@@ -20,8 +20,17 @@ export function ClientsTrustStrip() {
   ];
 
   return (
-    <section id="clients" className="relative py-28 sm:py-36 bg-[#f8f9fa] text-[#0e164c] overflow-hidden select-none font-display border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="clients" className="relative py-28 sm:py-36 bg-[#FAF7F2] text-[#0e164c] overflow-hidden select-none font-display border-t border-[#e8e1d5]">
+      {/* Authentic Indian Architectural Jaali Pattern Backdrop */}
+      <div
+        className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply"
+        style={{
+          backgroundImage: "url('/art/indian-art-jaali-pattern.jpg')",
+          backgroundRepeat: "repeat",
+          backgroundSize: "360px 360px",
+        }}
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-[#0e164c] uppercase leading-tight">

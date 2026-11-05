@@ -66,6 +66,18 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
       id="services"
       className="relative py-28 sm:py-36 bg-[#0e164c] text-white overflow-hidden select-none font-display border-t border-white/10"
     >
+      {/* Authentic Indian Heritage Cultural Backdrop */}
+      <div
+        className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen"
+        style={{
+          backgroundImage: "url('/art/indian-art-jaali-pattern.jpg')",
+          backgroundRepeat: "repeat",
+          backgroundSize: "380px 380px",
+        }}
+      />
+      <div className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-[#FFC400]/[0.08] blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-[#F36700]/[0.08] blur-[150px] pointer-events-none" />
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
@@ -103,7 +115,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                 <div>
                   {/* Top Row: Metric & Arrow */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-[10px] font-mono tracking-widest text-[#FFC400] uppercase font-bold">
+                    <span className="text-[11px] font-metric tracking-widest text-[#FFC400] uppercase font-bold">
                       {item.metric}
                     </span>
                     <span className="text-xl text-white/40 group-hover:text-[#F36700] group-hover:translate-x-1 transition-all">

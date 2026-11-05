@@ -203,12 +203,24 @@ export function CaseStudiesSection() {
   return (
     <section
       id="karname"
-      className="relative py-28 sm:py-36 bg-white text-[#0e164c] overflow-hidden select-none font-display scroll-mt-24"
+      className="relative py-28 sm:py-36 bg-[#FAF7F2] text-[#0e164c] overflow-hidden select-none font-display scroll-mt-24 border-t border-[#e8e1d5]"
     >
+      {/* Authentic Indian Architectural Jaali & Cultural Pattern Backdrop */}
+      <div
+        className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply"
+        style={{
+          backgroundImage: "url('/art/indian-art-jaali-pattern.jpg')",
+          backgroundRepeat: "repeat",
+          backgroundSize: "360px 360px",
+        }}
+      />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFC400]/15 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#F36700]/12 rounded-full blur-[160px] pointer-events-none" />
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F36700]/10 border border-[#F36700]/30 text-[#F36700] font-mono text-xs font-bold tracking-wider uppercase mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F36700]/10 border border-[#F36700]/30 text-[#F36700] font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5" />
             <span>VERIFIED CLIENT WORK • 5 LIVE DEPLOYMENTS</span>
           </div>
@@ -225,7 +237,7 @@ export function CaseStudiesSection() {
           {cases.map((cs, idx) => (
             <div
               key={cs.id}
-              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-gray-200 bg-white hover:border-[#F36700]/40"
+              className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-[#e8e1d5] bg-white/95 backdrop-blur-sm hover:border-[#F36700]/60"
             >
               {/* Browser Window Showcase Thumbnail */}
               <div
@@ -264,7 +276,7 @@ export function CaseStudiesSection() {
 
                   {/* Top Badges: Hero Stat & External Link */}
                   <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-full bg-[#F36700] text-white font-mono text-[10px] font-bold tracking-wider uppercase shadow-md pointer-events-auto">
+                    <span className="px-2.5 py-1 rounded-full bg-[#F36700] text-white font-metric text-[10px] font-bold tracking-wider uppercase shadow-md pointer-events-auto">
                       {cs.heroStat}
                     </span>
                     <div className="flex items-center gap-1.5 pointer-events-auto">
@@ -308,9 +320,9 @@ export function CaseStudiesSection() {
                 </p>
 
                 {/* Metric pill row */}
-                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between font-mono text-[11px]">
-                  <span className="text-gray-500">{cs.stats[0].label}</span>
-                  <span className="text-[#0e164c] font-black">{cs.stats[0].val}</span>
+                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
+                  <span className="text-gray-500 font-sans">{cs.stats[0].label}</span>
+                  <span className="text-[#0e164c] font-metric font-black text-sm">{cs.stats[0].val}</span>
                 </div>
               </div>
 

@@ -51,7 +51,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#FFC400]">
+              <span className="text-[10px] sm:text-xs font-royal font-bold uppercase tracking-widest text-[#FFC400]">
                 E-COMMERCE &amp; D2C GROWTH
               </span>
             </div>

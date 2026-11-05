@@ -1,27 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Poppins, Syne, Space_Grotesk, Roboto } from "next/font/google";
+import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import "./globals.css";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600"],
+  weight: ["500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -35,7 +28,7 @@ const syne = Syne({
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
   subsets: ["latin"],
-  weight: ["500", "700"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -73,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${roboto.variable} ${cormorant.variable} ${poppins.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
+      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
     >
       <body className="bg-[#0e164c] text-white selection:bg-[#F36700] selection:text-white min-h-screen overflow-x-hidden font-sans">
         <ThemeProvider>

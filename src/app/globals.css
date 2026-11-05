@@ -45,10 +45,12 @@
   --color-peacock-light: #14B8A6;
   --color-peacock-dark: #0F766E;
 
-  --font-display: var(--font-roboto), "Roboto", system-ui, sans-serif;
-  --font-royal: var(--font-roboto), "Roboto", system-ui, sans-serif;
-  --font-body: var(--font-roboto), "Roboto", system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-syne), system-ui, sans-serif;
+  --font-royal: var(--font-cinzel), serif;
+  --font-body: var(--font-jakarta), system-ui, sans-serif;
   --font-metric: var(--font-space), monospace;
+  --font-mono: var(--font-space), monospace;
+  --font-heritage: var(--font-cinzel), serif;
 }
 
 :root {
@@ -65,7 +67,7 @@ html {
 body {
   background-color: #0e164c;
   color: #ffffff;
-  font-family: var(--font-roboto), "Roboto", system-ui, sans-serif;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
