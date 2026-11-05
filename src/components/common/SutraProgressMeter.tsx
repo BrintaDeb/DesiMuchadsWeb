@@ -9,7 +9,6 @@ export function SutraProgressMeter() {
 
   const sections = [
     { id: "hero", name: "दरबार", eng: "Darbar (Hero)" },
-    { id: "baiscope", name: "बायोस्कोप", eng: "Baiscope (Showreel)" },
     { id: "services", name: "शस्त्र", eng: "Weapons (Services)" },
     { id: "calculator", name: "हिसाब-किताब", eng: "Hisab-Kitab (ROAS)" },
     { id: "karname", name: "कारनामे", eng: "Karname (Case Studies)" },

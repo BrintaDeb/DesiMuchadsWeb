@@ -9,7 +9,6 @@ import { SutraProgressMeter } from "@/components/common/SutraProgressMeter";
 import { Preloader } from "@/components/preloader/Preloader";
 import { Navbar } from "@/components/navigation/Navbar";
 import { HeroSection } from "@/components/hero/HeroSection";
-import { BaiscopeShowcase } from "@/components/baiscope/BaiscopeShowcase";
 import { ServicesSection } from "@/components/services/ServicesSection";
 import { WhyChooseUsSection } from "@/components/whous/WhyChooseUsSection";
 import { RoiCalculator } from "@/components/calculator/RoiCalculator";
@@ -61,10 +60,7 @@ export default function Home() {
           {/* Section 1: Monumental Hero with Three.js 3D Moustache & Mudras */}
           <HeroSection onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 2: The Royal Baiscope (Bioscope Viewfinder Showreel & Telemetry) */}
-          <BaiscopeShowcase />
-
-          {/* Section 3: The 6 Capabilities Bento Grid (BeeMarketing Taxonomy) */}
+          {/* Section 2: The 6 Capabilities Bento Grid (BeeMarketing Taxonomy) */}
           <ServicesSection onOpenKundli={() => setIsKundliOpen(true)} />
 
           {/* Section 4: "Why Performance Marketing? Why Desi Muchads?" (BeeMarketing 4-Pillar Trust Grid) */}
