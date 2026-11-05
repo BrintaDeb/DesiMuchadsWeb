@@ -203,19 +203,8 @@ export function CaseStudiesSection() {
   return (
     <section
       id="karname"
-      className="relative py-28 sm:py-36 bg-[#FAF7F2] text-[#0e164c] overflow-hidden select-none font-display scroll-mt-24 border-t border-[#e8e1d5]"
+      className="relative py-28 sm:py-36 bg-white text-[#0e164c] overflow-hidden select-none font-display scroll-mt-24"
     >
-      {/* Authentic Indian Architectural Jaali & Cultural Pattern Backdrop */}
-      <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply"
-        style={{
-          backgroundImage: "url('/art/indian-art-jaali-pattern.jpg')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "360px 360px",
-        }}
-      />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFC400]/15 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#F36700]/12 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
@@ -237,7 +226,7 @@ export function CaseStudiesSection() {
           {cases.map((cs, idx) => (
             <div
               key={cs.id}
-              className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-[#e8e1d5] bg-white/95 backdrop-blur-sm hover:border-[#F36700]/60"
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-gray-200 bg-white hover:border-[#F36700]/40"
             >
               {/* Browser Window Showcase Thumbnail */}
               <div

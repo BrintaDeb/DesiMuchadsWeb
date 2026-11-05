@@ -45,17 +45,6 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
 
   return (
     <section id="why-us" className="relative py-28 sm:py-36 bg-[#0e164c] text-white overflow-hidden select-none font-display border-t border-white/10">
-      {/* Authentic Indian Architectural Jaali Pattern Backdrop */}
-      <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-screen"
-        style={{
-          backgroundImage: "url('/art/indian-art-jaali-pattern.jpg')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "380px 380px",
-        }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#FFC400]/[0.05] rounded-full blur-[180px] pointer-events-none" />
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
