@@ -10,9 +10,11 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { BaiscopeShowcase } from "@/components/baiscope/BaiscopeShowcase";
 import { ServicesSection } from "@/components/services/ServicesSection";
+import { WhyChooseUsSection } from "@/components/whous/WhyChooseUsSection";
 import { RoiCalculator } from "@/components/calculator/RoiCalculator";
 import { AdPostMortemSection } from "@/components/adpostmortem/AdPostMortemSection";
 import { CaseStudiesSection } from "@/components/casestudies/CaseStudiesSection";
+import { ClientsTrustStrip } from "@/components/clients/ClientsTrustStrip";
 import { PricingSection } from "@/components/pricing/PricingSection";
 import { TwirlEasterEgg } from "@/components/easteregg/TwirlEasterEgg";
 import { MethodologySection } from "@/components/methodology/MethodologySection";
@@ -58,17 +60,23 @@ export default function Home() {
           {/* Section 2: The Royal Baiscope (Bioscope Viewfinder Showreel & Telemetry) */}
           <BaiscopeShowcase />
 
-          {/* Section 3: The 6 Pillars Darbar Bento Grid */}
+          {/* Section 3: The 6 Capabilities Bento Grid (BeeMarketing Taxonomy) */}
           <ServicesSection onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 4: Real-time Hisab-Kitab ROAS Simulator */}
+          {/* Section 4: "Why Performance Marketing? Why Desi Muchads?" (BeeMarketing 4-Pillar Trust Grid) */}
+          <WhyChooseUsSection onOpenKundli={() => setIsKundliOpen(true)} />
+
+          {/* Section 5: Real-time Hisab-Kitab ROAS Simulator */}
           <RoiCalculator />
 
-          {/* Section 5: Ad Post-Mortem Before/After Draggable Slider with 4 Golden Pins */}
+          {/* Section 6: Ad Post-Mortem Before/After Draggable Slider with 4 Golden Pins */}
           <AdPostMortemSection />
 
-          {/* Section 6: Editorial Case Studies in Jharokha Frames with Liquid Ripple Shader */}
+          {/* Section 7: Our Latest Work Showcase with Interactive Pop-Up Modals (BeeMarketing Work System) */}
           <CaseStudiesSection />
+
+          {/* Section 8: "Some friends we’ve made in the process" (BeeMarketing Client Trust Strip) */}
+          <ClientsTrustStrip />
 
           {/* Section 7: 3-Tier Retainers & "Build Your Marketing Thali" Platter Configurator */}
           <PricingSection onOpenKundli={() => setIsKundliOpen(true)} />

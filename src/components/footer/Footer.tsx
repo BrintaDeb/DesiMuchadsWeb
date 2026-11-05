@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MoustacheSVG } from "../common/Icons";
 import { ArrowUpRight, MessageCircle, Clock, Heart } from "lucide-react";
+import { sound } from "@/lib/sound";
 
 interface FooterProps {
   onOpenKundli: () => void;
@@ -55,6 +56,45 @@ export function Footer({ onOpenKundli }: FooterProps) {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+        {/* BeeMarketing Signature High-Impact Punchline Banner */}
+        <div className="mb-16 p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#1C1815] via-[#2A2521] to-[#1C1815] border border-[#D4AF37]/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          <div className="max-w-xl">
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#D4AF37] block mb-2">
+              ✦ HONEST &amp; RESULTS-DRIVEN PERFORMANCE AGENCY
+            </span>
+            <h3 className="font-display font-light text-3xl sm:text-5xl text-[#F5EFEB] uppercase leading-tight">
+              You deserve more.{" "}
+              <span className="italic font-normal text-[#D4AF37] block sm:inline font-display">
+                We’re proven to deliver.
+              </span>
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm text-[#EFE7DA]/70 font-light">
+              No hollow agency promises. We engineer data-backed media buying, viral hooks, and high-converting storefronts that scale real bank balance.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+            <button
+              onClick={() => {
+                sound.playChime();
+                onOpenKundli();
+              }}
+              type="button"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-[#C84B31] via-[#E11D48] to-[#C84B31] text-white font-body text-xs font-bold uppercase tracking-widest shadow-[0_0_25px_rgba(200,75,49,0.5)] hover:scale-105 active:scale-95 transition-all"
+            >
+              BUZZ US NOW (FREE AUDIT)
+            </button>
+            <a
+              href="https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20would%20like%20to%20buzz%20you%20for%20our%20e-commerce%20growth."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-4 rounded-full border border-[rgba(239,231,218,0.3)] bg-white/5 hover:bg-[#D4AF37]/15 text-[#EFE7DA] hover:text-[#D4AF37] font-body text-xs font-bold uppercase tracking-widest transition-all"
+            >
+              CHAT ON WHATSAPP
+            </a>
+          </div>
+        </div>
+
         {/* Desi Vibes Monumental Legacy Counter (22 Years / ₹140Cr+) */}
         <div className="mb-16 pb-12 border-b border-[rgba(239,231,218,0.15)] text-center sm:text-left">
           <div className="flex flex-col sm:flex-row items-baseline gap-4 sm:gap-6 mb-4">
@@ -72,10 +112,10 @@ export function Footer({ onOpenKundli }: FooterProps) {
           </div>
         </div>
 
-        {/* Top Footer Multi-Column Grid (Desi Vibes Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-[rgba(239,231,218,0.12)]">
+        {/* Top Footer Multi-Column Grid (BeeMarketing Taxonomy) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-[rgba(239,231,218,0.12)]">
           {/* Col 1-5: Brand & Vision with Official Logo */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-4 space-y-6">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)] shrink-0 bg-[#10223D]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -98,7 +138,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
             </div>
 
             <p className="text-xs sm:text-sm text-[#EFE7DA]/70 max-w-sm leading-relaxed font-light">
-              India&apos;s premier high-ROAS marketing agency and neo-desi creative powerhouse. We fuse royal cultural storytelling with ruthless performance media buying.
+              An honest &amp; results-driven performance marketing agency. We fuse authentic cultural storytelling with ruthless media buying to scale category kings.
             </p>
 
             {/* Live IST Time Badge */}
@@ -109,60 +149,100 @@ export function Footer({ onOpenKundli }: FooterProps) {
             </div>
           </div>
 
-          {/* Col 6-8: Discover Directory */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Col 5-6: Company Links (BeeMarketing Structure) */}
+          <div className="lg:col-span-2 space-y-4">
             <h6 className="font-body text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-semibold">
-              DISCOVER
+              COMPANY
             </h6>
             <ul className="space-y-2.5 text-xs font-light">
               <li>
                 <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
-                  ✦ Hum Kya Karte Hain (Services)
-                </a>
-              </li>
-              <li>
-                <a href="#baiscope" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
-                  ✦ The Royal Baiscope (Showreel)
+                  ✦ About us
                 </a>
               </li>
               <li>
                 <a href="#karname" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
-                  ✦ Hamare Karname (Case Studies)
+                  ✦ Clients &amp; Work
+                </a>
+              </li>
+              <li>
+                <a href="#baiscope" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ The Royal Baiscope
                 </a>
               </li>
               <li>
                 <a href="#pricing" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
-                  ✦ Marketing Thali & Retainers
+                  ✦ Retainers &amp; Thali
                 </a>
               </li>
               <li>
                 <a href="#portal" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
-                  ✦ Inside the Darbar (Client Portal)
+                  ✦ Client Portal
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Col 9-12: Locations & Direct WhatsApp Callout */}
-          <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-between space-y-6">
-            <div className="w-full lg:text-right space-y-2">
-              <h6 className="font-body text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-semibold">
-                DARBAR LOCATIONS
-              </h6>
-              <p className="text-xs text-[#EFE7DA]/70 font-light">
-                Sector 18 Noida • Connaught Place Delhi • Indiranagar Bengaluru • BKC Mumbai
+          {/* Col 7-9: 6 Capabilities Links (BeeMarketing Structure) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h6 className="font-body text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-semibold">
+              CAPABILITIES
+            </h6>
+            <ul className="space-y-2 text-xs font-light">
+              <li>
+                <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ Social Media Marketing
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ Performance Marketing (PPC)
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ Email &amp; SMS Marketing
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ Ad Creative Production
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ CRO &amp; Ecommerce Solutions
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors">
+                  ✦ Growth Investments
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 10-12: Contact & Locations */}
+          <div className="lg:col-span-3 space-y-4">
+            <h6 className="font-body text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-semibold">
+              CONTACTS &amp; DARBAR
+            </h6>
+            <div className="space-y-2 text-xs text-[#EFE7DA]/70 font-light leading-relaxed">
+              <p className="font-mono text-[#D4AF37]">buzz@desimuchads.com</p>
+              <p>+91 (0) 9999 999 999</p>
+              <p className="text-[11px] text-[#EFE7DA]/50 pt-2 border-t border-[rgba(239,231,218,0.1)]">
+                BLC Kaunas • Connaught Place Delhi • Indiranagar Bengaluru • BKC Mumbai
               </p>
             </div>
 
-            {/* Direct WhatsApp Hotline */}
             <a
               href="https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20would%20like%20to%20discuss%20our%20brand%20marketing."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-[#25D366] via-[#128C7E] to-[#075E54] text-white hover:scale-105 transition-all text-xs font-semibold tracking-wider uppercase shadow-lg"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white hover:scale-105 transition-all text-xs font-semibold uppercase tracking-wider shadow-md"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>Chat on WhatsApp</span>
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <span>Buzz on WhatsApp</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>

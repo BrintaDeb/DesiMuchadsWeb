@@ -15,10 +15,10 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
   const slides = [
     {
-      eyebrow: "22 YEARS OF COMBINED AGENCY EXCELLENCE",
+      eyebrow: "PERFORMANCE MARKETING AGENCY FOR E-COMMERCE GROWTH",
       mainTitle: "HIGH-ROAS MARKETING",
       subTitle: "INDIAN STYLE",
-      desc: "Step into an advertising experience rooted in the soul of India — authentic cultural storytelling, high-voltage Hinglish hooks, and ruthless multi-channel ROI.",
+      desc: "We love digital. We’re experts in brand-building experiences and results-driven marketing — combining authentic cultural storytelling with ruthless multi-channel media buying.",
     },
     {
       eyebrow: "UNSHAKABLE TRUST • MEASURABLE DOMINANCE",
@@ -27,10 +27,10 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
       desc: "We don't sell vanity metrics. Every Rupee deployed across Meta, Google, and YouTube is engineered like a disciplined investment to print compounding returns.",
     },
     {
-      eyebrow: "ONE DARBAR • COUNTLESS CATEGORY KINGS",
+      eyebrow: "WE WORK WITH YOU, NOT SIMPLY FOR YOU",
       mainTitle: "MORE THAN AN AGENCY",
       subTitle: "A GROWTH PARTNER",
-      desc: "From bespoke brand packaging granth to ultra-fast Next.js 3D web storefronts, we build the digital infrastructure for ambitious Indian brands to rule the market.",
+      desc: "From bespoke brand packaging granth to ultra-fast Next.js 3D web storefronts, we build the digital infrastructure for ambitious consumer brands to rule the market.",
     },
   ];
 
@@ -177,7 +177,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
             type="button"
             className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#C84B31] via-[#E11D48] to-[#C84B31] text-[#EFE7DA] font-body font-semibold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(200,75,49,0.5)] hover:shadow-[0_0_40px_rgba(200,75,49,0.8)] transition-all duration-300 hover:scale-[1.02] active:scale-95"
           >
-            <span>Reserve Free Brand Kundli (Audit)</span>
+            <span>Buzz Us Now (Let&apos;s Talk)</span>
             <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
           </button>
 
