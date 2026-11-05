@@ -67,7 +67,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
       className="relative py-28 sm:py-36 bg-[#0e164c] text-white overflow-hidden select-none font-display border-t border-white/10"
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header (BeeMarketing Exact) */}
+        {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Capabilities
@@ -77,7 +77,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
           </p>
         </div>
 
-        {/* 6 Capabilities Cards Grid (BeeMarketing Layout) */}
+        {/* 6 Capabilities Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {capabilities.map((item) => {
             const isHovered = activeCard === item.id;
@@ -116,7 +116,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                     {item.title}
                   </h3>
 
-                  {/* Description (Exact BeeMarketing Text) */}
+                  {/* Description */}
                   <p className="text-sm text-white/75 leading-relaxed font-normal">
                     {item.summary}
                   </p>

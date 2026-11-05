@@ -60,22 +60,22 @@ export default function Home() {
           {/* Section 1: Monumental Hero with Three.js 3D Moustache & Mudras */}
           <HeroSection onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 2: The 6 Capabilities Bento Grid (BeeMarketing Taxonomy) */}
+          {/* Section 2: The 6 Capabilities Bento Grid */}
           <ServicesSection onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 4: "Why Performance Marketing? Why Desi Muchads?" (BeeMarketing 4-Pillar Trust Grid) */}
+          {/* Section 3: "Why Performance Marketing? Why Desi Muchads?" */}
           <WhyChooseUsSection onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 5: Real-time Hisab-Kitab ROAS Simulator */}
+          {/* Section 4: Real-time Hisab-Kitab ROAS Simulator */}
           <RoiCalculator />
 
-          {/* Section 6: Ad Post-Mortem Before/After Draggable Slider with 4 Golden Pins */}
+          {/* Section 5: Ad Post-Mortem Before/After Draggable Slider with 4 Golden Pins */}
           <AdPostMortemSection />
 
-          {/* Section 7: Our Latest Work Showcase with Interactive Pop-Up Modals (BeeMarketing Work System) */}
+          {/* Section 6: Our Latest Work Showcase with Interactive Glassmorphism Lightboxes */}
           <CaseStudiesSection />
 
-          {/* Section 8: "Some friends we’ve made in the process" (BeeMarketing Client Trust Strip) */}
+          {/* Section 7: "Some friends we’ve made in the process" (Client Trust Strip) */}
           <ClientsTrustStrip />
 
           {/* Section 7: 3-Tier Retainers & "Build Your Marketing Thali" Platter Configurator */}

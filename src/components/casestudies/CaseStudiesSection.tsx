@@ -38,6 +38,7 @@ export function CaseStudiesSection() {
       heroStat: "+340% RESERVATION LIFT",
       liveUrl: "https://restaurant-web.vercel.app",
       vercelUrl: "https://vercel.com/brinta-debs-projects/restaurant_web/CMmXJSKAqMWtrQQeaVvMQTJpRHPh",
+      thumbnail: "/projects/lionelp-thumb.jpg",
       desc: "High-end culinary and bakery e-commerce experience designed for LionelP. Built with bespoke visual aesthetics, interactive gourmet product menus, and seamless table reservation flows.",
       mushkil:
         "Traditional boutique restaurant needing modern online ordering, menu showcase, and high-ticket private dining reservations without losing artisanal prestige.",
@@ -62,6 +63,7 @@ export function CaseStudiesSection() {
       heroStat: "6.4x INBOUND ROAS",
       liveUrl: "https://you-me-less-features.vercel.app",
       vercelUrl: "https://vercel.com/brinta-debs-projects/you-me-less-features/9qY2XmMTKYTWcaFB6qBY4ERNXCwk",
+      thumbnail: "/projects/youme-thumb.jpg",
       desc: "Cinematic visual storytelling portfolio for world-class destination wedding photographers. Designed with emotion-first typography, fluid media galleries, and high-converting client inquiry funnels.",
       mushkil:
         "Low inquiry conversion on generic social feeds and inability to command premium pricing for luxury global destination shoots.",
@@ -86,6 +88,7 @@ export function CaseStudiesSection() {
       heroStat: "5.8x BLENDED ROAS",
       liveUrl: "https://pet-first-web.vercel.app",
       vercelUrl: "https://vercel.com/brinta-debs-projects/pet-first-web/3K3nPxYnWxHjhHdmA9DnjvJ2MVbf",
+      thumbnail: "/projects/petfirst-thumb.jpg",
       desc: "Comprehensive pet-first health ecosystem for dogs, cats, birds, and small animals. Features an interactive pet nutrition calculator, digital health passport ID, and subscription essentials store.",
       mushkil:
         "Fragmented pet care market where pet parents struggled with customized nutrition calculations and recurring essentials replenishment.",
@@ -110,6 +113,7 @@ export function CaseStudiesSection() {
       heroStat: "+480% DIRECT ORDERS",
       liveUrl: "https://food-website.vercel.app",
       vercelUrl: "https://vercel.com/brinta-debs-projects/food-website/3MRZU3LuAVkxqMZAMyr4H2NJDAaU",
+      thumbnail: "/projects/fresheats-thumb.jpg",
       desc: "High-speed digital ordering storefront engineered for healthy organic meal bowls, fresh salads, and rapid doorstep delivery.",
       mushkil:
         "High commission bleed from 3rd-party delivery aggregators and lack of direct customer brand loyalty.",
@@ -134,6 +138,7 @@ export function CaseStudiesSection() {
       heroStat: "₹3.2Cr+ PIPELINE VALUE",
       liveUrl: "https://nestservices-brinta-debs-projects.vercel.app",
       vercelUrl: "https://vercel.com/brinta-debs-projects/nestservices/4Y8GS7NKxbCNVKpxWB5LX7E1ryo2",
+      thumbnail: "/projects/nestservices-thumb.jpg",
       desc: "Enterprise home living and residential services hub providing on-demand maintenance, home concierge, and luxury property lifecycle management.",
       mushkil:
         "Unorganized local service vendors and lack of reliable digital booking for premium residential communities.",
@@ -222,48 +227,78 @@ export function CaseStudiesSection() {
               key={cs.id}
               className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-gray-200 bg-white hover:border-[#F36700]/40"
             >
-              {/* CSS Gradient Banner Card with Glass Sheen */}
+              {/* Browser Window Showcase Thumbnail */}
               <div
-                className={`w-full h-48 rounded-xl mb-6 relative overflow-hidden bg-gradient-to-tr ${cs.bgGradient} p-5 flex flex-col justify-between cursor-pointer`}
+                className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-gray-200 bg-[#0e164c] shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col"
                 onClick={() => {
                   sound.playChime();
                   setSelectedCaseIndex(idx);
                   setIframeLoading(true);
                 }}
               >
-                <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
-                <div className="absolute -inset-full group-hover:inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transition-all duration-700 pointer-events-none" />
-
-                <div className="relative z-10 flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full bg-[#F36700] text-white font-mono text-[11px] font-bold tracking-wider uppercase shadow">
-                    {cs.heroStat}
-                  </span>
+                {/* Simulated Mini Browser Chrome Header */}
+                <div className="h-7 px-3 bg-[#090e33]/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
                   <div className="flex items-center gap-1.5">
-                    <span className="px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-[10px] font-mono text-white/90 border border-white/20 flex items-center gap-1">
-                      <Maximize2 className="w-3 h-3 text-[#FFC400]" />
-                      <span>LIGHTBOX</span>
+                    <span className="w-2 h-2 rounded-full bg-[#FF5F56]/80" />
+                    <span className="w-2 h-2 rounded-full bg-[#FFBD2E]/80" />
+                    <span className="w-2 h-2 rounded-full bg-[#27C93F]/80" />
+                  </div>
+                  <span className="text-white/60 truncate max-w-[140px]">
+                    {cs.liveUrl.replace("https://", "")}
+                  </span>
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                </div>
+
+                {/* Thumbnail Image Container with Zoom & Overlays */}
+                <div className="relative flex-1 w-full overflow-hidden bg-[#0e164c]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={cs.thumbnail}
+                    alt={`${cs.client} Website Thumbnail`}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+
+                  {/* Gradient Glass Overlay on Bottom of Image */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e164c]/85 via-transparent to-black/30 pointer-events-none" />
+
+                  {/* Top Badges: Hero Stat & External Link */}
+                  <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
+                    <span className="px-2.5 py-1 rounded-full bg-[#F36700] text-white font-mono text-[10px] font-bold tracking-wider uppercase shadow-md pointer-events-auto">
+                      {cs.heroStat}
                     </span>
-                    <a
-                      href={cs.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="p-2 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#0e164c] transition-all shadow"
-                      title="Open Live Deployment in New Tab"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    <div className="flex items-center gap-1.5 pointer-events-auto">
+                      <a
+                        href={cs.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-1.5 rounded-full bg-black/60 hover:bg-white text-white hover:text-[#0e164c] transition-all shadow border border-white/20"
+                        title="Open Live Deployment"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Hover Quick Overlay Prompt */}
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 backdrop-blur-md text-white font-display text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                      <Maximize2 className="w-3.5 h-3.5 text-[#FFC400]" />
+                      <span>OPEN LIGHTBOX</span>
+                    </span>
                   </div>
                 </div>
+              </div>
 
-                <div className="relative z-10 text-left">
-                  <span className="text-[10px] font-mono tracking-widest text-[#FFC400] uppercase font-bold block mb-1">
-                    {cs.category}
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight leading-tight group-hover:text-[#FFC400] transition-colors">
-                    {cs.client}
-                  </h3>
-                </div>
+              {/* Title & Category Below Thumbnail */}
+              <div className="text-left mb-3">
+                <span className="text-[10px] font-mono tracking-widest text-[#F36700] uppercase font-bold block mb-1">
+                  {cs.category}
+                </span>
+                <h3 className="font-display font-black text-xl text-[#0e164c] uppercase tracking-tight leading-tight group-hover:text-[#F36700] transition-colors">
+                  {cs.client}
+                </h3>
               </div>
 
               {/* Tagline & Info */}

@@ -39,7 +39,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          {/* Left Column: BeeMarketing Exact Hero Proposition */}
+          {/* Left Column: Hero Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
             {/* Eyebrow Badge with Brand Logo */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md">
@@ -56,7 +56,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               </span>
             </div>
 
-            {/* Giant BeeMarketing Headline (Exact Copy & Styling, Mobile Scaled) */}
+            {/* Giant Headline */}
             <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.08]">
               Performance marketing agency for e-commerce growth
             </h1>
@@ -66,7 +66,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               We love digital. We’re experts in brand-building experiences and results-driven marketing — turning ambitious consumer brands into category kings.
             </p>
 
-            {/* Action Buttons (BeeMarketing Exact Orange Rectangular Button) */}
+            {/* Action Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <button
                 onClick={() => {

@@ -43,7 +43,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-        {/* BeeMarketing Signature Pre-Footer Punchline (Exact Typography & Layout) */}
+        {/* Signature Pre-Footer Punchline */}
         <div className="mb-20 pb-16 border-b border-white/10 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
           <div>
             <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-[0.98]">
@@ -77,7 +77,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
           </div>
         </div>
 
-        {/* 3-Column Footer Grid (BeeMarketing Exact) */}
+        {/* 3-Column Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-white/10">
           {/* Brand Vision Column */}
           <div className="lg:col-span-5 space-y-6 text-left">
@@ -309,7 +309,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
         {/* Bottom Credits & Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs font-normal text-white/50 pt-8 gap-4">
           <div>
-            <span>© 2026 BeeMarketing / Desi Muchads. All rights reserved.</span>
+            <span>© 2026 Desi Muchads. All rights reserved.</span>
           </div>
           <div>
             <span>An honest &amp; results-driven digital marketing agency.</span>

@@ -22,7 +22,7 @@ export function ClientsTrustStrip() {
   return (
     <section id="clients" className="relative py-28 sm:py-36 bg-[#f8f9fa] text-[#0e164c] overflow-hidden select-none font-display border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header (BeeMarketing Exact) */}
+        {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-[#0e164c] uppercase leading-tight">
             Some friends we’ve made<br />in the process
@@ -50,7 +50,7 @@ export function ClientsTrustStrip() {
           ))}
         </div>
 
-        {/* Center Bottom Action Button (BeeMarketing Exact) */}
+        {/* Center Bottom Action Button */}
         <div className="mt-16 text-center">
           <a
             href="#karname"

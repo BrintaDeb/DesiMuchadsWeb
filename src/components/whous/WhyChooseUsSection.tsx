@@ -46,7 +46,7 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
   return (
     <section id="why-us" className="relative py-28 sm:py-36 bg-[#0e164c] text-white overflow-hidden select-none font-display border-t border-white/10">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header (BeeMarketing Exact) */}
+        {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-tight">
             Why Performance Marketing?<br />Why Desi Muchads?
@@ -56,7 +56,7 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
           </p>
         </div>
 
-        {/* 4 Pillars Grid (BeeMarketing Framework) */}
+        {/* 4 Pillars Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
           {pillars.map((p, idx) => {
             const Icon = p.icon;

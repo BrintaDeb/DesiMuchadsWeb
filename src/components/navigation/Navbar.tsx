@@ -65,7 +65,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           </div>
         </a>
 
-        {/* Desktop Nav Links (BeeMarketing exact style) */}
+        {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-7 lg:gap-9 font-display">
           {navLinks.map((link) => (
             <a
@@ -78,7 +78,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             </a>
           ))}
 
-          {/* BeeMarketing Signature Orange Button */}
+          {/* Signature Orange Button */}
           <button
             onClick={() => {
               sound.playChime();
