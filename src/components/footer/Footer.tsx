@@ -31,6 +31,17 @@ export function Footer({ onOpenKundli }: FooterProps) {
 
   return (
     <footer id="footer" className="relative bg-[#0e164c] text-white pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none font-display border-t border-white/10">
+      {/* Authentic Indian Cultural Artistry Background Backdrop */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.07] mix-blend-screen">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/art/indian-art-bg-royal.jpg"
+          alt="Indian Cultural Heritage Artistry"
+          className="w-full h-full object-cover object-bottom filter contrast-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0e164c] via-transparent to-[#0e164c]" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* BeeMarketing Signature Pre-Footer Punchline (Exact Typography & Layout) */}
         <div className="mb-20 pb-16 border-b border-white/10 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
@@ -70,23 +81,26 @@ export function Footer({ onOpenKundli }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-white/10">
           {/* Brand Vision Column */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#FFC400] shadow shrink-0 bg-[#0e164c]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/brand-logo.jpg"
-                  alt="Desi Muchads Logo"
-                  className="w-full h-full object-cover"
-                />
+            <div className="flex items-center gap-3.5">
+              <div className="relative group shrink-0">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#FFC400]/40 to-[#F36700]/30 rounded-full blur-sm opacity-70 group-hover:opacity-100 transition-opacity" />
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#FFC400] shadow-md bg-[#0e164c] p-0.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/brand-logo.jpg"
+                    alt="Desi Muchads Logo"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
               </div>
               <div className="flex flex-col text-left">
-                <div className="font-display font-extrabold text-xl tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
+                <div className="font-display font-black text-2xl tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
                   <span>DESI</span>
                   <span>
                     <span className="text-[#F36700]">MUCH</span>ADS
                   </span>
                 </div>
-                <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase mt-0.5">
+                <span className="text-[10px] font-mono tracking-widest text-[#FFC400] uppercase mt-1 font-bold">
                   PERFORMANCE MARKETING AGENCY
                 </span>
               </div>
@@ -255,7 +269,25 @@ export function Footer({ onOpenKundli }: FooterProps) {
         </div>
 
         {/* Unclipped Signature Two-Tone Wordmark (MUCHADS Together) */}
-        <div className="py-12 sm:py-16 text-center select-none border-b border-white/10">
+        <div className="py-12 sm:py-16 text-center select-none border-b border-white/10 flex flex-col items-center">
+          {/* Prominent Circular Brand Logo Crest */}
+          <div className="mb-6 relative group">
+            <div className="absolute -inset-3 bg-gradient-to-r from-[#FFC400]/40 via-[#F36700]/30 to-[#FFC400]/40 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-[3px] border-[#FFC400] shadow-[0_0_35px_rgba(255,196,0,0.4)] bg-[#0e164c] p-1">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand-logo.jpg"
+                alt="Desi Muchads Royal Crest"
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
+          </div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono font-bold tracking-widest text-[#FFC400] uppercase mb-6">
+            <span>EST. 2026</span>
+            <span className="text-white/40">•</span>
+            <span>ROYAL PERFORMANCE MARKETING</span>
+          </div>
+
           <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-6 md:gap-x-8 text-3xl sm:text-5xl md:text-7xl lg:text-[8.5vw] font-display font-black tracking-tight uppercase leading-tight">
             <span className="text-white/20 hover:text-white transition-colors duration-300">
               DESI

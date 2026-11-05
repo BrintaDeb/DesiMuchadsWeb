@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { KhadiNoiseOverlay } from "@/components/common/KhadiNoiseOverlay";
+import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { CustomCursor } from "@/components/common/CustomCursor";
 import { SutraProgressMeter } from "@/components/common/SutraProgressMeter";
 import { Preloader } from "@/components/preloader/Preloader";
@@ -32,6 +33,9 @@ export default function Home() {
     <SmoothScrollProvider>
       {/* Tactile Khadi handmade paper noise texture overlay */}
       <KhadiNoiseOverlay />
+
+      {/* Authentic Indian Architectural Jaali & Mandala Cultural Artistry Background */}
+      <IndianArtBackgroundOverlay />
 
       {/* Custom dual cursor with 'DEKHO • EXPLORE' stamp */}
       <CustomCursor />

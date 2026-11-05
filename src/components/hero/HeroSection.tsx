@@ -26,6 +26,17 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
       <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-[#142161]/50 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-[#F36700]/10 blur-[140px] pointer-events-none" />
 
+      {/* Authentic Indian Cultural Pichwai & Kalamkari Artistry Drawing Watermark */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.09] mix-blend-screen">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/art/indian-art-bg-royal.jpg"
+          alt="Indian Cultural Heritage Artistry"
+          className="w-full h-full object-cover object-center filter contrast-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e164c] via-transparent to-[#0e164c]/80" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column: BeeMarketing Exact Hero Proposition */}
