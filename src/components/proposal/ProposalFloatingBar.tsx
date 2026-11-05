@@ -52,10 +52,15 @@ export function ProposalFloatingBar() {
       {/* Persistent Floating Bottom Bar */}
       <div className="fixed bottom-4 sm:bottom-6 inset-x-4 max-w-4xl mx-auto z-40 pointer-events-auto select-none">
         <div className="rounded-full bg-[#0D0C12]/90 backdrop-blur-2xl border border-[#D4AF37]/50 shadow-[0_10px_40px_rgba(0,0,0,0.8)] px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3">
-          {/* Left Summary Badge */}
+          {/* Left Summary Badge with Brand Crest */}
           <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center shrink-0">
-              <MoustacheSVG className="w-5 h-2.5 text-[#D4AF37]" />
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#D4AF37] shadow-sm bg-[#10223D] shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand-logo.jpg"
+                alt="Desi Muchads Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="flex flex-col min-w-0">
               <span className="font-mono text-xs font-bold text-[#F5DE88] truncate">

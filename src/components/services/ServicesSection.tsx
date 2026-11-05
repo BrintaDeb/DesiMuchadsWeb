@@ -173,13 +173,11 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                 }}
                 onMouseLeave={() => setActiveCard(null)}
                 data-cursor="explore"
-                className={`relative group rounded-3xl p-6 sm:p-8 bg-white/70 border transition-all duration-300 backdrop-blur-md flex flex-col justify-between overflow-hidden ${
-                  item.colSpan
-                } ${
-                  isHovered
+                className={`relative group rounded-3xl p-6 sm:p-8 bg-white/70 border transition-all duration-300 backdrop-blur-md flex flex-col justify-between overflow-hidden ${item.colSpan
+                  } ${isHovered
                     ? "border-[#2A2521]/40 shadow-[0_15px_40px_rgba(42,37,33,0.12)] bg-white/90 -translate-y-1"
                     : "border-[#2A2521]/15 hover:border-[#2A2521]/30"
-                }`}
+                  }`}
               >
                 {/* Filigree corner accents */}
                 <div className="absolute top-3 left-3 opacity-30 group-hover:opacity-100 transition-opacity">

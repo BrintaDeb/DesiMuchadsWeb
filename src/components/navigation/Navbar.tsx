@@ -51,20 +51,27 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <FiligreeCorner className="w-3.5 h-3.5 text-[#D4AF37]" position="top-right" />
         </div>
 
-        {/* Brand Mark with Hover Twirling Moustache */}
+        {/* Brand Mark with User's Official Logo */}
         <a
           href="#"
           onMouseEnter={() => sound.playPluck(180)}
-          className="group flex items-center gap-2 sm:gap-3 py-1 focus:outline-none"
+          className="group flex items-center gap-2.5 sm:gap-3 py-1 focus:outline-none"
         >
-          <div className="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 group-hover:border-[#D4AF37] group-hover:bg-[#D4AF37]/20 transition-all duration-300">
-            <MoustacheSVG className="w-5 h-2.5 text-[#D4AF37] group-hover:-rotate-12 transition-transform duration-300 transform-gpu" />
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:scale-105 transition-transform duration-300 shrink-0 bg-[#10223D]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand-logo.jpg"
+              alt="Desi Muchads Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="flex flex-col">
-            <span className="font-display font-bold text-base sm:text-lg tracking-widest text-[#EFE7DA] group-hover:text-[#D4AF37] transition-colors leading-tight uppercase">
-              DESI MUCHADS
-            </span>
-            <span className="font-body text-[8.5px] tracking-[0.25em] text-[#D4AF37]/80 uppercase hidden xs:inline font-medium">
+          <div className="flex flex-col text-left">
+            <div className="font-display font-bold text-base sm:text-lg tracking-wider text-[#F5EFEB] leading-tight uppercase flex items-center gap-1">
+              <span>DESI</span>
+              <span className="text-[#E5A83B]">MUCH</span>
+              <span>ADS</span>
+            </div>
+            <span className="font-body text-[8.5px] tracking-[0.22em] text-[#D4AF37]/90 uppercase hidden xs:inline font-medium">
               HIGH-ROAS PERFORMANCE • DESI STYLE
             </span>
           </div>

@@ -70,10 +70,17 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
           <JharokhaArchSVG className="w-full h-full max-w-2xl text-[#D4AF37]" />
         </div>
 
-        {/* Top Eyebrow Tagline - Desi Vibes Cormorant Letterspaced Style */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[rgba(239,231,218,0.25)] bg-[rgba(239,231,218,0.05)] backdrop-blur-md mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#C84B31] animate-ping" />
-          <span className="font-body text-[11px] uppercase tracking-[0.22em] text-[#EFE7DA] font-medium">
+        {/* Top Eyebrow Tagline & Official Crest Badge */}
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[rgba(239,231,218,0.25)] bg-[rgba(239,231,218,0.05)] backdrop-blur-md mb-4 shadow-sm">
+          <div className="w-5 h-5 rounded-full overflow-hidden border border-[#D4AF37] shadow-sm bg-[#10223D] shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand-logo.jpg"
+              alt="Desi Muchads Emblem"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <span className="font-body text-[10.5px] uppercase tracking-[0.22em] text-[#EFE7DA] font-medium">
             {current.eyebrow}
           </span>
           <span className="text-[#D4AF37]">✦</span>

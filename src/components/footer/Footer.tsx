@@ -44,7 +44,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
     <footer
       ref={footerRef}
       onMouseMove={handleMouseMove}
-      className="relative bg-[#14110E] text-[#EFE7DA] pt-24 pb-12 overflow-hidden border-t border-[rgba(239,231,218,0.15)] select-none font-body"
+      className="relative bg-[#14110E] text-[#EFE7DA] pt-24 pb-28 sm:pb-36 overflow-hidden border-t border-[rgba(239,231,218,0.15)] select-none font-body"
     >
       {/* Cursor-Following Radial Golden Glow Effect */}
       <div
@@ -74,15 +74,27 @@ export function Footer({ onOpenKundli }: FooterProps) {
 
         {/* Top Footer Multi-Column Grid (Desi Vibes Style) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-[rgba(239,231,218,0.12)]">
-          {/* Col 1-5: Brand & Vision */}
+          {/* Col 1-5: Brand & Vision with Official Logo */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 flex items-center justify-center">
-                <MoustacheSVG className="w-6 h-3 text-[#D4AF37]" />
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)] shrink-0 bg-[#10223D]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand-logo.jpg"
+                  alt="Desi Muchads Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="font-display font-light text-3xl tracking-widest text-[#EFE7DA] uppercase">
-                DESI MUCHADS
-              </span>
+              <div className="flex flex-col text-left">
+                <div className="font-display font-bold text-2xl tracking-wider text-[#F5EFEB] uppercase flex items-center gap-1.5 leading-none">
+                  <span>DESI</span>
+                  <span className="text-[#E5A83B]">MUCH</span>
+                  <span>ADS</span>
+                </div>
+                <span className="font-body text-[9px] tracking-[0.22em] text-[#D4AF37]/90 uppercase font-medium mt-1">
+                  High-ROAS Performance • Desi Style
+                </span>
+              </div>
             </div>
 
             <p className="text-xs sm:text-sm text-[#EFE7DA]/70 max-w-sm leading-relaxed font-light">
@@ -92,7 +104,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
             {/* Live IST Time Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[rgba(239,231,218,0.2)] bg-[#1C1815] text-xs font-mono text-[#D4AF37]">
               <Clock className="w-3.5 h-3.5 text-[#0D9488]" />
-              <span>LIVE IST // {currentTime || "05:50:00 PM"}</span>
+              <span>LIVE IST // {currentTime || "06:05:00 PM"}</span>
               <span className="w-2 h-2 rounded-full bg-[#0D9488] animate-pulse" />
             </div>
           </div>
@@ -156,11 +168,22 @@ export function Footer({ onOpenKundli }: FooterProps) {
           </div>
         </div>
 
-        {/* Oversized Kinetic Edge-to-Edge Cormorant Garamond Wordmark */}
-        <div className="pt-12 pb-8 text-center overflow-hidden">
-          <div className="text-[12vw] font-display font-light tracking-[0.06em] uppercase leading-none select-none text-[rgba(239,231,218,0.06)] hover:text-[#D4AF37]/25 transition-colors duration-500 whitespace-nowrap">
-            DESI MUCHADS
+        {/* Grand Signature Wordmark (Unclipped & Fully Visible) */}
+        <div className="py-12 sm:py-16 text-center select-none border-b border-[rgba(239,231,218,0.08)]">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-6 md:gap-x-8 text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] font-display font-light tracking-[0.06em] uppercase leading-tight">
+            <span className="text-[#F5EFEB]/30 hover:text-[#F5EFEB] transition-colors duration-300">
+              DESI
+            </span>
+            <span className="text-[#E5A83B]/70 hover:text-[#E5A83B] transition-colors duration-300">
+              MUCH
+            </span>
+            <span className="text-[#F5EFEB]/30 hover:text-[#F5EFEB] transition-colors duration-300">
+              ADS
+            </span>
           </div>
+          <p className="mt-3 text-xs sm:text-sm font-body tracking-[0.25em] text-[#D4AF37]/80 uppercase font-medium">
+            HIGH-ROAS PERFORMANCE MARKETING • BOLD VERNACULAR ROOTS
+          </p>
         </div>
 
         {/* Bottom Credits & Copyright */}

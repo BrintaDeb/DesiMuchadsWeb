@@ -75,6 +75,16 @@ export function Preloader({ onComplete }: PreloaderProps) {
               <MandalaStamp className="w-full h-full" />
             </div>
 
+            {/* Official Brand Logo Badge */}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.45)] mb-4 bg-[#10223D]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand-logo.jpg"
+                alt="Desi Muchads Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
             {/* Moustache Stroke SVG */}
             <div className="relative w-48 sm:w-72 h-24 sm:h-36 mb-6">
               <svg
