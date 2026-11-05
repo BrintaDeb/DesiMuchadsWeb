@@ -3,6 +3,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { MoustacheSVG } from "../common/Icons";
+import { sound } from "@/lib/sound";
+import {
+  MOUSTACHE_3D_BODY,
+  MOUSTACHE_3D_LEFT_QUILL,
+  MOUSTACHE_3D_RIGHT_QUILL,
+} from "./moustache3DData";
+
+function createShapeFromPoints(pts: [number, number][]): THREE.Shape {
+  const shape = new THREE.Shape();
+  pts.forEach(([x, y], i) => {
+    if (i === 0) shape.moveTo(x, y);
+    else shape.lineTo(x, y);
+  });
+  return shape;
+}
 
 export function ThreeHeroCenterpiece() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -49,7 +64,7 @@ export function ThreeHeroCenterpiece() {
     // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 7.5);
+    camera.position.set(0, 0, 7.2);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -59,76 +74,108 @@ export function ThreeHeroCenterpiece() {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.35;
 
     container.appendChild(renderer.domElement);
 
-    // 2. Lighting Setup for Royal Brushed Gold
-    const ambientLight = new THREE.AmbientLight(0x141829, 1.2);
+    // 2. High-End Studio Lighting Rig (Eliminates Dark Silhouette)
+    // Warm Ambient Light
+    const ambientLight = new THREE.AmbientLight(0xfff6ea, 1.8);
     scene.add(ambientLight);
 
-    // Key Light (Warm Brass)
-    const keyLight = new THREE.DirectionalLight(0xfff5c0, 2.5);
-    keyLight.position.set(4, 5, 6);
+    // Key Light (Warm Sunlight Gold from front-right)
+    const keyLight = new THREE.DirectionalLight(0xfffae0, 3.4);
+    keyLight.position.set(3.5, 4.5, 6);
     scene.add(keyLight);
 
-    // Marigold Rim Light
-    const rimLight = new THREE.DirectionalLight(0xf59e0b, 3.8);
-    rimLight.position.set(-5, -3, -4);
+    // Secondary Front Fill (Soft ivory bounce from front-left)
+    const fillLight = new THREE.DirectionalLight(0xffeedd, 2.2);
+    fillLight.position.set(-3.5, 2.5, 5);
+    scene.add(fillLight);
+
+    // Marigold Rim Light (Sculpting outer edges & feather cuts from behind)
+    const rimLight = new THREE.DirectionalLight(0xf59e0b, 4.8);
+    rimLight.position.set(-4.5, -2.5, -3.5);
     scene.add(rimLight);
 
-    // Top Fill Light (Sindoor Crimson accent)
-    const topLight = new THREE.PointLight(0xe11d48, 1.5, 10);
-    topLight.position.set(0, 4, 3);
-    scene.add(topLight);
+    // Specular Glint Light (Top-down highlight)
+    const glintLight = new THREE.PointLight(0xffd700, 2.4, 15);
+    glintLight.position.set(0, 3.5, 3.5);
+    scene.add(glintLight);
 
-    // 3. PBR Brushed-Gold Material
+    // Warm Terracotta Ground Fill
+    const groundFill = new THREE.PointLight(0xc84b31, 1.5, 12);
+    groundFill.position.set(0, -3.5, 2.5);
+    scene.add(groundFill);
+
+    // 3. PBR Brushed-Gold Materials
     const goldPBR = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xd4af37),
-      metalness: 0.92,
+      color: new THREE.Color(0xe5a83b), // Official Desi Muchads Warm Golden Ochre
+      metalness: 0.88,
       roughness: 0.18,
+    });
+
+    const quillGoldPBR = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(0xf5de88), // Polished highlight gold for inner quills
+      metalness: 0.94,
+      roughness: 0.14,
     });
 
     const brassDarkPBR = new THREE.MeshStandardMaterial({
       color: new THREE.Color(0xb38f26),
-      metalness: 0.88,
-      roughness: 0.28,
+      metalness: 0.90,
+      roughness: 0.24,
     });
 
-    // 4. Group for all 3D Hero Elements
+    // 4. Root & Moustache Groups
     const rootGroup = new THREE.Group();
     scene.add(rootGroup);
 
-    // 5. Construct 3D Twirled Moustache using parametric curves & extrusion
-    const moustacheShape = new THREE.Shape();
-    // Symmetric royal twirled contour
-    moustacheShape.moveTo(0, 0.2);
-    moustacheShape.bezierCurveTo(-0.8, 1.1, -2.2, 1.4, -3.2, 0.6);
-    moustacheShape.bezierCurveTo(-3.8, 0.0, -4.2, -0.8, -3.8, -1.3);
-    moustacheShape.bezierCurveTo(-3.2, -1.6, -2.4, -0.8, -1.8, -0.4);
-    moustacheShape.bezierCurveTo(-1.0, 0.0, -0.4, -0.3, 0, -0.6);
-    moustacheShape.bezierCurveTo(0.4, -0.3, 1.0, 0.0, 1.8, -0.4);
-    moustacheShape.bezierCurveTo(2.4, -0.8, 3.2, -1.6, 3.8, -1.3);
-    moustacheShape.bezierCurveTo(4.2, -0.8, 3.8, 0.0, 3.2, 0.6);
-    moustacheShape.bezierCurveTo(2.2, 1.4, 0.8, 1.1, 0, 0.2);
+    const moustacheGroup = new THREE.Group();
 
+    // Extrude settings for high-precision beveling
     const extrudeSettings = {
-      depth: 0.35,
+      depth: 0.28,
       bevelEnabled: true,
-      bevelSegments: 5,
-      steps: 2,
-      bevelSize: 0.12,
-      bevelThickness: 0.12,
+      bevelSegments: 4,
+      steps: 1,
+      bevelSize: 0.05,
+      bevelThickness: 0.05,
     };
 
-    const moustacheGeo = new THREE.ExtrudeGeometry(moustacheShape, extrudeSettings);
-    moustacheGeo.center();
+    const bodyShape = createShapeFromPoints(MOUSTACHE_3D_BODY);
+    const leftQuillShape = createShapeFromPoints(MOUSTACHE_3D_LEFT_QUILL);
+    const rightQuillShape = createShapeFromPoints(MOUSTACHE_3D_RIGHT_QUILL);
 
-    const moustacheMesh = new THREE.Mesh(moustacheGeo, goldPBR);
-    moustacheMesh.scale.set(0.68, 0.68, 0.68);
-    rootGroup.add(moustacheMesh);
+    const bodyGeo = new THREE.ExtrudeGeometry(bodyShape, extrudeSettings);
+    const leftQuillGeo = new THREE.ExtrudeGeometry(leftQuillShape, extrudeSettings);
+    const rightQuillGeo = new THREE.ExtrudeGeometry(rightQuillShape, extrudeSettings);
 
-    // 6. Floating Royal Mudras (Indian Brass Coins)
+    const bodyMesh = new THREE.Mesh(bodyGeo, goldPBR);
+    const leftQuillMesh = new THREE.Mesh(leftQuillGeo, quillGoldPBR);
+    const rightQuillMesh = new THREE.Mesh(rightQuillGeo, quillGoldPBR);
+
+    // Subtly offset the inner quills in Z for extra dimensional depth
+    leftQuillMesh.position.z = 0.04;
+    rightQuillMesh.position.z = 0.04;
+
+    moustacheGroup.add(bodyMesh);
+    moustacheGroup.add(leftQuillMesh);
+    moustacheGroup.add(rightQuillMesh);
+
+    // Calculate geometric bounding box and center precisely at origin
+    const bbox = new THREE.Box3().setFromObject(moustacheGroup);
+    const center = new THREE.Vector3();
+    bbox.getCenter(center);
+    bodyMesh.position.sub(center);
+    leftQuillMesh.position.sub(center);
+    rightQuillMesh.position.sub(center);
+
+    // Scale to balanced hero proportion
+    moustacheGroup.scale.set(0.88, 0.88, 0.88);
+    rootGroup.add(moustacheGroup);
+
+    // 5. Floating Royal Mudras (Indian Brass Coins)
     const mudras: {
       mesh: THREE.Mesh;
       orbitRadius: number;
@@ -137,16 +184,16 @@ export function ThreeHeroCenterpiece() {
       orbitY: number;
     }[] = [];
 
-    const coinGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.08, 32);
+    const coinGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.08, 32);
     coinGeo.rotateX(Math.PI / 2);
 
-    const coinInnerGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.1, 24);
+    const coinInnerGeo = new THREE.CylinderGeometry(0.40, 0.40, 0.09, 32);
     coinInnerGeo.rotateX(Math.PI / 2);
 
     const coinConfigs = [
-      { r: 2.8, y: 1.1, speed: 0.012, initial: 0 },
-      { r: 3.1, y: -0.9, speed: -0.015, initial: Math.PI * 0.75 },
-      { r: 3.4, y: 0.3, speed: 0.018, initial: Math.PI * 1.4 },
+      { r: 3.3, y: 1.1, speed: 0.012, initial: 0 },
+      { r: 3.5, y: -0.9, speed: -0.015, initial: Math.PI * 0.75 },
+      { r: 3.7, y: 0.2, speed: 0.016, initial: Math.PI * 1.4 },
     ];
 
     coinConfigs.forEach((cfg) => {
@@ -164,19 +211,26 @@ export function ThreeHeroCenterpiece() {
       });
     });
 
-    // 7. Mouse Normalized Coordinates and Lerp Physics
+    // 6. Mouse Normalized Coordinates and Lerp Physics
     const targetMouse = { x: 0, y: 0 };
     const currentMouse = { x: 0, y: 0 };
+    let spinVelocity = 0;
 
     const handlePointerMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      targetMouse.x = x * 0.4;
-      targetMouse.y = y * 0.3;
+      targetMouse.x = x * 0.45;
+      targetMouse.y = y * 0.35;
+    };
+
+    const handleClick = () => {
+      sound.playChime();
+      spinVelocity += Math.PI * 2;
     };
 
     window.addEventListener("mousemove", handlePointerMove);
+    container.addEventListener("click", handleClick);
 
     // Resize Handler
     const handleResize = () => {
@@ -190,7 +244,7 @@ export function ThreeHeroCenterpiece() {
 
     window.addEventListener("resize", handleResize);
 
-    // 8. Animation Render Loop
+    // 7. Animation Render Loop
     let animationFrameId: number;
     const startTime = performance.now();
 
@@ -201,12 +255,16 @@ export function ThreeHeroCenterpiece() {
       currentMouse.x = THREE.MathUtils.lerp(currentMouse.x, targetMouse.x, 0.06);
       currentMouse.y = THREE.MathUtils.lerp(currentMouse.y, targetMouse.y, 0.06);
 
-      rootGroup.rotation.y = currentMouse.x + Math.sin(elapsed * 0.8) * 0.05;
+      // Damp spin velocity
+      spinVelocity = THREE.MathUtils.lerp(spinVelocity, 0, 0.04);
+
+      rootGroup.rotation.y =
+        currentMouse.x + Math.sin(elapsed * 0.8) * 0.06 + spinVelocity;
       rootGroup.rotation.x = -currentMouse.y + Math.cos(elapsed * 0.6) * 0.04;
 
-      // Subtle breathing float on moustache
-      moustacheMesh.position.y = Math.sin(elapsed * 1.5) * 0.08;
-      moustacheMesh.rotation.z = Math.sin(elapsed * 1.2) * 0.03;
+      // Gentle breathing float on moustache
+      moustacheGroup.position.y = Math.sin(elapsed * 1.5) * 0.08;
+      moustacheGroup.rotation.z = Math.sin(elapsed * 1.2) * 0.025;
 
       // Orbit Mudra coins
       mudras.forEach((m) => {
@@ -227,15 +285,19 @@ export function ThreeHeroCenterpiece() {
     return () => {
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("resize", handleResize);
+      container.removeEventListener("click", handleClick);
       cancelAnimationFrame(animationFrameId);
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
-      moustacheGeo.dispose();
+      bodyGeo.dispose();
+      leftQuillGeo.dispose();
+      rightQuillGeo.dispose();
       coinGeo.dispose();
       coinInnerGeo.dispose();
       goldPBR.dispose();
+      quillGoldPBR.dispose();
       brassDarkPBR.dispose();
     };
   }, [isMobile]);
@@ -244,8 +306,8 @@ export function ThreeHeroCenterpiece() {
   if (isMobile || !webGlSupported) {
     return (
       <div className="relative my-4 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#D4AF37]/20 blur-3xl rounded-full scale-125" />
-        <MoustacheSVG className="relative z-10 w-44 sm:w-64 h-20 sm:h-28 text-[#D4AF37] drop-shadow-[0_0_30px_rgba(212,175,55,0.5)] transform-gpu hover:scale-105 transition-transform" />
+        <div className="absolute inset-0 bg-[#E5A83B]/20 blur-3xl rounded-full scale-125" />
+        <MoustacheSVG className="relative z-10 w-44 sm:w-64 h-20 sm:h-28 text-[#E5A83B] drop-shadow-[0_0_30px_rgba(229,168,59,0.5)] transform-gpu hover:scale-105 transition-transform" />
       </div>
     );
   }
@@ -254,7 +316,7 @@ export function ThreeHeroCenterpiece() {
     <div
       ref={mountRef}
       className="relative w-full max-w-xl h-64 sm:h-80 mx-auto my-1 flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
-      title="Interactive 3D Desi Muchhad & Mudras (Move your cursor to tilt)"
+      title="Interactive 3D Desi Muchhad & Mudras (Move cursor to tilt, click to spin)"
     />
   );
 }

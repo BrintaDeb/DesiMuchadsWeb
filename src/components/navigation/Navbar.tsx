@@ -25,7 +25,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { label: "ABOUT US", sub: "Pehchan", href: "#services" },
     { label: "SERVICES", sub: "Weapons", href: "#services" },
     { label: "SHOWREEL", sub: "Baiscope", href: "#baiscope" },
     { label: "CASE STUDIES", sub: "Karname", href: "#karname" },
