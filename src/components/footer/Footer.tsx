@@ -30,7 +30,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
   }, []);
 
   return (
-    <footer id="footer" className="relative bg-[#0e164c] text-white pt-24 pb-28 sm:pb-36 overflow-hidden select-none font-display border-t border-white/10">
+    <footer id="footer" className="relative bg-[#0e164c] text-white pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none font-display border-t border-white/10">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* BeeMarketing Signature Pre-Footer Punchline (Exact Typography & Layout) */}
         <div className="mb-20 pb-16 border-b border-white/10 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
@@ -80,10 +80,11 @@ export function Footer({ onOpenKundli }: FooterProps) {
                 />
               </div>
               <div className="flex flex-col text-left">
-                <div className="font-display font-extrabold text-xl tracking-wider text-white uppercase flex items-center gap-1 leading-none">
+                <div className="font-display font-extrabold text-xl tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
                   <span>DESI</span>
-                  <span className="text-[#F36700]">MUCH</span>
-                  <span>ADS</span>
+                  <span>
+                    <span className="text-[#F36700]">MUCH</span>ADS
+                  </span>
                 </div>
                 <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase mt-0.5">
                   PERFORMANCE MARKETING AGENCY
@@ -188,17 +189,19 @@ export function Footer({ onOpenKundli }: FooterProps) {
           </div>
         </div>
 
-        {/* Unclipped Signature Two-Tone Wordmark */}
+        {/* Unclipped Signature Two-Tone Wordmark (MUCHADS Together) */}
         <div className="py-12 sm:py-16 text-center select-none border-b border-white/10">
-          <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-6 md:gap-x-8 text-4xl sm:text-6xl md:text-8xl lg:text-[9vw] font-display font-black tracking-tight uppercase leading-tight">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-6 md:gap-x-8 text-3xl sm:text-5xl md:text-7xl lg:text-[8.5vw] font-display font-black tracking-tight uppercase leading-tight">
             <span className="text-white/20 hover:text-white transition-colors duration-300">
               DESI
             </span>
-            <span className="text-[#F36700]/70 hover:text-[#F36700] transition-colors duration-300">
-              MUCH
-            </span>
-            <span className="text-white/20 hover:text-white transition-colors duration-300">
-              ADS
+            <span className="inline-block transition-colors duration-300">
+              <span className="text-[#F36700]/80 hover:text-[#F36700] transition-colors duration-300">
+                MUCH
+              </span>
+              <span className="text-white/20 hover:text-white transition-colors duration-300">
+                ADS
+              </span>
             </span>
           </div>
           <p className="mt-3 text-xs sm:text-sm font-mono tracking-widest text-white/60 uppercase font-medium">

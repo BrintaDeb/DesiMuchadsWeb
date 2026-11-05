@@ -34,8 +34,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-[#0e164c]/95 backdrop-blur-md shadow-lg py-3.5 border-b border-white/10"
-          : "bg-[#0e164c] py-5 border-b border-white/10"
-      }`}
+          : "bg-[#0e164c] py-4 sm:py-5 border-b border-white/10"
+      } pt-[calc(0.75rem+env(safe-area-inset-top,0px))]`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Brand Mark with Official Logo */}
@@ -53,10 +53,11 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             />
           </div>
           <div className="flex flex-col text-left">
-            <div className="font-display font-extrabold text-lg sm:text-xl tracking-wider text-white uppercase flex items-center gap-1 leading-none">
+            <div className="font-display font-extrabold text-lg sm:text-xl tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
               <span>DESI</span>
-              <span className="text-[#F36700]">MUCH</span>
-              <span>ADS</span>
+              <span>
+                <span className="text-[#F36700]">MUCH</span>ADS
+              </span>
             </div>
             <span className="text-[9px] font-mono tracking-widest text-white/60 uppercase mt-0.5">
               PERFORMANCE MARKETING
@@ -91,10 +92,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           </button>
         </div>
 
-        {/* Mobile Menu Hamburger */}
+        {/* Mobile Menu Hamburger (48px Touch Target) */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-white p-2 focus:outline-none"
+          className="md:hidden text-white p-2.5 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-lg active:bg-white/10 focus:outline-none"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -103,13 +104,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0e164c] border-t border-white/10 px-4 py-6 space-y-4 font-display">
+        <div className="md:hidden bg-[#0e164c] border-t border-white/10 px-4 py-6 space-y-2 font-display animate-in slide-in-from-top duration-200">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm font-bold uppercase tracking-wider text-white/90 hover:text-[#F36700]"
+              className="block py-3 px-2 rounded-lg text-sm font-bold uppercase tracking-wider text-white/90 hover:text-[#F36700] active:bg-white/10 transition-colors"
             >
               {link.label}
             </a>
@@ -120,7 +121,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               onOpenKundli();
             }}
             type="button"
-            className="w-full mt-4 py-3 rounded bg-[#F36700] text-white font-bold text-xs uppercase tracking-wider"
+            className="w-full mt-4 min-h-[48px] py-3.5 rounded bg-[#F36700] active:bg-[#e2560b] text-white font-bold text-xs uppercase tracking-wider shadow-lg"
           >
             LET&apos;S TALK &gt;
           </button>

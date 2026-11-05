@@ -173,14 +173,14 @@ export function CaseStudiesSection() {
         </div>
       </div>
 
-      {/* Pop-Up Modal View (BeeMarketing Architecture) */}
+      {/* Pop-Up Modal View (BeeMarketing Architecture, iOS & Android Touch Tuned) */}
       {selectedCaseModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0e164c] text-white shadow-2xl p-6 sm:p-10 select-none border border-white/10">
-            {/* Close Button */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto overscroll-contain rounded-2xl bg-[#0e164c] text-white shadow-2xl p-5 sm:p-10 select-none border border-white/10">
+            {/* Close Button (44px min touch target) */}
             <button
               onClick={() => setSelectedCaseModal(null)}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-[#F36700] text-white flex items-center justify-center transition-colors z-20"
+              className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-[#F36700] active:scale-95 text-white flex items-center justify-center transition-all z-20 min-w-[44px] min-h-[44px]"
               aria-label="Close Case Study"
             >
               <X className="w-5 h-5" />

@@ -10,6 +10,7 @@ import { FiligreeCorner, MoustacheSVG } from "../common/Icons";
 export function ProposalFloatingBar() {
   const { proposal, generateWhatsAppPayload } = useProposal();
   const [isChaiModalOpen, setIsChaiModalOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [callBooked, setCallBooked] = useState(false);
   const [callData, setCallData] = useState({
     name: "",
@@ -49,54 +50,87 @@ export function ProposalFloatingBar() {
 
   return (
     <>
-      {/* Persistent Floating Bottom Bar */}
-      <div className="fixed bottom-4 sm:bottom-6 inset-x-4 max-w-4xl mx-auto z-40 pointer-events-auto select-none">
-        <div className="rounded-full bg-[#0D0C12]/90 backdrop-blur-2xl border border-[#D4AF37]/50 shadow-[0_10px_40px_rgba(0,0,0,0.8)] px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3">
-          {/* Left Summary Badge with Brand Crest */}
-          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#D4AF37] shadow-sm bg-[#10223D] shrink-0">
+      {/* Persistent Floating Bottom Bar with iOS Safe Area & Minimize state */}
+      {isMinimized ? (
+        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-40 select-none">
+          <button
+            onClick={() => {
+              sound.playPluck(180);
+              setIsMinimized(false);
+            }}
+            className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#0e164c] border-2 border-[#F36700] text-white shadow-2xl hover:scale-105 active:scale-95 transition-all min-h-[48px]"
+            aria-label="Open Proposal Bar"
+          >
+            <div className="w-6 h-6 rounded-full overflow-hidden border border-[#FFC400] shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/brand-logo.jpg"
-                alt="Desi Muchads Logo"
-                className="w-full h-full object-cover"
-              />
+              <img src="/brand-logo.jpg" alt="Logo" className="w-full h-full object-cover" />
             </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-mono text-xs font-bold text-[#F5DE88] truncate">
-                {proposal.industry} • Budget: {formatINR(proposal.budget)}
-              </span>
-              <span className="font-mono text-[10px] text-white/60 truncate">
-                Target ROAS: {proposal.estimatedRoas} ✦ Ready to deploy
-              </span>
+            <span className="font-mono text-xs font-bold text-[#FFC400]">PROPOSAL</span>
+            <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
+          </button>
+        </div>
+      ) : (
+        <div className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] inset-x-3 sm:inset-x-4 max-w-4xl mx-auto z-40 pointer-events-auto select-none">
+          <div className="rounded-2xl sm:rounded-full bg-[#0e164c]/95 backdrop-blur-2xl border border-[#F36700]/50 shadow-[0_10px_40px_rgba(0,0,0,0.8)] px-3.5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+            {/* Left Summary Badge with Brand Crest */}
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-[#FFC400] shadow-sm bg-[#0e164c] shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand-logo.jpg"
+                  alt="Desi Muchads Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex flex-col min-w-0">
+                <span className="font-mono text-[11px] sm:text-xs font-bold text-[#FFC400] truncate">
+                  {proposal.industry} • {formatINR(proposal.budget)}
+                </span>
+                <span className="font-mono text-[9px] sm:text-[10px] text-white/70 truncate">
+                  ROAS: {proposal.estimatedRoas} ✦ Ready to deploy
+                </span>
+              </div>
             </div>
-          </div>
 
-          {/* Right Action Buttons */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Chai & Strategy Call Trigger */}
-            <button
-              onClick={() => {
-                sound.playPluck(160);
-                setIsChaiModalOpen(true);
-              }}
-              className="px-3.5 sm:px-4 py-2 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 text-[#D4AF37] font-mono text-xs font-bold transition-all flex items-center gap-1.5"
-            >
-              <Coffee className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Chai Call</span>
-            </button>
+            {/* Right Action Buttons */}
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* Chai & Strategy Call Trigger */}
+              <button
+                onClick={() => {
+                  sound.playPluck(160);
+                  setIsChaiModalOpen(true);
+                }}
+                className="px-3 sm:px-4 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-mono text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 min-h-[44px]"
+              >
+                <Coffee className="w-3.5 h-3.5 text-[#FFC400]" />
+                <span className="hidden sm:inline">Chai Call</span>
+              </button>
 
-            {/* Direct WhatsApp Proposal Button */}
-            <button
-              onClick={handleWhatsAppClick}
-              className="px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-mono text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5"
-            >
-              <MessageCircle className="w-3.5 h-3.5 fill-white" />
-              <span>Send to WhatsApp</span>
-            </button>
+              {/* Direct WhatsApp Proposal Button */}
+              <button
+                onClick={handleWhatsAppClick}
+                className="px-3 sm:px-5 py-2 rounded-full bg-[#25D366] hover:bg-[#1faa53] text-white font-mono text-[11px] sm:text-xs font-bold shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 min-h-[44px]"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white shrink-0" />
+                <span className="hidden sm:inline">Send to WhatsApp</span>
+                <span className="sm:hidden">WhatsApp</span>
+              </button>
+
+              {/* Minimize button */}
+              <button
+                onClick={() => {
+                  sound.playPluck(140);
+                  setIsMinimized(true);
+                }}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all ml-0.5"
+                aria-label="Minimize proposal bar"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* 15-Minute Chai & Strategy Call Booking Modal */}
       {isChaiModalOpen && (

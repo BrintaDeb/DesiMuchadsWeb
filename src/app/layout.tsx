@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Poppins, Syne, Space_Grotesk, Roboto } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
@@ -39,6 +39,14 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: "#0e164c",
+};
+
 export const metadata: Metadata = {
   title: "DESI MUCHADS ✦ High-ROAS Performance & Neo-Desi Creative Agency",
   description:
@@ -67,7 +75,7 @@ export default function RootLayout({
       lang="en"
       className={`${roboto.variable} ${cormorant.variable} ${poppins.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
     >
-      <body className="bg-[#0D0C12] text-[#F7F1E5] selection:bg-[#D4AF37] selection:text-[#0D0C12] min-h-screen overflow-x-hidden font-sans">
+      <body className="bg-[#0e164c] text-white selection:bg-[#F36700] selection:text-white min-h-screen overflow-x-hidden font-sans">
         <ThemeProvider>
           <AgencyProposalProvider>{children}</AgencyProposalProvider>
         </ThemeProvider>

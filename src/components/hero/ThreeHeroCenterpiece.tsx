@@ -21,25 +21,9 @@ function createShapeFromPoints(pts: [number, number][]): THREE.Shape {
 
 export function ThreeHeroCenterpiece() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [webGlSupported, setWebGlSupported] = useState(true);
 
   useEffect(() => {
-    // Check mobile or touch device
-    const checkMobile = () => {
-      const isTouch =
-        window.matchMedia("(pointer: coarse)").matches ||
-        window.innerWidth < 768;
-      setIsMobile(isTouch);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
     const container = mountRef.current;
     if (!container) return;
 
@@ -58,8 +42,8 @@ export function ThreeHeroCenterpiece() {
       return;
     }
 
-    const width = container.clientWidth || 600;
-    const height = container.clientHeight || 340;
+    const width = container.clientWidth || 360;
+    const height = container.clientHeight || 260;
 
     // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
@@ -72,7 +56,7 @@ export function ThreeHeroCenterpiece() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.35;
 
@@ -229,14 +213,40 @@ export function ThreeHeroCenterpiece() {
       spinVelocity += Math.PI * 2;
     };
 
+    // Touch Gestures for Android & iOS (Non-blocking vertical scroll)
+    let touchStartX = 0;
+    let isTouching = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        isTouching = true;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isTouching || e.touches.length !== 1) return;
+      const currentX = e.touches[0].clientX;
+      const deltaX = (currentX - touchStartX) / (window.innerWidth || 360);
+      targetMouse.x += deltaX * 1.2;
+      touchStartX = currentX;
+    };
+
+    const handleTouchEnd = () => {
+      isTouching = false;
+    };
+
     window.addEventListener("mousemove", handlePointerMove);
     container.addEventListener("click", handleClick);
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
+    container.addEventListener("touchmove", handleTouchMove, { passive: true });
+    container.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     // Resize Handler
     const handleResize = () => {
       if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+      const w = container.clientWidth || 360;
+      const h = container.clientHeight || 260;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -286,6 +296,9 @@ export function ThreeHeroCenterpiece() {
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("resize", handleResize);
       container.removeEventListener("click", handleClick);
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchmove", handleTouchMove);
+      container.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animationFrameId);
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -300,10 +313,10 @@ export function ThreeHeroCenterpiece() {
       quillGoldPBR.dispose();
       brassDarkPBR.dispose();
     };
-  }, [isMobile]);
+  }, []);
 
-  // Mobile or WebGL Unsupported Fallback
-  if (isMobile || !webGlSupported) {
+  // WebGL Unsupported Fallback
+  if (!webGlSupported) {
     return (
       <div className="relative my-4 flex items-center justify-center">
         <div className="absolute inset-0 bg-[#E5A83B]/20 blur-3xl rounded-full scale-125" />
@@ -315,8 +328,8 @@ export function ThreeHeroCenterpiece() {
   return (
     <div
       ref={mountRef}
-      className="relative w-full max-w-xl h-64 sm:h-80 mx-auto my-1 flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
-      title="Interactive 3D Desi Muchhad & Mudras (Move cursor to tilt, click to spin)"
+      className="relative w-full max-w-xl h-60 sm:h-80 mx-auto my-1 flex items-center justify-center cursor-grab active:cursor-grabbing select-none touch-pan-y"
+      title="Interactive 3D Desi Muchhad & Mudras (Touch or move to tilt, tap to spin)"
     />
   );
 }

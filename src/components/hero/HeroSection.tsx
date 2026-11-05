@@ -11,7 +11,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onOpenKundli }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[90vh] pt-32 sm:pt-40 pb-20 flex items-center overflow-hidden bg-[#0e164c] text-white font-display">
+    <section className="relative min-h-[90vh] pt-28 sm:pt-40 pb-16 sm:pb-20 flex items-center overflow-hidden bg-[#0e164c] text-white font-display">
       {/* Subtle Starry Night Particle Accents (Pure CSS, No Media) */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <div className="absolute top-1/4 left-1/6 w-1 h-1 bg-white rounded-full shadow-[0_0_8px_white]" />
@@ -27,7 +27,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
       <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-[#F36700]/10 blur-[140px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column: BeeMarketing Exact Hero Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
             {/* Eyebrow Badge with Brand Logo */}
@@ -45,25 +45,25 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               </span>
             </div>
 
-            {/* Giant BeeMarketing Headline (Exact Copy & Styling) */}
-            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.04]">
+            {/* Giant BeeMarketing Headline (Exact Copy & Styling, Mobile Scaled) */}
+            <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.08]">
               Performance marketing agency for e-commerce growth
             </h1>
 
             {/* Subhead Paragraph */}
-            <p className="text-base sm:text-lg text-white/80 font-normal leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base md:text-lg text-white/80 font-normal leading-relaxed max-w-xl">
               We love digital. We’re experts in brand-building experiences and results-driven marketing — turning ambitious consumer brands into category kings.
             </p>
 
             {/* Action Buttons (BeeMarketing Exact Orange Rectangular Button) */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <button
                 onClick={() => {
                   sound.playChime();
                   onOpenKundli();
                 }}
                 type="button"
-                className="px-8 py-4 rounded bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-sm font-bold tracking-wider uppercase transition-all shadow-lg hover:shadow-orange-500/25 flex items-center gap-2 group active:scale-95"
+                className="px-8 py-3.5 sm:py-4 rounded bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all shadow-lg hover:shadow-orange-500/25 flex items-center justify-center gap-2 group active:scale-95 min-h-[48px]"
               >
                 <span>LET&apos;S TALK</span>
                 <span className="text-base group-hover:translate-x-1 transition-transform">&gt;</span>
@@ -71,34 +71,34 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
               <a
                 href="#karname"
-                className="px-8 py-4 rounded border border-white/20 hover:border-white/50 text-white font-display text-sm font-bold tracking-wider uppercase transition-all hover:bg-white/5"
+                className="px-8 py-3.5 sm:py-4 rounded border border-white/20 hover:border-white/50 text-white font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all hover:bg-white/5 flex items-center justify-center min-h-[48px]"
               >
                 OUR WORK
               </a>
             </div>
 
             {/* Trust Proof Checklist */}
-            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-white/70 font-medium tracking-wide">
+            <div className="pt-5 border-t border-white/10 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-white/70 font-medium tracking-wide">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#FFC400]" />
+                <CheckCircle2 className="w-4 h-4 text-[#FFC400] shrink-0" />
                 <span>8+ Years Experience</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#FFC400]" />
+                <CheckCircle2 className="w-4 h-4 text-[#FFC400] shrink-0" />
                 <span>200+ Happy Brands</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#FFC400]" />
+                <CheckCircle2 className="w-4 h-4 text-[#FFC400] shrink-0" />
                 <span>₹140Cr+ Scaled</span>
               </div>
             </div>
           </div>
 
           {/* Right Column: 3D Feathered Moustache Centerpiece on Deep Navy */}
-          <div className="lg:col-span-5 flex items-center justify-center relative">
-            <div className="w-full max-w-md sm:max-w-lg aspect-square relative flex items-center justify-center">
+          <div className="lg:col-span-5 flex items-center justify-center relative mt-4 lg:mt-0">
+            <div className="w-full max-w-sm sm:max-w-lg relative flex items-center justify-center">
               {/* Subtle halo ring behind 3D object */}
-              <div className="absolute inset-8 rounded-full bg-[#142161] blur-2xl opacity-60 pointer-events-none" />
+              <div className="absolute inset-4 rounded-full bg-[#142161] blur-2xl opacity-60 pointer-events-none" />
               <ThreeHeroCenterpiece />
             </div>
           </div>
