@@ -506,3 +506,4 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     </section>
   );
 }
+

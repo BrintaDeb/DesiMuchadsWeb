@@ -25,11 +25,12 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { label: "Hum Kya Karte Hain", sub: "Services", href: "#services" },
-    { label: "Baiscope", sub: "Showreel", href: "#baiscope" },
-    { label: "Karname", sub: "Case Studies", href: "#karname" },
-    { label: "Pricing & Thali", sub: "Packages", href: "#pricing" },
-    { label: "Client Portal", sub: "Inside Darbar", href: "#portal" },
+    { label: "ABOUT US", sub: "Pehchan", href: "#services" },
+    { label: "SERVICES", sub: "Weapons", href: "#services" },
+    { label: "SHOWREEL", sub: "Baiscope", href: "#baiscope" },
+    { label: "CASE STUDIES", sub: "Karname", href: "#karname" },
+    { label: "RETAINERS", sub: "Pricing", href: "#pricing" },
+    { label: "CLIENT DARBAR", sub: "Portal", href: "#portal" },
   ];
 
   return (
@@ -40,7 +41,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     >
       <nav
         aria-label="Main Navigation"
-        className="relative w-full max-w-7xl rounded-full bg-[#0D0C12]/85 backdrop-blur-xl border border-[#D4AF37]/35 shadow-[0_10px_35px_rgba(0,0,0,0.6)] px-3 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between"
+        className="relative w-full max-w-7xl rounded-full bg-[#1C1815]/90 backdrop-blur-xl border border-[#D4AF37]/35 shadow-[0_10px_35px_rgba(0,0,0,0.6)] px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between"
       >
         {/* Brass filigree corner accents on the edges */}
         <div className="absolute left-3 top-2 pointer-events-none opacity-40 hidden sm:block">
@@ -60,30 +61,25 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             <MoustacheSVG className="w-5 h-2.5 text-[#D4AF37] group-hover:-rotate-12 transition-transform duration-300 transform-gpu" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display font-extrabold text-xs sm:text-sm tracking-wider text-[#F7F1E5] group-hover:text-[#D4AF37] transition-colors leading-tight">
+            <span className="font-display font-bold text-base sm:text-lg tracking-widest text-[#EFE7DA] group-hover:text-[#D4AF37] transition-colors leading-tight uppercase">
               DESI MUCHADS
             </span>
-            <span className="font-mono text-[8px] sm:text-[9px] tracking-[0.2em] text-[#D4AF37]/80 uppercase hidden xs:inline">
-              Much Ads • Muchhad ROAS
+            <span className="font-body text-[8.5px] tracking-[0.25em] text-[#D4AF37]/80 uppercase hidden xs:inline font-medium">
+              HIGH-ROAS PERFORMANCE • DESI STYLE
             </span>
           </div>
         </a>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden lg:flex items-center gap-5 xl:gap-7">
+        {/* Desktop Nav Links - Desi Vibes Cormorant / Poppins Tracked Style */}
+        <div className="hidden lg:flex items-center gap-5 xl:gap-6 font-body">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onMouseEnter={() => sound.playPluck(130)}
-              className="group flex flex-col items-center text-xs transition-colors py-1"
+              className="group py-1 text-[11px] font-medium tracking-[0.16em] uppercase text-[#EFE7DA]/75 hover:text-[#D4AF37] transition-colors"
             >
-              <span className="font-medium text-[#F7F1E5]/80 group-hover:text-[#D4AF37] transition-colors">
-                {link.label}
-              </span>
-              <span className="font-mono text-[8.5px] tracking-wider text-[#D4AF37]/50 group-hover:text-[#D4AF37] transition-colors uppercase">
-                {link.sub}
-              </span>
+              <span>{link.label}</span>
             </a>
           ))}
         </div>
@@ -102,10 +98,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             }}
             onMouseEnter={() => sound.playPluck(160)}
             type="button"
-            className="group relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 rounded-full bg-gradient-to-r from-[#E11D48] to-[#C84B31] text-[#F7F1E5] font-semibold text-xs tracking-wide shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_25px_rgba(225,29,72,0.7)] transition-all duration-300 active:scale-95"
+            className="group relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 rounded-full bg-gradient-to-r from-[#C84B31] via-[#E11D48] to-[#C84B31] text-[#EFE7DA] font-body font-semibold text-xs tracking-wider uppercase shadow-[0_0_20px_rgba(200,75,49,0.4)] hover:shadow-[0_0_25px_rgba(200,75,49,0.7)] transition-all duration-300 active:scale-95"
           >
-            <span>Start a Project</span>
-            <span className="text-xs font-mono text-[#F7F1E5]/90 group-hover:translate-x-0.5 transition-transform">
+            <span>Book Baithak</span>
+            <span className="text-xs font-mono text-[#EFE7DA]/90 group-hover:translate-x-0.5 transition-transform">
               〰️
             </span>
             <ArrowUpRight className="w-3 h-3 hidden sm:inline text-white/80 group-hover:rotate-45 transition-transform" />
@@ -124,17 +120,17 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed top-16 inset-x-4 bg-[#0D0C12]/95 backdrop-blur-2xl border border-[#D4AF37]/40 rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-300 z-50">
-          <div className="flex flex-col divide-y divide-[#D4AF37]/15">
+        <div className="lg:hidden fixed top-16 inset-x-4 bg-[#1C1815]/98 backdrop-blur-2xl border border-[#D4AF37]/40 rounded-3xl p-6 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-300 z-50">
+          <div className="flex flex-col divide-y divide-[#D4AF37]/15 font-body">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-3 flex items-center justify-between text-sm font-medium text-[#F7F1E5] hover:text-[#D4AF37] transition-colors"
+                className="py-3 flex items-center justify-between text-xs tracking-[0.18em] uppercase font-medium text-[#EFE7DA] hover:text-[#D4AF37] transition-colors"
               >
                 <span>{link.label}</span>
-                <span className="font-mono text-xs text-[#D4AF37]/60 uppercase">
+                <span className="text-[10px] text-[#D4AF37]/60">
                   {link.sub}
                 </span>
               </a>
@@ -146,9 +142,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               setMobileMenuOpen(false);
               onOpenKundli();
             }}
-            className="w-full py-3 rounded-full bg-gradient-to-r from-[#E11D48] to-[#C84B31] text-[#F7F1E5] font-semibold text-sm flex items-center justify-center gap-2 shadow-lg"
+            className="w-full py-3 rounded-full bg-gradient-to-r from-[#C84B31] via-[#E11D48] to-[#C84B31] text-[#EFE7DA] font-body font-semibold text-xs tracking-wider uppercase shadow-lg"
           >
-            <span>Get Your Free Brand Kundli</span>
+            <span>Reserve Strategy Baithak (Free)</span>
             <span>〰️</span>
           </button>
         </div>
@@ -156,4 +152,3 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     </header>
   );
 }
-
