@@ -5,18 +5,18 @@ import { sound } from "@/lib/sound";
 
 export function ClientsTrustStrip() {
   const clients = [
+    { name: "PET-FIRST", category: "Wellness & Pet Care" },
+    { name: "YOU & ME", category: "Cinematic Photography" },
+    { name: "LIONELP", category: "Gourmet & Hospitality" },
+    { name: "FRESHEATS", category: "Organic Food Storefront" },
+    { name: "NESTSERVICES", category: "Concierge & Living Hub" },
     { name: "MCDONALD'S", category: "QSR & Retail" },
     { name: "FROSCH", category: "Eco-Friendly Living" },
-    { name: "GARMIN", category: "GPS & Endurance Wearables" },
     { name: "ATEA", category: "Enterprise IT & Cloud" },
-    { name: "ŽALGIRIO ARENA", category: "Sports & Live Events" },
-    { name: "RUMŠIŠKIŲ PAUKŠTYNAS", category: "Poultry & FMCG" },
-    { name: "NEMATEKAS", category: "Food Processing Giant" },
     { name: "TRANSFERGO", category: "Fintech & Payments" },
-    { name: "TIKETA", category: "Ticketing & Live Entertainment" },
-    { name: "DADU", category: "Natural Ice Cream" },
     { name: "CROCS", category: "Global Footwear" },
     { name: "DESI D2C", category: "Direct-to-Consumer" },
+    { name: "ROYAL MASALA", category: "Heritage Spices" },
   ];
 
   return (

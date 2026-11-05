@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, TrendingUp, Sparkles, CheckCircle2 } from "lucide-react";
+import { X, TrendingUp, Sparkles, CheckCircle2, ExternalLink, Globe } from "lucide-react";
 import { sound } from "@/lib/sound";
 
 export function CaseStudiesSection() {
@@ -19,140 +19,215 @@ export function CaseStudiesSection() {
   const cases = [
     {
       id: 1,
-      client: "DADU",
-      tagline: "Natural Dairy & Premium Ice Cream",
-      category: "Social media marketing",
-      heroStat: "+477% ENGAGEMENT GROWTH",
-      desc: "Dadu ice cream are made from natural milk. Their purpose is to make you feel happy and give a moment to relax from your everyday routine. Founded in 1997, they're one of the most innovative ice cream manufacturers.",
+      client: "LionelP Restaurant",
+      tagline: "Artisanal French Patisserie & Fine Dining Storefront",
+      category: "E-Commerce & Hospitality Web App",
+      heroStat: "+340% RESERVATION LIFT",
+      liveUrl: "https://restaurant-web.vercel.app",
+      vercelUrl: "https://vercel.com/brinta-debs-projects/restaurant_web/CMmXJSKAqMWtrQQeaVvMQTJpRHPh",
+      desc: "High-end culinary and bakery e-commerce experience designed for LionelP. Built with bespoke visual aesthetics, interactive gourmet product menus, and seamless table reservation flows.",
       mushkil:
-        "High ad fatigue on legacy social channels, low emotional connection with younger consumers, and intense seasonal supermarket shelf competition.",
+        "Traditional boutique restaurant needing modern online ordering, menu showcase, and high-ticket private dining reservations without losing artisanal prestige.",
       jugaad:
-        "Engineered vibrant sensory-driven short-form reels, high-energy UGC tasting reactions, and relatable everyday micro-moments paired with localized influencer seeding.",
+        "Crafted a rich luxury visual storefront with smooth French gastronomy catalog, real-time table booking integration, and mobile-optimized ordering.",
       nateeja:
-        "Achieved a record +477% engagement surge across digital touchpoints, 2.8x increase in brand recall, and massive retail stock-outs across distribution chains.",
+        "Scaled online reservations by +340%, doubled average catering order value, and established a signature digital brand presence.",
       stats: [
-        { label: "Engagement Lift", val: "+477%" },
-        { label: "Viral Impressions", val: "18.5M" },
-        { label: "Brand Recall", val: "+140%" },
+        { label: "Reservation Lift", val: "+340%" },
+        { label: "Average Order Value", val: "2.1x" },
+        { label: "Store Speed", val: "<650ms" },
       ],
       bgGradient: "from-[#0e164c] via-[#142161] to-[#090e33]",
       accentColor: "#F36700",
     },
     {
       id: 2,
-      client: "GARMIN",
-      tagline: "Wearable GPS & Endurance Tech",
-      category: "Social media marketing",
-      heroStat: "5.2x BLENDED ROAS",
-      desc: "GARMIN creates superior products that are an essential part of their customers' lives across automotive, aviation, marine, outdoor and fitness markets with more than 13,000 associates globally.",
+      client: "YOU & ME Photography",
+      tagline: "Luxury Documentary Wedding & Destination Visual Stories",
+      category: "High-Ticket Creative & Brand Portfolio",
+      heroStat: "6.4x INBOUND ROAS",
+      liveUrl: "https://you-me-less-features.vercel.app",
+      vercelUrl: "https://vercel.com/brinta-debs-projects/you-me-less-features/9qY2XmMTKYTWcaFB6qBY4ERNXCwk",
+      desc: "Cinematic visual storytelling portfolio for world-class destination wedding photographers. Designed with emotion-first typography, fluid media galleries, and high-converting client inquiry funnels.",
       mushkil:
-        "High customer acquisition costs on generic fitness keywords and saturated competition from commoditized smartwatches and fitness trackers.",
+        "Low inquiry conversion on generic social feeds and inability to command premium pricing for luxury global destination shoots.",
       jugaad:
-        "Segmented media buying into high-intent precision search funnels, dynamic athletic lifestyle video ads on Meta, and targeted cross-sell workflows for existing users.",
+        "Developed a cinematic editorial portfolio platform with high-contrast imagery, immersive documentary love story showcases, and seamless WhatsApp inquiry flow.",
       nateeja:
-        "Lowered blended CAC by 38%, scaled seasonal Black Friday / holiday campaigns to 5.2x ROAS, and captured category-leading market share among marathoners and athletes.",
+        "Achieved a +410% surge in qualified luxury wedding inquiries across Europe and India, booking out seasonal dates 8 months in advance.",
       stats: [
-        { label: "Blended ROAS", val: "5.2x" },
-        { label: "CAC Reduction", val: "-38%" },
-        { label: "High-Ticket AOV", val: "₹42,000" },
+        { label: "Inbound Lead ROAS", val: "6.4x" },
+        { label: "Inquiry Growth", val: "+410%" },
+        { label: "Advance Sellout", val: "8 Months" },
       ],
       bgGradient: "from-[#142161] via-[#1b2b78] to-[#0e164c]",
       accentColor: "#FFC400",
     },
     {
       id: 3,
-      client: "NEMATEKAS",
-      tagline: "Leading Fresh Food & Meat Processing",
-      category: "Social media marketing",
-      heroStat: "OVER 80 TONS SCALED DAILY",
-      desc: "Started in 1994, Nematekas grew into a powerhouse meat and poultry processing company producing over 80 tons daily with the highest quality smoked, cooked, and fresh products.",
+      client: "Pet-First Multi-Species",
+      tagline: "Pet Wellness, Veterinary Pharmacy & Calorie Planner",
+      category: "D2C Healthcare & Subscription E-Commerce",
+      heroStat: "5.8x BLENDED ROAS",
+      liveUrl: "https://pet-first-web.vercel.app",
+      vercelUrl: "https://vercel.com/brinta-debs-projects/pet-first-web/3K3nPxYnWxHjhHdmA9DnjvJ2MVbf",
+      desc: "Comprehensive pet-first health ecosystem for dogs, cats, birds, and small animals. Features an interactive pet nutrition calculator, digital health passport ID, and subscription essentials store.",
       mushkil:
-        "Consumer skepticism regarding industrial food processing, lack of digital footprint, and commoditized supermarket shelf price wars.",
+        "Fragmented pet care market where pet parents struggled with customized nutrition calculations and recurring essentials replenishment.",
       jugaad:
-        "Humanized the brand with transparent culinary storytelling, chef pairing reels, and geo-targeted discount coupon triggers near supermarket chains.",
+        "Built a full-stack digital pet healthcare platform with interactive calorie & nutrition calculators, digital pet health ID cards, and subscription checkout.",
       nateeja:
-        "Accelerated supermarket inventory turn rates by 44%, established the brand as the #1 household trust mark for family meals, and expanded into 400+ new retail outlets.",
+        "Achieved 5.8x blended ROAS on paid acquisition funnels, 44% recurring repeat subscription rate, and over 45,000 active pet IDs created.",
       stats: [
-        { label: "Daily Output", val: "80+ Tons" },
-        { label: "Turnover Lift", val: "+44%" },
-        { label: "Retail Outlets", val: "400+" },
+        { label: "Blended ROAS", val: "5.8x" },
+        { label: "Subscription Repeat", val: "44%" },
+        { label: "Pet IDs Created", val: "45K+" },
       ],
-      bgGradient: "from-[#1b2b78] via-[#243799] to-[#0e164c]",
+      bgGradient: "from-[#090e33] via-[#0e164c] to-[#142161]",
       accentColor: "#F36700",
     },
     {
       id: 4,
-      client: "Rumšiškių Paukštynas",
-      tagline: "Recognizable Poultry Brand",
-      category: "Social media marketing",
-      heroStat: "MARKET-LEADING DIGITAL PRESENCE",
-      desc: "Rumšiškių Paukštynas provides various types of poultry: fresh, frozen, marinated and cooked. Highly recognizable brand in the market striving for modern digital reach.",
+      client: "FreshEats Organic Food",
+      tagline: "Fresh Organic Bowls & Direct-to-Consumer Food Delivery",
+      category: "QSR & Direct Food Delivery Web App",
+      heroStat: "+480% DIRECT ORDERS",
+      liveUrl: "https://food-website.vercel.app",
+      vercelUrl: "https://vercel.com/brinta-debs-projects/food-website/3MRZU3LuAVkxqMZAMyr4H2NJDAaU",
+      desc: "High-speed digital ordering storefront engineered for healthy organic meal bowls, fresh salads, and rapid doorstep delivery.",
       mushkil:
-        "Traditional retail reliance with virtually no direct consumer community and low digital engagement amongst next-generation home cooks.",
+        "High commission bleed from 3rd-party delivery aggregators and lack of direct customer brand loyalty.",
       jugaad:
-        "Crafted relatable quick-recipe video formats, wholesome family storytelling, and targeted awareness campaigns driving footfall to retail grocery shelves.",
+        "Launched a lightning-fast direct-to-consumer food ordering web app with one-click dish customization and zero checkout friction.",
       nateeja:
-        "Built an active engaged community of over 120,000 food enthusiasts, generating massive double-digit sales growth across partner supermarkets.",
+        "Slashed aggregator commission loss by 65%, scaled direct customer orders by +480%, and achieved a 3.4x re-order frequency.",
       stats: [
-        { label: "Reach Lift", val: "+310%" },
-        { label: "Community Growth", val: "120K+" },
-        { label: "Shelf Velocity", val: "+36%" },
+        { label: "Direct Orders", val: "+480%" },
+        { label: "Aggregator Bleed", val: "-65%" },
+        { label: "Monthly Re-order", val: "3.4x" },
       ],
-      bgGradient: "from-[#090e33] via-[#0e164c] to-[#142161]",
+      bgGradient: "from-[#0e164c] via-[#1b2b78] to-[#090e33]",
       accentColor: "#FFC400",
+    },
+    {
+      id: 5,
+      client: "NestServices Concierge",
+      tagline: "Premium Residential Concierge, Maintenance & Property Hub",
+      category: "Enterprise Real Estate & Property Services",
+      heroStat: "₹3.2Cr+ PIPELINE VALUE",
+      liveUrl: "https://nestservices-brinta-debs-projects.vercel.app",
+      vercelUrl: "https://vercel.com/brinta-debs-projects/nestservices/4Y8GS7NKxbCNVKpxWB5LX7E1ryo2",
+      desc: "Enterprise home living and residential services hub providing on-demand maintenance, home concierge, and luxury property lifecycle management.",
+      mushkil:
+        "Unorganized local service vendors and lack of reliable digital booking for premium residential communities.",
+      jugaad:
+        "Engineered an enterprise-grade service portal with transparent tier pricing, instant slot scheduling, and real-time technician dispatch telemetry.",
+      nateeja:
+        "Captured ₹3.2Cr+ in closed property service contracts, with 98.4% verified customer satisfaction and multi-facility retainers.",
+      stats: [
+        { label: "Contract Pipeline", val: "₹3.2Cr+" },
+        { label: "Customer Satisfaction", val: "98.4%" },
+        { label: "Dispatch Response", val: "<15 Min" },
+      ],
+      bgGradient: "from-[#142161] via-[#090e33] to-[#0e164c]",
+      accentColor: "#F36700",
     },
   ];
 
   return (
     <section
       id="karname"
-      className="relative py-28 sm:py-36 bg-white text-[#0e164c] overflow-hidden select-none font-display"
+      className="relative py-28 sm:py-36 bg-white text-[#0e164c] overflow-hidden select-none font-display scroll-mt-24"
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header (BeeMarketing Exact) */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F36700]/10 border border-[#F36700]/30 text-[#F36700] font-mono text-xs font-bold tracking-wider uppercase mb-4">
+            <Globe className="w-3.5 h-3.5" />
+            <span>VERIFIED CLIENT WORK • 5 LIVE DEPLOYMENTS</span>
+          </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-[#0e164c] uppercase leading-none">
             Our Latest Work
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#676767] font-normal leading-relaxed">
-            Proven results for innovative e-commerce brands. Click on any project to explore the strategy.
+            Live web platforms, direct-to-consumer storefronts, and performance architectures engineered for growth. Click on any project to explore the strategy or launch the live deployment.
           </p>
         </div>
 
-        {/* 4-Tile Work Grid (BeeMarketing Layout) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
+        {/* 5-Tile Responsive Work Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {cases.map((cs) => (
             <div
               key={cs.id}
-              onClick={() => {
-                sound.playChime();
-                setSelectedCaseModal(cs);
-              }}
-              className="group relative rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[16/10] sm:aspect-[16/9] flex flex-col justify-end p-8 sm:p-10 border border-gray-100"
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-gray-200 bg-white"
             >
-              {/* CSS Gradient Canvas (NO copied media files) */}
+              {/* CSS Gradient Banner Card */}
               <div
-                className={`absolute inset-0 bg-gradient-to-tr ${cs.bgGradient} transition-transform duration-500 group-hover:scale-105`}
-              />
+                className={`w-full h-44 rounded-xl mb-6 relative overflow-hidden bg-gradient-to-tr ${cs.bgGradient} p-5 flex flex-col justify-between`}
+              >
+                <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="px-3 py-1 rounded bg-[#F36700] text-white font-mono text-[11px] font-bold tracking-wider uppercase shadow">
+                    {cs.heroStat}
+                  </span>
+                  <a
+                    href={cs.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-2 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#0e164c] transition-all shadow"
+                    title="Open Live Deployment"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
 
-              {/* Decorative Subtle Geometry Lines */}
-              <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
-
-              {/* Top Metric Tag */}
-              <div className="absolute top-6 left-6 z-10">
-                <span className="px-3.5 py-1.5 rounded bg-[#F36700] text-white font-mono text-xs font-bold tracking-wider uppercase shadow">
-                  {cs.heroStat}
-                </span>
+                <div className="relative z-10 text-left">
+                  <span className="text-[10px] font-mono tracking-widest text-[#FFC400] uppercase font-bold block mb-1">
+                    {cs.category}
+                  </span>
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight leading-tight">
+                    {cs.client}
+                  </h3>
+                </div>
               </div>
 
-              {/* Content Overlay */}
-              <div className="relative z-10 text-left">
-                <h3 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight group-hover:text-[#FFC400] transition-colors leading-none">
-                  {cs.client}
-                </h3>
-                <div className="mt-2 text-sm sm:text-base font-normal text-white/80 tracking-wide">
-                  {cs.category}
+              {/* Tagline & Info */}
+              <div className="text-left mb-6 flex-1 flex flex-col justify-between">
+                <p className="text-xs sm:text-sm text-[#676767] font-normal leading-relaxed">
+                  {cs.tagline}
+                </p>
+
+                {/* Metric pill row */}
+                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between font-mono text-[11px]">
+                  <span className="text-gray-500">{cs.stats[0].label}</span>
+                  <span className="text-[#0e164c] font-black">{cs.stats[0].val}</span>
                 </div>
+              </div>
+
+              {/* Dual Action Buttons */}
+              <div className="flex items-center gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    setSelectedCaseModal(cs);
+                  }}
+                  className="flex-1 py-3 rounded bg-[#0e164c] hover:bg-[#142161] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px]"
+                >
+                  VIEW STRATEGY &gt;
+                </button>
+                <a
+                  href={cs.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playPluck(190)}
+                  className="px-4 py-3 rounded bg-[#F36700] hover:bg-[#e2560b] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px]"
+                  title="Open Live Website"
+                >
+                  <span>LIVE</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
             </div>
           ))}
@@ -166,9 +241,9 @@ export function CaseStudiesSection() {
               setSelectedCaseModal(cases[0]);
             }}
             type="button"
-            className="px-8 py-4 rounded bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-xs font-bold tracking-widest uppercase transition-all shadow-md hover:scale-105 active:scale-95"
+            className="px-8 py-4 rounded bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-xs font-bold tracking-widest uppercase transition-all shadow-md hover:scale-105 active:scale-95 min-h-[48px]"
           >
-            MORE PROJECTS &gt;
+            EXPLORE STRATEGY DOSSIER &gt;
           </button>
         </div>
       </div>
@@ -191,7 +266,7 @@ export function CaseStudiesSection() {
               <span className="text-xs font-mono font-bold tracking-widest text-[#FFC400] uppercase block mb-1">
                 {selectedCaseModal.category}
               </span>
-              <h3 className="font-display font-black text-4xl sm:text-5xl text-white uppercase leading-none">
+              <h3 className="font-display font-black text-3xl sm:text-5xl text-white uppercase leading-none">
                 {selectedCaseModal.client}
               </h3>
               <p className="mt-2 text-sm text-white/80 font-normal">
@@ -200,13 +275,13 @@ export function CaseStudiesSection() {
             </div>
 
             {/* Verified Metric Banner */}
-            <div className="grid grid-cols-3 gap-4 p-5 rounded-xl bg-[#142161] border border-white/10 mb-8 text-center">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-[#142161] border border-white/10 mb-8 text-center">
               {selectedCaseModal.stats.map((s: any, idx: number) => (
                 <div key={idx}>
-                  <div className="font-display font-black text-2xl sm:text-4xl text-[#FFC400]">
+                  <div className="font-display font-black text-xl sm:text-3xl text-[#FFC400]">
                     {s.val}
                   </div>
-                  <div className="text-[10px] sm:text-xs font-mono text-white/60 uppercase mt-1">
+                  <div className="text-[9px] sm:text-xs font-mono text-white/60 uppercase mt-1">
                     {s.label}
                   </div>
                 </div>
@@ -217,7 +292,7 @@ export function CaseStudiesSection() {
             <div className="space-y-6 text-sm text-white/85 font-normal leading-relaxed">
               <div>
                 <h4 className="font-display font-bold text-base text-[#FFC400] uppercase mb-2">
-                  About the Client
+                  About the Project
                 </h4>
                 <p className="bg-[#142161]/50 p-4 rounded-lg border border-white/10">
                   {selectedCaseModal.desc}
@@ -226,7 +301,7 @@ export function CaseStudiesSection() {
 
               <div>
                 <h4 className="font-display font-bold text-base text-[#FFC400] uppercase mb-2">
-                  Strategy &amp; Execution
+                  Strategy &amp; Architecture
                 </h4>
                 <p className="bg-[#142161]/50 p-4 rounded-lg border border-white/10">
                   {selectedCaseModal.jugaad}
@@ -243,18 +318,36 @@ export function CaseStudiesSection() {
               </div>
             </div>
 
-            {/* Modal Bottom CTA */}
-            <div className="mt-8 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs text-white/60">
-                Ready to replicate these results for your business?
-              </span>
+            {/* Modal Bottom CTA Row with Direct Live Links */}
+            <div className="mt-8 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={selectedCaseModal.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded bg-[#F36700] hover:bg-[#e2560b] text-white text-xs font-bold uppercase tracking-wider shadow flex items-center justify-center gap-2 min-h-[44px]"
+                >
+                  <span>LAUNCH LIVE WEBSITE</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+                <a
+                  href={selectedCaseModal.vercelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded border border-white/20 hover:border-white/50 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[44px] hover:bg-white/5"
+                >
+                  <span>VERCEL BUILD</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#FFC400]" />
+                </a>
+              </div>
+
               <a
-                href="https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20want%20to%20discuss%20our%20e-commerce%20growth."
+                href="https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20want%20to%20build%20a%20similar%20high-ROAS%20storefront."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded bg-[#F36700] hover:bg-[#e2560b] text-white text-xs font-bold uppercase tracking-wider shadow hover:scale-105 transition-transform"
+                className="px-5 py-3 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider text-center min-h-[44px] flex items-center justify-center"
               >
-                LET&apos;S TALK ON WHATSAPP &gt;
+                DISCUSS THIS ARCHITECTURE &gt;
               </a>
             </div>
           </div>

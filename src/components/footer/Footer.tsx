@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageCircle, Clock, ArrowUpRight } from "lucide-react";
+import { MessageCircle, Clock, ArrowUpRight, MapPin, Navigation, ExternalLink } from "lucide-react";
 import { sound } from "@/lib/sound";
 
 interface FooterProps {
@@ -182,9 +182,74 @@ export function Footer({ onOpenKundli }: FooterProps) {
                 buzz@desimuchads.com
               </a>
               <p>+91 (0) 9999 999 999</p>
-              <p className="text-[11px] text-white/50 pt-2 border-t border-white/10">
-                K. Donelaicio str. 60 (BLC), Kaunas • Connaught Place, New Delhi
+              <div className="pt-2 border-t border-white/10 space-y-1">
+                <p className="text-[#FFC400] font-bold text-xs flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[#F36700]" />
+                  <span>Business Location</span>
+                </p>
+                <a
+                  href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-white/70 hover:text-[#F36700] underline block"
+                >
+                  View on Google Maps ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Business Location & Client-View Interactive Map */}
+        <div className="py-12 border-b border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Location Details */}
+            <div className="lg:col-span-5 space-y-4 text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F36700]/15 border border-[#F36700]/40 text-xs font-mono font-bold text-[#FFC400] uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-[#F36700]" />
+                <span>OFFICIAL BUSINESS LOCATION</span>
+              </div>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
+                Our Headquarters &amp; Studio
+              </h3>
+              <p className="text-sm text-white/75 leading-relaxed font-normal">
+                Visit our agency hub for in-person strategy Baithaks, creative direction reviews, and e-commerce growth war-rooms.
               </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded bg-[#F36700] hover:bg-[#e2560b] active:scale-95 text-white font-bold text-xs uppercase tracking-wider shadow-lg transition-all min-h-[44px]"
+                >
+                  <Navigation className="w-4 h-4" />
+                  <span>GET DIRECTIONS ON GOOGLE MAPS &gt;</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Client-View Map */}
+            <div className="lg:col-span-7">
+              <div className="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-[#090e33] group">
+                <iframe
+                  title="Desi Muchads Business Location"
+                  src="https://maps.google.com/maps?q=Kolkata%20West%20Bengal&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                  className="w-full h-full border-0 filter contrast-[1.05] opacity-90 group-hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                  allowFullScreen
+                />
+                {/* Floating Map Pin Badge */}
+                <a
+                  href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 right-3 px-3.5 py-1.5 rounded-full bg-[#0e164c]/95 border border-[#F36700]/60 text-white font-mono text-[11px] font-bold shadow-lg flex items-center gap-1.5 hover:bg-[#F36700] transition-colors"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#FFC400]" />
+                  <span>Open in Google Maps ↗</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -52,31 +52,31 @@ export function Preloader({ onComplete }: PreloaderProps) {
   return (
     <AnimatePresence>
       {!isDone ? (
-        <div className="fixed inset-0 z-[999] flex flex-col justify-between p-6 sm:p-12 pointer-events-auto bg-[#0D0C12] overflow-hidden select-none">
-          {/* Subtle brass dust ambient particles */}
+        <div className="fixed inset-0 z-[999] flex flex-col justify-between p-6 sm:p-12 pointer-events-auto bg-[#0e164c] overflow-hidden select-none font-display">
+          {/* Subtle starry ambient glow particles */}
           <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-[#D4AF37]/10 blur-[100px]" />
-            <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#E11D48]/10 blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-[#142161] blur-[100px]" />
+            <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-[#F36700]/15 blur-[120px]" />
           </div>
 
-          {/* Top Bar: Royal Header */}
-          <div className="relative z-10 flex items-center justify-between text-xs font-mono uppercase tracking-[0.3em] text-[#D4AF37]/80">
+          {/* Top Bar: Brand Status */}
+          <div className="relative z-10 flex items-center justify-between text-xs font-mono uppercase tracking-[0.25em] text-[#FFC400]">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#E11D48] animate-ping" />
-              DESI MUCHADS DARBAR
+              <span className="w-2 h-2 rounded-full bg-[#F36700] animate-ping" />
+              DESI MUCHADS
             </span>
-            <span>MUMBAI • DELHI • BENGALURU</span>
+            <span className="text-white/60">PERFORMANCE MARKETING</span>
           </div>
 
-          {/* Centerpiece: Self-Drawing Golden Twirled Moustache & Cycling Copy */}
+          {/* Centerpiece: Header Logo & Official Typography */}
           <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto">
-            {/* Ambient rotating subtle mandala behind moustache */}
-            <div className="absolute -z-10 w-64 h-64 sm:w-80 sm:h-80 opacity-15 animate-spin-slow text-[#D4AF37]">
+            {/* Ambient rotating subtle mandala behind logo */}
+            <div className="absolute -z-10 w-72 h-72 sm:w-96 sm:h-96 opacity-10 animate-spin-slow text-[#FFC400]">
               <MandalaStamp className="w-full h-full" />
             </div>
 
-            {/* Official Brand Logo Badge */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.45)] mb-4 bg-[#10223D]">
+            {/* Official Header Brand Logo Badge */}
+            <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-[#FFC400] shadow-[0_0_40px_rgba(255,196,0,0.4)] mb-5 bg-[#0e164c] transform-gpu hover:scale-105 transition-transform">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand-logo.jpg"
@@ -85,103 +85,45 @@ export function Preloader({ onComplete }: PreloaderProps) {
               />
             </div>
 
-            {/* Moustache Stroke SVG */}
-            <div className="relative w-48 sm:w-72 h-24 sm:h-36 mb-6">
-              <svg
-                viewBox="0 0 240 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-              >
-                {/* Background ghost track */}
-                <path
-                  d="M 120 50 
-                     C 105 30, 75 16, 42 20 
-                     C 20 23, 4 36, 2 52 
-                     C 0 68, 16 82, 34 80 
-                     C 52 78, 68 60, 86 50 
-                     C 100 42, 114 45, 120 50 
-                     C 126 45, 140 42, 154 50 
-                     C 172 60, 188 78, 206 80 
-                     C 224 82, 240 68, 238 52 
-                     C 236 36, 220 23, 198 20 
-                     C 165 16, 135 30, 120 50 Z"
-                  stroke="#D4AF37"
-                  strokeOpacity="0.15"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                {/* Animated Drawing Path */}
-                <path
-                  d="M 120 50 
-                     C 105 30, 75 16, 42 20 
-                     C 20 23, 4 36, 2 52 
-                     C 0 68, 16 82, 34 80 
-                     C 52 78, 68 60, 86 50 
-                     C 100 42, 114 45, 120 50 
-                     C 126 45, 140 42, 154 50 
-                     C 172 60, 188 78, 206 80 
-                     C 224 82, 240 68, 238 52 
-                     C 236 36, 220 23, 198 20 
-                     C 165 16, 135 30, 120 50 Z"
-                  stroke="url(#preloaderGoldGradient)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{
-                    strokeDasharray: pathTotalLength,
-                    strokeDashoffset: strokeOffset,
-                    transition: "stroke-dashoffset 40ms linear",
-                  }}
-                />
-
-                {/* Gold Gradient */}
-                <defs>
-                  <linearGradient
-                    id="preloaderGoldGradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stopColor="#F5DE88" />
-                    <stop offset="50%" stopColor="#D4AF37" />
-                    <stop offset="100%" stopColor="#F59E0B" />
-                  </linearGradient>
-                </defs>
-              </svg>
+            {/* Official Header Wordmark (MUCHADS Together) */}
+            <div className="font-display font-black text-2xl sm:text-4xl tracking-wider text-white uppercase flex items-center gap-2 leading-none mb-1">
+              <span>DESI</span>
+              <span>
+                <span className="text-[#F36700]">MUCH</span>ADS
+              </span>
             </div>
+            <span className="text-[10px] sm:text-xs font-mono tracking-widest text-[#FFC400] uppercase mb-6 font-bold">
+              PERFORMANCE MARKETING AGENCY
+            </span>
 
-            {/* Cycling Hinglish Status Text */}
+            {/* Cycling Status Text */}
             <motion.p
               key={statusText}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25 }}
-              className="text-lg sm:text-2xl font-serif tracking-wide text-[#F7F1E5]"
+              className="text-base sm:text-xl font-sans font-medium tracking-wide text-white/90"
             >
               {statusText}
             </motion.p>
           </div>
 
-          {/* Bottom Bar: Desi Odometer & Progress Line */}
+          {/* Bottom Bar: Progress Counter & Track */}
           <div className="relative z-10">
             <div className="flex items-end justify-between mb-3 font-mono">
-              <span className="text-xs uppercase tracking-widest text-[#D4AF37]/60">
-                UNAPOLOGETIC ROOTS ✦ RUTHLESS ROI
+              <span className="text-xs uppercase tracking-widest text-white/60">
+                SCALING E-COMMERCE POTENTIAL
               </span>
-              <span className="text-4xl sm:text-6xl font-bold tracking-tight text-[#D4AF37] font-mono">
+              <span className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FFC400] font-mono">
                 {String(progress).padStart(2, "0")}%
               </span>
             </div>
 
-            {/* Brass Line Progress Bar */}
-            <div className="w-full h-1 bg-[#D4AF37]/15 rounded-full overflow-hidden">
+            {/* Orange to Gold Line Progress Bar */}
+            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F5DE88] to-[#E11D48] transition-all duration-75"
+                className="h-full bg-gradient-to-r from-[#F36700] via-[#FFC400] to-[#F36700] transition-all duration-75"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -195,10 +137,10 @@ export function Preloader({ onComplete }: PreloaderProps) {
             initial={{ x: "0%" }}
             animate={{ x: "-100%" }}
             transition={{ duration: 0.85, ease: [0.77, 0, 0.175, 1] }}
-            className="w-1/2 h-full bg-[#0D0C12] border-r border-[#D4AF37]/40 relative"
+            className="w-1/2 h-full bg-[#0e164c] border-r border-[#F36700]/30 relative"
           >
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-[#D4AF37]/40 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-[#FFC400]/40 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-[#F36700]" />
             </div>
           </motion.div>
 
@@ -207,10 +149,10 @@ export function Preloader({ onComplete }: PreloaderProps) {
             initial={{ x: "0%" }}
             animate={{ x: "100%" }}
             transition={{ duration: 0.85, ease: [0.77, 0, 0.175, 1] }}
-            className="w-1/2 h-full bg-[#0D0C12] border-l border-[#D4AF37]/40 relative"
+            className="w-1/2 h-full bg-[#0e164c] border-l border-[#F36700]/30 relative"
           >
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-[#D4AF37]/40 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-[#FFC400]/40 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-[#F36700]" />
             </div>
           </motion.div>
         </div>
