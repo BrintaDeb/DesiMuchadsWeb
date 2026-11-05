@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Poppins, Syne, Space_Grotesk } from "next/font/google";
+import { Cormorant_Garamond, Poppins, Syne, Space_Grotesk, Roboto } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import "./globals.css";
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700", "900"],
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -58,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${poppins.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
+      className={`${roboto.variable} ${cormorant.variable} ${poppins.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
     >
       <body className="bg-[#0D0C12] text-[#F7F1E5] selection:bg-[#D4AF37] selection:text-[#0D0C12] min-h-screen overflow-x-hidden font-sans">
         <ThemeProvider>

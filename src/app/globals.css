@@ -1,69 +1,77 @@
 @import "tailwindcss";
 
 @theme {
-  --color-espresso: #1C1815;
-  --color-espresso-dark: #14110E;
-  --color-sandstone: #DCD3C5;
-  --color-sandstone-dark: #C9BEAC;
-  --color-parchment: #EFE7DA;
-  --color-kohl-ink: #2A2521;
-  --color-terracotta-tint: rgba(242, 193, 154, 0.33);
+  --color-bee-navy: #0e164c;
+  --color-bee-navy-dark: #090e33;
+  --color-bee-navy-light: #142161;
+  --color-bee-orange: #F36700;
+  --color-bee-orange-hover: #e2560b;
+  --color-bee-yellow: #FFC400;
+  --color-bee-slate: #676767;
+  --color-bee-light: #f8f9fa;
+  --color-bee-dark: #212121;
 
-  --color-kohl: #1C1815;
-  --color-kohl-dark: #14110E;
-  --color-kohl-light: #25201C;
-  --color-indigo-night: #141829;
-  --color-indigo-dark: #0A0D18;
+  --color-espresso: #0e164c;
+  --color-espresso-dark: #090e33;
+  --color-sandstone: #ffffff;
+  --color-sandstone-dark: #f8f9fa;
+  --color-parchment: #ffffff;
+  --color-kohl-ink: #0e164c;
+  --color-terracotta-tint: rgba(243, 103, 0, 0.2);
+
+  --color-kohl: #0e164c;
+  --color-kohl-dark: #090e33;
+  --color-kohl-light: #142161;
+  --color-indigo-night: #0e164c;
+  --color-indigo-dark: #090e33;
   
-  --color-khadi: #DCD3C5;
-  --color-khadi-dark: #C9BEAC;
-  --color-khadi-border: #BAAF9C;
+  --color-khadi: #ffffff;
+  --color-khadi-dark: #f8f9fa;
+  --color-khadi-border: #e6e6e6;
   
-  --color-brass: #D4AF37;
-  --color-brass-light: #F5DE88;
-  --color-brass-dark: #9A7B1C;
-  --color-marigold: #F59E0B;
-  --color-marigold-light: #FBBF24;
+  --color-brass: #FFC400;
+  --color-brass-light: #FFF9C0;
+  --color-brass-dark: #E5A83B;
+  --color-marigold: #F36700;
+  --color-marigold-light: #FF8533;
   
-  --color-terracotta: #C84B31;
-  --color-terracotta-dark: #9E3520;
+  --color-terracotta: #F36700;
+  --color-terracotta-dark: #e2560b;
   
-  --color-sindoor: #E11D48;
-  --color-sindoor-dark: #BE123C;
+  --color-sindoor: #F36700;
+  --color-sindoor-dark: #e2560b;
   
   --color-peacock: #0D9488;
   --color-peacock-light: #14B8A6;
   --color-peacock-dark: #0F766E;
 
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-royal: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-body: var(--font-poppins), Poppins, system-ui, sans-serif;
+  --font-display: var(--font-roboto), "Roboto", system-ui, sans-serif;
+  --font-royal: var(--font-roboto), "Roboto", system-ui, sans-serif;
+  --font-body: var(--font-roboto), "Roboto", system-ui, sans-serif;
   --font-metric: var(--font-space), monospace;
 }
 
 :root {
-  --background: #1C1815;
-  --foreground: #EFE7DA;
+  --background: #0e164c;
+  --foreground: #ffffff;
 }
 
 html {
-  background-color: #1C1815;
-  color: #EFE7DA;
+  background-color: #0e164c;
+  color: #ffffff;
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #1C1815;
-  color: #EFE7DA;
-  font-family: var(--font-poppins), Poppins, system-ui, sans-serif;
+  background-color: #0e164c;
+  color: #ffffff;
+  font-family: var(--font-roboto), "Roboto", system-ui, sans-serif;
   overflow-x: hidden;
-  selection-background-color: #D4AF37;
-  selection-color: #1C1815;
 }
 
 ::selection {
-  background-color: #D4AF37;
-  color: #1C1815;
+  background-color: #F36700;
+  color: #ffffff;
 }
 
 /* Glassmorphism utility */

@@ -1,61 +1,65 @@
 "use client";
 
 import React from "react";
-import { MoustacheSVG } from "../common/Icons";
+import { sound } from "@/lib/sound";
 
 export function ClientsTrustStrip() {
   const clients = [
-    { name: "GARMIN", category: "Global GPS & Wearables" },
-    { name: "MCDONALD'S", category: "QSR & Quick Commerce" },
-    { name: "CROCS", category: "Global Footwear & D2C" },
-    { name: "TRANSFERGO", category: "Fintech & Cross-Border" },
-    { name: "DADU", category: "FMCG Dairy & Ice Cream" },
-    { name: "FROSCH", category: "Eco-Friendly Homecare" },
-    { name: "NEMATEKAS", category: "Food Processing Giant" },
+    { name: "MCDONALD'S", category: "QSR & Retail" },
+    { name: "FROSCH", category: "Eco-Friendly Living" },
+    { name: "GARMIN", category: "GPS & Endurance Wearables" },
     { name: "ATEA", category: "Enterprise IT & Cloud" },
-    { name: "ZALGIRIO ARENA", category: "Sports & Live Entertainment" },
-    { name: "TIKETA", category: "Ticketing & Event Tech" },
+    { name: "ŽALGIRIO ARENA", category: "Sports & Live Events" },
+    { name: "RUMŠIŠKIŲ PAUKŠTYNAS", category: "Poultry & FMCG" },
+    { name: "NEMATEKAS", category: "Food Processing Giant" },
+    { name: "TRANSFERGO", category: "Fintech & Payments" },
+    { name: "TIKETA", category: "Ticketing & Live Entertainment" },
+    { name: "DADU", category: "Natural Ice Cream" },
+    { name: "CROCS", category: "Global Footwear" },
+    { name: "DESI D2C", category: "Direct-to-Consumer" },
   ];
 
   return (
-    <section className="relative py-20 bg-[#14110E] text-[#EFE7DA] border-y border-[rgba(239,231,218,0.1)] overflow-hidden select-none font-body">
+    <section id="clients" className="relative py-28 sm:py-36 bg-[#f8f9fa] text-[#0e164c] overflow-hidden select-none font-display border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[rgba(239,231,218,0.2)] bg-white/5 text-[10px] uppercase tracking-[0.22em] text-[#D4AF37] font-semibold mb-3">
-            <MoustacheSVG className="w-4 h-2 text-[#D4AF37]" />
-            <span>GLOBAL & ENTERPRISE TRUST</span>
-          </div>
-
-          <h3 className="font-display font-light text-3xl sm:text-4xl md:text-5xl tracking-tight text-[#EFE7DA] uppercase leading-tight">
-            SOME FRIENDS WE’VE MADE{" "}
-            <span className="italic text-[#D4AF37] font-normal font-display">
-              IN THE PROCESS
-            </span>
-          </h3>
-          <p className="mt-2 text-xs sm:text-sm text-[#EFE7DA]/60 font-light">
-            From multinational giants to hyper-growth D2C brands, we deploy performance media that scales compounding revenue.
+        {/* Section Header (BeeMarketing Exact) */}
+        <div className="max-w-3xl mb-16 sm:mb-20 text-left">
+          <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-[#0e164c] uppercase leading-tight">
+            Some friends we’ve made<br />in the process
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-[#676767] font-normal leading-relaxed">
+            From multinational household names to emerging category disruptors.
           </p>
         </div>
 
-        {/* 10-Brand Responsive Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
+        {/* 12-Brand Responsive Clean Tiles (Pure CSS, No External Media) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
           {clients.map((c, idx) => (
             <div
               key={idx}
-              className="group relative rounded-2xl p-6 border border-[rgba(239,231,218,0.1)] bg-[#1C1815]/80 hover:bg-[#1C1815] hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col items-center justify-center text-center backdrop-blur-sm hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(212,175,55,0.15)]"
+              onMouseEnter={() => sound.playPluck(140 + idx * 10)}
+              className="group relative rounded-lg p-6 bg-white border border-gray-200 hover:border-[#F36700] hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-center text-center aspect-[4/3] cursor-pointer"
             >
-              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.08em] text-[#EFE7DA]/50 group-hover:text-[#F5DE88] transition-colors uppercase leading-none">
+              <span className="font-display font-black text-base sm:text-lg tracking-wider text-[#676767] group-hover:text-[#0e164c] transition-colors uppercase leading-none">
                 {c.name}
               </span>
-              <span className="mt-2 text-[9px] font-mono tracking-wider text-[#EFE7DA]/40 group-hover:text-[#D4AF37]/80 uppercase transition-colors">
+              <span className="mt-2 text-[9px] font-mono tracking-wider text-gray-400 group-hover:text-[#F36700] uppercase transition-colors">
                 {c.category}
               </span>
             </div>
           ))}
         </div>
+
+        {/* Center Bottom Action Button (BeeMarketing Exact) */}
+        <div className="mt-16 text-center">
+          <a
+            href="#karname"
+            className="inline-block px-8 py-4 rounded bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-xs font-bold tracking-widest uppercase transition-all shadow-md hover:scale-105 active:scale-95"
+          >
+            MORE CLIENTS &gt;
+          </a>
+        </div>
       </div>
     </section>
   );
 }
-

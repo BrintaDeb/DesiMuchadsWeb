@@ -92,7 +92,7 @@ export function RoiCalculator() {
   };
 
   return (
-    <section id="calculator" className="relative py-24 sm:py-32 bg-[#0A0D18] overflow-hidden">
+    <section id="calculator" className="relative py-24 sm:py-32 bg-[#090e33] overflow-hidden border-t border-white/10 text-white">
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-[#D4AF37]/10 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-[#E11D48]/10 blur-[140px] pointer-events-none" />
