@@ -368,3 +368,4 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
     </div>
   );
 }
+

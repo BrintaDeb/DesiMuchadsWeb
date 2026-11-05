@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Rozha_One, Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import "./globals.css";
 
 const syne = Syne({
@@ -59,7 +61,9 @@ export default function RootLayout({
       className={`${syne.variable} ${rozhaOne.variable} ${spaceGrotesk.variable} ${plusJakartaSans.variable} dark antialiased scroll-smooth`}
     >
       <body className="bg-[#0D0C12] text-[#F7F1E5] selection:bg-[#D4AF37] selection:text-[#0D0C12] min-h-screen overflow-x-hidden font-sans">
-        {children}
+        <ThemeProvider>
+          <AgencyProposalProvider>{children}</AgencyProposalProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

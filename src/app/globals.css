@@ -6,23 +6,23 @@
   --color-kohl-light: #16151E;
   --color-indigo-night: #141829;
   --color-indigo-dark: #0A0D18;
-  
+
   --color-khadi: #F7F1E5;
   --color-khadi-dark: #EFE7D5;
   --color-khadi-border: #E2D7C0;
-  
+
   --color-brass: #D4AF37;
   --color-brass-light: #F5DE88;
   --color-brass-dark: #9A7B1C;
   --color-marigold: #F59E0B;
   --color-marigold-light: #FBBF24;
-  
+
   --color-terracotta: #C84B31;
   --color-terracotta-dark: #9E3520;
-  
+
   --color-sindoor: #E11D48;
   --color-sindoor-dark: #BE123C;
-  
+
   --color-peacock: #0D9488;
   --color-peacock-light: #14B8A6;
   --color-peacock-dark: #0F766E;
@@ -103,21 +103,29 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #0D0C12;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #D4AF37;
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #F5DE88;
 }
 
 /* Marquee infinite scroll keyframes */
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -130,10 +138,39 @@ body {
   animation-play-state: paused;
 }
 
+/* Khadi Parchment Din Theme Overrides */
+html.theme-din, html[data-theme="din"] {
+  background-color: #F7F1E5;
+  color: #0D0C12;
+}
+
+html.theme-din body, html[data-theme="din"] body {
+  background-color: #F7F1E5;
+  color: #0D0C12;
+}
+
+/* View Transition Root Animation Support */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
 /* Rotating stamp animation */
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-spin-slow {

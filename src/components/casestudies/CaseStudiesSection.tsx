@@ -1,11 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { JharokhaArchSVG, MoustacheSVG, FiligreeCorner } from "../common/Icons";
 import { ArrowUpRight, TrendingUp, CheckCircle, Award } from "lucide-react";
+import { sound } from "@/lib/sound";
+import gsap from "gsap";
 
 export function CaseStudiesSection() {
   const [hoveredCase, setHoveredCase] = useState<number | null>(null);
+  const displacementMapRef = useRef<SVGFEDisplacementMapElement>(null);
+
+  const triggerRippleEffect = () => {
+    sound.playPluck(130);
+    if (displacementMapRef.current) {
+      gsap.fromTo(
+        displacementMapRef.current,
+        { attr: { scale: 0 } },
+        {
+          attr: { scale: 22 },
+          duration: 0.25,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.out",
+        }
+      );
+    }
+  };
 
   const cases = [
     {
@@ -78,6 +98,26 @@ export function CaseStudiesSection() {
       id="karname"
       className="relative py-28 sm:py-36 bg-[#F7F1E5] text-[#0D0C12] overflow-hidden"
     >
+      {/* SVG Liquid Displacement Filter */}
+      <svg className="hidden pointer-events-none" aria-hidden="true">
+        <filter id="desi-ripple" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.04 0.08"
+            numOctaves="3"
+            result="noise"
+          />
+          <feDisplacementMap
+            ref={displacementMapRef}
+            in="SourceGraphic"
+            in2="noise"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </svg>
+
       {/* Subtle Khadi Parchment Texture Accents */}
       <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(#E2D7C0_1px,transparent_1px)] [background-size:20px_20px]" />
 
@@ -108,10 +148,13 @@ export function CaseStudiesSection() {
             return (
               <div
                 key={cs.id}
-                onMouseEnter={() => setHoveredCase(cs.id)}
+                onMouseEnter={() => {
+                  setHoveredCase(cs.id);
+                  triggerRippleEffect();
+                }}
                 onMouseLeave={() => setHoveredCase(null)}
                 data-cursor="explore"
-                className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-white/80 border border-[#0D0C12]/10 shadow-[0_15px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_65px_rgba(0,0,0,0.12)] transition-all duration-300"
+                className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-white/85 border border-[#0D0C12]/10 shadow-[0_15px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_65px_rgba(0,0,0,0.12)] transition-all duration-300"
               >
                 {/* Filigree corner brackets */}
                 <div className="absolute top-4 left-4 opacity-30">
@@ -122,10 +165,17 @@ export function CaseStudiesSection() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  {/* Left Column: Ornate Jharokha Scalloped Visual Frame (5 cols) */}
+                  {/* Left Column: Ornate Jharokha Scalloped Visual Frame with Liquid Ripple */}
                   <div className="lg:col-span-5 relative flex items-center justify-center">
                     <div
-                      className={`relative w-full aspect-[4/5] rounded-3xl overflow-hidden transition-all duration-500 shadow-2xl flex flex-col justify-between p-6 text-white bg-gradient-to-br ${cs.bgGradient}`}
+                      style={{
+                        filter: isHovered ? "url(#desi-ripple)" : "none",
+                      }}
+                      className={`relative w-full aspect-[4/5] overflow-hidden transition-all duration-700 shadow-2xl flex flex-col justify-between p-6 text-white bg-gradient-to-br ${cs.bgGradient} ${
+                        isHovered
+                          ? "rounded-3xl scale-[1.02]"
+                          : "rounded-[2.5rem] [clip-path:polygon(0_12%,15%_12%,20%_0%,50%_0%,80%_0%,85%_12%,100%_12%,100%_100%,0_100%)] sm:[clip-path:none] rounded-3xl"
+                      }`}
                     >
                       {/* Jharokha SVG Arch Mask Overlay */}
                       <div className="absolute inset-0 pointer-events-none opacity-30 flex items-center justify-center p-2">
@@ -231,3 +281,4 @@ export function CaseStudiesSection() {
     </section>
   );
 }
+

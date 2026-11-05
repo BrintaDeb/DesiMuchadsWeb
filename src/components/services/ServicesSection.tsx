@@ -280,3 +280,4 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
     </section>
   );
 }
+
