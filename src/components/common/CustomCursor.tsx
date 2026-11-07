@@ -75,7 +75,7 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Center 8px golden sharp dot */}
+      {/* Center 8px stark white sharp dot */}
       <div
         ref={dotRef}
         aria-hidden="true"
@@ -83,10 +83,10 @@ export function CustomCursor() {
           isVisible ? "opacity-100" : "opacity-0"
         } ${isExplore ? "opacity-0" : ""}`}
       >
-        <div className="w-2 h-2 rounded-full bg-[#D4AF37] shadow-[0_0_8px_#D4AF37]" />
+        <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_white]" />
       </div>
 
-      {/* Trailing 36px brass ring or rotating "DEKHO • EXPLORE •" stamp */}
+      {/* Trailing 36px white ring or rotating stamp */}
       <div
         ref={ringRef}
         aria-hidden="true"
@@ -99,30 +99,30 @@ export function CustomCursor() {
           <div className="relative w-28 h-28 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center animate-spin-slow">
             <svg
               viewBox="0 0 100 100"
-              className="w-full h-full text-[#D4AF37] drop-shadow-[0_0_12px_rgba(212,175,55,0.4)]"
+              className="w-full h-full text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]"
             >
               <path
                 id="dekhoCirclePath"
                 d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
                 fill="none"
               />
-              <text className="font-mono text-[9px] uppercase tracking-[0.22em] fill-[#D4AF37] font-bold">
+              <text className="font-mono text-[9px] uppercase tracking-[0.22em] fill-white font-bold">
                 <textPath href="#dekhoCirclePath" startOffset="0%">
                   ✦ DEKHO • EXPLORE ✦ DEKHO • EXPLORE
                 </textPath>
               </text>
             </svg>
-            <div className="absolute inset-0 m-auto w-10 h-10 rounded-full bg-[#E11D48]/90 flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.6)]">
-              <span className="text-[#F7F1E5] text-xs font-bold font-mono">〰️</span>
+            <div className="absolute inset-0 m-auto w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-[0_0_15px_white]">
+              <span className="text-black text-xs font-bold font-mono">〰️</span>
             </div>
           </div>
         ) : (
           /* Normal Trailing Ring */
           <div
-            className={`rounded-full border border-[#D4AF37] transition-all duration-300 flex items-center justify-center ${
+            className={`rounded-full border border-white/60 transition-all duration-300 flex items-center justify-center ${
               isPointer
-                ? "w-14 h-14 bg-[#D4AF37]/15 border-[#F5DE88] scale-110"
-                : "w-9 h-9 border-[#D4AF37]/60"
+                ? "w-14 h-14 bg-white/10 border-white scale-110"
+                : "w-9 h-9 border-white/40"
             }`}
           />
         )}
@@ -130,4 +130,3 @@ export function CustomCursor() {
     </>
   );
 }
-

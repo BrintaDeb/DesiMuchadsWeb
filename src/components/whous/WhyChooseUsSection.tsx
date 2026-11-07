@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Zap, Target, Users, BarChart3 } from "lucide-react";
+import { Zap, Target, Users, BarChart3, ArrowRight } from "lucide-react";
 import { sound } from "@/lib/sound";
 
 interface WhyChooseUsSectionProps {
@@ -20,7 +20,7 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
       id: "easy-roi",
       icon: BarChart3,
       title: "EASY TO MEASURE ROI",
-      desc: "We are ruthlessly ROI (return on investment) oriented. Every single Rupee deployed is mapped to verified revenue, blended ROAS, and margins.",
+      desc: "We are ruthlessly ROI oriented. Every single Rupee deployed is mapped to verified revenue, blended ROAS, and bottom-line margins.",
     },
     {
       id: "broad-targeting",
@@ -44,19 +44,19 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
   ];
 
   return (
-    <section id="why-us" className="relative py-28 sm:py-36 bg-[#0e164c] text-white overflow-hidden select-none font-display border-t border-white/10">
+    <section id="why-us" className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden select-none font-display border-t border-white/10">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-tight">
             Why Performance Marketing?<br />Why Desi Muchads?
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-white/80 font-normal leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed font-sans">
             We don’t guess. We deploy disciplined e-commerce growth strategies engineered to scale compounding bottom-line returns.
           </p>
         </div>
 
-        {/* 4 Pillars Grid */}
+        {/* 4 Pillars Highlighted Panels Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
           {pillars.map((p, idx) => {
             const Icon = p.icon;
@@ -64,17 +64,17 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
               <div
                 key={p.id}
                 onMouseEnter={() => sound.playPluck(130 + idx * 20)}
-                className="relative rounded-xl p-8 sm:p-10 bg-[#142161]/60 border border-white/10 hover:border-[#F36700] hover:bg-[#142161]/90 transition-all duration-300"
+                className="group relative rounded-2xl p-8 sm:p-10 bg-[#121215] border border-white/10 border-t-white/20 hover:border-white/35 hover:bg-[#18181d] shadow-xl hover:shadow-[0_0_30px_rgba(255,255,255,0.06)] transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded bg-[#0e164c] border border-white/10 flex items-center justify-center text-[#F36700] mb-6">
-                  <Icon className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-white/30 group-hover:bg-white/10 transition-all">
+                  <Icon className="w-6 h-6 text-white" />
                 </div>
 
                 <h3 className="font-display font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-tight mb-3">
                   {p.title}
                 </h3>
 
-                <p className="text-sm text-white/75 font-normal leading-relaxed">
+                <p className="text-sm text-zinc-300 font-normal leading-relaxed font-sans">
                   {p.desc}
                 </p>
               </div>
@@ -82,15 +82,15 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
           })}
         </div>
 
-        {/* Stats Row */}
-        <div className="rounded-xl border border-white/10 bg-[#142161]/40 p-8 sm:p-12 mb-12">
+        {/* Highlighted Stats Panel */}
+        <div className="rounded-2xl border border-white/15 bg-[#121215] p-8 sm:p-12 mb-12 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
             {stats.map((s, idx) => (
               <div key={idx} className={idx > 0 ? "pt-6 md:pt-0" : ""}>
-                <div className="font-metric font-black text-4xl sm:text-5xl text-[#FFC400] tracking-tight leading-none mb-2">
+                <div className="font-metric font-black text-4xl sm:text-5xl text-white tracking-tight leading-none mb-2">
                   {s.value}
                 </div>
-                <div className="text-[10px] sm:text-xs font-mono tracking-widest text-white/60 uppercase">
+                <div className="text-[10px] sm:text-xs font-mono tracking-widest text-zinc-400 uppercase">
                   {s.label}
                 </div>
               </div>
@@ -106,9 +106,10 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
               onOpenKundli();
             }}
             type="button"
-            className="px-8 py-4 rounded bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-xs font-bold tracking-widest uppercase transition-all shadow-md hover:scale-105 active:scale-95"
+            className="px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 inline-flex items-center gap-2"
           >
-            LET&apos;S TALK &gt;
+            <span>LET&apos;S TALK</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>

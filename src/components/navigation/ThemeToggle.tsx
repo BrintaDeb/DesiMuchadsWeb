@@ -18,22 +18,22 @@ export function ThemeToggle() {
       onClick={handleClick}
       onMouseEnter={() => sound.playPluck(120)}
       type="button"
-      className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#0D0C12]/80 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 text-xs font-mono text-[#D4AF37]"
-      title={`Switch to ${theme === "raat" ? "Din (Khadi Parchment)" : "Raat (Night Obsidian)"}`}
+      className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 transition-all duration-300 text-xs font-mono text-zinc-300 hover:text-white"
+      title={`Switch to ${theme === "raat" ? "Din (Light Mode)" : "Raat (Obsidian Mode)"}`}
       aria-label="Toggle Raat / Din Theme"
     >
       {theme === "raat" ? (
         <>
-          <Moon className="w-3.5 h-3.5 text-[#F5DE88] group-hover:rotate-12 transition-transform" />
-          <span className="hidden sm:inline text-[10px] uppercase font-bold tracking-wider">
+          <Moon className="w-3.5 h-3.5 text-white group-hover:rotate-12 transition-transform" />
+          <span className="hidden sm:inline text-[10px] uppercase font-bold tracking-wider text-white">
             रात (Night)
           </span>
         </>
       ) : (
         <>
-          <Sun className="w-3.5 h-3.5 text-[#F59E0B] group-hover:rotate-45 transition-transform" />
-          <span className="hidden sm:inline text-[10px] uppercase font-bold tracking-wider text-[#C84B31]">
-            दिन (Khadi)
+          <Sun className="w-3.5 h-3.5 text-white group-hover:rotate-45 transition-transform" />
+          <span className="hidden sm:inline text-[10px] uppercase font-bold tracking-wider text-white">
+            दिन (Light)
           </span>
         </>
       )}

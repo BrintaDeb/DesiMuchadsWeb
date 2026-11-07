@@ -22,8 +22,8 @@ export function SonicToggle() {
       type="button"
       className={`group flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono transition-all duration-300 ${
         enabled
-          ? "border-[#D4AF37]/50 bg-[#D4AF37]/10 text-[#D4AF37] hover:border-[#D4AF37]"
-          : "border-white/10 bg-white/5 text-white/50 hover:text-white"
+          ? "border-white/30 bg-white/10 text-white hover:border-white/60"
+          : "border-white/10 bg-white/5 text-zinc-500 hover:text-white"
       }`}
       title={enabled ? "Mute Sonic Masala UI" : "Enable Sonic Masala UI"}
       aria-label="Toggle Sonic Masala Audio Effects"
@@ -33,7 +33,7 @@ export function SonicToggle() {
         <span
           className={`w-[2px] rounded-full transition-all duration-200 ${
             enabled
-              ? "h-3 bg-[#D4AF37] animate-pulse"
+              ? "h-3 bg-white animate-pulse"
               : "h-1 bg-white/30"
           }`}
           style={{ animationDuration: "0.5s" }}
@@ -41,7 +41,7 @@ export function SonicToggle() {
         <span
           className={`w-[2px] rounded-full transition-all duration-200 ${
             enabled
-              ? "h-2 bg-[#D4AF37] animate-pulse"
+              ? "h-2 bg-white animate-pulse"
               : "h-1.5 bg-white/30"
           }`}
           style={{ animationDuration: "0.3s" }}
@@ -49,7 +49,7 @@ export function SonicToggle() {
         <span
           className={`w-[2px] rounded-full transition-all duration-200 ${
             enabled
-              ? "h-3 bg-[#D4AF37] animate-pulse"
+              ? "h-3 bg-white animate-pulse"
               : "h-1 bg-white/30"
           }`}
           style={{ animationDuration: "0.7s" }}
@@ -57,7 +57,7 @@ export function SonicToggle() {
         <span
           className={`w-[2px] rounded-full transition-all duration-200 ${
             enabled
-              ? "h-1.5 bg-[#D4AF37] animate-pulse"
+              ? "h-1.5 bg-white animate-pulse"
               : "h-1 bg-white/30"
           }`}
           style={{ animationDuration: "0.4s" }}

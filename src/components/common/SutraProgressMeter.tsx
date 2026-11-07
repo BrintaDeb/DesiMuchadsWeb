@@ -35,17 +35,17 @@ export function SutraProgressMeter() {
       className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center select-none pointer-events-auto"
     >
       {/* Top Diamond Pinnacle */}
-      <div className="w-2.5 h-2.5 rotate-45 border border-[#D4AF37] bg-[#D4AF37]/30 mb-2" />
+      <div className="w-2.5 h-2.5 rotate-45 border border-white/60 bg-white/20 mb-2" />
 
-      {/* Sutra Track with Dynamic Glowing Crimson Fill */}
-      <div className="relative w-[3px] h-64 sm:h-80 bg-[#D4AF37]/20 rounded-full overflow-hidden">
+      {/* Sutra Track with Dynamic Glowing White Fill */}
+      <div className="relative w-[3px] h-64 sm:h-80 bg-white/15 rounded-full overflow-hidden">
         <div
-          className="w-full bg-gradient-to-b from-[#D4AF37] via-[#E11D48] to-[#C84B31] shadow-[0_0_10px_#E11D48] transition-all duration-150"
+          className="w-full bg-white shadow-[0_0_10px_white] transition-all duration-150"
           style={{ height: `${scrollProgress}%` }}
         />
       </div>
 
-      {/* 7 Checkpoint Dots & Hindi Transliterated Tooltips */}
+      {/* 6 Checkpoint Dots & Hindi Transliterated Tooltips */}
       <div className="absolute inset-y-6 flex flex-col justify-between items-center pointer-events-auto">
         {sections.map((sec, idx) => (
           <div
@@ -57,15 +57,15 @@ export function SutraProgressMeter() {
             onMouseLeave={() => setHoveredSection(null)}
             className="relative flex items-center justify-center cursor-pointer group"
           >
-            <div className="w-2 h-2 rounded-full border border-[#D4AF37] bg-[#0D0C12] group-hover:scale-150 group-hover:bg-[#E11D48] transition-all" />
+            <div className="w-2 h-2 rounded-full border border-white/60 bg-black group-hover:scale-150 group-hover:bg-white transition-all shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
 
             {/* Hover Tooltip Pill */}
             {hoveredSection === sec.id && (
-              <div className="absolute right-6 px-3 py-1 rounded-full bg-[#0D0C12]/95 border border-[#D4AF37] backdrop-blur-md shadow-xl whitespace-nowrap text-right animate-in fade-in slide-in-from-right-2 duration-150">
-                <span className="font-royal text-xs text-[#D4AF37] block font-semibold leading-tight">
+              <div className="absolute right-6 px-3 py-1 rounded-full bg-black/95 border border-white/30 backdrop-blur-md shadow-2xl whitespace-nowrap text-right animate-in fade-in slide-in-from-right-2 duration-150">
+                <span className="font-royal text-xs text-white block font-semibold leading-tight">
                   {sec.name}
                 </span>
-                <span className="font-mono text-[9px] uppercase tracking-wider text-white/70 block">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-zinc-400 block">
                   {sec.eng}
                 </span>
               </div>
@@ -74,9 +74,8 @@ export function SutraProgressMeter() {
         ))}
       </div>
 
-      {/* Bottom Diamond Pinnacle */}
-      <div className="w-2.5 h-2.5 rotate-45 border border-[#D4AF37] bg-[#D4AF37]/30 mt-2" />
+      {/* Bottom Diamond Base */}
+      <div className="w-2.5 h-2.5 rotate-45 border border-white/60 bg-white/20 mt-2" />
     </aside>
   );
 }
-

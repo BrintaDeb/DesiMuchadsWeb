@@ -1,20 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { SectionDivider } from "../common/SectionDivider";
-import { FiligreeCorner, MoustacheSVG } from "../common/Icons";
 import {
   Check,
-  Crown,
   Sparkles,
-  Zap,
   ArrowRight,
   Plus,
-  Minus,
-  MessageCircle,
   Clock,
   TrendingUp,
+  MessageCircle,
 } from "lucide-react";
+import { FiligreeCorner } from "@/components/common/Icons";
+import { SectionDivider } from "@/components/common/SectionDivider";
 import { sound } from "@/lib/sound";
 
 interface PricingSectionProps {
@@ -22,153 +19,157 @@ interface PricingSectionProps {
 }
 
 export function PricingSection({ onOpenKundli }: PricingSectionProps) {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "quarterly">(
+    "monthly"
+  );
   const [mode, setMode] = useState<"retainers" | "thali">("retainers");
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "quarterly">("monthly");
 
-  // Mode B: Marketing Thali Custom Stack State
-  const thaliDishes = [
-    {
-      id: "media_buying",
-      name: "Performance Media Buying",
-      hindi: "ऐड बाइंग (Meta + Google)",
-      desc: "Full-funnel automated PPC campaigns, CBO scaling, dynamic retargeting.",
-      basePrice: 65000,
-      hoursSaved: 45,
-      roasBoost: 1.4,
-    },
-    {
-      id: "custom_web",
-      name: "Custom Next.js / 3D Web Mahal",
-      hindi: "डिजिटल महल आर्किटेक्चर",
-      desc: "Ultra-fast Next.js 16 storefront, 3D WebGL interactions, sub-800ms load speed.",
-      basePrice: 85000,
-      hoursSaved: 55,
-      roasBoost: 1.2,
-    },
-    {
-      id: "viral_reels",
-      name: "Viral Reels & Hinglish Production",
-      hindi: "हल्ला बोल रील्स (12 Reels/mo)",
-      desc: "Studio production, witty cultural scripts, high-retention hooks, sound design.",
-      basePrice: 50000,
-      hoursSaved: 35,
-      roasBoost: 0.9,
-    },
-    {
-      id: "brand_granth",
-      name: "Brand Identity & Packaging Granth",
-      hindi: "शाही पहचान & पैकेजिंग",
-      desc: "Royal bespoke visual identity, packaging guidelines, custom typography.",
-      basePrice: 45000,
-      hoursSaved: 30,
-      roasBoost: 0.7,
-    },
-    {
-      id: "seo_dominance",
-      name: "Technical SEO & Generative AI Search",
-      hindi: "Google व AI पर हुकूमत",
-      desc: "Authority backlinks, local Maps GMB domination, GEO prompt-engine optimization.",
-      basePrice: 35000,
-      hoursSaved: 25,
-      roasBoost: 0.6,
-    },
-    {
-      id: "cloud_retention",
-      name: "24/7 Cloud & Conversion Optimization",
-      hindi: "24/7 वॉर-रूम मेंटेनेंस",
-      desc: "Continuous A/B testing, heatmap tracking, weekly strategy calls, zero server downtime.",
-      basePrice: 30000,
-      hoursSaved: 20,
-      roasBoost: 0.5,
-    },
-  ];
-
+  // Custom Marketing Thali State
   const [selectedDishes, setSelectedDishes] = useState<string[]>([
-    "media_buying",
-    "viral_reels",
+    "meta-ads",
+    "creative-production",
+    "whatsapp-crm",
   ]);
 
-  const toggleDish = (id: string) => {
-    sound.playPluck(160);
-    setSelectedDishes((prev) =>
-      prev.includes(id) ? prev.filter((d) => d !== id) : [...prev, id]
-    );
-  };
-
-  // Thali computations
-  const thaliInvestment = selectedDishes.reduce((acc, id) => {
-    const dish = thaliDishes.find((d) => d.id === id);
-    return acc + (dish ? dish.basePrice : 0);
-  }, 0);
-
-  const thaliHoursSaved = selectedDishes.reduce((acc, id) => {
-    const dish = thaliDishes.find((d) => d.id === id);
-    return acc + (dish ? dish.hoursSaved : 0);
-  }, 0);
-
-  const thaliRoas = (
-    3.0 +
-    selectedDishes.reduce((acc, id) => {
-      const dish = thaliDishes.find((d) => d.id === id);
-      return acc + (dish ? dish.roasBoost : 0);
-    }, 0)
-  ).toFixed(1);
-
-  // Retainers
   const discountMultiplier = billingCycle === "quarterly" ? 0.85 : 1.0;
 
   const retainers = [
     {
-      id: "spark",
-      name: "Desi Spark",
-      hindi: "ग्रोथ स्टार्टर",
-      badge: "Emerging Brands",
-      price: Math.floor(75000 * discountMultiplier),
-      desc: "Essential high-impact foundation for ambitious brands launching or breaking past ₹10L/mo revenue.",
+      id: "shuruwat",
+      name: "Foundation Stack",
+      hindi: "SHURUWAT",
+      price: Math.round(75000 * discountMultiplier),
+      desc: "For challenger brands seeking disciplined, profitable scaling from ₹3L–₹15L/mo ad spend.",
       features: [
-        "Meta Ads Architecture (Meta Advantage+)",
-        "Weekly Creative Refreshes (4 Ads/mo)",
-        "Brand Identity Polish & Ad Creatives",
-        "Bi-weekly Strategy Call & War-Room",
-        "Dedicated WhatsApp Account Lead",
+        "Meta & Google Ads Engine Setup",
+        "Weekly 4 High-Hook Creative Refresh",
+        "Weekly ROAS & Contribution Margin Audit",
+        "Dedicated Growth Strategist via Slack",
+        "Zero-Ghosting 4-Hour Response SLA",
       ],
       isPopular: false,
     },
     {
-      id: "shahi",
-      name: "Shahi Growth",
-      hindi: "शाही ग्रोथ (Most Popular)",
-      badge: "✦ MOST POPULAR DARBAR ✦",
-      price: Math.floor(175000 * discountMultiplier),
-      desc: "Our flagship full-funnel offensive. Omnichannel ad scaling, viral content machine, and ruthless CRO.",
+      id: "hukumat",
+      name: "Dominance Stack",
+      hindi: "HUKUMAT",
+      price: Math.round(150000 * discountMultiplier),
+      desc: "Our flagship end-to-end engine for scaling brands pushing ₹15L–₹75L/mo ad spend.",
       features: [
-        "Full-Funnel Meta + Google Search & Shopping",
-        "12 Viral Reels/mo (Scripting, Edit, Audio)",
-        "Landing Page Conversion Rate Optimization",
-        "Technical SEO & Google Maps Domination",
-        "Daily Bid Optimization & Creative Testing",
-        "Priority 24/7 Strategy War-Room",
+        "Full-Funnel Meta, Google & YouTube Ads",
+        "12 Cinematic UGC & Graphic Ad Packs / mo",
+        "Shopify CRO & Checkout Speed Optimization",
+        "Retention CRM (Klaviyo + WhatsApp Flows)",
+        "Daily Live Dashboard & Weekly Baithak",
+        "Algorithmic Broad Scale Architecture",
       ],
-      isPopular: true, // Von Restorff effect
+      isPopular: true,
+      badge: "MOST DEPLOYED",
     },
     {
-      id: "maharaja",
-      name: "Maharaja Dominance",
-      hindi: "महाराजा डोमिनेंस (Full-Stack)",
-      badge: "Enterprise & Scale",
-      price: Math.floor(350000 * discountMultiplier),
-      desc: "Full-service digital agency takeover. Custom WebGL/Next.js infrastructure, celebrity PR, and ruthless scale.",
+      id: "shehenshah",
+      name: "Monopoly Stack",
+      hindi: "SHEHENSHAH",
+      price: Math.round(300000 * discountMultiplier),
+      desc: "Full enterprise brand takeover for market leaders exceeding ₹75L/mo ad volume.",
       features: [
-        "Omnichannel Ad Domination (Meta, Google, YouTube)",
-        "Custom Next.js / 3D Web Architectural Build",
-        "Influencer Darbar (Creator Matchmaking)",
-        "Complete 'Brand Granth' Book & Packaging",
-        "Principal Creative Director Dedicated Lead",
-        "Uncapped Ad Spend Scaling Architecture",
+        "Omnichannel Media Buying (Meta + Google + Q-Commerce)",
+        "24 Cinematic Creative Deliverables Monthly",
+        "Custom Headless Landers & Frictionless Funnels",
+        "Dedicated 4-Member Pod (Media + Copy + Design + Dev)",
+        "Direct Founder & Principal Architect Access",
+        "Contractual ROAS Performance Guarantees",
       ],
       isPopular: false,
     },
   ];
+
+  const thaliDishes = [
+    {
+      id: "meta-ads",
+      name: "Meta Ads Weaponry",
+      hindi: "Facebook & Instagram",
+      desc: "Full broad targeting, ASC+ setups, and daily bid optimizations.",
+      basePrice: 50000,
+      hoursSaved: 60,
+      roasContribution: 1.6,
+    },
+    {
+      id: "google-ads",
+      name: "Google & Search Intent",
+      hindi: "PMax, Search & Shopping",
+      desc: "Capturing high-intent search traffic with ruthless negative keyword pruning.",
+      basePrice: 45000,
+      hoursSaved: 40,
+      roasContribution: 1.4,
+    },
+    {
+      id: "creative-production",
+      name: "Ad Creative Engine",
+      hindi: "UGC, Hooks & Motion",
+      desc: "8 data-driven video and static ad creative iterations per month.",
+      basePrice: 40000,
+      hoursSaved: 50,
+      roasContribution: 1.2,
+    },
+    {
+      id: "whatsapp-crm",
+      name: "WhatsApp & SMS Automation",
+      hindi: "Conversational Retention",
+      desc: "Automated cart abandonment, dispatch alerts, and VIP broadcast funnels.",
+      basePrice: 25000,
+      hoursSaved: 30,
+      roasContribution: 0.8,
+    },
+    {
+      id: "cro-landing",
+      name: "Conversion Funnels (CRO)",
+      hindi: "Fast Checkout & Landers",
+      desc: "Sub-second load times and high-converting PDP architectures.",
+      basePrice: 35000,
+      hoursSaved: 35,
+      roasContribution: 0.9,
+    },
+    {
+      id: "q-commerce",
+      name: "Quick Commerce Engine",
+      hindi: "Blinkit, Zepto, Instamart",
+      desc: "Dark store catalog indexing, sponsored search ads, and inventory tracking.",
+      basePrice: 40000,
+      hoursSaved: 45,
+      roasContribution: 1.1,
+    },
+  ];
+
+  const toggleDish = (dishId: string) => {
+    sound.playPluck(130);
+    setSelectedDishes((prev) =>
+      prev.includes(dishId)
+        ? prev.filter((id) => id !== dishId)
+        : [...prev, dishId]
+    );
+  };
+
+  const calculateThaliStats = () => {
+    const selected = thaliDishes.filter((d) => selectedDishes.includes(d.id));
+    const rawCost = selected.reduce((acc, curr) => acc + curr.basePrice, 0);
+    const bundleDiscount =
+      selected.length >= 4 ? 0.85 : selected.length >= 3 ? 0.9 : 1.0;
+    const finalPrice = Math.round(rawCost * bundleDiscount);
+    const hoursSaved = selected.reduce((acc, curr) => acc + curr.hoursSaved, 0);
+    const roas = (
+      selected.reduce((acc, curr) => acc + curr.roasContribution, 0) + 1.2
+    ).toFixed(1);
+
+    return {
+      investment: finalPrice,
+      hoursSaved,
+      roas,
+      count: selected.length,
+    };
+  };
+
+  const thaliStats = calculateThaliStats();
 
   const formatINR = (val: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -180,44 +181,42 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
   const handleThaliWhatsApp = () => {
     sound.playChime();
-    const dishNames = selectedDishes
-      .map((id) => thaliDishes.find((d) => d.id === id)?.name)
-      .join(", ");
+    const selectedNames = thaliDishes
+      .filter((d) => selectedDishes.includes(d.id))
+      .map((d) => `• ${d.name}`)
+      .join("\n");
 
     const text = encodeURIComponent(
-      `Pranam Desi Muchads! 🙏\n\nI built a Custom Marketing Thali on your website:\n` +
-        `✦ Selected Modules: ${dishNames}\n` +
-        `✦ Monthly Investment: ${formatINR(thaliInvestment)}\n` +
-        `✦ Projected Team Hours Saved: ${thaliHoursSaved} hrs/mo\n` +
-        `✦ Estimated ROAS Multiplier: ${thaliRoas}x\n\n` +
+      `Pranam Desi Muchads! Here is my custom Marketing Thali selection:\n\n` +
+        `${selectedNames}\n\n` +
+        `✦ Monthly Investment: ${formatINR(thaliStats.investment)}\n` +
+        `✦ Projected Team Hours Saved: ${thaliStats.hoursSaved} hrs/mo\n` +
+        `✦ Estimated ROAS Multiplier: ${thaliStats.roas}x\n\n` +
         `Let's schedule a Baithak to lock in this custom stack! 〰️`
     );
     window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
   };
 
   return (
-    <section id="pricing" className="relative py-28 sm:py-36 bg-[#0e164c] text-white overflow-hidden border-t border-white/10">
-      {/* Background ambient gold vignette */}
-      <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-[#D4AF37]/10 blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-40 w-[600px] h-[600px] rounded-full bg-[#E11D48]/10 blur-[160px] pointer-events-none" />
+    <section id="pricing" className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden border-t border-white/10">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-40 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
 
       <SectionDivider label="PRICING & PACKAGES" sublabel="HISAB-KITAB WITH ZERO GHOSTING" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-[#F7F1E5]">
-            Transparent Retainers.{" "}
-            <span className="brass-gradient-text block mt-1">
-              Custom Marketing Thali.
-            </span>
+          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-tight">
+            Transparent Retainers.<br />Custom Marketing Thali.
           </h2>
-          <p className="mt-4 text-[#F7F1E5]/75 text-sm sm:text-base">
+          <p className="mt-4 text-zinc-400 text-sm sm:text-base font-sans">
             Choose our battle-tested all-in-one growth retainers, or build your own custom marketing platter tailored to your exact balance of firepower.
           </p>
 
           {/* Mode Switcher: Retainers vs Build-A-Thali */}
-          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-[#141829] border border-[#D4AF37]/30 shadow-lg">
+          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-[#121215] border border-white/15 shadow-xl">
             <button
               type="button"
               onClick={() => {
@@ -226,8 +225,8 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
               }}
               className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all ${
                 mode === "retainers"
-                  ? "bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0D0C12] shadow-md"
-                  : "text-[#F7F1E5]/70 hover:text-white"
+                  ? "bg-white text-black shadow-md"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
               Ready-Made Retainers (3 Tiers)
@@ -240,12 +239,12 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
               }}
               className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
                 mode === "thali"
-                  ? "bg-gradient-to-r from-[#D4AF37] to-[#F59E0B] text-[#0D0C12] shadow-md"
-                  : "text-[#F7F1E5]/70 hover:text-white"
+                  ? "bg-white text-black shadow-md"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
               <span>Build Your Marketing Thali</span>
-              <span className="px-1.5 py-0.5 rounded-full bg-[#E11D48] text-[9px] text-white font-extrabold uppercase">
+              <span className="px-1.5 py-0.5 rounded-full bg-white/20 text-[9px] text-white font-extrabold uppercase">
                 Custom
               </span>
             </button>
@@ -257,7 +256,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
           <div>
             {/* Monthly vs. Quarterly Toggle */}
             <div className="flex items-center justify-center gap-3 mb-12 font-mono text-xs">
-              <span className={billingCycle === "monthly" ? "text-[#F5DE88] font-bold" : "text-white/60"}>
+              <span className={billingCycle === "monthly" ? "text-white font-bold" : "text-zinc-400"}>
                 Monthly Billing
               </span>
               <button
@@ -266,19 +265,19 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                   sound.playPluck(140);
                   setBillingCycle(billingCycle === "monthly" ? "quarterly" : "monthly");
                 }}
-                className="w-12 h-6 rounded-full bg-[#141829] border border-[#D4AF37]/40 p-0.5 transition-colors relative"
+                className="w-12 h-6 rounded-full bg-zinc-800 border border-white/20 p-0.5 transition-colors relative"
               >
                 <div
-                  className={`w-4 h-4 rounded-full bg-[#D4AF37] transition-transform ${
-                    billingCycle === "quarterly" ? "translate-x-6 bg-[#0D9488]" : "translate-x-0.5"
+                  className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                    billingCycle === "quarterly" ? "translate-x-6" : "translate-x-0.5"
                   }`}
                 />
               </button>
               <div className="flex items-center gap-1.5">
-                <span className={billingCycle === "quarterly" ? "text-[#0D9488] font-bold" : "text-white/60"}>
+                <span className={billingCycle === "quarterly" ? "text-white font-bold" : "text-zinc-400"}>
                   Quarterly Commitment
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#0D9488]/20 border border-[#0D9488]/40 text-[#14B8A6] text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-bold">
                   SAVE 15%
                 </span>
               </div>
@@ -293,22 +292,22 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                     onMouseEnter={() => sound.playPluck(110)}
                     className={`relative rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-xl ${
                       tier.isPopular
-                        ? "bg-[#161B30] border-2 border-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.25)] lg:-translate-y-3"
-                        : "bg-[#141829]/60 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50"
+                        ? "bg-[#16161b] border-2 border-white shadow-[0_0_40px_rgba(255,255,255,0.12)] lg:-translate-y-3"
+                        : "bg-[#121215] border border-white/10 hover:border-white/25 hover:bg-[#18181d]"
                     }`}
                   >
                     {/* Filigree corner brackets */}
                     <div className="absolute top-3 left-3 opacity-30">
-                      <FiligreeCorner className="w-4 h-4 text-[#D4AF37]" position="top-left" />
+                      <FiligreeCorner className="w-4 h-4 text-white/50" position="top-left" />
                     </div>
                     <div className="absolute top-3 right-3 opacity-30">
-                      <FiligreeCorner className="w-4 h-4 text-[#D4AF37]" position="top-right" />
+                      <FiligreeCorner className="w-4 h-4 text-white/50" position="top-right" />
                     </div>
 
-                    {/* Popular Highlight Stamp (Von Restorff Effect) */}
+                    {/* Popular Highlight Stamp */}
                     {tier.isPopular && (
-                      <div className="absolute -top-3.5 inset-x-0 mx-auto w-max px-4 py-1 rounded-full bg-gradient-to-r from-[#E11D48] to-[#C84B31] text-white font-mono text-[10px] font-extrabold tracking-widest uppercase shadow-md flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3" />
+                      <div className="absolute -top-3.5 inset-x-0 mx-auto w-max px-4 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-xl flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3 text-black" />
                         <span>{tier.badge}</span>
                       </div>
                     )}
@@ -316,35 +315,35 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                     <div>
                       {/* Tier Name & Subtitle */}
                       <div className="mb-4 pt-2">
-                        <span className="font-mono text-xs text-[#D4AF37] uppercase tracking-widest block mb-1">
+                        <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest block mb-1">
                           {tier.hindi}
                         </span>
-                        <h3 className="font-display font-extrabold text-2xl text-[#F7F1E5]">
+                        <h3 className="font-display font-black text-2xl text-white uppercase">
                           {tier.name}
                         </h3>
                       </div>
 
                       {/* Pricing */}
-                      <div className="my-6 pb-6 border-b border-[#D4AF37]/15">
+                      <div className="my-6 pb-6 border-b border-white/10">
                         <div className="flex items-baseline gap-1">
-                          <span className="text-3xl sm:text-4xl font-display font-extrabold text-[#F5DE88]">
+                          <span className="text-3xl sm:text-4xl font-metric font-black text-white">
                             {formatINR(tier.price)}
                           </span>
-                          <span className="text-xs font-mono text-white/60">/ month</span>
+                          <span className="text-xs font-mono text-zinc-400">/ month</span>
                         </div>
-                        <p className="text-xs text-[#F7F1E5]/70 mt-3 leading-relaxed">
+                        <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans">
                           {tier.desc}
                         </p>
                       </div>
 
                       {/* Features List */}
                       <div className="space-y-3 mb-8">
-                        <span className="text-[11px] font-mono tracking-widest text-[#D4AF37]/80 uppercase block font-semibold">
+                        <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase block font-bold">
                           What&apos;s Included:
                         </span>
                         {tier.features.map((feat, i) => (
-                          <div key={i} className="flex items-start gap-2.5 text-xs text-[#F7F1E5]/90 font-mono">
-                            <Check className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
+                          <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200 font-mono">
+                            <Check className="w-4 h-4 text-white shrink-0 mt-0.5" />
                             <span>{feat}</span>
                           </div>
                         ))}
@@ -357,10 +356,10 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                         sound.playChime();
                         onOpenKundli();
                       }}
-                      className={`w-full py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 ${
+                      className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 ${
                         tier.isPopular
-                          ? "bg-gradient-to-r from-[#E11D48] to-[#C84B31] text-white shadow-[0_0_20px_rgba(225,29,72,0.5)] hover:shadow-[0_0_30px_rgba(225,29,72,0.8)]"
-                          : "bg-[#D4AF37] hover:bg-[#F5DE88] text-[#0D0C12]"
+                          ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.2)] font-black"
+                          : "bg-white/10 hover:bg-white/20 text-white border border-white/20"
                       }`}
                     >
                       <span>Deploy {tier.name}</span>
@@ -375,15 +374,15 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
         {/* MODE B: "BUILD YOUR OWN MARKETING THALI" PLATTER */}
         {mode === "thali" && (
-          <div className="rounded-3xl p-6 sm:p-10 lg:p-12 bg-[#141829]/70 border border-[#D4AF37]/40 backdrop-blur-2xl shadow-2xl">
+          <div className="rounded-3xl p-6 sm:p-10 lg:p-12 bg-[#121215] border border-white/15 backdrop-blur-2xl shadow-2xl">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-semibold block mb-2">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold block mb-2">
                 DESI MUCHADS MARKETING THALI
               </span>
-              <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-[#F7F1E5]">
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase">
                 Pick Your Katoris (Modular Weapons)
               </h3>
-              <p className="text-xs text-[#F7F1E5]/70 mt-2">
+              <p className="text-xs text-zinc-300 mt-2 font-sans">
                 Click to add or remove services from your platter. Watch your monthly cost, team hours saved, and estimated ROAS adjust in real time.
               </p>
             </div>
@@ -399,39 +398,39 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       onClick={() => toggleDish(dish.id)}
                       className={`cursor-pointer rounded-2xl p-5 border transition-all duration-300 flex flex-col justify-between ${
                         isSelected
-                          ? "border-[#D4AF37] bg-[#D4AF37]/15 shadow-[0_0_20px_rgba(212,175,55,0.2)]"
-                          : "border-[#D4AF37]/20 bg-[#0D0C12]/60 hover:border-[#D4AF37]/40"
+                          ? "border-white bg-white/10 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                          : "border-white/10 bg-[#16161b] hover:border-white/25"
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="font-royal text-xs text-[#D4AF37]">
+                          <span className="font-royal text-xs text-zinc-400">
                             {dish.hindi}
                           </span>
                           <div
                             className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
                               isSelected
-                                ? "bg-[#D4AF37] text-[#0D0C12]"
-                                : "border border-[#D4AF37]/30 text-white/40"
+                                ? "bg-white text-black"
+                                : "border border-white/20 text-white/40"
                             }`}
                           >
                             {isSelected ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : <Plus className="w-3.5 h-3.5" />}
                           </div>
                         </div>
 
-                        <h4 className="font-display font-bold text-sm text-[#F7F1E5] mb-1">
+                        <h4 className="font-display font-bold text-sm text-white mb-1">
                           {dish.name}
                         </h4>
-                        <p className="text-[11px] text-[#F7F1E5]/70 leading-relaxed mb-4">
+                        <p className="text-[11px] text-zinc-300 leading-relaxed mb-4 font-sans">
                           {dish.desc}
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-[#D4AF37]/15 flex items-center justify-between font-mono text-xs">
-                        <span className="text-[#F5DE88] font-bold">
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono text-xs">
+                        <span className="text-white font-bold">
                           {formatINR(dish.basePrice)}/mo
                         </span>
-                        <span className="text-[10px] text-[#0D9488]">
+                        <span className="text-[10px] text-zinc-400">
                           +{dish.hoursSaved}h saved
                         </span>
                       </div>
@@ -440,50 +439,50 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 })}
               </div>
 
-              {/* Right Column: Visual Brass Thali Platter Summary (5 cols) */}
-              <div className="lg:col-span-5 rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-[#161B30] to-[#0D0C12] border border-[#D4AF37]/50 shadow-inner flex flex-col justify-between">
+              {/* Right Column: Visual Thali Platter Summary (5 cols) */}
+              <div className="lg:col-span-5 rounded-2xl p-6 sm:p-8 bg-[#18181d] border border-white/20 shadow-xl flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/20 mb-6">
-                    <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                    <span className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-bold">
                       THALI SUMMARY
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#F5DE88] text-xs font-mono font-bold">
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-mono font-bold">
                       {selectedDishes.length} Items Selected
                     </span>
                   </div>
 
                   {/* Computed Investment Highlight */}
-                  <div className="p-5 rounded-2xl bg-[#0D0C12]/90 border border-[#D4AF37]/30 text-center mb-6">
-                    <span className="font-mono text-xs text-[#F7F1E5]/60 uppercase tracking-wider block mb-1">
+                  <div className="p-5 rounded-2xl bg-[#121214] border border-white/15 text-center mb-6">
+                    <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider block mb-1">
                       Monthly Thali Investment
                     </span>
-                    <div className="text-3xl sm:text-4xl font-display font-extrabold text-[#F5DE88]">
-                      {formatINR(thaliInvestment)}
+                    <div className="text-3xl sm:text-4xl font-metric font-black text-white">
+                      {formatINR(thaliStats.investment)}
                     </div>
-                    <span className="text-[11px] font-mono text-[#0D9488] mt-1 block">
+                    <span className="text-[11px] font-mono text-zinc-300 mt-1 block">
                       ✦ Flexible Month-to-Month • No Lock-in
                     </span>
                   </div>
 
                   {/* Impact Stats */}
                   <div className="space-y-3 mb-8">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#141829]/60 border border-[#D4AF37]/15 font-mono text-xs">
-                      <div className="flex items-center gap-2 text-white/80">
-                        <Clock className="w-4 h-4 text-[#D4AF37]" />
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/10 font-mono text-xs">
+                      <div className="flex items-center gap-2 text-zinc-300">
+                        <Clock className="w-4 h-4 text-white" />
                         <span>Estimated Team Hours Saved</span>
                       </div>
-                      <span className="font-bold text-[#F7F1E5]">
-                        ~{thaliHoursSaved} hrs/mo
+                      <span className="font-bold text-white">
+                        ~{thaliStats.hoursSaved} hrs/mo
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#141829]/60 border border-[#D4AF37]/15 font-mono text-xs">
-                      <div className="flex items-center gap-2 text-white/80">
-                        <TrendingUp className="w-4 h-4 text-[#0D9488]" />
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/10 font-mono text-xs">
+                      <div className="flex items-center gap-2 text-zinc-300">
+                        <TrendingUp className="w-4 h-4 text-white" />
                         <span>Projected Blended ROAS</span>
                       </div>
-                      <span className="font-bold text-[#0D9488]">
-                        {thaliRoas}x Return
+                      <span className="font-bold text-white">
+                        {thaliStats.roas}x Return
                       </span>
                     </div>
                   </div>
@@ -493,9 +492,9 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 <button
                   onClick={handleThaliWhatsApp}
                   disabled={selectedDishes.length === 0}
-                  className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#25D366] via-[#128C7E] to-[#075E54] text-white font-bold text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(37,211,102,0.4)] hover:shadow-[0_0_35px_rgba(37,211,102,0.7)] transition-all flex items-center justify-center gap-2.5 disabled:opacity-40"
+                  className="w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2.5 active:scale-95 disabled:opacity-40"
                 >
-                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <MessageCircle className="w-4 h-4" />
                   <span>Lock In Custom Thali → WhatsApp</span>
                 </button>
               </div>
@@ -506,4 +505,3 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     </section>
   );
 }
-

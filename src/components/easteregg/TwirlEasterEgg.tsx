@@ -28,7 +28,7 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
           particleCount: 120,
           spread: 80,
           origin: { y: 0.7 },
-          colors: ["#D4AF37", "#F5DE88", "#E11D48", "#F7F1E5"],
+          colors: ["#ffffff", "#e4e4e7", "#a1a1aa", "#71717a"],
         });
       } catch {}
     }
@@ -36,22 +36,22 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
 
   return (
     <div className="relative py-16 px-4 max-w-4xl mx-auto my-12 text-center">
-      <div className="relative rounded-3xl p-8 sm:p-12 bg-gradient-to-br from-[#161B30] to-[#0D0C12] border-2 border-[#D4AF37]/40 shadow-2xl overflow-hidden">
+      <div className="relative rounded-3xl p-8 sm:p-12 bg-[#121215] border border-white/15 border-t-white/30 shadow-2xl overflow-hidden">
         {/* Filigree corner brackets */}
-        <div className="absolute top-3 left-3 opacity-40 pointer-events-none">
-          <FiligreeCorner className="w-5 h-5 text-[#D4AF37]" position="top-left" />
+        <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
+          <FiligreeCorner className="w-5 h-5 text-white" position="top-left" />
         </div>
-        <div className="absolute top-3 right-3 opacity-40 pointer-events-none">
-          <FiligreeCorner className="w-5 h-5 text-[#D4AF37]" position="top-right" />
+        <div className="absolute top-3 right-3 opacity-30 pointer-events-none">
+          <FiligreeCorner className="w-5 h-5 text-white" position="top-right" />
         </div>
 
-        <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-semibold block mb-2">
+        <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-2">
           INTERACTIVE MUCHHAD PHYSICS EASTER EGG
         </span>
-        <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-[#F7F1E5] mb-2">
+        <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2">
           Twirl the Muchh (Tension Check)
         </h3>
-        <p className="text-xs sm:text-sm text-[#F7F1E5]/70 max-w-md mx-auto mb-8">
+        <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto mb-8">
           Flick or pull the moustache with your cursor/finger. Test our spring physics and see what secret gift the Raja has in store.
         </p>
 
@@ -65,20 +65,20 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
             onDragEnd={handleDragEnd}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="cursor-grab active:cursor-grabbing p-4 rounded-3xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-colors"
+            className="cursor-grab active:cursor-grabbing p-4 rounded-3xl bg-white/5 border border-white/20 hover:border-white transition-colors"
           >
-            <MoustacheSVG className="w-48 sm:w-64 h-24 sm:h-32 text-[#D4AF37] drop-shadow-[0_0_25px_rgba(212,175,55,0.5)]" />
+            <MoustacheSVG className="w-48 sm:w-64 h-24 sm:h-32 text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]" />
           </motion.div>
         </div>
 
-        <span className="text-[11px] font-mono text-[#D4AF37]/70 uppercase tracking-widest block">
+        <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest block">
           {unlocked ? "✦ Elastic Tension Unlocked!" : "← Drag and release to twirl →"}
         </span>
 
         {/* UNLOCKED VIP REWARD BADGE */}
         {unlocked && (
-          <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-[#E11D48]/20 via-[#D4AF37]/20 to-[#E11D48]/20 border-2 border-[#D4AF37] animate-in zoom-in-95 duration-400 max-w-lg mx-auto">
-            <div className="flex items-center justify-center gap-2 mb-2 text-[#F5DE88]">
+          <div className="mt-8 p-6 rounded-2xl bg-[#18181c] border-2 border-white animate-in zoom-in-95 duration-400 max-w-lg mx-auto shadow-[0_0_30px_rgba(255,255,255,0.12)]">
+            <div className="flex items-center justify-center gap-2 mb-2 text-white">
               <Gift className="w-5 h-5" />
               <span className="font-mono text-xs font-bold uppercase tracking-widest">
                 VIP SECRET REWARD UNLOCKED
@@ -87,12 +87,12 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
             <h4 className="font-display font-bold text-lg sm:text-xl text-white mb-2">
               Shabaash! You unlocked a Free Creative Audit + 1 Bonus Ad Concept.
             </h4>
-            <p className="text-xs text-[#F7F1E5]/80 mb-5 leading-relaxed">
+            <p className="text-xs text-zinc-300 mb-5 leading-relaxed">
               Show this secret badge to our founders on WhatsApp to claim your complimentary creative teardown and bespoke ad angle wireframe.
             </p>
             <button
               onClick={onOpenKundli}
-              className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#E11D48] to-[#C84B31] text-white font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-transform"
+              className="px-6 py-2.5 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-zinc-200 transition-colors"
             >
               Claim Bonus Ad Concept Now 〰️
             </button>

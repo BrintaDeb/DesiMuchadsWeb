@@ -72,7 +72,7 @@ export function BrandKundliScanner() {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["#D4AF37", "#0D9488", "#E11D48"],
+        colors: ["#ffffff", "#e4e4e7", "#a1a1aa", "#71717a"],
       });
     } catch {}
 
@@ -87,33 +87,33 @@ export function BrandKundliScanner() {
   };
 
   return (
-    <section id="scanner" className="relative py-28 sm:py-36 bg-[#0D0C12] text-[#F7F1E5] overflow-hidden">
+    <section id="scanner" className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden border-t border-white/10">
       {/* Background glow */}
-      <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] rounded-full bg-[#D4AF37]/10 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] rounded-full bg-white/[0.03] blur-[150px] pointer-events-none" />
 
       <SectionDivider label="AI BRAND KUNDLI SCANNER" sublabel="INSTANT REVENUE LEAK AUDIT" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-[#F7F1E5]">
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-white">
             Diagnose Your Brand&apos;s{" "}
-            <span className="brass-gradient-text block mt-1">
+            <span className="text-gradient-silver block mt-1">
               Hidden Revenue Leaks.
             </span>
           </h2>
-          <p className="mt-4 text-[#F7F1E5]/70 text-sm sm:text-base">
+          <p className="mt-4 text-zinc-400 text-sm sm:text-base">
             Enter your brand URL and social handle. Our automated crawler will analyze your speed, pixel signals, and cultural swagger in real time.
           </p>
         </div>
 
         {/* Scanner Container Box */}
-        <div className="relative rounded-3xl p-6 sm:p-10 bg-[#141829]/80 border border-[#D4AF37]/30 backdrop-blur-2xl shadow-2xl">
+        <div className="relative rounded-3xl p-6 sm:p-10 bg-[#121215] border border-white/10 border-t-white/20 backdrop-blur-2xl shadow-2xl">
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
-            <FiligreeCorner className="w-4 h-4 text-[#D4AF37]" position="top-left" />
+            <FiligreeCorner className="w-4 h-4 text-white" position="top-left" />
           </div>
           <div className="absolute top-3 right-3 opacity-30 pointer-events-none">
-            <FiligreeCorner className="w-4 h-4 text-[#D4AF37]" position="top-right" />
+            <FiligreeCorner className="w-4 h-4 text-white" position="top-right" />
           </div>
 
           {/* INPUT FORM (if not scanned yet) */}
@@ -121,7 +121,7 @@ export function BrandKundliScanner() {
             <form onSubmit={handleStartScan} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="scannerUrlInput" className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] font-semibold block mb-2">
+                  <label htmlFor="scannerUrlInput" className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold block mb-2">
                     1. Brand Website URL *
                   </label>
                   <input
@@ -132,12 +132,12 @@ export function BrandKundliScanner() {
                     placeholder="https://yourbrand.com"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-2xl bg-[#0D0C12] border border-[#D4AF37]/30 text-sm text-white focus:outline-none focus:border-[#D4AF37] font-mono"
+                    className="w-full px-4 py-3.5 rounded-2xl bg-[#18181c] border border-white/15 text-sm text-white focus:outline-none focus:border-white font-mono placeholder-zinc-500"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="scannerInstagramInput" className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] font-semibold block mb-2">
+                  <label htmlFor="scannerInstagramInput" className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold block mb-2">
                     2. Instagram Handle (Optional)
                   </label>
                   <input
@@ -147,7 +147,7 @@ export function BrandKundliScanner() {
                     placeholder="@yourbrand"
                     value={instagram}
                     onChange={(e) => setInstagram(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-2xl bg-[#0D0C12] border border-[#D4AF37]/30 text-sm text-white focus:outline-none focus:border-[#D4AF37] font-mono"
+                    className="w-full px-4 py-3.5 rounded-2xl bg-[#18181c] border border-white/15 text-sm text-white focus:outline-none focus:border-white font-mono placeholder-zinc-500"
                   />
                 </div>
               </div>
@@ -155,7 +155,7 @@ export function BrandKundliScanner() {
               <div className="text-center pt-2">
                 <button
                   type="submit"
-                  className="px-8 py-4 rounded-full bg-gradient-to-r from-[#E11D48] via-[#C84B31] to-[#E11D48] text-white font-bold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(225,29,72,0.5)] hover:shadow-[0_0_35px_rgba(225,29,72,0.8)] transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2.5"
+                  className="px-8 py-4 rounded-full bg-white text-black font-bold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2.5"
                 >
                   <Search className="w-4 h-4" />
                   <span>Generate My Brand Kundli (Free)</span>
@@ -169,25 +169,25 @@ export function BrandKundliScanner() {
             <div className="py-12 flex flex-col items-center justify-center text-center space-y-6">
               {/* Radar pulse animation */}
               <div className="relative w-24 h-24 flex items-center justify-center">
-                <div className="absolute inset-0 rounded-full border border-[#D4AF37] animate-ping opacity-40" />
-                <div className="w-16 h-16 rounded-full border-2 border-[#D4AF37] bg-[#D4AF37]/10 flex items-center justify-center">
-                  <MoustacheSVG className="w-8 h-4 text-[#D4AF37] animate-pulse" />
+                <div className="absolute inset-0 rounded-full border border-white/30 animate-ping opacity-40" />
+                <div className="w-16 h-16 rounded-full border-2 border-white bg-white/10 flex items-center justify-center">
+                  <MoustacheSVG className="w-8 h-4 text-white animate-pulse" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <span className="font-mono text-xs text-[#0D9488] uppercase tracking-widest font-bold block">
+                <span className="font-mono text-xs text-zinc-300 uppercase tracking-widest font-bold block">
                   CRAWLING: {url}
                 </span>
-                <p className="font-display font-bold text-lg sm:text-xl text-[#F7F1E5]">
+                <p className="font-display font-bold text-lg sm:text-xl text-white">
                   {scanSteps[scanStep]}
                 </p>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full max-w-md h-1.5 bg-[#0D0C12] rounded-full overflow-hidden border border-[#D4AF37]/30">
+              <div className="w-full max-w-md h-1.5 bg-[#18181c] rounded-full overflow-hidden border border-white/15">
                 <div
-                  className="h-full bg-gradient-to-r from-[#D4AF37] via-[#0D9488] to-[#E11D48] transition-all duration-300"
+                  className="h-full bg-white transition-all duration-300"
                   style={{ width: `${((scanStep + 1) / scanSteps.length) * 100}%` }}
                 />
               </div>
@@ -197,12 +197,12 @@ export function BrandKundliScanner() {
           {/* SCAN COMPLETED SCORECARD */}
           {scanComplete && (
             <div className="space-y-8 animate-in fade-in duration-500">
-              <div className="flex flex-col sm:flex-row items-center justify-between pb-6 border-b border-[#D4AF37]/20 gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-between pb-6 border-b border-white/10 gap-4">
                 <div>
-                  <span className="font-mono text-xs text-[#D4AF37] uppercase tracking-widest block mb-1">
+                  <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest block mb-1">
                     DIAGNOSTIC AUDIT COMPLETE
                   </span>
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-[#F7F1E5]">
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
                     Brand Kundli for {url.replace(/^https?:\/\//, "")}
                   </h3>
                 </div>
@@ -212,7 +212,7 @@ export function BrandKundliScanner() {
                     setScanComplete(false);
                     setUnlocked(false);
                   }}
-                  className="px-4 py-2 rounded-full border border-[#D4AF37]/30 text-xs font-mono text-[#D4AF37] hover:bg-[#D4AF37]/10"
+                  className="px-4 py-2 rounded-full border border-white/20 text-xs font-mono text-zinc-300 hover:text-white hover:border-white/50 bg-white/5"
                 >
                   Scan Another URL
                 </button>
@@ -220,80 +220,80 @@ export function BrandKundliScanner() {
 
               {/* 4-Metric Scorecard Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 rounded-2xl bg-[#0D0C12]/80 border border-[#0D9488]/40 text-center">
-                  <span className="text-[11px] font-mono text-white/60 uppercase block mb-1">
+                <div className="p-4 rounded-2xl bg-[#18181c] border border-white/15 text-center">
+                  <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">
                     Speed & Tech
                   </span>
-                  <div className="text-3xl font-display font-extrabold text-[#0D9488]">
+                  <div className="text-3xl font-display font-extrabold text-white">
                     94/100
                   </div>
-                  <span className="text-[10px] font-mono text-green-400">✦ Sub-1s Load</span>
+                  <span className="text-[10px] font-mono text-zinc-300">✦ Sub-1s Load</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#0D0C12]/80 border border-[#F59E0B]/40 text-center">
-                  <span className="text-[11px] font-mono text-white/60 uppercase block mb-1">
+                <div className="p-4 rounded-2xl bg-[#18181c] border border-white/15 text-center">
+                  <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">
                     Ad Readiness
                   </span>
-                  <div className="text-3xl font-display font-extrabold text-[#F59E0B]">
+                  <div className="text-3xl font-display font-extrabold text-white">
                     62/100
                   </div>
-                  <span className="text-[10px] font-mono text-yellow-400">✦ Missing CBO Pixels</span>
+                  <span className="text-[10px] font-mono text-zinc-300">✦ Missing CBO Pixels</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#0D0C12]/80 border border-[#E11D48]/40 text-center">
-                  <span className="text-[11px] font-mono text-white/60 uppercase block mb-1">
+                <div className="p-4 rounded-2xl bg-[#18181c] border border-white/15 text-center">
+                  <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">
                     Visual Swagger
                   </span>
-                  <div className="text-3xl font-display font-extrabold text-[#E11D48]">
+                  <div className="text-3xl font-display font-extrabold text-white">
                     48/100
                   </div>
-                  <span className="text-[10px] font-mono text-red-400">✦ Generic Creative</span>
+                  <span className="text-[10px] font-mono text-zinc-300">✦ Generic Creative</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#0D0C12]/80 border border-[#D4AF37]/40 text-center">
-                  <span className="text-[11px] font-mono text-white/60 uppercase block mb-1">
+                <div className="p-4 rounded-2xl bg-[#18181c] border border-white/15 text-center">
+                  <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">
                     SEO & GEO
                   </span>
-                  <div className="text-3xl font-display font-extrabold text-[#F5DE88]">
+                  <div className="text-3xl font-display font-extrabold text-white">
                     71/100
                   </div>
-                  <span className="text-[10px] font-mono text-[#D4AF37]">✦ Local Untapped</span>
+                  <span className="text-[10px] font-mono text-zinc-300">✦ Local Untapped</span>
                 </div>
               </div>
 
               {/* 3 CRITICAL REVENUE LEAKS (BLURRED TEASER / UNLOCKED) */}
-              <div className="relative rounded-2xl p-6 sm:p-8 bg-[#0D0C12] border border-[#E11D48]/40 overflow-hidden">
-                <div className="flex items-center gap-2 text-[#E11D48] mb-3 font-mono text-xs font-bold uppercase tracking-wider">
-                  <AlertTriangle className="w-4 h-4" />
+              <div className="relative rounded-2xl p-6 sm:p-8 bg-[#18181c] border border-white/20 border-t-white/30 overflow-hidden shadow-xl">
+                <div className="flex items-center gap-2 text-white mb-3 font-mono text-xs font-bold uppercase tracking-wider">
+                  <AlertTriangle className="w-4 h-4 text-zinc-300" />
                   <span>3 Critical Revenue Leaks Detected (Costing ~₹3.8L/mo)</span>
                 </div>
 
                 {/* The Leaks List (blurred if locked) */}
                 <div className={`space-y-3 transition-all duration-500 ${!unlocked ? "filter blur-sm select-none pointer-events-none" : ""}`}>
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-                    <span className="font-bold text-[#E11D48] block mb-1">Leak 1: Meta ViewContent to AddToCart Dropoff (-54%)</span>
-                    <p className="text-white/70">Your product pages lack localized social proof and instant checkout triggers, causing over half of your paid ad visitors to bounce before adding items.</p>
+                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs">
+                    <span className="font-bold text-white block mb-1">Leak 1: Meta ViewContent to AddToCart Dropoff (-54%)</span>
+                    <p className="text-zinc-300">Your product pages lack localized social proof and instant checkout triggers, causing over half of your paid ad visitors to bounce before adding items.</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-                    <span className="font-bold text-[#E11D48] block mb-1">Leak 2: Zero Dynamic Catalog Retargeting</span>
-                    <p className="text-white/70">Visitors who abandon carts are not served dynamic vernacular ads, burning 38% of your top-of-funnel ad spend without automated recaptures.</p>
+                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs">
+                    <span className="font-bold text-white block mb-1">Leak 2: Zero Dynamic Catalog Retargeting</span>
+                    <p className="text-zinc-300">Visitors who abandon carts are not served dynamic vernacular ads, burning 38% of your top-of-funnel ad spend without automated recaptures.</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-                    <span className="font-bold text-[#E11D48] block mb-1">Leak 3: Unindexed Generative AI Keywords</span>
-                    <p className="text-white/70">Your competitors appear in Perplexity and Google Gemini recommendations while your brand is completely invisible in modern GEO search.</p>
+                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs">
+                    <span className="font-bold text-white block mb-1">Leak 3: Unindexed Generative AI Keywords</span>
+                    <p className="text-zinc-300">Your competitors appear in Perplexity and Google Gemini recommendations while your brand is completely invisible in modern GEO search.</p>
                   </div>
                 </div>
 
                 {/* Locked Overlay with WhatsApp Unlocker */}
                 {!unlocked && (
-                  <div className="absolute inset-0 bg-[#0D0C12]/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-10">
-                    <div className="w-12 h-12 rounded-full bg-[#E11D48]/20 border border-[#E11D48] text-[#E11D48] flex items-center justify-center mb-3">
+                  <div className="absolute inset-0 bg-[#09090b]/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10">
+                    <div className="w-12 h-12 rounded-full bg-white/10 border border-white/30 text-white flex items-center justify-center mb-3">
                       <Lock className="w-5 h-5" />
                     </div>
-                    <h4 className="font-display font-bold text-lg text-[#F7F1E5] mb-1">
+                    <h4 className="font-display font-bold text-lg text-white mb-1">
                       Unlock Full Revenue Leak Audit
                     </h4>
-                    <p className="text-xs text-[#F7F1E5]/70 max-w-sm mb-4">
+                    <p className="text-xs text-zinc-400 max-w-sm mb-4">
                       Enter your WhatsApp number to immediately reveal the complete leak breakdown and receive your PDF Brand Kundli report.
                     </p>
 
@@ -309,13 +309,13 @@ export function BrandKundliScanner() {
                         placeholder="+91 98765 43210"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
-                        className="flex-1 px-4 py-2.5 rounded-full bg-[#141829] border border-[#D4AF37]/40 text-xs text-white focus:outline-none focus:border-[#D4AF37] font-mono"
+                        className="flex-1 px-4 py-2.5 rounded-full bg-[#121215] border border-white/20 text-xs text-white focus:outline-none focus:border-white font-mono placeholder-zinc-500"
                       />
                       <button
                         type="submit"
-                        className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-105 active:scale-95 transition-transform"
+                        className="px-6 py-2.5 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                        <MessageCircle className="w-3.5 h-3.5 fill-black text-black" />
                         <span>Unlock via WhatsApp</span>
                       </button>
                     </form>

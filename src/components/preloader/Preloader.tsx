@@ -52,31 +52,31 @@ export function Preloader({ onComplete }: PreloaderProps) {
   return (
     <AnimatePresence>
       {!isDone ? (
-        <div className="fixed inset-0 z-[999] flex flex-col justify-between p-6 sm:p-12 pointer-events-auto bg-[#0e164c] overflow-hidden select-none font-display">
-          {/* Subtle starry ambient glow particles */}
+        <div className="fixed inset-0 z-[999] flex flex-col justify-between p-6 sm:p-12 pointer-events-auto bg-[#09090b] overflow-hidden select-none font-display">
+          {/* Subtle ambient glow particles */}
           <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-[#142161] blur-[100px]" />
-            <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-[#F36700]/15 blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-white/[0.05] blur-[100px]" />
+            <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-white/[0.05] blur-[120px]" />
           </div>
 
           {/* Top Bar: Brand Status */}
-          <div className="relative z-10 flex items-center justify-between text-xs font-mono uppercase tracking-[0.25em] text-[#FFC400]">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#F36700] animate-ping" />
+          <div className="relative z-10 flex items-center justify-between text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">
+            <span className="flex items-center gap-2 text-white">
+              <span className="w-2 h-2 rounded-full bg-white animate-ping" />
               DESI MUCHADS
             </span>
-            <span className="text-white/60">PERFORMANCE MARKETING</span>
+            <span className="text-zinc-400">PERFORMANCE MARKETING</span>
           </div>
 
           {/* Centerpiece: Header Logo & Official Typography */}
           <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto">
             {/* Ambient rotating subtle mandala behind logo */}
-            <div className="absolute -z-10 w-72 h-72 sm:w-96 sm:h-96 opacity-10 animate-spin-slow text-[#FFC400]">
+            <div className="absolute -z-10 w-72 h-72 sm:w-96 sm:h-96 opacity-5 animate-spin-slow text-white">
               <MandalaStamp className="w-full h-full" />
             </div>
 
             {/* Official Header Brand Logo Badge */}
-            <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-[#FFC400] shadow-[0_0_40px_rgba(255,196,0,0.4)] mb-5 bg-[#0e164c] transform-gpu hover:scale-105 transition-transform">
+            <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.25)] mb-5 bg-[#121215] transform-gpu hover:scale-105 transition-transform">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand-logo.jpg"
@@ -89,10 +89,10 @@ export function Preloader({ onComplete }: PreloaderProps) {
             <div className="font-display font-black text-2xl sm:text-4xl tracking-wider text-white uppercase flex items-center gap-2 leading-none mb-1">
               <span>DESI</span>
               <span>
-                <span className="text-[#F36700]">MUCH</span>ADS
+                <span className="text-zinc-400">MUCH</span>ADS
               </span>
             </div>
-            <span className="text-[10px] sm:text-xs font-mono tracking-widest text-[#FFC400] uppercase mb-6 font-bold">
+            <span className="text-[10px] sm:text-xs font-mono tracking-widest text-zinc-400 uppercase mb-6 font-bold">
               PERFORMANCE MARKETING AGENCY
             </span>
 
@@ -103,7 +103,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25 }}
-              className="text-base sm:text-xl font-sans font-medium tracking-wide text-white/90"
+              className="text-base sm:text-xl font-sans font-medium tracking-wide text-zinc-300"
             >
               {statusText}
             </motion.p>
@@ -112,35 +112,35 @@ export function Preloader({ onComplete }: PreloaderProps) {
           {/* Bottom Bar: Progress Counter & Track */}
           <div className="relative z-10">
             <div className="flex items-end justify-between mb-3 font-mono">
-              <span className="text-xs uppercase tracking-widest text-white/60">
+              <span className="text-xs uppercase tracking-widest text-zinc-400">
                 SCALING E-COMMERCE POTENTIAL
               </span>
-              <span className="text-3xl sm:text-5xl font-bold tracking-tight text-[#FFC400] font-mono">
+              <span className="text-3xl sm:text-5xl font-bold tracking-tight text-white font-mono">
                 {String(progress).padStart(2, "0")}%
               </span>
             </div>
 
-            {/* Orange to Gold Line Progress Bar */}
+            {/* White Monochrome Line Progress Bar */}
             <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#F36700] via-[#FFC400] to-[#F36700] transition-all duration-75"
+                className="h-full bg-white transition-all duration-75 shadow-[0_0_15px_rgba(255,255,255,0.4)]"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
         </div>
       ) : (
-        /* Stage 3: Palace Doors Split-Curtain Reveal */
+        /* Stage 3: Split-Curtain Reveal */
         <div className="fixed inset-0 z-[999] pointer-events-none flex">
           {/* Left Door Curtain */}
           <motion.div
             initial={{ x: "0%" }}
             animate={{ x: "-100%" }}
             transition={{ duration: 0.85, ease: [0.77, 0, 0.175, 1] }}
-            className="w-1/2 h-full bg-[#0e164c] border-r border-[#F36700]/30 relative"
+            className="w-1/2 h-full bg-[#09090b] border-r border-white/20 relative"
           >
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-[#FFC400]/40 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-[#F36700]" />
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-white/40 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-white" />
             </div>
           </motion.div>
 
@@ -149,10 +149,10 @@ export function Preloader({ onComplete }: PreloaderProps) {
             initial={{ x: "0%" }}
             animate={{ x: "100%" }}
             transition={{ duration: 0.85, ease: [0.77, 0, 0.175, 1] }}
-            className="w-1/2 h-full bg-[#0e164c] border-l border-[#F36700]/30 relative"
+            className="w-1/2 h-full bg-[#09090b] border-l border-white/20 relative"
           >
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-[#FFC400]/40 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-[#F36700]" />
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-white/40 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-white" />
             </div>
           </motion.div>
         </div>

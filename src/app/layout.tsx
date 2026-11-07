@@ -37,7 +37,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#0e164c",
+  themeColor: "#09090b",
 };
 
 export const metadata: Metadata = {
@@ -68,7 +68,7 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
     >
-      <body className="bg-[#0e164c] text-white selection:bg-[#F36700] selection:text-white min-h-screen overflow-x-hidden font-sans">
+      <body className="bg-[#09090b] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden font-sans">
         <ThemeProvider>
           <AgencyProposalProvider>{children}</AgencyProposalProvider>
         </ThemeProvider>

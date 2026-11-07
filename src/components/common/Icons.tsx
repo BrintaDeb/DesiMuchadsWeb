@@ -11,7 +11,7 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
  * Features elegant upward curls, symmetrical center dip, and royal sharpness.
  */
 export function MoustacheSVG({
-  className = "w-24 h-12 text-[#D4AF37]",
+  className = "w-24 h-12 text-white",
   strokeWidth = 2,
   animated = false,
   ...props
@@ -44,7 +44,7 @@ export function MoustacheSVG({
  * Line-art Path version of Moustache for GSAP stroke-dashoffset drawing
  */
 export function MoustachePathSVG({
-  className = "w-full h-full text-[#D4AF37]",
+  className = "w-full h-full text-white",
   pathRef,
   ...props
 }: SVGProps & { pathRef?: React.Ref<SVGPathElement> }) {
@@ -83,7 +83,7 @@ export function MoustachePathSVG({
  * Ornate Rajasthani / Mughal Scalloped Jharokha Arch
  */
 export function JharokhaArchSVG({
-  className = "w-full h-full text-[#D4AF37]",
+  className = "w-full h-full text-white",
   strokeWidth = 2,
   ...props
 }: SVGProps & { strokeWidth?: number }) {
@@ -126,7 +126,7 @@ export function JharokhaArchSVG({
  * 8-Fold Rotating Royal Mandala / Chakra Stamp
  */
 export function MandalaStamp({
-  className = "w-20 h-20 text-[#D4AF37]",
+  className = "w-20 h-20 text-white",
   ...props
 }: SVGProps) {
   return (
@@ -159,10 +159,10 @@ export function MandalaStamp({
 }
 
 /**
- * Brass Filigree Corner Bracket for Royal Glassmorphic Cards
+ * Filigree Corner Bracket for Glassmorphic Cards
  */
 export function FiligreeCorner({
-  className = "w-6 h-6 text-[#D4AF37]",
+  className = "w-6 h-6 text-white",
   position = "top-left",
 }: {
   className?: string;

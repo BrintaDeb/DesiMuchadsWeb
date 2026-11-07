@@ -18,7 +18,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "Rank #1 Google & High Search ROAS",
     anchor: "#service-seo",
     iconName: "Search",
-    gradient: "from-[#FFC400]/20 to-[#F36700]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "performance-marketing",
@@ -28,7 +28,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "5.8x Blended ROAS",
     anchor: "#service-performance",
     iconName: "Rocket",
-    gradient: "from-[#F36700]/20 to-[#E11D48]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "lead-generation",
@@ -38,7 +38,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "₹180 CPL & High Intent SQLs",
     anchor: "#service-leads",
     iconName: "Magnet",
-    gradient: "from-[#3B82F6]/20 to-[#1D4ED8]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "social-media",
@@ -48,7 +48,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "+477% Viral Organic Reach",
     anchor: "#service-social",
     iconName: "Share2",
-    gradient: "from-[#EC4899]/20 to-[#8B5CF6]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "ecommerce-services",
@@ -58,7 +58,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "+340% Store Revenue Lift",
     anchor: "#service-ecommerce",
     iconName: "ShoppingBag",
-    gradient: "from-[#10B981]/20 to-[#047857]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "quick-commerce",
@@ -68,7 +68,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "10-Min Dark Store Scale",
     anchor: "#service-qcommerce",
     iconName: "Zap",
-    gradient: "from-[#F59E0B]/20 to-[#D97706]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "web-development",
@@ -78,7 +78,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "<0.8s Store Speed & Next.js",
     anchor: "#service-webdev",
     iconName: "Code2",
-    gradient: "from-[#6366F1]/20 to-[#4338CA]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
   {
     id: "packaging-label",
@@ -88,6 +88,6 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     metric: "Award-Winning Shelf Impact",
     anchor: "#service-packaging",
     iconName: "Package",
-    gradient: "from-[#D4AF37]/25 to-[#F59E0B]/10",
+    gradient: "from-white/15 to-white/[0.03]",
   },
 ];

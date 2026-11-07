@@ -52,8 +52,8 @@ export function CaseStudiesSection() {
         { label: "Store Speed", val: "<650ms" },
       ],
       techStack: ["Next.js 14", "Tailwind CSS", "Vercel Edge", "Framer Motion", "TypeScript"],
-      bgGradient: "from-[#0e164c] via-[#142161] to-[#090e33]",
-      accentColor: "#F36700",
+      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
+      accentColor: "#ffffff",
     },
     {
       id: 2,
@@ -77,8 +77,8 @@ export function CaseStudiesSection() {
         { label: "Advance Sellout", val: "8 Months" },
       ],
       techStack: ["React", "Editorial UI", "Dynamic Galleries", "Vercel CDN", "TypeScript"],
-      bgGradient: "from-[#142161] via-[#1b2b78] to-[#0e164c]",
-      accentColor: "#FFC400",
+      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
+      accentColor: "#ffffff",
     },
     {
       id: 3,
@@ -102,8 +102,8 @@ export function CaseStudiesSection() {
         { label: "Pet IDs Created", val: "45K+" },
       ],
       techStack: ["Next.js", "Nutrition Calculator Engine", "Tailwind CSS", "Vercel"],
-      bgGradient: "from-[#090e33] via-[#0e164c] to-[#142161]",
-      accentColor: "#F36700",
+      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
+      accentColor: "#ffffff",
     },
     {
       id: 4,
@@ -127,8 +127,8 @@ export function CaseStudiesSection() {
         { label: "Monthly Re-order", val: "3.4x" },
       ],
       techStack: ["Next.js 14", "Real-Time Cart", "Tailwind CSS", "Vercel Edge"],
-      bgGradient: "from-[#0e164c] via-[#1b2b78] to-[#090e33]",
-      accentColor: "#FFC400",
+      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
+      accentColor: "#ffffff",
     },
     {
       id: 5,
@@ -152,8 +152,8 @@ export function CaseStudiesSection() {
         { label: "Dispatch Response", val: "<15 Min" },
       ],
       techStack: ["Next.js", "Slot Scheduler", "Tailwind CSS", "Enterprise API", "Vercel"],
-      bgGradient: "from-[#142161] via-[#090e33] to-[#0e164c]",
-      accentColor: "#F36700",
+      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
+      accentColor: "#ffffff",
     },
   ];
 
@@ -203,20 +203,19 @@ export function CaseStudiesSection() {
   return (
     <section
       id="karname"
-      className="relative py-28 sm:py-36 bg-white text-[#0e164c] overflow-hidden select-none font-display scroll-mt-24"
+      className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden select-none font-display scroll-mt-24 border-t border-white/10"
     >
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F36700]/10 border border-[#F36700]/30 text-[#F36700] font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5" />
             <span>VERIFIED CLIENT WORK • 5 LIVE DEPLOYMENTS</span>
           </div>
-          <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-[#0e164c] uppercase leading-none">
+          <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#676767] font-normal leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed font-sans">
             Live web platforms, direct-to-consumer storefronts, and performance architectures engineered for growth. Click on any project card to launch the interactive glassmorphism lightbox.
           </p>
         </div>
@@ -226,11 +225,11 @@ export function CaseStudiesSection() {
           {cases.map((cs, idx) => (
             <div
               key={cs.id}
-              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-gray-200 bg-white hover:border-[#F36700]/40"
+              className="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.06)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-white/10 border-t-white/20 bg-[#121215] hover:border-white/35 hover:bg-[#18181d]"
             >
               {/* Browser Window Showcase Thumbnail */}
               <div
-                className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-gray-200 bg-[#0e164c] shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col"
+                className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/10 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col"
                 onClick={() => {
                   sound.playChime();
                   setSelectedCaseIndex(idx);
@@ -238,20 +237,20 @@ export function CaseStudiesSection() {
                 }}
               >
                 {/* Simulated Mini Browser Chrome Header */}
-                <div className="h-7 px-3 bg-[#090e33]/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
+                <div className="h-7 px-3 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#FF5F56]/80" />
-                    <span className="w-2 h-2 rounded-full bg-[#FFBD2E]/80" />
-                    <span className="w-2 h-2 rounded-full bg-[#27C93F]/80" />
+                    <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="text-white/60 truncate max-w-[140px]">
+                  <span className="text-zinc-400 truncate max-w-[140px]">
                     {cs.liveUrl.replace("https://", "")}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 </div>
 
                 {/* Thumbnail Image Container with Zoom & Overlays */}
-                <div className="relative flex-1 w-full overflow-hidden bg-[#0e164c]">
+                <div className="relative flex-1 w-full overflow-hidden bg-black">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={cs.thumbnail}
@@ -261,11 +260,11 @@ export function CaseStudiesSection() {
                   />
 
                   {/* Gradient Glass Overlay on Bottom of Image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e164c]/85 via-transparent to-black/30 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#121215]/90 via-transparent to-black/30 pointer-events-none" />
 
                   {/* Top Badges: Hero Stat & External Link */}
                   <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-full bg-[#F36700] text-white font-metric text-[10px] font-bold tracking-wider uppercase shadow-md pointer-events-auto">
+                    <span className="px-2.5 py-1 rounded-full bg-white text-black font-metric text-[10px] font-black tracking-wider uppercase shadow-md pointer-events-auto">
                       {cs.heroStat}
                     </span>
                     <div className="flex items-center gap-1.5 pointer-events-auto">
@@ -274,7 +273,7 @@ export function CaseStudiesSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-full bg-black/60 hover:bg-white text-white hover:text-[#0e164c] transition-all shadow border border-white/20"
+                        className="p-1.5 rounded-full bg-black/70 hover:bg-white text-white hover:text-black transition-all shadow border border-white/20"
                         title="Open Live Deployment"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -283,9 +282,9 @@ export function CaseStudiesSection() {
                   </div>
 
                   {/* Hover Quick Overlay Prompt */}
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 backdrop-blur-md text-white font-display text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                      <Maximize2 className="w-3.5 h-3.5 text-[#FFC400]" />
+                      <Maximize2 className="w-3.5 h-3.5 text-white" />
                       <span>OPEN LIGHTBOX</span>
                     </span>
                   </div>
@@ -294,24 +293,24 @@ export function CaseStudiesSection() {
 
               {/* Title & Category Below Thumbnail */}
               <div className="text-left mb-3">
-                <span className="text-[10px] font-mono tracking-widest text-[#F36700] uppercase font-bold block mb-1">
+                <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1">
                   {cs.category}
                 </span>
-                <h3 className="font-display font-black text-xl text-[#0e164c] uppercase tracking-tight leading-tight group-hover:text-[#F36700] transition-colors">
+                <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight transition-colors">
                   {cs.client}
                 </h3>
               </div>
 
               {/* Tagline & Info */}
               <div className="text-left mb-6 flex-1 flex flex-col justify-between">
-                <p className="text-xs sm:text-sm text-[#676767] font-normal leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed font-sans">
                   {cs.tagline}
                 </p>
 
                 {/* Metric pill row */}
-                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
-                  <span className="text-gray-500 font-sans">{cs.stats[0].label}</span>
-                  <span className="text-[#0e164c] font-metric font-black text-sm">{cs.stats[0].val}</span>
+                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span className="text-zinc-400 font-sans">{cs.stats[0].label}</span>
+                  <span className="text-white font-metric font-black text-sm">{cs.stats[0].val}</span>
                 </div>
               </div>
 
@@ -324,9 +323,9 @@ export function CaseStudiesSection() {
                     setSelectedCaseIndex(idx);
                     setIframeLoading(true);
                   }}
-                  className="flex-1 py-3 rounded-xl bg-[#0e164c] hover:bg-[#142161] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px] flex items-center justify-center gap-1.5 shadow-sm"
+                  className="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px] flex items-center justify-center gap-1.5 border border-white/15"
                 >
-                  <Maximize2 className="w-3.5 h-3.5 text-[#FFC400]" />
+                  <Maximize2 className="w-3.5 h-3.5 text-white" />
                   <span>VIEW LIGHTBOX</span>
                 </button>
                 <a
@@ -334,7 +333,7 @@ export function CaseStudiesSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sound.playPluck(190)}
-                  className="px-4 py-3 rounded-xl bg-[#F36700] hover:bg-[#e2560b] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px]"
+                  className="px-4 py-3 rounded-xl bg-white hover:bg-zinc-200 active:scale-95 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px] shadow-md"
                   title="Open Live Website"
                 >
                   <span>LIVE</span>
@@ -354,7 +353,7 @@ export function CaseStudiesSection() {
               setIframeLoading(true);
             }}
             type="button"
-            className="px-8 py-4 rounded-xl bg-[#F36700] hover:bg-[#e2560b] text-white font-display text-xs font-bold tracking-widest uppercase transition-all shadow-md hover:scale-105 active:scale-95 min-h-[48px] inline-flex items-center gap-2"
+            className="px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 min-h-[48px] inline-flex items-center gap-2"
           >
             <Maximize2 className="w-4 h-4" />
             <span>EXPLORE INTERACTIVE LIGHTBOX &gt;</span>
@@ -403,7 +402,7 @@ export function CaseStudiesSection() {
           </button>
 
           {/* Lightbox Modal Shell with Glassmorphism */}
-          <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col rounded-3xl bg-gradient-to-b from-white/[0.14] via-white/[0.07] to-[#0e164c]/90 backdrop-blur-3xl border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.4)] text-white overflow-hidden">
+          <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col rounded-3xl bg-gradient-to-b from-white/[0.14] via-[#121215]/95 to-[#09090b]/98 backdrop-blur-3xl border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.2)] text-white overflow-hidden">
             
             {/* 1. Frosted Glass Browser Bar (macOS Dots, URL Pill, Controls) */}
             <div className="px-4 sm:px-6 py-3.5 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex flex-wrap items-center justify-between gap-3 shrink-0">
@@ -427,7 +426,7 @@ export function CaseStudiesSection() {
                   />
                 </div>
 
-                <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono font-bold tracking-widest text-[#FFC400]">
+                <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono font-bold tracking-widest text-white">
                   <span>0{currentCase.id}</span>
                   <span className="text-white/40">/</span>
                   <span className="text-white/60">05</span>
@@ -455,8 +454,8 @@ export function CaseStudiesSection() {
                     }}
                     className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${
                       activeTab === "preview"
-                        ? "bg-[#F36700] text-white shadow"
-                        : "text-white/70 hover:text-white"
+                        ? "bg-white text-black shadow"
+                        : "text-zinc-400 hover:text-white"
                     }`}
                   >
                     Live Preview
@@ -469,8 +468,8 @@ export function CaseStudiesSection() {
                     }}
                     className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${
                       activeTab === "strategy"
-                        ? "bg-[#F36700] text-white shadow"
-                        : "text-white/70 hover:text-white"
+                        ? "bg-white text-black shadow"
+                        : "text-zinc-400 hover:text-white"
                     }`}
                   >
                     Strategy
@@ -522,7 +521,7 @@ export function CaseStudiesSection() {
                 <button
                   type="button"
                   onClick={() => setSelectedCaseIndex(null)}
-                  className="p-2 rounded-xl bg-white/10 hover:bg-[#F36700] border border-white/15 text-white transition-all active:scale-95"
+                  className="p-2 rounded-xl bg-white/10 hover:bg-white hover:text-black border border-white/15 text-white transition-all active:scale-95"
                   aria-label="Close Lightbox (Esc)"
                   title="Close (Esc)"
                 >
@@ -546,7 +545,7 @@ export function CaseStudiesSection() {
                           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                           <span className="font-bold text-white uppercase">{currentCase.client}</span>
                           <span className="text-white/40">•</span>
-                          <span className="text-[#FFC400] text-[11px]">{currentCase.heroStat}</span>
+                          <span className="text-white font-mono text-[11px]">{currentCase.heroStat}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <button
@@ -564,7 +563,7 @@ export function CaseStudiesSection() {
                             href={currentCase.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#FFC400] hover:underline flex items-center gap-1 text-[11px]"
+                            className="text-white hover:underline flex items-center gap-1 text-[11px]"
                           >
                             <span>Open Tab</span>
                             <ExternalLink className="w-3 h-3" />
@@ -573,10 +572,10 @@ export function CaseStudiesSection() {
                       </div>
 
                       {/* Interactive Iframe */}
-                      <div className="relative flex-1 w-full h-full bg-[#0e164c]/50">
+                      <div className="relative flex-1 w-full h-full bg-black">
                         {iframeLoading && (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#090e33]/90 backdrop-blur-md z-10">
-                            <div className="w-10 h-10 rounded-full border-2 border-white/20 border-t-[#F36700] animate-spin mb-3" />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
+                            <div className="w-10 h-10 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
                             <span className="font-mono text-xs text-white/70 tracking-wider">
                               CONNECTING TO LIVE VERCEL DEPLOYMENT...
                             </span>
@@ -602,10 +601,10 @@ export function CaseStudiesSection() {
                       </div>
 
                       {/* Iframe inside Mobile Frame */}
-                      <div className="relative flex-1 w-full h-full pt-8 pb-3 bg-[#0e164c]">
+                      <div className="relative flex-1 w-full h-full pt-8 pb-3 bg-black">
                         {iframeLoading && (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#090e33]/90 backdrop-blur-md z-10">
-                            <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-[#FFC400] animate-spin mb-2" />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
+                            <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin mb-2" />
                             <span className="font-mono text-[10px] text-white/70">
                               LOADING MOBILE VIEW...
                             </span>
@@ -636,20 +635,20 @@ export function CaseStudiesSection() {
                   <div className={`p-6 sm:p-8 rounded-2xl bg-gradient-to-r ${currentCase.bgGradient} border border-white/20 shadow-xl relative overflow-hidden`}>
                     <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
-                        <span className="text-xs font-mono font-bold tracking-widest text-[#FFC400] uppercase block mb-1">
+                        <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase block mb-1">
                           {currentCase.category}
                         </span>
                         <h3 className="font-display font-black text-2xl sm:text-4xl text-white uppercase leading-tight">
                           {currentCase.client}
                         </h3>
-                        <p className="mt-1 text-sm text-white/80 font-normal">
+                        <p className="mt-1 text-sm text-zinc-300 font-normal">
                           {currentCase.tagline}
                         </p>
                       </div>
 
                       <div className="shrink-0 px-4 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-center">
                         <span className="text-[10px] font-mono text-white/60 uppercase block">PRIMARY IMPACT</span>
-                        <span className="font-display font-black text-xl sm:text-2xl text-[#FFC400]">
+                        <span className="font-display font-black text-xl sm:text-2xl text-white">
                           {currentCase.heroStat}
                         </span>
                       </div>
@@ -663,7 +662,7 @@ export function CaseStudiesSection() {
                         key={idx}
                         className="p-4 sm:p-5 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/15 text-center shadow-md hover:border-white/30 transition-all"
                       >
-                        <div className="font-display font-black text-xl sm:text-3xl text-[#FFC400]">
+                        <div className="font-display font-black text-xl sm:text-3xl text-white">
                           {s.val}
                         </div>
                         <div className="text-[10px] sm:text-xs font-mono text-white/60 uppercase mt-1">
@@ -689,10 +688,10 @@ export function CaseStudiesSection() {
                     </div>
 
                     {/* Jugaad */}
-                    <div className="p-5 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/15 hover:border-[#FFC400]/40 transition-all flex flex-col">
+                    <div className="p-5 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/15 hover:border-white/40 transition-all flex flex-col">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="w-2 h-2 rounded-full bg-[#FFC400]" />
-                        <h4 className="font-display font-bold text-sm text-[#FFC400] uppercase">
+                        <span className="w-2 h-2 rounded-full bg-white" />
+                        <h4 className="font-display font-bold text-sm text-white uppercase">
                           02. Strategic Architecture (Jugaad)
                         </h4>
                       </div>
@@ -718,7 +717,7 @@ export function CaseStudiesSection() {
                   {/* Technology Stack Pills */}
                   <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-wrap items-center gap-2">
                     <div className="flex items-center gap-1.5 text-xs font-mono text-white/60 mr-2">
-                      <Code2 className="w-3.5 h-3.5 text-[#FFC400]" />
+                      <Code2 className="w-3.5 h-3.5 text-white" />
                       <span>TECH STACK:</span>
                     </div>
                     {currentCase.techStack.map((tech, tIdx) => (
@@ -752,11 +751,11 @@ export function CaseStudiesSection() {
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
                       selectedCaseIndex === cIdx
-                        ? "bg-white/20 text-white border border-[#FFC400] shadow-[0_0_15px_rgba(255,196,0,0.3)] scale-105"
+                        ? "bg-white text-black border border-white shadow-[0_0_15px_rgba(255,255,255,0.25)] scale-105"
                         : "bg-white/[0.06] hover:bg-white/[0.12] text-white/70 border border-white/10"
                     }`}
                   >
-                    <span className="text-[10px] text-[#FFC400]">0{cs.id}</span>
+                    <span className="text-[10px] opacity-70">0{cs.id}</span>
                     <span>{cs.client.split(" ")[0]}</span>
                   </button>
                 ))}
@@ -768,7 +767,17 @@ export function CaseStudiesSection() {
                   href={currentCase.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#F36700] hover:bg-[#e2560b] text-white text-xs font-bold uppercase tracking-wider shadow flex items-center justify-center gap-2 min-h-[42px] active:scale-95 transition-all"
+                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-wider shadow flex items-center justify-center gap-2 min-h-[42px] active:scale-95 transition-all"
+                >
+                  <span>LAUNCH LIVE SITE</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+
+                <a
+                  href={`https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20love%20the%20${encodeURIComponent(currentCase.client)}%20showcase%20and%20want%20to%20build%20a%20similar%20high-ROAS%20storefront.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white border border-white/20 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[42px] active:scale-95 transition-all"
                 >
                   <span>LAUNCH LIVE SITE</span>
                   <ExternalLink className="w-3.5 h-3.5" />

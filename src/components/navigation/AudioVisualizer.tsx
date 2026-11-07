@@ -114,32 +114,32 @@ export function AudioVisualizer() {
     <button
       onClick={toggleAudio}
       type="button"
-      className="group flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#0D0C12]/80 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 text-xs font-mono text-[#D4AF37]"
+      className="group flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 transition-all duration-300 text-xs font-mono text-zinc-300 hover:text-white"
       title={isPlaying ? "Mute Desi Ambient Beats" : "Play Desi Ambient Beats"}
       aria-label="Toggle ambient desi beats"
     >
       {/* 4 Animated Soundwave Bars */}
       <div className="flex items-end gap-[3px] h-3.5 w-3.5">
         <span
-          className={`w-[2.5px] bg-[#D4AF37] rounded-full transition-all duration-300 ${
+          className={`w-[2.5px] bg-white rounded-full transition-all duration-300 ${
             isPlaying ? "h-3.5 animate-pulse" : "h-1"
           }`}
           style={{ animationDuration: "0.6s" }}
         />
         <span
-          className={`w-[2.5px] bg-[#D4AF37] rounded-full transition-all duration-300 ${
+          className={`w-[2.5px] bg-white rounded-full transition-all duration-300 ${
             isPlaying ? "h-2.5 animate-pulse" : "h-1.5"
           }`}
           style={{ animationDuration: "0.4s" }}
         />
         <span
-          className={`w-[2.5px] bg-[#D4AF37] rounded-full transition-all duration-300 ${
+          className={`w-[2.5px] bg-white rounded-full transition-all duration-300 ${
             isPlaying ? "h-3.5 animate-pulse" : "h-1"
           }`}
           style={{ animationDuration: "0.8s" }}
         />
         <span
-          className={`w-[2.5px] bg-[#D4AF37] rounded-full transition-all duration-300 ${
+          className={`w-[2.5px] bg-white rounded-full transition-all duration-300 ${
             isPlaying ? "h-2 animate-pulse" : "h-1.5"
           }`}
           style={{ animationDuration: "0.5s" }}
@@ -151,7 +151,7 @@ export function AudioVisualizer() {
       </span>
 
       {isPlaying ? (
-        <Volume2 className="w-3.5 h-3.5 text-[#E11D48]" />
+        <Volume2 className="w-3.5 h-3.5 text-white" />
       ) : (
         <VolumeX className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
       )}
