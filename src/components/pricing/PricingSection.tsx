@@ -13,6 +13,7 @@ import {
 import { FiligreeCorner } from "@/components/common/Icons";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { sound } from "@/lib/sound";
+import { SpotlightCard } from "@/components/common/SpotlightCard";
 
 interface PricingSectionProps {
   onOpenKundli: () => void;
@@ -287,10 +288,12 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
               {retainers.map((tier) => {
                 return (
-                  <div
+                  <SpotlightCard
                     key={tier.id}
+                    spotlightColor={tier.isPopular ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
+                    borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
                     onMouseEnter={() => sound.playPluck(110)}
-                    className={`relative rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-xl ${
+                    className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-xl ${
                       tier.isPopular
                         ? "bg-[#16161b] border-2 border-white shadow-[0_0_40px_rgba(255,255,255,0.12)] lg:-translate-y-3"
                         : "bg-[#121215] border border-white/10 hover:border-white/25 hover:bg-[#18181d]"
@@ -365,7 +368,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       <span>Deploy {tier.name}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
-                  </div>
+                  </SpotlightCard>
                 );
               })}
             </div>

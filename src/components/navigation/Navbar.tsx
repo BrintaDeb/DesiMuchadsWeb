@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import {
   ChevronDown,
   Menu,
@@ -123,39 +124,39 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
   const portfolioProjects = [
     {
-      name: "Lionel P Restaurant",
-      tagline: "Fine Dining & Hospitality Web App",
-      metric: "+340% Lift",
-      href: "#karname",
-      liveUrl: "https://restaurant-web.vercel.app",
+      name: "VedaRoots Ayurveda",
+      tagline: "Classical Single-Estate Ayurveda",
+      metric: "+420% Organic",
+      href: "/demos/vedaroots-ayurveda",
+      liveUrl: "/demos/vedaroots-ayurveda",
     },
     {
-      name: "You & Me Photography",
-      tagline: "Luxury Brand & Creative Portfolio",
-      metric: "6.4x ROAS",
-      href: "#karname",
-      liveUrl: "https://you-me-less-features.vercel.app",
+      name: "Darbar Fine Watches",
+      tagline: "Bespoke Royal Mechanical Horology",
+      metric: "99 PageSpeed",
+      href: "/demos/darbar-fine-watches",
+      liveUrl: "/demos/darbar-fine-watches",
     },
     {
-      name: "Pet-First Multi-Species",
-      tagline: "D2C Healthcare & Calorie Planner",
+      name: "SnackNation Makhanas",
+      tagline: "D2C Clean-Label Superfoods",
       metric: "5.8x ROAS",
-      href: "#karname",
-      liveUrl: "https://pet-first-web.vercel.app",
+      href: "/demos/snacknation-makhanas",
+      liveUrl: "/demos/snacknation-makhanas",
     },
     {
-      name: "Fresh Eats Groceries",
-      tagline: "Quick-Commerce Next-Gen Delivery",
-      metric: "+480% Orders",
-      href: "#karname",
-      liveUrl: "https://fresheats-green.vercel.app",
+      name: "Mithai Magic Sweets",
+      tagline: "10-Minute Dark Store Ingestion",
+      metric: "8.4x Flash",
+      href: "/demos/mithaimagic-sweets",
+      liveUrl: "/demos/mithaimagic-sweets",
     },
     {
-      name: "Nest Services",
-      tagline: "Enterprise Facility & Maintenance CRM",
-      metric: "₹3.2Cr+ Pipeline",
-      href: "#karname",
-      liveUrl: "https://nestservices.in",
+      name: "Lionel P Boulangerie",
+      tagline: "French Patisserie & Dining",
+      metric: "+340% Lift",
+      href: "/demos/lionelp-restaurant",
+      liveUrl: "/demos/lionelp-restaurant",
     },
   ];
 
@@ -309,9 +310,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 {/* 2-Column Grid of 8 Services */}
                 <div className="grid grid-cols-2 gap-x-6 gap-y-3.5">
                   {AGENCY_SERVICES.map((srv) => (
-                    <a
+                    <Link
                       key={srv.id}
-                      href={srv.anchor}
+                      href={`/services/${srv.slug}`}
                       onClick={() => setActiveDropdown(null)}
                       className="group/item flex items-start gap-3.5 p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 transition-all"
                     >
@@ -326,7 +327,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                           {srv.shortDesc}
                         </span>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
 
@@ -454,7 +455,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               >
                 <div className="pb-2.5 mb-2 border-b border-white/10 flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 font-royal">
-                    5 Live Production Deployments
+                    16 Live Client Products
                   </span>
                   <a
                     href="#karname"
@@ -558,9 +559,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             {mobileAccordion === "services" && (
               <div className="p-3 bg-black/40 border-t border-white/10 space-y-2">
                 {AGENCY_SERVICES.map((s) => (
-                  <a
+                  <Link
                     key={s.id}
-                    href={s.anchor}
+                    href={`/services/${s.slug}`}
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center justify-between p-2 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white"
                   >
@@ -568,7 +569,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     <span className="text-[10px] text-white font-metric font-bold bg-white/10 px-2 py-0.5 rounded">
                       {s.metric}
                     </span>
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}

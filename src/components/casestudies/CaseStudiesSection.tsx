@@ -20,7 +20,22 @@ import {
   ArrowRight,
   Code2,
 } from "lucide-react";
+import Link from "next/link";
 import { sound } from "@/lib/sound";
+import { SpotlightCard } from "@/components/common/SpotlightCard";
+import { AGENCY_PROJECTS } from "@/data/projectsData";
+
+const FILTER_CATEGORIES = [
+  { id: "all", label: "All Work (16)" },
+  { id: "seo-sem", label: "SEO & SEM" },
+  { id: "performance-marketing", label: "Performance Marketing" },
+  { id: "lead-generation", label: "Lead Generation" },
+  { id: "social-media", label: "Social Media" },
+  { id: "ecommerce-services", label: "E-Commerce" },
+  { id: "quick-commerce", label: "Quick Commerce" },
+  { id: "web-development", label: "Web Development" },
+  { id: "packaging-label", label: "Packaging & Branding" },
+];
 
 export function CaseStudiesSection() {
   const [selectedCaseIndex, setSelectedCaseIndex] = useState<number | null>(null);
@@ -29,133 +44,12 @@ export function CaseStudiesSection() {
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [iframeLoading, setIframeLoading] = useState<boolean>(true);
 
-  const cases = [
-    {
-      id: 1,
-      client: "LionelP Restaurant",
-      tagline: "Artisanal French Patisserie & Fine Dining Storefront",
-      category: "E-Commerce & Hospitality Web App",
-      heroStat: "+340% RESERVATION LIFT",
-      liveUrl: "https://restaurant-web.vercel.app",
-      vercelUrl: "https://vercel.com/brinta-debs-projects/restaurant_web/CMmXJSKAqMWtrQQeaVvMQTJpRHPh",
-      thumbnail: "/projects/lionelp-thumb.jpg",
-      desc: "High-end culinary and bakery e-commerce experience designed for LionelP. Built with bespoke visual aesthetics, interactive gourmet product menus, and seamless table reservation flows.",
-      mushkil:
-        "Traditional boutique restaurant needing modern online ordering, menu showcase, and high-ticket private dining reservations without losing artisanal prestige.",
-      jugaad:
-        "Crafted a rich luxury visual storefront with smooth French gastronomy catalog, real-time table booking integration, and mobile-optimized ordering.",
-      nateeja:
-        "Scaled online reservations by +340%, doubled average catering order value, and established a signature digital brand presence.",
-      stats: [
-        { label: "Reservation Lift", val: "+340%" },
-        { label: "Average Order Value", val: "2.1x" },
-        { label: "Store Speed", val: "<650ms" },
-      ],
-      techStack: ["Next.js 14", "Tailwind CSS", "Vercel Edge", "Framer Motion", "TypeScript"],
-      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
-      accentColor: "#ffffff",
-    },
-    {
-      id: 2,
-      client: "YOU & ME Photography",
-      tagline: "Luxury Documentary Wedding & Destination Visual Stories",
-      category: "High-Ticket Creative & Brand Portfolio",
-      heroStat: "6.4x INBOUND ROAS",
-      liveUrl: "https://you-me-less-features.vercel.app",
-      vercelUrl: "https://vercel.com/brinta-debs-projects/you-me-less-features/9qY2XmMTKYTWcaFB6qBY4ERNXCwk",
-      thumbnail: "/projects/youme-thumb.jpg",
-      desc: "Cinematic visual storytelling portfolio for world-class destination wedding photographers. Designed with emotion-first typography, fluid media galleries, and high-converting client inquiry funnels.",
-      mushkil:
-        "Low inquiry conversion on generic social feeds and inability to command premium pricing for luxury global destination shoots.",
-      jugaad:
-        "Developed a cinematic editorial portfolio platform with high-contrast imagery, immersive documentary love story showcases, and seamless WhatsApp inquiry flow.",
-      nateeja:
-        "Achieved a +410% surge in qualified luxury wedding inquiries across Europe and India, booking out seasonal dates 8 months in advance.",
-      stats: [
-        { label: "Inbound Lead ROAS", val: "6.4x" },
-        { label: "Inquiry Growth", val: "+410%" },
-        { label: "Advance Sellout", val: "8 Months" },
-      ],
-      techStack: ["React", "Editorial UI", "Dynamic Galleries", "Vercel CDN", "TypeScript"],
-      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
-      accentColor: "#ffffff",
-    },
-    {
-      id: 3,
-      client: "Pet-First Multi-Species",
-      tagline: "Pet Wellness, Veterinary Pharmacy & Calorie Planner",
-      category: "D2C Healthcare & Subscription E-Commerce",
-      heroStat: "5.8x BLENDED ROAS",
-      liveUrl: "https://pet-first-web.vercel.app",
-      vercelUrl: "https://vercel.com/brinta-debs-projects/pet-first-web/3K3nPxYnWxHjhHdmA9DnjvJ2MVbf",
-      thumbnail: "/projects/petfirst-thumb.jpg",
-      desc: "Comprehensive pet-first health ecosystem for dogs, cats, birds, and small animals. Features an interactive pet nutrition calculator, digital health passport ID, and subscription essentials store.",
-      mushkil:
-        "Fragmented pet care market where pet parents struggled with customized nutrition calculations and recurring essentials replenishment.",
-      jugaad:
-        "Built a full-stack digital pet healthcare platform with interactive calorie & nutrition calculators, digital pet health ID cards, and subscription checkout.",
-      nateeja:
-        "Achieved 5.8x blended ROAS on paid acquisition funnels, 44% recurring repeat subscription rate, and over 45,000 active pet IDs created.",
-      stats: [
-        { label: "Blended ROAS", val: "5.8x" },
-        { label: "Subscription Repeat", val: "44%" },
-        { label: "Pet IDs Created", val: "45K+" },
-      ],
-      techStack: ["Next.js", "Nutrition Calculator Engine", "Tailwind CSS", "Vercel"],
-      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
-      accentColor: "#ffffff",
-    },
-    {
-      id: 4,
-      client: "FreshEats Organic Food",
-      tagline: "Fresh Organic Bowls & Direct-to-Consumer Food Delivery",
-      category: "QSR & Direct Food Delivery Web App",
-      heroStat: "+480% DIRECT ORDERS",
-      liveUrl: "https://food-website.vercel.app",
-      vercelUrl: "https://vercel.com/brinta-debs-projects/food-website/3MRZU3LuAVkxqMZAMyr4H2NJDAaU",
-      thumbnail: "/projects/fresheats-thumb.jpg",
-      desc: "High-speed digital ordering storefront engineered for healthy organic meal bowls, fresh salads, and rapid doorstep delivery.",
-      mushkil:
-        "High commission bleed from 3rd-party delivery aggregators and lack of direct customer brand loyalty.",
-      jugaad:
-        "Launched a lightning-fast direct-to-consumer food ordering web app with one-click dish customization and zero checkout friction.",
-      nateeja:
-        "Slashed aggregator commission loss by 65%, scaled direct customer orders by +480%, and achieved a 3.4x re-order frequency.",
-      stats: [
-        { label: "Direct Orders", val: "+480%" },
-        { label: "Aggregator Bleed", val: "-65%" },
-        { label: "Monthly Re-order", val: "3.4x" },
-      ],
-      techStack: ["Next.js 14", "Real-Time Cart", "Tailwind CSS", "Vercel Edge"],
-      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
-      accentColor: "#ffffff",
-    },
-    {
-      id: 5,
-      client: "NestServices Concierge",
-      tagline: "Premium Residential Concierge, Maintenance & Property Hub",
-      category: "Enterprise Real Estate & Property Services",
-      heroStat: "₹3.2Cr+ PIPELINE VALUE",
-      liveUrl: "https://nestservices-brinta-debs-projects.vercel.app",
-      vercelUrl: "https://vercel.com/brinta-debs-projects/nestservices/4Y8GS7NKxbCNVKpxWB5LX7E1ryo2",
-      thumbnail: "/projects/nestservices-thumb.jpg",
-      desc: "Enterprise home living and residential services hub providing on-demand maintenance, home concierge, and luxury property lifecycle management.",
-      mushkil:
-        "Unorganized local service vendors and lack of reliable digital booking for premium residential communities.",
-      jugaad:
-        "Engineered an enterprise-grade service portal with transparent tier pricing, instant slot scheduling, and real-time technician dispatch telemetry.",
-      nateeja:
-        "Captured ₹3.2Cr+ in closed property service contracts, with 98.4% verified customer satisfaction and multi-facility retainers.",
-      stats: [
-        { label: "Contract Pipeline", val: "₹3.2Cr+" },
-        { label: "Customer Satisfaction", val: "98.4%" },
-        { label: "Dispatch Response", val: "<15 Min" },
-      ],
-      techStack: ["Next.js", "Slot Scheduler", "Tailwind CSS", "Enterprise API", "Vercel"],
-      bgGradient: "from-[#18181c] via-[#121215] to-[#09090b]",
-      accentColor: "#ffffff",
-    },
-  ];
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const cases = AGENCY_PROJECTS;
+  const filteredCases =
+    selectedCategory === "all"
+      ? cases
+      : cases.filter((c) => c.serviceId === selectedCategory);
 
   const currentCase = selectedCaseIndex !== null ? cases[selectedCaseIndex] : null;
 
@@ -207,141 +101,178 @@ export function CaseStudiesSection() {
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20 text-left">
+        <div className="max-w-3xl mb-12 sm:mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5" />
-            <span>VERIFIED CLIENT WORK • 5 LIVE DEPLOYMENTS</span>
+            <span>VERIFIED CLIENT WORK • 16 HUMAN-GRADE CASE STUDIES</span>
           </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed font-sans">
-            Live web platforms, direct-to-consumer storefronts, and performance architectures engineered for growth. Click on any project card to launch the interactive glassmorphism lightbox.
+            Live web platforms, direct-to-consumer storefronts, and performance architectures engineered for growth. Filter by capability or click on any project card to inspect the interactive live lightbox and strategic dossier.
           </p>
         </div>
 
-        {/* 5-Tile Responsive Work Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {cases.map((cs, idx) => (
-            <div
-              key={cs.id}
-              className="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.06)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-white/10 border-t-white/20 bg-[#121215] hover:border-white/35 hover:bg-[#18181d]"
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 mb-12 overflow-x-auto pb-2">
+          {FILTER_CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => {
+                sound.playPluck(160);
+                setSelectedCategory(cat.id);
+              }}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all ${
+                selectedCategory === cat.id
+                  ? "bg-white text-black shadow-lg scale-105"
+                  : "bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10"
+              }`}
             >
-              {/* Browser Window Showcase Thumbnail */}
-              <div
-                className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/10 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col"
-                onClick={() => {
-                  sound.playChime();
-                  setSelectedCaseIndex(idx);
-                  setIframeLoading(true);
-                }}
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Responsive Work Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {filteredCases.map((cs) => {
+            const origIdx = cases.findIndex((c) => c.id === cs.id);
+            return (
+              <SpotlightCard
+                key={cs.id}
+                spotlightColor="rgba(255, 255, 255, 0.08)"
+                borderColor="rgba(255, 255, 255, 0.4)"
+                className="group rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.06)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-white/10 border-t-white/20 bg-[#121215] hover:border-white/35 hover:bg-[#18181d]"
               >
-                {/* Simulated Mini Browser Chrome Header */}
-                <div className="h-7 px-3 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-                  </div>
-                  <span className="text-zinc-400 truncate max-w-[140px]">
-                    {cs.liveUrl.replace("https://", "")}
-                  </span>
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                </div>
-
-                {/* Thumbnail Image Container with Zoom & Overlays */}
-                <div className="relative flex-1 w-full overflow-hidden bg-black">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={cs.thumbnail}
-                    alt={`${cs.client} Website Thumbnail`}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
-                  />
-
-                  {/* Gradient Glass Overlay on Bottom of Image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#121215]/90 via-transparent to-black/30 pointer-events-none" />
-
-                  {/* Top Badges: Hero Stat & External Link */}
-                  <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-full bg-white text-black font-metric text-[10px] font-black tracking-wider uppercase shadow-md pointer-events-auto">
-                      {cs.heroStat}
-                    </span>
-                    <div className="flex items-center gap-1.5 pointer-events-auto">
-                      <a
-                        href={cs.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-full bg-black/70 hover:bg-white text-white hover:text-black transition-all shadow border border-white/20"
-                        title="Open Live Deployment"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Hover Quick Overlay Prompt */}
-                  <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 backdrop-blur-md text-white font-display text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                      <Maximize2 className="w-3.5 h-3.5 text-white" />
-                      <span>OPEN LIGHTBOX</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Title & Category Below Thumbnail */}
-              <div className="text-left mb-3">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1">
-                  {cs.category}
-                </span>
-                <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight transition-colors">
-                  {cs.client}
-                </h3>
-              </div>
-
-              {/* Tagline & Info */}
-              <div className="text-left mb-6 flex-1 flex flex-col justify-between">
-                <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed font-sans">
-                  {cs.tagline}
-                </p>
-
-                {/* Metric pill row */}
-                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 font-sans">{cs.stats[0].label}</span>
-                  <span className="text-white font-metric font-black text-sm">{cs.stats[0].val}</span>
-                </div>
-              </div>
-
-              {/* Dual Action Buttons */}
-              <div className="flex items-center gap-2 pt-2">
-                <button
-                  type="button"
+                {/* Browser Window Showcase Thumbnail */}
+                <div
+                  className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/10 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col"
                   onClick={() => {
                     sound.playChime();
-                    setSelectedCaseIndex(idx);
+                    setSelectedCaseIndex(origIdx);
                     setIframeLoading(true);
                   }}
-                  className="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px] flex items-center justify-center gap-1.5 border border-white/15"
                 >
-                  <Maximize2 className="w-3.5 h-3.5 text-white" />
-                  <span>VIEW LIGHTBOX</span>
-                </button>
-                <a
-                  href={cs.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => sound.playPluck(190)}
-                  className="px-4 py-3 rounded-xl bg-white hover:bg-zinc-200 active:scale-95 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px] shadow-md"
-                  title="Open Live Website"
-                >
-                  <span>LIVE</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-          ))}
+                  {/* Simulated Mini Browser Chrome Header */}
+                  <div className="h-7 px-3 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                      <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                    </div>
+                    <span className="text-zinc-400 truncate max-w-[140px]">
+                      {cs.liveUrl.replace("https://", "")}
+                    </span>
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  </div>
+
+                  {/* Thumbnail Image Container with Zoom & Overlays */}
+                  <div className="relative flex-1 w-full overflow-hidden bg-black">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={cs.thumbnail}
+                      alt={`${cs.client} Website Thumbnail`}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                      loading="lazy"
+                    />
+
+                    {/* Gradient Glass Overlay on Bottom of Image */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#121215]/90 via-transparent to-black/30 pointer-events-none" />
+
+                    {/* Top Badges: Hero Stat & External Link */}
+                    <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="px-2.5 py-1 rounded-full bg-white text-black font-metric text-[10px] font-black tracking-wider uppercase shadow-md pointer-events-auto">
+                        {cs.heroStat}
+                      </span>
+                      <div className="flex items-center gap-1.5 pointer-events-auto">
+                        <a
+                          href={cs.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-1.5 rounded-full bg-black/70 hover:bg-white text-white hover:text-black transition-all shadow border border-white/20"
+                          title="Open Live Deployment"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Hover Quick Overlay Prompt */}
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 backdrop-blur-md text-white font-display text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <Maximize2 className="w-3.5 h-3.5 text-white" />
+                        <span>OPEN LIGHTBOX</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Title & Category Below Thumbnail */}
+                <div className="text-left mb-3">
+                  <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1">
+                    {cs.category}
+                  </span>
+                  <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight transition-colors">
+                    {cs.client}
+                  </h3>
+                </div>
+
+                {/* Tagline & Info */}
+                <div className="text-left mb-4 flex-1 flex flex-col justify-between">
+                  <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed font-sans">
+                    {cs.tagline}
+                  </p>
+
+                  {/* Metric pill row */}
+                  <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                    <span className="text-zinc-400 font-sans">{cs.stats[0]?.label || "Metric"}</span>
+                    <span className="text-white font-metric font-black text-sm">{cs.stats[0]?.val}</span>
+                  </div>
+                </div>
+
+                {/* Direct Link to Dedicated Case Study Page */}
+                <div className="mb-4 pt-2">
+                  <Link
+                    href={`/work/${cs.slug}`}
+                    className="text-xs font-mono font-bold text-amber-300 hover:text-white flex items-center gap-1 group/link transition-colors"
+                  >
+                    <span>Read Strategic Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Dual Action Buttons */}
+                <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playChime();
+                      setSelectedCaseIndex(origIdx);
+                      setIframeLoading(true);
+                    }}
+                    className="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px] flex items-center justify-center gap-1.5 border border-white/15"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5 text-white" />
+                    <span>VIEW LIGHTBOX</span>
+                  </button>
+                  <a
+                    href={cs.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playPluck(190)}
+                    className="px-4 py-3 rounded-xl bg-white hover:bg-zinc-200 active:scale-95 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px] shadow-md"
+                    title="Open Live Website"
+                  >
+                    <span>LIVE</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            );
+          })}
         </div>
 
         {/* Center Bottom Action Button */}
@@ -403,7 +334,7 @@ export function CaseStudiesSection() {
 
           {/* Lightbox Modal Shell with Glassmorphism */}
           <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col rounded-3xl bg-gradient-to-b from-white/[0.14] via-[#121215]/95 to-[#09090b]/98 backdrop-blur-3xl border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.2)] text-white overflow-hidden">
-            
+
             {/* 1. Frosted Glass Browser Bar (macOS Dots, URL Pill, Controls) */}
             <div className="px-4 sm:px-6 py-3.5 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex flex-wrap items-center justify-between gap-3 shrink-0">
               {/* Traffic Lights & Project Sequence Badge */}
@@ -427,16 +358,20 @@ export function CaseStudiesSection() {
                 </div>
 
                 <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono font-bold tracking-widest text-white">
-                  <span>0{currentCase.id}</span>
+                  <span>{currentCase.id < 10 ? `0${currentCase.id}` : currentCase.id}</span>
                   <span className="text-white/40">/</span>
-                  <span className="text-white/60">05</span>
+                  <span className="text-white/60">{filteredCases.length < 10 ? `0${filteredCases.length}` : filteredCases.length}</span>
                 </div>
               </div>
 
               {/* Center Simulated URL Bar */}
               <div className="flex-1 max-w-md hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-black/40 border border-white/15 text-xs font-mono text-white/80">
                 <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="truncate select-text">{currentCase.liveUrl.replace("https://", "")}</span>
+                <span className="truncate select-text">
+                  {currentCase.liveUrl.startsWith("/")
+                    ? `https://desimuchads.agency${currentCase.liveUrl}`
+                    : currentCase.liveUrl.replace("https://", "")}
+                </span>
                 <span className="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
                   SSL LIVE
                 </span>
@@ -452,11 +387,10 @@ export function CaseStudiesSection() {
                       sound.playPluck(140);
                       setActiveTab("preview");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${
-                      activeTab === "preview"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${activeTab === "preview"
                         ? "bg-white text-black shadow"
                         : "text-zinc-400 hover:text-white"
-                    }`}
+                      }`}
                   >
                     Live Preview
                   </button>
@@ -466,11 +400,10 @@ export function CaseStudiesSection() {
                       sound.playPluck(160);
                       setActiveTab("strategy");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${
-                      activeTab === "strategy"
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${activeTab === "strategy"
                         ? "bg-white text-black shadow"
                         : "text-zinc-400 hover:text-white"
-                    }`}
+                      }`}
                   >
                     Strategy
                   </button>
@@ -482,11 +415,10 @@ export function CaseStudiesSection() {
                     <button
                       type="button"
                       onClick={() => setDeviceMode("desktop")}
-                      className={`p-1.5 rounded-lg transition-all ${
-                        deviceMode === "desktop"
+                      className={`p-1.5 rounded-lg transition-all ${deviceMode === "desktop"
                           ? "bg-white/20 text-white"
                           : "text-white/50 hover:text-white"
-                      }`}
+                        }`}
                       title="Desktop View"
                     >
                       <Monitor className="w-4 h-4" />
@@ -494,11 +426,10 @@ export function CaseStudiesSection() {
                     <button
                       type="button"
                       onClick={() => setDeviceMode("mobile")}
-                      className={`p-1.5 rounded-lg transition-all ${
-                        deviceMode === "mobile"
+                      className={`p-1.5 rounded-lg transition-all ${deviceMode === "mobile"
                           ? "bg-white/20 text-white"
                           : "text-white/50 hover:text-white"
-                      }`}
+                        }`}
                       title="Mobile iPhone View"
                     >
                       <Smartphone className="w-4 h-4" />
@@ -532,7 +463,7 @@ export function CaseStudiesSection() {
 
             {/* 2. Main Lightbox Content Area */}
             <div className="relative flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8">
-              
+
               {/* TAB 1: LIVE INTERACTIVE PREVIEW */}
               {activeTab === "preview" && (
                 <div className="flex flex-col items-center justify-center min-h-[500px] h-full">
@@ -632,7 +563,7 @@ export function CaseStudiesSection() {
               {activeTab === "strategy" && (
                 <div className="space-y-6 animate-fade-in max-w-4xl mx-auto">
                   {/* Hero Gradient Header */}
-                  <div className={`p-6 sm:p-8 rounded-2xl bg-gradient-to-r ${currentCase.bgGradient} border border-white/20 shadow-xl relative overflow-hidden`}>
+                  <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#18181c] via-[#121215] to-[#09090b] border border-white/20 shadow-xl relative overflow-hidden">
                     <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
                         <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase block mb-1">
@@ -749,11 +680,10 @@ export function CaseStudiesSection() {
                       setSelectedCaseIndex(cIdx);
                       setIframeLoading(true);
                     }}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
-                      selectedCaseIndex === cIdx
+                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${selectedCaseIndex === cIdx
                         ? "bg-white text-black border border-white shadow-[0_0_15px_rgba(255,255,255,0.25)] scale-105"
                         : "bg-white/[0.06] hover:bg-white/[0.12] text-white/70 border border-white/10"
-                    }`}
+                      }`}
                   >
                     <span className="text-[10px] opacity-70">0{cs.id}</span>
                     <span>{cs.client.split(" ")[0]}</span>

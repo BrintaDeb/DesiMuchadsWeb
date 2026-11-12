@@ -3,6 +3,7 @@
 import React from "react";
 import { Zap, Target, Users, BarChart3, ArrowRight } from "lucide-react";
 import { sound } from "@/lib/sound";
+import { SpotlightCard } from "@/components/common/SpotlightCard";
 
 interface WhyChooseUsSectionProps {
   onOpenKundli: () => void;
@@ -61,23 +62,27 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
           {pillars.map((p, idx) => {
             const Icon = p.icon;
             return (
-              <div
+              <SpotlightCard
                 key={p.id}
+                spotlightColor="rgba(255, 255, 255, 0.08)"
+                borderColor="rgba(255, 255, 255, 0.4)"
                 onMouseEnter={() => sound.playPluck(130 + idx * 20)}
-                className="group relative rounded-2xl p-8 sm:p-10 bg-[#121215] border border-white/10 border-t-white/20 hover:border-white/35 hover:bg-[#18181d] shadow-xl hover:shadow-[0_0_30px_rgba(255,255,255,0.06)] transition-all duration-300"
+                className="group rounded-2xl p-8 sm:p-10 bg-[#121215] border border-white/10 border-t-white/20 hover:border-white/35 hover:bg-[#18181d] shadow-xl hover:shadow-[0_0_30px_rgba(255,255,255,0.06)] transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-white/30 group-hover:bg-white/10 transition-all">
-                  <Icon className="w-6 h-6 text-white" />
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:border-white/30 group-hover:bg-white/10 transition-all">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+
+                  <h3 className="font-display font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-tight mb-3">
+                    {p.title}
+                  </h3>
+
+                  <p className="text-sm text-zinc-300 font-normal leading-relaxed font-sans">
+                    {p.desc}
+                  </p>
                 </div>
-
-                <h3 className="font-display font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-tight mb-3">
-                  {p.title}
-                </h3>
-
-                <p className="text-sm text-zinc-300 font-normal leading-relaxed font-sans">
-                  {p.desc}
-                </p>
-              </div>
+              </SpotlightCard>
             );
           })}
         </div>

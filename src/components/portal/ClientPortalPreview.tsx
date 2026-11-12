@@ -182,11 +182,11 @@ export function ClientPortalPreview() {
                 </span>
                 <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                   <span className="text-[10px] font-mono text-zinc-400">Reel Script</span>
-                  <p className="font-bold text-white">"5 Wedding Saree Mistakes NRI Brides Make"</p>
+                  <p className="font-bold text-white">&ldquo;5 Wedding Saree Mistakes NRI Brides Make&rdquo;</p>
                 </div>
                 <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                   <span className="text-[10px] font-mono text-zinc-400">Meta Static</span>
-                  <p className="font-bold text-white">"Before vs After Pure Katan Silk Texture"</p>
+                  <p className="font-bold text-white">&ldquo;Before vs After Pure Katan Silk Texture&rdquo;</p>
                 </div>
               </div>
 
@@ -197,7 +197,7 @@ export function ClientPortalPreview() {
                 </span>
                 <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                   <span className="text-[10px] font-mono text-zinc-400">Studio Shoot</span>
-                  <p className="font-bold text-white">"Varanasi Loom Documentary B-Roll 4K"</p>
+                  <p className="font-bold text-white">&ldquo;Varanasi Loom Documentary B-Roll 4K&rdquo;</p>
                 </div>
               </div>
 
@@ -211,7 +211,7 @@ export function ClientPortalPreview() {
                     <span className="text-[10px] font-mono text-zinc-300">Needs Your Thumbs-Up</span>
                     <Flame className="w-3.5 h-3.5 text-white" />
                   </div>
-                  <p className="font-bold text-white">"Dilli Street Roast Viral Hook Cut v3"</p>
+                  <p className="font-bold text-white">&ldquo;Dilli Street Roast Viral Hook Cut v3&rdquo;</p>
                   <button className="w-full py-1.5 rounded-lg bg-white text-black text-[10px] font-mono font-bold hover:bg-zinc-200 transition-colors">
                     Approve Script (One-Click)
                   </button>
@@ -225,11 +225,11 @@ export function ClientPortalPreview() {
                 </span>
                 <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                   <span className="text-[10px] font-mono text-zinc-400">✦ 5.4x ROAS</span>
-                  <p className="font-bold text-white">"Bridal Kundli Quiz Funnel Hook"</p>
+                  <p className="font-bold text-white">&ldquo;Bridal Kundli Quiz Funnel Hook&rdquo;</p>
                 </div>
                 <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                   <span className="text-[10px] font-mono text-zinc-400">✦ 4.9x ROAS</span>
-                  <p className="font-bold text-white">"Organic Chaiwala Street Drama"</p>
+                  <p className="font-bold text-white">&ldquo;Organic Chaiwala Street Drama&rdquo;</p>
                 </div>
               </div>
             </div>
