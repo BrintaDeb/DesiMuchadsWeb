@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { SectionDivider } from "../common/SectionDivider";
-import { FiligreeCorner, MoustacheSVG } from "../common/Icons";
-import { Eye, Flame, Play, Sparkles, TrendingUp, Film, X, ExternalLink, ChevronLeft, ChevronRight, Maximize2, ShieldCheck, ArrowRight } from "lucide-react";
+import { Flame, Play, Film, X, Maximize2 } from "lucide-react";
 import { sound } from "@/lib/sound";
 
 export function BaiscopeShowcase() {
@@ -107,7 +106,7 @@ export function BaiscopeShowcase() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeVideo]);
+  }, [activeVideo, items.length]);
 
   return (
     <section id="baiscope" className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden border-t border-white/10">

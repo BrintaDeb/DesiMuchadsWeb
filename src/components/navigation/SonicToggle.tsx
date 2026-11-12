@@ -1,15 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { sound } from "@/lib/sound";
-import { Sparkles } from "lucide-react";
 
 export function SonicToggle() {
-  const [enabled, setEnabled] = useState(true);
-
-  useEffect(() => {
-    setEnabled(sound.getStatus());
-  }, []);
+  const [enabled, setEnabled] = useState(() => sound.getStatus());
 
   const handleToggle = () => {
     const newState = sound.toggle();

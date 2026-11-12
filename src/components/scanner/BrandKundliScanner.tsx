@@ -5,14 +5,9 @@ import { SectionDivider } from "../common/SectionDivider";
 import { FiligreeCorner, MoustacheSVG } from "../common/Icons";
 import {
   Search,
-  CheckCircle2,
   Lock,
-  MessageCircle,
   AlertTriangle,
-  Zap,
-  ShieldCheck,
-  TrendingUp,
-  Share2,
+  MessageCircle,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import confetti from "canvas-confetti";

@@ -6,23 +6,15 @@ import {
   ArrowRight,
   ExternalLink,
   CheckCircle2,
-  Sparkles,
-  Layers,
   ChevronRight,
-  Monitor,
-  Smartphone,
   Quote,
-  ShieldCheck,
-  TrendingUp,
   PhoneCall,
-  Flame,
 } from "lucide-react";
-import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
+import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
 import { KhadiNoiseOverlay } from "@/components/common/KhadiNoiseOverlay";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
-import { SpotlightCard } from "@/components/common/SpotlightCard";
 
 interface PageProps {
   params: Promise<{ slug: string }>;

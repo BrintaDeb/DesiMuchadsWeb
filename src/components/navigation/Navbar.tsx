@@ -24,6 +24,9 @@ import {
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { AGENCY_SERVICES } from "@/data/servicesData";
+import { AudioVisualizer } from "./AudioVisualizer";
+import { SonicToggle } from "./SonicToggle";
+import { CommandMenu } from "../common/CommandMenu";
 
 interface NavbarProps {
   onOpenKundli: () => void;
@@ -34,6 +37,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+  const [isCommandOpen, setIsCommandOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -58,6 +62,19 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Global Shortcut ⌘K / Ctrl+K
+  useEffect(() => {
+    const handleGlobalKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        sound.playPluck(160);
+        setIsCommandOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKey);
+    return () => window.removeEventListener("keydown", handleGlobalKey);
   }, []);
 
   // Close dropdown on Escape key
@@ -500,6 +517,30 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             Pricing
           </a>
 
+          {/* Quick Search & Command Palette (⌘K) */}
+          <button
+            onClick={() => {
+              sound.playPluck(160);
+              setIsCommandOpen(true);
+            }}
+            type="button"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            title="Open Quick Search & Command Palette (⌘K)"
+            aria-label="Search and quick actions"
+          >
+            <Search className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="hidden xl:inline text-[11px]">Search</span>
+            <kbd className="px-1.5 py-0.5 text-[10px] rounded bg-white/10 border border-white/20 text-zinc-300 font-mono">
+              ⌘K
+            </kbd>
+          </button>
+
+          {/* Sonic UI Effects Toggle */}
+          <SonicToggle />
+
+          {/* Indian Tanpura + Tabla Ambient Beats */}
+          <AudioVisualizer />
+
           {/* Signature Stark White Button */}
           <button
             onClick={() => {
@@ -507,7 +548,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               onOpenKundli();
             }}
             type="button"
-            className="px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 flex items-center gap-1.5 shrink-0"
           >
             <span>LET&apos;S TALK</span>
             <span className="text-sm font-bold">&gt;</span>
@@ -662,6 +703,26 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             Pricing
           </a>
 
+          {/* Mobile Audio & Command Tools */}
+          <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                sound.playPluck(160);
+                setIsCommandOpen(true);
+              }}
+              type="button"
+              className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 text-xs font-mono text-white border border-white/20 flex-1 justify-center"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span>Search (⌘K)</span>
+            </button>
+            <div className="flex items-center gap-2">
+              <SonicToggle />
+              <AudioVisualizer />
+            </div>
+          </div>
+
           {/* Mobile CTA */}
           <button
             onClick={() => {
@@ -676,6 +737,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           </button>
         </div>
       )}
+
+      {/* Global ⌘K Command Palette Modal */}
+      <CommandMenu
+        isOpen={isCommandOpen}
+        onClose={() => setIsCommandOpen(false)}
+        onOpenKundli={onOpenKundli}
+      />
     </header>
   );
 }

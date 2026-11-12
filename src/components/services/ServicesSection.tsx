@@ -15,7 +15,6 @@ import {
   Sparkles,
   CheckCircle2,
   Clock,
-  Layers,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
@@ -30,6 +29,32 @@ interface ServicesSectionProps {
 export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [expandedSpecs, setExpandedSpecs] = useState<Record<string, boolean>>({});
+  const [selectedStage, setSelectedStage] = useState<"all" | "early" | "scale" | "omnichannel">("all");
+
+  const stageConfigs: Record<string, { label: string; ids: string[]; badge: string }> = {
+    all: {
+      label: "All 8 Capabilities",
+      ids: AGENCY_SERVICES.map((s) => s.id),
+      badge: "FULL STACK",
+    },
+    early: {
+      label: "Seed to Early D2C (₹0–₹10L/mo)",
+      ids: ["seo-sem", "social-media", "web-development"],
+      badge: "FOUNDATION CORE",
+    },
+    scale: {
+      label: "Growth & Scale (₹10L–₹50L/mo)",
+      ids: ["performance-marketing", "ecommerce-services", "lead-generation"],
+      badge: "VELOCITY DRIVER",
+    },
+    omnichannel: {
+      label: "Omnichannel & Monopoly (₹50L+/mo)",
+      ids: ["quick-commerce", "packaging-label", "performance-marketing", "ecommerce-services"],
+      badge: "CATEGORY MONOPOLY",
+    },
+  };
+
+  const activeStageConfig = stageConfigs[selectedStage];
 
   const toggleSpecs = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -83,6 +108,32 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
           <p className="mt-5 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed max-w-2xl font-sans">
             We love digital. We’re experts in brand building experiences, full-funnel customer acquisition, quick-commerce velocity, and results-driven performance marketing with deep technical specifications.
           </p>
+
+          {/* Dynamic Brand Stage Filter Selector */}
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-mono text-zinc-400 mr-1">Filter by Stage:</span>
+            {(Object.keys(stageConfigs) as (keyof typeof stageConfigs)[]).map((stageKey) => {
+              const cfg = stageConfigs[stageKey];
+              const isSelected = selectedStage === stageKey;
+              return (
+                <button
+                  key={stageKey}
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(150);
+                    setSelectedStage(stageKey as typeof selectedStage);
+                  }}
+                  className={`px-3 py-1.5 rounded-full text-xs font-mono tracking-wide transition-all ${
+                    isSelected
+                      ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                      : "bg-[#121215] border border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
+                  }`}
+                >
+                  {cfg.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* 8 Capabilities Cards 4x2 Highlighted Panels Grid with Specular Spotlight */}
@@ -91,6 +142,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
             const isHovered = activeCard === item.id;
             const isExpanded = !!expandedSpecs[item.id];
             const elementId = item.anchor.replace("#", "");
+            const isStageMatch = activeStageConfig.ids.includes(item.id);
 
             return (
               <SpotlightCard
@@ -110,7 +162,9 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                 className={`group rounded-2xl p-6 sm:p-7 bg-[#121215] border border-white/10 border-t-white/25 transition-all duration-300 backdrop-blur-sm cursor-pointer scroll-mt-32 ${
                   isHovered
                     ? "border-white/40 bg-[#16161b] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.06)] -translate-y-1.5"
-                    : "hover:border-white/25"
+                    : isStageMatch
+                    ? "border-white/20"
+                    : "opacity-60 hover:opacity-100 hover:border-white/25"
                 }`}
               >
                 <div>
@@ -119,9 +173,16 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                     <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-white/30 group-hover:bg-white/10 transition-all">
                       {getServiceIcon(item.iconName)}
                     </div>
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-[9px] font-metric tracking-wider text-white uppercase font-bold">
-                      {item.metric}
-                    </span>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-[9px] font-metric tracking-wider text-white uppercase font-bold">
+                        {item.metric}
+                      </span>
+                      {selectedStage !== "all" && isStageMatch && (
+                        <span className="inline-block px-2 py-0.5 rounded-md bg-white text-black text-[8px] font-mono tracking-wider uppercase font-extrabold animate-pulse">
+                          {activeStageConfig.badge}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Title */}

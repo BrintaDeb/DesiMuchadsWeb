@@ -15,22 +15,24 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<ThemeMode>("raat");
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("desi_theme") as ThemeMode | null;
+      if (saved === "din" || saved === "raat") return saved;
+    }
+    return "raat";
+  });
 
   useEffect(() => {
-    const saved = localStorage.getItem("desi_theme") as ThemeMode | null;
-    if (saved === "din" || saved === "raat") {
-      setTheme(saved);
-      document.documentElement.setAttribute("data-theme", saved);
-      if (saved === "din") {
-        document.documentElement.classList.add("theme-din");
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.documentElement.classList.remove("theme-din");
-        document.documentElement.classList.add("dark");
-      }
+    document.documentElement.setAttribute("data-theme", theme);
+    if (theme === "din") {
+      document.documentElement.classList.add("theme-din");
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.remove("theme-din");
+      document.documentElement.classList.add("dark");
     }
-  }, []);
+  }, [theme]);
 
   const toggleTheme = (event?: React.MouseEvent) => {
     const nextTheme: ThemeMode = theme === "raat" ? "din" : "raat";

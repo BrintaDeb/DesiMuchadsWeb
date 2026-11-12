@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   X,
-  TrendingUp,
-  Sparkles,
-  CheckCircle2,
   ExternalLink,
   Globe,
   Monitor,
@@ -15,8 +12,6 @@ import {
   Lock,
   Maximize2,
   RefreshCw,
-  Layers,
-  ShieldCheck,
   ArrowRight,
   Code2,
 } from "lucide-react";
@@ -53,17 +48,17 @@ export function CaseStudiesSection() {
 
   const currentCase = selectedCaseIndex !== null ? cases[selectedCaseIndex] : null;
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     sound.playPluck(180);
     setIframeLoading(true);
     setSelectedCaseIndex((prev) => (prev !== null ? (prev + 1) % cases.length : 0));
-  };
+  }, [cases.length]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     sound.playPluck(150);
     setIframeLoading(true);
     setSelectedCaseIndex((prev) => (prev !== null ? (prev - 1 + cases.length) % cases.length : 0));
-  };
+  }, [cases.length]);
 
   // Keyboard navigation & body scroll lock
   useEffect(() => {
@@ -81,7 +76,7 @@ export function CaseStudiesSection() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedCaseIndex]);
+  }, [selectedCaseIndex, handleNext, handlePrev]);
 
   useEffect(() => {
     if (selectedCaseIndex !== null) {

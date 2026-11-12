@@ -3,11 +3,11 @@
 import React, { useState, useId } from "react";
 import {
   Calculator,
-  IndianRupee,
   Users,
   Eye,
   Check,
   Send,
+  Percent,
 } from "lucide-react";
 import { FiligreeCorner } from "@/components/common/Icons";
 import { SectionDivider } from "@/components/common/SectionDivider";
@@ -15,7 +15,10 @@ import { sound } from "@/lib/sound";
 
 export function RoiCalculator() {
   const budgetId = useId();
+  const aovId = useId();
   const [budget, setBudget] = useState(150000); // 1.5 Lakh default
+  const [aov, setAov] = useState(1800); // Average Order Value in INR
+  const [marginPercent, setMarginPercent] = useState(65); // Gross product margin
   const [industry, setIndustry] = useState("Fashion & D2C Apparel");
   const [objective, setObjective] = useState<"ecommerce" | "leads">("ecommerce");
 
@@ -38,21 +41,28 @@ export function RoiCalculator() {
         : selectedIndustry.roas * 1.15;
 
     const estimatedRevenue = Math.round(budget * roasMultiplier);
+    const estimatedCogs = Math.round(estimatedRevenue * ((100 - marginPercent) / 100));
+    const estimatedGrossProfit = estimatedRevenue - estimatedCogs;
+    const netProfit = estimatedGrossProfit - budget;
 
     const cpcEstimate = 14;
     const traffic = Math.round(budget / cpcEstimate);
-    const qualifiedConversions = Math.round(
-      traffic * selectedIndustry.conversionRate
-    );
+    const estimatedOrders = objective === "ecommerce" ? Math.max(1, Math.round(estimatedRevenue / aov)) : Math.round(traffic * selectedIndustry.conversionRate);
+    const cac = estimatedOrders > 0 ? Math.round(budget / estimatedOrders) : 0;
+    const breakEvenRoas = (100 / marginPercent).toFixed(2);
 
     const cpmEstimate = 180;
     const impressions = Math.round((budget / cpmEstimate) * 1000);
 
     return {
       estimatedRevenue,
+      estimatedCogs,
+      netProfit,
+      breakEvenRoas,
       roasMultiplier: roasMultiplier.toFixed(1),
       traffic,
-      qualifiedConversions,
+      estimatedOrders,
+      cac,
       impressions,
     };
   };
@@ -74,11 +84,12 @@ export function RoiCalculator() {
   const handleWhatsAppShare = () => {
     sound.playChime();
     const text = encodeURIComponent(
-      `Pranam Desi Muchads! I ran the Hisab-Kitab Simulator for ${industry} with ₹${formatNumber(
-        budget
-      )} ad budget. Projected Revenue: ₹${formatNumber(
-        metrics.estimatedRevenue
-      )} (${metrics.roasMultiplier}x ROAS). Let's review my media plan!`
+      `Pranam Desi Muchads! I ran the Hisab-Kitab Simulator for ${industry}:\n` +
+      `✦ Monthly Ad Fuel: ₹${formatNumber(budget)}\n` +
+      `✦ Projected Revenue: ₹${formatNumber(metrics.estimatedRevenue)} (${metrics.roasMultiplier}x ROAS)\n` +
+      `✦ Net Cashflow Profit: ₹${formatNumber(metrics.netProfit)}\n` +
+      `✦ Target CAC: ₹${formatNumber(metrics.cac)} across ${formatNumber(metrics.estimatedOrders)} Orders\n\n` +
+      `Let's structure our media plan and scale this!`
     );
     window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
   };
@@ -96,17 +107,20 @@ export function RoiCalculator() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 text-xs font-mono text-white mb-4">
             <Calculator className="w-3.5 h-3.5" />
-            <span>REAL-TIME AD-SPEND &amp; ROAS ESTIMATOR</span>
+            <span>REAL-TIME AD-SPEND &amp; UNIT ECONOMICS ENGINE</span>
           </div>
-          <h2 className="font-display font-black text-3xl sm:text-5xl tracking-tight text-white uppercase leading-tight">
-            Hisab-Kitab: Calculate Your Market Domination
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase">
+            No Speculation.{" "}
+            <span className="text-gradient-silver block mt-1">
+              Precision Unit Economics.
+            </span>
           </h2>
           <p className="mt-4 text-zinc-400 text-sm sm:text-base font-sans">
-            Dial in your ad budget, choose your sector, and see the exact high-ROAS returns we engineer with our battle-tested algorithms.
+            Adjust your monthly marketing budget, target AOV, and margin to project net revenue, orders, and true contribution profit with our calibrated performance formulas.
           </p>
         </div>
 
-        {/* The Calculator Box */}
+        {/* Calculator Card Container */}
         <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-[#121215] border border-white/15 border-t-white/25 backdrop-blur-2xl shadow-2xl">
           {/* Filigree Corner Accents */}
           <div className="absolute top-4 left-4 pointer-events-none opacity-40">
@@ -138,7 +152,10 @@ export function RoiCalculator() {
                   max="2500000"
                   step="25000"
                   value={budget}
-                  onChange={(e) => setBudget(Number(e.target.value))}
+                  onChange={(e) => {
+                    sound.playPluck(120);
+                    setBudget(Number(e.target.value));
+                  }}
                   className="w-full h-2.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-white"
                 />
 
@@ -149,7 +166,67 @@ export function RoiCalculator() {
                 </div>
               </div>
 
-              {/* Input 2: Industry Selector Pills */}
+              {/* Input 2: Average Order Value (AOV) & Margin Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label htmlFor={aovId} className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold">
+                      Target AOV
+                    </label>
+                    <span className="font-mono text-sm font-bold text-white">{formatINR(aov)}</span>
+                  </div>
+                  <input
+                    id={aovId}
+                    type="range"
+                    min="500"
+                    max="8000"
+                    step="100"
+                    value={aov}
+                    onChange={(e) => {
+                      sound.playPluck(130);
+                      setAov(Number(e.target.value));
+                    }}
+                    className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-white"
+                  />
+                  <div className="flex justify-between text-[10px] font-mono text-zinc-500 mt-1">
+                    <span>₹500</span>
+                    <span>₹8,000</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold">
+                      Gross Product Margin
+                    </span>
+                    <span className="font-mono text-sm font-bold text-white">{marginPercent}%</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {[50, 65, 80].map((pct) => (
+                      <button
+                        key={pct}
+                        type="button"
+                        onClick={() => {
+                          sound.playPluck(140);
+                          setMarginPercent(pct);
+                        }}
+                        className={`flex-1 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all ${
+                          marginPercent === pct
+                            ? "border-white bg-white text-black"
+                            : "border-white/10 bg-white/5 text-zinc-400 hover:text-white"
+                        }`}
+                      >
+                        {pct}%
+                      </button>
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-500 block mt-1">
+                    Break-Even ROAS: {metrics.breakEvenRoas}x
+                  </span>
+                </div>
+              </div>
+
+              {/* Input 3: Industry Selector Pills */}
               <div>
                 <label className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold block mb-3">
                   2. Select Your Industry Sector
@@ -161,7 +238,10 @@ export function RoiCalculator() {
                       <button
                         key={ind.name}
                         type="button"
-                        onClick={() => setIndustry(ind.name)}
+                        onClick={() => {
+                          sound.playPluck(150);
+                          setIndustry(ind.name);
+                        }}
                         className={`px-3 py-2.5 rounded-xl border text-xs font-mono font-medium transition-all text-left flex items-center justify-between ${
                           isSelected
                             ? "border-white bg-white text-black font-bold shadow-md"
@@ -176,7 +256,7 @@ export function RoiCalculator() {
                 </div>
               </div>
 
-              {/* Input 3: Primary Objective Toggle */}
+              {/* Input 4: Primary Objective Toggle */}
               <div>
                 <label className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold block mb-3">
                   3. Primary Campaign Objective
@@ -184,7 +264,10 @@ export function RoiCalculator() {
                 <div className="grid grid-cols-2 gap-3 p-1.5 rounded-2xl bg-zinc-900 border border-white/10">
                   <button
                     type="button"
-                    onClick={() => setObjective("ecommerce")}
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setObjective("ecommerce");
+                    }}
                     className={`py-3 px-4 rounded-xl text-xs font-mono font-bold transition-all ${
                       objective === "ecommerce"
                         ? "bg-white text-black shadow-md"
@@ -195,7 +278,10 @@ export function RoiCalculator() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setObjective("leads")}
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setObjective("leads");
+                    }}
                     className={`py-3 px-4 rounded-xl text-xs font-mono font-bold transition-all ${
                       objective === "leads"
                         ? "bg-white text-black shadow-md"
@@ -234,35 +320,48 @@ export function RoiCalculator() {
                   </span>
                 </div>
 
+                {/* Net Profit Cashflow Callout */}
+                <div className="mb-6 p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-[11px] font-mono text-zinc-400 block">Est. Net Profit (After Ads + COGS)</span>
+                    <span className="text-xl font-metric font-extrabold text-white">
+                      {formatINR(metrics.netProfit)}
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono text-emerald-400 font-bold bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                    +Profitable
+                  </span>
+                </div>
+
                 {/* Detailed Metric Rows */}
-                <div className="space-y-4">
+                <div className="space-y-3 font-mono text-xs">
                   <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
+                    <div className="flex items-center gap-2.5 text-zinc-300">
                       <Users className="w-4 h-4 text-white" />
-                      <span>{objective === "leads" ? "Projected Qualified Leads" : "Projected Orders"}</span>
+                      <span>{objective === "leads" ? "Projected Leads" : "Projected Orders"}</span>
                     </div>
-                    <span className="font-mono font-bold text-sm text-white">
-                      {formatNumber(metrics.qualifiedConversions)}+
+                    <span className="font-bold text-white">
+                      {formatNumber(metrics.estimatedOrders)}+
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
+                    <div className="flex items-center gap-2.5 text-zinc-300">
+                      <Percent className="w-4 h-4 text-white" />
+                      <span>Target Customer Acq. Cost (CAC)</span>
+                    </div>
+                    <span className="font-bold text-white">
+                      {formatINR(metrics.cac)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/10">
+                    <div className="flex items-center gap-2.5 text-zinc-300">
                       <Eye className="w-4 h-4 text-white" />
                       <span>Estimated Ad Impressions</span>
                     </div>
-                    <span className="font-mono font-bold text-sm text-white">
+                    <span className="font-bold text-white">
                       {formatNumber(metrics.impressions)}+
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
-                      <IndianRupee className="w-4 h-4 text-white" />
-                      <span>Estimated Return on Ad Spend</span>
-                    </div>
-                    <span className="font-mono font-bold text-sm text-white">
-                      {metrics.roasMultiplier}x ROAS
                     </span>
                   </div>
                 </div>

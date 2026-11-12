@@ -62,53 +62,53 @@ export function ThreeHeroCenterpiece() {
 
     container.appendChild(renderer.domElement);
 
-    // 2. High-End Studio Lighting Rig (Eliminates Dark Silhouette)
-    // Warm Ambient Light
-    const ambientLight = new THREE.AmbientLight(0xfff6ea, 1.8);
+    // 2. High-End Studio Lighting Rig (Liquid Platinum & Titanium Chrome Setup)
+    // Cool Neutral Ambient Light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    // Key Light (Warm Sunlight Gold from front-right)
-    const keyLight = new THREE.DirectionalLight(0xfffae0, 3.4);
+    // Key Light (Pure Diamond White from front-right)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 3.6);
     keyLight.position.set(3.5, 4.5, 6);
     scene.add(keyLight);
 
-    // Secondary Front Fill (Soft ivory bounce from front-left)
-    const fillLight = new THREE.DirectionalLight(0xffeedd, 2.2);
+    // Secondary Front Fill (Cool silver bounce from front-left)
+    const fillLight = new THREE.DirectionalLight(0xe4e4e7, 2.2);
     fillLight.position.set(-3.5, 2.5, 5);
     scene.add(fillLight);
 
-    // Marigold Rim Light (Sculpting outer edges & feather cuts from behind)
-    const rimLight = new THREE.DirectionalLight(0xf59e0b, 4.8);
+    // Liquid Platinum Rim Light (Razor-sharp edge highlights on feather bevels)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 5.4);
     rimLight.position.set(-4.5, -2.5, -3.5);
     scene.add(rimLight);
 
-    // Specular Glint Light (Top-down highlight)
-    const glintLight = new THREE.PointLight(0xffd700, 2.4, 15);
+    // Specular Glint Light (Top-down diamond highlight)
+    const glintLight = new THREE.PointLight(0xffffff, 2.8, 15);
     glintLight.position.set(0, 3.5, 3.5);
     scene.add(glintLight);
 
-    // Warm Terracotta Ground Fill
-    const groundFill = new THREE.PointLight(0xc84b31, 1.5, 12);
+    // Deep Obsidian Ground Bounce (Rich velvety contrast)
+    const groundFill = new THREE.PointLight(0x27272a, 1.8, 12);
     groundFill.position.set(0, -3.5, 2.5);
     scene.add(groundFill);
 
-    // 3. PBR Brushed-Gold Materials
-    const goldPBR = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xe5a83b), // Official Desi Muchads Warm Golden Ochre
-      metalness: 0.88,
-      roughness: 0.18,
+    // 3. PBR Liquid Platinum & Polished Titanium Chrome Materials
+    const platinumPBR = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(0xf4f4f5), // Pure Platinum Silver
+      metalness: 0.95,
+      roughness: 0.12,
     });
 
-    const quillGoldPBR = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xf5de88), // Polished highlight gold for inner quills
-      metalness: 0.94,
-      roughness: 0.14,
+    const quillChromePBR = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(0xffffff), // Mirror-Polished High-Specular Chrome
+      metalness: 0.98,
+      roughness: 0.08,
     });
 
-    const brassDarkPBR = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(0xb38f26),
+    const obsidianPBR = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(0x27272a), // Matte Obsidian Brushed Titanium
       metalness: 0.90,
-      roughness: 0.24,
+      roughness: 0.22,
     });
 
     // 4. Root & Moustache Groups
@@ -135,9 +135,9 @@ export function ThreeHeroCenterpiece() {
     const leftQuillGeo = new THREE.ExtrudeGeometry(leftQuillShape, extrudeSettings);
     const rightQuillGeo = new THREE.ExtrudeGeometry(rightQuillShape, extrudeSettings);
 
-    const bodyMesh = new THREE.Mesh(bodyGeo, goldPBR);
-    const leftQuillMesh = new THREE.Mesh(leftQuillGeo, quillGoldPBR);
-    const rightQuillMesh = new THREE.Mesh(rightQuillGeo, quillGoldPBR);
+    const bodyMesh = new THREE.Mesh(bodyGeo, platinumPBR);
+    const leftQuillMesh = new THREE.Mesh(leftQuillGeo, quillChromePBR);
+    const rightQuillMesh = new THREE.Mesh(rightQuillGeo, quillChromePBR);
 
     // Subtly offset the inner quills in Z for extra dimensional depth
     leftQuillMesh.position.z = 0.04;
@@ -181,8 +181,8 @@ export function ThreeHeroCenterpiece() {
     ];
 
     coinConfigs.forEach((cfg) => {
-      const coinMesh = new THREE.Mesh(coinGeo, goldPBR);
-      const innerMesh = new THREE.Mesh(coinInnerGeo, brassDarkPBR);
+      const coinMesh = new THREE.Mesh(coinGeo, platinumPBR);
+      const innerMesh = new THREE.Mesh(coinInnerGeo, obsidianPBR);
       coinMesh.add(innerMesh);
 
       rootGroup.add(coinMesh);
@@ -309,9 +309,9 @@ export function ThreeHeroCenterpiece() {
       rightQuillGeo.dispose();
       coinGeo.dispose();
       coinInnerGeo.dispose();
-      goldPBR.dispose();
-      quillGoldPBR.dispose();
-      brassDarkPBR.dispose();
+      platinumPBR.dispose();
+      quillChromePBR.dispose();
+      obsidianPBR.dispose();
     };
   }, []);
 
@@ -319,8 +319,8 @@ export function ThreeHeroCenterpiece() {
   if (!webGlSupported) {
     return (
       <div className="relative my-4 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#E5A83B]/20 blur-3xl rounded-full scale-125" />
-        <MoustacheSVG className="relative z-10 w-44 sm:w-64 h-20 sm:h-28 text-[#E5A83B] drop-shadow-[0_0_30px_rgba(229,168,59,0.5)] transform-gpu hover:scale-105 transition-transform" />
+        <div className="absolute inset-0 bg-white/10 blur-3xl rounded-full scale-125" />
+        <MoustacheSVG className="relative z-10 w-44 sm:w-64 h-20 sm:h-28 text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] transform-gpu hover:scale-105 transition-transform" />
       </div>
     );
   }

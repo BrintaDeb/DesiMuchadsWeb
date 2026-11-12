@@ -7,6 +7,7 @@ export function AudioVisualizer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const masterGainRef = useRef<GainNode | null>(null);
+  const oscillatorsRef = useRef<OscillatorNode[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const toggleAudio = async () => {
@@ -30,6 +31,15 @@ export function AudioVisualizer() {
         master.connect(ctx.destination);
         masterGainRef.current = master;
 
+        // Clear any old oscillators
+        oscillatorsRef.current.forEach((osc) => {
+          try {
+            osc.stop();
+            osc.disconnect();
+          } catch {}
+        });
+        oscillatorsRef.current = [];
+
         // Indian Tanpura Chord: Root D2 (73.4Hz), Fifth A2 (110Hz), Octave D3 (146.8Hz)
         const freqs = [73.42, 110.0, 146.83, 220.0];
         freqs.forEach((freq, idx) => {
@@ -52,6 +62,7 @@ export function AudioVisualizer() {
           filter.connect(oscGain);
           oscGain.connect(master);
           osc.start();
+          oscillatorsRef.current.push(osc);
         });
 
         // Gentle rhythmic beat simulation
@@ -81,13 +92,20 @@ export function AudioVisualizer() {
         if (masterGainRef.current && audioCtxRef.current) {
           masterGainRef.current.gain.linearRampToValueAtTime(
             0.001,
-            audioCtxRef.current.currentTime + 0.4
+            audioCtxRef.current.currentTime + 0.35
           );
           setTimeout(() => {
+            oscillatorsRef.current.forEach((osc) => {
+              try {
+                osc.stop();
+                osc.disconnect();
+              } catch {}
+            });
+            oscillatorsRef.current = [];
             if (audioCtxRef.current) {
               audioCtxRef.current.suspend();
             }
-          }, 450);
+          }, 380);
         }
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
@@ -104,6 +122,13 @@ export function AudioVisualizer() {
   useEffect(() => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      oscillatorsRef.current.forEach((osc) => {
+        try {
+          osc.stop();
+          osc.disconnect();
+        } catch {}
+      });
+      oscillatorsRef.current = [];
       if (audioCtxRef.current) {
         audioCtxRef.current.close().catch(() => {});
       }

@@ -45,10 +45,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
     return () => clearInterval(interval);
   }, [onComplete]);
 
-  // SVG stroke-dash calculations for 600px path length
-  const pathTotalLength = 600;
-  const strokeOffset = pathTotalLength - (pathTotalLength * progress) / 100;
-
   return (
     <AnimatePresence>
       {!isDone ? (

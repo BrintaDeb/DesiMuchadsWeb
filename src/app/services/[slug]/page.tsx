@@ -164,9 +164,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
 
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-white font-mono text-xs font-bold tracking-widest uppercase mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>{service.metric}</span>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shadow-inner">
+                {getServiceIcon(service.iconName)}
+              </div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-white font-mono text-xs font-bold tracking-widest uppercase">
+                <Sparkles className="w-3.5 h-3.5 text-white" />
+                <span>{service.metric}</span>
+              </div>
             </div>
 
             <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none mb-6">
