@@ -284,11 +284,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </div>
 
             {/* 3. Nateeja */}
-            <div className="rounded-3xl p-8 bg-[#131318] border border-amber-500/20 shadow-xl space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-mono text-xs font-bold text-amber-400">
+            <div className="rounded-3xl p-8 bg-[#15151a] border border-white/25 shadow-xl space-y-4">
+              <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/30 flex items-center justify-center font-mono text-xs font-bold text-white shadow-[0_0_15px_rgba(255,255,255,0.15)]">
                 03
               </div>
-              <span className="font-mono text-xs font-black uppercase tracking-widest text-amber-400 block">
+              <span className="font-mono text-xs font-black uppercase tracking-widest text-white block">
                 THE NATEEJA (RESULTS)
               </span>
               <p className="text-sm text-zinc-300 leading-relaxed font-sans">

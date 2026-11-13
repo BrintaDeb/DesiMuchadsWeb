@@ -548,7 +548,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               onOpenKundli();
             }}
             type="button"
-            className="px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 flex items-center gap-1.5 shrink-0"
+            className="btn-luxury-shine px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 flex items-center gap-1.5 shrink-0"
           >
             <span>LET&apos;S TALK</span>
             <span className="text-sm font-bold">&gt;</span>

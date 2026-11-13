@@ -159,12 +159,14 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                   sound.playChime();
                   onOpenKundli();
                 }}
-                className={`group rounded-2xl p-6 sm:p-7 bg-[#121215] border border-white/10 border-t-white/25 transition-all duration-300 backdrop-blur-sm cursor-pointer scroll-mt-32 ${
+                className={`group shimmer-card rounded-2xl p-6 sm:p-7 bg-[#121215] border transition-all duration-300 backdrop-blur-sm cursor-pointer scroll-mt-32 ${
                   isHovered
-                    ? "border-white/40 bg-[#16161b] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.06)] -translate-y-1.5"
-                    : isStageMatch
-                    ? "border-white/20"
-                    : "opacity-60 hover:opacity-100 hover:border-white/25"
+                    ? "border-white/50 bg-[#16161b] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)] -translate-y-1.5"
+                    : selectedStage !== "all" && isStageMatch
+                    ? "border-white/40 bg-[#15151a] shadow-[0_0_25px_rgba(255,255,255,0.06)]"
+                    : selectedStage !== "all"
+                    ? "border-white/10 opacity-50 hover:opacity-100 hover:border-white/30"
+                    : "border-white/10 border-t-white/25 hover:border-white/30"
                 }`}
               >
                 <div>

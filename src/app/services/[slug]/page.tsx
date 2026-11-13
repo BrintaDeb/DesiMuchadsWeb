@@ -189,7 +189,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* Turnaround & SLA Strip */}
             <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-white/10">
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                <Clock className="w-4 h-4 text-amber-400" />
+                <Clock className="w-4 h-4 text-white" />
                 <span>{service.specs.turnaround}</span>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
@@ -204,14 +204,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 href="https://wa.me/919876543210?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
                 target="_blank"
                 rel="noreferrer"
-                className="px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 inline-flex items-center gap-2"
+                className="btn-luxury-shine px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 inline-flex items-center gap-2"
               >
                 <span>CLAIM FREE STRATEGY AUDIT</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="#demo-projects"
-                className="px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all border border-white/15"
+                className="btn-luxury-shine px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all border border-white/15"
               >
                 Explore Demo Projects ({matchedProjects.length})
               </a>
@@ -222,7 +222,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         {/* Section 2: Strategic Edge & Philosophy */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-5 space-y-4">
-            <span className="font-mono text-xs uppercase tracking-widest text-amber-400 font-bold block">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block">
               THE MUCHADS ADVANTAGE
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase leading-tight">
@@ -232,7 +232,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <div className="lg:col-span-7 rounded-2xl p-8 bg-[#121215] border border-white/10 text-zinc-300 leading-relaxed font-sans text-sm sm:text-base space-y-4 shadow-xl">
             <p>{service.philosophy}</p>
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
-              <Sparkles className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <Sparkles className="w-5 h-5 text-white shrink-0 mt-0.5" />
               <div className="text-xs text-zinc-300">
                 <strong className="text-white block font-sans text-sm mb-1">
                   Ideal Client Profile:
@@ -261,7 +261,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 className="rounded-2xl p-6 bg-[#121215] border border-white/10 border-t-white/25 flex flex-col justify-between hover:border-white/30 hover:bg-[#16161b] transition-all"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/15 flex items-center justify-center font-mono text-xs font-black text-amber-400 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/15 flex items-center justify-center font-mono text-xs font-black text-white mb-4">
                     {step.step}
                   </div>
                   <h3 className="font-display font-black text-base text-white uppercase mb-2">
@@ -340,7 +340,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div id="demo-projects" className="space-y-8 scroll-mt-24">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-white font-mono text-xs uppercase tracking-wider mb-2">
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
+              <Layers className="w-3.5 h-3.5 text-white" />
               <span>REAL CLIENT PORTFOLIO SHOWCASE</span>
             </div>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
@@ -516,7 +516,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 className="rounded-2xl p-6 bg-[#121215] border border-white/10 space-y-2"
               >
                 <div className="flex items-start gap-3">
-                  <HelpCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <HelpCircle className="w-4 h-4 text-white shrink-0 mt-0.5" />
                   <h3 className="font-display font-bold text-base text-white">
                     {faq.q}
                   </h3>

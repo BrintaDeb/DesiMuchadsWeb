@@ -215,3 +215,80 @@ body {
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
 }
 
+/* Subtle Animated Shimmer Beam for Highlighted Cards */
+.shimmer-card {
+  position: relative;
+}
+
+.shimmer-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.shimmer-card:hover::before {
+  opacity: 1;
+}
+
+/* Luxury Button Light-Sweep */
+.btn-luxury-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-luxury-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: all 0.75s ease-in-out;
+}
+
+.btn-luxury-shine:hover::after {
+  left: 130%;
+}
+
+/* Connected Glowing Timeline Connector */
+.timeline-stem {
+  position: relative;
+}
+
+.timeline-stem::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  bottom: -2rem;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+}
+
+

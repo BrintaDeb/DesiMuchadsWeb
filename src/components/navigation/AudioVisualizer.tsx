@@ -139,7 +139,11 @@ export function AudioVisualizer() {
     <button
       onClick={toggleAudio}
       type="button"
-      className="group flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 transition-all duration-300 text-xs font-mono text-zinc-300 hover:text-white"
+      className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-full border transition-all duration-300 text-xs font-mono ${
+        isPlaying
+          ? "border-white/60 bg-white/15 text-white shadow-[0_0_18px_rgba(255,255,255,0.15)]"
+          : "border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-zinc-300 hover:text-white"
+      }`}
       title={isPlaying ? "Mute Desi Ambient Beats" : "Play Desi Ambient Beats"}
       aria-label="Toggle ambient desi beats"
     >

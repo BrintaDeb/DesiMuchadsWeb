@@ -149,7 +149,7 @@ export function ClientPortalPreview() {
         </div>
 
         {/* The Portal Mockup Window */}
-        <div className="relative rounded-3xl p-6 sm:p-10 bg-[#121215] border border-white/15 border-t-white/30 shadow-[0_25px_80px_rgba(0,0,0,0.9)] backdrop-blur-2xl">
+        <div className="relative shimmer-card rounded-3xl p-6 sm:p-10 bg-[#121215] border border-white/15 border-t-white/30 shadow-[0_25px_80px_rgba(0,0,0,0.9)] backdrop-blur-2xl">
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
             <FiligreeCorner className="w-4 h-4 text-white" position="top-left" />
@@ -368,7 +368,7 @@ export function ClientPortalPreview() {
                     <button
                       onClick={handleApproveScript}
                       type="button"
-                      className="w-full py-2 rounded-lg bg-white text-black text-[11px] font-mono font-bold hover:bg-zinc-200 transition-all active:scale-95 shadow-[0_0_15px_rgba(255,255,255,0.2)] flex items-center justify-center gap-1.5"
+                      className="btn-luxury-shine w-full py-2 rounded-lg bg-white text-black text-[11px] font-mono font-bold hover:bg-zinc-200 transition-all active:scale-95 shadow-[0_0_15px_rgba(255,255,255,0.2)] flex items-center justify-center gap-1.5"
                     >
                       <Sparkles className="w-3.5 h-3.5 text-black" />
                       <span>Approve Script (One-Click)</span>

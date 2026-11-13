@@ -321,7 +321,7 @@ export function RoiCalculator() {
                 </div>
 
                 {/* Net Profit Cashflow Callout */}
-                <div className="mb-6 p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
+                <div className="mb-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
                   <div>
                     <span className="text-[11px] font-mono text-zinc-400 block">Est. Net Profit (After Ads + COGS)</span>
                     <span className="text-xl font-metric font-extrabold text-white">
@@ -331,6 +331,45 @@ export function RoiCalculator() {
                   <span className="text-xs font-mono text-emerald-400 font-bold bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-500/30">
                     +Profitable
                   </span>
+                </div>
+
+                {/* Visual Unit Economics Allocation Bar */}
+                <div className="mb-6 p-4 rounded-2xl bg-black/40 border border-white/10 space-y-2">
+                  <div className="flex items-center justify-between font-mono text-[11px] text-zinc-400">
+                    <span>Revenue Allocation Split</span>
+                    <span>100% Topline</span>
+                  </div>
+                  <div className="w-full h-2.5 rounded-full overflow-hidden flex bg-zinc-800">
+                    <div
+                      className="bg-zinc-600 h-full transition-all duration-300"
+                      style={{ width: `${Math.round((metrics.estimatedCogs / metrics.estimatedRevenue) * 100)}%` }}
+                      title={`Product COGS: ${Math.round((metrics.estimatedCogs / metrics.estimatedRevenue) * 100)}%`}
+                    />
+                    <div
+                      className="bg-zinc-400 h-full transition-all duration-300"
+                      style={{ width: `${Math.round((budget / metrics.estimatedRevenue) * 100)}%` }}
+                      title={`Ad Fuel: ${Math.round((budget / metrics.estimatedRevenue) * 100)}%`}
+                    />
+                    <div
+                      className="bg-white h-full transition-all duration-300 shadow-[0_0_10px_white]"
+                      style={{ width: `${Math.max(5, Math.round((metrics.netProfit / metrics.estimatedRevenue) * 100))}%` }}
+                      title={`Net Profit: ${Math.round((metrics.netProfit / metrics.estimatedRevenue) * 100)}%`}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 pt-1">
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded bg-zinc-600" />
+                      <span>COGS ({100 - marginPercent}%)</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded bg-zinc-400" />
+                      <span>Ads ({Math.round((budget / metrics.estimatedRevenue) * 100)}%)</span>
+                    </span>
+                    <span className="flex items-center gap-1 text-white font-bold">
+                      <span className="w-2 h-2 rounded bg-white shadow-[0_0_6px_white]" />
+                      <span>Profit ({Math.round((metrics.netProfit / metrics.estimatedRevenue) * 100)}%)</span>
+                    </span>
+                  </div>
                 </div>
 
                 {/* Detailed Metric Rows */}
@@ -372,7 +411,7 @@ export function RoiCalculator() {
                 <button
                   type="button"
                   onClick={handleWhatsAppShare}
-                  className="w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2.5 active:scale-95"
+                  className="btn-luxury-shine w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2.5 active:scale-95"
                 >
                   <Send className="w-4 h-4 text-black" />
                   <span>CLAIM THIS GROWTH RUNWAY &gt;</span>

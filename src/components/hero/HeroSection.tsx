@@ -74,7 +74,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                   onOpenKundli();
                 }}
                 type="button"
-                className="px-8 py-3.5 sm:py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs sm:text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center justify-center gap-2 group active:scale-95 min-h-[48px]"
+                className="btn-luxury-shine px-8 py-3.5 sm:py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs sm:text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center justify-center gap-2 group active:scale-95 min-h-[48px]"
               >
                 <span>LET&apos;S TALK</span>
                 <span className="text-base group-hover:translate-x-1 transition-transform">&gt;</span>
@@ -82,7 +82,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
               <a
                 href="#karname"
-                className="px-8 py-3.5 sm:py-4 rounded-xl border border-white/20 hover:border-white text-white font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all hover:bg-white/5 flex items-center justify-center min-h-[48px]"
+                className="btn-luxury-shine px-8 py-3.5 sm:py-4 rounded-xl border border-white/20 hover:border-white text-white font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all hover:bg-white/5 flex items-center justify-center min-h-[48px]"
               >
                 OUR WORK
               </a>
@@ -106,11 +106,21 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
           </div>
 
           {/* Right Column: 3D Centerpiece on Matte Obsidian */}
-          <div className="lg:col-span-5 flex items-center justify-center relative mt-4 lg:mt-0">
-            <div className="w-full max-w-sm sm:max-w-lg relative flex items-center justify-center">
-              {/* Subtle halo ring behind 3D object */}
-              <div className="absolute inset-4 rounded-full bg-white/5 blur-3xl opacity-30 pointer-events-none" />
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative mt-4 lg:mt-0">
+            <div className="w-full max-w-sm sm:max-w-lg relative flex flex-col items-center justify-center">
+              {/* Rotating subtle halo ring behind 3D object */}
+              <div
+                className="absolute inset-0 rounded-full border border-white/10 animate-spin-slow opacity-30 pointer-events-none"
+                style={{ animationDuration: "50s" }}
+              />
+              <div className="absolute inset-4 rounded-full bg-white/5 blur-3xl opacity-40 pointer-events-none" />
               <ThreeHeroCenterpiece />
+              <div className="flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm pointer-events-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+                  Interactive 3D Moustache • Drag to Tilt
+                </span>
+              </div>
             </div>
           </div>
         </div>
