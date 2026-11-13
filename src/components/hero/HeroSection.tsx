@@ -114,11 +114,13 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                 style={{ animationDuration: "50s" }}
               />
               <div className="absolute inset-4 rounded-full bg-white/5 blur-3xl opacity-40 pointer-events-none" />
+              {/* Subtle Radial Pedestal Glow */}
+              <div className="absolute -bottom-4 w-3/4 h-8 bg-white/10 blur-xl rounded-full pointer-events-none" />
               <ThreeHeroCenterpiece />
               <div className="flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm pointer-events-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-                  Interactive 3D Moustache • Drag to Tilt
+                  Interactive 3D Moustache • Drag to Tilt • Tap to Spin
                 </span>
               </div>
             </div>

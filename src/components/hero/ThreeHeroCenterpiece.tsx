@@ -21,34 +21,32 @@ function createShapeFromPoints(pts: [number, number][]): THREE.Shape {
 
 export function ThreeHeroCenterpiece() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [webGlSupported, setWebGlSupported] = useState(true);
-
-  useEffect(() => {
-    const container = mountRef.current;
-    if (!container) return;
-
-    // Check WebGL availability
+  const [webGlSupported] = useState(() => {
+    if (typeof window === "undefined") return true;
     try {
       const testCanvas = document.createElement("canvas");
-      const gl =
+      return !!(
         testCanvas.getContext("webgl") ||
-        testCanvas.getContext("experimental-webgl");
-      if (!gl) {
-        setWebGlSupported(false);
-        return;
-      }
+        testCanvas.getContext("experimental-webgl")
+      );
     } catch {
-      setWebGlSupported(false);
-      return;
+      return false;
     }
+  });
+
+  useEffect(() => {
+    if (!webGlSupported) return;
+    const container = mountRef.current;
+    if (!container) return;
 
     const width = container.clientWidth || 360;
     const height = container.clientHeight || 260;
 
     // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
+    const isMobile = width < 540;
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 7.2);
+    camera.position.set(0, 0, isMobile ? 8.2 : 7.2);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -56,59 +54,59 @@ export function ThreeHeroCenterpiece() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2.0));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.35;
+    renderer.toneMappingExposure = 1.45;
 
     container.appendChild(renderer.domElement);
 
     // 2. High-End Studio Lighting Rig (Liquid Platinum & Titanium Chrome Setup)
     // Cool Neutral Ambient Light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
     // Key Light (Pure Diamond White from front-right)
-    const keyLight = new THREE.DirectionalLight(0xffffff, 3.6);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 3.8);
     keyLight.position.set(3.5, 4.5, 6);
     scene.add(keyLight);
 
     // Secondary Front Fill (Cool silver bounce from front-left)
-    const fillLight = new THREE.DirectionalLight(0xe4e4e7, 2.2);
+    const fillLight = new THREE.DirectionalLight(0xe4e4e7, 2.4);
     fillLight.position.set(-3.5, 2.5, 5);
     scene.add(fillLight);
 
     // Liquid Platinum Rim Light (Razor-sharp edge highlights on feather bevels)
-    const rimLight = new THREE.DirectionalLight(0xffffff, 5.4);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 5.8);
     rimLight.position.set(-4.5, -2.5, -3.5);
     scene.add(rimLight);
 
     // Specular Glint Light (Top-down diamond highlight)
-    const glintLight = new THREE.PointLight(0xffffff, 2.8, 15);
+    const glintLight = new THREE.PointLight(0xffffff, 3.2, 16);
     glintLight.position.set(0, 3.5, 3.5);
     scene.add(glintLight);
 
     // Deep Obsidian Ground Bounce (Rich velvety contrast)
-    const groundFill = new THREE.PointLight(0x27272a, 1.8, 12);
+    const groundFill = new THREE.PointLight(0x27272a, 2.0, 12);
     groundFill.position.set(0, -3.5, 2.5);
     scene.add(groundFill);
 
     // 3. PBR Liquid Platinum & Polished Titanium Chrome Materials
     const platinumPBR = new THREE.MeshStandardMaterial({
       color: new THREE.Color(0xf4f4f5), // Pure Platinum Silver
-      metalness: 0.95,
-      roughness: 0.12,
+      metalness: 0.96,
+      roughness: 0.10,
     });
 
     const quillChromePBR = new THREE.MeshStandardMaterial({
       color: new THREE.Color(0xffffff), // Mirror-Polished High-Specular Chrome
       metalness: 0.98,
-      roughness: 0.08,
+      roughness: 0.06,
     });
 
     const obsidianPBR = new THREE.MeshStandardMaterial({
       color: new THREE.Color(0x27272a), // Matte Obsidian Brushed Titanium
-      metalness: 0.90,
-      roughness: 0.22,
+      metalness: 0.92,
+      roughness: 0.20,
     });
 
     // 4. Root & Moustache Groups
@@ -248,6 +246,7 @@ export function ThreeHeroCenterpiece() {
       const w = container.clientWidth || 360;
       const h = container.clientHeight || 260;
       camera.aspect = w / h;
+      camera.position.z = w < 540 ? 8.2 : 7.2;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };

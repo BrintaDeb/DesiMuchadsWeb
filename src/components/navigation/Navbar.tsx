@@ -89,6 +89,18 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Prevent background body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
   const handleMouseEnter = (menuName: string) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     sound.playPluck(140);
@@ -555,186 +567,316 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           </button>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-white p-2.5 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-lg active:bg-white/10 focus:outline-none"
-          aria-label="Toggle Navigation Menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* 3. Mobile Navigation Drawer with Accordions */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#09090b] border-t border-white/10 px-4 py-6 max-h-[85vh] overflow-y-auto space-y-3 font-display">
-          {/* About Us */}
-          <a
-            href="#why-us"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2.5 px-3 rounded-lg text-sm font-bold uppercase tracking-wider text-white hover:bg-white/10"
-          >
-            About Us
-          </a>
-
-          {/* Services Mobile Accordion */}
-          <div className="border border-white/10 rounded-xl overflow-hidden bg-[#121215]">
-            <button
-              onClick={() =>
-                setMobileAccordion(
-                  mobileAccordion === "services" ? null : "services"
-                )
-              }
-              className="w-full flex items-center justify-between p-3.5 text-sm font-bold uppercase tracking-wider text-white"
-            >
-              <span className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-white" />
-                <span>Services ({AGENCY_SERVICES.length})</span>
-              </span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${
-                  mobileAccordion === "services" ? "rotate-180 text-white" : ""
-                }`}
-              />
-            </button>
-            {mobileAccordion === "services" && (
-              <div className="p-3 bg-black/40 border-t border-white/10 space-y-2">
-                {AGENCY_SERVICES.map((s) => (
-                  <Link
-                    key={s.id}
-                    href={`/services/${s.slug}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between p-2 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white"
-                  >
-                    <span>{s.title}</span>
-                    <span className="text-[10px] text-white font-metric font-bold bg-white/10 px-2 py-0.5 rounded">
-                      {s.metric}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Quick Links Mobile Accordion */}
-          <div className="border border-white/10 rounded-xl overflow-hidden bg-[#121215]">
-            <button
-              onClick={() =>
-                setMobileAccordion(
-                  mobileAccordion === "quick-links" ? null : "quick-links"
-                )
-              }
-              className="w-full flex items-center justify-between p-3.5 text-sm font-bold uppercase tracking-wider text-white"
-            >
-              <span>Quick Links</span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${
-                  mobileAccordion === "quick-links" ? "rotate-180 text-white" : ""
-                }`}
-              />
-            </button>
-            {mobileAccordion === "quick-links" && (
-              <div className="p-3 bg-black/40 border-t border-white/10 space-y-2">
-                {quickLinks.map((ql) => (
-                  <a
-                    key={ql.title}
-                    href={ql.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block p-2 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white"
-                  >
-                    {ql.title}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Success Story */}
-          <a
-            href="#karname"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2.5 px-3 rounded-lg text-sm font-bold uppercase tracking-wider text-white hover:bg-white/10"
-          >
-            Success Story
-          </a>
-
-          {/* Portfolio Mobile Accordion */}
-          <div className="border border-white/10 rounded-xl overflow-hidden bg-[#121215]">
-            <button
-              onClick={() =>
-                setMobileAccordion(
-                  mobileAccordion === "portfolio" ? null : "portfolio"
-                )
-              }
-              className="w-full flex items-center justify-between p-3.5 text-sm font-bold uppercase tracking-wider text-white"
-            >
-              <span>Portfolio ({portfolioProjects.length})</span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${
-                  mobileAccordion === "portfolio" ? "rotate-180 text-white" : ""
-                }`}
-              />
-            </button>
-            {mobileAccordion === "portfolio" && (
-              <div className="p-3 bg-black/40 border-t border-white/10 space-y-2">
-                {portfolioProjects.map((p) => (
-                  <a
-                    key={p.name}
-                    href={p.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between p-2 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white"
-                  >
-                    <span>{p.name}</span>
-                    <span className="text-[10px] text-white font-metric font-bold bg-white/10 px-2 py-0.5 rounded">
-                      {p.metric}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Pricing */}
-          <a
-            href="#pricing"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2.5 px-3 rounded-lg text-sm font-bold uppercase tracking-wider text-white hover:bg-white/10"
-          >
-            Pricing
-          </a>
-
-          {/* Mobile Audio & Command Tools */}
-          <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                sound.playPluck(160);
-                setIsCommandOpen(true);
-              }}
-              type="button"
-              className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 text-xs font-mono text-white border border-white/20 flex-1 justify-center"
-            >
-              <Search className="w-3.5 h-3.5" />
-              <span>Search (⌘K)</span>
-            </button>
-            <div className="flex items-center gap-2">
-              <SonicToggle />
-              <AudioVisualizer />
-            </div>
-          </div>
-
-          {/* Mobile CTA */}
+        {/* Mobile Controls: Search Shortcut + Hamburger */}
+        <div className="flex items-center gap-2 lg:hidden">
           <button
             onClick={() => {
-              setMobileMenuOpen(false);
-              sound.playChime();
-              onOpenKundli();
+              sound.playPluck(160);
+              setIsCommandOpen(true);
             }}
             type="button"
-            className="w-full mt-4 min-h-[48px] py-3.5 rounded-xl bg-white active:bg-zinc-200 text-black font-extrabold text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
+            className="p-2.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] flex items-center justify-center"
+            aria-label="Open Command Search (⌘K)"
           >
-            <span>LET&apos;S TALK &gt;</span>
+            <Search className="w-4 h-4" />
           </button>
+
+          <button
+            onClick={() => {
+              sound.playPluck(mobileMenuOpen ? 120 : 180);
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
+            className="relative p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] focus:outline-none focus:ring-1 focus:ring-white/40"
+            aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
+          </button>
+        </div>
+      </div>
+
+      {/* 3. Mobile Navigation Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          onClick={() => {
+            sound.playPluck(120);
+            setMobileMenuOpen(false);
+          }}
+          className="fixed inset-0 top-[78px] sm:top-[86px] bg-black/80 backdrop-blur-md z-40 lg:hidden transition-opacity duration-300"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* 4. Structured Glassmorphic Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="fixed top-[78px] sm:top-[86px] inset-x-0 bottom-0 z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto font-display animate-in slide-in-from-top-2 duration-200">
+          <div className="p-4 sm:p-6 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between">
+            {/* Top Interactive Tool Rows & Navigations */}
+            <div className="space-y-3.5">
+              {/* Tool Row 1: Quick Search Bar Pill */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  sound.playPluck(160);
+                  setIsCommandOpen(true);
+                }}
+                type="button"
+                className="w-full flex items-center justify-between px-3.5 py-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] active:bg-white/[0.12] border border-white/15 text-zinc-300 text-xs font-mono transition-all shadow-[0_2px_12px_rgba(0,0,0,0.4)] group"
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <Search className="w-4 h-4 text-white group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="text-zinc-200 font-medium truncate">Search services, case studies, formulas...</span>
+                </div>
+                <kbd className="px-2 py-0.5 rounded-md bg-white/10 text-[10px] font-bold text-white border border-white/20 shrink-0">
+                  ⌘K
+                </kbd>
+              </button>
+
+              {/* Tool Row 2: Tactile Glass Control Deck (Sonic FX, Desi Beats, Darbar Portal) */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
+                {/* Tile 1: Sonic Masala UI Audio */}
+                <div className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Sonic Masala</span>
+                  <SonicToggle />
+                </div>
+
+                {/* Tile 2: Ambient Desi Beats */}
+                <div className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Desi Beats</span>
+                  <AudioVisualizer />
+                </div>
+
+                {/* Tile 3: Client Darbar Quick Launcher */}
+                <a
+                  href="#portal"
+                  onClick={() => {
+                    sound.playPluck(150);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
+                >
+                  <div className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">Portal</span>
+                  </div>
+                  <span className="text-[11px] font-display font-bold text-white group-hover:text-zinc-200 truncate w-full">
+                    Darbar ↗
+                  </span>
+                </a>
+              </div>
+
+              {/* Subtle Hairline Divider 1 */}
+              <div className="drawer-divider my-1" />
+
+              {/* Core Structured Navigation Links & Accordions */}
+              <div className="space-y-2">
+                {/* About Desi Muchads */}
+                <a
+                  href="#why-us"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <ShieldCheck className="w-4 h-4 text-zinc-400" />
+                    <span>Why Desi Muchads</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-400">8+ Yrs Proven</span>
+                </a>
+
+                {/* Accordion 1: 8 Capabilities & Services */}
+                <div className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.03] transition-all">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setMobileAccordion(mobileAccordion === "services" ? null : "services");
+                    }}
+                    className="w-full flex items-center justify-between p-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-white hover:bg-white/[0.05]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Sparkles className="w-4 h-4 text-white" />
+                      <span>Capabilities ({AGENCY_SERVICES.length})</span>
+                    </div>
+                    <ChevronDown
+                      className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${
+                        mobileAccordion === "services" ? "rotate-180 text-white" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileAccordion === "services" && (
+                    <div className="p-2.5 bg-black/60 border-t border-white/10 grid grid-cols-1 gap-1.5 animate-in fade-in duration-150">
+                      {AGENCY_SERVICES.map((s) => (
+                        <Link
+                          key={s.id}
+                          href={`/services/${s.slug}`}
+                          onClick={() => {
+                            sound.playPluck(180);
+                            setMobileMenuOpen(false);
+                          }}
+                          className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                            <span className="p-1 rounded bg-white/10 shrink-0">
+                              {getServiceLucideIcon(s.iconName)}
+                            </span>
+                            <span className="text-xs font-semibold text-zinc-200 truncate">{s.title}</span>
+                          </div>
+                          <span className="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded shrink-0">
+                            {s.metric}
+                          </span>
+                        </Link>
+                      ))}
+                      <div className="pt-2 px-1 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                        <span>All 8 Growth Blueprints</span>
+                        <a
+                          href="#services"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="text-white hover:underline flex items-center gap-1 font-bold"
+                        >
+                          Bento Grid &gt;
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Accordion 2: Featured Demos & Case Studies */}
+                <div className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.03] transition-all">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setMobileAccordion(mobileAccordion === "portfolio" ? null : "portfolio");
+                    }}
+                    className="w-full flex items-center justify-between p-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-white hover:bg-white/[0.05]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Globe className="w-4 h-4 text-white" />
+                      <span>Case Studies &amp; Demos</span>
+                    </div>
+                    <ChevronDown
+                      className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${
+                        mobileAccordion === "portfolio" ? "rotate-180 text-white" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileAccordion === "portfolio" && (
+                    <div className="p-2.5 bg-black/60 border-t border-white/10 space-y-1.5 animate-in fade-in duration-150">
+                      <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 px-2 pt-1 pb-0.5">
+                        Live Production Demos (5)
+                      </div>
+                      {portfolioProjects.map((p) => (
+                        <Link
+                          key={p.name}
+                          href={p.href}
+                          onClick={() => {
+                            sound.playPluck(180);
+                            setMobileMenuOpen(false);
+                          }}
+                          className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors"
+                        >
+                          <div className="min-w-0 pr-2">
+                            <div className="text-xs font-semibold text-white truncate">{p.name}</div>
+                            <div className="text-[10px] text-zinc-400 truncate">{p.tagline}</div>
+                          </div>
+                          <span className="text-[10px] text-white font-mono font-bold bg-white/10 px-2 py-0.5 rounded border border-white/20 shrink-0">
+                            {p.metric}
+                          </span>
+                        </Link>
+                      ))}
+                      <div className="pt-2 px-1 border-t border-white/10 flex items-center justify-between">
+                        <Link
+                          href="/work"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="text-xs text-white font-bold hover:underline flex items-center gap-1"
+                        >
+                          <span>Explore All 16 Case Studies</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Hisab-Kitab Simulator */}
+                <a
+                  href="#calculator"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <Calculator className="w-4 h-4 text-zinc-400" />
+                    <span>Hisab-Kitab Simulator</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+                    P&amp;L Engine
+                  </span>
+                </a>
+
+                {/* Retainers & Pricing */}
+                <a
+                  href="#pricing"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <Layers className="w-4 h-4 text-zinc-400" />
+                    <span>Retainers &amp; Pricing</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-400">Fixed + RevShare</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Bottom High-Contrast Deck & Actions */}
+            <div className="pt-4 pb-4 space-y-2.5">
+              {/* Subtle Hairline Divider 2 */}
+              <div className="drawer-divider mb-3" />
+
+              {/* Primary High-Contrast Button */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  sound.playChime();
+                  onOpenKundli();
+                }}
+                type="button"
+                className="w-full btn-luxury-shine btn-contrast-glow py-3.5 sm:py-4 rounded-xl text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 group cursor-pointer shadow-[0_0_25px_rgba(255,255,255,0.22)] active:scale-[0.98]"
+              >
+                <span>LET&apos;S TALK</span>
+                <span className="text-base group-hover:translate-x-1 transition-transform">&gt;</span>
+              </button>
+
+              {/* Secondary High-Contrast Action: WhatsApp Strategy Baithak */}
+              <a
+                href="https://wa.me/919999999999?text=Namaste%20Desi%20Muchads!%20We%20want%20to%20audit%20and%20scale%20our%20e-commerce%20performance%20growth."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playChime()}
+                className="w-full py-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 active:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <PhoneCall className="w-3.5 h-3.5" />
+                <span>WhatsApp Strategy Baithak</span>
+              </a>
+
+              {/* Regulatory Stamp */}
+              <div className="text-center pt-1 text-[9px] sm:text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
+                UNIT OF DESI MUCHADS DIGITAL LLP • GSTIN: 07AAECD5582M1ZX
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
