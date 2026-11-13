@@ -88,7 +88,7 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
         </div>
 
         {/* Highlighted Stats Panel */}
-        <div className="rounded-2xl border border-white/15 bg-[#121215] p-8 sm:p-12 mb-12 shadow-2xl">
+        <div className="rounded-2xl border border-white/15 bg-[#121215] p-8 sm:p-12 mb-16 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
             {stats.map((s, idx) => (
               <div key={idx} className={idx > 0 ? "pt-6 md:pt-0" : ""}>
@@ -100,6 +100,58 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Anti-AI Performance Engineering Manifesto */}
+        <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-[#121216] via-[#0d0d10] to-black p-8 sm:p-12 mb-16 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/[0.03] blur-[140px] pointer-events-none" />
+          
+          <div className="relative max-w-4xl text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>THE ANTI-AI CREATIVE ENGINEERING MANIFESTO</span>
+            </div>
+
+            <h3 className="font-display font-black text-2xl sm:text-4xl text-white uppercase leading-tight mb-4">
+              Why 95% of Automated AI Web Agencies Burn Client Capital
+            </h3>
+
+            <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed font-sans mb-8">
+              Generic AI generators produce bland, soulless templates that score 42 on Google PageSpeed, vomit repetitive adjectives that convert at 0.8%, and collapse during festive flash sales. At Desi Muchads, our senior growth architects handcraft bespoke Shopify Liquid and Next.js headless architectures, write high-conversion copy rooted in raw Indian consumer psychology, and audit unit economics down to the last rupee of GST and gateway fees.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-white/10 text-left">
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
+                <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest font-bold block">
+                  01 · The AI Sludge Problem
+                </span>
+                <h4 className="text-white font-bold text-sm uppercase">Cookie-Cutter Themes</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+                  Slow boilerplate templates packed with unused scripts, layout shifts (CLS &gt; 0.25), and zero custom checkout friction optimization.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
+                <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block">
+                  02 · Desi Muchads Standard
+                </span>
+                <h4 className="text-white font-bold text-sm uppercase">Sub-Second Precision</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+                  99 Google PageSpeed scores, sub-600ms LCP, custom CAPI server-side tracking, and frictionless Razorpay / UPI 1-click checkout engines.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
+                <span className="text-[10px] font-mono text-white uppercase tracking-widest font-bold block">
+                  03 · Operational Depth
+                </span>
+                <h4 className="text-white font-bold text-sm uppercase">Real P&amp;L Accountability</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+                  Audited ₹140Cr+ GMV scaled. Physical Delhi NCR studio (Connaught Place &amp; Okhla Phase III). Daily Slack war rooms with senior technologists.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 

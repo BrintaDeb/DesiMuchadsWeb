@@ -232,7 +232,7 @@ export function CaseStudiesSection() {
                 <div className="mb-4 pt-2">
                   <Link
                     href={`/work/${cs.slug}`}
-                    className="text-xs font-mono font-bold text-amber-300 hover:text-white flex items-center gap-1 group/link transition-colors"
+                    className="text-xs font-mono font-bold text-zinc-300 hover:text-white flex items-center gap-1 group/link transition-colors"
                   >
                     <span>Read Strategic Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
@@ -519,11 +519,22 @@ export function CaseStudiesSection() {
                       </div>
                     </div>
                   ) : (
-                    /* Mobile iPhone Device Frame */
-                    <div className="w-[340px] sm:w-[375px] h-[58vh] min-h-[480px] rounded-[44px] border-[8px] border-white/20 bg-black shadow-2xl relative overflow-hidden flex flex-col">
-                      {/* Dynamic Island */}
-                      <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-20 flex items-center justify-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-white/20 ml-auto mr-2" />
+                    /* Mobile iPhone Device Frame with iOS 18 Chrome */
+                    <div className="w-[340px] sm:w-[375px] h-[58vh] min-h-[480px] rounded-[44px] border-[8px] border-white/25 bg-black shadow-2xl relative overflow-hidden flex flex-col">
+                      {/* Authentic iOS Status Bar */}
+                      <div className="absolute top-0 inset-x-0 h-8 px-6 flex items-center justify-between text-[11px] font-mono text-white/90 z-30 pointer-events-none">
+                        <span className="font-bold tracking-tight">9:41</span>
+                        {/* Dynamic Island */}
+                        <div className="w-24 h-4 bg-black rounded-full border border-white/10 flex items-center justify-between px-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                          <span className="w-2 h-2 rounded-full bg-emerald-400/80" />
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[10px]">
+                          <span>5G</span>
+                          <div className="w-4 h-2 rounded-xs border border-white/60 p-0.5 flex items-center">
+                            <div className="w-full h-full bg-white rounded-xs" />
+                          </div>
+                        </div>
                       </div>
 
                       {/* Iframe inside Mobile Frame */}
