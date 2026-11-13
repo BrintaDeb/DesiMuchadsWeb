@@ -710,17 +710,7 @@ export function CaseStudiesSection() {
                 </a>
 
                 <a
-                  href={`https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20love%20the%20${encodeURIComponent(currentCase.client)}%20showcase%20and%20want%20to%20build%20a%20similar%20high-ROAS%20storefront.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white border border-white/20 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[42px] active:scale-95 transition-all"
-                >
-                  <span>LAUNCH LIVE SITE</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-
-                <a
-                  href={`https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20love%20the%20${encodeURIComponent(currentCase.client)}%20showcase%20and%20want%20to%20build%20a%20similar%20high-ROAS%20storefront.`}
+                  href={`https://wa.me/919999999999?text=Pranam%20Desi%20Muchads!%20We%20love%20the%20${encodeURIComponent(currentCase.client)}%20showcase%20and%20want%20to%20build%20a%20similar%20high-ROAS%20storefront.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[42px] active:scale-95 transition-all"

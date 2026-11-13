@@ -29,6 +29,9 @@ import {
   Eye,
   FileText,
   Printer,
+  Activity,
+  Leaf,
+  Truck,
 } from "lucide-react";
 import {
   DemoProjectConfig,
@@ -82,6 +85,56 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
   });
   const [showGstModal, setShowGstModal] = useState<boolean>(false);
 
+  // UI/UX Pro Max Dynamic States
+  const [currency, setCurrency] = useState<"INR" | "USD" | "AED">("INR");
+  const [isCouponApplied, setIsCouponApplied] = useState<boolean>(false);
+  const [abMode, setAbMode] = useState<"flagship" | "baseline">("flagship");
+  const [activeDosha, setActiveDosha] = useState<"all" | "vata" | "pitta" | "kapha">("all");
+  const [activeDarkstoreCity, setActiveDarkstoreCity] = useState<"delhi" | "mumbai" | "bengaluru">("delhi");
+  const [watchStrapIndex, setWatchStrapIndex] = useState<number>(0);
+  const [socialProofIndex, setSocialProofIndex] = useState<number>(0);
+  const [showSocialProof, setShowSocialProof] = useState<boolean>(true);
+  const [evVehicleType, setEvVehicleType] = useState<"cargo3w" | "fleet2w" | "van4w">("cargo3w");
+  const [petActivity, setPetActivity] = useState<"low" | "moderate" | "high">("moderate");
+
+  // Watch Bespoke Strap Options
+  const watchStraps = [
+    { name: "Horween Calfskin (Jet Black)", material: "Hand-Stitched Full-Grain Italian Leather", priceMod: 0 },
+    { name: "316L Solid Steel Oyster", material: "Hand-Brushed Surgical Grade Steel Links", priceMod: 4500 },
+    { name: "Milanese Mesh (Polished 316L)", material: "Laser-Welded Woven Steel", priceMod: 3200 },
+  ];
+
+  // Dark Store Fulfillment Hubs
+  const darkstoreHubs = {
+    delhi: {
+      city: "Delhi NCR",
+      hubName: "Hub #04 · Connaught Place / Barakhamba",
+      riders: 4,
+      temp: "-18°C Cryo-Lock",
+      avgPickTime: "84s",
+      etaMins: 11,
+      stockAccuracy: "99.8%",
+    },
+    mumbai: {
+      city: "Mumbai",
+      hubName: "Hub #09 · Bandra Kurla Complex (BKC)",
+      riders: 6,
+      temp: "-18°C Cryo-Lock",
+      avgPickTime: "72s",
+      etaMins: 9,
+      stockAccuracy: "100%",
+    },
+    bengaluru: {
+      city: "Bengaluru",
+      hubName: "Hub #02 · Indiranagar 100ft Corridor",
+      riders: 5,
+      temp: "-18°C Cryo-Lock",
+      avgPickTime: "68s",
+      etaMins: 8,
+      stockAccuracy: "99.4%",
+    },
+  };
+
   // Search & Category filter
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -118,6 +171,21 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
     return () => clearInterval(timer);
   }, []);
 
+  const socialProofStream = [
+    { name: "Vikram R.", city: "Vasant Vihar, New Delhi", item: config.products[0]?.name || "Flagship Item", time: "2m ago" },
+    { name: "Ananya M.", city: "Bandra West, Mumbai", item: config.products[1]?.name || "Signature Pack", time: "5m ago" },
+    { name: "Siddharth K.", city: "Indiranagar, Bengaluru", item: config.products[0]?.name || "Direct SKU", time: "8m ago" },
+    { name: "Pooja S.", city: "Jubilee Hills, Hyderabad", item: "VIP First-Order Allocation", time: "12m ago" },
+  ];
+
+  // Rotate social proof every 6 seconds
+  useEffect(() => {
+    const spInterval = setInterval(() => {
+      setSocialProofIndex((prev) => (prev + 1) % socialProofStream.length);
+    }, 6000);
+    return () => clearInterval(spInterval);
+  }, [socialProofStream.length]);
+
   // Format countdown
   const formatCountdown = (totalSeconds: number) => {
     const mins = Math.floor(totalSeconds / 60);
@@ -132,6 +200,17 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
     setTimeout(() => {
       setToastMessage(null);
     }, 3000);
+  };
+
+  // Format price dynamically based on currency
+  const formatPrice = (inr: number) => {
+    if (currency === "USD") {
+      return `$${(inr * 0.012).toFixed(2)}`;
+    }
+    if (currency === "AED") {
+      return `AED ${(inr * 0.044).toFixed(1)}`;
+    }
+    return `₹${inr.toLocaleString("en-IN")}`;
   };
 
   // Add to cart
@@ -178,16 +257,18 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Cart calculations
+  // Cart calculations with 15% VIP Coupon
   const cartSubtotal = cart.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
+  const couponDiscount = isCouponApplied ? Math.round(cartSubtotal * 0.15) : 0;
+  const discountedSubtotal = Math.max(0, cartSubtotal - couponDiscount);
   const freeShippingThreshold = 999;
-  const isFreeShipping = cartSubtotal >= freeShippingThreshold;
-  const shippingFee = cartSubtotal > 0 && !isFreeShipping ? 99 : 0;
-  const estimatedTax = Math.round(cartSubtotal * 0.05); // 5% GST
-  const grandTotal = cartSubtotal + shippingFee + estimatedTax;
+  const isFreeShipping = discountedSubtotal >= freeShippingThreshold;
+  const shippingFee = discountedSubtotal > 0 && !isFreeShipping ? 99 : 0;
+  const estimatedTax = Math.round(discountedSubtotal * 0.05); // 5% GST
+  const grandTotal = discountedSubtotal + shippingFee + estimatedTax;
 
   const handleCheckPincode = (pin: string) => {
     sound.playPluck(150);
@@ -241,14 +322,54 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
     return matchesCategory && matchesSearch;
   });
 
-  // Calculate EV fleet stats (based on commercial cargo 12 km/L diesel baseline)
-  const monthlyDiesel = Math.round(
-    (evFleetSize * evDailyKm * 30 * 94) / 12
-  );
-  const monthlyEvCost = Math.round(
-    evFleetSize * 12499 + evFleetSize * evDailyKm * 30 * 0.035 * 8.5
-  );
+  // Calculate EV fleet stats with selectable commercial vehicle types
+  const evConfigs = {
+    cargo3w: { name: "3W Cargo L5N (550kg Payload)", lease: 12499, kmL: 12, fuelCostPerL: 94, powerRatePerKm: 0.035 * 8.5, co2Factor: 0.12 },
+    fleet2w: { name: "2W Fleet Delivery (Hyper-Local)", lease: 4299, kmL: 38, fuelCostPerL: 98, powerRatePerKm: 0.02 * 8.5, co2Factor: 0.05 },
+    van4w: { name: "4W Electric Van (1.2 Ton Mega)", lease: 24999, kmL: 9, fuelCostPerL: 94, powerRatePerKm: 0.06 * 8.5, co2Factor: 0.22 },
+  };
+  const activeEvPreset = evConfigs[evVehicleType];
+  const monthlyDiesel = Math.round((evFleetSize * evDailyKm * 30 * activeEvPreset.fuelCostPerL) / activeEvPreset.kmL);
+  const monthlyEvCost = Math.round(evFleetSize * activeEvPreset.lease + evFleetSize * evDailyKm * 30 * activeEvPreset.powerRatePerKm);
   const monthlyEvSavings = Math.max(0, monthlyDiesel - monthlyEvCost);
+  const evSavingsPercent = Math.min(88, Math.max(15, Math.round((monthlyEvSavings / (monthlyDiesel || 1)) * 100)));
+  const treesSavedMonthly = Math.round((evFleetSize * evDailyKm * activeEvPreset.co2Factor * 30) / 22);
+
+  // Pet Nutrition & Portion calculations
+  const petActivityMultiplier = petActivity === "low" ? 0.9 : petActivity === "high" ? 1.25 : 1.0;
+  const dailyGrams = Math.round(petWeight * 32 * petActivityMultiplier);
+  const dailyCalories = Math.round(petWeight * 48 * petActivityMultiplier);
+
+  // Watch Customizer calculations
+  const currentDialMod = config.interactiveData?.finishes?.[watchDialIndex]?.priceMod || 0;
+  const currentStrapMod = watchStraps[watchStrapIndex]?.priceMod || 0;
+  const baseWatchPrice = config.products[0]?.price || 48500;
+  const totalWatchCustomPrice = baseWatchPrice + currentDialMod + currentStrapMod;
+
+  // Snack Bundle calculations
+  const snackBundleCount = selectedFlavors.length;
+  const snackBundleDiscountPercent = snackBundleCount >= 4 ? 20 : snackBundleCount === 3 ? 10 : 0;
+  const baseSnackPrice = 299;
+  const rawSnackTotal = snackBundleCount * baseSnackPrice;
+  const snackDiscountAmt = Math.round((rawSnackTotal * snackBundleDiscountPercent) / 100);
+  const finalSnackPrice = Math.max(0, rawSnackTotal - snackDiscountAmt);
+
+  // Dosha Herb mapping
+  const doshaMapping: Record<string, string[]> = {
+    "Ashwagandha Root Extract (KSM-66)": ["vata", "kapha"],
+    "Shatavari Bioactive Rhizome": ["pitta", "vata"],
+    "Brahmi Whole Plant Standardized": ["pitta", "vata"],
+    "Turmeric Curcumin 95%": ["vata", "pitta", "kapha"],
+    "Amla Super-Fruit Vitamin C": ["pitta", "kapha"],
+    "Shankhpushpi Memory Tonic": ["pitta", "vata"],
+    "Purified Guggulu Resin": ["kapha", "vata"],
+    "Neem Leaf Detox Extract": ["pitta", "kapha"],
+  };
+  const filteredHerbs = config.interactiveData?.herbs?.filter((h: HerbInfoItem) => {
+    if (activeDosha === "all") return true;
+    const matchedDoshas = doshaMapping[h.name] || ["vata", "pitta", "kapha"];
+    return matchedDoshas.includes(activeDosha);
+  }) || [];
 
   return (
     <div
@@ -267,6 +388,23 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* A/B Benchmark Mode Toggle */}
+          <button
+            type="button"
+            onClick={() => {
+              sound.playPluck(140);
+              setAbMode(abMode === "flagship" ? "baseline" : "flagship");
+            }}
+            className={`px-2 py-1 rounded-md text-[10px] font-mono font-bold uppercase transition-all border cursor-pointer ${
+              abMode === "baseline"
+                ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+            }`}
+            title="Toggle A/B Benchmark (Generic Baseline vs Desi Muchads Velocity)"
+          >
+            {abMode === "flagship" ? "⚡ Flagship (4.8% Conv)" : "⚠️ Baseline (1.4% Conv)"}
+          </button>
+
           {/* Dev Protocol & Audit Drawer Toggle */}
           <button
             type="button"
@@ -355,8 +493,46 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
         </div>
       )}
 
+      {/* 1.2 BASELINE BENCHMARK COMPARISON NOTICE */}
+      {abMode === "baseline" && (
+        <div className="bg-amber-950/60 border-b border-amber-500/30 px-4 py-3 text-xs font-mono text-center">
+          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="text-amber-200 text-left">
+              ⚠️ <strong>Viewing Baseline Store Simulator:</strong> Standard unoptimized template with 4.2s TTFB, 3-page checkout friction, and 28% dropoff rate.
+            </div>
+            <button
+              onClick={() => {
+                sound.playChime();
+                setAbMode("flagship");
+              }}
+              className="px-3.5 py-1.5 rounded-xl bg-white text-black font-bold uppercase text-[10px] shrink-0 hover:bg-zinc-200 cursor-pointer shadow-md"
+            >
+              Switch to Desi Muchads Velocity &gt;
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* 1.3 VIP DISCOUNT BANNER */}
+      <div className="bg-gradient-to-r from-emerald-950/60 via-black to-emerald-950/60 border-b border-white/10 py-1.5 px-4 text-center text-xs font-mono">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2">
+          <span className="text-emerald-400 font-bold">VIP CODE:</span>
+          <span className="text-zinc-300">Use <code className="bg-white/10 px-1.5 py-0.5 rounded text-white font-bold">DESIMUCH15</code> for 15% instant checkout discount</span>
+          <button
+            onClick={() => {
+              sound.playPluck(180);
+              setIsCouponApplied(true);
+              showToast("Coupon 'DESIMUCH15' applied! 15% discount unlocked.");
+            }}
+            className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 cursor-pointer font-bold uppercase"
+          >
+            {isCouponApplied ? "✓ Applied" : "Apply 1-Click"}
+          </button>
+        </div>
+      </div>
+
       {/* 2. BRAND STOREFRONT HEADER */}
-      <header className="px-4 sm:px-8 py-4 sm:py-6 border-b border-white/10 backdrop-blur-md bg-black/40 sticky top-10 z-40">
+      <header className="px-4 sm:px-8 py-3.5 sm:py-5 border-b border-white/10 backdrop-blur-md bg-black/50 sticky top-10 z-40">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Brand Logo & Tagline */}
           <div>
@@ -375,10 +551,32 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             </p>
           </div>
 
-          {/* Quick Header Actions */}
-          <div className="flex items-center gap-3">
+          {/* Quick Header Actions: Search, Currency Switcher, Cart */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Currency Selector */}
+            <div className="hidden sm:flex items-center rounded-xl bg-white/5 border border-white/15 p-1 text-[10px] font-mono">
+              <button
+                onClick={() => { sound.playPluck(110); setCurrency("INR"); }}
+                className={`px-2 py-0.5 rounded-lg transition-colors ${currency === "INR" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+              >
+                ₹ INR
+              </button>
+              <button
+                onClick={() => { sound.playPluck(110); setCurrency("USD"); }}
+                className={`px-2 py-0.5 rounded-lg transition-colors ${currency === "USD" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+              >
+                $ USD
+              </button>
+              <button
+                onClick={() => { sound.playPluck(110); setCurrency("AED"); }}
+                className={`px-2 py-0.5 rounded-lg transition-colors ${currency === "AED" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+              >
+                د.إ AED
+              </button>
+            </div>
+
             {/* Search Input (Desktop) */}
-            <div className="relative hidden md:block w-48 lg:w-64">
+            <div className="relative hidden md:block w-40 lg:w-56">
               <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -395,7 +593,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 sound.playPluck(160);
                 setIsCartOpen(true);
               }}
-              className="relative px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
+              className="relative px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
               aria-label="Open Cart"
             >
               <ShoppingBag className="w-4 h-4" />
@@ -478,18 +676,45 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
         <div className="max-w-5xl mx-auto">
           {/* A. EV Fleet Calculator */}
           {config.interactiveType === "calculator_ev" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-cyan-500/30 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
-                  <Zap className="w-5 h-5" />
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-cyan-500/40 shadow-[0_0_40px_rgba(6,182,212,0.15)] relative overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold border border-cyan-500/40 shadow-sm">
+                    <Zap className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold block">
+                      COMMERCIAL B2B FLEET OPTIMIZER
+                    </span>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                      Fleet TCO &amp; Carbon Neutrality Engine
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold">
-                    INTERACTIVE B2B TOOL
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    Commercial Fleet TCO & Fuel Savings Calculator
-                  </h3>
+
+                {/* Vehicle Type Switcher */}
+                <div className="flex items-center rounded-xl bg-black/60 border border-cyan-500/30 p-1 text-[11px] font-mono">
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(130); setEvVehicleType("cargo3w"); }}
+                    className={`px-3 py-1 rounded-lg transition-all ${evVehicleType === "cargo3w" ? "bg-cyan-400 text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    3W Cargo L5N
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(130); setEvVehicleType("fleet2w"); }}
+                    className={`px-3 py-1 rounded-lg transition-all ${evVehicleType === "fleet2w" ? "bg-cyan-400 text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    2W Delivery
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(130); setEvVehicleType("van4w"); }}
+                    className={`px-3 py-1 rounded-lg transition-all ${evVehicleType === "van4w" ? "bg-cyan-400 text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    4W Mega Van
+                  </button>
                 </div>
               </div>
 
@@ -499,7 +724,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     <div className="flex justify-between text-xs font-mono mb-2">
                       <span className="text-zinc-300">Fleet Size (Vehicles):</span>
                       <span className="text-cyan-400 font-bold font-metric text-sm">
-                        {evFleetSize} EVs
+                        {evFleetSize} {activeEvPreset.name.split(" ")[0]} EVs
                       </span>
                     </div>
                     <input
@@ -515,7 +740,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
 
                   <div>
                     <div className="flex justify-between text-xs font-mono mb-2">
-                      <span className="text-zinc-300">Daily Average Run per EV:</span>
+                      <span className="text-zinc-300">Daily Average Run per Vehicle:</span>
                       <span className="text-cyan-400 font-bold font-metric text-sm">
                         {evDailyKm} km / day
                       </span>
@@ -531,42 +756,75 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     />
                   </div>
 
-                  <div className="p-4 rounded-xl bg-black/40 border border-white/10 text-xs font-mono space-y-2">
-                    <div className="flex justify-between text-zinc-400">
-                      <span>Baseline Monthly Diesel Cost:</span>
-                      <span className="text-red-400 font-bold">
-                        ₹{monthlyDiesel.toLocaleString("en-IN")}
-                      </span>
+                  {/* Split Visual Comparison Bar */}
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-[11px] font-mono">
+                      <span className="text-red-400 font-bold">Diesel Burn: {formatPrice(monthlyDiesel)}/mo</span>
+                      <span className="text-emerald-400 font-bold">UrbanDrift EV: {formatPrice(monthlyEvCost)}/mo</span>
                     </div>
-                    <div className="flex justify-between text-zinc-400">
-                      <span>UrbanDrift Monthly Lease & Power:</span>
-                      <span className="text-emerald-400 font-bold">
-                        ₹{monthlyEvCost.toLocaleString("en-IN")}
-                      </span>
+                    <div className="w-full h-3 rounded-full bg-red-950/60 border border-white/10 overflow-hidden flex">
+                      <div
+                        className="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-300"
+                        style={{ width: `${Math.min(100, Math.max(10, Math.round((monthlyEvCost / (monthlyDiesel || 1)) * 100)))}%` }}
+                        title="UrbanDrift EV Cost Fraction"
+                      />
+                      <div
+                        className="h-full bg-red-500/60 flex-1"
+                        title="Net Fuel & Maintenance Waste Avoided"
+                      />
+                    </div>
+                    <div className="flex justify-between text-[10px] font-mono text-zinc-400">
+                      <span>⚡ Electric Power + Lease ({100 - evSavingsPercent}%)</span>
+                      <span className="text-emerald-400 font-bold">Net Margin Reclaimed ({evSavingsPercent}%)</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-950/60 to-black border border-cyan-500/40 text-center">
-                  <span className="text-xs font-mono uppercase tracking-wider text-cyan-300 block mb-1">
-                    NET MONTHLY OPERATING SAVINGS
-                  </span>
-                  <div className="font-display font-black text-3xl sm:text-5xl text-white my-2">
-                    ₹{monthlyEvSavings.toLocaleString("en-IN")}
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-950/70 via-black to-zinc-950 border border-cyan-500/50 text-center shadow-xl space-y-4">
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-cyan-300 block mb-1">
+                      NET MONTHLY FLEET PROFIT RECLAIMED
+                    </span>
+                    <div className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight my-1">
+                      {formatPrice(monthlyEvSavings)}
+                    </div>
+                    <div className="text-[11px] font-mono text-emerald-400 font-bold">
+                      +{evSavingsPercent}% Blended OPEX Margin Improvement
+                    </div>
                   </div>
-                  <p className="text-xs text-zinc-400 mb-6">
-                    Reduces carbon emissions by ~
-                    {Math.round(evFleetSize * evDailyKm * 0.12)} kg CO2 daily
-                  </p>
+
+                  <div className="grid grid-cols-2 gap-2 text-left pt-2 border-t border-white/10">
+                    <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                      <div className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-mono font-bold">
+                        <Leaf className="w-3.5 h-3.5" />
+                        <span>CARBON OFFSET</span>
+                      </div>
+                      <div className="text-xs font-bold text-white mt-1">
+                        🌱 {treesSavedMonthly} Trees / Mo
+                      </div>
+                      <div className="text-[10px] text-zinc-400">~{Math.round(evFleetSize * evDailyKm * activeEvPreset.co2Factor * 30)}kg CO2 cut</div>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                      <div className="flex items-center gap-1.5 text-cyan-400 text-[10px] font-mono font-bold">
+                        <Activity className="w-3.5 h-3.5" />
+                        <span>FAST TURNAROUND</span>
+                      </div>
+                      <div className="text-xs font-bold text-white mt-1">
+                        ⚡ 22m to 80% SOC
+                      </div>
+                      <div className="text-[10px] text-zinc-400">HyperCharge 250kW</div>
+                    </div>
+                  </div>
+
                   <button
-                    onClick={() =>
-                      showToast(
-                        "Fleet proposal sent to enterprise sales team for instant review!"
-                      )
-                    }
-                    className="w-full py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-display font-bold text-xs uppercase tracking-wider transition-all"
+                    onClick={() => {
+                      sound.playChime();
+                      showToast(`Enterprise Pilot dossier generated for ${evFleetSize} ${activeEvPreset.name}!`);
+                    }}
+                    className="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
                   >
-                    Lock In Enterprise Fleet Lease
+                    Lock In Enterprise Fleet Lease &gt;
                   </button>
                 </div>
               </div>
@@ -575,25 +833,52 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
 
           {/* B. Canine Calorie & Nutrition Planner */}
           {config.interactiveType === "calorie_pet" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-emerald-500/30 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-                  <Heart className="w-5 h-5" />
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.15)]">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/40">
+                    <Heart className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block">
+                      VETERINARY PRECISION ENGINE
+                    </span>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                      Canine Breed Calorie &amp; Portion Balancer
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">
-                    VETERINARY PRECISION TOOL
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    Canine Breed Calorie & Fresh Meal Planner
-                  </h3>
+
+                {/* Activity Level Selector */}
+                <div className="flex items-center rounded-xl bg-black/60 border border-emerald-500/30 p-1 text-[11px] font-mono">
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setPetActivity("low"); }}
+                    className={`px-3 py-1 rounded-lg transition-all ${petActivity === "low" ? "bg-emerald-400 text-black font-bold" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Low / Couch
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setPetActivity("moderate"); }}
+                    className={`px-3 py-1 rounded-lg transition-all ${petActivity === "moderate" ? "bg-emerald-400 text-black font-bold" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Daily Walker
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setPetActivity("high"); }}
+                    className={`px-3 py-1 rounded-lg transition-all ${petActivity === "high" ? "bg-emerald-400 text-black font-bold" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    High Agility
+                  </button>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="space-y-4">
                   <label className="block text-xs font-mono text-zinc-300 uppercase">
-                    Select Canine Breed Type:
+                    Select Canine Breed Silhouette:
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     {config.interactiveData?.breeds?.map(
@@ -601,18 +886,19 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                         <button
                           key={bIdx}
                           onClick={() => {
+                            sound.playPluck(140);
                             setPetBreedIndex(bIdx);
                             setPetWeight(b.avgWeight);
                           }}
-                          className={`p-3 rounded-xl border text-left text-xs transition-all ${
+                          className={`p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                             petBreedIndex === bIdx
-                              ? "bg-emerald-500/20 border-emerald-400 text-white font-bold"
+                              ? "bg-emerald-500/20 border-emerald-400 text-white font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]"
                               : "bg-white/5 border-white/10 text-zinc-400 hover:text-white"
                           }`}
                         >
                           <div className="font-semibold">{b.name}</div>
                           <div className="text-[10px] font-mono text-zinc-500">
-                            Avg {b.avgWeight} kg
+                            Preset: {b.avgWeight} kg
                           </div>
                         </button>
                       )
@@ -621,7 +907,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
 
                   <div>
                     <div className="flex justify-between text-xs font-mono mb-2">
-                      <span className="text-zinc-300">Exact Weight:</span>
+                      <span className="text-zinc-300">Weight Calibrator:</span>
                       <span className="text-emerald-400 font-bold">
                         {petWeight} kg
                       </span>
@@ -635,100 +921,231 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                       className="w-full accent-emerald-400 cursor-pointer"
                     />
                   </div>
+
+                  {/* Macro Split Bar */}
+                  <div className="p-3 rounded-xl bg-black/50 border border-white/10 space-y-1.5 text-[11px] font-mono">
+                    <div className="flex justify-between text-zinc-400">
+                      <span>Nutrient Formulation Split:</span>
+                      <span className="text-emerald-400 font-bold">Human-Grade Wholefood</span>
+                    </div>
+                    <div className="grid grid-cols-4 gap-1 text-center text-[10px]">
+                      <div className="p-1 rounded bg-emerald-950/60 border border-emerald-500/20 text-emerald-300">38% Protein</div>
+                      <div className="p-1 rounded bg-white/5 border border-white/10 text-zinc-300">18% Omega Fat</div>
+                      <div className="p-1 rounded bg-white/5 border border-white/10 text-zinc-300">35% Broth</div>
+                      <div className="p-1 rounded bg-white/5 border border-white/10 text-zinc-300">9% Fiber</div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-950/60 to-black border border-emerald-500/40 text-center">
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-950/70 via-black to-zinc-950 border border-emerald-500/50 text-center shadow-xl space-y-4">
                   <span className="text-xs font-mono uppercase tracking-wider text-emerald-300 block mb-1">
-                    RECOMMENDED DAILY MEAL PORTION
+                    DAILY GENTLY STEAMED PORTION
                   </span>
-                  <div className="font-display font-black text-3xl sm:text-5xl text-white my-2">
-                    {petWeight * 32}g / Day
+                  <div className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight my-1">
+                    {dailyGrams}g / Day
                   </div>
-                  <p className="text-xs text-zinc-400 mb-6">
-                    ~{petWeight * 48} kcal · 100% gently steamed human-grade meat & veggies
+                  <p className="text-xs text-zinc-400">
+                    ~{dailyCalories} kcal · Formulated with fresh pasture-raised meat, pumpkin &amp; kelp
                   </p>
+
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-zinc-300 flex items-center justify-between">
+                    <span>Weekly Subscription Box:</span>
+                    <strong className="text-white font-bold">{formatPrice(649)} / wk</strong>
+                  </div>
+
                   <button
                     onClick={() => {
                       if (config.products[0]) {
                         handleAddToCart(config.products[0]);
                       }
                     }}
-                    className="w-full py-3 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-display font-bold text-xs uppercase tracking-wider transition-all"
+                    className="w-full py-3.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
                   >
-                    Add Custom Meal Pouch to Bag (₹649)
+                    Add Custom Meal Pouch to Bag ({formatPrice(649)}) &gt;
                   </button>
                 </div>
               </div>
             </div>
           )}
 
-          {/* C. Dark Store Countdown Timer */}
+          {/* C. Dark Store Countdown Timer & Multi-City Hub */}
           {config.interactiveType === "darkstore_timer" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-amber-500/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
-                  <Clock className="w-7 h-7 animate-spin" />
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.15)] space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/40 shadow-sm shrink-0">
+                    <Clock className="w-7 h-7 animate-spin" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block">
+                      INSTANT MICRO-FULFILLMENT TELEMETRY
+                    </span>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                      Hyper-Local Dark Store Routing Active
+                    </h3>
+                    <p className="text-xs text-zinc-400 mt-0.5">
+                      {darkstoreHubs[activeDarkstoreCity].hubName}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold block">
-                    INSTANT DARK STORE ROUTING
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    Doorstep Delivery Dispatch Active
-                  </h3>
-                  <p className="text-xs text-zinc-400 mt-0.5">
-                    Micro-fulfillment dark store #14 connected · 2 riders on standby
-                  </p>
+
+                {/* City Switcher */}
+                <div className="flex items-center rounded-xl bg-black/60 border border-emerald-500/30 p-1 text-[11px] font-mono self-start md:self-auto">
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(130); setActiveDarkstoreCity("delhi"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDarkstoreCity === "delhi" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Delhi NCR
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(130); setActiveDarkstoreCity("mumbai"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDarkstoreCity === "mumbai" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Mumbai BKC
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(130); setActiveDarkstoreCity("bengaluru"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDarkstoreCity === "bengaluru" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Bengaluru
+                  </button>
                 </div>
               </div>
 
-              <div className="px-6 py-4 rounded-2xl bg-black border border-amber-500/40 text-center shrink-0">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase block">
-                  ESTIMATED ARRIVAL IN
+              {/* Radar Telemetry Grid & Countdown */}
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs font-mono">
+                <div className="p-3.5 rounded-2xl bg-black/50 border border-white/10">
+                  <div className="text-[10px] text-zinc-400 uppercase">Available Riders</div>
+                  <div className="text-emerald-400 font-bold text-lg mt-0.5 flex items-center gap-1.5">
+                    <Truck className="w-4 h-4" />
+                    <span>{darkstoreHubs[activeDarkstoreCity].riders} On Standby</span>
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-black/50 border border-white/10">
+                  <div className="text-[10px] text-zinc-400 uppercase">Mean Pick &amp; Pack</div>
+                  <div className="text-white font-bold text-lg mt-0.5">
+                    {darkstoreHubs[activeDarkstoreCity].avgPickTime}
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-black/50 border border-white/10">
+                  <div className="text-[10px] text-zinc-400 uppercase">Thermal Integrity</div>
+                  <div className="text-cyan-400 font-bold text-lg mt-0.5">
+                    {darkstoreHubs[activeDarkstoreCity].temp}
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-center">
+                  <div className="text-[10px] text-emerald-300 uppercase">Estimated Doorstep In</div>
+                  <div className="font-metric font-black text-2xl text-white tracking-wider mt-0.5">
+                    {formatCountdown(secondsLeft)}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                <span className="text-[11px] text-zinc-400 font-mono">
+                  ⚡ All confectionery packaged in dry-ice insulated containers at 0% thermal leakage.
                 </span>
-                <span className="font-metric font-black text-3xl text-amber-300 tracking-wider">
-                  {formatCountdown(secondsLeft)}
-                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(180);
+                    showToast(`Simulated dark store rider ping sent to ${darkstoreHubs[activeDarkstoreCity].hubName}!`);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all cursor-pointer shadow-md shrink-0"
+                >
+                  Ping Nearest Hub Dispatcher
+                </button>
               </div>
             </div>
           )}
 
-          {/* D. Herb Formulation & Decoction Matrix */}
+          {/* D. Herb Formulation & Dosha Balancer Matrix */}
           {config.interactiveType === "herb_explorer" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-white/20 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-bold">
-                  <Award className="w-5 h-5" />
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-white/20 shadow-2xl space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-bold border border-white/20">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-bold block">
+                      VEDIC PHARMACOPEIA PURITY
+                    </span>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                      {config.interactiveData?.title || "Herbal Bioactives & Extraction Matrix"}
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-bold">
-                    PHARMACOPEIA PURITY
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    {config.interactiveData?.title || "Ingredient & Decoction Matrix"}
-                  </h3>
+
+                {/* Dosha Filter Tabs */}
+                <div className="flex items-center rounded-xl bg-black/60 border border-white/15 p-1 text-[11px] font-mono self-start md:self-auto">
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setActiveDosha("all"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDosha === "all" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    All Herbs
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setActiveDosha("vata"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDosha === "vata" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Vata (Air)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setActiveDosha("pitta"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDosha === "pitta" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Pitta (Fire)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { sound.playPluck(120); setActiveDosha("kapha"); }}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${activeDosha === "kapha" ? "bg-white text-black font-bold shadow" : "text-zinc-400 hover:text-white"}`}
+                  >
+                    Kapha (Earth)
+                  </button>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {config.interactiveData?.herbs?.map(
+                {filteredHerbs.map(
                   (herb: HerbInfoItem, hIdx: number) => (
                     <div
                       key={hIdx}
-                      className="p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-white/30 transition-all text-left"
+                      className="p-5 rounded-2xl bg-black/50 border border-white/10 hover:border-white/30 transition-all text-left flex flex-col justify-between"
                     >
-                      <div className="font-display font-bold text-sm text-white mb-1">
-                        {herb.name}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">
+                            {herb.part}
+                          </span>
+                          <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-mono font-bold border border-emerald-500/20">
+                            NABL Certified
+                          </span>
+                        </div>
+                        <h4 className="font-display font-bold text-sm text-white mb-2 leading-snug">
+                          {herb.name}
+                        </h4>
+                        <p className="text-xs text-zinc-300 leading-relaxed mb-4">
+                          {herb.benefit}
+                        </p>
                       </div>
-                      <div className="text-[10px] font-mono text-zinc-400 uppercase mb-2">
-                        {herb.part} · {herb.decoctionTime}
+
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono">
+                        <span className="text-zinc-400">{herb.decoctionTime}</span>
+                        <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded">
+                          {herb.potency}
+                        </span>
                       </div>
-                      <p className="text-xs text-zinc-300 leading-relaxed mb-3">
-                        {herb.benefit}
-                      </p>
-                      <span className="inline-block px-2 py-0.5 rounded bg-white/10 text-[10px] font-mono text-zinc-300">
-                        {herb.potency}
-                      </span>
                     </div>
                   )
                 )}
@@ -736,71 +1153,182 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             </div>
           )}
 
-          {/* E. Bespoke Horology Watch Customizer */}
+          {/* E. Haute Horlogerie Liquid Platinum Watch Customizer */}
           {config.interactiveType === "watch_customizer" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-amber-500/30 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">
-                  <Sparkles className="w-5 h-5" />
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.1)] space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-bold border border-white/20">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-zinc-300 uppercase tracking-widest font-bold block">
+                      HAUTE HORLOGERIE BESPOKE CONFIGURATOR
+                    </span>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                      Darbar Bespoke Finishing &amp; Mechanical Calibration
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono text-amber-300 uppercase tracking-widest font-bold">
-                    HAUTE HORLOGERIE BESPOKE CONFIGURATOR
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    Select Your Hand-Assembled Finishing
-                  </h3>
+
+                {/* Mechanical Beat Indicator */}
+                <div className="px-3 py-1.5 rounded-xl bg-black/60 border border-white/20 text-xs font-mono text-zinc-300 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                  <span>28,800 VPH (4Hz) Hi-Beat Escapement</span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {config.interactiveData?.finishes?.map(
-                  (f: FinishInfoItem, fIdx: number) => (
+              {/* 1. Dial Finishing Selection */}
+              <div>
+                <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2.5 font-bold">
+                  Step 1: Select Case &amp; Dial Finishing
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {config.interactiveData?.finishes?.map(
+                    (f: FinishInfoItem, fIdx: number) => (
+                      <button
+                        key={fIdx}
+                        type="button"
+                        onClick={() => {
+                          sound.playPluck(150);
+                          setWatchDialIndex(fIdx);
+                        }}
+                        className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                          watchDialIndex === fIdx
+                            ? "bg-white text-black border-white shadow-xl scale-[1.02]"
+                            : "bg-black/40 border-white/10 hover:border-white/25 text-zinc-400"
+                        }`}
+                      >
+                        <div className={`font-display font-bold text-sm mb-1 ${watchDialIndex === fIdx ? "text-black" : "text-white"}`}>
+                          {f.name}
+                        </div>
+                        <div className={`text-xs mb-2 ${watchDialIndex === fIdx ? "text-zinc-800" : "text-zinc-400"}`}>{f.case}</div>
+                        <div className={`text-xs font-mono font-bold ${watchDialIndex === fIdx ? "text-black" : "text-zinc-200"}`}>
+                          {f.priceMod === 0 ? "Standard Tier" : `+${formatPrice(f.priceMod)}`}
+                        </div>
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* 2. Bespoke Strap Selection */}
+              <div>
+                <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2.5 font-bold">
+                  Step 2: Select Hand-Assembled Strap
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {watchStraps.map((s, sIdx) => (
                     <button
-                      key={fIdx}
+                      key={sIdx}
+                      type="button"
                       onClick={() => {
                         sound.playPluck(150);
-                        setWatchDialIndex(fIdx);
+                        setWatchStrapIndex(sIdx);
                       }}
-                      className={`p-5 rounded-2xl border text-left transition-all ${
-                        watchDialIndex === fIdx
-                          ? "bg-amber-500/10 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.2)]"
-                          : "bg-black/40 border-white/10 hover:border-white/20 text-zinc-400"
+                      className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                        watchStrapIndex === sIdx
+                          ? "bg-white text-black border-white shadow-xl scale-[1.02]"
+                          : "bg-black/40 border-white/10 hover:border-white/25 text-zinc-400"
                       }`}
                     >
-                      <div className="font-display font-bold text-base text-white mb-1">
-                        {f.name}
+                      <div className={`font-display font-bold text-sm mb-1 ${watchStrapIndex === sIdx ? "text-black" : "text-white"}`}>
+                        {s.name}
                       </div>
-                      <div className="text-xs text-zinc-300 mb-3">{f.case}</div>
-                      <div className="text-xs font-mono text-amber-300 font-bold">
-                        {f.priceMod === 0
-                          ? "Standard Tier"
-                          : `+₹${f.priceMod.toLocaleString("en-IN")}`}
+                      <div className={`text-xs mb-2 ${watchStrapIndex === sIdx ? "text-zinc-800" : "text-zinc-400"}`}>{s.material}</div>
+                      <div className={`text-xs font-mono font-bold ${watchStrapIndex === sIdx ? "text-black" : "text-zinc-200"}`}>
+                        {s.priceMod === 0 ? "Included in Base" : `+${formatPrice(s.priceMod)}`}
                       </div>
                     </button>
-                  )
-                )}
+                  ))}
+                </div>
+              </div>
+
+              {/* Total Configured Watch Price & Add to Bag CTA */}
+              <div className="p-5 rounded-2xl bg-black/60 border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono uppercase text-zinc-400 block">
+                    TOTAL BESPOKE HOROLOGY VALUATION
+                  </span>
+                  <div className="font-metric font-black text-2xl sm:text-3xl text-white">
+                    {formatPrice(totalWatchCustomPrice)}
+                  </div>
+                  <span className="text-[11px] font-mono text-zinc-400">
+                    Includes 5-Year Global Chronometer Warranty &amp; NABL Escapement Certificate
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const customWatch: DemoProductItem = {
+                      id: `custom-darbar-${Date.now()}`,
+                      name: `Darbar Bespoke (${config.interactiveData?.finishes?.[watchDialIndex]?.name || "Rhodium"} · ${watchStraps[watchStrapIndex].name})`,
+                      category: "Horology Timepiece",
+                      price: totalWatchCustomPrice,
+                      image: config.products[0]?.image || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
+                      description: "Custom hand-assembled mechanical chronometer with customized dial finishing and premium strap.",
+                      rating: 4.9,
+                      reviewCount: 42,
+                      specs: ["28,800 VPH Automatic", "Double-Domed Sapphire", "100m Water Resistance"],
+                    };
+                    handleAddToCart(customWatch);
+                    setIsCartOpen(true);
+                  }}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Add Configured Timepiece to Bag &gt;
+                </button>
               </div>
             </div>
           )}
 
-          {/* F. Snack Bundle Builder */}
+          {/* F. Snack Nation Custom Flavor Box & Tiered Savings */}
           {config.interactiveType === "bundle_snacks" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-amber-500/30 shadow-2xl">
-              <div className="flex items-center justify-between mb-6">
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.15)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold">
-                    CUSTOM FLAVOR BOX
+                  <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block">
+                    INTERACTIVE BUNDLE BUILDER
                   </span>
                   <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    {config.interactiveData?.title || "Choose Your Flavors"}
+                    Build Your Custom Artisanal Snack Nation Pack
                   </h3>
                 </div>
-                <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono font-bold">
-                  {selectedFlavors.length}/6 Flavors Picked
-                </span>
+
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono font-bold border border-emerald-500/30">
+                    {selectedFlavors.length} Tubs Picked
+                  </span>
+                  {snackBundleDiscountPercent > 0 && (
+                    <span className="px-3 py-1 rounded-full bg-white text-black text-xs font-mono font-bold">
+                      {snackBundleDiscountPercent}% OFF UNLOCKED
+                    </span>
+                  )}
+                </div>
               </div>
 
+              {/* Tier Progress Meter */}
+              <div className="p-3.5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
+                <div className="flex justify-between text-xs font-mono">
+                  <span className="text-zinc-300">
+                    {snackBundleCount < 3
+                      ? `Add ${3 - snackBundleCount} more tub for 10% Bundle Discount`
+                      : snackBundleCount === 3
+                      ? "Add 1 more tub for 20% Discount + Free Truffle Dip!"
+                      : "🎉 Maximum 20% Bundle Tier + Free Dip Unlocked!"}
+                  </span>
+                  <span className="text-emerald-400 font-bold">{snackBundleDiscountPercent}% Savings Tier</span>
+                </div>
+                <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-400 transition-all duration-300"
+                    style={{ width: `${Math.min(100, (snackBundleCount / 4) * 100)}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Flavors Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {config.interactiveData?.flavours?.map(
                   (flav: string, flIdx: number) => {
@@ -816,16 +1344,16 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                               : [...prev, flav]
                           );
                         }}
-                        className={`p-3.5 rounded-xl border text-left text-xs transition-all ${
+                        className={`p-4 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                           isSelected
-                            ? "bg-amber-500/20 border-amber-400 text-white font-bold"
+                            ? "bg-emerald-500/20 border-emerald-400 text-white font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]"
                             : "bg-white/5 border-white/10 text-zinc-400 hover:text-white"
                         }`}
                       >
                         <div className="flex items-center justify-between">
                           <span>{flav}</span>
                           {isSelected && (
-                            <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                           )}
                         </div>
                       </button>
@@ -833,25 +1361,71 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                   }
                 )}
               </div>
+
+              {/* Bundle Pricing Summary & Action */}
+              <div className="p-4 rounded-2xl bg-black/60 border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-metric font-black text-2xl text-white">
+                      {formatPrice(finalSnackPrice)}
+                    </span>
+                    {snackBundleDiscountPercent > 0 && (
+                      <span className="text-xs font-mono text-zinc-500 line-through">
+                        {formatPrice(rawSnackTotal)}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[11px] font-mono text-zinc-400">
+                    {snackBundleCount} Tubs @ {formatPrice(baseSnackPrice)} each {snackBundleDiscountPercent > 0 && `(Saved ${formatPrice(snackDiscountAmt)})`}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (selectedFlavors.length === 0) {
+                      showToast("Please pick at least one flavor for your snack box!");
+                      return;
+                    }
+                    const customPack: DemoProductItem = {
+                      id: `snack-box-${Date.now()}`,
+                      name: `Artisanal Snack Box (${selectedFlavors.length} Tubs: ${selectedFlavors.join(", ")})`,
+                      category: "Custom Bundle",
+                      price: finalSnackPrice,
+                      originalPrice: rawSnackTotal > finalSnackPrice ? rawSnackTotal : undefined,
+                      image: config.products[0]?.image || "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=800&auto=format&fit=crop&q=80",
+                      description: `Custom curated snack bundle featuring ${selectedFlavors.join(", ")}. Roasted with cold-pressed olive oil.`,
+                      rating: 5.0,
+                      reviewCount: 38,
+                      specs: ["100% Roasted", "Zero Palm Oil", "Gluten Free"],
+                    };
+                    handleAddToCart(customPack);
+                    setIsCartOpen(true);
+                  }}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Add Custom Box to Bag ({formatPrice(finalSnackPrice)}) &gt;
+                </button>
+              </div>
             </div>
           )}
 
-          {/* G. Mandi Rate Ticker */}
+          {/* G. Mandi Commodity Ticker & APMC Escrow */}
           {config.interactiveType === "mandi_rates" && (
-            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/80 border border-emerald-500/30 shadow-2xl">
-              <div className="flex items-center justify-between mb-6">
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.15)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">
-                    REAL-TIME AGRI COMMODITY FEED
+                  <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block">
+                    REAL-TIME AGRI ESCROW COMMODITY FEED
                   </span>
                   <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    Live APMC Mandi Rates & Escrow Prices
+                    Live APMC Mandi Rates &amp; Direct Farmer Settlement
                   </h3>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span className="text-[11px] font-mono text-zinc-400">
-                    Updated 4 mins ago
+                  <span className="text-[11px] font-mono text-zinc-300">
+                    Live Stream: APMC Nizamabad / Unjha
                   </span>
                 </div>
               </div>
@@ -861,20 +1435,43 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                   (mandi: MandiInfoItem, mIdx: number) => (
                     <div
                       key={mIdx}
-                      className="p-4 rounded-2xl bg-black/50 border border-white/10"
+                      className="p-5 rounded-2xl bg-black/50 border border-white/10 flex flex-col justify-between"
                     >
-                      <div className="text-xs text-zinc-400 font-sans mb-1">
-                        {mandi.crop}
+                      <div>
+                        <div className="text-xs text-zinc-400 font-sans mb-1">
+                          {mandi.crop}
+                        </div>
+                        <div className="font-display font-black text-xl text-white">
+                          {mandi.price}
+                        </div>
                       </div>
-                      <div className="font-display font-black text-lg text-white">
-                        {mandi.price}
+                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/10">
+                        <span className="text-[10px] font-mono text-emerald-400 font-bold">
+                          {mandi.trend}
+                        </span>
+                        <span className="text-[9px] font-mono text-zinc-500 uppercase">
+                          Escrow Valid 24h
+                        </span>
                       </div>
-                      <span className="text-[10px] font-mono text-emerald-400 mt-1 inline-block">
-                        {mandi.trend}
-                      </span>
                     </div>
                   )
                 )}
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                <span className="text-zinc-300">
+                  🔒 All forward contracts backed by ICICI Bank Mandi Escrow · Instant T+0 Farmer RTGS.
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    showToast("Simulated forward contract rate locked for 50 Quintals via APMC Escrow!");
+                  }}
+                  className="px-4 py-2 rounded-xl bg-white text-black font-bold uppercase hover:bg-zinc-200 transition-all shrink-0 cursor-pointer"
+                >
+                  Lock Escrow Forward Contract Rate
+                </button>
               </div>
             </div>
           )}
@@ -972,11 +1569,11 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-2">
                   <div>
                     <div className="font-metric font-black text-xl text-white">
-                      ₹{p.price.toLocaleString("en-IN")}
+                      {formatPrice(p.price)}
                     </div>
                     {p.originalPrice && (
                       <div className="text-[10px] font-mono text-zinc-500 line-through">
-                        ₹{p.originalPrice.toLocaleString("en-IN")}
+                        {formatPrice(p.originalPrice)}
                       </div>
                     )}
                   </div>
@@ -1154,10 +1751,10 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     <span className="text-zinc-400">
                       {isFreeShipping
                         ? "✓ FREE Express Delivery Unlocked!"
-                        : `Add ₹${(freeShippingThreshold - cartSubtotal).toLocaleString("en-IN")} more for Free Delivery`}
+                        : `Add ${formatPrice(freeShippingThreshold - cartSubtotal)} more for Free Delivery`}
                     </span>
                     <span className="font-bold text-white">
-                      ₹{cartSubtotal.toLocaleString("en-IN")} / ₹{freeShippingThreshold}
+                      {formatPrice(cartSubtotal)} / {formatPrice(freeShippingThreshold)}
                     </span>
                   </div>
                   <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -1192,7 +1789,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                             {item.name}
                           </h4>
                           <div className="text-xs font-metric font-bold text-zinc-300 mt-0.5">
-                            ₹{item.price.toLocaleString("en-IN")}
+                            {formatPrice(item.price)}
                           </div>
 
                           <div className="flex items-center gap-2 mt-2">
@@ -1231,31 +1828,37 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     <div className="flex justify-between text-zinc-400">
                       <span>Subtotal:</span>
                       <span className="text-white">
-                        ₹{cartSubtotal.toLocaleString("en-IN")}
+                        {formatPrice(cartSubtotal)}
                       </span>
                     </div>
+                    {isCouponApplied && (
+                      <div className="flex justify-between text-emerald-400 font-bold">
+                        <span>VIP 15% Discount (DESIMUCH15):</span>
+                        <span>-{formatPrice(couponDiscount)}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between text-zinc-400">
                       <span>Express Shipping:</span>
                       <span className="text-white">
-                        {shippingFee === 0 ? "FREE" : `₹${shippingFee}`}
+                        {shippingFee === 0 ? "FREE" : formatPrice(shippingFee)}
                       </span>
                     </div>
                     <div className="flex justify-between text-zinc-400">
                       <span>Estimated GST (5%):</span>
                       <span className="text-white">
-                        ₹{estimatedTax.toLocaleString("en-IN")}
+                        {formatPrice(estimatedTax)}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm font-bold text-white pt-2 border-t border-white/10 font-sans">
                       <span>Total Due:</span>
                       <span className="font-metric font-black text-lg">
-                        ₹{grandTotal.toLocaleString("en-IN")}
+                        {formatPrice(grandTotal)}
                       </span>
                     </div>
 
                     <button
                       onClick={handleSimulateCheckout}
-                      className="w-full mt-3 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95"
+                      className="w-full mt-3 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
                     >
                       Proceed to Secure Checkout &gt;
                     </button>
@@ -1338,7 +1941,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                   <div className="flex justify-between text-sm font-bold text-white">
                     <span>Payable:</span>
                     <span className="font-metric font-black text-lg">
-                      ₹{grandTotal.toLocaleString("en-IN")}
+                      {formatPrice(grandTotal)}
                     </span>
                   </div>
                   <button
@@ -1454,7 +2057,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     onClick={handleExecutePayment}
                     className="w-full py-3.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:scale-105 active:scale-95"
                   >
-                    Authorize &amp; Complete Payment (₹{grandTotal.toLocaleString("en-IN")})
+                    Authorize &amp; Complete Payment ({formatPrice(grandTotal)})
                   </button>
                 </div>
               </div>
@@ -1575,11 +2178,11 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                   </h3>
                   <div className="flex items-center gap-3 mt-2">
                     <span className="font-metric font-black text-2xl text-white">
-                      ₹{selectedProductModal.price.toLocaleString("en-IN")}
+                      {formatPrice(selectedProductModal.price)}
                     </span>
                     {selectedProductModal.originalPrice && (
                       <span className="text-xs font-mono text-zinc-500 line-through">
-                        ₹{selectedProductModal.originalPrice.toLocaleString("en-IN")}
+                        {formatPrice(selectedProductModal.originalPrice)}
                       </span>
                     )}
                     <span className="text-[11px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">
@@ -1795,6 +2398,41 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             </div>
           </div>
         </div>
+      )}
+
+      {/* 14. REAL-TIME CUSTOMER SOCIAL PROOF STREAM */}
+      {showSocialProof && (
+        <aside
+          aria-label="Real-time purchase stream"
+          className="fixed bottom-6 left-6 z-40 max-w-sm p-3.5 rounded-2xl bg-[#0d0d12]/95 backdrop-blur-xl border border-white/20 shadow-2xl flex items-center gap-3 animate-fade-in transition-all pointer-events-auto"
+        >
+          <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+            <CheckCircle2 className="w-4 h-4" />
+          </div>
+          <div className="flex-1 min-w-0 text-left">
+            <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 font-bold uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Verified Order · {socialProofStream[socialProofIndex].time}</span>
+            </div>
+            <p className="text-xs text-white font-medium truncate mt-0.5">
+              <strong>{socialProofStream[socialProofIndex].name}</strong> ({socialProofStream[socialProofIndex].city})
+            </p>
+            <p className="text-[11px] text-zinc-400 truncate">
+              Placed order for {socialProofStream[socialProofIndex].item}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              sound.playPluck(100);
+              setShowSocialProof(false);
+            }}
+            className="p-1 rounded-full text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            aria-label="Dismiss notification"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </aside>
       )}
     </div>
   );
