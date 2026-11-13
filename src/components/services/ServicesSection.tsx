@@ -199,7 +199,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
 
                   {/* Turnaround Badge */}
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] text-zinc-300 font-mono mb-4">
-                    <Clock className="w-3 h-3 text-amber-400" />
+                    <Clock className="w-3 h-3 text-zinc-400" />
                     <span>{item.specs.turnaround}</span>
                   </div>
 

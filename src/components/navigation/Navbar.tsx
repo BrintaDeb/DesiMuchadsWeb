@@ -258,7 +258,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           className="flex items-center gap-3.5 focus:outline-none group shrink-0"
         >
           <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.15)] group-hover:scale-105 group-hover:border-white transition-all shrink-0 bg-black">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             <img
               src="/brand-logo.jpg"
               alt="Desi Muchads Logo"

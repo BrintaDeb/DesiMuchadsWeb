@@ -165,7 +165,7 @@ export function CaseStudiesSection() {
 
                   {/* Thumbnail Image Container with Zoom & Overlays */}
                   <div className="relative flex-1 w-full overflow-hidden bg-black">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    { }
                     <img
                       src={cs.thumbnail}
                       alt={`${cs.client} Website Thumbnail`}

@@ -312,7 +312,7 @@ export function ThreeHeroCenterpiece() {
       quillChromePBR.dispose();
       obsidianPBR.dispose();
     };
-  }, []);
+  }, [webGlSupported]);
 
   // WebGL Unsupported Fallback
   if (!webGlSupported) {

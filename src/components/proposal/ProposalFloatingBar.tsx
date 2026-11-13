@@ -62,7 +62,7 @@ export function ProposalFloatingBar() {
             aria-label="Open Proposal Bar"
           >
             <div className="w-6 h-6 rounded-full overflow-hidden border border-white/50 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               <img src="/brand-logo.jpg" alt="Logo" className="w-full h-full object-cover" />
             </div>
             <span className="font-mono text-xs font-bold text-white">PROPOSAL</span>
@@ -75,7 +75,7 @@ export function ProposalFloatingBar() {
             {/* Left Summary Badge with Brand Crest */}
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/40 shadow-sm bg-black shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                { }
                 <img
                   src="/brand-logo.jpg"
                   alt="Desi Muchads Logo"

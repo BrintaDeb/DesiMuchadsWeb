@@ -73,7 +73,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
             {/* Official Header Brand Logo Badge */}
             <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.25)] mb-5 bg-[#121215] transform-gpu hover:scale-105 transition-transform">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               <img
                 src="/brand-logo.jpg"
                 alt="Desi Muchads Logo"

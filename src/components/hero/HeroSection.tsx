@@ -28,7 +28,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
       {/* Subtle Monochrome Drawing Watermark */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.04] mix-blend-screen grayscale">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img
           src="/art/indian-art-bg-royal.jpg"
           alt="Artistry Background Watermark"
@@ -44,7 +44,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
             {/* Eyebrow Badge with Brand Logo */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md">
               <div className="w-4 h-4 rounded-full overflow-hidden border border-white/40 bg-black shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                { }
                 <img
                   src="/brand-logo.jpg"
                   alt="Desi Muchads Digital Performance Marketing Agency"
@@ -58,8 +58,8 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
             {/* Giant Keyword-Rich Semantic Headline */}
             <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.08]">
-              <span className="block text-zinc-400 text-sm sm:text-xl font-mono tracking-widest mb-1 font-bold">
-                HIGH-ROAS PERFORMANCE MARKETING &amp; CREATIVE AGENCY
+              <span className="block text-zinc-400 text-xs sm:text-sm md:text-base font-mono tracking-widest mb-2 font-bold">
+                DESI MUCHADS ✦ HIGH-ROAS PERFORMANCE MARKETING &amp; CREATIVE AGENCY
               </span>
               Scaling Ambitious Brands Across India &amp; Beyond
             </h1>

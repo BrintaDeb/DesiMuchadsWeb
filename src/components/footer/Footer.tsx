@@ -34,7 +34,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
     <footer id="footer" className="relative bg-[#050507] text-white pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none font-display border-t border-white/10">
       {/* Subtle Monochrome Artistry Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03] mix-blend-screen grayscale">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         <img
           src="/art/indian-art-bg-royal.jpg"
           alt="Artistry Background Watermark"
@@ -86,7 +86,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
             <div className="flex items-center gap-3.5">
               <div className="relative group shrink-0">
                 <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/40 shadow-xl bg-black p-0.5">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  { }
                   <img
                     src="/brand-logo.jpg"
                     alt="Desi Muchads Logo"
@@ -203,8 +203,8 @@ export function Footer({ onOpenKundli }: FooterProps) {
               CONTACTS
             </h4>
             <div className="space-y-2 text-xs text-zinc-400 font-normal leading-relaxed font-sans">
-              <a href="mailto:buzz@desimuchads.com" className="text-white font-mono hover:underline block font-semibold">
-                buzz@desimuchads.com
+              <a href="mailto:buzz@desimuchads.agency" className="text-white font-mono hover:underline block font-semibold">
+                buzz@desimuchads.agency
               </a>
               <p>+91 (0) 9999 999 999</p>
               <div className="pt-2 border-t border-white/10 space-y-1">
@@ -284,7 +284,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
           {/* Prominent Circular Brand Logo Crest */}
           <div className="mb-6 relative group">
             <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-[2px] border-white/40 shadow-[0_0_35px_rgba(255,255,255,0.15)] bg-black p-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               <img
                 src="/brand-logo.jpg"
                 alt="Desi Muchads Crest"
