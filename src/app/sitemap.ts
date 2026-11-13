@@ -4,14 +4,14 @@ import { AGENCY_PROJECTS } from "@/data/projectsData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://desimuchads.agency";
-  const currentDate = new Date("2025-01-01");
+  const currentDate = new Date("2026-03-15T00:00:00.000Z");
 
   // 1. Core Pages
   const routes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
       lastModified: currentDate,
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       priority: 1.0,
     },
   ];
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.push({
       url: `${baseUrl}/services/${service.slug}`,
       lastModified: currentDate,
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
       priority: 0.9,
     });
   });
@@ -31,8 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.push({
       url: `${baseUrl}/work/${project.slug}`,
       lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.8,
+      changeFrequency: "weekly",
+      priority: 0.85,
     });
   });
 
@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/demos/${project.slug}`,
       lastModified: currentDate,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     });
   });
 

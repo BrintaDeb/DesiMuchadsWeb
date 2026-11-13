@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import {
   ArrowLeft,
   ArrowRight,
@@ -26,14 +27,50 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = AGENCY_PROJECTS.find((p) => p.slug === slug);
   if (!project) return { title: "Case Study Not Found" };
 
+  const pageUrl = `https://desimuchads.agency/work/${slug}`;
+
   return {
-    title: `${project.client} Case Study | DESI MUCHADS ✦ High-ROAS Agency`,
-    description: `${project.heroStat} · ${project.tagline}`,
+    title: `${project.client} Case Study (${project.heroStat}) | DESI MUCHADS ✦ High-ROAS Agency`,
+    description: `${project.tagline} Verified Results: ${project.heroStat}. The Mushkil, Jugaad, and Nateeja breakdown by Desi Muchads Digital Growth Squad.`,
+    keywords: [
+      project.client,
+      `${project.client} Case Study`,
+      `${project.client} Performance Marketing`,
+      `${project.category} Growth Agency India`,
+      "Desi Muchads Work",
+      "High ROAS Case Study",
+      ...project.techStack,
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: `${project.client} Case Study · ${project.heroStat} | DESI MUCHADS`,
+      description: project.tagline,
+      url: pageUrl,
+      siteName: "DESI MUCHADS",
+      images: [
+        {
+          url: "/brand-logo-white.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${project.client} Case Study - Desi Muchads`,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.client} Case Study · ${project.heroStat} | DESI MUCHADS`,
+      description: project.tagline,
+      images: ["/brand-logo-white.jpg"],
+      creator: "@desimuchads",
+    },
   };
 }
 
@@ -50,8 +87,86 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     AGENCY_PROJECTS[(currentIndex + 1) % AGENCY_PROJECTS.length];
   const matchedService = AGENCY_SERVICES.find((s) => s.id === project.serviceId);
 
+  // Structured Data: Article / CreativeWork Schema
+  const caseStudySchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${project.client} Case Study: How Desi Muchads Delivered ${project.heroStat}`,
+    description: `${project.tagline}. ${project.desc}`,
+    author: {
+      "@type": "Organization",
+      name: "DESI MUCHADS Digital Agency",
+      url: "https://desimuchads.agency",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "DESI MUCHADS",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://desimuchads.agency/brand-logo-white.jpg",
+      },
+    },
+    datePublished: "2025-01-15T00:00:00+05:30",
+    dateModified: "2026-03-15T00:00:00+05:30",
+    mainEntityOfPage: `https://desimuchads.agency/work/${project.slug}`,
+    about: {
+      "@type": "Organization",
+      name: project.client,
+    },
+    review: {
+      "@type": "Review",
+      reviewBody: project.testimonial.quote,
+      author: {
+        "@type": "Person",
+        name: project.testimonial.author,
+        jobTitle: project.testimonial.role,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+  };
+
+  // Structured Data: BreadcrumbList Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Darbar Home",
+        item: "https://desimuchads.agency",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Portfolio Work",
+        item: "https://desimuchads.agency/#karname",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: project.client,
+        item: `https://desimuchads.agency/work/${project.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="relative min-h-screen bg-[#09090b] text-white selection:bg-white selection:text-black font-display overflow-x-hidden">
+      {/* Injected Rich Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Background textures */}
       <KhadiNoiseOverlay />
       <IndianArtBackgroundOverlay />

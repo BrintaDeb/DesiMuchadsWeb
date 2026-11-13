@@ -47,23 +47,26 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/brand-logo.jpg"
-                  alt="Desi Muchads"
+                  alt="Desi Muchads Digital Performance Marketing Agency"
                   className="w-full h-full object-cover"
                 />
               </div>
               <span className="text-[10px] sm:text-xs font-royal font-bold uppercase tracking-widest text-white">
-                E-COMMERCE &amp; D2C PERFORMANCE ARCHITECTURE
+                DESI MUCHADS · PERFORMANCE &amp; D2C ARCHITECTURE
               </span>
             </div>
 
-            {/* Giant Headline */}
+            {/* Giant Keyword-Rich Semantic Headline */}
             <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.08]">
-              Performance marketing agency for e-commerce growth
+              <span className="block text-zinc-400 text-sm sm:text-xl font-mono tracking-widest mb-1 font-bold">
+                HIGH-ROAS PERFORMANCE MARKETING &amp; CREATIVE AGENCY
+              </span>
+              Scaling Ambitious Brands Across India &amp; Beyond
             </h1>
 
             {/* Subhead Paragraph */}
             <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl font-sans">
-              We love digital. We’re experts in brand-building experiences and results-driven marketing — turning ambitious consumer brands into category kings.
+              Desi Muchads engineers high-converting marketing architectures, viral social storytelling, sub-second Next.js web platforms, and hyper-growth Quick Commerce campaigns for visionary brands.
             </p>
 
             {/* Action Buttons */}

@@ -2,8 +2,8 @@
 
 import React from "react";
 import { SectionDivider } from "../common/SectionDivider";
-import { ChaiCupIcon, MoustacheSVG } from "../common/Icons";
-import { Sparkles, Rocket, TrendingUp, Layers } from "lucide-react";
+import { ChaiCupIcon } from "../common/Icons";
+import { Rocket, TrendingUp, Layers } from "lucide-react";
 
 export function MethodologySection() {
   const steps = [

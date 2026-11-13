@@ -17,7 +17,9 @@ export function CustomCursor() {
   useEffect(() => {
     // Only enable on fine pointer devices (desktop)
     if (window.matchMedia("(pointer: coarse)").matches) return;
-    setMounted(true);
+    const rafId = requestAnimationFrame(() => {
+      setMounted(true);
+    });
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
@@ -64,6 +66,7 @@ export function CustomCursor() {
     animationFrameId = requestAnimationFrame(render);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);

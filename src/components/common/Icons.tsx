@@ -12,10 +12,10 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
  */
 export function MoustacheSVG({
   className = "w-24 h-12 text-white",
-  strokeWidth = 2,
-  animated = false,
+  _strokeWidth = 2,
+  _animated = false,
   ...props
-}: SVGProps & { strokeWidth?: number; animated?: boolean }) {
+}: SVGProps & { _strokeWidth?: number; _animated?: boolean }) {
   return (
     <svg
       viewBox="0 0 240 90"

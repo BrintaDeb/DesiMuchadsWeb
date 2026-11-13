@@ -274,7 +274,7 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                     <Link
                       href={`/services/${item.slug}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="text-[11px] font-mono font-bold text-amber-300 hover:text-white flex items-center gap-1 group/slink transition-colors"
+                      className="text-[11px] font-mono font-bold text-white hover:text-zinc-300 flex items-center gap-1 group/slink transition-colors"
                     >
                       <span>Explore Dedicated Page</span>
                       <ArrowRight className="w-3 h-3 group-hover/slink:translate-x-1 transition-transform" />

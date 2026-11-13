@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import {
   ArrowLeft,
   ArrowRight,
@@ -39,14 +40,50 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const service = AGENCY_SERVICES.find((s) => s.slug === slug);
   if (!service) return { title: "Service Not Found" };
 
+  const pageUrl = `https://desimuchads.agency/services/${slug}`;
+
   return {
-    title: `${service.title} | DESI MUCHADS ✦ High-ROAS Agency`,
-    description: service.shortDesc,
+    title: `${service.title} Agency India | DESI MUCHADS ✦ High-ROAS Growth`,
+    description: `${service.shortDesc} Scaled across ₹140Cr+ tracked GMV. Unapologetic Indian creative storytelling paired with ruthless mathematical ROI.`,
+    keywords: [
+      service.title,
+      `${service.title} Agency India`,
+      `${service.title} Delhi NCR Mumbai Bangalore`,
+      "Desi Muchads",
+      "Performance Marketing Agency",
+      "High ROAS Agency India",
+      ...service.specs.deliverables,
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: `${service.title} Agency India | DESI MUCHADS`,
+      description: service.shortDesc,
+      url: pageUrl,
+      siteName: "DESI MUCHADS",
+      images: [
+        {
+          url: "/brand-logo-white.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${service.title} - Desi Muchads`,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} Agency India | DESI MUCHADS`,
+      description: service.shortDesc,
+      images: ["/brand-logo-white.jpg"],
+      creator: "@desimuchads",
+    },
   };
 }
 
@@ -57,6 +94,74 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   if (!service) {
     notFound();
   }
+
+  // Structured Data: Service Schema
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    serviceType: service.title,
+    provider: {
+      "@type": "Organization",
+      name: "DESI MUCHADS",
+      url: "https://desimuchads.agency",
+    },
+    areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates"],
+    description: service.fullDesc,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${service.title} Deliverables`,
+      itemListElement: service.specs.deliverables.map((deliv: string, idx: number) => ({
+        "@type": "Offer",
+        position: idx + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: deliv,
+          description: `${service.title} specialized agency deliverable: ${deliv}`,
+        },
+      })),
+    },
+  };
+
+  // Structured Data: FAQPage Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: service.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.a,
+      },
+    })),
+  };
+
+  // Structured Data: BreadcrumbList Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Darbar Home",
+        item: "https://desimuchads.agency",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: "https://desimuchads.agency/#services",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: `https://desimuchads.agency/services/${service.slug}`,
+      },
+    ],
+  };
 
   // Find demo projects matching this service
   const matchedProjects = AGENCY_PROJECTS.filter((p) => p.serviceId === service.id);
@@ -87,6 +192,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <div className="relative min-h-screen bg-[#09090b] text-white selection:bg-white selection:text-black font-display overflow-x-hidden">
+      {/* Injected Rich Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Background textures */}
       <KhadiNoiseOverlay />
       <IndianArtBackgroundOverlay />

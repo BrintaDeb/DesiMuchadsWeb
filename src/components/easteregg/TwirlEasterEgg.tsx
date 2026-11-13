@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MoustacheSVG, FiligreeCorner } from "../common/Icons";
-import { Sparkles, Gift, Check, ArrowRight } from "lucide-react";
+import { Gift } from "lucide-react";
 import confetti from "canvas-confetti";
 import { sound } from "@/lib/sound";
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { Clock, MapPin, Navigation, ArrowRight } from "lucide-react";
 import { sound } from "@/lib/sound";
 
@@ -147,41 +148,51 @@ export function Footer({ onOpenKundli }: FooterProps) {
             </ul>
           </div>
 
-          {/* Capabilities Links */}
+          {/* Capabilities Links (Deep Indexable SEO Routes) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="font-display text-xs uppercase tracking-widest text-white font-bold">
               CAPABILITIES
             </h4>
             <ul className="space-y-2 text-xs font-normal font-sans">
               <li>
-                <a href="#service-social" className="text-zinc-400 hover:text-white transition-colors">
-                  Social Media Services
-                </a>
+                <Link href="/services/performance-marketing" className="text-zinc-400 hover:text-white transition-colors">
+                  Performance Marketing &amp; ROAS
+                </Link>
               </li>
               <li>
-                <a href="#service-performance" className="text-zinc-400 hover:text-white transition-colors">
-                  Performance Marketing
-                </a>
+                <Link href="/services/seo-sem" className="text-zinc-400 hover:text-white transition-colors">
+                  SEO &amp; High-Intent SEM
+                </Link>
               </li>
               <li>
-                <a href="#service-seo" className="text-zinc-400 hover:text-white transition-colors">
-                  SEO &amp; SEM Services
-                </a>
+                <Link href="/services/quick-commerce" className="text-zinc-400 hover:text-white transition-colors">
+                  Quick Commerce (Zepto &amp; Blinkit)
+                </Link>
               </li>
               <li>
-                <a href="#service-webdev" className="text-zinc-400 hover:text-white transition-colors">
-                  Web Development
-                </a>
+                <Link href="/services/ecommerce-services" className="text-zinc-400 hover:text-white transition-colors">
+                  D2C E-Commerce &amp; Shopify Plus
+                </Link>
               </li>
               <li>
-                <a href="#service-ecommerce" className="text-zinc-400 hover:text-white transition-colors">
-                  E-Commerce Solutions
-                </a>
+                <Link href="/services/web-development" className="text-zinc-400 hover:text-white transition-colors">
+                  Full-Stack Next.js 16 Web Apps
+                </Link>
               </li>
               <li>
-                <a href="#service-qcommerce" className="text-zinc-400 hover:text-white transition-colors">
-                  Quick Commerce Services
-                </a>
+                <Link href="/services/social-media" className="text-zinc-400 hover:text-white transition-colors">
+                  Viral Social Media &amp; Reels
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/lead-generation" className="text-zinc-400 hover:text-white transition-colors">
+                  High-Ticket B2B Lead Gen
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/packaging-label" className="text-zinc-400 hover:text-white transition-colors">
+                  Luxury Packaging &amp; Identity
+                </Link>
               </li>
             </ul>
           </div>
