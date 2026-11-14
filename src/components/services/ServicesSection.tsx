@@ -132,11 +132,10 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                     sound.playPluck(150);
                     setSelectedStage(stageKey as typeof selectedStage);
                   }}
-                  className={`px-3.5 py-2 rounded-full text-xs font-mono tracking-wide transition-all shrink-0 min-h-[38px] flex items-center ${
-                    isSelected
-                      ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.2)] scale-105"
-                      : "bg-[#121215] border border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
-                  }`}
+                  className={`px-3.5 py-2 rounded-full text-xs font-mono tracking-wide transition-all shrink-0 min-h-[38px] flex items-center ${isSelected
+                    ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.2)] scale-105"
+                    : "bg-[#121215] border border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
+                    }`}
                 >
                   {cfg.label}
                 </button>
@@ -177,11 +176,10 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                       sound.playPluck(160);
                       setSearchQuery(isSelected ? "" : tag);
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-[10px] font-mono tracking-wider transition-all whitespace-nowrap border ${
-                      isSelected
-                        ? "bg-white text-black border-white font-bold"
-                        : "bg-white/5 border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-mono tracking-wider transition-all whitespace-nowrap border ${isSelected
+                      ? "bg-white text-black border-white font-bold"
+                      : "bg-white/5 border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
+                      }`}
                   >
                     {tag}
                   </button>
@@ -224,13 +222,12 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                   sound.playChime();
                   onOpenKundli();
                 }}
-                className={`group shimmer-card rounded-2xl p-6 sm:p-7 ios-glass-card cursor-pointer scroll-mt-32 transition-all duration-300 ${
-                  isHovered
-                    ? "border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)]"
-                    : isDimmed
+                className={`group shimmer-card rounded-2xl p-6 sm:p-7 ios-glass-card cursor-pointer scroll-mt-32 transition-all duration-300 ${isHovered
+                  ? "border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)]"
+                  : isDimmed
                     ? "opacity-35 hover:opacity-100 border-white/10"
                     : "border-white/15 hover:border-white/30"
-                }`}
+                  }`}
               >
                 <div>
                   {/* Top Row: Icon Badge & Metric with 3D Parallax Depth */}

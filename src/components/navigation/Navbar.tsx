@@ -24,8 +24,6 @@ import {
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { AGENCY_SERVICES } from "@/data/servicesData";
-import { AudioVisualizer } from "./AudioVisualizer";
-import { SonicToggle } from "./SonicToggle";
 import { ThemeToggle } from "./ThemeToggle";
 import { CommandMenu } from "../common/CommandMenu";
 
@@ -533,11 +531,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           {/* Quick Search & Command Palette (⌘K) */}
           <button
             onClick={() => {
-              sound.playPluck(160);
               setIsCommandOpen(true);
             }}
             type="button"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            className="flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
             title="Open Quick Search & Command Palette (⌘K)"
             aria-label="Search and quick actions"
           >
@@ -548,23 +545,16 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             </kbd>
           </button>
 
-          {/* Sonic UI Effects Toggle */}
-          <SonicToggle />
-
-          {/* Indian Tanpura + Tabla Ambient Beats */}
-          <AudioVisualizer />
-
           {/* Luxury Visual Density Switcher */}
           <ThemeToggle />
 
           {/* Signature Stark White Button */}
           <button
             onClick={() => {
-              sound.playChime();
               onOpenKundli();
             }}
             type="button"
-            className="btn-luxury-shine px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 flex items-center gap-1.5 shrink-0"
+            className="btn-luxury-shine px-6 py-2.5 min-h-[40px] rounded-full bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_22px_rgba(255,255,255,0.2)] active:scale-95 flex items-center gap-1.5 shrink-0"
           >
             <span>LET&apos;S TALK</span>
             <span className="text-sm font-bold">&gt;</span>
@@ -575,7 +565,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         <div className="flex items-center gap-2 lg:hidden">
           <button
             onClick={() => {
-              sound.playPluck(160);
               setIsCommandOpen(true);
             }}
             type="button"
@@ -587,7 +576,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
           <button
             onClick={() => {
-              sound.playPluck(mobileMenuOpen ? 120 : 180);
               setMobileMenuOpen(!mobileMenuOpen);
             }}
             className="relative p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] focus:outline-none focus:ring-1 focus:ring-white/40 touch-hit-expand"
@@ -603,7 +591,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
       {mobileMenuOpen && (
         <div
           onClick={() => {
-            sound.playPluck(120);
             setMobileMenuOpen(false);
           }}
           className="fixed inset-0 top-[78px] sm:top-[86px] bg-black/80 backdrop-blur-md z-40 lg:hidden transition-opacity duration-300"
@@ -621,7 +608,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  sound.playPluck(160);
                   setIsCommandOpen(true);
                 }}
                 type="button"
@@ -636,27 +622,39 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 </kbd>
               </button>
 
-              {/* Tool Row 2: Tactile Glass Control Deck (Sonic FX, Desi Beats, Darbar Portal) */}
+              {/* Tool Row 2: High-Utility Tactical Deck (Calculator, Brand Kundli, Client Darbar) */}
               <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
-                {/* Tile 1: Sonic Masala UI Audio */}
-                <div className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Sonic Masala</span>
-                  <SonicToggle />
-                </div>
+                {/* Tile 1: Hisab-Kitab Calculator */}
+                <a
+                  href="#calculator"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
+                >
+                  <Calculator className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
+                  <span className="text-[11px] font-display font-bold text-white group-hover:text-zinc-200 truncate w-full">
+                    Hisab-Kitab
+                  </span>
+                </a>
 
-                {/* Tile 2: Ambient Desi Beats */}
-                <div className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Desi Beats</span>
-                  <AudioVisualizer />
-                </div>
+                {/* Tile 2: AI Brand Kundli Audit */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenKundli();
+                  }}
+                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
+                >
+                  <ShieldCheck className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
+                  <span className="text-[11px] font-display font-bold text-white group-hover:text-zinc-200 truncate w-full">
+                    Brand Kundli
+                  </span>
+                </button>
 
                 {/* Tile 3: Client Darbar Quick Launcher */}
                 <a
                   href="#portal"
-                  onClick={() => {
-                    sound.playPluck(150);
-                    setMobileMenuOpen(false);
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
                 >
                   <div className="flex items-center gap-1">
