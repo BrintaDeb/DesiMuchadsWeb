@@ -10,7 +10,11 @@ import {
   Percent,
   ShieldCheck,
   Sparkles,
+  Copy,
+  Plus,
+  Minus,
 } from "lucide-react";
+import confetti from "canvas-confetti";
 import { FiligreeCorner } from "@/components/common/Icons";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
@@ -24,6 +28,7 @@ export function RoiCalculator() {
   const [marginPercent, setMarginPercent] = useState(65); // Gross product margin
   const [industry, setIndustry] = useState("Fashion & D2C Apparel");
   const [objective, setObjective] = useState<"ecommerce" | "leads">("ecommerce");
+  const [isCopied, setIsCopied] = useState(false);
 
   const industries = [
     {
@@ -173,6 +178,38 @@ export function RoiCalculator() {
     window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
   };
 
+  const handleCopyHisab = () => {
+    sound.playChime();
+    const summary =
+      `Desi Muchads Precision Unit Economics Hisab:\n` +
+      `Industry: ${industry} (${selectedIndustry.hindi})\n` +
+      `Monthly Ad Investment: ${formatINR(budget)}\n` +
+      `Projected Topline Revenue: ${formatINR(metrics.estimatedRevenue)} (${metrics.roasMultiplier}x ROAS)\n` +
+      `Net Cashflow Contribution: ${formatINR(metrics.netProfit)} (${metrics.isProfitable ? "Profitable CM3" : "Re-balancing"})\n` +
+      `Break-Even Benchmark: ${metrics.breakEvenRoas}x\n` +
+      `Projected Orders: ${formatNumber(metrics.estimatedOrders)} @ ${formatINR(metrics.cac)} CAC\n` +
+      `https://desimuchads.com/#calculator`;
+
+    navigator.clipboard.writeText(summary);
+    setIsCopied(true);
+    if (metrics.netProfit > 500000) {
+      try {
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.7 },
+          colors: ["#ffffff", "#e4e4e7", "#a1a1aa"],
+        });
+      } catch {}
+    }
+    setTimeout(() => setIsCopied(false), 2500);
+  };
+
+  const stepBudget = (delta: number) => {
+    sound.playPluck(130);
+    setBudget((prev) => Math.min(2500000, Math.max(25000, prev + delta)));
+  };
+
   const budgetPct = Math.min(100, Math.max(0, ((budget - 25000) / (2500000 - 25000)) * 100));
   const aovPct = Math.min(100, Math.max(0, ((aov - 500) / (8000 - 500)) * 100));
 
@@ -234,24 +271,46 @@ export function RoiCalculator() {
                   </div>
                 </div>
 
-                {/* Range Slider with Glowing Silver Fill */}
-                <input
-                  id={budgetId}
-                  aria-label="Monthly Ad Budget Slider"
-                  type="range"
-                  min="25000"
-                  max="2500000"
-                  step="25000"
-                  value={budget}
-                  onChange={(e) => {
-                    sound.playPluck(120);
-                    setBudget(Number(e.target.value));
-                  }}
-                  style={{
-                    background: `linear-gradient(to right, #ffffff 0%, #ffffff ${budgetPct}%, #27272a ${budgetPct}%, #27272a 100%)`,
-                  }}
-                  className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-white transition-all"
-                />
+                {/* Range Slider with Glowing Silver Fill & Fine-Tuning Steppers */}
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => stepBudget(-25000)}
+                    disabled={budget <= 25000}
+                    className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center shrink-0 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                    aria-label="Decrease budget by 25,000"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+
+                  <input
+                    id={budgetId}
+                    aria-label="Monthly Ad Budget Slider"
+                    type="range"
+                    min="25000"
+                    max="2500000"
+                    step="25000"
+                    value={budget}
+                    onChange={(e) => {
+                      sound.playPluck(120);
+                      setBudget(Number(e.target.value));
+                    }}
+                    style={{
+                      background: `linear-gradient(to right, #ffffff 0%, #ffffff ${budgetPct}%, #27272a ${budgetPct}%, #27272a 100%)`,
+                    }}
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-white transition-all"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => stepBudget(25000)}
+                    disabled={budget >= 2500000}
+                    className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center shrink-0 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                    aria-label="Increase budget by 25,000"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
 
                 {/* Quick Preset Buttons */}
                 <div className="mt-3 flex items-center justify-between gap-1.5 flex-wrap">
@@ -588,17 +647,60 @@ export function RoiCalculator() {
                     </span>
                   </div>
                 </div>
+
+                {/* Modern Web Guidance: Semantic Accessible Table for Screen Readers */}
+                <table className="sr-only-accessible-table">
+                  <caption>Unit Economics Projection Summary</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Factor</th>
+                      <th scope="col">Projection</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Industry</td><td>{industry} ({selectedIndustry.hindi})</td></tr>
+                    <tr><td>Monthly Ad Fuel</td><td>{formatINR(budget)}</td></tr>
+                    <tr><td>Projected Revenue</td><td>{formatINR(metrics.estimatedRevenue)}</td></tr>
+                    <tr><td>Net Cashflow Contribution</td><td>{formatINR(metrics.netProfit)}</td></tr>
+                    <tr><td>Target ROAS</td><td>{metrics.roasMultiplier}x</td></tr>
+                    <tr><td>Break-even ROAS</td><td>{metrics.breakEvenRoas}x</td></tr>
+                    <tr><td>Projected Orders</td><td>{formatNumber(metrics.estimatedOrders)}</td></tr>
+                    <tr><td>Target CAC</td><td>{formatINR(metrics.cac)}</td></tr>
+                  </tbody>
+                </table>
               </div>
 
-              {/* Action Trigger Button */}
-              <div className="mt-6 pt-5 border-t border-white/10">
+              {/* Action Trigger Buttons */}
+              <div className="mt-6 pt-5 border-t border-white/10 space-y-2.5">
                 <button
                   type="button"
                   onClick={handleWhatsAppShare}
-                  className="btn-luxury-shine w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.25)] transition-all flex items-center justify-center gap-2.5 active:scale-95"
+                  className="btn-luxury-shine w-full py-3.5 sm:py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.25)] transition-all flex items-center justify-center gap-2.5 active:scale-95"
                 >
                   <Send className="w-4 h-4 text-black" />
                   <span>LOCK IN THIS GROWTH RUNWAY →</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleCopyHisab}
+                  className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 active:scale-95 ${
+                    isCopied
+                      ? "bg-emerald-950/80 border-emerald-500/50 text-emerald-300"
+                      : "bg-white/5 border-white/15 text-zinc-300 hover:text-white hover:border-white/40 hover:bg-white/10"
+                  }`}
+                >
+                  {isCopied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>✓ HISAB-KITAB COPIED TO CLIPBOARD</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>COPY FULL HISAB-KITAB SUMMARY</span>
+                    </>
+                  )}
                 </button>
               </div>
             </SpotlightCard>

@@ -30,6 +30,15 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [expandedSpecs, setExpandedSpecs] = useState<Record<string, boolean>>({});
   const [selectedStage, setSelectedStage] = useState<"all" | "early" | "scale" | "omnichannel">("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const quickTags = [
+    "Performance Marketing",
+    "Quick Commerce",
+    "SEO & GEO",
+    "Web Development",
+    "Packaging Design",
+  ];
 
   const stageConfigs: Record<string, { label: string; ids: string[]; badge: string }> = {
     all: {
@@ -134,6 +143,52 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
               );
             })}
           </div>
+
+          {/* Interactive Instant Capability Search & Quick Tag Filter Bar */}
+          <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="relative flex-1 max-w-md">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <input
+                type="text"
+                placeholder="Search capabilities (e.g. Meta, Shopify, Quick Commerce, SEO)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#121215] border border-white/15 focus:border-white/50 text-xs font-mono text-white placeholder-zinc-500 rounded-xl pl-10 pr-8 py-2.5 outline-none transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white p-1"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              {quickTags.map((tag) => {
+                const isSelected = searchQuery.toLowerCase() === tag.toLowerCase();
+                return (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setSearchQuery(isSelected ? "" : tag);
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-mono tracking-wider transition-all whitespace-nowrap border ${
+                      isSelected
+                        ? "bg-white text-black border-white font-bold"
+                        : "bg-white/5 border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* 8 Capabilities Cards 4x2 Highlighted Panels Grid with Specular Spotlight */}
@@ -143,6 +198,16 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
             const isExpanded = !!expandedSpecs[item.id];
             const elementId = item.anchor.replace("#", "");
             const isStageMatch = activeStageConfig.ids.includes(item.id);
+
+            const q = searchQuery.trim().toLowerCase();
+            const matchesSearch =
+              !q ||
+              item.title.toLowerCase().includes(q) ||
+              item.shortDesc.toLowerCase().includes(q) ||
+              item.specs.tools.some((t) => t.toLowerCase().includes(q)) ||
+              item.specs.deliverables.some((d) => d.toLowerCase().includes(q));
+
+            const isDimmed = !matchesSearch || (selectedStage !== "all" && !isStageMatch);
 
             return (
               <SpotlightCard
@@ -162,10 +227,8 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                 className={`group shimmer-card rounded-2xl p-6 sm:p-7 ios-glass-card cursor-pointer scroll-mt-32 transition-all duration-300 ${
                   isHovered
                     ? "border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)]"
-                    : selectedStage !== "all" && isStageMatch
-                    ? "border-white/40 shadow-[0_0_25px_rgba(255,255,255,0.06)]"
-                    : selectedStage !== "all"
-                    ? "opacity-50 hover:opacity-100 hover:border-white/30"
+                    : isDimmed
+                    ? "opacity-35 hover:opacity-100 border-white/10"
                     : "border-white/15 hover:border-white/30"
                 }`}
               >

@@ -122,17 +122,24 @@ export function SpotlightCard({
       targetX.current = Math.max(-1, Math.min(1, normX));
       targetY.current = Math.max(-1, Math.min(1, normY));
 
+      const glareXPct = (x / rect.width) * 100;
+      const glareYPct = (y / rect.height) * 100;
+
+      // Modern Web Guidance: Update coordinates on container for registered custom properties
+      if (cardRef.current) {
+        cardRef.current.style.setProperty("--mouse-x", `${glareXPct.toFixed(1)}%`);
+        cardRef.current.style.setProperty("--mouse-y", `${glareYPct.toFixed(1)}%`);
+      }
+
       // Dynamic Glare coordinates
       if (glareRef.current) {
-        const glareXPct = (x / rect.width) * 100;
-        const glareYPct = (y / rect.height) * 100;
         glareRef.current.style.background = `radial-gradient(400px circle at ${glareXPct}% ${glareYPct}%, ${spotlightColor}, transparent 70%)`;
       }
 
       // Dynamic Border Glint coordinates
       if (borderGlintRef.current) {
-        borderGlintRef.current.style.maskImage = `radial-gradient(280px circle at ${x}px ${y}px, black, transparent 75%)`;
-        borderGlintRef.current.style.webkitMaskImage = `radial-gradient(280px circle at ${x}px ${y}px, black, transparent 75%)`;
+        borderGlintRef.current.style.maskImage = `radial-gradient(280px circle at ${x}px ${y}px, black var(--inner-size, 0%), transparent var(--outer-size, 75%))`;
+        borderGlintRef.current.style.webkitMaskImage = `radial-gradient(280px circle at ${x}px ${y}px, black var(--inner-size, 0%), transparent var(--outer-size, 75%))`;
       }
 
       if (!animFrameId.current) {
@@ -162,6 +169,11 @@ export function SpotlightCard({
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (props.onMouseEnter) props.onMouseEnter(e);
       setIsHovered(true);
+      if (cardRef.current) {
+        cardRef.current.style.setProperty("--inner-size", "80px");
+        cardRef.current.style.setProperty("--outer-size", "220px");
+        cardRef.current.style.setProperty("--spotlight-opacity", "1");
+      }
       if (!animFrameId.current) {
         animFrameId.current = requestAnimationFrame(updatePhysics);
       }
@@ -171,6 +183,11 @@ export function SpotlightCard({
 
   const handleTouchStart = useCallback(() => {
     setIsHovered(true);
+    if (cardRef.current) {
+      cardRef.current.style.setProperty("--inner-size", "80px");
+      cardRef.current.style.setProperty("--outer-size", "220px");
+      cardRef.current.style.setProperty("--spotlight-opacity", "1");
+    }
     if (!animFrameId.current) {
       animFrameId.current = requestAnimationFrame(updatePhysics);
     }
@@ -182,6 +199,11 @@ export function SpotlightCard({
       setIsHovered(false);
       targetX.current = 0;
       targetY.current = 0;
+      if (cardRef.current) {
+        cardRef.current.style.setProperty("--inner-size", "0px");
+        cardRef.current.style.setProperty("--outer-size", "0px");
+        cardRef.current.style.setProperty("--spotlight-opacity", "0");
+      }
       if (!animFrameId.current) {
         animFrameId.current = requestAnimationFrame(updatePhysics);
       }
@@ -193,6 +215,11 @@ export function SpotlightCard({
     setIsHovered(false);
     targetX.current = 0;
     targetY.current = 0;
+    if (cardRef.current) {
+      cardRef.current.style.setProperty("--inner-size", "0px");
+      cardRef.current.style.setProperty("--outer-size", "0px");
+      cardRef.current.style.setProperty("--spotlight-opacity", "0");
+    }
     if (!animFrameId.current) {
       animFrameId.current = requestAnimationFrame(updatePhysics);
     }
