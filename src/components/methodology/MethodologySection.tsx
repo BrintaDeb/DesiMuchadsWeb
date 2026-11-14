@@ -3,6 +3,7 @@
 import React from "react";
 import { SectionDivider } from "../common/SectionDivider";
 import { ChaiCupIcon } from "../common/Icons";
+import { SpotlightCard } from "../common/SpotlightCard";
 import { Rocket, TrendingUp, Layers } from "lucide-react";
 
 export function MethodologySection() {
@@ -76,9 +77,10 @@ export function MethodologySection() {
               const Icon = step.icon;
 
               return (
-                <div
+                <SpotlightCard
                   key={step.num}
-                  className="group relative rounded-3xl p-6 sm:p-8 bg-[#121215] border border-white/10 border-t-white/20 hover:border-white/35 hover:bg-[#18181d] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between hover:-translate-y-2 shadow-xl hover:shadow-[0_15px_35px_rgba(255,255,255,0.06)]"
+                  maxTilt={8}
+                  className="rounded-3xl p-6 sm:p-8 ios-glass-card shadow-xl flex flex-col justify-between"
                 >
                   {/* Top Step Pill with icon */}
                   <div className="flex items-center justify-between mb-8">
@@ -117,7 +119,7 @@ export function MethodologySection() {
                       ✦ {step.deliverable}
                     </span>
                   </div>
-                </div>
+                </SpotlightCard>
               );
             })}
           </div>

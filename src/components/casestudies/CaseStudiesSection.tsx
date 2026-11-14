@@ -137,13 +137,13 @@ export function CaseStudiesSection() {
             return (
               <SpotlightCard
                 key={cs.id}
-                spotlightColor="rgba(255, 255, 255, 0.08)"
-                borderColor="rgba(255, 255, 255, 0.4)"
-                className="group rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.06)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 border border-white/10 border-t-white/20 bg-[#121215] hover:border-white/35 hover:bg-[#18181d]"
+                spotlightColor="rgba(255, 255, 255, 0.12)"
+                borderColor="rgba(255, 255, 255, 0.45)"
+                className="group rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_24px_60px_rgba(0,0,0,0.95),0_0_30px_rgba(255,255,255,0.08)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 ios-glass-card"
               >
-                {/* Browser Window Showcase Thumbnail */}
+                {/* Browser Window Showcase Thumbnail with 3D Depth */}
                 <div
-                  className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/10 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col"
+                  className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/15 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col ios-layer-floating"
                   onClick={() => {
                     sound.playChime();
                     setSelectedCaseIndex(origIdx);
@@ -327,8 +327,8 @@ export function CaseStudiesSection() {
             <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
-          {/* Lightbox Modal Shell with Glassmorphism */}
-          <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col rounded-3xl bg-gradient-to-b from-white/[0.14] via-[#121215]/95 to-[#09090b]/98 backdrop-blur-3xl border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.2)] text-white overflow-hidden">
+          {/* Lightbox Modal Shell with iOS Glassmorphism */}
+          <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)]">
 
             {/* 1. Frosted Glass Browser Bar (macOS Dots, URL Pill, Controls) */}
             <div className="px-4 sm:px-6 py-3.5 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex flex-wrap items-center justify-between gap-3 shrink-0">

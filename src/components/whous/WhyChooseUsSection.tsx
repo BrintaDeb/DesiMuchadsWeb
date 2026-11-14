@@ -87,8 +87,8 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
           })}
         </div>
 
-        {/* Highlighted Stats Panel */}
-        <div className="rounded-2xl border border-white/15 bg-[#121215] p-8 sm:p-12 mb-16 shadow-2xl">
+        {/* Highlighted Stats Panel with iOS Glassmorphism */}
+        <div className="rounded-2xl ios-glass-panel p-8 sm:p-12 mb-16 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
             {stats.map((s, idx) => (
               <div key={idx} className={idx > 0 ? "pt-6 md:pt-0" : ""}>
@@ -103,8 +103,8 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
           </div>
         </div>
 
-        {/* Anti-AI Performance Engineering Manifesto */}
-        <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-[#121216] via-[#0d0d10] to-black p-8 sm:p-12 mb-16 shadow-2xl relative overflow-hidden">
+        {/* Anti-AI Performance Engineering Manifesto with iOS Glassmorphism */}
+        <div className="rounded-3xl ios-glass-panel p-8 sm:p-12 mb-16 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/[0.03] blur-[140px] pointer-events-none" />
           
           <div className="relative max-w-4xl text-left">

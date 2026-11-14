@@ -185,7 +185,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-2xl bg-[#101013] border border-white/20 rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col max-h-[80vh] border-t-white/30"
+        className="relative w-full max-w-2xl ios-glass-panel rounded-2xl shadow-[0_35px_100px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}

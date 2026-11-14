@@ -41,6 +41,7 @@ import {
   FinishInfoItem,
   MandiInfoItem,
 } from "@/data/demoProductsData";
+import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { sound } from "@/lib/sound";
 
 interface DemoStorefrontClientProps {
@@ -1514,9 +1515,10 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map((p) => (
-            <div
+            <SpotlightCard
               key={p.id}
-              className="rounded-3xl bg-zinc-900/60 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col overflow-hidden group shadow-xl"
+              maxTilt={8}
+              className="rounded-3xl ios-glass-card overflow-hidden group shadow-xl flex flex-col"
             >
               {/* Product Image Container */}
               <div className="relative h-56 bg-zinc-950 overflow-hidden">
@@ -1601,7 +1603,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
       </section>

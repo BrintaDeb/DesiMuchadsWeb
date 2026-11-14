@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { SectionDivider } from "../common/SectionDivider";
 import { FiligreeCorner, MoustacheSVG } from "../common/Icons";
+import { SpotlightCard } from "../common/SpotlightCard";
 import {
   Search,
   Lock,
@@ -101,8 +102,8 @@ export function BrandKundliScanner() {
           </p>
         </div>
 
-        {/* Scanner Container Box */}
-        <div className="relative rounded-3xl p-6 sm:p-10 bg-[#121215] border border-white/10 border-t-white/20 backdrop-blur-2xl shadow-2xl">
+        {/* Scanner Container Box with iOS 3D Tilt Glassmorphism */}
+        <SpotlightCard maxTilt={4} className="ios-glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl">
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
             <FiligreeCorner className="w-4 h-4 text-white" position="top-left" />
@@ -319,7 +320,7 @@ export function BrandKundliScanner() {
               </div>
             </div>
           )}
-        </div>
+        </SpotlightCard>
       </div>
     </section>
   );

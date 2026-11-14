@@ -2,6 +2,7 @@
 
 import React from "react";
 import { sound } from "@/lib/sound";
+import { SpotlightCard } from "../common/SpotlightCard";
 import { ArrowRight } from "lucide-react";
 
 export function ClientsTrustStrip() {
@@ -36,10 +37,11 @@ export function ClientsTrustStrip() {
         {/* 12-Brand Responsive Clean Highlighted Tiles */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
           {clients.map((c, idx) => (
-            <div
+            <SpotlightCard
               key={idx}
+              maxTilt={9}
               onMouseEnter={() => sound.playPluck(140 + idx * 10)}
-              className="group relative rounded-xl p-6 bg-[#121215] border border-white/10 border-t-white/20 hover:border-white/35 hover:bg-[#18181d] shadow-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.06)] transition-all duration-300 flex flex-col items-center justify-center text-center aspect-[4/3] cursor-pointer"
+              className="rounded-xl p-6 ios-glass-card shadow-lg flex flex-col items-center justify-center text-center aspect-[4/3] cursor-pointer"
             >
               <span className="font-display font-black text-base sm:text-lg tracking-wider text-white transition-colors uppercase leading-none">
                 {c.name}
@@ -47,7 +49,7 @@ export function ClientsTrustStrip() {
               <span className="mt-2 text-[9px] font-mono tracking-wider text-zinc-400 group-hover:text-zinc-200 uppercase transition-colors">
                 {c.category}
               </span>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 

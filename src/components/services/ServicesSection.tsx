@@ -159,19 +159,19 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                   sound.playChime();
                   onOpenKundli();
                 }}
-                className={`group shimmer-card rounded-2xl p-6 sm:p-7 bg-[#121215] border transition-all duration-300 backdrop-blur-sm cursor-pointer scroll-mt-32 ${
+                className={`group shimmer-card rounded-2xl p-6 sm:p-7 ios-glass-card cursor-pointer scroll-mt-32 transition-all duration-300 ${
                   isHovered
-                    ? "border-white/50 bg-[#16161b] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)] -translate-y-1.5"
+                    ? "border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)]"
                     : selectedStage !== "all" && isStageMatch
-                    ? "border-white/40 bg-[#15151a] shadow-[0_0_25px_rgba(255,255,255,0.06)]"
+                    ? "border-white/40 shadow-[0_0_25px_rgba(255,255,255,0.06)]"
                     : selectedStage !== "all"
-                    ? "border-white/10 opacity-50 hover:opacity-100 hover:border-white/30"
-                    : "border-white/10 border-t-white/25 hover:border-white/30"
+                    ? "opacity-50 hover:opacity-100 hover:border-white/30"
+                    : "border-white/15 hover:border-white/30"
                 }`}
               >
                 <div>
-                  {/* Top Row: Icon Badge & Metric */}
-                  <div className="flex items-center justify-between mb-4">
+                  {/* Top Row: Icon Badge & Metric with 3D Parallax Depth */}
+                  <div className="flex items-center justify-between mb-4 ios-layer-floating">
                     <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-white/30 group-hover:bg-white/10 transition-all">
                       {getServiceIcon(item.iconName)}
                     </div>

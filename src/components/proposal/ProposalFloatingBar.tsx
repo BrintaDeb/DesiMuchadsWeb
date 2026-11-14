@@ -71,7 +71,7 @@ export function ProposalFloatingBar() {
         </div>
       ) : (
         <div className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] inset-x-3 sm:inset-x-4 max-w-4xl mx-auto z-40 pointer-events-auto select-none">
-          <div className="rounded-2xl sm:rounded-full bg-[#0c0c0e]/95 backdrop-blur-2xl border border-white/20 shadow-[0_15px_50px_rgba(0,0,0,0.9)] px-3.5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+          <div className="rounded-2xl sm:rounded-full ios-glass-panel px-3.5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-3 shadow-[0_20px_60px_rgba(0,0,0,0.95)]">
             {/* Left Summary Badge with Brand Crest */}
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/40 shadow-sm bg-black shrink-0">

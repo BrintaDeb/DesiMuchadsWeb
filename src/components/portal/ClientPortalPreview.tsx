@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { SectionDivider } from "../common/SectionDivider";
 import { FiligreeCorner } from "../common/Icons";
+import { SpotlightCard } from "../common/SpotlightCard";
 import {
   BarChart3,
   Kanban,
@@ -148,8 +149,8 @@ export function ClientPortalPreview() {
           </div>
         </div>
 
-        {/* The Portal Mockup Window */}
-        <div className="relative shimmer-card rounded-3xl p-6 sm:p-10 bg-[#121215] border border-white/15 border-t-white/30 shadow-[0_25px_80px_rgba(0,0,0,0.9)] backdrop-blur-2xl">
+        {/* The Portal Mockup Window with iOS 3D Tilt Glassmorphism */}
+        <SpotlightCard maxTilt={3.5} className="ios-glass-panel rounded-3xl p-6 sm:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.9)]">
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
             <FiligreeCorner className="w-4 h-4 text-white" position="top-left" />
@@ -462,7 +463,7 @@ export function ClientPortalPreview() {
               </div>
             </div>
           )}
-        </div>
+        </SpotlightCard>
       </div>
 
       {/* Interactive Invoice / Strategy Modal */}

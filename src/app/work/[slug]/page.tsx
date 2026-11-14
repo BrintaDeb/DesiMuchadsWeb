@@ -307,8 +307,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Section 2: Interactive Simulated Device Showcase */}
-        <div className="rounded-3xl p-6 sm:p-10 bg-[#121215] border border-white/15 shadow-2xl">
+        {/* Section 2: Interactive Simulated Device Showcase with iOS Glassmorphism */}
+        <div className="rounded-3xl p-6 sm:p-10 ios-glass-panel shadow-2xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-1">
@@ -398,7 +398,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* 1. Mushkil */}
-            <div className="rounded-3xl p-8 bg-[#151214] border border-red-500/20 shadow-xl space-y-4">
+            <div className="rounded-3xl p-8 ios-glass-card border-red-500/25 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
               <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center font-mono text-xs font-bold text-red-400">
                 01
               </div>
@@ -411,7 +411,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </div>
 
             {/* 2. Jugaad */}
-            <div className="rounded-3xl p-8 bg-[#121513] border border-emerald-500/20 shadow-xl space-y-4">
+            <div className="rounded-3xl p-8 ios-glass-card border-emerald-500/25 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-mono text-xs font-bold text-emerald-400">
                 02
               </div>
@@ -424,7 +424,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </div>
 
             {/* 3. Nateeja */}
-            <div className="rounded-3xl p-8 bg-[#15151a] border border-white/25 shadow-xl space-y-4">
+            <div className="rounded-3xl p-8 ios-glass-card border-white/35 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
               <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/30 flex items-center justify-center font-mono text-xs font-bold text-white shadow-[0_0_15px_rgba(255,255,255,0.15)]">
                 03
               </div>
@@ -439,7 +439,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </div>
 
         {/* Section 4: Deliverables & Tech Architecture */}
-        <div className="rounded-3xl p-8 sm:p-12 bg-[#121215] border border-white/15 shadow-2xl">
+        <div className="rounded-3xl p-8 sm:p-12 ios-glass-panel shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block">

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { FiligreeCorner } from "@/components/common/Icons";
 import { SectionDivider } from "@/components/common/SectionDivider";
+import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { sound } from "@/lib/sound";
 
 export function RoiCalculator() {
@@ -120,8 +121,8 @@ export function RoiCalculator() {
           </p>
         </div>
 
-        {/* Calculator Card Container */}
-        <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-[#121215] border border-white/15 border-t-white/25 backdrop-blur-2xl shadow-2xl">
+        {/* Calculator Card Container with iOS 3D Tilt Glassmorphism */}
+        <SpotlightCard maxTilt={3.5} className="ios-glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl">
           {/* Filigree Corner Accents */}
           <div className="absolute top-4 left-4 pointer-events-none opacity-40">
             <FiligreeCorner className="w-5 h-5 text-white/50" position="top-left" />
@@ -294,8 +295,8 @@ export function RoiCalculator() {
               </div>
             </div>
 
-            {/* Right Live Projected Results Column (5 cols) */}
-            <div className="lg:col-span-5 rounded-2xl p-6 sm:p-8 bg-[#18181d] border border-white/20 flex flex-col justify-between shadow-xl">
+            {/* Right Live Projected Results Column (5 cols) with Nested 3D Glass Layer */}
+            <SpotlightCard maxTilt={5.5} className="lg:col-span-5 rounded-2xl p-6 sm:p-8 ios-glass-card border border-white/20 flex flex-col justify-between shadow-xl">
               <div>
                 {/* Result Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
@@ -417,9 +418,9 @@ export function RoiCalculator() {
                   <span>CLAIM THIS GROWTH RUNWAY &gt;</span>
                 </button>
               </div>
-            </div>
+            </SpotlightCard>
           </div>
-        </div>
+        </SpotlightCard>
       </div>
     </section>
   );

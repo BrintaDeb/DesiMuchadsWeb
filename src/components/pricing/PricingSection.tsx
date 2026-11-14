@@ -293,10 +293,10 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                     spotlightColor={tier.isPopular ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
                     borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
                     onMouseEnter={() => sound.playPluck(110)}
-                    className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-xl ${
+                    className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
                       tier.isPopular
-                        ? "bg-[#16161b] border-2 border-white shadow-[0_0_40px_rgba(255,255,255,0.12)] lg:-translate-y-3"
-                        : "bg-[#121215] border border-white/10 hover:border-white/25 hover:bg-[#18181d]"
+                        ? "ios-glass-panel border-2 border-white shadow-[0_0_50px_rgba(255,255,255,0.18)] lg:-translate-y-3"
+                        : "ios-glass-card hover:border-white/35"
                     }`}
                   >
                     {/* Filigree corner brackets */}
@@ -377,7 +377,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
         {/* MODE B: "BUILD YOUR OWN MARKETING THALI" PLATTER */}
         {mode === "thali" && (
-          <div className="rounded-3xl p-6 sm:p-10 lg:p-12 bg-[#121215] border border-white/15 backdrop-blur-2xl shadow-2xl">
+          <div className="rounded-3xl p-6 sm:p-10 lg:p-12 ios-glass-panel shadow-2xl">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold block mb-2">
                 DESI MUCHADS MARKETING THALI
@@ -401,8 +401,8 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       onClick={() => toggleDish(dish.id)}
                       className={`cursor-pointer rounded-2xl p-5 border transition-all duration-300 flex flex-col justify-between ${
                         isSelected
-                          ? "border-white bg-white/10 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                          : "border-white/10 bg-[#16161b] hover:border-white/25"
+                          ? "border-white bg-white/10 shadow-[0_0_25px_rgba(255,255,255,0.15)]"
+                          : "ios-glass-card hover:border-white/30"
                       }`}
                     >
                       <div>
@@ -442,8 +442,8 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 })}
               </div>
 
-              {/* Right Column: Visual Thali Platter Summary (5 cols) */}
-              <div className="lg:col-span-5 rounded-2xl p-6 sm:p-8 bg-[#18181d] border border-white/20 shadow-xl flex flex-col justify-between">
+              {/* Right Column: Visual Thali Platter Summary (5 cols) with iOS Glassmorphism */}
+              <div className="lg:col-span-5 rounded-2xl p-6 sm:p-8 ios-glass-panel shadow-xl flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
                     <span className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-bold">

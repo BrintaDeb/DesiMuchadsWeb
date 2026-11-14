@@ -316,7 +316,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }}
                 onMouseLeave={handleMouseLeave}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[820px] bg-[#0c0c0e] text-white rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] border border-white/15 p-6 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[820px] ios-glass-panel text-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.98)] p-6 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
               >
                 {/* Mega Menu Header */}
                 <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
@@ -411,7 +411,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }}
                 onMouseLeave={handleMouseLeave}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-[#0c0c0e] text-white rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] border border-white/15 p-4 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 ios-glass-panel text-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.98)] p-4 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
               >
                 <div className="space-y-1">
                   {quickLinks.map((item) => {
@@ -480,7 +480,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }}
                 onMouseLeave={handleMouseLeave}
-                className="absolute top-full right-0 mt-2 w-96 bg-[#0c0c0e] text-white rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] border border-white/15 p-4 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
+                className="absolute top-full right-0 mt-2 w-96 ios-glass-panel text-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.98)] p-4 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
               >
                 <div className="pb-2.5 mb-2 border-b border-white/10 flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 font-royal">

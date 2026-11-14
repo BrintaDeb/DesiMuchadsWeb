@@ -348,7 +348,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               Why Ordinary Agencies Fail &amp; How We Deliver Compounding ROI
             </h2>
           </div>
-          <div className="lg:col-span-7 rounded-2xl p-8 bg-[#121215] border border-white/10 text-zinc-300 leading-relaxed font-sans text-sm sm:text-base space-y-4 shadow-xl">
+          <div className="lg:col-span-7 rounded-2xl p-8 ios-glass-panel text-zinc-300 leading-relaxed font-sans text-sm sm:text-base space-y-4 shadow-xl">
             <p>{service.philosophy}</p>
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
               <Sparkles className="w-5 h-5 text-white shrink-0 mt-0.5" />
@@ -395,8 +395,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Section 4: Full Deliverables & Tech Architecture */}
-        <div className="rounded-3xl p-8 sm:p-12 bg-[#121215] border border-white/15 shadow-2xl">
+        {/* Section 4: Full Deliverables & Tech Architecture with iOS Glassmorphism */}
+        <div className="rounded-3xl p-8 sm:p-12 ios-glass-panel shadow-2xl">
           <div className="max-w-2xl mb-8">
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
               ZERO-AMBIGUITY SCOPE

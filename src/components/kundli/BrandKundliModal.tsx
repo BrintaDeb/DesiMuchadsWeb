@@ -91,7 +91,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
       aria-labelledby="kundliModalTitle"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-2xl rounded-3xl bg-[#0f0f12] border border-white/20 border-t-white/30 shadow-[0_25px_80px_rgba(0,0,0,0.95)] p-6 sm:p-10 overflow-hidden text-white">
+      <div className="relative w-full max-w-2xl rounded-3xl ios-glass-panel shadow-[0_35px_100px_rgba(0,0,0,0.98)] p-6 sm:p-10 overflow-hidden text-white">
         {/* Filigree corner brackets */}
         <div className="absolute top-4 left-4 opacity-30 pointer-events-none">
           <FiligreeCorner className="w-5 h-5 text-white" position="top-left" />
@@ -160,7 +160,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
                         className={`p-4 rounded-2xl border text-left flex items-center justify-between transition-all ${
                           isSelected
                             ? "border-white bg-white/10 shadow-[0_0_20px_rgba(255,255,255,0.08)]"
-                            : "border-white/10 bg-[#151518] hover:border-white/30 hover:bg-[#1a1a20]"
+                            : "ios-glass-card hover:border-white/30"
                         }`}
                       >
                         <div className="flex items-center gap-3">
@@ -208,7 +208,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
                         className={`w-full p-4 rounded-2xl border text-left flex items-center justify-between transition-all ${
                           isSelected
                             ? "border-white bg-white/10 shadow-[0_0_20px_rgba(255,255,255,0.08)]"
-                            : "border-white/10 bg-[#151518] hover:border-white/30 hover:bg-[#1a1a20]"
+                            : "ios-glass-card hover:border-white/30"
                         }`}
                       >
                         <div>

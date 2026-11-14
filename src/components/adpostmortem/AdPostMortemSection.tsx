@@ -74,7 +74,7 @@ export function AdPostMortemSection() {
           onTouchMove={(e) => {
             if (e.touches[0]) handleSliderMove(e.touches[0].clientX);
           }}
-          className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden border-2 border-white/20 shadow-[0_20px_70px_rgba(0,0,0,0.95)] select-none cursor-ew-resize bg-black"
+          className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden ios-glass-panel border-2 border-white/20 shadow-[0_20px_70px_rgba(0,0,0,0.95)] select-none cursor-ew-resize bg-black"
         >
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-40 z-30 pointer-events-none">
