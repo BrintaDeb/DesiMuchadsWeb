@@ -2,7 +2,6 @@ import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { DEMO_PROJECTS_DATABASE } from "@/data/demoProductsData";
-import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { DemoStorefrontClient } from "@/components/demos/DemoStorefrontClient";
 
 interface PageProps {
@@ -10,8 +9,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return AGENCY_PROJECTS.map((p) => ({
-    slug: p.slug,
+  return Object.keys(DEMO_PROJECTS_DATABASE).map((slug) => ({
+    slug,
   }));
 }
 

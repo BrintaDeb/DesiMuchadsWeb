@@ -21,15 +21,15 @@ import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 
 const FILTER_CATEGORIES = [
-  { id: "all", label: "All Work (16)" },
-  { id: "seo-sem", label: "SEO & SEM" },
+  { id: "all", label: "All Work (46)" },
+  { id: "web-development", label: "Fullstack Web & Apps" },
   { id: "performance-marketing", label: "Performance Marketing" },
-  { id: "lead-generation", label: "Lead Generation" },
-  { id: "social-media", label: "Social Media" },
+  { id: "social-media", label: "Social Media & Video" },
+  { id: "packaging-label", label: "Packaging & Brand Identity" },
+  { id: "lead-generation", label: "Lead Gen & Pitch Decks" },
+  { id: "seo-sem", label: "SEO & SEM" },
   { id: "ecommerce-services", label: "E-Commerce" },
   { id: "quick-commerce", label: "Quick Commerce" },
-  { id: "web-development", label: "Web Development" },
-  { id: "packaging-label", label: "Packaging & Branding" },
 ];
 
 export function CaseStudiesSection() {
@@ -99,7 +99,7 @@ export function CaseStudiesSection() {
         <div className="max-w-3xl mb-12 sm:mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5" />
-            <span>VERIFIED CLIENT WORK • 16 HUMAN-GRADE CASE STUDIES</span>
+            <span>VERIFIED CLIENT WORK • 46 HUMAN-GRADE CASE STUDIES</span>
           </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work

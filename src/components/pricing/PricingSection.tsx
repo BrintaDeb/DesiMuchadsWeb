@@ -325,18 +325,10 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
             </div>
 
             {/* 3 Pricing Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-2">
               {retainers.map((tier) => {
                 return (
-                  <div key={tier.id} className="relative flex flex-col h-full pt-3.5 group">
-                    {/* Floating Crown Pill Badge: Perched across top border, 100% unclipped */}
-                    {tier.isPopular && (
-                      <div className="absolute top-0 inset-x-0 mx-auto w-max z-30 px-4 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-[0_0_25px_rgba(255,255,255,0.4)] flex items-center gap-1.5 pointer-events-none transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[0_0_35px_rgba(255,255,255,0.6)]">
-                        <Sparkles className="w-3 h-3 text-black fill-black" />
-                        <span>{tier.badge}</span>
-                      </div>
-                    )}
-
+                  <div key={tier.id} className="relative flex flex-col h-full group">
                     <SpotlightCard
                       spotlightColor={tier.isPopular ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
                       borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
@@ -357,11 +349,21 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       </div>
 
                       <div>
-                        {/* Top Category Header Row */}
+                        {/* Top Category & Status Header Row */}
                         <div className="flex items-center justify-between gap-2 mb-3">
                           <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest font-bold">
                             {tier.hindi}
                           </span>
+                          {tier.isPopular ? (
+                            <div className="px-3 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-[0_0_18px_rgba(255,255,255,0.35)] flex items-center gap-1.5 shrink-0">
+                              <Sparkles className="w-3 h-3 text-black fill-black" />
+                              <span>{tier.badge}</span>
+                            </div>
+                          ) : (
+                            <div className="px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-zinc-400 font-mono text-[9px] uppercase tracking-wider shrink-0 font-semibold">
+                              {tier.badge}
+                            </div>
+                          )}
                         </div>
 
                         {/* Tier Name */}
