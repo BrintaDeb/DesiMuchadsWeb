@@ -279,11 +279,21 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
     sound.playPluck(150);
     const clean = pin.trim();
     if (clean.startsWith("11") || clean.startsWith("12") || clean.startsWith("20")) {
-      setPincodeResult("⚡ Guaranteed Same-Day 4:00 PM via Delhi NCR Hub #04");
-    } else if (clean.startsWith("40") || clean.startsWith("56")) {
-      setPincodeResult("✈️ Express Air Cargo: Next-Day Delivery by 1:30 PM");
+      setPincodeResult("⚡ Express 11-min Darkstore Dispatch via Delhi NCR Central Hub #04");
+    } else if (clean.startsWith("40")) {
+      setPincodeResult("⚡ Express 9-min Darkstore Dispatch via Mumbai Bandra Kurla Complex (BKC) Hub #09");
+    } else if (clean.startsWith("56")) {
+      setPincodeResult("⚡ Express 8-min Darkstore Dispatch via Bengaluru Indiranagar 100ft Hub #02");
+    } else if (clean.startsWith("50")) {
+      setPincodeResult("⚡ Express 14-min Darkstore Dispatch via Hyderabad Jubilee Hills Hub #07");
+    } else if (clean.startsWith("70")) {
+      setPincodeResult("✈️ Express Air Cargo: Guaranteed Next-Day 11:00 AM via Kolkata Salt Lake Hub");
+    } else if (clean.startsWith("60")) {
+      setPincodeResult("✈️ Express Air Cargo: Guaranteed Next-Day 10:30 AM via Chennai Guindy Hub");
+    } else if (clean.startsWith("41")) {
+      setPincodeResult("✈️ Express Air Cargo: Guaranteed Next-Day 11:30 AM via Pune Viman Nagar Hub");
     } else if (clean.length === 6) {
-      setPincodeResult("📦 Bluedart Surface Express: Delivery in 48-72 Hours");
+      setPincodeResult("📦 Bluedart Dedicated Air Cargo: Dispatched from nearest zonal fulfillment hub within 24h");
     } else {
       setPincodeResult("Please enter a valid 6-digit Indian PIN code");
     }
@@ -410,6 +420,18 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             {abMode === "flagship" ? "⚡ Flagship (4.8% Conv)" : "⚠️ Baseline (1.4% Conv)"}
           </button>
 
+          {/* Service Category Badge */}
+          {config.serviceCriteria && (
+            <Link
+              href={`/services/${config.serviceCriteria.serviceId}`}
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-[10px] font-bold uppercase tracking-wider transition-all"
+              title={`View ${config.serviceCriteria.serviceTitle} Specification`}
+            >
+              <Zap className="w-3 h-3 text-emerald-400" />
+              <span>{config.serviceCriteria.serviceTitle}</span>
+            </Link>
+          )}
+
           {/* Dev Protocol & Audit Drawer Toggle */}
           <button
             type="button"
@@ -422,10 +444,10 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                 : "bg-white/10 hover:bg-white/20 text-zinc-300 border-white/20"
             }`}
-            title="Inspect Live Architecture & Telemetry"
+            title="Inspect Service Criteria, Architecture & Telemetry"
           >
             <Terminal className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">DEV PROTOCOL</span>
+            <span className="hidden sm:inline">SERVICE CRITERIA &amp; SPECS</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           </button>
 
@@ -500,52 +522,168 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
 
       {/* 1.1 EXPANDABLE PRO DEV TELEMETRY & AUDIT PROTOCOL DRAWER */}
       {isDevToolsOpen && (
-        <div className="bg-[#0c0c10] border-b border-white/20 px-4 sm:px-8 py-5 text-xs font-mono shadow-2xl animate-in slide-in-from-top-2 duration-200 relative z-40">
-          <div className="max-w-7xl mx-auto space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10">
-              <div className="flex items-center gap-2">
+        <div className="bg-[#0c0c10] border-b border-white/20 px-4 sm:px-8 py-6 text-xs font-mono shadow-2xl animate-in slide-in-from-top-2 duration-200 relative z-40">
+          <div className="max-w-7xl mx-auto space-y-5">
+            {/* Header with Service Mapping */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
                 <Cpu className="w-4 h-4 text-emerald-400" />
-                <span className="font-bold text-white uppercase tracking-wider">
-                  Senior Engineering &amp; Telemetry Protocol
+                <span className="font-bold text-white uppercase tracking-wider text-sm">
+                  {config.serviceCriteria?.serviceTitle || "Full-Stack Agency"} · Deployed Architecture &amp; Criteria
                 </span>
                 <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
-                  VERIFIED HUMAN-ENGINEERED ARCHITECTURE
+                  VERIFIED HUMAN-ENGINEERED
                 </span>
               </div>
-              <div className="text-[11px] text-zinc-400">
-                P99 Latency: <span className="text-white font-bold">14ms</span> · PoP: <span className="text-white font-bold">DELHI NCR (bom1)</span>
+              <div className="flex items-center gap-3 text-[11px] text-zinc-400">
+                <span>P99 Latency: <strong className="text-white">14ms</strong></span>
+                <span>·</span>
+                <span>PoP: <strong className="text-white">DELHI NCR (bom1)</strong></span>
+                <button
+                  onClick={() => setIsDevToolsOpen(false)}
+                  className="ml-2 px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-white cursor-pointer"
+                >
+                  ✕ Close
+                </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                <div className="text-[10px] text-zinc-400 uppercase tracking-widest">Core Web Vitals</div>
-                <div className="text-emerald-400 font-bold text-sm mt-1">LCP: 0.62s · CLS: 0.000</div>
-                <div className="text-[10px] text-zinc-400 mt-0.5">Mobile PageSpeed: 99/100</div>
+            {/* Service Criteria 4 Dimensions Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
+              {/* Box 1: Primary Objective & Target KPI */}
+              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
+                    <Zap className="w-3 h-3 text-emerald-400" />
+                    <span>Target KPI Criteria</span>
+                  </div>
+                  <div className="text-emerald-400 font-black text-sm mt-1.5 leading-snug">
+                    {config.serviceCriteria?.targetKpi || config.hero.stats[0]?.val}
+                  </div>
+                </div>
+                <div className="text-[10px] text-zinc-400 mt-2 pt-2 border-t border-white/10">
+                  {config.serviceCriteria?.primaryObjective}
+                </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                <div className="text-[10px] text-zinc-400 uppercase tracking-widest">Serverless Pipeline</div>
-                <div className="text-white font-bold text-sm mt-1">Next.js 16 Turbopack</div>
-                <div className="text-[10px] text-zinc-400 mt-0.5">Edge ISR 60s Revalidation</div>
+              {/* Box 2: Core Web Vitals & Speed */}
+              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
+                    <Activity className="w-3 h-3 text-cyan-400" />
+                    <span>Performance Metrics</span>
+                  </div>
+                  <div className="text-white font-black text-sm mt-1.5">
+                    LCP: 0.62s · CLS: 0.000
+                  </div>
+                </div>
+                <div className="text-[10px] text-zinc-400 mt-2 pt-2 border-t border-white/10">
+                  Mobile PageSpeed: <span className="text-emerald-400 font-bold">99/100</span> · Zero Bloat
+                </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                <div className="text-[10px] text-zinc-400 uppercase tracking-widest">Target Unit Economics</div>
-                <div className="text-emerald-400 font-bold text-sm mt-1">{config.hero.stats[0]?.val || "4.8x ROAS"}</div>
-                <div className="text-[10px] text-zinc-400 mt-0.5">Blended Contribution Margin: 42%</div>
+              {/* Box 3: Verified Commercial Impact */}
+              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
+                    <Award className="w-3 h-3 text-amber-400" />
+                    <span>Verified Growth Impact</span>
+                  </div>
+                  <div className="text-amber-300 font-black text-sm mt-1.5 leading-snug">
+                    {config.serviceCriteria?.verifiedImpact || "+340% Revenue Growth"}
+                  </div>
+                </div>
+                <div className="text-[10px] text-zinc-400 mt-2 pt-2 border-t border-white/10">
+                  Calculated against pre-engagement benchmarks
+                </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                <div className="text-[10px] text-zinc-400 uppercase tracking-widest">Anti-AI Verification</div>
-                <div className="text-white font-bold text-sm mt-1">100% Handcrafted Code</div>
-                <div className="text-[10px] text-zinc-400 mt-0.5">Zero Generic AI Page Builders</div>
+              {/* Box 4: Anti-AI Standard */}
+              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
+                    <ShieldCheck className="w-3 h-3 text-white" />
+                    <span>Anti-AI Architecture</span>
+                  </div>
+                  <div className="text-white font-black text-sm mt-1.5">
+                    100% Handcrafted
+                  </div>
+                </div>
+                <div className="text-[10px] text-zinc-400 mt-2 pt-2 border-t border-white/10">
+                  React 19 App Router Primitives · Zero AI builders
+                </div>
               </div>
             </div>
 
-            <p className="text-[11px] text-zinc-400 leading-relaxed font-sans pt-1">
-              <strong>The Anti-AI Standard:</strong> Unlike automated AI web generators that produce generic unoptimized templates with 42 PageSpeed scores and broken checkout dropoffs, this platform is engineered with bespoke React 19 App Router primitives, zero third-party bloat, sub-second hydration, and real Indian payment integrations.
-            </p>
+            {/* Bottom Row: Tech Architecture Pills & Deliverables Checklist */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+              {/* Tech Architecture Stack */}
+              <div className="p-4 rounded-xl bg-black/40 border border-white/10">
+                <span className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold block mb-2.5">
+                  DEPLOYED TECH &amp; MEDIA BUYING ARCHITECTURE
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {(config.serviceCriteria?.techArchitecture || [
+                    "Next.js 16 Turbopack",
+                    "Meta ASC+ Broad Scaling",
+                    "Shopify Plus CAPI",
+                    "Klaviyo WhatsApp CRM",
+                  ]).map((tech, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2.5 py-1 rounded-md bg-white/10 border border-white/15 text-white text-[10px] font-mono font-bold"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Deliverables Checklist */}
+              <div className="p-4 rounded-xl bg-black/40 border border-white/10">
+                <span className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold block mb-2.5">
+                  SPECIALIZED AGENCY DELIVERABLES IMPLEMENTED
+                </span>
+                <ul className="space-y-1.5">
+                  {(config.serviceCriteria?.deliverablesDeployed || [
+                    "Full-Funnel Meta & Google Ads Architecture",
+                    "Sub-800ms Headless Next.js Experience",
+                    "Custom AOV Multipliers & 1-Click UPI Drawer",
+                    "COD Anti-RTO Verification Shield",
+                  ]).map((deliv, dIdx) => (
+                    <li key={dIdx} className="flex items-center gap-2 text-[11px] text-zinc-300">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <span>{deliv}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Direct Deep-Dive Action Links */}
+            <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <span className="text-zinc-400">
+                Want this exact architecture for your brand?
+              </span>
+              <div className="flex items-center gap-3">
+                {config.serviceCriteria && (
+                  <Link
+                    href={`/services/${config.serviceCriteria.serviceId}`}
+                    className="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 border border-white/20"
+                  >
+                    <span>Explore {config.serviceCriteria.serviceTitle} Specs</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                )}
+                <Link
+                  href={`/work/${config.slug}`}
+                  className="px-3.5 py-1.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md"
+                >
+                  <span>Read Full Case Study</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -659,8 +797,11 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             <div className="relative hidden md:block w-40 lg:w-56">
               <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
+                id="storefront-search"
+                name="search"
                 type="text"
                 placeholder="Search catalog..."
+                aria-label="Search product catalog"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-white/5 border border-white/10 rounded-full pl-8 pr-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30"
@@ -689,6 +830,57 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
           </div>
         </div>
       </header>
+
+      {/* 2.5 EXECUTIVE SERVICE ARCHITECTURE RIBBON */}
+      {config.serviceCriteria && (
+        <div className="bg-[#121215]/95 border-b border-white/10 px-4 sm:px-8 py-3 relative z-30 shadow-md">
+          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-white font-bold text-[10px] uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                <Zap className="w-3 h-3 text-emerald-400" />
+                <span>DESI MUCHADS SERVICE: {config.serviceCriteria.serviceTitle.toUpperCase()}</span>
+              </span>
+              <span className="text-zinc-500 hidden sm:inline">•</span>
+              <span className="text-emerald-400 font-bold hidden sm:inline">
+                🎯 KPI: {config.serviceCriteria.targetKpi}
+              </span>
+              <span className="text-zinc-500 hidden lg:inline">•</span>
+              <span className="text-zinc-300 hidden lg:inline text-[11px]">
+                Impact: {config.serviceCriteria.verifiedImpact}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playPluck(160);
+                  setIsDevToolsOpen(true);
+                }}
+                className="text-[11px] text-zinc-300 hover:text-white font-bold underline decoration-white/30 underline-offset-4 flex items-center gap-1 cursor-pointer"
+              >
+                <Eye className="w-3 h-3" />
+                <span>Inspect Criteria</span>
+              </button>
+              <span className="text-white/20">|</span>
+              <Link
+                href={`/services/${config.serviceCriteria.serviceId}`}
+                className="text-[11px] text-zinc-300 hover:text-white font-bold underline decoration-white/30 underline-offset-4 flex items-center gap-1"
+              >
+                <span>Service Specs</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+              <span className="text-white/20">|</span>
+              <Link
+                href={`/work/${config.slug}`}
+                className="text-[11px] text-zinc-300 hover:text-white font-bold underline decoration-white/30 underline-offset-4 flex items-center gap-1"
+              >
+                <span>Case Study</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 3. HERO SHOWCASE SECTION */}
       <section className="relative px-4 sm:px-8 pt-12 sm:pt-20 pb-16 overflow-hidden">
@@ -744,6 +936,49 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Real-time Indian Delivery Hub & Pincode Radar */}
+          <div className="mt-10 max-w-xl mx-auto p-4 rounded-2xl bg-[#121215]/85 border border-white/15 backdrop-blur-md shadow-2xl text-left">
+            <div className="flex items-center justify-between pb-2 border-b border-white/10 mb-3">
+              <div className="flex items-center gap-2">
+                <Truck className="w-4 h-4 text-emerald-400" />
+                <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                  Live Dispatch Radar &amp; Pincode Check
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold">
+                PAN-INDIA 48-CITY NETWORK
+              </span>
+            </div>
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <input
+                  id="storefront-pincode"
+                  name="pincode"
+                  type="text"
+                  maxLength={6}
+                  value={pincodeInput}
+                  onChange={(e) => setPincodeInput(e.target.value.replace(/\D/g, ""))}
+                  placeholder="Enter 6-digit PIN (e.g. 110001, 400050, 560038)"
+                  className="w-full bg-black/60 border border-white/20 rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-zinc-500 focus:outline-none focus:border-white"
+                  aria-label="Enter PIN code for delivery estimation"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => handleCheckPincode(pincodeInput)}
+                className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-mono text-xs font-bold uppercase transition-all shadow-md shrink-0 cursor-pointer active:scale-95"
+              >
+                Check Hub
+              </button>
+            </div>
+            {pincodeResult && (
+              <div className="mt-2.5 text-[11px] font-mono text-zinc-300 flex items-center gap-2 pt-2 border-t border-white/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>{pincodeResult}</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -1589,6 +1824,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
               </button>
             ))}
           </div>
+
         </div>
 
         {/* Product Cards Grid */}

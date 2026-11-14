@@ -61,6 +61,16 @@ export interface InteractiveDataConfig {
   mandis?: MandiInfoItem[];
 }
 
+export interface DemoServiceCriteria {
+  serviceId: string;
+  serviceTitle: string;
+  primaryObjective: string;
+  targetKpi: string;
+  techArchitecture: string[];
+  deliverablesDeployed: string[];
+  verifiedImpact: string;
+}
+
 export interface DemoProjectConfig {
   slug: string;
   brandName: string;
@@ -105,6 +115,7 @@ export interface DemoProjectConfig {
     verified: boolean;
   }[];
   faq: { q: string; a: string }[];
+  serviceCriteria?: DemoServiceCriteria;
 }
 
 export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
@@ -113,6 +124,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "vedaroots-ayurveda",
     brandName: "VedaRoots Ayurveda",
     brandTagline: "Classical Single-Origin Ayurveda & Cold-Pressed Elixirs",
+    serviceCriteria: {
+      "serviceId": "seo-sem",
+      "serviceTitle": "SEO & SEM Services",
+      "primaryObjective": "High-Intent Commercial Keyword Clustering & Organic Search Dominance",
+      "targetKpi": "Top 3 Google SERP for 84+ High-Intent Keywords · 4.8x Search ROAS",
+      "techArchitecture": [
+            "Next.js 16 Server Components",
+            "Google PMax & Search Engine",
+            "Schema.org Rich Snippets",
+            "Sub-800ms LCP"
+      ],
+      "deliverablesDeployed": [
+            "Technical Core Web Vitals Optimization",
+            "Commercial Intent Search Bidding",
+            "Negative Search Term Blacklisting",
+            "Structured Herbal Rich Data"
+      ],
+      "verifiedImpact": "+420% Organic Traffic · 38,400+ Verified Customers"
+},
+
     categoryBadge: "100% Certified Ayush GMP & USDA Organic",
     domainUrl: "vedarootsayurveda.in",
     theme: {
@@ -271,6 +302,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "urbandrift-ev",
     brandName: "UrbanDrift Fleet Systems",
     brandTagline: "Commercial EV Fleet Leasing & Smart Telematics for Last-Mile Logistics",
+    serviceCriteria: {
+      "serviceId": "lead-generation",
+      "serviceTitle": "Lead Generation Services",
+      "primaryObjective": "High-Ticket B2B Fleet Leasing Pre-Qualification Funnel",
+      "targetKpi": "₹420 Cost Per Qualified Fleet Lead · 18% Pipeline Close Rate",
+      "techArchitecture": [
+            "Interactive TCO Calculator",
+            "Instant WhatsApp Concierge Bot",
+            "HubSpot CRM Webhooks",
+            "LinkedIn Paid Ads"
+      ],
+      "deliverablesDeployed": [
+            "2-Step Fleet Size Pre-Qualification Quiz",
+            "Automated TCO Cost Savings PDF Generator",
+            "60-Second WhatsApp Dispatch",
+            "B2B Decision-Maker Retargeting"
+      ],
+      "verifiedImpact": "1,420+ Commercial Fleet Leases Signed · ₹18.4Cr Annual Pipeline"
+},
+
     categoryBadge: "Pan-India Fleet Deployment · 99.8% Fleet Uptime",
     domainUrl: "urbandriftev.com",
     theme: {
@@ -401,6 +452,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "you-and-me-photography",
     brandName: "You & Me Weddings",
     brandTagline: "Editorial & Bespoke Destination Wedding Cinematography",
+    serviceCriteria: {
+      "serviceId": "social-media",
+      "serviceTitle": "Social Media Services",
+      "primaryObjective": "Luxury Royal Wedding Viral Reels & High-Ticket Booking",
+      "targetKpi": "3.4M+ Organic Reel Views · ₹3.5L Average Booking Size",
+      "techArchitecture": [
+            "Cinematic 4K Video Delivery",
+            "Instagram Whitelisted Ads",
+            "Interactive Date Availability Engine",
+            "Luxury Micro-Moments"
+      ],
+      "deliverablesDeployed": [
+            "3-Second Hook Hinglish Video Scripts",
+            "Emotional Royal Narrative Audio Design",
+            "Luxury Wedding Date Concierge",
+            "High-Net-Worth Retargeting"
+      ],
+      "verifiedImpact": "100% Calendar Fully Booked for 2026 Season · 4.98/5 Rating"
+},
+
     categoryBadge: "Featured in Vogue Weddings & Harper's Bazaar Bride",
     domainUrl: "youandmeweddings.art",
     theme: {
@@ -531,6 +602,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "snacknation-makhanas",
     brandName: "SnackNation Superfoods",
     brandTagline: "Slow-Roasted Himalayan Water Lily Pops & Protein Snacks",
+    serviceCriteria: {
+      "serviceId": "performance-marketing",
+      "serviceTitle": "Performance Marketing Services",
+      "primaryObjective": "Broad Target Scaling & Dynamic Creative Testing (DCT)",
+      "targetKpi": "4.6x Blended ROAS · Sub-₹320 First-Order CAC",
+      "techArchitecture": [
+            "Meta Advantage+ Shopping Campaigns (ASC+)",
+            "Shopify Plus Headless",
+            "Klaviyo Cart Recovery",
+            "1-Click UPI Drawer"
+      ],
+      "deliverablesDeployed": [
+            "16 Monthly Cinematic UGC Video Packs",
+            "Broad Scale Creative Fatigue Rotation",
+            "Custom 6-Flavor Box AOV Multiplier",
+            "Post-Purchase Retention Engine"
+      ],
+      "verifiedImpact": "₹84L Monthly Ad Spend Scaled at 4.6x ROAS · 38% Repeat Rate"
+},
+
     categoryBadge: "0% Palm Oil · 100% Olive Oil Roasted · High Fiber",
     domainUrl: "snacknation.in",
     theme: {
@@ -668,6 +759,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "bharat-bio-health",
     brandName: "BharatBio Health Systems",
     brandTagline: "Automated Clinical Diagnostic Analyzers & Hospital Equipment",
+    serviceCriteria: {
+      "serviceId": "lead-generation",
+      "serviceTitle": "Lead Generation & High-Ticket SEM",
+      "primaryObjective": "Hospital & Pathology Lab Equipment Lead Generation",
+      "targetKpi": "₹650 Cost Per Verified Pathology Lead · 24% Demo Conversion",
+      "techArchitecture": [
+            "Google Search Commercial High-Intent Bidding",
+            "HL7 LIS Integration Funnel",
+            "Reagent Cost Estimator",
+            "Direct Sales Engineer Routing"
+      ],
+      "deliverablesDeployed": [
+            "NABL-Ready Reagent Cost Calculator",
+            "Hospital Procurement Pre-Qualification",
+            "Zero-Ghosting 15-Minute Callback SLA",
+            "Technical Spec Sheet Gate"
+      ],
+      "verifiedImpact": "320+ Hospital Installations Pan-India · ₹42Cr Total Equipment Value"
+},
+
     categoryBadge: "NABL & CE-IVD Approved · ISO 13485 Certified",
     domainUrl: "bharatbiohealth.com",
     theme: {
@@ -797,6 +908,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "sobha-heritage-villas",
     brandName: "Sobha Heritage Villas · Goa",
     brandTagline: "Private Indo-Portuguese Luxury Estates in North Goa",
+    serviceCriteria: {
+      "serviceId": "lead-generation",
+      "serviceTitle": "Lead Generation Services",
+      "primaryObjective": "Ultra-Luxury Goa Heritage Villa High-Net-Worth Sales",
+      "targetKpi": "₹1,850 Cost Per Ultra-HNW Lead · ₹4.5Cr Average Transaction Value",
+      "techArchitecture": [
+            "Meta HNW Broad Targeting",
+            "3D Architectural Virtual Tour",
+            "Private Chauffeur Scheduling Engine",
+            "WhatsApp VIP Concierge"
+      ],
+      "deliverablesDeployed": [
+            "Exclusive Private Villa Brochure Gate",
+            "Sanad & RERA Title Verification Dossier",
+            "Chauffeur Concierge Scheduler",
+            "Retargeting for NRI Investors"
+      ],
+      "verifiedImpact": "14 Heritage Villas Sold Out in Phase 1 · ₹63Cr Total Gross Value"
+},
+
     categoryBadge: "Only 12 Signature Residences · Assagao Valley",
     domainUrl: "sobhaheritagegoa.com",
     theme: {
@@ -926,6 +1057,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "chaichaska-ctc",
     brandName: "Chai Chaska Co.",
     brandTagline: "High-Elevation Assam Royal CTC & Kadak Tapri Blends",
+    serviceCriteria: {
+      "serviceId": "ecommerce",
+      "serviceTitle": "E-Commerce Services",
+      "primaryObjective": "Frictionless Direct D2C Storefront & High-AOV Subscription",
+      "targetKpi": "5.2% Storefront Conversion Rate · ₹890 AOV (2.4x Industry Baseline)",
+      "techArchitecture": [
+            "Next.js 16 Sub-Second Storefront",
+            "1-Click UPI Quick Checkout",
+            "Dynamic Kadak Strength Selector",
+            "WhatsApp Re-Order Flow"
+      ],
+      "deliverablesDeployed": [
+            "Free Terracotta Kulhad AOV Upsell Engine",
+            "Frictionless Pincode Delivery Routing",
+            "Automated COD Verification Shield",
+            "WhatsApp 30-Day Refill Sprints"
+      ],
+      "verifiedImpact": "120,000+ Kilos of Pure Assam CTC Shipped · 64% 60-Day Repeat Rate"
+},
+
     categoryBadge: "Pure Assam Single-Estate Garden Fresh · No Tea Dust",
     domainUrl: "chaichaska.in",
     theme: {
@@ -1060,6 +1211,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "streethreads-handloom",
     brandName: "StreeThreads Varanasi",
     brandTagline: "Master Weaver Silk Mark Certified Handloom Sarees",
+    serviceCriteria: {
+      "serviceId": "ecommerce",
+      "serviceTitle": "E-Commerce & Packaging Design",
+      "primaryObjective": "Preserving Indian Heritage Craft with Luxury D2C Architecture",
+      "targetKpi": "4.4% Conversion Rate · ₹4,800 AOV on Pure Handloom Silk",
+      "techArchitecture": [
+            "Silk Mark Government Verification API",
+            "Zoom-to-Weave High-Resolution Inspection",
+            "Shopify Plus Headless",
+            "Klaviyo VIP Flows"
+      ],
+      "deliverablesDeployed": [
+            "Authentic Zari & Loom Traceability Card",
+            "Pre-Order Custom Blouse Stitching Upsell",
+            "COD Abuse & RTO Protection Engine",
+            "Artisan Storytelling Video Funnel"
+      ],
+      "verifiedImpact": "850+ Generational Weavers Supported · ₹2.8Cr Quarterly D2C Sales"
+},
+
     categoryBadge: "Silk Mark of India Certified · Handwoven on Pit Looms",
     domainUrl: "streethreads.in",
     theme: {
@@ -1349,6 +1520,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "pet-first-wellness",
     brandName: "PetFirst Canine Nutrition",
     brandTagline: "Veterinarian-Engineered Fresh Cooked Meals & Calorie Engine",
+    serviceCriteria: {
+      "serviceId": "performance-marketing",
+      "serviceTitle": "Performance Marketing & Retention",
+      "primaryObjective": "Fresh Dog Food Meal Subscription Scaling & Retention",
+      "targetKpi": "4.4x Blended ROAS · 72% 3-Month Subscription Retention",
+      "techArchitecture": [
+            "Meta Advantage+ Catalog Ads",
+            "Custom Dog Calorie Portioning Logic",
+            "ReCharge Subscription API",
+            "Cold-Chain Thermal Tracking"
+      ],
+      "deliverablesDeployed": [
+            "Interactive Breed & Calorie Portioned Meal Quiz",
+            "First-Box 40% Trial Funnel Architecture",
+            "Automated Delivery Cadence Manager",
+            "Veterinarian Whitelisted Ad Campaigns"
+      ],
+      "verifiedImpact": "18,000+ Active Monthly Canine Subscribers · ₹1.4Cr Monthly MRR"
+},
+
     categoryBadge: "100% Human-Grade Whole Meat · Formulated by Vet Nutritionists",
     domainUrl: "petfirstwellness.in",
     theme: {
@@ -1482,6 +1673,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "mithaimagic-sweets",
     brandName: "Mithai Magic Sweets",
     brandTagline: "Pure Desi Ghee Indian Sweets Delivered in 10 Minutes",
+    serviceCriteria: {
+      "serviceId": "quick-commerce",
+      "serviceTitle": "Quick Commerce Services",
+      "primaryObjective": "Sub-15 Minute Desi Ghee Sweets Dark Store Domination",
+      "targetKpi": "11-Min Average Dispatch Time · 99.8% Inventory In-Stock Accuracy",
+      "techArchitecture": [
+            "Dark Store Real-time Inventory API",
+            "Blinkit & Zepto Sponsored Search Bids",
+            "Instant Delivery Radar Simulation",
+            "Cold Storage Cryo-Lock"
+      ],
+      "deliverablesDeployed": [
+            "Live 10-Minute Dark Store Dispatch Counter",
+            "Festive Flash Placement Bidding Strategy",
+            "Geo-Fenced BKC & Connaught Place Hub Routing",
+            "Zero Vanaspati Lab Verification Badges"
+      ],
+      "verifiedImpact": "45,000+ Boxes Delivered in Diwali Week · 4.94 Star Rating Across 3 Hubs"
+},
+
     categoryBadge: "10-Minute Dark Store Delivery · 100% Pure Desi Ghee",
     domainUrl: "mithaimagicsweets.com",
     theme: {
@@ -1611,6 +1822,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "pureglow-kombucha",
     brandName: "PureGlow Sparkling Kombucha",
     brandTagline: "Living Probiotics, Darjeeling Tea & Cold-Chain Speed",
+    serviceCriteria: {
+      "serviceId": "quick-commerce",
+      "serviceTitle": "Quick Commerce & Performance Marketing",
+      "primaryObjective": "Cold-Chain Raw Probiotic Delivery & Health Influencer Funnel",
+      "targetKpi": "14-Min Dark Store Delivery · 4.8x Meta ASC+ Blended ROAS",
+      "techArchitecture": [
+            "Zepto / Instamart Micro-Hub Routing",
+            "Meta Dynamic Creative Testing",
+            "Living Probiotics Live Counter",
+            "6-Bottle Mix & Match Builder"
+      ],
+      "deliverablesDeployed": [
+            "Sub-4°C Cold-Chain Freshness Tracking",
+            "Custom 6-Bottle Raw Probiotic Pack Builder",
+            "Gut Health Microbiome Educational Funnel",
+            "Zero Sugar Comparative Clinical Breakdown"
+      ],
+      "verifiedImpact": "62,000+ Bottles Shipped Monthly · 48% Dark Store Re-Order Rate"
+},
+
     categoryBadge: "10 Billion Live CFUs · Unpasteurized Raw Probiotics",
     domainUrl: "pureglowkombucha.com",
     theme: {
@@ -1744,6 +1975,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "darbar-fine-watches",
     brandName: "Darbar Mechanical Horology",
     brandTagline: "Bespoke Royal Rajput Mechanical Timepieces & Swiss Calibres",
+    serviceCriteria: {
+      "serviceId": "web-development",
+      "serviceTitle": "Web Development & Packaging Design",
+      "primaryObjective": "Bespoke 3D Swiss Automatic Royal Timepiece Customizer",
+      "targetKpi": "Sub-600ms Headless Next.js Load Speed · ₹48,000 Average Order Value",
+      "techArchitecture": [
+            "Next.js 16 Turbopack",
+            "Three.js / Canvas 3D Dial Renderer",
+            "COSC Certification Registry API",
+            "White-Glove Insured Delivery Gateway"
+      ],
+      "deliverablesDeployed": [
+            "Interactive Bespoke Watch Customizer (Dials, Straps, Engravings)",
+            "316L Surgical Steel & Ceramic Bezel Selector",
+            "Handcrafted Wooden Box Packaging Specs",
+            "5-Year Global Warranty Tracking Portal"
+      ],
+      "verifiedImpact": "2,800+ Limited Edition Timepieces Sold Out · 0% Checkout Dropoff"
+},
+
     categoryBadge: "Hand-Assembled in Switzerland · Rajput Royal Heritage",
     domainUrl: "darbarwatches.com",
     theme: {
@@ -1873,6 +2124,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "kisaandirect-agri",
     brandName: "KisaanDirect Agri Platform",
     brandTagline: "Vernacular Direct-From-Farm Wholesale Mandi Procurement",
+    serviceCriteria: {
+      "serviceId": "lead-generation",
+      "serviceTitle": "Lead Generation & Platform Engineering",
+      "primaryObjective": "Farm-to-Retail Agri Produce Escrow Trading Network",
+      "targetKpi": "₹180 CAC Per Registered Farmer · 100% Escrow Dispute-Free Clearance",
+      "techArchitecture": [
+            "Live APMC Mandi Price Ticker API",
+            "NABL Moisture & Quality Assaying System",
+            "Escrow Smart Settlement Gateway",
+            "GPS Freight Fleet Tracking"
+      ],
+      "deliverablesDeployed": [
+            "Real-Time 4-State APMC Mandi Rate Board",
+            "Bulk Escrow Payment Protection Calculator",
+            "Direct Farmer eNAM Legal Invoicing Pipeline",
+            "Truck-Load Weight & Moisture Verification"
+      ],
+      "verifiedImpact": "₹34Cr Agri Commodities Cleared Without Middlemen Cut · 14,000+ Farmers"
+},
+
     categoryBadge: "12,000+ Verified Farmer Collectives · 0% Middleman Cut",
     domainUrl: "kisaandirect.org",
     theme: {
@@ -2003,6 +2274,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "royal-rajwada-spices",
     brandName: "Royal Rajwada Spices",
     brandTagline: "Single-Origin Heirloom Spices in Collectible Embossed Tin Architecture",
+    serviceCriteria: {
+      "serviceId": "packaging-design",
+      "serviceTitle": "Packaging & Label Designing Services",
+      "primaryObjective": "Royal Octagonal UV-Proof Luxury Spice Tins & Export Identity",
+      "targetKpi": "Zero Essential Terpene Evaporation · 3.8x Export Price Realization",
+      "techArchitecture": [
+            "3D Photorealistic Canister Renders",
+            "FSSAI & US FDA Export Compliance Verification",
+            "Terpene Chromatography Sensor Data",
+            "Heritage Single-Estate Traceability"
+      ],
+      "deliverablesDeployed": [
+            "Octagonal Brass-Accented Tin Dielines & Structural Design",
+            "100% UV-Blocking Food-Grade Hermetic Seals",
+            "Tellicherry Harvest Block GPS Origin Coordinates",
+            "Luxury Reusable Kitchen Keepsake Architecture"
+      ],
+      "verifiedImpact": "Featured in 12 Michelin Star Kitchens · 98,000+ Collector Tins Sold"
+},
+
     categoryBadge: "Hand-Harvested from Century-Old Plantations · 24K Gold Foil Tins",
     domainUrl: "royalrajwadaspices.com",
     theme: {
@@ -2157,6 +2448,26 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "kamakesh-hair-elixir",
     brandName: "Kamakesh Ayurvedic Scalp Oil",
     brandTagline: "21-Herb Classical Scalp Elixir in Pharmaceutical Amber Glass Architecture",
+    serviceCriteria: {
+      "serviceId": "packaging-design",
+      "serviceTitle": "Packaging Design & Performance Marketing",
+      "primaryObjective": "72-Hour Kshirapak Botanical Formula & Luxury Glass Architecture",
+      "targetKpi": "4.9x Meta Ad ROAS · 68% Telogen Hair Shedding Reduction",
+      "techArchitecture": [
+            "Custom Frosted Amber Glass Dielines",
+            "Ayush Classical Kshirapak Vidhi Certification",
+            "Follicle Density Clinical Trial Viewer",
+            "Klaviyo 60-Day Re-Order Sequence"
+      ],
+      "deliverablesDeployed": [
+            "Heavyweight Embossed Amber Dropper Bottle Design",
+            "21-Herb Botanical Extraction Breakdown Matrix",
+            "Clinical Dermatologist Clinical Trial Display",
+            "60-Day Empty Bottle Money-Back Funnel"
+      ],
+      "verifiedImpact": "74,000+ Bottles Scaled at 4.9x ROAS · 88% Reported Visible Follicle Density"
+},
+
     categoryBadge: "Classical Kshirapak Vidhi · 72-Hour Slow Decoction",
     domainUrl: "kamakesh.com",
     theme: {

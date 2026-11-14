@@ -87,7 +87,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function ServiceDetailPage({ params }: PageProps) {
+export default function ServiceDetailPage({ params }: PageProps) {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400 font-mono text-sm">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
+            <span>Loading Desi Muchads Service Specification...</span>
+          </div>
+        </div>
+      }
+    >
+      <ServiceDetailContent params={params} />
+    </React.Suspense>
+  );
+}
+
+async function ServiceDetailContent({ params }: PageProps) {
   const { slug } = await params;
   const service = AGENCY_SERVICES.find((s) => s.slug === slug);
 

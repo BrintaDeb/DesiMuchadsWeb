@@ -74,7 +74,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function ProjectDetailPage({ params }: PageProps) {
+export default function ProjectDetailPage({ params }: PageProps) {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400 font-mono text-sm">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
+            <span>Loading Desi Muchads Case Study...</span>
+          </div>
+        </div>
+      }
+    >
+      <ProjectDetailContent params={params} />
+    </React.Suspense>
+  );
+}
+
+async function ProjectDetailContent({ params }: PageProps) {
   const { slug } = await params;
   const project = AGENCY_PROJECTS.find((p) => p.slug === slug);
 
