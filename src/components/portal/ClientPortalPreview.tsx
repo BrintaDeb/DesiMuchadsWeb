@@ -149,7 +149,7 @@ export function ClientPortalPreview() {
         origin: { y: 0.6 },
         colors: ["#ffffff", "#e4e4e7", "#a1a1aa", "#71717a"],
       });
-    } catch {}
+    } catch { }
   };
 
   const handleSimulateWebhook = () => {
@@ -158,7 +158,7 @@ export function ClientPortalPreview() {
     const hubs = ["South Delhi Hub #04", "Gurugram Cyber City", "Hyderabad Jubilee Hills", "Pune Koregaon Park"];
     const amounts = ["₹4,890", "₹3,750", "₹6,200", "₹2,899"];
     const roasList = ["6.8x", "7.4x", "5.9x", "8.1x"];
-    
+
     const randomOrder: LiveOrderItem = {
       id: newId,
       amount: amounts[Math.floor(Math.random() * amounts.length)],
@@ -230,11 +230,10 @@ export function ClientPortalPreview() {
                     sound.playPluck(150);
                     setActiveTab(tab.id as typeof activeTab);
                   }}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition-all interactive-scale-tap whitespace-nowrap shrink-0 min-h-[42px] ${
-                    isActive
-                      ? "bg-white text-black shadow-md"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition-all interactive-scale-tap whitespace-nowrap shrink-0 min-h-[42px] ${isActive
+                    ? "bg-white text-black shadow-md"
+                    : "text-zinc-400 hover:text-white"
+                    }`}
                 >
                   <Icon className="w-3.5 h-3.5 shrink-0" />
                   <span>{tab.label}</span>
@@ -273,11 +272,10 @@ export function ClientPortalPreview() {
                       sound.playPluck(130);
                       setTimeRange(range);
                     }}
-                    className={`px-3 py-1 rounded text-xs transition-all ${
-                      timeRange === range
-                        ? "bg-white text-black font-bold shadow-md"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`px-3 py-1 rounded text-xs transition-all ${timeRange === range
+                      ? "bg-white text-black font-bold shadow-md"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     {range === "7d" ? "7 Days" : range === "30d" ? "30 Days" : "Q3 Pace"}
                   </button>
@@ -326,11 +324,10 @@ export function ClientPortalPreview() {
                     sound.playPluck(140);
                     setMetricMode("blended");
                   }}
-                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${
-                    metricMode === "blended"
-                      ? "border-white bg-white/10 text-white font-bold"
-                      : "border-white/10 text-zinc-400 hover:text-white"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${metricMode === "blended"
+                    ? "border-white bg-white/10 text-white font-bold"
+                    : "border-white/10 text-zinc-400 hover:text-white"
+                    }`}
                 >
                   Blended Topline
                 </button>
@@ -340,11 +337,10 @@ export function ClientPortalPreview() {
                     sound.playPluck(140);
                     setMetricMode("first_order");
                   }}
-                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${
-                    metricMode === "first_order"
-                      ? "border-white bg-white/10 text-white font-bold"
-                      : "border-white/10 text-zinc-400 hover:text-white"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${metricMode === "first_order"
+                    ? "border-white bg-white/10 text-white font-bold"
+                    : "border-white/10 text-zinc-400 hover:text-white"
+                    }`}
                 >
                   First-Order CAC
                 </button>
@@ -354,11 +350,10 @@ export function ClientPortalPreview() {
                     sound.playPluck(140);
                     setMetricMode("contribution");
                   }}
-                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${
-                    metricMode === "contribution"
-                      ? "border-white bg-white/10 text-white font-bold"
-                      : "border-white/10 text-zinc-400 hover:text-white"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${metricMode === "contribution"
+                    ? "border-white bg-white/10 text-white font-bold"
+                    : "border-white/10 text-zinc-400 hover:text-white"
+                    }`}
                 >
                   Contribution Margin
                 </button>
@@ -420,6 +415,10 @@ export function ClientPortalPreview() {
                         setHoveredBarIndex(i);
                       }}
                       onMouseLeave={() => setHoveredBarIndex(null)}
+                      onTouchStart={() => {
+                        sound.playPluck(130 + i * 15);
+                        setHoveredBarIndex(i);
+                      }}
                       className="flex-1 flex flex-col items-center gap-2 relative cursor-pointer group"
                     >
                       {/* Interactive Hover Tooltip */}
@@ -533,7 +532,7 @@ export function ClientPortalPreview() {
                       <Flame className="w-3.5 h-3.5 text-white" />
                     </div>
                     <p className="font-bold text-white">&ldquo;Dilli Street Roast Viral Hook Cut v3&rdquo;</p>
-                    
+
                     <button
                       type="button"
                       onClick={() => {
@@ -651,11 +650,10 @@ export function ClientPortalPreview() {
                           sound.playPluck(140);
                           setSelectedKeyword(kw);
                         }}
-                        className={`p-3 rounded-xl border text-left transition-all ${
-                          isSelected
-                            ? "bg-white text-black border-white shadow-md font-bold"
-                            : "bg-[#121215] border-white/10 text-zinc-300 hover:border-white/30"
-                        }`}
+                        className={`p-3 rounded-xl border text-left transition-all ${isSelected
+                          ? "bg-white text-black border-white shadow-md font-bold"
+                          : "bg-[#121215] border-white/10 text-zinc-300 hover:border-white/30"
+                          }`}
                       >
                         <div className="flex items-center justify-between mb-1">
                           <span className={`text-[10px] font-mono ${isSelected ? "text-zinc-700" : "text-emerald-400"}`}>
@@ -760,7 +758,14 @@ export function ClientPortalPreview() {
 
       {/* Interactive Invoice / Strategy / Script Modals */}
       {activeModal && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+        >
           <div className="relative w-full max-w-xl max-h-[92dvh] overflow-y-auto overscroll-contain bg-[#101013] border border-white/20 rounded-2xl p-5 sm:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.95)]">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div className="flex items-center gap-2">
@@ -774,7 +779,8 @@ export function ClientPortalPreview() {
               </div>
               <button
                 onClick={() => setActiveModal(null)}
-                className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors touch-hit-expand"
+                aria-label="Close modal dialog"
               >
                 <X className="w-5 h-5" />
               </button>

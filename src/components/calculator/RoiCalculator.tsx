@@ -200,7 +200,7 @@ export function RoiCalculator() {
           origin: { y: 0.7 },
           colors: ["#ffffff", "#e4e4e7", "#a1a1aa"],
         });
-      } catch {}
+      } catch { }
     }
     setTimeout(() => setIsCopied(false), 2500);
   };
@@ -322,11 +322,10 @@ export function RoiCalculator() {
                         sound.playPluck(125);
                         setBudget(preset.value);
                       }}
-                      className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold transition-all border ${
-                        budget === preset.value
-                          ? "bg-white text-black border-white shadow-sm font-bold"
-                          : "bg-white/5 text-zinc-400 border-white/10 hover:text-white hover:border-white/30"
-                      }`}
+                      className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold transition-all border ${budget === preset.value
+                        ? "bg-white text-black border-white shadow-sm font-bold"
+                        : "bg-white/5 text-zinc-400 border-white/10 hover:text-white hover:border-white/30"
+                        }`}
                     >
                       {preset.label}
                     </button>
@@ -377,11 +376,10 @@ export function RoiCalculator() {
                           sound.playPluck(135);
                           setAov(preset.value);
                         }}
-                        className={`py-1 text-center rounded text-[10px] font-mono transition-all border ${
-                          aov === preset.value
-                            ? "bg-white text-black border-white font-bold"
-                            : "bg-white/5 text-zinc-400 border-white/10 hover:text-white"
-                        }`}
+                        className={`py-1 text-center rounded text-[10px] font-mono transition-all border ${aov === preset.value
+                          ? "bg-white text-black border-white font-bold"
+                          : "bg-white/5 text-zinc-400 border-white/10 hover:text-white"
+                          }`}
                       >
                         {preset.label}
                       </button>
@@ -414,11 +412,10 @@ export function RoiCalculator() {
                             sound.playPluck(140);
                             setMarginPercent(preset.value);
                           }}
-                          className={`py-1.5 text-center rounded-lg border text-[11px] font-mono font-bold transition-all ${
-                            marginPercent === preset.value
-                              ? "border-white bg-white text-black shadow-sm"
-                              : "border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:border-white/30"
-                          }`}
+                          className={`py-1.5 text-center rounded-lg border text-[11px] font-mono font-bold transition-all ${marginPercent === preset.value
+                            ? "border-white bg-white text-black shadow-sm"
+                            : "border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:border-white/30"
+                            }`}
                         >
                           {preset.label}
                         </button>
@@ -449,11 +446,10 @@ export function RoiCalculator() {
                           setIndustry(ind.name);
                           if (ind.defaultAov) setAov(ind.defaultAov);
                         }}
-                        className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
-                          isSelected
-                            ? "border-white bg-white text-black shadow-lg ring-1 ring-white"
-                            : "border-white/10 bg-white/[0.03] text-zinc-300 hover:border-white/30 hover:bg-white/[0.06]"
-                        }`}
+                        className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${isSelected
+                          ? "border-white bg-white text-black shadow-lg ring-1 ring-white"
+                          : "border-white/10 bg-white/[0.03] text-zinc-300 hover:border-white/30 hover:bg-white/[0.06]"
+                          }`}
                       >
                         <div className="flex items-center justify-between w-full mb-1">
                           <span className={`text-[10px] font-mono uppercase tracking-wider ${isSelected ? "text-zinc-600" : "text-zinc-400"}`}>
@@ -485,11 +481,10 @@ export function RoiCalculator() {
                       sound.playPluck(160);
                       setObjective("ecommerce");
                     }}
-                    className={`py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-2 ${
-                      objective === "ecommerce"
-                        ? "bg-white text-black shadow-md"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-2 ${objective === "ecommerce"
+                      ? "bg-white text-black shadow-md"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     <span>Direct E-Commerce Sales</span>
                   </button>
@@ -499,11 +494,10 @@ export function RoiCalculator() {
                       sound.playPluck(160);
                       setObjective("leads");
                     }}
-                    className={`py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-2 ${
-                      objective === "leads"
-                        ? "bg-white text-black shadow-md"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-2 ${objective === "leads"
+                      ? "bg-white text-black shadow-md"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     <span>High-Ticket Lead Generation</span>
                   </button>
@@ -556,11 +550,10 @@ export function RoiCalculator() {
                     </span>
                   </div>
                   <span
-                    className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${
-                      metrics.isProfitable
-                        ? "text-emerald-400 bg-emerald-950/70 border-emerald-500/40"
-                        : "text-rose-400 bg-rose-950/70 border-rose-500/40"
-                    }`}
+                    className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${metrics.isProfitable
+                      ? "text-emerald-400 bg-emerald-950/70 border-emerald-500/40"
+                      : "text-rose-400 bg-rose-950/70 border-rose-500/40"
+                      }`}
                   >
                     {metrics.isProfitable ? "+Profitable CM3" : "Re-balancing"}
                   </span>
@@ -684,11 +677,10 @@ export function RoiCalculator() {
                 <button
                   type="button"
                   onClick={handleCopyHisab}
-                  className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 active:scale-95 ${
-                    isCopied
-                      ? "bg-emerald-950/80 border-emerald-500/50 text-emerald-300"
-                      : "bg-white/5 border-white/15 text-zinc-300 hover:text-white hover:border-white/40 hover:bg-white/10"
-                  }`}
+                  className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 active:scale-95 ${isCopied
+                    ? "bg-emerald-950/80 border-emerald-500/50 text-emerald-300"
+                    : "bg-white/5 border-white/15 text-zinc-300 hover:text-white hover:border-white/40 hover:bg-white/10"
+                    }`}
                 >
                   {isCopied ? (
                     <>

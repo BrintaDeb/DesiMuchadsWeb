@@ -14,7 +14,7 @@ export function SonicToggle() {
     <button
       onClick={handleToggle}
       type="button"
-      className={`group flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono transition-all duration-300 ${
+      className={`group flex items-center gap-2 px-3 py-1.5 min-h-[44px] rounded-full border text-xs font-mono transition-all duration-300 touch-hit-expand ${
         enabled
           ? "border-white/30 bg-white/10 text-white hover:border-white/60"
           : "border-white/10 bg-white/5 text-zinc-500 hover:text-white"

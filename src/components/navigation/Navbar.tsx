@@ -26,6 +26,7 @@ import { sound } from "@/lib/sound";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { AudioVisualizer } from "./AudioVisualizer";
 import { SonicToggle } from "./SonicToggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { CommandMenu } from "../common/CommandMenu";
 
 interface NavbarProps {
@@ -552,6 +553,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
           {/* Indian Tanpura + Tabla Ambient Beats */}
           <AudioVisualizer />
+
+          {/* Luxury Visual Density Switcher */}
+          <ThemeToggle />
 
           {/* Signature Stark White Button */}
           <button

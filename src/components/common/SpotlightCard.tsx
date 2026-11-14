@@ -27,6 +27,7 @@ export function SpotlightCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
   const borderGlintRef = useRef<HTMLDivElement>(null);
+  const isCoarseRef = useRef<boolean>(false);
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
@@ -45,6 +46,7 @@ export function SpotlightCard({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    isCoarseRef.current = window.matchMedia("(pointer: coarse)").matches;
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", listener);
@@ -84,9 +86,9 @@ export function SpotlightCard({
     [enableTilt, isHovered, maxTilt, perspective, prefersReducedMotion, scale]
   );
 
-  // Gyroscope mobile spatial tilt support
+  // Gyroscope mobile spatial tilt support (active only on hovered/tapped card to eliminate background GPU churn)
   useEffect(() => {
-    if (typeof window === "undefined" || prefersReducedMotion || !enableTilt) return;
+    if (typeof window === "undefined" || prefersReducedMotion || !enableTilt || !isHovered) return;
 
     const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma === null || e.beta === null) return;
@@ -106,7 +108,7 @@ export function SpotlightCard({
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
     };
-  }, [enableTilt, prefersReducedMotion, updatePhysics]);
+  }, [enableTilt, isHovered, prefersReducedMotion, updatePhysics]);
 
   const handlePointerMove = useCallback(
     (clientX: number, clientY: number) => {
@@ -158,6 +160,8 @@ export function SpotlightCard({
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
+      // On mobile coarse touch screens, preserve 100% fluid vertical scrolling without fighting 3D tilt
+      if (isCoarseRef.current) return;
       if (e.touches[0]) {
         handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
       }

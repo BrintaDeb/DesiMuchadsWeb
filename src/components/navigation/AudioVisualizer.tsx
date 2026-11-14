@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Volume2, VolumeX, Sparkles } from "lucide-react";
+import { Volume2, VolumeX, Sparkles, ChevronDown } from "lucide-react";
 
 type SoundMode = "tanpura" | "pulse" | "chimes";
 
@@ -25,7 +25,7 @@ export function AudioVisualizer() {
       try {
         osc.stop();
         osc.disconnect();
-      } catch {}
+      } catch { }
     });
     oscillatorsRef.current = [];
   };
@@ -164,7 +164,7 @@ export function AudioVisualizer() {
       setTimeout(() => {
         clearNodes();
         if (audioCtxRef.current) {
-          audioCtxRef.current.suspend().catch(() => {});
+          audioCtxRef.current.suspend().catch(() => { });
         }
       }, 380);
     } else {
@@ -188,18 +188,37 @@ export function AudioVisualizer() {
     }
   };
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     return () => {
       clearNodes();
       if (audioCtxRef.current) {
-        audioCtxRef.current.close().catch(() => {});
+        audioCtxRef.current.close().catch(() => { });
       }
       if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
     };
   }, []);
 
+  // Handle outside click to close menu on mobile touch
+  useEffect(() => {
+    if (!showMenu) return;
+    const handleOutside = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+    };
+  }, [showMenu]);
+
   return (
     <div
+      ref={containerRef}
       className="relative inline-block"
       onMouseEnter={() => {
         if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
@@ -212,7 +231,7 @@ export function AudioVisualizer() {
       <button
         onClick={toggleAudio}
         type="button"
-        className={`group flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 text-xs font-mono interactive-scale-tap ${
+        className={`group flex items-center gap-2 px-3 py-1.5 min-h-[44px] rounded-full border transition-all duration-300 text-xs font-mono interactive-scale-tap ${
           isPlaying
             ? "border-white/60 bg-white/15 text-white shadow-[0_0_18px_rgba(255,255,255,0.15)]"
             : "border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-zinc-300 hover:text-white"
@@ -223,27 +242,23 @@ export function AudioVisualizer() {
         {/* 4 Animated Soundwave Bars */}
         <div className="flex items-end gap-[2.5px] h-3.5 w-3.5">
           <span
-            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${
-              isPlaying ? "h-3.5 animate-pulse" : "h-1"
-            }`}
+            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${isPlaying ? "h-3.5 animate-pulse" : "h-1"
+              }`}
             style={{ animationDuration: "0.6s" }}
           />
           <span
-            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${
-              isPlaying ? "h-2.5 animate-pulse" : "h-1.5"
-            }`}
+            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${isPlaying ? "h-2.5 animate-pulse" : "h-1.5"
+              }`}
             style={{ animationDuration: "0.4s" }}
           />
           <span
-            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${
-              isPlaying ? "h-3.5 animate-pulse" : "h-1"
-            }`}
+            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${isPlaying ? "h-3.5 animate-pulse" : "h-1"
+              }`}
             style={{ animationDuration: "0.8s" }}
           />
           <span
-            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${
-              isPlaying ? "h-2 animate-pulse" : "h-1.5"
-            }`}
+            className={`w-[2px] bg-white rounded-full transition-all duration-300 ${isPlaying ? "h-2 animate-pulse" : "h-1.5"
+              }`}
             style={{ animationDuration: "0.5s" }}
           />
         </div>
@@ -253,8 +268,8 @@ export function AudioVisualizer() {
             ? soundMode === "tanpura"
               ? "Tanpura"
               : soundMode === "pulse"
-              ? "Tabla Beat"
-              : "Temple Chimes"
+                ? "Tabla Beat"
+                : "Temple Chimes"
             : "Desi Beats"}
         </span>
 
@@ -263,6 +278,23 @@ export function AudioVisualizer() {
         ) : (
           <VolumeX className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
         )}
+
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowMenu((prev) => !prev);
+          }}
+          className="p-1 rounded-full hover:bg-white/10 transition-colors ml-0.5 cursor-pointer touch-hit-expand"
+          role="button"
+          tabIndex={0}
+          aria-label="Toggle ambient soundscapes list"
+        >
+          <ChevronDown
+            className={`w-3 h-3 text-zinc-400 transition-transform ${
+              showMenu ? "rotate-180 text-white" : ""
+            }`}
+          />
+        </span>
       </button>
 
       {/* Interactive Soundscape Mode Picker Flyout */}
@@ -285,11 +317,10 @@ export function AudioVisualizer() {
                   switchMode(mode.id as SoundMode);
                   if (!isPlaying) startSoundscape(mode.id as SoundMode);
                 }}
-                className={`w-full text-left p-2 rounded-xl transition-all ${
-                  soundMode === mode.id
-                    ? "bg-white text-black font-bold shadow-sm"
-                    : "text-zinc-300 hover:text-white hover:bg-white/10"
-                }`}
+                className={`w-full text-left p-2 rounded-xl transition-all ${soundMode === mode.id
+                  ? "bg-white text-black font-bold shadow-sm"
+                  : "text-zinc-300 hover:text-white hover:bg-white/10"
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold block">{mode.label}</span>
