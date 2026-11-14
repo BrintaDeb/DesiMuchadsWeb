@@ -314,6 +314,50 @@ export default function RootLayout({
     },
   };
 
+  // Google SERP Primary Navigation Sitelinks Schema
+  const siteNavigationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Desi Muchads Primary Navigation Sitelinks",
+    itemListElement: [
+      {
+        "@type": "SiteNavigationElement",
+        position: 1,
+        name: "Verified Client Work (46 Case Studies)",
+        description: "Live production platforms, e-commerce storefronts, and verified ROAS case studies.",
+        url: "https://desimuchads.agency/#karname",
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 2,
+        name: "Capabilities & Services",
+        description: "Full-funnel Meta & Google ads, Next.js web platforms, and Quick Commerce scaling.",
+        url: "https://desimuchads.agency/#services",
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 3,
+        name: "Hisab-Kitab Simulator",
+        description: "Simulate monthly ad spend, contribution margin, and projected ROAS in real time.",
+        url: "https://desimuchads.agency/#calculator",
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 4,
+        name: "Retainers & Pricing",
+        description: "Transparent growth retainers and modular marketing thali packages.",
+        url: "https://desimuchads.agency/#pricing",
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 5,
+        name: "Why Desi Muchads",
+        description: "Anti-AI performance growth architecture, unit economics audit, and zero-ghosting SLA.",
+        url: "https://desimuchads.agency/#why-us",
+      },
+    ],
+  };
+
   // Google SERP Rich FAQ Schema
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -383,6 +427,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationJsonLd) }}
         />
       </head>
       <body className="bg-[#09090b] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden font-sans">

@@ -203,7 +203,7 @@ export function RoiCalculator() {
         </div>
 
         {/* Stable Master Panel */}
-        <div className="ios-glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl relative border border-white/15 bg-gradient-to-br from-white/[0.04] via-[#121215]/90 to-[#09090b]/95 backdrop-blur-2xl">
+        <div className="ios-glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-12 shadow-2xl relative border border-white/15 bg-gradient-to-br from-white/[0.04] via-[#121215]/90 to-[#09090b]/95 backdrop-blur-2xl">
           {/* Filigree Corner Accents */}
           <div className="absolute top-4 left-4 pointer-events-none opacity-40">
             <FiligreeCorner className="w-5 h-5 text-white/50" position="top-left" />
@@ -212,12 +212,12 @@ export function RoiCalculator() {
             <FiligreeCorner className="w-5 h-5 text-white/50" position="top-right" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-stretch">
             {/* Left Inputs Column (7 cols) */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-7">
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6 sm:space-y-7">
               {/* Input 1: Monthly Ad Budget Slider */}
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/10">
-                <div className="flex items-center justify-between mb-3">
+              <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/10">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                   <div>
                     <label htmlFor={budgetId} className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-bold block">
                       1. Monthly Ad Fuel

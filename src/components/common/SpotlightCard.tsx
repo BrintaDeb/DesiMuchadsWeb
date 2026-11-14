@@ -215,6 +215,7 @@ export function SpotlightCard({
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       style={{
         transformStyle: "preserve-3d",
         willChange: "transform",

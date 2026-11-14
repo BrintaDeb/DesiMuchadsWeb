@@ -253,7 +253,7 @@ async function ProjectDetailContent({ params }: PageProps) {
         </div>
 
         {/* Hero Section */}
-        <div className="relative rounded-3xl p-8 sm:p-12 md:p-16 bg-[#121215] border border-white/15 border-t-white/30 shadow-2xl overflow-hidden">
+        <div className="relative rounded-2xl sm:rounded-3xl p-5 sm:p-12 md:p-16 bg-[#121215] border border-white/15 border-t-white/30 shadow-2xl overflow-hidden">
           {/* Filigree decorative corners */}
           <div className="absolute top-4 left-4 opacity-30 pointer-events-none">
             <FiligreeCorner className="w-6 h-6 text-white" position="top-left" />
@@ -263,7 +263,7 @@ async function ProjectDetailContent({ params }: PageProps) {
           </div>
 
           <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-6">
               <span className="px-3.5 py-1.5 rounded-full bg-white text-black font-metric text-xs font-black tracking-wider uppercase shadow-md">
                 {project.heroStat}
               </span>
@@ -275,7 +275,7 @@ async function ProjectDetailContent({ params }: PageProps) {
               </span>
             </div>
 
-            <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none mb-6">
+            <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-none mb-6">
               {project.client}
             </h1>
 

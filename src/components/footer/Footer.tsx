@@ -69,7 +69,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="https://web.whatsapp.com/send?phone=919999999999&text=Pranam%20Desi%20Muchads!%20We%20would%20like%20to%20buzz%20you%20for%20our%20e-commerce%20growth."
+              href="https://wa.me/919999999999?text=Pranam%20Desi%20Muchads!%20We%20would%20like%20to%20buzz%20you%20for%20our%20e-commerce%20growth."
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl border border-white/20 hover:border-white text-white font-display text-xs font-bold tracking-widest uppercase transition-all hover:bg-white/5"

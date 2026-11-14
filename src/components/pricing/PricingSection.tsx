@@ -229,14 +229,14 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
           </p>
 
           {/* Mode Switcher: Retainers vs Build-A-Thali */}
-          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-[#121215] border border-white/15 shadow-xl">
+          <div className="mt-8 inline-flex flex-col sm:flex-row items-center p-1 sm:p-1.5 rounded-2xl sm:rounded-full bg-[#121215] border border-white/15 shadow-xl max-w-full gap-1 sm:gap-0">
             <button
               type="button"
               onClick={() => {
                 sound.playPluck(150);
                 setMode("retainers");
               }}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all ${
+              className={`w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-xs font-mono font-bold transition-all text-center ${
                 mode === "retainers"
                   ? "bg-white text-black shadow-md"
                   : "text-zinc-400 hover:text-white"
@@ -250,7 +250,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 sound.playPluck(180);
                 setMode("thali");
               }}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
+              className={`w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
                 mode === "thali"
                   ? "bg-white text-black shadow-md"
                   : "text-zinc-400 hover:text-white"
@@ -423,7 +423,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
         {/* MODE B: "BUILD YOUR OWN MARKETING THALI" PLATTER */}
         {mode === "thali" && (
-          <div className="rounded-3xl p-6 sm:p-10 lg:p-12 ios-glass-panel shadow-2xl">
+          <div className="rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-12 ios-glass-panel shadow-2xl">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold block mb-2">
                 DESI MUCHADS MARKETING THALI

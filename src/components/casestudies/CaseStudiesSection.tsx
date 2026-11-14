@@ -110,7 +110,7 @@ export function CaseStudiesSection() {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 overflow-x-auto pb-2">
+        <div className="flex items-center gap-2 mb-10 overflow-x-auto pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex-nowrap sm:flex-wrap scrollbar-none">
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
@@ -119,7 +119,7 @@ export function CaseStudiesSection() {
                 sound.playPluck(160);
                 setSelectedCategory(cat.id);
               }}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all ${
+              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[40px] flex items-center ${
                 selectedCategory === cat.id
                   ? "bg-white text-black shadow-lg scale-105"
                   : "bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10"
@@ -592,17 +592,17 @@ export function CaseStudiesSection() {
                     </div>
                   </div>
 
-                  {/* 3 Metric Glass Tiles */}
-                  <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                  {/* 4 Metric Glass Tiles (2x2 on mobile, 4-col on tablet/desktop) */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
                     {currentCase.stats.map((s, idx) => (
                       <div
                         key={idx}
-                        className="p-4 sm:p-5 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/15 text-center shadow-md hover:border-white/30 transition-all"
+                        className="p-3.5 sm:p-5 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/15 text-center shadow-md hover:border-white/30 transition-all"
                       >
-                        <div className="font-display font-black text-xl sm:text-3xl text-white">
+                        <div className="font-display font-black text-lg sm:text-2xl md:text-3xl text-white truncate">
                           {s.val}
                         </div>
-                        <div className="text-[10px] sm:text-xs font-mono text-white/60 uppercase mt-1">
+                        <div className="text-[10px] sm:text-xs font-mono text-white/60 uppercase mt-1 leading-tight">
                           {s.label}
                         </div>
                       </div>
@@ -671,39 +671,62 @@ export function CaseStudiesSection() {
             </div>
 
             {/* 3. Bottom Glass Navigation Dock & Project Switcher Strip */}
-            <div className="px-4 sm:px-6 py-4 border-t border-white/15 bg-white/[0.04] backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-4 shrink-0">
-              {/* Project Thumbnail / Pill Dock (5 Projects) */}
-              <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto max-w-full pb-1 lg:pb-0">
-                <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest hidden sm:inline mr-1">
-                  PROJECTS:
-                </span>
-                {cases.map((cs, cIdx) => (
+            <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-t border-white/15 bg-white/[0.04] backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-3.5 shrink-0">
+              {/* Mobile Quick Stepper & Project Dock */}
+              <div className="flex items-center justify-between w-full lg:w-auto gap-2">
+                <div className="flex items-center gap-1.5 shrink-0">
                   <button
-                    key={cs.id}
                     type="button"
-                    onClick={() => {
-                      sound.playPluck(140 + cIdx * 20);
-                      setSelectedCaseIndex(cIdx);
-                      setIframeLoading(true);
-                    }}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${selectedCaseIndex === cIdx
-                        ? "bg-white text-black border border-white shadow-[0_0_15px_rgba(255,255,255,0.25)] scale-105"
-                        : "bg-white/[0.06] hover:bg-white/[0.12] text-white/70 border border-white/10"
-                      }`}
+                    onClick={handlePrev}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center gap-1 text-xs font-mono font-bold active:scale-95 transition-all min-h-[38px]"
+                    aria-label="Previous Project"
+                    title="Previous Project (←)"
                   >
-                    <span className="text-[10px] opacity-70">0{cs.id}</span>
-                    <span>{cs.client.split(" ")[0]}</span>
+                    <ChevronLeft className="w-4 h-4" />
+                    <span className="hidden sm:inline">Prev</span>
                   </button>
-                ))}
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center gap-1 text-xs font-mono font-bold active:scale-95 transition-all min-h-[38px]"
+                    aria-label="Next Project"
+                    title="Next Project (→)"
+                  >
+                    <span className="hidden sm:inline">Next</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Project Thumbnail / Pill Dock */}
+                <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto max-w-full pb-0.5 scrollbar-none flex-1 lg:flex-initial">
+                  {cases.map((cs, cIdx) => (
+                    <button
+                      key={cs.id}
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(140 + (cIdx % 10) * 15);
+                        setSelectedCaseIndex(cIdx);
+                        setIframeLoading(true);
+                      }}
+                      className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all whitespace-nowrap flex items-center gap-1 shrink-0 ${selectedCaseIndex === cIdx
+                          ? "bg-white text-black border border-white shadow-[0_0_15px_rgba(255,255,255,0.25)] scale-105"
+                          : "bg-white/[0.06] hover:bg-white/[0.12] text-white/70 border border-white/10"
+                        }`}
+                    >
+                      <span className="text-[10px] opacity-70">{cs.id < 10 ? `0${cs.id}` : cs.id}</span>
+                      <span className="hidden sm:inline">{cs.client.split(" ")[0]}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* Action Buttons: Launch Website & WhatsApp Strategy */}
-              <div className="flex items-center gap-2.5 sm:gap-3 w-full lg:w-auto justify-end">
+              <div className="flex items-center gap-2 sm:gap-3 w-full lg:w-auto justify-end">
                 <a
                   href={currentCase.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-wider shadow flex items-center justify-center gap-2 min-h-[42px] active:scale-95 transition-all"
+                  className="flex-1 sm:flex-none px-4 sm:px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-wider shadow flex items-center justify-center gap-2 min-h-[42px] active:scale-95 transition-all"
                 >
                   <span>LAUNCH LIVE SITE</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -713,7 +736,7 @@ export function CaseStudiesSection() {
                   href={`https://wa.me/919999999999?text=Pranam%20Desi%20Muchads!%20We%20love%20the%20${encodeURIComponent(currentCase.client)}%20showcase%20and%20want%20to%20build%20a%20similar%20high-ROAS%20storefront.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[42px] active:scale-95 transition-all"
+                  className="flex-1 sm:flex-none px-3.5 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[42px] active:scale-95 transition-all"
                 >
                   <span>DISCUSS STRATEGY</span>
                   <ArrowRight className="w-3.5 h-3.5" />

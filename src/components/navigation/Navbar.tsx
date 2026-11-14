@@ -133,7 +133,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     },
     {
       title: "Verified Client Work",
-      desc: "5 live production platforms & verified growth results",
+      desc: "46 verified growth architectures & live client platforms",
       href: "#karname",
       icon: Globe,
     },
@@ -484,7 +484,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               >
                 <div className="pb-2.5 mb-2 border-b border-white/10 flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 font-royal">
-                    16 Live Client Products
+                    46 Verified Case Studies
                   </span>
                   <a
                     href="#karname"
@@ -768,7 +768,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   {mobileAccordion === "portfolio" && (
                     <div className="p-2.5 bg-black/60 border-t border-white/10 space-y-1.5 animate-in fade-in duration-150">
                       <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 px-2 pt-1 pb-0.5">
-                        Live Production Demos (5)
+                        Featured Client Deployments
                       </div>
                       {portfolioProjects.map((p) => (
                         <Link
@@ -790,14 +790,14 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                         </Link>
                       ))}
                       <div className="pt-2 px-1 border-t border-white/10 flex items-center justify-between">
-                        <Link
-                          href="/work"
+                        <a
+                          href="#karname"
                           onClick={() => setMobileMenuOpen(false)}
                           className="text-xs text-white font-bold hover:underline flex items-center gap-1"
                         >
-                          <span>Explore All 16 Case Studies</span>
+                          <span>Explore All 46 Case Studies</span>
                           <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   )}
@@ -840,7 +840,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             </div>
 
             {/* Bottom High-Contrast Deck & Actions */}
-            <div className="pt-4 pb-4 space-y-2.5">
+            <div className="pt-4 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] space-y-2.5">
               {/* Subtle Hairline Divider 2 */}
               <div className="drawer-divider mb-3" />
 

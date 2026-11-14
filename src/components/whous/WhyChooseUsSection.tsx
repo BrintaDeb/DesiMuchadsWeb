@@ -88,11 +88,11 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
         </div>
 
         {/* Highlighted Stats Panel with iOS Glassmorphism */}
-        <div className="rounded-2xl ios-glass-panel p-8 sm:p-12 mb-16 shadow-2xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+        <div className="rounded-2xl ios-glass-panel p-5 sm:p-10 mb-16 shadow-2xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
             {stats.map((s, idx) => (
-              <div key={idx} className={idx > 0 ? "pt-6 md:pt-0" : ""}>
-                <div className="font-metric font-black text-4xl sm:text-5xl text-white tracking-tight leading-none mb-2">
+              <div key={idx} className="flex flex-col items-center justify-center">
+                <div className="font-metric font-black text-3xl sm:text-4xl md:text-5xl text-white tracking-tight leading-none mb-2">
                   {s.value}
                 </div>
                 <div className="text-[10px] sm:text-xs font-mono tracking-widest text-zinc-400 uppercase">

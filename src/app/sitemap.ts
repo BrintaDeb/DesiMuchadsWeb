@@ -1,12 +1,13 @@
 import { MetadataRoute } from "next";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
+import { DEMO_PROJECTS_DATABASE } from "@/data/demoProductsData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://desimuchads.agency";
-  const currentDate = new Date("2026-03-15T00:00:00.000Z");
+  const currentDate = new Date();
 
-  // 1. Core Pages
+  // 1. Core Landing & Main Anchor Routes
   const routes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
@@ -26,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 3. 16 Human-Grade Strategic Case Studies
+  // 3. 46 Human-Grade Strategic Case Studies
   AGENCY_PROJECTS.forEach((project) => {
     routes.push({
       url: `${baseUrl}/work/${project.slug}`,
@@ -36,10 +37,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 4. 16 Original Live Interactive Demo Products
-  AGENCY_PROJECTS.forEach((project) => {
+  // 4. Live Interactive Production Demo Storefronts
+  Object.keys(DEMO_PROJECTS_DATABASE).forEach((demoSlug) => {
     routes.push({
-      url: `${baseUrl}/demos/${project.slug}`,
+      url: `${baseUrl}/demos/${demoSlug}`,
       lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.8,

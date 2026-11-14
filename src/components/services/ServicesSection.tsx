@@ -110,8 +110,8 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
           </p>
 
           {/* Dynamic Brand Stage Filter Selector */}
-          <div className="mt-8 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono text-zinc-400 mr-1">Filter by Stage:</span>
+          <div className="mt-8 flex items-center gap-2 overflow-x-auto pb-2.5 -mx-4 px-4 sm:mx-0 sm:px-0 flex-nowrap sm:flex-wrap scrollbar-none">
+            <span className="text-xs font-mono text-zinc-400 mr-1 shrink-0">Filter by Stage:</span>
             {(Object.keys(stageConfigs) as (keyof typeof stageConfigs)[]).map((stageKey) => {
               const cfg = stageConfigs[stageKey];
               const isSelected = selectedStage === stageKey;
@@ -123,9 +123,9 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
                     sound.playPluck(150);
                     setSelectedStage(stageKey as typeof selectedStage);
                   }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-mono tracking-wide transition-all ${
+                  className={`px-3.5 py-2 rounded-full text-xs font-mono tracking-wide transition-all shrink-0 min-h-[38px] flex items-center ${
                     isSelected
-                      ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                      ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.2)] scale-105"
                       : "bg-[#121215] border border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
                   }`}
                 >

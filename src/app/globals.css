@@ -31,6 +31,17 @@
 :root {
   --background: #09090b;
   --foreground: #ffffff;
+  --target-size: 24px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+@media (pointer: coarse) {
+  :root {
+    --target-size: 44px;
+  }
 }
 
 html {
@@ -38,6 +49,7 @@ html {
   color: #ffffff;
   scroll-behavior: smooth;
   color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -45,6 +57,39 @@ body {
   color: #ffffff;
   font-family: var(--font-jakarta), system-ui, sans-serif;
   overflow-x: hidden;
+  overflow-wrap: anywhere;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fluid responsive typography balance */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+/* Media never overflows on small mobile devices */
+img, video, iframe, canvas {
+  max-inline-size: 100%;
+}
+
+/* Touch targets on coarse pointer mobile screens */
+@media (pointer: coarse) {
+  :where(button, [role="button"], input[type="button"], input[type="submit"]) {
+    min-block-size: 38px;
+  }
+}
+
+/* On touch-only mobile devices, dampen 3D perspective transforms to prioritize silky 120Hz scroll */
+@media (hover: none) and (pointer: coarse) {
+  .ios-glass-panel:hover,
+  .ios-glass-card:hover,
+  .panel-highlight:hover,
+  .panel-highlight-pro:hover {
+    transform: none !important;
+  }
 }
 
 ::selection {
