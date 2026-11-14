@@ -55,8 +55,8 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
           Flick or pull the moustache with your cursor/finger. Test our spring physics and see what secret gift the Raja has in store.
         </p>
 
-        {/* Draggable Spring-Physics Moustache */}
-        <div className="flex justify-center my-6">
+        {/* Draggable Spring-Physics Moustache (isolated touch-action for vertical scroll safety) */}
+        <div className="flex justify-center my-6 touch-pan-y">
           <motion.div
             drag
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -92,7 +92,7 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
             </p>
             <button
               onClick={onOpenKundli}
-              className="px-6 py-2.5 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-zinc-200 transition-colors"
+              className="px-6 py-3 min-h-[44px] inline-flex items-center justify-center rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-zinc-200 transition-colors"
             >
               Claim Bonus Ad Concept Now 〰️
             </button>

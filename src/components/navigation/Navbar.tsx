@@ -575,7 +575,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               setIsCommandOpen(true);
             }}
             type="button"
-            className="p-2.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] flex items-center justify-center"
+            className="p-2.5 min-w-[44px] min-h-[44px] rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] flex items-center justify-center touch-hit-expand"
             aria-label="Open Command Search (⌘K)"
           >
             <Search className="w-4 h-4" />
@@ -586,7 +586,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               sound.playPluck(mobileMenuOpen ? 120 : 180);
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="relative p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] focus:outline-none focus:ring-1 focus:ring-white/40"
+            className="relative p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/[0.12] active:bg-white/[0.18] border border-white/15 text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.5)] focus:outline-none focus:ring-1 focus:ring-white/40 touch-hit-expand"
             aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -607,9 +607,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         />
       )}
 
-      {/* 4. Structured Glassmorphic Mobile Drawer */}
+      {/* 4. Structured Glassmorphic Mobile Drawer with Dynamic Viewport Height & Safe Area */}
       {mobileMenuOpen && (
-        <div className="fixed top-[78px] sm:top-[86px] inset-x-0 bottom-0 z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto font-display animate-in slide-in-from-top-2 duration-200">
+        <div className="fixed top-[78px] sm:top-[86px] inset-x-0 bottom-0 max-h-[calc(100dvh-78px)] sm:max-h-[calc(100dvh-86px)] z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto overscroll-contain font-display animate-in slide-in-from-top-2 duration-200">
           <div className="p-4 sm:p-6 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between">
             {/* Top Interactive Tool Rows & Navigations */}
             <div className="space-y-3.5">

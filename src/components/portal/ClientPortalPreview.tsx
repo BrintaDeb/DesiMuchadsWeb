@@ -217,8 +217,8 @@ export function ClientPortalPreview() {
             Every client gets 24/7 access to our custom Darbar portal. Track ad metrics in real time, approve scripts in one click, and see exactly where every Rupee goes.
           </p>
 
-          {/* 4 Tabs Selector */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-2.5 p-1.5 rounded-2xl bg-[#121215] border border-white/15 max-w-2xl mx-auto">
+          {/* 4 Tabs Selector with Silky Mobile Momentum Scroll */}
+          <div className="mt-10 flex items-center justify-start sm:justify-center gap-2 p-1.5 rounded-2xl bg-[#121215] border border-white/15 max-w-2xl mx-auto scroll-momentum-x pb-2 sm:pb-1.5">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -230,13 +230,13 @@ export function ClientPortalPreview() {
                     sound.playPluck(150);
                     setActiveTab(tab.id as typeof activeTab);
                   }}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition-all interactive-scale-tap ${
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition-all interactive-scale-tap whitespace-nowrap shrink-0 min-h-[42px] ${
                     isActive
                       ? "bg-white text-black shadow-md"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -318,15 +318,15 @@ export function ClientPortalPreview() {
           {activeTab === "telemetry" && (
             <div className="space-y-6 animate-in fade-in duration-300">
               {/* Metric Type Filters */}
-              <div className="flex items-center justify-end gap-2 text-[11px] font-mono">
-                <span className="text-zinc-500 mr-2">Metric Mode:</span>
+              <div className="flex items-center justify-start sm:justify-end gap-1.5 overflow-x-auto pb-1 scroll-momentum-x text-[11px] font-mono">
+                <span className="text-zinc-500 mr-1 shrink-0">Metric Mode:</span>
                 <button
                   type="button"
                   onClick={() => {
                     sound.playPluck(140);
                     setMetricMode("blended");
                   }}
-                  className={`px-2.5 py-1 rounded-md border text-xs transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${
                     metricMode === "blended"
                       ? "border-white bg-white/10 text-white font-bold"
                       : "border-white/10 text-zinc-400 hover:text-white"
@@ -340,7 +340,7 @@ export function ClientPortalPreview() {
                     sound.playPluck(140);
                     setMetricMode("first_order");
                   }}
-                  className={`px-2.5 py-1 rounded-md border text-xs transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${
                     metricMode === "first_order"
                       ? "border-white bg-white/10 text-white font-bold"
                       : "border-white/10 text-zinc-400 hover:text-white"
@@ -354,7 +354,7 @@ export function ClientPortalPreview() {
                     sound.playPluck(140);
                     setMetricMode("contribution");
                   }}
-                  className={`px-2.5 py-1 rounded-md border text-xs transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg border text-xs transition-colors whitespace-nowrap shrink-0 min-h-[38px] ${
                     metricMode === "contribution"
                       ? "border-white bg-white/10 text-white font-bold"
                       : "border-white/10 text-zinc-400 hover:text-white"
@@ -760,8 +760,8 @@ export function ClientPortalPreview() {
 
       {/* Interactive Invoice / Strategy / Script Modals */}
       {activeModal && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-xl bg-[#101013] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.95)]">
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-xl max-h-[92dvh] overflow-y-auto overscroll-contain bg-[#101013] border border-white/20 rounded-2xl p-5 sm:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.95)]">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-white" />

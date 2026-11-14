@@ -119,9 +119,16 @@ export function AdPostMortemSection() {
           onMouseMove={(e) => handlePointerMove(e.clientX, e.clientY)}
           onMouseEnter={() => setIsXrayHovered(true)}
           onMouseLeave={() => setIsXrayHovered(false)}
+          onTouchStart={(e) => {
+            if (e.touches[0]) {
+              setIsXrayHovered(true);
+              handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
+          }}
           onTouchMove={(e) => {
             if (e.touches[0]) handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
           }}
+          style={{ touchAction: "pan-y" }}
           className={`relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden ios-glass-panel border-2 border-white/20 shadow-[0_20px_70px_rgba(0,0,0,0.95)] select-none bg-black ${
             inspectionMode === "slider" ? "cursor-ew-resize" : "cursor-crosshair"
           }`}
@@ -226,7 +233,7 @@ export function AdPostMortemSection() {
                     setActivePin(activePin === pin.id ? null : pin.id);
                   }}
                   onMouseEnter={() => sound.playPluck(180)}
-                  className="relative group p-1 focus:outline-none"
+                  className="relative group p-1 focus:outline-none min-w-[44px] min-h-[44px] flex items-center justify-center touch-hit-expand"
                   aria-label={pin.title}
                 >
                   <span className="absolute inset-0 rounded-full bg-white/40 animate-ping" />

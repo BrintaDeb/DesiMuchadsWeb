@@ -98,7 +98,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
       aria-labelledby="kundliModalTitle"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-2xl rounded-3xl ios-glass-panel shadow-[0_35px_100px_rgba(0,0,0,0.98)] p-6 sm:p-10 overflow-hidden text-white">
+      <div className="relative w-full max-w-2xl max-h-[92dvh] overflow-y-auto overscroll-contain rounded-3xl ios-glass-panel shadow-[0_35px_100px_rgba(0,0,0,0.98)] p-5 sm:p-10 text-white">
         {/* Filigree corner brackets */}
         <div className="absolute top-4 left-4 opacity-30 pointer-events-none">
           <FiligreeCorner className="w-5 h-5 text-white" position="top-left" />
@@ -107,10 +107,10 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
           <FiligreeCorner className="w-5 h-5 text-white" position="top-right" />
         </div>
 
-        {/* Close Button */}
+        {/* Close Button with 44px Touch Target */}
         <button
           onClick={resetForm}
-          className="absolute top-6 right-6 p-2 rounded-full border border-white/20 text-zinc-400 hover:text-white hover:border-white/60 bg-white/5 transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full border border-white/20 text-zinc-400 hover:text-white hover:border-white/60 bg-white/5 transition-colors touch-hit-expand"
           aria-label="Close dialog"
         >
           <X className="w-4 h-4" />

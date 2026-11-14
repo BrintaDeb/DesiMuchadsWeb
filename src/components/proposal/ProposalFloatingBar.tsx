@@ -122,7 +122,7 @@ export function ProposalFloatingBar() {
                   sound.playPluck(140);
                   setIsMinimized(true);
                 }}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 active:scale-90 transition-all ml-0.5"
+                className="w-9 h-9 min-w-[44px] min-h-[44px] touch-hit-expand rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 active:scale-90 transition-all ml-0.5"
                 aria-label="Minimize proposal bar"
               >
                 <X className="w-4 h-4" />
@@ -139,7 +139,7 @@ export function ProposalFloatingBar() {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
         >
-          <div className="relative w-full max-w-md rounded-3xl bg-[#121215] border border-white/20 shadow-2xl p-6 sm:p-8 text-white">
+          <div className="relative w-full max-w-md max-h-[92dvh] overflow-y-auto overscroll-contain rounded-3xl bg-[#121215] border border-white/20 shadow-2xl p-6 sm:p-8 text-white">
             <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
               <FiligreeCorner className="w-4 h-4 text-white/50" position="top-left" />
             </div>
@@ -152,7 +152,7 @@ export function ProposalFloatingBar() {
                 setIsChaiModalOpen(false);
                 setCallBooked(false);
               }}
-              className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white"
+              className="absolute top-4 right-4 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center touch-hit-expand rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Close call modal"
             >
               <X className="w-4 h-4" />

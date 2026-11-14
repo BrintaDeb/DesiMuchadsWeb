@@ -236,9 +236,9 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 sound.playPluck(150);
                 setMode("retainers");
               }}
-              className={`w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-xs font-mono font-bold transition-all text-center ${
+              className={`w-full sm:w-auto px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl sm:rounded-full text-xs font-mono font-bold transition-all text-center flex items-center justify-center ${
                 mode === "retainers"
-                  ? "bg-white text-black shadow-md"
+                  ? "bg-white text-black shadow-md font-black"
                   : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -250,9 +250,9 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 sound.playPluck(180);
                 setMode("thali");
               }}
-              className={`w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
+              className={`w-full sm:w-auto px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl sm:rounded-full text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
                 mode === "thali"
-                  ? "bg-white text-black shadow-md"
+                  ? "bg-white text-black shadow-md font-black"
                   : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -280,7 +280,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                     sound.playPluck(140);
                     setBillingCycle(billingCycle === "monthly" ? "quarterly" : "monthly");
                   }}
-                  className="w-12 h-6 rounded-full bg-zinc-800 border border-white/20 p-0.5 transition-colors relative"
+                  className="w-12 h-6 rounded-full bg-zinc-800 border border-white/20 p-0.5 transition-colors relative min-h-[44px] min-w-[44px] flex items-center touch-hit-expand"
                   aria-label="Toggle Monthly or Quarterly Billing"
                 >
                   <div
@@ -312,7 +312,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       sound.playPluck(160);
                       setCurrency(curr);
                     }}
-                    className={`px-2.5 py-1 rounded text-[11px] font-mono font-bold transition-all ${
+                    className={`px-3 py-1.5 min-h-[38px] rounded text-[11px] font-mono font-bold transition-all flex items-center justify-center ${
                       currency === curr
                         ? "bg-white text-black shadow-sm font-black"
                         : "text-zinc-400 hover:text-white"
@@ -404,7 +404,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                           sound.playChime();
                           onOpenKundli();
                         }}
-                        className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 ${
+                        className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 min-h-[44px] ${
                           tier.isPopular
                             ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_25px_rgba(255,255,255,0.3)] font-black"
                             : "bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold"
@@ -541,7 +541,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 <button
                   onClick={handleThaliWhatsApp}
                   disabled={selectedDishes.length === 0}
-                  className="w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2.5 active:scale-95 disabled:opacity-40"
+                  className="w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2.5 active:scale-95 disabled:opacity-40 min-h-[48px]"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Lock In Custom Thali → WhatsApp</span>

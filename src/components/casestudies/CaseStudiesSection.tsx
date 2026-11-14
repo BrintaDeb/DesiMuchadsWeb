@@ -109,8 +109,8 @@ export function CaseStudiesSection() {
           </p>
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex items-center gap-2 mb-10 overflow-x-auto pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex-nowrap sm:flex-wrap scrollbar-none">
+        {/* Category Filter Pills (Silky momentum rail on mobile) */}
+        <div className="flex items-center gap-2 mb-10 overflow-x-auto pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex-nowrap sm:flex-wrap scrollbar-none scroll-momentum-x">
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
@@ -119,9 +119,9 @@ export function CaseStudiesSection() {
                 sound.playPluck(160);
                 setSelectedCategory(cat.id);
               }}
-              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[40px] flex items-center ${
+              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[44px] flex items-center ${
                 selectedCategory === cat.id
-                  ? "bg-white text-black shadow-lg scale-105"
+                  ? "bg-white text-black shadow-lg scale-105 font-black"
                   : "bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10"
               }`}
             >
@@ -328,7 +328,7 @@ export function CaseStudiesSection() {
           </button>
 
           {/* Lightbox Modal Shell with iOS Glassmorphism */}
-          <div className="relative w-full max-w-6xl max-h-[94vh] flex flex-col rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)]">
+          <div className="relative w-full max-w-6xl max-h-[92dvh] flex flex-col rounded-3xl ios-glass-panel text-white overflow-hidden overscroll-contain shadow-[0_35px_100px_rgba(0,0,0,0.98)]">
 
             {/* 1. Frosted Glass Browser Bar (macOS Dots, URL Pill, Controls) */}
             <div className="px-4 sm:px-6 py-3.5 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex flex-wrap items-center justify-between gap-3 shrink-0">

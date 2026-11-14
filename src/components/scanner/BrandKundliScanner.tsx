@@ -153,7 +153,7 @@ export function BrandKundliScanner() {
               <div className="text-center pt-2">
                 <button
                   type="submit"
-                  className="px-8 py-4 rounded-full bg-white text-black font-bold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2.5"
+                  className="w-full sm:w-auto px-8 py-4 min-h-[48px] rounded-full bg-white text-black font-bold text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center gap-2.5"
                 >
                   <Search className="w-4 h-4" />
                   <span>Generate My Brand Kundli (Free)</span>
@@ -210,7 +210,7 @@ export function BrandKundliScanner() {
                     setScanComplete(false);
                     setUnlocked(false);
                   }}
-                  className="px-4 py-2 rounded-full border border-white/20 text-xs font-mono text-zinc-300 hover:text-white hover:border-white/50 bg-white/5"
+                  className="px-4 py-2 min-h-[44px] inline-flex items-center justify-center rounded-full border border-white/20 text-xs font-mono text-zinc-300 hover:text-white hover:border-white/50 bg-white/5 transition-colors"
                 >
                   Scan Another URL
                 </button>
@@ -290,14 +290,14 @@ export function BrandKundliScanner() {
                       <span>Full Audit Dossier Ready</span>
                     </div>
 
-                    <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
                       <button
                         type="button"
                         onClick={() => {
                           sound.playChime();
                           window.print();
                         }}
-                        className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <Printer className="w-3.5 h-3.5" />
                         <span>Print / Save PDF</span>
@@ -309,7 +309,7 @@ export function BrandKundliScanner() {
                         )}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex-1 sm:flex-none px-5 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                        className="w-full sm:w-auto px-5 py-2.5 min-h-[44px] rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
                       >
                         <MessageCircle className="w-3.5 h-3.5" />
                         <span>Fix These Leaks →</span>
@@ -343,11 +343,11 @@ export function BrandKundliScanner() {
                         placeholder="+91 98765 43210"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
-                        className="flex-1 px-4 py-2.5 rounded-full bg-[#121215] border border-white/20 text-xs text-white focus:outline-none focus:border-white font-mono placeholder-zinc-500"
+                        className="flex-1 px-4 py-3 min-h-[44px] rounded-full bg-[#121215] border border-white/20 text-xs text-white focus:outline-none focus:border-white font-mono placeholder-zinc-500"
                       />
                       <button
                         type="submit"
-                        className="px-6 py-2.5 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all"
+                        className="px-6 py-3 min-h-[44px] w-full sm:w-auto rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all"
                       >
                         <MessageCircle className="w-3.5 h-3.5 fill-black text-black" />
                         <span>Unlock via WhatsApp</span>

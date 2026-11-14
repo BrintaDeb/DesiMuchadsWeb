@@ -122,6 +122,7 @@
 @media (pointer: coarse) {
   :root {
     --target-size: 44px;
+    --density: compact;
   }
 }
 
@@ -131,6 +132,8 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -140,6 +143,7 @@ body {
   overflow-x: hidden;
   overflow-wrap: anywhere;
   -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
 }
 
 /* Fluid responsive typography balance */
@@ -154,17 +158,50 @@ p, li {
 /* Media never overflows on small mobile devices */
 img, video, iframe, canvas {
   max-inline-size: 100%;
+  block-size: auto;
 }
 
-/* Touch targets on coarse pointer mobile screens */
+/* Modern Web Guidance: Form-factor adaptation touch targets */
 @media (pointer: coarse) {
-  :where(button, [role="button"], input[type="button"], input[type="submit"]) {
-    min-block-size: 38px;
+  :where(button, select, textarea, input:not([type="checkbox"], [type="radio"]), [role="button"], nav a, label:has(input[type="checkbox"], input[type="radio"])) {
+    min-block-size: var(--target-size);
   }
 }
 
-/* On touch-only mobile devices, dampen 3D perspective transforms to prioritize silky 120Hz scroll */
+/* Hit Area Expander for compact icons on touch screens */
+.touch-hit-expand {
+  position: relative;
+}
+
+.touch-hit-expand::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+}
+
+/* Silky Touch Momentum Horizontal Scrolling Rails */
+.scroll-momentum-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-momentum-x::-webkit-scrollbar {
+  display: none;
+}
+
+/* On touch-only mobile devices, optimize blur and dampen 3D perspective transforms to prioritize silky 120Hz scroll */
 @media (hover: none) and (pointer: coarse) {
+  .ios-glass-panel,
+  .ios-glass-card {
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+
   .ios-glass-panel:hover,
   .ios-glass-card:hover,
   .panel-highlight:hover,

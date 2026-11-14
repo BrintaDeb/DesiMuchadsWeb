@@ -185,11 +185,11 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-2xl ios-glass-panel rounded-2xl shadow-[0_35px_100px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[80vh]"
+        className="relative w-full max-w-2xl ios-glass-panel rounded-2xl shadow-[0_35px_100px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[85dvh] overscroll-contain"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10">
+        <div className="flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 border-b border-white/10">
           <Search className="w-5 h-5 text-white/50 shrink-0" />
           <input
             ref={inputRef}
@@ -201,19 +201,20 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
             }}
             onKeyDown={handleKeyNav}
             placeholder="Type a service, case study, live demo, or command..."
-            className="flex-1 bg-transparent text-sm sm:text-base text-white placeholder-zinc-500 outline-none font-sans"
+            className="flex-1 bg-transparent text-sm sm:text-base text-white placeholder-zinc-500 outline-none font-sans min-h-[40px]"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="text-zinc-500 hover:text-white text-xs px-2 py-1 rounded"
+              className="text-zinc-500 hover:text-white text-xs px-2 py-1 min-h-[36px] flex items-center rounded"
             >
               Clear
             </button>
           )}
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors touch-hit-expand"
+            aria-label="Close command palette"
           >
             <X className="w-5 h-5" />
           </button>
@@ -237,7 +238,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
                     item.onSelect();
                   }}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all ${
+                  className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all min-h-[44px] ${
                     isSelected ? "bg-white/10 text-white" : "text-zinc-400 hover:text-white"
                   }`}
                 >
