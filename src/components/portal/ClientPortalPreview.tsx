@@ -150,7 +150,7 @@ export function ClientPortalPreview() {
         </div>
 
         {/* The Portal Mockup Window with iOS 3D Tilt Glassmorphism */}
-        <SpotlightCard maxTilt={3.5} className="ios-glass-panel rounded-3xl p-6 sm:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.9)]">
+        <SpotlightCard maxTilt={3} className="ios-glass-panel rounded-3xl p-6 sm:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.9)]">
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
             <FiligreeCorner className="w-4 h-4 text-white" position="top-left" />
@@ -160,11 +160,11 @@ export function ClientPortalPreview() {
           </div>
 
           {/* Window Top Controls Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-white/10 font-mono text-xs text-zinc-400 gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-4 border-b border-white/10 font-mono text-xs text-zinc-400 gap-3">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-zinc-600" />
-              <span className="w-3 h-3 rounded-full bg-zinc-600" />
-              <span className="w-3 h-3 rounded-full bg-zinc-600" />
+              <span className="w-3 h-3 rounded-full bg-red-500/80" />
+              <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+              <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
               <span className="ml-3 text-zinc-300">darbar.desimuchads.com/client-portal</span>
             </div>
             <div className="flex items-center gap-3">
@@ -178,21 +178,34 @@ export function ClientPortalPreview() {
                       sound.playPluck(130);
                       setTimeRange(range);
                     }}
-                    className={`px-2 py-0.5 rounded text-[10px] font-mono transition-colors uppercase ${
+                    className={`px-3 py-1 rounded text-xs transition-all ${
                       timeRange === range
-                        ? "bg-white text-black font-bold"
+                        ? "bg-white text-black font-bold shadow-md"
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    {range === "7d" ? "7 Days" : range === "30d" ? "30 Days" : "Q3"}
+                    {range === "7d" ? "7 Days" : range === "30d" ? "30 Days" : "Q3 Pace"}
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-2 text-zinc-300">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span>LIVE TELEMETRY</span>
-              </div>
             </div>
+          </div>
+
+          {/* Live Telemetry Stream Ticker */}
+          <div className="mb-6 p-2.5 sm:p-3 rounded-xl bg-black/60 border border-white/10 flex items-center justify-between text-xs font-mono text-zinc-300">
+            <div className="flex items-center gap-2 truncate">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <span className="text-[10px] sm:text-[11px] font-bold text-white uppercase tracking-wider shrink-0">
+                LIVE STREAM
+              </span>
+              <span className="text-zinc-500">·</span>
+              <span className="text-zinc-400 truncate text-[11px]">
+                Order #DM-9428 placed · ₹3,499 via UPI · 6.2x ROAS · South Delhi Hub #04
+              </span>
+            </div>
+            <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full shrink-0 ml-2">
+              ⚡ Live SLA
+            </span>
           </div>
 
           {/* TAB 1: Live ROAS & Funnel Telemetry */}

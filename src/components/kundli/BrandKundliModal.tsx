@@ -14,7 +14,11 @@ import {
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
+  Calendar,
+  Video,
+  MessageCircle,
 } from "lucide-react";
+import { sound } from "@/lib/sound";
 
 interface BrandKundliModalProps {
   isOpen: boolean;
@@ -25,6 +29,9 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedBudget, setSelectedBudget] = useState<string>("");
+  const [selectedDay, setSelectedDay] = useState<string>("Tomorrow");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("3:00 PM IST");
+  const [isBookedOnCalendar, setIsBookedOnCalendar] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: "",
     brandName: "",
@@ -340,27 +347,130 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
             )}
           </div>
         ) : (
-          /* Celebratory Confirmation State */
-          <div className="text-center py-8">
-            <div className="w-16 h-16 rounded-full bg-white/10 border border-white text-white flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-              <CheckCircle2 className="w-8 h-8" />
+          /* Celebratory Confirmation State with Interactive Baithak Booking */
+          <div className="text-center py-4">
+            <div className="w-14 h-14 rounded-full bg-white/10 border border-white text-white flex items-center justify-center mx-auto mb-3 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+              <CheckCircle2 className="w-7 h-7 text-emerald-400" />
             </div>
 
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 block mb-2 font-bold">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 block mb-1 font-bold">
               KUNDLI DISPATCHED WITH SWAGGER!
             </span>
-            <h3 className="font-display font-extrabold text-3xl text-white mb-4">
+            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2">
               Pranam, {formData.name || "Friend"}!
             </h3>
-            <p className="max-w-md mx-auto text-sm text-zinc-300 leading-relaxed mb-6 font-normal">
+            <p className="max-w-md mx-auto text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-normal">
               Our Principal Creative Technologists are reviewing your parameters right now. Expect your personalized Brand Kundli on WhatsApp within 4 business hours.
             </p>
 
+            {/* Instant Baithak Strategy Booking Card */}
+            <div className="mb-6 p-5 rounded-2xl bg-[#121215] border border-white/20 text-left max-w-lg mx-auto shadow-2xl">
+              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-emerald-400" />
+                  <span className="font-mono text-xs uppercase tracking-wider text-white font-bold">
+                    Schedule 20-Min Strategy Baithak
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                  1-on-1 Founder Session
+                </span>
+              </div>
+
+              {/* Day Selector */}
+              <div className="mb-3">
+                <span className="text-[10px] font-mono uppercase text-zinc-400 block mb-1.5 font-bold">
+                  Select Day:
+                </span>
+                <div className="grid grid-cols-3 gap-2">
+                  {["Today (Urgent)", "Tomorrow", "Day After"].map((day) => (
+                    <button
+                      key={day}
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(140);
+                        setSelectedDay(day);
+                      }}
+                      className={`py-1.5 px-2 text-center rounded-lg text-xs font-mono transition-all border ${
+                        selectedDay === day
+                          ? "bg-white text-black border-white font-bold shadow-sm"
+                          : "bg-white/5 text-zinc-400 border-white/10 hover:text-white"
+                      }`}
+                    >
+                      {day}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Time Slot Selector */}
+              <div className="mb-4">
+                <span className="text-[10px] font-mono uppercase text-zinc-400 block mb-1.5 font-bold">
+                  Select IST Slot:
+                </span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {["11:30 AM", "3:00 PM", "5:30 PM", "8:00 PM"].map((slot) => (
+                    <button
+                      key={slot}
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(160);
+                        setSelectedTimeSlot(`${slot} IST`);
+                      }}
+                      className={`py-1.5 px-2 text-center rounded-lg text-xs font-mono transition-all border ${
+                        selectedTimeSlot.startsWith(slot)
+                          ? "bg-white text-black border-white font-bold shadow-sm"
+                          : "bg-white/5 text-zinc-400 border-white/10 hover:text-white"
+                      }`}
+                    >
+                      {slot}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    setIsBookedOnCalendar(true);
+                    const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Desi+Muchads+Growth+Baithak+·+${encodeURIComponent(formData.brandName || "Brand")}&details=Strategic+Unit+Economics+%26+Ad+Scaling+Session+with+Desi+Muchads+Principals.&location=Google+Meet`;
+                    window.open(googleCalUrl, "_blank");
+                  }}
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+                >
+                  <Video className="w-3.5 h-3.5 text-black" />
+                  <span>{isBookedOnCalendar ? "✓ Calendar Linked" : "Add to Google Calendar"}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    const text = encodeURIComponent(
+                      `Pranam Desi Muchads! I just submitted my Brand Kundli and would like to lock in a Baithak:\n` +
+                      `✦ Name: ${formData.name}\n` +
+                      `✦ Brand: ${formData.brandName} (${formData.brandUrl})\n` +
+                      `✦ Preferred Time: ${selectedDay} at ${selectedTimeSlot}\n\n` +
+                      `Looking forward to meeting the creative pod!`
+                    );
+                    window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
+                  }}
+                  className="py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>WhatsApp VIP</span>
+                </button>
+              </div>
+            </div>
+
             <button
               onClick={resetForm}
-              className="px-8 py-3 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-zinc-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+              className="px-6 py-2 rounded-full border border-white/20 text-zinc-400 hover:text-white hover:border-white/40 text-xs font-mono transition-colors"
             >
-              Close & Return to Darbar
+              Close &amp; Return to Darbar
             </button>
           </div>
         )}

@@ -32,6 +32,9 @@ import {
   Activity,
   Leaf,
   Truck,
+  Monitor,
+  Tablet,
+  Smartphone,
 } from "lucide-react";
 import {
   DemoProjectConfig,
@@ -90,6 +93,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
   const [currency, setCurrency] = useState<"INR" | "USD" | "AED">("INR");
   const [isCouponApplied, setIsCouponApplied] = useState<boolean>(false);
   const [abMode, setAbMode] = useState<"flagship" | "baseline">("flagship");
+  const [deviceViewport, setDeviceViewport] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [activeDosha, setActiveDosha] = useState<"all" | "vata" | "pitta" | "kapha">("all");
   const [activeDarkstoreCity, setActiveDarkstoreCity] = useState<"delhi" | "mumbai" | "bengaluru">("delhi");
   const [watchStrapIndex, setWatchStrapIndex] = useState<number>(0);
@@ -425,6 +429,58 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           </button>
 
+          {/* Viewport Frame Switcher (Desktop / Tablet / iPhone 16 Pro) */}
+          <div className="hidden lg:flex items-center p-0.5 rounded-lg bg-zinc-900 border border-white/15">
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(130);
+                setDeviceViewport("desktop");
+              }}
+              className={`px-2 py-1 rounded text-[10px] font-mono font-bold flex items-center gap-1 transition-all ${
+                deviceViewport === "desktop"
+                  ? "bg-white text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+              title="Desktop Viewport"
+            >
+              <Monitor className="w-3 h-3" />
+              <span>Desktop</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(140);
+                setDeviceViewport("tablet");
+              }}
+              className={`px-2 py-1 rounded text-[10px] font-mono font-bold flex items-center gap-1 transition-all ${
+                deviceViewport === "tablet"
+                  ? "bg-white text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+              title="iPad Air / Tablet Viewport"
+            >
+              <Tablet className="w-3 h-3" />
+              <span>Tablet</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(150);
+                setDeviceViewport("mobile");
+              }}
+              className={`px-2 py-1 rounded text-[10px] font-mono font-bold flex items-center gap-1 transition-all ${
+                deviceViewport === "mobile"
+                  ? "bg-white text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+              title="iPhone 16 Pro Viewport"
+            >
+              <Smartphone className="w-3 h-3" />
+              <span>iPhone 16</span>
+            </button>
+          </div>
+
           <Link
             href={`/work/${config.slug}`}
             className="px-3 py-1 rounded-md bg-white hover:bg-zinc-200 text-black font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-sm text-[11px]"
@@ -532,8 +588,31 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
         </div>
       </div>
 
-      {/* 2. BRAND STOREFRONT HEADER */}
-      <header className="px-4 sm:px-8 py-3.5 sm:py-5 border-b border-white/10 backdrop-blur-md bg-black/50 sticky top-10 z-40">
+      {/* 2. RESPONSIVE STOREFRONT WRAPPER (DESKTOP / IPAD / IPHONE 16 FRAME) */}
+      <div
+        className={`mx-auto transition-all duration-500 ease-out ${
+          deviceViewport === "mobile"
+            ? "max-w-[420px] my-8 rounded-[48px] border-[10px] border-zinc-800 shadow-[0_0_80px_rgba(0,0,0,0.98),0_0_30px_rgba(255,255,255,0.12)] overflow-hidden relative bg-[#09090b]"
+            : deviceViewport === "tablet"
+            ? "max-w-[820px] my-8 rounded-[32px] border-[8px] border-zinc-800 shadow-2xl overflow-hidden relative bg-[#09090b]"
+            : "w-full"
+        }`}
+      >
+        {/* Dynamic Island for iPhone 16 Viewport */}
+        {deviceViewport === "mobile" && (
+          <div className="sticky top-0 inset-x-0 h-7 bg-black flex items-center justify-center z-50 pointer-events-none border-b border-white/10">
+            <div className="w-28 h-4 rounded-full bg-zinc-900 border border-white/20 flex items-center justify-between px-2 text-[9px] text-zinc-400 font-mono">
+              <span>9:41</span>
+              <div className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>5G</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* BRAND STOREFRONT HEADER */}
+        <header className="px-4 sm:px-8 py-3.5 sm:py-5 border-b border-white/10 backdrop-blur-md bg-black/50 sticky top-10 z-40">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Brand Logo & Tagline */}
           <div>
@@ -1702,6 +1781,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
           </div>
         </div>
       </footer>
+      </div>
 
       {/* 9. FLOATING TOAST NOTIFICATION */}
       {toastMessage && (

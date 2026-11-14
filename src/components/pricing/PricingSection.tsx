@@ -24,6 +24,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     "monthly"
   );
   const [mode, setMode] = useState<"retainers" | "thali">("retainers");
+  const [currency, setCurrency] = useState<"INR" | "USD" | "AED">("INR");
 
   // Custom Marketing Thali State
   const [selectedDishes, setSelectedDishes] = useState<string[]>([
@@ -34,12 +35,28 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
   const discountMultiplier = billingCycle === "quarterly" ? 0.85 : 1.0;
 
+  const formatPrice = (inrVal: number) => {
+    if (currency === "USD") {
+      const usdVal = Math.round(inrVal * 0.0132);
+      return `$${usdVal.toLocaleString("en-US")}`;
+    }
+    if (currency === "AED") {
+      const aedVal = Math.round(inrVal * 0.048);
+      return `AED ${aedVal.toLocaleString("en-US")}`;
+    }
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(inrVal);
+  };
+
   const retainers = [
     {
       id: "shuruwat",
-      name: "Foundation Stack",
+      name: "FOUNDATION STACK",
       hindi: "SHURUWAT",
-      badge: "FOUNDATION",
+      badge: "STARTER",
       price: Math.round(75000 * discountMultiplier),
       desc: "For challenger brands seeking disciplined, profitable scaling from ₹3L–₹15L/mo ad spend.",
       features: [
@@ -54,9 +71,9 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     },
     {
       id: "hukumat",
-      name: "Dominance Stack",
+      name: "DOMINANCE STACK",
       hindi: "HUKUMAT",
-      badge: "MOST DEPLOYED",
+      badge: "MOST POPULAR",
       price: Math.round(150000 * discountMultiplier),
       desc: "Our flagship end-to-end engine for scaling brands pushing ₹15L–₹75L/mo ad spend.",
       features: [
@@ -71,7 +88,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     },
     {
       id: "shehenshah",
-      name: "Monopoly Stack",
+      name: "MONOPOLY STACK",
       hindi: "SHEHENSHAH",
       badge: "ENTERPRISE",
       price: Math.round(300000 * discountMultiplier),
@@ -175,14 +192,6 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
   const thaliStats = calculateThaliStats();
 
-  const formatINR = (val: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(val);
-  };
-
   const handleThaliWhatsApp = () => {
     sound.playChime();
     const selectedNames = thaliDishes
@@ -193,7 +202,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     const text = encodeURIComponent(
       `Pranam Desi Muchads! Here is my custom Marketing Thali selection:\n\n` +
         `${selectedNames}\n\n` +
-        `✦ Monthly Investment: ${formatINR(thaliStats.investment)}\n` +
+        `✦ Monthly Investment: ${formatPrice(thaliStats.investment)}\n` +
         `✦ Projected Team Hours Saved: ${thaliStats.hoursSaved} hrs/mo\n` +
         `✦ Estimated ROAS Multiplier: ${thaliStats.roas}x\n\n` +
         `Let's schedule a Baithak to lock in this custom stack! 〰️`
@@ -258,125 +267,152 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
         {/* MODE A: 3-TIER RETAINERS */}
         {mode === "retainers" && (
           <div>
-            {/* Monthly vs. Quarterly Toggle */}
-            <div className="flex items-center justify-center gap-3 mb-12 font-mono text-xs">
-              <span className={billingCycle === "monthly" ? "text-white font-bold" : "text-zinc-400"}>
-                Monthly Billing
-              </span>
-              <button
-                type="button"
-                onClick={() => {
-                  sound.playPluck(140);
-                  setBillingCycle(billingCycle === "monthly" ? "quarterly" : "monthly");
-                }}
-                className="w-12 h-6 rounded-full bg-zinc-800 border border-white/20 p-0.5 transition-colors relative"
-              >
-                <div
-                  className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                    billingCycle === "quarterly" ? "translate-x-6" : "translate-x-0.5"
-                  }`}
-                />
-              </button>
-              <div className="flex items-center gap-1.5">
-                <span className={billingCycle === "quarterly" ? "text-white font-bold" : "text-zinc-400"}>
-                  Quarterly Commitment
+            {/* Billing Cycle + Multi-Currency Parity Controls */}
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-12 font-mono text-xs">
+              {/* Monthly vs. Quarterly Toggle */}
+              <div className="flex items-center gap-3">
+                <span className={billingCycle === "monthly" ? "text-white font-bold" : "text-zinc-400"}>
+                  Monthly Billing
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-bold">
-                  SAVE 15%
-                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    setBillingCycle(billingCycle === "monthly" ? "quarterly" : "monthly");
+                  }}
+                  className="w-12 h-6 rounded-full bg-zinc-800 border border-white/20 p-0.5 transition-colors relative"
+                  aria-label="Toggle Monthly or Quarterly Billing"
+                >
+                  <div
+                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                      billingCycle === "quarterly" ? "translate-x-6" : "translate-x-0.5"
+                    }`}
+                  />
+                </button>
+                <div className="flex items-center gap-1.5">
+                  <span className={billingCycle === "quarterly" ? "text-white font-bold" : "text-zinc-400"}>
+                    Quarterly Commitment
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-bold">
+                    SAVE 15%
+                  </span>
+                </div>
+              </div>
+
+              {/* Vertical divider */}
+              <div className="hidden sm:block w-px h-5 bg-white/15" />
+
+              {/* Currency Selector (INR, USD, AED) */}
+              <div className="inline-flex items-center p-0.5 rounded-lg bg-zinc-900 border border-white/15">
+                {(["INR", "USD", "AED"] as const).map((curr) => (
+                  <button
+                    key={curr}
+                    type="button"
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setCurrency(curr);
+                    }}
+                    className={`px-2.5 py-1 rounded text-[11px] font-mono font-bold transition-all ${
+                      currency === curr
+                        ? "bg-white text-black shadow-sm font-black"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    {curr === "INR" ? "INR ₹" : curr === "USD" ? "USD $" : "AED د.إ"}
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* 3 Pricing Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-4">
               {retainers.map((tier) => {
                 return (
-                  <SpotlightCard
-                    key={tier.id}
-                    spotlightColor={tier.isPopular ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
-                    borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
-                    maxTilt={3}
-                    onMouseEnter={() => sound.playPluck(110)}
-                    className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
-                      tier.isPopular
-                        ? "ios-glass-panel border-2 border-white shadow-[0_0_45px_rgba(255,255,255,0.18)]"
-                        : "ios-glass-card hover:border-white/35"
-                    }`}
-                  >
-                    {/* Filigree corner brackets */}
-                    <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
-                      <FiligreeCorner className="w-4 h-4 text-white/50" position="top-left" />
-                    </div>
-                    <div className="absolute top-3 right-3 opacity-30 pointer-events-none">
-                      <FiligreeCorner className="w-4 h-4 text-white/50" position="top-right" />
-                    </div>
-
-                    <div>
-                      {/* Top Category & Status Header Row */}
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest font-bold">
-                          {tier.hindi}
-                        </span>
-                        {tier.isPopular ? (
-                          <div className="px-3 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-[0_0_15px_rgba(255,255,255,0.3)] flex items-center gap-1.5 shrink-0">
-                            <Sparkles className="w-3 h-3 text-black" />
-                            <span>{tier.badge}</span>
-                          </div>
-                        ) : (
-                          <div className="px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-zinc-400 font-mono text-[9px] uppercase tracking-wider shrink-0 font-semibold">
-                            {tier.badge}
-                          </div>
-                        )}
+                  <div key={tier.id} className="relative flex flex-col h-full pt-3.5 group">
+                    {/* Floating Crown Pill Badge: Perched across top border, 100% unclipped */}
+                    {tier.isPopular && (
+                      <div className="absolute top-0 inset-x-0 mx-auto w-max z-30 px-4 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-[0_0_25px_rgba(255,255,255,0.4)] flex items-center gap-1.5 pointer-events-none transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[0_0_35px_rgba(255,255,255,0.6)]">
+                        <Sparkles className="w-3 h-3 text-black fill-black" />
+                        <span>{tier.badge}</span>
                       </div>
+                    )}
 
-                      {/* Tier Name */}
-                      <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight mb-4">
-                        {tier.name}
-                      </h3>
-
-                      {/* Pricing */}
-                      <div className="mb-6 pb-6 border-b border-white/10">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-3xl sm:text-4xl font-metric font-black text-white tracking-tight">
-                            {formatINR(tier.price)}
-                          </span>
-                          <span className="text-xs font-mono text-zinc-400">/ month</span>
-                        </div>
-                        <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans min-h-[44px] flex items-center">
-                          {tier.desc}
-                        </p>
-                      </div>
-
-                      {/* Features List */}
-                      <div className="space-y-3 mb-8">
-                        <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase block font-bold">
-                          What&apos;s Included:
-                        </span>
-                        {tier.features.map((feat, i) => (
-                          <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200 font-mono min-h-[22px]">
-                            <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                            <span>{feat}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <button
-                      onClick={() => {
-                        sound.playChime();
-                        onOpenKundli();
-                      }}
-                      className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 ${
+                    <SpotlightCard
+                      spotlightColor={tier.isPopular ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
+                      borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
+                      maxTilt={3}
+                      onMouseEnter={() => sound.playPluck(110)}
+                      className={`rounded-3xl p-6 sm:p-8 flex-1 flex flex-col justify-between transition-all duration-300 ${
                         tier.isPopular
-                          ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.25)] font-black"
-                          : "bg-white/10 hover:bg-white/20 text-white border border-white/20"
+                          ? "ios-glass-panel border-2 border-white shadow-[0_0_45px_rgba(255,255,255,0.18)]"
+                          : "ios-glass-card hover:border-white/35"
                       }`}
                     >
-                      <span>Deploy {tier.name}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </SpotlightCard>
+                      {/* Filigree corner brackets */}
+                      <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
+                        <FiligreeCorner className="w-4 h-4 text-white/50" position="top-left" />
+                      </div>
+                      <div className="absolute top-3 right-3 opacity-30 pointer-events-none">
+                        <FiligreeCorner className="w-4 h-4 text-white/50" position="top-right" />
+                      </div>
+
+                      <div>
+                        {/* Top Category Header Row */}
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest font-bold">
+                            {tier.hindi}
+                          </span>
+                        </div>
+
+                        {/* Tier Name */}
+                        <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight mb-4">
+                          {tier.name}
+                        </h3>
+
+                        {/* Pricing */}
+                        <div className="mb-6 pb-6 border-b border-white/10">
+                          <div className="flex items-baseline gap-1.5">
+                            <span className="text-3xl sm:text-4xl font-metric font-black text-white tracking-tight">
+                              {formatPrice(tier.price)}
+                            </span>
+                            <span className="text-xs font-mono text-zinc-400">/ month</span>
+                          </div>
+                          <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans min-h-[48px] flex items-center">
+                            {tier.desc}
+                          </p>
+                        </div>
+
+                        {/* Features List */}
+                        <div className="space-y-3 mb-8">
+                          <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase block font-bold">
+                            WHAT&apos;S INCLUDED:
+                          </span>
+                          {tier.features.map((feat, i) => (
+                            <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200 font-mono min-h-[22px]">
+                              <Check className="w-4 h-4 text-white/80 shrink-0 mt-0.5" />
+                              <span>{feat}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* CTA Button */}
+                      <button
+                        onClick={() => {
+                          sound.playChime();
+                          onOpenKundli();
+                        }}
+                        className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 ${
+                          tier.isPopular
+                            ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_25px_rgba(255,255,255,0.3)] font-black"
+                            : "bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold"
+                        }`}
+                      >
+                        <span>DEPLOY {tier.name}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </SpotlightCard>
+                  </div>
                 );
               })}
             </div>
@@ -439,7 +475,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
                       <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono text-xs">
                         <span className="text-white font-bold">
-                          {formatINR(dish.basePrice)}/mo
+                          {formatPrice(dish.basePrice)}/mo
                         </span>
                         <span className="text-[10px] text-zinc-400">
                           +{dish.hoursSaved}h saved
@@ -468,7 +504,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       Monthly Thali Investment
                     </span>
                     <div className="text-3xl sm:text-4xl font-metric font-black text-white">
-                      {formatINR(thaliStats.investment)}
+                      {formatPrice(thaliStats.investment)}
                     </div>
                     <span className="text-[11px] font-mono text-zinc-300 mt-1 block">
                       ✦ Flexible Month-to-Month • No Lock-in

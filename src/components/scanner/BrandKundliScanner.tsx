@@ -9,6 +9,8 @@ import {
   Lock,
   AlertTriangle,
   MessageCircle,
+  Printer,
+  CheckCircle2,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import confetti from "canvas-confetti";
@@ -279,6 +281,42 @@ export function BrandKundliScanner() {
                     <p className="text-zinc-300">Your competitors appear in Perplexity and Google Gemini recommendations while your brand is completely invisible in modern GEO search.</p>
                   </div>
                 </div>
+
+                {/* Unlocked Action Bar (Dossier Download / WhatsApp Fix) */}
+                {unlocked && (
+                  <div className="mt-6 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 animate-in fade-in duration-300">
+                    <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>Full Audit Dossier Ready</span>
+                    </div>
+
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          sound.playChime();
+                          window.print();
+                        }}
+                        className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <Printer className="w-3.5 h-3.5" />
+                        <span>Print / Save PDF</span>
+                      </button>
+
+                      <a
+                        href={`https://wa.me/919999999999?text=${encodeURIComponent(
+                          `Pranam Desi Muchads! I just unlocked my Brand Kundli for ${url}. Please assign a Growth Strategist to fix our 3 leaks!`
+                        )}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 sm:flex-none px-5 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        <span>Fix These Leaks →</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
 
                 {/* Locked Overlay with WhatsApp Unlocker */}
                 {!unlocked && (

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ThreeHeroCenterpiece } from "./ThreeHeroCenterpiece";
+import { LiquidPlatinumCanvas } from "./LiquidPlatinumCanvas";
 import { CheckCircle2 } from "lucide-react";
 import { sound } from "@/lib/sound";
 
@@ -12,6 +13,9 @@ interface HeroSectionProps {
 export function HeroSection({ onOpenKundli }: HeroSectionProps) {
   return (
     <section className="relative min-h-[90vh] pt-28 sm:pt-40 pb-16 sm:pb-20 flex items-center overflow-hidden bg-[#09090b] text-white font-display">
+      {/* Liquid Platinum Undulating Ribbon Canvas */}
+      <LiquidPlatinumCanvas />
+
       {/* Subtle Starry Particle Accents */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
         <div className="absolute top-1/4 left-1/6 w-1 h-1 bg-white rounded-full shadow-[0_0_8px_white]" />

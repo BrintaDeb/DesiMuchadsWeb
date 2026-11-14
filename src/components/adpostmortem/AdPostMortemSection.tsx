@@ -3,20 +3,29 @@
 import React, { useState, useRef } from "react";
 import { SectionDivider } from "../common/SectionDivider";
 import { FiligreeCorner, MoustacheSVG } from "../common/Icons";
-import { ArrowLeftRight, Sparkles, X } from "lucide-react";
+import { ArrowLeftRight, Sparkles, X, Scan } from "lucide-react";
 import { sound } from "@/lib/sound";
 
 export function AdPostMortemSection() {
   const [sliderPos, setSliderPos] = useState(50); // percentage 0 - 100
+  const [inspectionMode, setInspectionMode] = useState<"slider" | "xray">("slider");
   const [activePin, setActivePin] = useState<number | null>(null);
+  const [xrayCoords, setXrayCoords] = useState<{ x: number; y: number }>({ x: 300, y: 200 });
+  const [isXrayHovered, setIsXrayHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleSliderMove = (clientX: number) => {
+  const handlePointerMove = (clientX: number, clientY: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
-    const percentage = Math.max(5, Math.min(95, (x / rect.width) * 100));
-    setSliderPos(percentage);
+    const y = clientY - rect.top;
+
+    if (inspectionMode === "slider") {
+      const percentage = Math.max(5, Math.min(95, (x / rect.width) * 100));
+      setSliderPos(percentage);
+    } else {
+      setXrayCoords({ x, y });
+    }
   };
 
   const pins = [
@@ -55,7 +64,7 @@ export function AdPostMortemSection() {
       <SectionDivider label="AD POST-MORTEM" sublabel="ANATOMY OF A HIGH-ROAS CONVERSION" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-tight">
             Template Ad vs.<br />
             <span className="text-zinc-300">
@@ -63,18 +72,59 @@ export function AdPostMortemSection() {
             </span>
           </h2>
           <p className="mt-4 text-zinc-400 text-sm sm:text-base font-sans">
-            Drag the comparison slider below to dissect why generic ads burn your budget at 0.8x ROAS while our culturally engineered ads print 5.2x ROAS.
+            Dissect why generic ads burn your budget at 0.8x ROAS while our culturally engineered ads print 5.2x ROAS.
           </p>
+
+          {/* Mode Switcher: Split Slider vs X-Ray Inspection Loupe */}
+          <div className="mt-8 inline-flex items-center p-1 rounded-full bg-[#121215] border border-white/15 shadow-xl">
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(140);
+                setInspectionMode("slider");
+              }}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
+                inspectionMode === "slider"
+                  ? "bg-white text-black shadow-md"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <ArrowLeftRight className="w-3.5 h-3.5" />
+              <span>Split-Screen Slider</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(170);
+                setInspectionMode("xray");
+              }}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
+                inspectionMode === "xray"
+                  ? "bg-white text-black shadow-md"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <Scan className="w-3.5 h-3.5" />
+              <span>X-Ray Inspection Loupe</span>
+              <span className="px-1.5 py-0.5 rounded-full bg-white/20 text-[9px] text-white font-extrabold uppercase">
+                VFX
+              </span>
+            </button>
+          </div>
         </div>
 
-        {/* Interactive Split-Screen Slider Box */}
+        {/* Interactive Comparison & X-Ray Box */}
         <div
           ref={containerRef}
-          onMouseMove={(e) => handleSliderMove(e.clientX)}
+          onMouseMove={(e) => handlePointerMove(e.clientX, e.clientY)}
+          onMouseEnter={() => setIsXrayHovered(true)}
+          onMouseLeave={() => setIsXrayHovered(false)}
           onTouchMove={(e) => {
-            if (e.touches[0]) handleSliderMove(e.touches[0].clientX);
+            if (e.touches[0]) handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
           }}
-          className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden ios-glass-panel border-2 border-white/20 shadow-[0_20px_70px_rgba(0,0,0,0.95)] select-none cursor-ew-resize bg-black"
+          className={`relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden ios-glass-panel border-2 border-white/20 shadow-[0_20px_70px_rgba(0,0,0,0.95)] select-none bg-black ${
+            inspectionMode === "slider" ? "cursor-ew-resize" : "cursor-crosshair"
+          }`}
         >
           {/* Filigree corner brackets */}
           <div className="absolute top-3 left-3 opacity-40 z-30 pointer-events-none">
@@ -118,9 +168,14 @@ export function AdPostMortemSection() {
             </div>
           </div>
 
-          {/* RIGHT SIDE: Desi Muchads High-ROAS Weapon (5.2x ROAS) clipped by sliderPos */}
+          {/* RIGHT SIDE: Desi Muchads High-ROAS Weapon (5.2x ROAS) */}
           <div
-            style={{ clipPath: `inset(0 0 0 ${sliderPos}%)` }}
+            style={{
+              clipPath:
+                inspectionMode === "slider"
+                  ? `inset(0 0 0 ${sliderPos}%)`
+                  : `circle(${isXrayHovered ? 140 : 0}px at ${xrayCoords.x}px ${xrayCoords.y}px)`,
+            }}
             className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#121215] via-[#16161b] to-[#121215] p-6 sm:p-12 flex flex-col justify-between transition-none z-10"
           >
             {/* Weapon Header Badge */}
@@ -209,28 +264,58 @@ export function AdPostMortemSection() {
             ))}
           </div>
 
-          {/* Draggable Divider Handle */}
-          <div
-            style={{ left: `${sliderPos}%` }}
-            className="absolute top-0 bottom-0 w-1 bg-white z-20 pointer-events-none -translate-x-1/2 shadow-[0_0_20px_white]"
-          >
-            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white border-2 border-black text-black flex items-center justify-center shadow-xl">
-              <ArrowLeftRight className="w-4 h-4 text-black" />
+          {/* Draggable Divider Handle (Slider Mode Only) */}
+          {inspectionMode === "slider" && (
+            <div
+              style={{ left: `${sliderPos}%` }}
+              className="absolute top-0 bottom-0 w-1 bg-white z-20 pointer-events-none -translate-x-1/2 shadow-[0_0_20px_white]"
+            >
+              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white border-2 border-black text-black flex items-center justify-center shadow-xl">
+                <ArrowLeftRight className="w-4 h-4 text-black" />
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Floating X-Ray Loupe Overlay Ring (X-Ray Mode Only) */}
+          {inspectionMode === "xray" && isXrayHovered && (
+            <div
+              style={{
+                left: `${xrayCoords.x}px`,
+                top: `${xrayCoords.y}px`,
+              }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full border-2 border-white pointer-events-none z-30 shadow-[0_0_50px_rgba(255,255,255,0.35),inset_0_0_30px_rgba(255,255,255,0.2)] flex items-center justify-center backdrop-contrast-125"
+            >
+              {/* Tactical Crosshair lines */}
+              <div className="absolute w-full h-[1px] bg-white/30" />
+              <div className="absolute h-full w-[1px] bg-white/30" />
+              <div className="w-8 h-8 rounded-full border border-white/60 animate-ping" />
+              <div className="absolute bottom-3 px-2.5 py-0.5 rounded-full bg-black/85 border border-white/40 text-[9px] font-mono text-white font-bold tracking-widest uppercase shadow-lg">
+                X-RAY LOUPE · 5.2x ROAS
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Legend */}
+        {/* Dynamic Legend based on active mode */}
         <div className="flex items-center justify-center gap-6 mt-6 font-mono text-xs text-zinc-400">
-          <span className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-zinc-600" />
-            <span>← Slide Left for Template Ad</span>
-          </span>
-          <span className="text-white">✦</span>
-          <span className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-white" />
-            <span>Slide Right for Desi Muchads Weapon →</span>
-          </span>
+          {inspectionMode === "slider" ? (
+            <>
+              <span className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-600" />
+                <span>← Slide Left for Generic Template</span>
+              </span>
+              <span className="text-white">✦</span>
+              <span className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-white" />
+                <span>Slide Right for Desi Muchads Weapon →</span>
+              </span>
+            </>
+          ) : (
+            <span className="flex items-center gap-2 text-zinc-300">
+              <Scan className="w-3.5 h-3.5 text-white" />
+              <span>Hover &amp; sweep your cursor across the ad to magnify performance architecture</span>
+            </span>
+          )}
         </div>
       </div>
     </section>

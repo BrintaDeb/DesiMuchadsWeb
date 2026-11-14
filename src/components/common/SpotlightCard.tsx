@@ -84,6 +84,30 @@ export function SpotlightCard({
     [enableTilt, isHovered, maxTilt, perspective, prefersReducedMotion, scale]
   );
 
+  // Gyroscope mobile spatial tilt support
+  useEffect(() => {
+    if (typeof window === "undefined" || prefersReducedMotion || !enableTilt) return;
+
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.gamma === null || e.beta === null) return;
+      // Normalize gamma (-25 to 25 deg) and beta (20 to 70 deg)
+      const normX = Math.max(-1, Math.min(1, e.gamma / 25));
+      const normY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+
+      targetX.current = normX;
+      targetY.current = normY;
+
+      if (!animFrameId.current) {
+        animFrameId.current = requestAnimationFrame(updatePhysics);
+      }
+    };
+
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation);
+    };
+  }, [enableTilt, prefersReducedMotion, updatePhysics]);
+
   const handlePointerMove = useCallback(
     (clientX: number, clientY: number) => {
       if (!cardRef.current || !enableTilt || prefersReducedMotion) return;
