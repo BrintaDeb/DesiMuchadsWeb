@@ -25,7 +25,6 @@ export function SpotlightCard({
   ...props
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const cardInnerRef = useRef<HTMLDivElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
   const borderGlintRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +54,7 @@ export function SpotlightCard({
   // Smooth linear interpolation animation loop using named function expression
   const updatePhysics = useCallback(
     function tick() {
-      if (!enableTilt || prefersReducedMotion) return;
+      if (!enableTilt || prefersReducedMotion || !cardRef.current) return;
 
       // Smooth, silky dampening factor (lerp)
       const factor = 0.08;
@@ -65,12 +64,10 @@ export function SpotlightCard({
       const rotX = -currentY.current * maxTilt;
       const rotY = currentX.current * maxTilt;
 
-      if (cardInnerRef.current) {
-        if (isHovered) {
-          cardInnerRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale}) translateZ(4px)`;
-        } else {
-          cardInnerRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1, 1, 1) translateZ(0px)`;
-        }
+      if (isHovered) {
+        cardRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`;
+      } else {
+        cardRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1, 1, 1)`;
       }
 
       // Continue loop until fully dampened when not hovered
@@ -78,8 +75,8 @@ export function SpotlightCard({
       if (isHovered || delta > 0.001) {
         animFrameId.current = requestAnimationFrame(tick);
       } else {
-        if (cardInnerRef.current) {
-          cardInnerRef.current.style.transform = `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)`;
+        if (cardRef.current) {
+          cardRef.current.style.transform = `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         }
         animFrameId.current = null;
       }
@@ -194,53 +191,47 @@ export function SpotlightCard({
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      style={{ perspective: `${perspective}px` }}
-      className="relative select-none h-full w-full"
+      style={{
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+        transition: isHovered
+          ? "none"
+          : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease",
+        ...props.style,
+      }}
+      className={`relative overflow-hidden select-none ${className}`}
       {...props}
     >
-      {/* 3D Tilt Card (This is the actual visual element with className applied) */}
+      {/* 1. iOS Specular Reflection Sheen (Follows cursor in 3D) */}
       <div
-        ref={cardInnerRef}
+        ref={glareRef}
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
         style={{
-          transformStyle: "preserve-3d",
-          willChange: "transform",
-          transition: isHovered
-            ? "none"
-            : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease",
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(400px circle at 50% 50%, ${spotlightColor}, transparent 70%)`,
         }}
-        className={`relative w-full h-full overflow-hidden ${className}`}
+      />
+
+      {/* 2. Cursor-Tracking Specular Border Glint */}
+      <div
+        ref={borderGlintRef}
+        className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-10"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          border: `1px solid ${borderColor}`,
+          borderTopColor: "rgba(255, 255, 255, 0.7)",
+        }}
+      />
+
+      {/* 3. iOS visionOS Specular Top Bevel Edge */}
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent z-20" />
+
+      {/* 4. Card Content with 3D Spatial Depth */}
+      <div
+        style={{ transformStyle: "preserve-3d", transform: "translateZ(4px)" }}
+        className="relative z-20 flex-1 flex flex-col justify-between h-full"
       >
-        {/* 1. iOS Specular Reflection Sheen (Follows cursor in 3D) */}
-        <div
-          ref={glareRef}
-          className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(400px circle at 50% 50%, ${spotlightColor}, transparent 70%)`,
-          }}
-        />
-
-        {/* 2. Cursor-Tracking Specular Border Glint */}
-        <div
-          ref={borderGlintRef}
-          className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-10"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            border: `1px solid ${borderColor}`,
-            borderTopColor: "rgba(255, 255, 255, 0.7)",
-          }}
-        />
-
-        {/* 3. iOS visionOS Specular Top Bevel Edge */}
-        <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent z-20" />
-
-        {/* 4. Card Children with 3D Spatial Depth Capability */}
-        <div
-          style={{ transformStyle: "preserve-3d", transform: "translateZ(8px)" }}
-          className="relative z-20 flex-1 flex flex-col justify-between h-full"
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </div>
   );

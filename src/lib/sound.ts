@@ -9,6 +9,7 @@
 class SoundController {
   private ctx: AudioContext | null = null;
   private isEnabled: boolean = true;
+  private listeners: Set<() => void> = new Set();
 
   constructor() {
     if (typeof window !== "undefined") {
@@ -17,6 +18,17 @@ class SoundController {
         this.isEnabled = stored === "true";
       }
     }
+  }
+
+  public subscribe = (listener: () => void): (() => void) => {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
+  };
+
+  private notify() {
+    this.listeners.forEach((l) => l());
   }
 
   private getContext(): AudioContext | null {
@@ -41,15 +53,16 @@ class SoundController {
     if (typeof window !== "undefined") {
       localStorage.setItem("desi_sonic_enabled", String(this.isEnabled));
     }
+    this.notify();
     if (this.isEnabled) {
       this.playPluck();
     }
     return this.isEnabled;
   }
 
-  public getStatus(): boolean {
+  public getStatus = (): boolean => {
     return this.isEnabled;
-  }
+  };
 
   /**
    * Warm, muted percussive pluck for hover states

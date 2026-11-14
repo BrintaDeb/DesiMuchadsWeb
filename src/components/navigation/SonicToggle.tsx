@@ -1,18 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useSyncExternalStore } from "react";
 import { sound } from "@/lib/sound";
 
 export function SonicToggle() {
-  const [enabled, setEnabled] = useState(true);
-
-  useEffect(() => {
-    setEnabled(sound.getStatus());
-  }, []);
+  const enabled = useSyncExternalStore(sound.subscribe, sound.getStatus, () => true);
 
   const handleToggle = () => {
-    const newState = sound.toggle();
-    setEnabled(newState);
+    sound.toggle();
   };
 
   return (
