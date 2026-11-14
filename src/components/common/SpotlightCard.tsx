@@ -8,22 +8,20 @@ export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement>
   borderColor?: string;
   className?: string;
   enableTilt?: boolean;
-  maxTilt?: number; // max tilt degrees (default 8)
-  perspective?: number; // 3D perspective in px (default 1000)
-  scale?: number; // scale on hover (default 1.018)
-  glassTheme?: "ios" | "obsidian" | "none";
+  maxTilt?: number; // max tilt degrees (default 3)
+  perspective?: number; // 3D perspective in px (default 1200)
+  scale?: number; // scale on hover (default 1.004)
 }
 
 export function SpotlightCard({
   children,
-  spotlightColor = "rgba(255, 255, 255, 0.12)",
-  borderColor = "rgba(255, 255, 255, 0.45)",
+  spotlightColor = "rgba(255, 255, 255, 0.10)",
+  borderColor = "rgba(255, 255, 255, 0.40)",
   className = "",
   enableTilt = true,
-  maxTilt = 8,
-  perspective = 1000,
-  scale = 1.018,
-  glassTheme = "ios",
+  maxTilt = 3,
+  perspective = 1200,
+  scale = 1.004,
   ...props
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -59,8 +57,8 @@ export function SpotlightCard({
     function tick() {
       if (!enableTilt || prefersReducedMotion) return;
 
-      // Dampening factor (lerp)
-      const factor = 0.16;
+      // Smooth, silky dampening factor (lerp)
+      const factor = 0.08;
       currentX.current += (targetX.current - currentX.current) * factor;
       currentY.current += (targetY.current - currentY.current) * factor;
 
@@ -69,7 +67,7 @@ export function SpotlightCard({
 
       if (cardInnerRef.current) {
         if (isHovered) {
-          cardInnerRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale}) translateZ(8px)`;
+          cardInnerRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale}) translateZ(4px)`;
         } else {
           cardInnerRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1, 1, 1) translateZ(0px)`;
         }
@@ -107,7 +105,7 @@ export function SpotlightCard({
       if (glareRef.current) {
         const glareXPct = (x / rect.width) * 100;
         const glareYPct = (y / rect.height) * 100;
-        glareRef.current.style.background = `radial-gradient(420px circle at ${glareXPct}% ${glareYPct}%, ${spotlightColor}, transparent 70%)`;
+        glareRef.current.style.background = `radial-gradient(400px circle at ${glareXPct}% ${glareYPct}%, ${spotlightColor}, transparent 70%)`;
       }
 
       // Dynamic Border Glint coordinates
@@ -187,14 +185,6 @@ export function SpotlightCard({
     };
   }, []);
 
-  // iOS Glassmorphism default styling presets
-  const glassClasses =
-    glassTheme === "ios"
-      ? "backdrop-blur-2xl bg-gradient-to-br from-white/[0.08] via-[#121215]/85 to-[#0c0c0e]/95 border border-white/15 border-t-white/35 shadow-[0_20px_50px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_-1px_0_rgba(255,255,255,0.05)]"
-      : glassTheme === "obsidian"
-      ? "backdrop-blur-xl bg-[#121215]/90 border border-white/10 border-t-white/20 shadow-xl"
-      : "";
-
   return (
     <div
       ref={cardRef}
@@ -205,10 +195,10 @@ export function SpotlightCard({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       style={{ perspective: `${perspective}px` }}
-      className={`relative select-none ${className}`}
+      className="relative select-none h-full w-full"
       {...props}
     >
-      {/* 3D Tilt Wrapper Element */}
+      {/* 3D Tilt Card (This is the actual visual element with className applied) */}
       <div
         ref={cardInnerRef}
         style={{
@@ -216,9 +206,9 @@ export function SpotlightCard({
           willChange: "transform",
           transition: isHovered
             ? "none"
-            : "transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.45s ease",
+            : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease",
         }}
-        className={`relative w-full h-full rounded-[inherit] overflow-hidden ${glassClasses}`}
+        className={`relative w-full h-full overflow-hidden ${className}`}
       >
         {/* 1. iOS Specular Reflection Sheen (Follows cursor in 3D) */}
         <div
@@ -226,7 +216,7 @@ export function SpotlightCard({
           className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
           style={{
             opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(420px circle at 50% 50%, ${spotlightColor}, transparent 70%)`,
+            background: `radial-gradient(400px circle at 50% 50%, ${spotlightColor}, transparent 70%)`,
           }}
         />
 
@@ -237,16 +227,16 @@ export function SpotlightCard({
           style={{
             opacity: isHovered ? 1 : 0,
             border: `1px solid ${borderColor}`,
-            borderTopColor: "rgba(255, 255, 255, 0.8)",
+            borderTopColor: "rgba(255, 255, 255, 0.7)",
           }}
         />
 
         {/* 3. iOS visionOS Specular Top Bevel Edge */}
-        <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent z-20" />
+        <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent z-20" />
 
         {/* 4. Card Children with 3D Spatial Depth Capability */}
         <div
-          style={{ transformStyle: "preserve-3d", transform: "translateZ(12px)" }}
+          style={{ transformStyle: "preserve-3d", transform: "translateZ(8px)" }}
           className="relative z-20 flex-1 flex flex-col justify-between h-full"
         >
           {children}

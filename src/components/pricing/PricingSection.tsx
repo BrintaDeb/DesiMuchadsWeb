@@ -39,6 +39,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
       id: "shuruwat",
       name: "Foundation Stack",
       hindi: "SHURUWAT",
+      badge: "FOUNDATION",
       price: Math.round(75000 * discountMultiplier),
       desc: "For challenger brands seeking disciplined, profitable scaling from ₹3L–₹15L/mo ad spend.",
       features: [
@@ -46,6 +47,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
         "Weekly 4 High-Hook Creative Refresh",
         "Weekly ROAS & Contribution Margin Audit",
         "Dedicated Growth Strategist via Slack",
+        "Creative Angle & Offer Testing Framework",
         "Zero-Ghosting 4-Hour Response SLA",
       ],
       isPopular: false,
@@ -54,6 +56,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
       id: "hukumat",
       name: "Dominance Stack",
       hindi: "HUKUMAT",
+      badge: "MOST DEPLOYED",
       price: Math.round(150000 * discountMultiplier),
       desc: "Our flagship end-to-end engine for scaling brands pushing ₹15L–₹75L/mo ad spend.",
       features: [
@@ -65,12 +68,12 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
         "Algorithmic Broad Scale Architecture",
       ],
       isPopular: true,
-      badge: "MOST DEPLOYED",
     },
     {
       id: "shehenshah",
       name: "Monopoly Stack",
       hindi: "SHEHENSHAH",
+      badge: "ENTERPRISE",
       price: Math.round(300000 * discountMultiplier),
       desc: "Full enterprise brand takeover for market leaders exceeding ₹75L/mo ad volume.",
       features: [
@@ -292,49 +295,54 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                     key={tier.id}
                     spotlightColor={tier.isPopular ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.08)"}
                     borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
+                    maxTilt={3}
                     onMouseEnter={() => sound.playPluck(110)}
                     className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
                       tier.isPopular
-                        ? "ios-glass-panel border-2 border-white shadow-[0_0_50px_rgba(255,255,255,0.18)] lg:-translate-y-3"
+                        ? "ios-glass-panel border-2 border-white shadow-[0_0_45px_rgba(255,255,255,0.18)]"
                         : "ios-glass-card hover:border-white/35"
                     }`}
                   >
                     {/* Filigree corner brackets */}
-                    <div className="absolute top-3 left-3 opacity-30">
+                    <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
                       <FiligreeCorner className="w-4 h-4 text-white/50" position="top-left" />
                     </div>
-                    <div className="absolute top-3 right-3 opacity-30">
+                    <div className="absolute top-3 right-3 opacity-30 pointer-events-none">
                       <FiligreeCorner className="w-4 h-4 text-white/50" position="top-right" />
                     </div>
 
-                    {/* Popular Highlight Stamp */}
-                    {tier.isPopular && (
-                      <div className="absolute -top-3.5 inset-x-0 mx-auto w-max px-4 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-xl flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3 text-black" />
-                        <span>{tier.badge}</span>
-                      </div>
-                    )}
-
                     <div>
-                      {/* Tier Name & Subtitle */}
-                      <div className="mb-4 pt-2">
-                        <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest block mb-1">
+                      {/* Top Category & Status Header Row */}
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest font-bold">
                           {tier.hindi}
                         </span>
-                        <h3 className="font-display font-black text-2xl text-white uppercase">
-                          {tier.name}
-                        </h3>
+                        {tier.isPopular ? (
+                          <div className="px-3 py-1 rounded-full bg-white text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-[0_0_15px_rgba(255,255,255,0.3)] flex items-center gap-1.5 shrink-0">
+                            <Sparkles className="w-3 h-3 text-black" />
+                            <span>{tier.badge}</span>
+                          </div>
+                        ) : (
+                          <div className="px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-zinc-400 font-mono text-[9px] uppercase tracking-wider shrink-0 font-semibold">
+                            {tier.badge}
+                          </div>
+                        )}
                       </div>
 
+                      {/* Tier Name */}
+                      <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight mb-4">
+                        {tier.name}
+                      </h3>
+
                       {/* Pricing */}
-                      <div className="my-6 pb-6 border-b border-white/10">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-3xl sm:text-4xl font-metric font-black text-white">
+                      <div className="mb-6 pb-6 border-b border-white/10">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-3xl sm:text-4xl font-metric font-black text-white tracking-tight">
                             {formatINR(tier.price)}
                           </span>
                           <span className="text-xs font-mono text-zinc-400">/ month</span>
                         </div>
-                        <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans">
+                        <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans min-h-[44px] flex items-center">
                           {tier.desc}
                         </p>
                       </div>
@@ -345,8 +353,8 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                           What&apos;s Included:
                         </span>
                         {tier.features.map((feat, i) => (
-                          <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200 font-mono">
-                            <Check className="w-4 h-4 text-white shrink-0 mt-0.5" />
+                          <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200 font-mono min-h-[22px]">
+                            <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                             <span>{feat}</span>
                           </div>
                         ))}
@@ -361,7 +369,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       }}
                       className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 ${
                         tier.isPopular
-                          ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.2)] font-black"
+                          ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.25)] font-black"
                           : "bg-white/10 hover:bg-white/20 text-white border border-white/20"
                       }`}
                     >

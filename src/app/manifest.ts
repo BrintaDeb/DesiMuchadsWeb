@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "Unapologetic Desi Roots. Ruthless Global ROI. High-converting marketing architectures, viral reels, and full-stack web platforms.",
     start_url: "/",
     scope: "/",
-    id: "https://desimuchads.agency",
+    id: "/",
     display: "standalone",
     orientation: "portrait",
     background_color: "#09090b",
