@@ -37,9 +37,21 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState<number>(96);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (dropdownRef.current) {
+        setHeaderHeight(dropdownRef.current.offsetHeight);
+      }
+    };
+    updateHeaderHeight();
+    window.addEventListener("resize", updateHeaderHeight);
+    return () => window.removeEventListener("resize", updateHeaderHeight);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -226,13 +238,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         <div className="flex items-center gap-2 truncate">
           <span className="font-extrabold text-white">UNIT OF DESI MUCHADS DIGITAL LLP</span>
           <span className="hidden md:inline text-white/20">|</span>
-          <span className="hidden md:inline text-zinc-400">GSTIN: 07AAECD5582M1ZX</span>
+          <span className="hidden md:inline text-zinc-400">CIN: U74999DL2024PTC412891</span>
           <span className="hidden lg:inline text-white/20">|</span>
-          <span className="hidden lg:inline text-zinc-400">CIN: U74999DL2024PTC412891</span>
+          <span className="hidden lg:inline text-emerald-400 font-bold">100% VERIFIED AGENCY</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">
           <span className="hidden sm:inline-flex items-center gap-1.5 text-white">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>5.8X BLENDED ROAS GUARANTEED</span>
           </span>
           <span className="hidden sm:inline text-white/20">|</span>
@@ -249,27 +261,28 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
       </div>
 
       {/* 2. Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
         {/* Brand Mark with Official Logo and Tagline */}
         <a
           href="#"
           onMouseEnter={() => sound.playPluck(180)}
-          className="flex items-center gap-3.5 focus:outline-none group shrink-0"
+          className="flex items-center gap-3 sm:gap-4 focus:outline-none group shrink-0"
         >
-          <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.15)] group-hover:scale-105 group-hover:border-white transition-all shrink-0 bg-black">
-            { }
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 lg:w-[68px] lg:h-[68px] rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_22px_rgba(255,255,255,0.18)] group-hover:scale-105 group-hover:border-white transition-all shrink-0 bg-black p-0.5">
             <img
               src="/brand-logo.jpg"
-              alt="Desi Muchads Logo"
-              className="w-full h-full object-cover"
+              alt="Desi Muchads Official Brand Logo"
+              className="w-full h-full object-cover rounded-full"
+              loading="eager"
             />
           </div>
-          <div className="flex flex-col text-left">
-            <div className="font-display font-black text-xl tracking-wider text-white uppercase flex items-center gap-1 leading-tight">
+          <div className="flex flex-col text-left justify-center">
+            <div className="font-display font-black text-lg sm:text-2xl lg:text-[26px] tracking-wider text-white uppercase flex items-center gap-1 sm:gap-1.5 leading-none">
               <span>DESI</span>
-              <span className="text-zinc-400">MUCH</span>ADS
+              <span className="text-zinc-400">MUCH</span>
+              <span>ADS</span>
             </div>
-            <span className="text-[10px] font-sans font-medium tracking-wide text-zinc-400 italic leading-none mt-0.5">
+            <span className="text-[9.5px] sm:text-[11px] lg:text-xs font-sans font-medium tracking-wide text-zinc-300 italic leading-tight mt-1 truncate max-w-[170px] sm:max-w-none">
               We Scale Your Business Personally and Seriously!
             </span>
           </div>
@@ -593,14 +606,21 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           onClick={() => {
             setMobileMenuOpen(false);
           }}
-          className="fixed inset-0 top-[78px] sm:top-[86px] bg-black/80 backdrop-blur-md z-40 lg:hidden transition-opacity duration-300"
+          style={{ top: `${headerHeight}px` }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden transition-opacity duration-300"
           aria-hidden="true"
         />
       )}
 
       {/* 4. Structured Glassmorphic Mobile Drawer with Dynamic Viewport Height & Safe Area */}
       {mobileMenuOpen && (
-        <div className="fixed top-[78px] sm:top-[86px] inset-x-0 bottom-0 max-h-[calc(100dvh-78px)] sm:max-h-[calc(100dvh-86px)] z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto overscroll-contain font-display animate-in slide-in-from-top-2 duration-200">
+        <div
+          style={{
+            top: `${headerHeight}px`,
+            maxHeight: `calc(100dvh - ${headerHeight}px)`,
+          }}
+          className="fixed inset-x-0 bottom-0 z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto overscroll-contain font-display animate-in slide-in-from-top-2 duration-200"
+        >
           <div className="p-4 sm:p-6 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between">
             {/* Top Interactive Tool Rows & Navigations */}
             <div className="space-y-3.5">
@@ -875,7 +895,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
               {/* Regulatory Stamp */}
               <div className="text-center pt-1 text-[9px] sm:text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
-                UNIT OF DESI MUCHADS DIGITAL LLP • GSTIN: 07AAECD5582M1ZX
+                UNIT OF DESI MUCHADS DIGITAL LLP • CIN: U74999DL2024PTC412891
               </div>
             </div>
           </div>
