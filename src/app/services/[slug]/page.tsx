@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   Clock,
   Sparkles,
-  Layers,
   ShieldCheck,
   ChevronRight,
   HelpCircle,
@@ -303,14 +302,8 @@ async function ServiceDetailContent({ params }: PageProps) {
           </div>
 
           <div className="max-w-4xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shadow-inner">
-                {getServiceIcon(service.iconName)}
-              </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-white font-mono text-xs font-bold tracking-widest uppercase">
-                <Sparkles className="w-3.5 h-3.5 text-white" />
-                <span>{service.metric}</span>
-              </div>
+            <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shadow-inner mb-6">
+              {getServiceIcon(service.iconName)}
             </div>
 
             <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-none mb-6">
@@ -478,10 +471,6 @@ async function ServiceDetailContent({ params }: PageProps) {
         {/* Section 5: Real Showcase Projects (Human-Grade Demos) */}
         <div id="demo-projects" className="space-y-8 scroll-mt-24">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-white font-mono text-xs uppercase tracking-wider mb-2">
-              <Layers className="w-3.5 h-3.5 text-white" />
-              <span>REAL CLIENT PORTFOLIO SHOWCASE</span>
-            </div>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
               Demonstrated Case Studies
             </h2>

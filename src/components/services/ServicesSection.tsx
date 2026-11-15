@@ -110,10 +110,6 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-14 sm:mb-18 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>FULL-STACK PERFORMANCE SUITE • 8 CORE CAPABILITIES</span>
-          </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Capabilities
           </h2>

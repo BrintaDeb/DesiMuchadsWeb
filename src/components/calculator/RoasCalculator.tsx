@@ -4,7 +4,6 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import {
   TrendingUp,
-  Calculator,
   MessageCircle,
   Copy,
   Check,
@@ -204,10 +203,6 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12 relative z-10 border-b border-white/10 pb-6">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs font-mono text-zinc-300 font-bold uppercase tracking-wider mb-3">
-              <Calculator className="w-3.5 h-3.5 text-emerald-400" />
-              <span>RADICAL TRANSPARENCY • HISAB-KITAB REVENUE ENGINE</span>
-            </div>
             <h2 className="font-display font-black text-2xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight">
               Interactive ROAS &amp; Margin Simulator
             </h2>

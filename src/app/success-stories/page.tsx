@@ -116,11 +116,6 @@ export default function SuccessStoriesPage() {
           </div>
 
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-wider uppercase text-zinc-300 mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>Proven Outcomes · Verified Financial Results</span>
-            </div>
-
             <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-[1.08] mb-6">
               Stories Of Relentless{" "}
               <span className="text-zinc-400 underline decoration-white/20 underline-offset-8">
@@ -311,11 +306,6 @@ export default function SuccessStoriesPage() {
         {/* 5. Grand Call to Action */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-24">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/20 text-center space-y-6 shadow-2xl relative overflow-hidden">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-mono uppercase tracking-wider text-white">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Free 30-Minute Forensic Ad Account Teardown</span>
-            </div>
-
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight max-w-2xl mx-auto">
               Ready To Engineer Your Brand&apos;s Breakout Quarter?
             </h2>

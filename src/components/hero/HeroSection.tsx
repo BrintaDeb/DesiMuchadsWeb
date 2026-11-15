@@ -45,26 +45,8 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column: Hero Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Eyebrow Badge with Brand Logo */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md">
-              <div className="w-4 h-4 rounded-full overflow-hidden border border-white/40 bg-black shrink-0">
-                { }
-                <img
-                  src="/brand-logo.jpg"
-                  alt="Desi Muchads Digital Performance Marketing Agency"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-[10px] sm:text-xs font-royal font-bold uppercase tracking-widest text-white">
-                DESI MUCHADS · PERFORMANCE &amp; D2C ARCHITECTURE
-              </span>
-            </div>
-
             {/* Giant Keyword-Rich Semantic Headline */}
             <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.08]">
-              <span className="block text-zinc-400 text-xs sm:text-sm md:text-base font-mono tracking-widest mb-2 font-bold">
-                DESI MUCHADS ✦ HIGH-ROAS PERFORMANCE MARKETING &amp; CREATIVE AGENCY
-              </span>
               Scaling Ambitious Brands Across India &amp; Beyond
             </h1>
 

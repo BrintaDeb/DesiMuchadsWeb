@@ -8,7 +8,6 @@ import {
   Target,
   ArrowRight,
   ChevronRight,
-  Users,
   Code2,
   Mail,
   Globe,
@@ -104,11 +103,6 @@ export default function AboutPage() {
           </div>
 
           <div className="max-w-4xl text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-mono text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>THE ANTI-AI PERFORMANCE ARCHITECTURE</span>
-            </div>
-
             <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-[0.95]">
               We Scale Businesses <br />
               <span className="text-zinc-400">Personally</span> &amp; Seriously.
@@ -211,10 +205,6 @@ export default function AboutPage() {
       <section id="team" className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/10 text-left">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider mb-3">
-              <Users className="w-3.5 h-3.5 text-emerald-400" />
-              <span>THE DARBAR ROSTER • CORE EXECUTIVE LEADERSHIP</span>
-            </div>
             <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white leading-tight">
               Meet The Minds Behind The Growth.
             </h2>

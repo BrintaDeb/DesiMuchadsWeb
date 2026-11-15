@@ -242,10 +242,6 @@ export function Footer({ onOpenKundli }: FooterProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Location Details */}
             <div className="lg:col-span-5 space-y-4 text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/20 text-xs font-mono font-bold text-white uppercase tracking-wider">
-                <MapPin className="w-3.5 h-3.5 text-white" />
-                <span>OFFICIAL BUSINESS LOCATION</span>
-              </div>
               <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
                 Our Headquarters &amp; Studio
               </h3>
@@ -303,11 +299,6 @@ export function Footer({ onOpenKundli }: FooterProps) {
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-          </div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-[10px] font-mono font-bold tracking-widest text-zinc-300 uppercase mb-6">
-            <span>EST. 2026</span>
-            <span className="text-white/40">•</span>
-            <span>HIGH-ROAS PERFORMANCE ARCHITECTURE</span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-6 md:gap-x-8 text-3xl sm:text-5xl md:text-7xl lg:text-[8.5vw] font-display font-black tracking-tight uppercase leading-tight">

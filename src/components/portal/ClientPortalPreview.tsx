@@ -9,7 +9,6 @@ import {
   Kanban,
   Gauge,
   Receipt,
-  ShieldCheck,
   CheckCircle2,
   Download,
   Flame,
@@ -203,10 +202,6 @@ export function ClientPortalPreview() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5 text-xs font-mono text-zinc-300 mb-4">
-            <ShieldCheck className="w-4 h-4 text-white" />
-            <span>RADICAL TRANSPARENCY • NO HIDDEN AGENCY MARGINS</span>
-          </div>
           <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-white">
             Zero Ghosting.{" "}
             <span className="text-gradient-silver block mt-1">

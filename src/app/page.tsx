@@ -3,12 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
   CheckCircle2,
   Eye,
-  Layers,
   ChevronRight,
 } from "lucide-react";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -21,7 +18,6 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { ClientsTrustStrip } from "@/components/clients/ClientsTrustStrip";
 import { TwirlEasterEgg } from "@/components/easteregg/TwirlEasterEgg";
-import { BrandKundliScanner } from "@/components/scanner/BrandKundliScanner";
 import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { ProposalFloatingBar } from "@/components/proposal/ProposalFloatingBar";
@@ -79,10 +75,6 @@ export default function Home() {
           <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 border-t border-white/10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider text-zinc-300 mb-3">
-                  <Sparkles className="w-3.5 h-3.5 text-white" />
-                  <span>Disciplined Revenue Engines</span>
-                </div>
                 <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
                   What We Engineer
                 </h2>
@@ -93,7 +85,7 @@ export default function Home() {
                 onMouseEnter={() => sound.playPluck(150)}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-display font-black tracking-wider uppercase transition-all shadow-md active:scale-95 shrink-0"
               >
-                <span>View All 8 Disciplines</span>
+                <span>View All 9 Disciplines</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -155,10 +147,6 @@ export default function Home() {
           <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider text-zinc-300 mb-3">
-                  <Layers className="w-3.5 h-3.5 text-white" />
-                  <span>50 Verified Master Works</span>
-                </div>
                 <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
                   Selected Work &amp; Art
                 </h2>
@@ -270,23 +258,14 @@ export default function Home() {
 
           <SectionDivider />
 
-          {/* Section 4: Live AI Brand Kundli Diagnostic Scanner */}
-          <BrandKundliScanner />
-
-          <SectionDivider />
-
-          {/* Section 5: Client Trust Proof Strip */}
+          {/* Section 4: Client Trust Proof Strip */}
           <ClientsTrustStrip />
 
           <SectionDivider />
 
-          {/* Section 6: Executive Retainer Teaser */}
+          {/* Section 5: Executive Retainer Teaser */}
           <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider text-zinc-300 mb-3">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Zero Hidden Fees · Real-Time Telemetry</span>
-              </div>
               <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight mb-4">
                 Transparent Partnerships
               </h2>

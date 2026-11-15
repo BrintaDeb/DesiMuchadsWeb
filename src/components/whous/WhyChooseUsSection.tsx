@@ -108,11 +108,6 @@ export function WhyChooseUsSection({ onOpenKundli }: WhyChooseUsSectionProps) {
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/[0.03] blur-[140px] pointer-events-none" />
           
           <div className="relative max-w-4xl text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>THE ANTI-AI CREATIVE ENGINEERING MANIFESTO</span>
-            </div>
-
             <h3 className="font-display font-black text-2xl sm:text-4xl text-white uppercase leading-tight mb-4">
               Why 95% of Automated AI Web Agencies Burn Client Capital
             </h3>

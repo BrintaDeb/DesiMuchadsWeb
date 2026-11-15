@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import {
   X,
   ExternalLink,
-  Globe,
   ChevronLeft,
   ChevronRight,
   Maximize2,
@@ -131,10 +130,6 @@ export function CaseStudiesSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16 text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>VERIFIED CLIENT WORK • 50 HUMAN-GRADE CASE STUDIES &amp; ARTWORKS</span>
-          </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work
           </h2>

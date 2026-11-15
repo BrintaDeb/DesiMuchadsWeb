@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Home, Sparkles, PhoneCall } from "lucide-react";
+import { ArrowLeft, Home, PhoneCall } from "lucide-react";
 import { MoustacheSVG } from "@/components/common/Icons";
 
 export default function NotFound() {
@@ -38,11 +38,6 @@ export default function NotFound() {
 
       {/* Center 404 Hero */}
       <main className="max-w-2xl mx-auto w-full text-center py-16 z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-zinc-300 font-mono text-xs uppercase tracking-widest mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-white" />
-          <span>RAASTA BHEEG GAYA · 404 CODE</span>
-        </div>
-
         <h1 className="font-display font-black text-6xl sm:text-8xl text-white tracking-tight uppercase leading-none mb-4">
           404
         </h1>

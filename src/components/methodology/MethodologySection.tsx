@@ -8,7 +8,6 @@ import {
   Rocket,
   TrendingUp,
   Layers,
-  Sparkles,
   CheckCircle2,
   Send,
 } from "lucide-react";
@@ -281,10 +280,6 @@ export function MethodologySection() {
           </div>
 
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/20 bg-white/5 text-xs font-mono text-white mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>THE DESI AD HOOK SANDBOX · INTERACTIVE CREATIVE LAB</span>
-            </div>
             <h3 className="font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight">
               Test Our High-ROAS Hook Frameworks Live
             </h3>

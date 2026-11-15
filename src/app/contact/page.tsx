@@ -9,7 +9,6 @@ import {
   PhoneCall,
   Mail,
   Globe,
-  Sparkles,
   CheckCircle2,
   MessageCircle,
   Layers,
@@ -483,11 +482,6 @@ export default function ContactPage() {
 
           {/* Hero Section */}
           <div className="mb-14 text-left max-w-4xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>DIRECT FOUNDER DESK &bull; LIVE CALENDAR RESERVATION</span>
-            </div>
-
             <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase leading-[0.96] text-white">
               Schedule Your Baithak. <br />
               <span className="text-zinc-400">Lock In Your Quotation.</span>
@@ -1047,11 +1041,6 @@ export default function ContactPage() {
           <div className="mt-20 pt-16 border-t border-white/10 text-left">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-5 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">
-                  <MapPin className="w-3.5 h-3.5 text-white" />
-                  <span>OFFICIAL BUSINESS LOCATION</span>
-                </div>
-
                 <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
                   Our Studio &amp; Headquarters
                 </h2>

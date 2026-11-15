@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Sparkles,
   Zap,
   Palette,
   CheckCircle2,
@@ -177,11 +176,6 @@ export function WorkDesignTheorySection() {
 
       {/* Section Header */}
       <div className="max-w-3xl mb-12 sm:mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-white" />
-          <span>THE UI DESIGN THEORY OF DESI MUCHADS</span>
-        </div>
-
         <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white leading-tight">
           Where Sacred Geometry Meets Sub-Second Code.
         </h2>

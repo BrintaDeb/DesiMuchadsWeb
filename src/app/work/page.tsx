@@ -10,7 +10,6 @@ import {
   Eye,
   ChevronRight,
   Maximize2,
-  ShieldCheck,
   Compass,
   LayoutGrid,
   ListFilter,
@@ -140,11 +139,6 @@ export default function WorkPage() {
           </div>
 
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-wider uppercase text-zinc-300 mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>50 Verified Production Architectures &amp; Master Artworks</span>
-            </div>
-
             <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.05] mb-6">
               Our Karname:{" "}
               <span className="text-zinc-400 underline decoration-white/20 underline-offset-8">
@@ -576,11 +570,6 @@ export default function WorkPage() {
         {/* 5. Direct CTA */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-24 text-center">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/20 space-y-6 shadow-2xl relative overflow-hidden">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-mono uppercase tracking-wider text-white">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Commission A Production Architecture</span>
-            </div>
-
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight max-w-2xl mx-auto">
               Want Your Brand Featured in Our Next Success Story?
             </h2>
