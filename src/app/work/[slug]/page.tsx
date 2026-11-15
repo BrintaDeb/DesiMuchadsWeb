@@ -16,6 +16,7 @@ import { AGENCY_SERVICES } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
 import { KhadiNoiseOverlay } from "@/components/common/KhadiNoiseOverlay";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
+import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -346,44 +347,12 @@ async function ProjectDetailContent({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Browser Shell Frame */}
-          <div className="rounded-2xl border border-white/15 bg-black overflow-hidden shadow-2xl">
-            {/* Browser Chrome Header */}
-            <div className="h-10 px-4 bg-zinc-900 border-b border-white/10 flex items-center justify-between text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-              </div>
-              <div className="px-4 py-1 rounded-md bg-black/60 border border-white/10 text-zinc-300 text-[11px] truncate max-w-sm flex items-center gap-1.5">
-                <span className="text-emerald-400">🔒</span>
-                <span>{project.liveUrl.startsWith("/") ? `https://desimuchads.agency${project.liveUrl}` : project.liveUrl}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white text-[11px] font-mono flex items-center gap-1"
-                  title="Open Live Product Experience"
-                >
-                  <span>Open Flagship</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-
-            {/* Embedded Iframe Container */}
-            <div className="relative w-full h-[520px] sm:h-[680px] bg-zinc-950">
-              <iframe
-                src={project.liveUrl}
-                title={`${project.client} Live Showcase`}
-                className="w-full h-full border-0"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                loading="lazy"
-              />
-            </div>
-          </div>
+          {/* Interactive Simulated Device Showcase powered by ProjectPreviewShowcase */}
+          <ProjectPreviewShowcase
+            project={project}
+            isStandalone={true}
+            initialDeviceMode="desktop"
+          />
 
           {/* Anti-AI Pro Developer Architecture Guarantee Strip */}
           <div className="mt-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono">

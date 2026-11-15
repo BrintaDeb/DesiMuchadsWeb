@@ -851,7 +851,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "ecommerce-services",
     heroStat: "+340% DIRECT SALES · ZERO DRIFT",
     liveUrl: "https://humlya-salt-product-web.onrender.com",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/hymalya_salt_full.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/humlya_salt_full.png",
     desc: "Hymalya Salt harvests hand-chiseled pristine mineral rock salt from ancient Himalayan salt deposits, delivering 84 essential trace minerals directly to gourmet kitchens.",
     mushkil:
       "Commoditized consumer perception of salt. Customers saw Himalayan pink salt as interchangeable with cheap supermarket brands and balked at a premium ₹599 culinary gift jar.",
@@ -904,7 +904,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "SUB-1S LOAD · 3.4X ORDER FREQUENCY",
     liveUrl: "https://food-website-ashy-nine.vercel.app/",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/currycraft_full.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/burger_food_full.png",
     desc: "CurryCraft is an artisanal cloud kitchen collective preparing heritage regional curries from Chettinad, Malabar, and Kolhapur using stone-ground masala blends.",
     mushkil:
       "Existing food ordering websites suffered from bloated cart checkout flows with 6+ screen steps, causing a 68% checkout abandonment rate during peak dinner hours.",
@@ -957,7 +957,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "10,000+ PETS ONBOARDED · 78% RETENTION",
     liveUrl: "https://pet-first-web.vercel.app/",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/petfirst_full.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/pet_first_full.png",
     desc: "Pet-First provides holistic preventive pet wellness, breed-specific customized nutrition plans, and instant video consultations with certified veterinary specialists.",
     mushkil:
       "Pet parents lacked a unified destination for pet health records, struggled to calculate precise breed-specific caloric requirements, and delayed vital veterinary checkups.",
@@ -1009,8 +1009,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Web Development Services",
     serviceId: "web-development",
     heroStat: "60FPS HARDWARE ACCELERATED STREAMING",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/netflix_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/netflix_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/4196fb390cbd9b45ba4dad6f2a98b397.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/4196fb390cbd9b45ba4dad6f2a98b397.png",
     desc: "An architectural engineering showcase recreating Netflix's enterprise streaming UI with dynamic billboard trailer previews and adaptive infinite media rails.",
     mushkil:
       "Modern video streaming UIs struggle with memory leaks, layout shifts (CLS), and stuttering frame rates when rendering hundreds of dynamic media thumbnails simultaneously.",
@@ -1062,8 +1062,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Social Media & Influencer Management",
     serviceId: "social-media",
     heroStat: "120K+ ORGANIC VIEWS · 4.6X BOOKINGS",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/bali_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/bali_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/video/0291a950e1660906e0a2cf78ea3cc59d.mp4",
+    thumbnail: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80",
     desc: "A breathtaking high-retention cinematic social media video campaign capturing emerald Balinese rice terraces, sacred sea temples, and luxury bamboo villas.",
     mushkil:
       "Luxury tour bookings had plateaued due to generic travel agency stock photos that failed to evoke sensory wanderlust on Instagram and TikTok.",
@@ -1115,8 +1115,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Web Development Services",
     serviceId: "web-development",
     heroStat: "3.2X DONOR ENGAGEMENT · 99/100 CWV",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/worldmark_webflow_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/worldmark_webflow_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/47dffeb11d199c8b13a8c5880bfa8623.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/47dffeb11d199c8b13a8c5880bfa8623.png",
     desc: "World Mark Foundation is an international non-profit mobilizing healthcare access, clean drinking water, and rural education across 14 developing nations.",
     mushkil:
       "The foundation's previous web presence was disjointed and hard to navigate for global philanthropy partners, with high donation checkout failure rates for international credit cards.",
@@ -1168,8 +1168,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Social Media & Influencer Management",
     serviceId: "social-media",
     heroStat: "+45% WEEKEND FOOTFALL · 88K REEL VIEWS",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ourbrews_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ourbrews_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/video/454c2193e5856c61115a3a0af61abb87.mp4",
+    thumbnail: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80",
     desc: "Our Brews is an artisanal specialty coffee roastery celebrating single-origin Coorg and Chikmagalur beans with handcrafted espresso drinks.",
     mushkil:
       "Despite award-winning single-origin pour-overs, their suburban cafe struggled to attract young urban coffee aficionados away from multinational coffee chains.",
@@ -1221,8 +1221,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Web Development Services",
     serviceId: "web-development",
     heroStat: "100% RESPONSIVE · MULTI-BREAKPOINT",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/worldmark_wix_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/worldmark_wix_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/5aa8400b1c1748a45c1e52546bbed452.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/5aa8400b1c1748a45c1e52546bbed452.png",
     desc: "A responsive engineering showcase utilizing Wix Studio's advanced fluid engine to deliver accessible multi-breakpoint layouts for non-profit governance.",
     mushkil:
       "Translating complex institutional annual reports and field research data into readable, engaging layouts across diverse desktop screens, tablets, and low-cost smartphones.",
@@ -1274,8 +1274,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Social Media & Influencer Management",
     serviceId: "social-media",
     heroStat: "85,000+ LOCAL VIEWS · 62% DINE-IN LIFT",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/nagpal_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/nagpal_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/video/bc78b97f8ad927dd204883528e1a8e61.mp4",
+    thumbnail: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80",
     desc: "Nagpal Di Hatti is a 50-year-old culinary institution renowned for crispy, golden bhature, rich pindi chole, and slow-churned sweet lassi.",
     mushkil:
       "A legendary culinary heritage was being overshadowed by trendy fast-casual food chains on social media platforms, resulting in declining youth footfall.",
@@ -1327,8 +1327,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Performance Marketing Services",
     serviceId: "performance-marketing",
     heroStat: "50,000+ STUDENTS · 40+ UNIVERSITIES",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/antiragging_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/antiragging_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/4160d5c43f0e3bbaa41ea2868029c7e4.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/4160d5c43f0e3bbaa41ea2868029c7e4.png",
     desc: "A nationwide campus safety initiative empowering university students with legal rights, anonymous helpline reporting, and emotional support networks.",
     mushkil:
       "Institutional anti-ragging notices looked bureaucratic, intimidating, and were ignored by freshers who were hesitant to speak up or report abuse.",
@@ -1380,8 +1380,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Social Media & Influencer Management",
     serviceId: "social-media",
     heroStat: "25K+ BOOKMARKS · 4.8X SHARE RATE",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ig_seo_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ig_seo_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/video/9cfd35179075b14a6522145e2dd51717.mp4",
+    thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80",
     desc: "A proprietary educational growth carousel system engineered to maximize Instagram algorithmic watch time, save rates, and profile conversion.",
     mushkil:
       "Generic graphic design carousels were experiencing severe reach decay due to Instagram's shifting algorithmic preference toward retention time and saves over passive likes.",
@@ -1433,8 +1433,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "SOLD-OUT ARENA · 15,000+ ATTENDEES",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/holi_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/holi_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/94ba33e622970233daf0a5937daab451.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/94ba33e622970233daf0a5937daab451.png",
     desc: "The premier outdoor electronic music festival celebrating the festival of colors with international DJs, organic color cannons, and laser shows.",
     mushkil:
       "Crowded entertainment calendar where multiple festivals competed for youth ticket sales with repetitive stock photos of splashed color.",
@@ -1486,8 +1486,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Social Media & Influencer Management",
     serviceId: "social-media",
     heroStat: "60FPS SEAMLESS VJ STAGE LOOP",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ticket_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ticket_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/video/3bfa6f73ccf0dca332681673af1bdab7.mp4",
+    thumbnail: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80",
     desc: "A mesmerizing 3D kinetic typography and holographic ticket animation engineered for stadium LED walls, DJ stage screens, and social teaser promos.",
     mushkil:
       "Traditional static concert tickets are discarded immediately after purchase without contributing to the immersive visual spectacle of live performances.",
@@ -1539,8 +1539,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "LUXURY MONOGRAM SUITE · GOLDEN RATIO",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/namasvi_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/namasvi_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/588ea4c484f35de331781338c483464a.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/588ea4c484f35de331781338c483464a.png",
     desc: "NAMASVI is an exclusive luxury fashion atelier handcrafting bespoke zardozi bridal lehengas, raw silk sherwanis, and heirloom bridal jewelry.",
     mushkil:
       "The fashion house was launching in competitive international luxury markets (Dubai, London, Mumbai) and needed an aristocratic visual identity that commanded five-figure price tags.",
@@ -1592,8 +1592,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "100% BIODEGRADABLE · 20+ BOUTIQUES",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/zerowaste_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/zerowaste_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/4cb3b40250f0f48f1a745ffb67b266a2.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/4cb3b40250f0f48f1a745ffb67b266a2.png",
     desc: "EarthFirst engineers plastic-free lifestyle merchandise and compostable packaging solutions for eco-conscious direct-to-consumer lifestyle brands.",
     mushkil:
       "Most 'eco-friendly' paper and cotton bags still use synthetic toxic glues, petroleum-based inks, or tear under 5kg weight loads.",
@@ -1645,8 +1645,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "5,000+ COLLECTOR CUPS · 0 DEFECT",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/rathyatra_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/rathyatra_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/6ee9649b6e33f8953e379bfbcdbb4bb5.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/6ee9649b6e33f8953e379bfbcdbb4bb5.png",
     desc: "A festive cultural packaging initiative honoring Lord Jagannath's grand Rath Yatra festival in Puri with collector-edition coffee cups.",
     mushkil:
       "Festive packaging often looks tacky or misinterprets sacred cultural motifs, while low-cost commercial printing bleeds ink under hot 90°C beverages.",
@@ -1698,8 +1698,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "EXHIBITED AT REGIONAL HERITAGE GUILD",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/folkmask_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/folkmask_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ac64da694ace09d1b9942f055e0638d9.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ac64da694ace09d1b9942f055e0638d9.png",
     desc: "A masterwork digital illustration documenting traditional Chhau, Theyyam, and Gomira folk performance masks with hyper-detailed stippling and authentic pigments.",
     mushkil:
       "Indigenous tribal performance masks are rapidly vanishing from modern cultural memory as younger generations disconnect from rural folklore.",
@@ -1751,8 +1751,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "300% CAMPAIGN ROI · SOLD-OUT NIGHT",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/loveluxe_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/loveluxe_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/28b35d4e8aee8a2836b9dd9fa522f520.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/28b35d4e8aee8a2836b9dd9fa522f520.png",
     desc: "A sumptuous, moody Valentine's evening event branding campaign for an ultra-luxury nightlife lounge featuring world-class mixology and private cabanas.",
     mushkil:
       "Generic cheesy red-and-pink Valentine's graphics failed to appeal to elite clientele seeking an exclusive, sophisticated romantic evening.",
@@ -1804,8 +1804,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "10,000+ ENGAGEMENTS · ARTSTATION",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/tanjiro_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/tanjiro_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ec03fe34a4d885c6c1faff01a49bd99e.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ec03fe34a4d885c6c1faff01a49bd99e.png",
     desc: "A passionate digital illustration tribute to Demon Slayer protagonist Tanjiro Kamado unleashing the legendary Sun Breathing (Hinokami Kagura) sword form.",
     mushkil:
       "Capturing the blinding kinetic heat of incandescent sun flames without muddying the character's emotional face and checkered haori kimono linework.",
@@ -1857,8 +1857,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "FEATURED CREATOR SHOWCASE · 4K",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/zenitsu_thunder_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/zenitsu_thunder_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/f22740031efdf69bf015d3a1609d9403.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/f22740031efdf69bf015d3a1609d9403.png",
     desc: "An explosive action artwork illustrating Zenitsu Agatsuma in his unconscious lethal state performing Thunder Breathing First Form: Thunderclap and Flash.",
     mushkil:
       "Conveying hypersonic speed and shattering electrical discharge while maintaining crisp anatomy and razor-sharp sword silhouette clarity.",
@@ -1910,8 +1910,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "INTERNATIONAL COLLECTOR COMMISSIONS",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/zenitsu_sparrow_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/zenitsu_sparrow_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/79d412c14dc811f1b5d941f703114591.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/79d412c14dc811f1b5d941f703114591.png",
     desc: "A touching emotional portrait depicting Zenitsu resting peacefully with his devoted sparrow messenger Chuntaro nestled upon his fingertips.",
     mushkil:
       "Most anime fan art focuses purely on aggressive combat, overlooking the gentle innocence and endearing vulnerability of Zenitsu's character.",
@@ -1963,8 +1963,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "HIGH-CONTRAST MONOCHROME MASTER",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/inosuke_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/inosuke_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/b35bbed35c5bc0673fa97ebc938b796a.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/b35bbed35c5bc0673fa97ebc938b796a.png",
     desc: "A visceral high-contrast monochrome tribute capturing Inosuke Hashibira unleashing Beast Breathing dual chipped katanas in savage wild combat.",
     mushkil:
       "Expressing untamed animalistic fury and raw muscular tension using strictly black-and-white tonal contrast without relying on color.",
@@ -2016,8 +2016,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Packaging & Label Designing Services",
     serviceId: "packaging-label",
     heroStat: "VIRAL POP SURREALIST PIECE · 50K+ REACH",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/spongebob_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/spongebob_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/411051247f7f5c4f0f29b4c70b5efc89.jpg",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/411051247f7f5c4f0f29b4c70b5efc89.jpg",
     desc: "A thought-provoking pop surrealist piece deconstructing SpongeBob's eternal manic optimism against the hidden existential exhaustion of modern society.",
     mushkil:
       "Subverting a beloved global pop culture icon without coming across as cynical or trite, but rather opening a poignant discourse on workplace burnout.",
@@ -2069,8 +2069,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Performance Marketing Services",
     serviceId: "performance-marketing",
     heroStat: "+38% DINE-IN REVENUE · 4.9X ROAS",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/khyber_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/khyber_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/9cc1d42fca2ab95b600c86de7ae288f8.jpg",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/9cc1d42fca2ab95b600c86de7ae288f8.jpg",
     desc: "Khyber Pass is a heritage frontier eatery famous for smokey tandoori kebabs, rich butter chicken, and slow-braised Peshawari curries.",
     mushkil:
       "Dinner revenue was lagging on weeknights due to severe competition from delivery apps offering deep discount coupons.",
@@ -2122,8 +2122,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Performance Marketing Services",
     serviceId: "performance-marketing",
     heroStat: "100% MID-WEEK CAPACITY · 5.8X ROAS",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/threerooms_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/threerooms_full.png",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/12b430f652a6514e21dfbee23e054ad2.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/12b430f652a6514e21dfbee23e054ad2.png",
     desc: "3Rooms is an upscale multi-cuisine restaurant and cocktail bar known for artisanal wood-fired pizzas, pan-Asian sushi, and continental roasts.",
     mushkil:
       "Wednesday evenings were running at an unprofitable 28% table occupancy, forcing the kitchen to discard fresh perishables.",
@@ -2176,7 +2176,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "lead-generation",
     heroStat: "$150K ANGEL ROUND SECURED · CANVA",
     liveUrl: "https://www.canva.com/design/DAEgOcD46u8/qXha20201-C-BVE0ggTrIw/view",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/canva1_full.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png",
     desc: "A precision-crafted investor pitch deck designed for an emerging enterprise AI startup pitching Tier-1 angel investors and venture funds.",
     mushkil:
       "The founding team had groundbreaking technical AI architecture but their slide deck was a text-heavy, impenetrable wall of academic jargon that lost investors by slide 3.",
@@ -2229,7 +2229,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "lead-generation",
     heroStat: "98% AUDIENCE APPROVAL · 500+ EXECUTIVES",
     liveUrl: "https://www.canva.com/design/DAEukfCDzdI/VX12fHvVfaxcwznDpox7XQ/view",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/canva2_full.png",
+    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png",
     desc: "An enterprise keynote presentation delivered at a national industry summit to 500+ corporate executives, enterprise buyers, and industry analysts.",
     mushkil:
       "The speaker needed to present complex digital transformation telemetry and compliance benchmarks to a distracted C-suite audience without losing momentum.",
@@ -2356,3 +2356,14 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2026",
   },
 ];
+
+
+export type ProjectAssetType = "internal_app" | "external_app" | "video_reel" | "visual_showcase" | "canva_deck";
+
+export function getProjectAssetType(project: ProjectItem): ProjectAssetType {
+  if (project.liveUrl.startsWith("/demos/")) return "internal_app";
+  if (project.liveUrl.endsWith(".mp4") || project.liveUrl.includes("/assets/video/")) return "video_reel";
+  if (project.liveUrl.includes("canva.com")) return "canva_deck";
+  if (/\.(png|jpe?g|webp|svg)($|\?)/i.test(project.liveUrl)) return "visual_showcase";
+  return "external_app";
+}

@@ -5,44 +5,40 @@ import {
   X,
   ExternalLink,
   Globe,
-  Monitor,
-  Smartphone,
   ChevronLeft,
   ChevronRight,
-  Lock,
   Maximize2,
-  RefreshCw,
   ArrowRight,
   Code2,
-  Image as ImageIcon,
   CheckCircle2,
+  Eye,
+  Film,
+  Sparkles,
+  Layers,
 } from "lucide-react";
 import Link from "next/link";
 import { sound } from "@/lib/sound";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
-import { AGENCY_PROJECTS } from "@/data/projectsData";
+import { AGENCY_PROJECTS, getProjectAssetType } from "@/data/projectsData";
+import { ProjectPreviewShowcase } from "./ProjectPreviewShowcase";
 
 const FILTER_CATEGORIES = [
   { id: "all", label: "All Work (48)" },
-  { id: "web-development", label: "Fullstack Web & Apps" },
-  { id: "performance-marketing", label: "Performance Marketing" },
-  { id: "social-media", label: "Social Media & Video" },
-  { id: "packaging-label", label: "Packaging & Brand Identity" },
-  { id: "lead-generation", label: "Lead Gen & Pitch Decks" },
-  { id: "seo-sem", label: "SEO & SEM" },
-  { id: "ecommerce-services", label: "E-Commerce" },
-  { id: "quick-commerce", label: "Quick Commerce" },
+  { id: "packaging-label", label: "Packaging & Branding (13)" },
+  { id: "web-development", label: "Fullstack Web & Apps (11)" },
+  { id: "social-media", label: "Social Media & Video (7)" },
+  { id: "performance-marketing", label: "Performance Marketing (5)" },
+  { id: "lead-generation", label: "Lead Gen & Decks (4)" },
+  { id: "seo-sem", label: "SEO & SEM (3)" },
+  { id: "ecommerce-services", label: "E-Commerce (3)" },
+  { id: "quick-commerce", label: "Quick Commerce (2)" },
 ];
 
 export function CaseStudiesSection() {
   const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"preview" | "strategy">("preview");
-  const [previewMode, setPreviewMode] = useState<"visual" | "interactive">("visual");
-  const [deviceMode, setDeviceMode] = useState<"desktop" | "mobile">("desktop");
-  const [iframeKey, setIframeKey] = useState<number>(0);
-  const [iframeLoading, setIframeLoading] = useState<boolean>(true);
-
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
   const cases = AGENCY_PROJECTS;
   const filteredCases =
     selectedCategory === "all"
@@ -59,44 +55,30 @@ export function CaseStudiesSection() {
     : -1;
 
   // Open Lightbox handler
-  const openLightbox = (proj: typeof cases[0]) => {
+  const openLightbox = (proj: typeof cases[0], tab: "preview" | "strategy" = "preview") => {
     sound.playChime();
     setSelectedProjectId(proj.id);
-    setActiveTab("preview");
-    setDeviceMode("desktop");
-    // Internal Next.js demo storefronts default to interactive; Canva and external domains default to visual
-    if (proj.liveUrl.startsWith("/demos/")) {
-      setPreviewMode("interactive");
-    } else {
-      setPreviewMode("visual");
-    }
-    setIframeLoading(true);
+    setActiveTab(tab);
   };
 
   const handleNext = useCallback(() => {
     sound.playPluck(180);
-    setIframeLoading(true);
     if (filteredCases.length === 0) return;
     const currentIdx = currentCase
       ? filteredCases.findIndex((c) => c.id === currentCase.id)
       : -1;
     const nextIdx = (currentIdx + 1) % filteredCases.length;
-    const nextItem = filteredCases[nextIdx];
-    setSelectedProjectId(nextItem.id);
-    setPreviewMode(nextItem.liveUrl.startsWith("/demos/") ? "interactive" : "visual");
+    setSelectedProjectId(filteredCases[nextIdx].id);
   }, [currentCase, filteredCases]);
 
   const handlePrev = useCallback(() => {
     sound.playPluck(150);
-    setIframeLoading(true);
     if (filteredCases.length === 0) return;
     const currentIdx = currentCase
       ? filteredCases.findIndex((c) => c.id === currentCase.id)
       : -1;
     const prevIdx = (currentIdx - 1 + filteredCases.length) % filteredCases.length;
-    const prevItem = filteredCases[prevIdx];
-    setSelectedProjectId(prevItem.id);
-    setPreviewMode(prevItem.liveUrl.startsWith("/demos/") ? "interactive" : "visual");
+    setSelectedProjectId(filteredCases[prevIdx].id);
   }, [currentCase, filteredCases]);
 
   // Keyboard navigation & body scroll lock
@@ -130,15 +112,6 @@ export function CaseStudiesSection() {
     };
   }, [selectedProjectId]);
 
-  // Safety timeout on iframe loading spinner so it never hangs
-  useEffect(() => {
-    if (selectedProjectId === null || previewMode !== "interactive") return;
-    const timer = setTimeout(() => {
-      setIframeLoading(false);
-    }, 3500);
-    return () => clearTimeout(timer);
-  }, [selectedProjectId, iframeKey, previewMode]);
-
   return (
     <section
       id="karname"
@@ -149,13 +122,13 @@ export function CaseStudiesSection() {
         <div className="max-w-3xl mb-12 sm:mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>VERIFIED CLIENT WORK • {cases.length} HUMAN-GRADE CASE STUDIES</span>
+            <span>VERIFIED CLIENT WORK • 48 HUMAN-GRADE CASE STUDIES</span>
           </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed font-sans">
-            Live web platforms, direct-to-consumer storefronts, and performance architectures engineered for growth. Filter by capability or click on any project card to inspect the interactive live lightbox and strategic dossier.
+            Live web platforms, direct-to-consumer storefronts, high-impact video reels, and brand packaging architectures engineered for growth. Filter by capability or click Preview on any card to inspect the interactive live environment and strategic dossier.
           </p>
         </div>
 
@@ -169,7 +142,7 @@ export function CaseStudiesSection() {
                 sound.playPluck(160);
                 setSelectedCategory(cat.id);
               }}
-              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[44px] flex items-center ${
+              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[44px] flex items-center cursor-pointer ${
                 selectedCategory === cat.id
                   ? "bg-white text-black shadow-lg scale-105 font-black"
                   : "bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10"
@@ -182,130 +155,144 @@ export function CaseStudiesSection() {
 
         {/* Responsive Work Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredCases.map((cs) => (
-            <SpotlightCard
-              key={cs.id}
-              spotlightColor="rgba(255, 255, 255, 0.12)"
-              borderColor="rgba(255, 255, 255, 0.45)"
-              className="group rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_24px_60px_rgba(0,0,0,0.95),0_0_30px_rgba(255,255,255,0.08)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 ios-glass-card"
-            >
-              {/* Browser Window Showcase Thumbnail with 3D Depth */}
-              <div
-                className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/15 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col ios-layer-floating"
-                onClick={() => openLightbox(cs)}
+          {filteredCases.map((cs) => {
+            const assetType = getProjectAssetType(cs);
+
+            return (
+              <SpotlightCard
+                key={cs.id}
+                spotlightColor="rgba(255, 255, 255, 0.12)"
+                borderColor="rgba(255, 255, 255, 0.45)"
+                className="group rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_24px_60px_rgba(0,0,0,0.95),0_0_30px_rgba(255,255,255,0.08)] transition-all duration-300 flex flex-col justify-between p-6 sm:p-8 ios-glass-card"
               >
-                {/* Simulated Mini Browser Chrome Header */}
-                <div className="h-7 px-3 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-                  </div>
-                  <span className="text-zinc-400 truncate max-w-[140px]">
-                    {cs.liveUrl.replace("https://", "")}
-                  </span>
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                </div>
-
-                {/* Thumbnail Image Container with Zoom & Overlays */}
-                <div className="relative flex-1 w-full overflow-hidden bg-black">
-                  <img
-                    src={cs.thumbnail}
-                    alt={`${cs.client} Website Thumbnail`}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
-                  />
-
-                  {/* Gradient Glass Overlay on Bottom of Image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#121215]/90 via-transparent to-black/30 pointer-events-none" />
-
-                  {/* Top Badges: Hero Stat & External Link */}
-                  <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-full bg-white text-black font-metric text-[10px] font-black tracking-wider uppercase shadow-md pointer-events-auto">
-                      {cs.heroStat}
+                {/* Browser Window Showcase Thumbnail with 3D Depth */}
+                <div
+                  className="w-full h-56 rounded-2xl mb-5 relative overflow-hidden border border-white/15 bg-black shadow-md group-hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col ios-layer-floating"
+                  onClick={() => openLightbox(cs)}
+                >
+                  {/* Simulated Mini Browser Chrome Header */}
+                  <div className="h-7 px-3 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-[10px] font-mono shrink-0 z-20">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                      <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                    </div>
+                    <span className="text-zinc-400 truncate max-w-[140px]">
+                      {cs.liveUrl.startsWith("/")
+                        ? `desimuchads.agency${cs.liveUrl}`
+                        : cs.liveUrl.replace("https://", "")}
                     </span>
-                    <div className="flex items-center gap-1.5 pointer-events-auto">
-                      <a
-                        href={cs.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-full bg-black/70 hover:bg-white text-white hover:text-black transition-all shadow border border-white/20"
-                        title="Open Live Deployment"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
+                    <div className="flex items-center gap-1">
+                      {assetType === "video_reel" ? (
+                        <Film className="w-3 h-3 text-emerald-400" />
+                      ) : assetType === "canva_deck" ? (
+                        <Sparkles className="w-3 h-3 text-amber-400" />
+                      ) : (
+                        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      )}
                     </div>
                   </div>
 
-                  {/* Hover Quick Overlay Prompt */}
-                  <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 backdrop-blur-md text-white font-display text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                      <Maximize2 className="w-3.5 h-3.5 text-white" />
-                      <span>OPEN LIGHTBOX</span>
-                    </span>
+                  {/* Thumbnail Image Container with Zoom & Overlays */}
+                  <div className="relative flex-1 w-full overflow-hidden bg-black">
+                    <img
+                      src={cs.thumbnail}
+                      alt={`${cs.client} Work Thumbnail`}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                      loading="lazy"
+                    />
+
+                    {/* Gradient Glass Overlay on Bottom of Image */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#121215]/90 via-transparent to-black/30 pointer-events-none" />
+
+                    {/* Top Badges: Hero Stat & External Link */}
+                    <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="px-2.5 py-1 rounded-full bg-white text-black font-metric text-[10px] font-black tracking-wider uppercase shadow-md pointer-events-auto">
+                        {cs.heroStat}
+                      </span>
+                      <div className="flex items-center gap-1.5 pointer-events-auto">
+                        <a
+                          href={cs.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-1.5 rounded-full bg-black/70 hover:bg-white text-white hover:text-black transition-all shadow border border-white/20"
+                          title="Open Live Deployment / Asset"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Hover Quick Overlay Prompt */}
+                    <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 backdrop-blur-md text-white font-display text-xs font-bold uppercase tracking-wider shadow-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <Eye className="w-3.5 h-3.5 text-white" />
+                        <span>PREVIEW WORK &amp; DOSSIER</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Title & Category Below Thumbnail */}
-              <div className="text-left mb-3">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1">
-                  {cs.category}
-                </span>
-                <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight transition-colors">
-                  {cs.client}
-                </h3>
-              </div>
-
-              {/* Tagline & Info */}
-              <div className="text-left mb-4 flex-1 flex flex-col justify-between">
-                <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed font-sans">
-                  {cs.tagline}
-                </p>
-
-                {/* Metric pill row */}
-                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 font-sans">{cs.stats[0]?.label || "Metric"}</span>
-                  <span className="text-white font-metric font-black text-sm">{cs.stats[0]?.val}</span>
+                {/* Title & Category Below Thumbnail */}
+                <div className="text-left mb-3">
+                  <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1">
+                    {cs.category}
+                  </span>
+                  <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight transition-colors">
+                    {cs.client}
+                  </h3>
                 </div>
-              </div>
 
-              {/* Direct Link to Dedicated Case Study Page */}
-              <div className="mb-4 pt-2">
-                <Link
-                  href={`/work/${cs.slug}`}
-                  className="text-xs font-mono font-bold text-zinc-300 hover:text-white flex items-center gap-1 group/link transition-colors"
-                >
-                  <span>Read Strategic Case Study</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-                </Link>
-              </div>
+                {/* Tagline & Info */}
+                <div className="text-left mb-4 flex-1 flex flex-col justify-between">
+                  <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed font-sans">
+                    {cs.tagline}
+                  </p>
 
-              {/* Dual Action Buttons */}
-              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-                <button
-                  type="button"
-                  onClick={() => openLightbox(cs)}
-                  className="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px] flex items-center justify-center gap-1.5 border border-white/15 cursor-pointer"
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-white" />
-                  <span>VIEW LIGHTBOX</span>
-                </button>
-                <a
-                  href={cs.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => sound.playPluck(190)}
-                  className="px-4 py-3 rounded-xl bg-white hover:bg-zinc-200 active:scale-95 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px] shadow-md"
-                  title="Open Live Website"
-                >
-                  <span>LIVE</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </SpotlightCard>
-          ))}
+                  {/* Metric pill row */}
+                  <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                    <span className="text-zinc-400 font-sans">{cs.stats[0]?.label || "Metric"}</span>
+                    <span className="text-white font-metric font-black text-sm">{cs.stats[0]?.val}</span>
+                  </div>
+                </div>
+
+                {/* Direct Link to Dedicated Case Study Page */}
+                <div className="mb-4 pt-2">
+                  <Link
+                    href={`/work/${cs.slug}`}
+                    className="text-xs font-mono font-bold text-zinc-300 hover:text-white flex items-center gap-1 group/link transition-colors"
+                  >
+                    <span>Read Strategic Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Dual Action Buttons */}
+                <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(cs)}
+                    className="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all min-h-[44px] flex items-center justify-center gap-1.5 border border-white/15 cursor-pointer"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-white" />
+                    <span>PREVIEW</span>
+                  </button>
+                  <a
+                    href={cs.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playPluck(190)}
+                    className="px-4 py-3 rounded-xl bg-white hover:bg-zinc-200 active:scale-95 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 min-h-[44px] shadow-md cursor-pointer"
+                    title="Launch Live Project / Master File"
+                  >
+                    <span>LIVE</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            );
+          })}
         </div>
 
         {/* Center Bottom Action Button */}
@@ -318,14 +305,14 @@ export function CaseStudiesSection() {
             className="px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 min-h-[48px] inline-flex items-center gap-2 cursor-pointer"
           >
             <Maximize2 className="w-4 h-4" />
-            <span>EXPLORE INTERACTIVE LIGHTBOX &gt;</span>
+            <span>EXPLORE WORK LIGHTBOX ({filteredCases.length} PROJECTS) &gt;</span>
           </button>
         </div>
       </div>
 
       {/* =========================================================================
-          HIGH-END GLASSMORPHISM LIGHTBOX SYSTEM (Interactive Browser, Dual Viewport)
-          Rendered at z-[150] to sit securely above all navigation bars
+          HIGH-END GLASSMORPHISM WORK LIGHTBOX SYSTEM
+          Rendered at z-[150] to sit securely above fixed navigation bars
          ========================================================================= */}
       {selectedProjectId !== null && currentCase && (
         <div
@@ -367,26 +354,13 @@ export function CaseStudiesSection() {
             <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
-          {/* Floating Quick Close Button on Mobile Screens */}
-          <button
-            type="button"
-            onClick={() => {
-              sound.playPluck(120);
-              setSelectedProjectId(null);
-            }}
-            className="sm:hidden absolute top-3 right-3 z-[160] w-10 h-10 rounded-full bg-black/80 border border-white/30 text-white flex items-center justify-center shadow-2xl active:scale-90 cursor-pointer"
-            aria-label="Close Lightbox"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
           {/* Lightbox Modal Shell with iOS Glassmorphism */}
           <div className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20 animate-in zoom-in-95 duration-200">
 
-            {/* 1. Frosted Glass Browser Bar (macOS Dots, URL Pill, Controls) */}
-            <div className="px-4 sm:px-6 py-2.5 sm:py-3.5 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
-              {/* Traffic Lights & Project Sequence Badge */}
-              <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            {/* 1. Frosted Glass Browser Bar (Traffic lights, Sequence, Tabs, Single Close Button) */}
+            <div className="px-3 sm:px-6 py-2.5 sm:py-3.5 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-2.5 shrink-0">
+              {/* Left Side: Traffic Lights & Project Sequence Badge */}
+              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                 <div className="flex items-center gap-1.5">
                   <span
                     onClick={() => {
@@ -397,17 +371,14 @@ export function CaseStudiesSection() {
                     title="Close Lightbox"
                   />
                   <span
-                    onClick={() => setDeviceMode(deviceMode === "desktop" ? "mobile" : "desktop")}
+                    onClick={() => setActiveTab(activeTab === "preview" ? "strategy" : "preview")}
                     className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-amber-400/40 cursor-pointer shadow hover:opacity-80 transition-opacity"
-                    title="Toggle Device Mode"
+                    title="Toggle Preview / Strategy"
                   />
                   <span
-                    onClick={() => {
-                      setIframeKey((k) => k + 1);
-                      setIframeLoading(true);
-                    }}
+                    onClick={handleNext}
                     className="w-3 h-3 rounded-full bg-[#27C93F] border border-green-400/40 cursor-pointer shadow hover:opacity-80 transition-opacity"
-                    title="Reload Preview"
+                    title="Next Project"
                   />
                 </div>
 
@@ -419,40 +390,28 @@ export function CaseStudiesSection() {
 
                 <div className="hidden sm:flex items-center gap-1.5 font-display font-black text-xs uppercase tracking-wider text-white">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="truncate max-w-[180px]">{currentCase.client}</span>
+                  <span className="truncate max-w-[200px]">{currentCase.client}</span>
                 </div>
               </div>
 
-              {/* Center Simulated URL Bar (Desktop) */}
-              <div className="flex-1 max-w-sm hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-black/50 border border-white/15 text-xs font-mono text-white/80">
-                <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="truncate select-text">
-                  {currentCase.liveUrl.startsWith("/")
-                    ? `https://desimuchads.agency${currentCase.liveUrl}`
-                    : currentCase.liveUrl.replace("https://", "")}
-                </span>
-                <span className="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
-                  SSL LIVE
-                </span>
-              </div>
-
-              {/* Right Controls: Viewport, Tabs & Close */}
+              {/* Center / Right: Tabs & Clean Close Control */}
               <div className="flex items-center gap-2 sm:gap-3 ml-auto shrink-0">
                 {/* View Mode Switcher: Preview vs Strategy */}
-                <div className="flex items-center p-0.5 rounded-xl bg-black/50 border border-white/15">
+                <div className="flex items-center p-0.5 rounded-xl bg-black/60 border border-white/15">
                   <button
                     type="button"
                     onClick={() => {
                       sound.playPluck(140);
                       setActiveTab("preview");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === "preview"
                         ? "bg-white text-black shadow"
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Live View
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>Live View</span>
                   </button>
                   <button
                     type="button"
@@ -460,67 +419,38 @@ export function CaseStudiesSection() {
                       sound.playPluck(160);
                       setActiveTab("strategy");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer flex items-center gap-1.5 ${
                       activeTab === "strategy"
                         ? "bg-white text-black shadow"
                         : "text-zinc-400 hover:text-white"
                     }`}
                   >
-                    Strategy
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>Strategy</span>
                   </button>
                 </div>
 
-                {/* Device Viewport Toggle (Only visible in Preview tab) */}
-                {activeTab === "preview" && (
-                  <div className="hidden sm:flex items-center p-0.5 rounded-xl bg-black/50 border border-white/15">
-                    <button
-                      type="button"
-                      onClick={() => setDeviceMode("desktop")}
-                      className={`p-1.5 rounded-lg transition-all ${
-                        deviceMode === "desktop"
-                          ? "bg-white/20 text-white"
-                          : "text-white/50 hover:text-white"
-                      }`}
-                      title="Desktop View"
-                    >
-                      <Monitor className="w-4 h-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeviceMode("mobile")}
-                      className={`p-1.5 rounded-lg transition-all ${
-                        deviceMode === "mobile"
-                          ? "bg-white/20 text-white"
-                          : "text-white/50 hover:text-white"
-                      }`}
-                      title="Mobile iPhone View"
-                    >
-                      <Smartphone className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
-
-                {/* Direct External Link */}
+                {/* Direct Link to Official Destination */}
                 <a
                   href={currentCase.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center justify-center"
-                  title="Open Live Website in New Tab"
+                  className="hidden sm:flex p-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all items-center justify-center cursor-pointer"
+                  title="Open Project in New Tab"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </a>
 
-                {/* Close Button */}
+                {/* Single, Accessible Thumb-Friendly Close Button */}
                 <button
                   type="button"
                   onClick={() => {
                     sound.playPluck(120);
                     setSelectedProjectId(null);
                   }}
-                  className="p-2 rounded-xl bg-white/10 hover:bg-white hover:text-black border border-white/15 text-white transition-all active:scale-95 cursor-pointer flex items-center justify-center min-w-[36px] min-h-[36px]"
+                  className="p-2 sm:p-2.5 rounded-xl bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white transition-all active:scale-95 cursor-pointer flex items-center justify-center min-w-[40px] min-h-[40px]"
                   aria-label="Close Lightbox (Esc)"
-                  title="Close (Esc)"
+                  title="Close Lightbox (Esc)"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -532,203 +462,11 @@ export function CaseStudiesSection() {
 
               {/* TAB 1: LIVE INTERACTIVE PREVIEW */}
               {activeTab === "preview" && (
-                <div className="flex flex-col items-center justify-center h-full min-h-[380px]">
-                  {/* Mode Selector Sub-bar: Visual Architecture vs Interactive Frame */}
-                  <div className="w-full mb-3 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setPreviewMode("visual")}
-                        className={`px-3 py-1 rounded-lg border flex items-center gap-1.5 transition-all ${
-                          previewMode === "visual"
-                            ? "bg-white text-black font-bold border-white"
-                            : "bg-white/5 text-zinc-400 hover:text-white border-white/10"
-                        }`}
-                      >
-                        <ImageIcon className="w-3.5 h-3.5" />
-                        <span>High-Res Architecture View</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setPreviewMode("interactive");
-                          setIframeLoading(true);
-                        }}
-                        className={`px-3 py-1 rounded-lg border flex items-center gap-1.5 transition-all ${
-                          previewMode === "interactive"
-                            ? "bg-white text-black font-bold border-white"
-                            : "bg-white/5 text-zinc-400 hover:text-white border-white/10"
-                        }`}
-                      >
-                        <Globe className="w-3.5 h-3.5" />
-                        <span>Interactive Frame</span>
-                      </button>
-                    </div>
-
-                    <div className="text-zinc-400 text-[11px] hidden sm:block">
-                      {currentCase.heroStat}
-                    </div>
-                  </div>
-
-                  {previewMode === "visual" ? (
-                    /* Visual High-Resolution Showcase View */
-                    <div className="w-full h-[52vh] sm:h-[58vh] min-h-[360px] rounded-2xl overflow-hidden border border-white/20 bg-zinc-950 shadow-2xl relative flex flex-col">
-                      <div className="px-4 py-2 bg-zinc-900 border-b border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
-                        <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                          <span className="text-white font-bold">{currentCase.client}</span>
-                          <span className="text-zinc-500">•</span>
-                          <span>{currentCase.category}</span>
-                        </div>
-                        <a
-                          href={currentCase.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-white hover:underline flex items-center gap-1 text-[11px] font-bold"
-                        >
-                          <span>Open Full Deployment</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      </div>
-
-                      <div className="relative flex-1 w-full overflow-hidden bg-black group">
-                        <img
-                          src={currentCase.thumbnail}
-                          alt={`${currentCase.client} Architectural Render`}
-                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-
-                        {/* Overlay CTA Card */}
-                        <div className="absolute bottom-4 inset-x-4 p-4 rounded-xl bg-black/70 backdrop-blur-md border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                          <div>
-                            <div className="text-xs font-mono uppercase text-zinc-400 font-bold">
-                              Verified Strategic Metric
-                            </div>
-                            <div className="font-display font-black text-lg text-white">
-                              {currentCase.heroStat}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {currentCase.liveUrl.startsWith("/demos/") && (
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  setPreviewMode("interactive");
-                                  setIframeLoading(true);
-                                }}
-                                className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 cursor-pointer"
-                              >
-                                Test Live Demo
-                              </button>
-                            )}
-                            <a
-                              href={currentCase.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-white text-black font-black text-xs uppercase tracking-wider hover:bg-zinc-200 transition-all flex items-center gap-1.5 shadow"
-                            >
-                              <span>Launch Official Experience</span>
-                              <ExternalLink className="w-3.5 h-3.5" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    /* Interactive Iframe View (Desktop Panoramic or Mobile iPhone) */
-                    deviceMode === "desktop" ? (
-                      <div className="w-full h-[52vh] sm:h-[58vh] min-h-[360px] rounded-2xl overflow-hidden border border-white/20 bg-black shadow-2xl relative flex flex-col">
-                        <div className="px-4 py-2 bg-zinc-900 border-b border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            <span className="text-white font-bold uppercase">{currentCase.client}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setIframeLoading(true);
-                                setIframeKey((k) => k + 1);
-                              }}
-                              className="p-1 rounded hover:bg-white/10 text-white/70 hover:text-white transition-colors"
-                              title="Reload Frame"
-                            >
-                              <RefreshCw className="w-3.5 h-3.5" />
-                            </button>
-                            <a
-                              href={currentCase.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-white hover:underline flex items-center gap-1 text-[11px]"
-                            >
-                              <span>Open Tab</span>
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          </div>
-                        </div>
-
-                        <div className="relative flex-1 w-full h-full bg-black">
-                          {iframeLoading && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
-                              <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
-                              <span className="font-mono text-xs text-white/70 tracking-wider">
-                                CONNECTING TO INTERACTIVE STOREFRONT...
-                              </span>
-                            </div>
-                          )}
-                          <iframe
-                            key={`${currentCase.id}-${iframeKey}-desktop`}
-                            src={currentCase.liveUrl}
-                            onLoad={() => setIframeLoading(false)}
-                            className="w-full h-full border-0"
-                            title={`${currentCase.client} Live Showcase`}
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      /* Mobile iPhone Device Frame */
-                      <div className="w-[320px] sm:w-[360px] h-[52vh] sm:h-[58vh] min-h-[440px] rounded-[44px] border-[8px] border-white/25 bg-black shadow-2xl relative overflow-hidden flex flex-col">
-                        <div className="absolute top-0 inset-x-0 h-8 px-6 flex items-center justify-between text-[11px] font-mono text-white/90 z-30 pointer-events-none">
-                          <span className="font-bold tracking-tight">9:41</span>
-                          <div className="w-24 h-4 bg-black rounded-full border border-white/10 flex items-center justify-between px-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                            <span className="w-2 h-2 rounded-full bg-emerald-400/80" />
-                          </div>
-                          <div className="flex items-center gap-1.5 text-[10px]">
-                            <span>5G</span>
-                            <div className="w-4 h-2 rounded-xs border border-white/60 p-0.5 flex items-center">
-                              <div className="w-full h-full bg-white rounded-xs" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="relative flex-1 w-full h-full pt-8 pb-3 bg-black">
-                          {iframeLoading && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
-                              <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin mb-2" />
-                              <span className="font-mono text-[10px] text-white/70">
-                                LOADING MOBILE VIEW...
-                              </span>
-                            </div>
-                          )}
-                          <iframe
-                            key={`${currentCase.id}-${iframeKey}-mobile`}
-                            src={currentCase.liveUrl}
-                            onLoad={() => setIframeLoading(false)}
-                            className="w-full h-full border-0"
-                            title={`${currentCase.client} Mobile Showcase`}
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="w-32 h-1 bg-white/30 rounded-full mx-auto my-1.5" />
-                      </div>
-                    )
-                  )}
-                </div>
+                <ProjectPreviewShowcase
+                  key={currentCase.id}
+                  project={currentCase}
+                  initialDeviceMode="desktop"
+                />
               )}
 
               {/* TAB 2: STRATEGIC CASE STUDY DOSSIER */}
@@ -888,7 +626,7 @@ export function CaseStudiesSection() {
                 <Link
                   href={`/work/${currentCase.slug}`}
                   onClick={() => setSelectedProjectId(null)}
-                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all text-center"
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all text-center cursor-pointer"
                 >
                   <span>Strategic Dossier</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -898,7 +636,7 @@ export function CaseStudiesSection() {
                   href={currentCase.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-black uppercase tracking-wider shadow flex items-center justify-center gap-1.5 transition-all text-center"
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-black uppercase tracking-wider shadow flex items-center justify-center gap-1.5 transition-all text-center cursor-pointer"
                 >
                   <span>Launch Live</span>
                   <ExternalLink className="w-3.5 h-3.5" />
