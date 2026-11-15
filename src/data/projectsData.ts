@@ -140,7 +140,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Web Development Services",
     serviceId: "web-development",
     heroStat: "12,000+ TENANTS · SUB-SECOND SEARCH",
-    liveUrl: "https://nestservices.vercel.app/",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/nestservices_full.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/nestservices_full.png",
     desc: "Nest Services is a next-generation urban rental marketplace connecting verified tenants with premium furnished apartments in metro tech hubs.",
     mushkil:
@@ -193,7 +193,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "E-Commerce Management Services",
     serviceId: "ecommerce-services",
     heroStat: "+340% DIRECT SALES · ZERO DRIFT",
-    liveUrl: "https://humlya-salt-product-web.onrender.com",
+    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/humlya_salt_full.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/humlya_salt_full.png",
     desc: "Hymalya Salt harvests hand-chiseled pristine mineral rock salt from ancient Himalayan salt deposits, delivering 84 essential trace minerals directly to gourmet kitchens.",
     mushkil:
@@ -667,8 +667,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "anti-ragging-safety-tour",
     client: "Anti-Ragging National Awareness Tour",
     tagline: "Campus Visual Identity, Safety Campaign Collateral & Digital Hub",
-    category: "Performance Marketing Services",
-    serviceId: "performance-marketing",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "50,000+ STUDENTS · 40+ UNIVERSITIES",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/4160d5c43f0e3bbaa41ea2868029c7e4.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/4160d5c43f0e3bbaa41ea2868029c7e4.png",
@@ -773,8 +773,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "holi-celebration-stadium-poster",
     client: "Kolkata Holi Fest 2021",
     tagline: "15,000-Capacity Arena Concert Branding, Billboard Dielines & VIP Passes",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "SOLD-OUT ARENA · 15,000+ ATTENDEES",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/94ba33e622970233daf0a5937daab451.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/94ba33e622970233daf0a5937daab451.png",
@@ -879,8 +879,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "namasvi-luxury-brand-identity",
     client: "NAMASVI Haute Couture",
     tagline: "Luxury Monogram, Golden Ratio Geometry & High-End Lifestyle Identity",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "LUXURY MONOGRAM SUITE · GOLDEN RATIO",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/588ea4c484f35de331781338c483464a.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/588ea4c484f35de331781338c483464a.png",
@@ -932,8 +932,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "zero-waste-bamboo-eco-bag",
     client: "EarthFirst Sustainable Living",
     tagline: "100% Biodegradable Bamboo Fiber Packaging & Botanical Screenprinting",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "100% BIODEGRADABLE · 20+ BOUTIQUES",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/4cb3b40250f0f48f1a745ffb67b266a2.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/4cb3b40250f0f48f1a745ffb67b266a2.png",
@@ -985,8 +985,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "happy-rath-yatra-coffee-cups",
     client: "Heritage Cafe Chain",
     tagline: "Limited Edition Double-Wall Heat Insulated Festival Collector Cups",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "5,000+ COLLECTOR CUPS · 0 DEFECT",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/6ee9649b6e33f8953e379bfbcdbb4bb5.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/6ee9649b6e33f8953e379bfbcdbb4bb5.png",
@@ -1038,8 +1038,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "traditional-folk-masks-illustration",
     client: "Indian Heritage Arts Guild",
     tagline: "Archival Fine-Art Folk Masks Illustration & Intricate Pattern Tapestry",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
     heroStat: "EXHIBITED AT REGIONAL HERITAGE GUILD",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ac64da694ace09d1b9942f055e0638d9.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ac64da694ace09d1b9942f055e0638d9.png",
@@ -1091,8 +1091,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "loveluxe-valentine-luxury-poster",
     client: "LoveLuxe VIP Nightclub",
     tagline: "Black Velvet & Liquid Gold Event Poster, VIP Guest Pass Architecture",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "300% CAMPAIGN ROI · SOLD-OUT NIGHT",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/28b35d4e8aee8a2836b9dd9fa522f520.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/28b35d4e8aee8a2836b9dd9fa522f520.png",
@@ -1144,8 +1144,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "tanjiro-kamado-procreate-art",
     client: "Anime Creator Collective",
     tagline: "Hinokami Kagura Flame Dynamics, High-DPI Layered Master Illustration",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
     heroStat: "10,000+ ENGAGEMENTS · ARTSTATION",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/ec03fe34a4d885c6c1faff01a49bd99e.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/ec03fe34a4d885c6c1faff01a49bd99e.png",
@@ -1197,8 +1197,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "zenitsu-thunder-breathing-art",
     client: "Demon Slayer Tribute Project",
     tagline: "Kinetic First Form Thunderclap and Flash Shockwave Illustration",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
     heroStat: "FEATURED CREATOR SHOWCASE · 4K",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/f22740031efdf69bf015d3a1609d9403.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/f22740031efdf69bf015d3a1609d9403.png",
@@ -1250,8 +1250,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "zenitsu-chuntaro-portrait",
     client: "Collector Art Print Series",
     tagline: "Intimate Emotional Character Art, Soft Lighting & Detailed Linework",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
     heroStat: "INTERNATIONAL COLLECTOR COMMISSIONS",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/79d412c14dc811f1b5d941f703114591.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/79d412c14dc811f1b5d941f703114591.png",
@@ -1303,8 +1303,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "inosuke-beast-slash-art",
     client: "Manga Kinetic Study Group",
     tagline: "Raw Kinetic Dual-Nichirin Sword Slash & High-Energy Crosshatch Art",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
     heroStat: "HIGH-CONTRAST MONOCHROME MASTER",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/b35bbed35c5bc0673fa97ebc938b796a.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/b35bbed35c5bc0673fa97ebc938b796a.png",
@@ -1356,8 +1356,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "spongebob-dual-face-surrealism",
     client: "Contemporary Pop Art Guild",
     tagline: "Provocative Modern Cultural Commentary & Dual Identity Surrealism",
-    category: "Packaging & Label Designing Services",
-    serviceId: "packaging-label",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
     heroStat: "VIRAL POP SURREALIST PIECE · 50K+ REACH",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/411051247f7f5c4f0f29b4c70b5efc89.jpg",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/411051247f7f5c4f0f29b4c70b5efc89.jpg",
@@ -1409,8 +1409,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "khyber-pass-chicken-tikka",
     client: "Khyber Pass Gourmet Restaurant",
     tagline: "Hyper-Sensory Charcoal Sizzle Food Photography & Dynamic Advertising",
-    category: "Performance Marketing Services",
-    serviceId: "performance-marketing",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "+38% DINE-IN REVENUE · 4.9X ROAS",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/9cc1d42fca2ab95b600c86de7ae288f8.jpg",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/9cc1d42fca2ab95b600c86de7ae288f8.jpg",
@@ -1462,8 +1462,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "threerooms-wednesday-banquet",
     client: "3Rooms Luxury Lounge",
     tagline: "Mid-Week Revenue Revival Engine, VIP Table Reservation Architecture",
-    category: "Performance Marketing Services",
-    serviceId: "performance-marketing",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "100% MID-WEEK CAPACITY · 5.8X ROAS",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/12b430f652a6514e21dfbee23e054ad2.png",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/12b430f652a6514e21dfbee23e054ad2.png",
@@ -1515,8 +1515,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "canva-pitch-deck-01",
     client: "Seed Stage AI Venture Deck",
     tagline: "High-Stakes Investor Pitch Deck, Financial Modeling & Visual Narrative",
-    category: "Lead Generation Services",
-    serviceId: "lead-generation",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "$150K ANGEL ROUND SECURED · CANVA",
     liveUrl: "https://www.canva.com/design/DAEgOcD46u8/qXha20201-C-BVE0ggTrIw/view",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png",
@@ -1568,8 +1568,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     slug: "canva-keynote-deck-02",
     client: "Enterprise Executive Keynote Deck",
     tagline: "500+ Executive Audience Visual Deck, Kinetic Transitions & Brand Tokens",
-    category: "Lead Generation Services",
-    serviceId: "lead-generation",
+    category: "Graphic Design & Branding",
+    serviceId: "graphic-design",
     heroStat: "98% AUDIENCE APPROVAL · 500+ EXECUTIVES",
     liveUrl: "https://www.canva.com/design/DAEukfCDzdI/VX12fHvVfaxcwznDpox7XQ/view",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png",
@@ -1615,9 +1615,221 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #31] VedaRoots Ayurveda (vedaroots-ayurveda)
+  // [PORTFOLIO WORK #31] Lord Ganesha Cyber-Mandala (ganesha-cyber-mandala)
   {
     id: 31,
+    slug: "ganesha-cyber-mandala",
+    client: "Lord Ganesha Cyber-Mandala",
+    tagline: "Modern Cyber-Spiritual Sacred Geometry Vector Art & Filigree",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
+    heroStat: "MASTER ARTWORK · 300 DPI VECTOR",
+    liveUrl: "/art/ganesha-cyber-mandala.jpg",
+    thumbnail: "/art/ganesha-cyber-mandala.jpg",
+    desc: "Hand-crafted cyber-spiritual sacred geometry mandala featuring an ornate gold-filigreed elephant deity with liquid platinum accents, sacred geometric rings, and glowing circuitry against obsidian glass.",
+    mushkil:
+      "Traditional cultural vector iconography frequently looks dated, flat, and disconnected from modern ultra-luxury digital screens and high-resolution display standards.",
+    jugaad:
+      "Synthesized classical Vedic iconographic proportions with cyberpunk cyber-geometry and liquid obsidian lighting layers, exported in 4K lossless P3 wide-gamut resolution.",
+    nateeja:
+      "Achieved viral engagement across creator design communities, recognized as a benchmark for contemporary Indian digital vector art.",
+    stats: [
+          {
+                "label": "Canvas Resolution",
+                "val": "4K 300DPI"
+          },
+          {
+                "label": "Layer Hierarchy",
+                "val": "148 Layers"
+          },
+          {
+                "label": "Design Precision",
+                "val": "0.25pt Vector"
+          },
+          {
+                "label": "Color Gamut",
+                "val": "P3 Wide Gamut"
+          }
+    ],
+    deliverables: [
+          "Lossless 4K Master Digital Canvas",
+          "Ornate Gold Foil Print Dieline & Vector Separation",
+          "Ultra-Wide Ambient Desktop & Mobile Wallpapers",
+          "Layered Procreate 5X & Vector Architecture Archive"
+    ],
+    testimonial: {
+      quote:
+        "A breathtaking fusion of ancient Vedic sacred geometry and futuristic digital art direction. Truly masterful craftsmanship.",
+      author: "Ananya Deshmukh",
+      role: "Curator, Contemporary Indian Arts Guild",
+    },
+    accentColor: "#f59e0b",
+    techStack: ["Procreate 5X","Adobe Illustrator","Sacred Geometry","Vector Filigree","Apple Pencil Pro"],
+    year: "2024 - 2026",
+  },
+
+  // [PORTFOLIO WORK #32] Samurai Ronin Ink Wash (samurai-ronin-ink-sketch)
+  {
+    id: 32,
+    slug: "samurai-ronin-ink-sketch",
+    client: "Samurai Ronin Ink Wash",
+    tagline: "Dynamic Sumi-e Splatter & High-Velocity Anime Brush Sketch",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
+    heroStat: "RAW INK SKETCH · SUMI-E MASTER",
+    liveUrl: "/art/samurai-ronin-ink-sketch.jpg",
+    thumbnail: "/art/samurai-ronin-ink-sketch.jpg",
+    desc: "High-energy dynamic manga brush ink sketch capturing a wandering ronin in fierce wind, executed with traditional sumi-e splatter textures, expressive monochrome lineart, and a striking crimson katana accent.",
+    mushkil:
+      "Digital inking often lacks the visceral physical soul, organic bleeding, and dynamic weight of traditional Japanese bamboo-brush ink on handmade washi paper.",
+    jugaad:
+      "Engineered custom tilt-pressure sumi-e brush presets in Procreate to emulate natural carbon ink flow, hand-splattering fine droplet textures with high-velocity kinetic strokes.",
+    nateeja:
+      "Generated over 18,000 community impressions and print commissions from international manga art collectors and animation directors.",
+    stats: [
+          {
+                "label": "Brush Technique",
+                "val": "Sumi-e Wash"
+          },
+          {
+                "label": "Stroke Velocity",
+                "val": "120 FPS Flow"
+          },
+          {
+                "label": "Print Standard",
+                "val": "Fine Art Giclée"
+          },
+          {
+                "label": "Contrast Ratio",
+                "val": "100% Carbon Black"
+          }
+    ],
+    deliverables: [
+          "Master High-Resolution Sumi-e Ink Canvas",
+          "Fine Art Museum Giclée Print Archive",
+          "High-Contrast Kinetic Manga Lineart File",
+          "Step-by-Step Brushwork Process Timelapse"
+    ],
+    testimonial: {
+      quote:
+        "The raw kinetic energy and ink splatter dynamics in this ronin piece evoke classic Samurai Champloo with modern mastery.",
+      author: "Kenji Takahashi",
+      role: "Lead Concept Illustrator, Tokyo Manga Lab",
+    },
+    accentColor: "#ef4444",
+    techStack: ["Custom Sumi-e Brushes","Procreate","Wacom Cintiq","Carbon Ink Emulation"],
+    year: "2024 - 2026",
+  },
+
+  // [PORTFOLIO WORK #33] Neo-Tokyo Midnight Hawker (neotokyo-street-food-hawker)
+  {
+    id: 33,
+    slug: "neotokyo-street-food-hawker",
+    client: "Neo-Tokyo Midnight Hawker",
+    tagline: "Atmospheric Isometric Anime Digital Painting & Concept Art",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
+    heroStat: "CONCEPT ART · 240+ DETAIL ASSETS",
+    liveUrl: "/art/neotokyo-street-food-hawker.jpg",
+    thumbnail: "/art/neotokyo-street-food-hawker.jpg",
+    desc: "Detailed atmospheric isometric anime concept painting of a midnight street-food cart nestled in a rainy neon-lit Neo-Tokyo alleyway, featuring glowing paper lanterns, steam rising from ramen pots, and Ghibli-meets-Akira linework.",
+    mushkil:
+      "Capturing dense urban isometric perspective while maintaining warm nostalgic emotional warmth and authentic atmospheric illumination across a neon palette.",
+    jugaad:
+      "Constructed an accurate 30-degree isometric perspective grid, hand-painting 240+ individual props, weathered textures, and 12 distinct multi-point neon light passes.",
+    nateeja:
+      "Featured on prominent digital art communities and acquired for indie game concept keyframe licensing.",
+    stats: [
+          {
+                "label": "Handmade Props",
+                "val": "240+ Assets"
+          },
+          {
+                "label": "Lighting Passes",
+                "val": "12 Dynamic Passes"
+          },
+          {
+                "label": "Perspective Grid",
+                "val": "30° True Isometric"
+          },
+          {
+                "label": "Atmosphere Tone",
+                "val": "Cyber-Nostalgic"
+          }
+    ],
+    deliverables: [
+          "Full-Length 4K Isometric Concept Painting",
+          "Asset & Prop Breakdown Model Sheet",
+          "Multi-Pass Ambient Lighting Layer Files",
+          "Day-to-Night Palette Variation Study"
+    ],
+    testimonial: {
+      quote:
+        "Every millimeter of this midnight hawker cart tells a rich story. The steam, lanterns, and rainy pavement reflections are enchanting.",
+      author: "Maya Lin",
+      role: "Senior Art Director, Cyberpunk Games Studio",
+    },
+    accentColor: "#06b6d4",
+    techStack: ["Adobe Photoshop","Procreate","True Isometric Grid","Atmospheric Matte Painting"],
+    year: "2024 - 2026",
+  },
+
+  // [PORTFOLIO WORK #34] Varanasi Dawn Ghats Heritage (varanasi-ghats-heritage-matte)
+  {
+    id: 34,
+    slug: "varanasi-ghats-heritage-matte",
+    client: "Varanasi Dawn Ghats Heritage",
+    tagline: "Serene Cinematic Digital Matte Painting & Concept Architecture",
+    category: "Illustrations & Art Sketches",
+    serviceId: "illustrations-art",
+    heroStat: "MATTE PAINTING · CINEMATIC KEYFRAME",
+    liveUrl: "/art/varanasi-ghats-heritage-matte.jpg",
+    thumbnail: "/art/varanasi-ghats-heritage-matte.jpg",
+    desc: "Serene cinematic digital concept matte painting of the ancient Varanasi riverfront steps at sunrise with soft golden morning mist, temple spires, floating marigolds, and wooden boats on the sacred river.",
+    mushkil:
+      "Depicting the vast architectural depth of Varanasi ghats without cluttering the meditative, ethereal dawn spiritual atmosphere.",
+    jugaad:
+      "Employed classical atmospheric aerial perspective: soft warm 3200K golden sunrise lighting, multi-layered depth mist, and textured architectural sandstone temple facades.",
+    nateeja:
+      "Exhibited in digital heritage showcases and commissioned for a national heritage documentary key visual.",
+    stats: [
+          {
+                "label": "Atmospheric Layers",
+                "val": "28 Fog/Mist Layers"
+          },
+          {
+                "label": "Light Temperature",
+                "val": "3200K Golden Hour"
+          },
+          {
+                "label": "Architectural Scale",
+                "val": "1.2km Riverfront"
+          },
+          {
+                "label": "Aspect Ratio",
+                "val": "Cinematic 21:9"
+          }
+    ],
+    deliverables: [
+          "Cinematic 21:9 Master Matte Painting",
+          "Vedic Heritage Architectural Elevation Guide",
+          "Atmospheric Color Key Script",
+          "High-Resolution Exhibition Art Print File"
+    ],
+    testimonial: {
+      quote:
+        "Captures the timeless, transcendental soul of the holy ghats at dawn with profound cinematic sensitivity and architectural reverence.",
+      author: "Rajiv Sengupta",
+      role: "Heritage Architecture Historian & Documentary Producer",
+    },
+    accentColor: "#eab308",
+    techStack: ["Digital Matte Painting","Photoshop","Aerial Perspective","Heritage Architecture"],
+    year: "2024 - 2026",
+  },
+
+  // [INTERACTIVE DEMO STOREFRONT #35] VedaRoots Ayurveda (vedaroots-ayurveda)
+  {
+    id: 35,
     slug: "vedaroots-ayurveda",
     client: "VedaRoots Ayurveda",
     tagline: "High-Intent Google Search & Organic Topical Authority Dominance",
@@ -1625,7 +1837,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "seo-sem",
     heroStat: "+420% ORGANIC TRAFFIC LIFT",
     liveUrl: "/demos/vedaroots-ayurveda",
-    thumbnail: "https://images.unsplash.com/photo-1608248597359-54d762e8ea02?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80",
     desc: "VedaRoots is an authentic Ayurvedic wellness brand specializing in single-origin cold-pressed oils, adaptogenic tonics, and classical herb formulations.",
     mushkil:
       "VedaRoots was trapped paying ₹1,200+ per acquisition on generic Meta ads while competitors dominated Google Page 1 for high-intent search queries like 'authentic pure kshirabala oil' and 'cold-pressed sesame oil bulk'. Their technical site had 4.8s TTFB and 0 structured schema markup.",
@@ -1657,9 +1869,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2023 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #32] UrbanDrift EV Mobility (urbandrift-ev)
+  // [INTERACTIVE DEMO STOREFRONT #36] UrbanDrift EV Mobility (urbandrift-ev)
   {
-    id: 32,
+    id: 36,
     slug: "urbandrift-ev",
     client: "UrbanDrift EV Mobility",
     tagline: "High-Ticket Commercial B2B Fleet Search Acquisition",
@@ -1698,9 +1910,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #33] SnackNation Makhanas (snacknation-makhanas)
+  // [INTERACTIVE DEMO STOREFRONT #37] SnackNation Makhanas (snacknation-makhanas)
   {
-    id: 33,
+    id: 37,
     slug: "snacknation-makhanas",
     client: "SnackNation Makhanas",
     tagline: "High-Velocity D2C Superfood Scaling & Volume Bundling",
@@ -1708,7 +1920,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "performance-marketing",
     heroStat: "5.8X BLENDED ROAS · ₹1.2CR 90-DAY",
     liveUrl: "/demos/snacknation-makhanas",
-    thumbnail: "https://images.unsplash.com/photo-1621996346565-e3d5d6281084?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=800&q=80",
     desc: "Roasted organic artisanal fox nuts (makhanas) in peri-peri, truffle, and Himalayan pink salt variants.",
     mushkil:
       "Single-pack purchase economics were unsustainable: average order value (AOV) was only ₹299 with a ₹220 customer acquisition cost, leaving zero margin after shipping.",
@@ -1739,9 +1951,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #34] Bharat Bio-Health (bharat-bio-health)
+  // [INTERACTIVE DEMO STOREFRONT #38] Bharat Bio-Health (bharat-bio-health)
   {
-    id: 34,
+    id: 38,
     slug: "bharat-bio-health",
     client: "Bharat Bio-Health",
     tagline: "B2B Medical Diagnostics & Clinic Franchise Qualification",
@@ -1780,9 +1992,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2023 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #35] Sobha Heritage Villas (sobha-heritage-villas)
+  // [INTERACTIVE DEMO STOREFRONT #39] Sobha Heritage Villas (sobha-heritage-villas)
   {
-    id: 35,
+    id: 39,
     slug: "sobha-heritage-villas",
     client: "Sobha Heritage Villas",
     tagline: "Ultra-Luxury Real Estate HNI Inbound Concierge",
@@ -1821,9 +2033,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #36] ChaiChaska Premium Tea (chaichaska-ctc)
+  // [INTERACTIVE DEMO STOREFRONT #40] ChaiChaska Premium Tea (chaichaska-ctc)
   {
-    id: 36,
+    id: 40,
     slug: "chaichaska-ctc",
     client: "ChaiChaska Premium Tea",
     tagline: "Viral Cultural Storytelling & Community Evangelism",
@@ -1862,9 +2074,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #37] StreeThreads Handloom (streethreads-handloom)
+  // [INTERACTIVE DEMO STOREFRONT #41] StreeThreads Handloom (streethreads-handloom)
   {
-    id: 37,
+    id: 41,
     slug: "streethreads-handloom",
     client: "StreeThreads Handloom",
     tagline: "Weaver Heritage Documentaries & Creator Whitelisting",
@@ -1903,9 +2115,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2023 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #38] LionelP Restaurant (lionelp-restaurant)
+  // [INTERACTIVE DEMO STOREFRONT #42] LionelP Restaurant (lionelp-restaurant)
   {
-    id: 38,
+    id: 42,
     slug: "lionelp-restaurant",
     client: "LionelP Restaurant",
     tagline: "Artisanal French Patisserie & Fine Dining Storefront",
@@ -1944,9 +2156,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #39] MithaiMagic Artisanal Sweets (mithaimagic-sweets)
+  // [INTERACTIVE DEMO STOREFRONT #43] MithaiMagic Artisanal Sweets (mithaimagic-sweets)
   {
-    id: 39,
+    id: 43,
     slug: "mithaimagic-sweets",
     client: "MithaiMagic Artisanal Sweets",
     tagline: "10-Minute Dark Store Domination Across Blinkit, Zepto & Instamart",
@@ -1985,9 +2197,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #40] PureGlow Organic Kombucha (pureglow-kombucha)
+  // [INTERACTIVE DEMO STOREFRONT #44] PureGlow Organic Kombucha (pureglow-kombucha)
   {
-    id: 40,
+    id: 44,
     slug: "pureglow-kombucha",
     client: "PureGlow Organic Kombucha",
     tagline: "Cold-Chain Beverage Velocity & Checkout Impulse Carousels",
@@ -2026,9 +2238,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #41] Darbar Fine Watches (darbar-fine-watches)
+  // [INTERACTIVE DEMO STOREFRONT #45] Darbar Fine Watches (darbar-fine-watches)
   {
-    id: 41,
+    id: 45,
     slug: "darbar-fine-watches",
     client: "Darbar Fine Watches",
     tagline: "Bespoke 3D Three.js Interactive Horology Flagship",
@@ -2067,9 +2279,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #42] KisaanDirect AgriTech (kisaandirect-agri)
+  // [INTERACTIVE DEMO STOREFRONT #46] KisaanDirect AgriTech (kisaandirect-agri)
   {
-    id: 42,
+    id: 46,
     slug: "kisaandirect-agri",
     client: "KisaanDirect AgriTech",
     tagline: "Vernacular Progressive Web App with 1-Click UPI Intent",
@@ -2108,9 +2320,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2023 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #43] Royal Rajwada Spices (royal-rajwada-spices)
+  // [INTERACTIVE DEMO STOREFRONT #47] Royal Rajwada Spices (royal-rajwada-spices)
   {
-    id: 43,
+    id: 47,
     slug: "royal-rajwada-spices",
     client: "Royal Rajwada Spices",
     tagline: "Heritage Gold Foil-Stamped Boxes & Amber Glass Jars",
@@ -2149,9 +2361,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2023 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #44] KamaKesh Ayurvedic Elixir (kamakesh-hair-elixir)
+  // [INTERACTIVE DEMO STOREFRONT #48] KamaKesh Ayurvedic Elixir (kamakesh-hair-elixir)
   {
-    id: 44,
+    id: 48,
     slug: "kamakesh-hair-elixir",
     client: "KamaKesh Ayurvedic Elixir",
     tagline: "Luxury Matte Soft-Touch Bottle & Embossed Gold Carton",
@@ -2190,9 +2402,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #45] Zenith RankMatrix Growth Engine (zenith-seo-growth)
+  // [INTERACTIVE DEMO STOREFRONT #49] Zenith RankMatrix Growth Engine (zenith-seo-growth)
   {
-    id: 45,
+    id: 49,
     slug: "zenith-seo-growth",
     client: "Zenith RankMatrix Growth Engine",
     tagline: "Enterprise Organic Topical Authority & AI Search Optimization (GEO)",
@@ -2232,9 +2444,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2026",
   },
 
-  // [INTERACTIVE DEMO STOREFRONT #46] KartFlow Headless Commerce OS (kartflow-headless)
+  // [INTERACTIVE DEMO STOREFRONT #50] KartFlow Headless Commerce OS (kartflow-headless)
   {
-    id: 46,
+    id: 50,
     slug: "kartflow-headless",
     client: "KartFlow Headless Commerce OS",
     tagline: "Edge-Rendered Sub-Millisecond Headless D2C Commerce Engine",

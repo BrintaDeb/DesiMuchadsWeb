@@ -144,7 +144,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     },
     {
       title: "Verified Client Work",
-      desc: "46 verified growth architectures & live client platforms",
+      desc: "50 verified growth architectures, live platforms & master artworks",
       href: "#karname",
       icon: Globe,
     },
@@ -496,7 +496,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               >
                 <div className="pb-2.5 mb-2 border-b border-white/10 flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 font-royal">
-                    46 Verified Case Studies
+                    50 Verified Case Studies &amp; Artworks
                   </span>
                   <a
                     href="#karname"
@@ -817,7 +817,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className="text-xs text-white font-bold hover:underline flex items-center gap-1"
                         >
-                          <span>Explore All 46 Case Studies</span>
+                          <span>Explore All 50 Case Studies &amp; Artworks</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </a>
                       </div>

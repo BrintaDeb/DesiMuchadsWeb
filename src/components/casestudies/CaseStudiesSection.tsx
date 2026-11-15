@@ -23,15 +23,17 @@ import { AGENCY_PROJECTS, getProjectAssetType } from "@/data/projectsData";
 import { ProjectPreviewShowcase } from "./ProjectPreviewShowcase";
 
 const FILTER_CATEGORIES = [
-  { id: "all", label: "All Work (46)" },
-  { id: "packaging-label", label: "Packaging & Branding (13)" },
+  { id: "all", label: "All Work (50)" },
+  { id: "graphic-design", label: "Graphic Design (10)" },
+  { id: "illustrations-art", label: "Illustrations & Sketches (10)" },
   { id: "web-development", label: "Fullstack Web & Apps (11)" },
   { id: "social-media", label: "Social Media & Video (7)" },
-  { id: "performance-marketing", label: "Performance Marketing (4)" },
-  { id: "lead-generation", label: "Lead Gen & Decks (4)" },
   { id: "seo-sem", label: "SEO & SEM (3)" },
+  { id: "packaging-label", label: "Packaging & Dielines (2)" },
+  { id: "lead-generation", label: "Lead Gen & Decks (2)" },
   { id: "ecommerce-services", label: "E-Commerce (2)" },
   { id: "quick-commerce", label: "Quick Commerce (2)" },
+  { id: "performance-marketing", label: "Performance Marketing (1)" },
 ];
 
 export function CaseStudiesSection() {
@@ -122,7 +124,7 @@ export function CaseStudiesSection() {
         <div className="max-w-3xl mb-12 sm:mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>VERIFIED CLIENT WORK • 46 HUMAN-GRADE CASE STUDIES</span>
+            <span>VERIFIED CLIENT WORK • 50 HUMAN-GRADE CASE STUDIES &amp; ARTWORKS</span>
           </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work
@@ -142,11 +144,10 @@ export function CaseStudiesSection() {
                 sound.playPluck(160);
                 setSelectedCategory(cat.id);
               }}
-              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[44px] flex items-center cursor-pointer ${
-                selectedCategory === cat.id
-                  ? "bg-white text-black shadow-lg scale-105 font-black"
-                  : "bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10"
-              }`}
+              className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all shrink-0 min-h-[44px] flex items-center cursor-pointer ${selectedCategory === cat.id
+                ? "bg-white text-black shadow-lg scale-105 font-black"
+                : "bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10"
+                }`}
             >
               {cat.label}
             </button>
@@ -404,11 +405,10 @@ export function CaseStudiesSection() {
                       sound.playPluck(140);
                       setActiveTab("preview");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer flex items-center gap-1.5 ${
-                      activeTab === "preview"
-                        ? "bg-white text-black shadow"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer flex items-center gap-1.5 ${activeTab === "preview"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     <Eye className="w-3.5 h-3.5" />
                     <span>Live View</span>
@@ -419,11 +419,10 @@ export function CaseStudiesSection() {
                       sound.playPluck(160);
                       setActiveTab("strategy");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer flex items-center gap-1.5 ${
-                      activeTab === "strategy"
-                        ? "bg-white text-black shadow"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer flex items-center gap-1.5 ${activeTab === "strategy"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     <Layers className="w-3.5 h-3.5" />
                     <span>Strategy</span>
