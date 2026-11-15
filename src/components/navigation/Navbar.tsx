@@ -200,13 +200,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           </span>
           <span className="hidden sm:inline text-white/20">|</span>
           <a
-            href="https://wa.me/919999999999"
+            href="https://wa.me/919180252831"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors flex items-center gap-1 text-zinc-300"
           >
-            <PhoneCall className="w-3 h-3 text-white" />
-            <span>TALK TO FOUNDER</span>
+            <PhoneCall className="w-3.5 h-3.5 text-white" />
+            <span>TALK TO FOUNDER (+91 9180252831)</span>
           </a>
         </div>
       </div>
@@ -233,7 +233,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               <span className="text-zinc-400">MUCH</span>
               <span>ADS</span>
             </div>
-            <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-sans font-medium tracking-wide text-zinc-300 italic leading-tight mt-1 whitespace-nowrap hidden sm:block">
+            <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-sans font-medium tracking-wide text-zinc-300 italic leading-tight mt-1 whitespace-nowrap hidden 2xl:block">
               We Scale Your Business Personally and Seriously!
             </span>
           </div>
@@ -241,14 +241,14 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
         {/* Desktop Nav Items (No Word Breaking, Perfectly Aligned) */}
         <nav
-          className="hidden lg:flex items-center gap-1.5 xl:gap-3 2xl:gap-5 font-display shrink-0 whitespace-nowrap"
+          className="hidden lg:flex items-center gap-1 xl:gap-2.5 2xl:gap-4 font-display shrink-0 whitespace-nowrap flex-nowrap"
           style={{ whiteSpace: "nowrap" }}
         >
           {/* About Us */}
           <Link
             href="/about"
             onMouseEnter={() => sound.playPluck(130)}
-            className="whitespace-nowrap shrink-0 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
+            className="whitespace-nowrap shrink-0 px-2 xl:px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
             style={{ whiteSpace: "nowrap" }}
           >
             About Us
@@ -426,10 +426,20 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <Link
             href="/pricing"
             onMouseEnter={() => sound.playPluck(130)}
-            className="whitespace-nowrap shrink-0 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
+            className="whitespace-nowrap shrink-0 px-2 xl:px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
             style={{ whiteSpace: "nowrap" }}
           >
             Pricing
+          </Link>
+
+          {/* Contact */}
+          <Link
+            href="/contact"
+            onMouseEnter={() => sound.playPluck(130)}
+            className="whitespace-nowrap shrink-0 px-2 xl:px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
+            style={{ whiteSpace: "nowrap" }}
+          >
+            Contact
           </Link>
 
           {/* Quick Search & Command Palette (⌘K) */}
@@ -438,13 +448,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               setIsCommandOpen(true);
             }}
             type="button"
-            className="whitespace-nowrap shrink-0 flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            className="whitespace-nowrap shrink-0 flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 min-h-[36px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
             title="Open Quick Search & Command Palette (⌘K)"
             aria-label="Search and quick actions"
             style={{ whiteSpace: "nowrap" }}
           >
             <Search className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-            <span className="hidden xl:inline text-[11px] whitespace-nowrap">Search</span>
+            <span className="hidden 2xl:inline text-[11px] whitespace-nowrap">Search</span>
             <kbd className="px-1.5 py-0.5 text-[10px] rounded bg-white/10 border border-white/20 text-zinc-300 font-mono shrink-0 whitespace-nowrap">
               ⌘K
             </kbd>
@@ -454,17 +464,15 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <ThemeToggle />
 
           {/* Signature Stark White CTA Button */}
-          <button
-            onClick={() => {
-              onOpenKundli();
-            }}
-            type="button"
-            className="btn-luxury-shine px-4 xl:px-5 py-2 min-h-[36px] rounded-full bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_22px_rgba(255,255,255,0.2)] active:scale-95 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+          <Link
+            href="/contact"
+            onMouseEnter={() => sound.playPluck(160)}
+            className="btn-luxury-shine px-3.5 xl:px-5 py-2 min-h-[36px] rounded-full bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_22px_rgba(255,255,255,0.2)] active:scale-95 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
             style={{ whiteSpace: "nowrap" }}
           >
             <span className="whitespace-nowrap">LET&apos;S TALK</span>
             <span className="text-sm font-bold">&gt;</span>
-          </button>
+          </Link>
         </nav>
 
         {/* Mobile Controls: Search Shortcut + Hamburger */}
@@ -710,6 +718,22 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     <span>Transparent Pricing</span>
                   </div>
                   <span className="text-[10px] font-mono text-zinc-400">0% Markups</span>
+                </Link>
+
+                {/* Contact Us & Live Baithak */}
+                <Link
+                  href="/contact"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/20 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all shadow-sm"
+                >
+                  <div className="flex items-center gap-3">
+                    <PhoneCall className="w-4 h-4 text-emerald-400" />
+                    <span>Contact Us &amp; Live Baithak</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Live Slots</span>
                 </Link>
               </div>
             </div>

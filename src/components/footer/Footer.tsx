@@ -69,12 +69,12 @@ export function Footer({ onOpenKundli }: FooterProps) {
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="https://wa.me/919999999999?text=Pranam%20Desi%20Muchads!%20We%20would%20like%20to%20buzz%20you%20for%20our%20e-commerce%20growth."
+              href="https://wa.me/919180252831?text=Pranam%20Desi%20Muchads!%20We%20would%20like%20to%20buzz%20you%20for%20our%20e-commerce%20growth."
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl border border-white/20 hover:border-white text-white font-display text-xs font-bold tracking-widest uppercase transition-all hover:bg-white/5"
             >
-              WHATSAPP &gt;
+              WHATSAPP (+91 9180252831) &gt;
             </a>
           </div>
         </div>
@@ -150,6 +150,11 @@ export function Footer({ onOpenKundli }: FooterProps) {
                   Pricing &amp; Retainers
                 </Link>
               </li>
+              <li>
+                <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors font-medium">
+                  Contact &amp; Book Baithak
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -211,7 +216,9 @@ export function Footer({ onOpenKundli }: FooterProps) {
               <a href="mailto:buzz@desimuchads.agency" className="text-white font-mono hover:underline block font-semibold">
                 buzz@desimuchads.agency
               </a>
-              <p>+91 (0) 9999 999 999</p>
+              <a href="tel:+919180252831" className="text-zinc-300 font-mono hover:text-white block font-medium">
+                +91 9180252831
+              </a>
               <div className="pt-2 border-t border-white/10 space-y-1">
                 <p className="text-white font-bold text-xs flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-white" />

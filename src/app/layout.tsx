@@ -176,8 +176,8 @@ export default function RootLayout({
     vatID: "IN07AAECD5582M1ZX",
     iso6523Code: "0199:07AAECD5582M1ZX",
     priceRange: "₹₹₹",
-    telephone: "+91-98112-34567",
-    email: "contact@desimuchads.agency",
+    telephone: "+91-9180252831",
+    email: "buzz@desimuchads.agency",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Connaught Place, Barakhamba Road",

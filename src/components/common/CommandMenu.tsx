@@ -12,6 +12,7 @@ import {
   ExternalLink,
   Layers,
   X,
+  Calendar,
 } from "lucide-react";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
@@ -94,15 +95,26 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
       },
     },
     {
+      id: "action-calendar",
+      category: "Action",
+      title: "Schedule Live Growth Baithak (Calendar)",
+      subtitle: "Select appointment slot & request custom quotation",
+      icon: Calendar,
+      onSelect: () => {
+        onClose();
+        router.push("/contact");
+      },
+    },
+    {
       id: "action-whatsapp",
       category: "Action",
       title: "Book Direct Strategy Call on WhatsApp",
-      subtitle: "Connect instantly with Principal Growth Architect",
+      subtitle: "Connect instantly with Principal Growth Architect (+91 9180252831)",
       icon: PhoneCall,
       onSelect: () => {
         onClose();
         window.open(
-          "https://wa.me/919999999999?text=" +
+          "https://wa.me/919180252831?text=" +
             encodeURIComponent("Pranam Desi Muchads! I would like to schedule a strategy baithak."),
           "_blank"
         );

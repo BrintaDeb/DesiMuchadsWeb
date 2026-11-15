@@ -72,7 +72,7 @@ export function AgencyProposalProvider({
       (proposal.brandUrl ? `✦ Brand URL: ${proposal.brandUrl}\n` : "") +
       `\nLet's schedule our 15-Minute Chai & Strategy Call! 〰️`;
 
-    return `https://wa.me/919999999999?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/919180252831?text=${encodeURIComponent(msg)}`;
   };
 
   return (

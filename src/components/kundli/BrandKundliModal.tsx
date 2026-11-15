@@ -456,7 +456,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
                       `✦ Preferred Time: ${selectedDay} at ${selectedTimeSlot}\n\n` +
                       `Looking forward to meeting the creative pod!`
                     );
-                    window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
+                    window.open(`https://wa.me/919180252831?text=${text}`, "_blank");
                   }}
                   className="py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5"
                 >

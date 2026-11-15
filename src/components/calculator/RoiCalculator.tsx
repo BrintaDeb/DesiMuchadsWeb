@@ -175,7 +175,7 @@ export function RoiCalculator() {
       `✦ Projected Orders: ${formatNumber(metrics.estimatedOrders)} @ ${formatINR(metrics.cac)} Target CAC\n\n` +
       `Let's schedule a Baithak to lock in our media plan! 〰️`
     );
-    window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
+    window.open(`https://wa.me/919180252831?text=${text}`, "_blank");
   };
 
   const handleCopyHisab = () => {
