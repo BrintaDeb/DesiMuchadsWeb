@@ -39,12 +39,13 @@ export function ThemeToggle() {
     <button
       onClick={cycleDensity}
       type="button"
-      className="group flex items-center gap-1.5 px-3 py-1.5 min-h-[38px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-zinc-300 hover:text-white transition-all text-xs font-mono interactive-scale-tap touch-hit-expand shrink-0 whitespace-nowrap"
+      style={{ whiteSpace: "nowrap" }}
+      className="group flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-zinc-300 hover:text-white transition-all text-xs font-mono interactive-scale-tap touch-hit-expand shrink-0 whitespace-nowrap"
       title={`Visual Density: ${density} (Click to switch)`}
       aria-label={`Switch visual layout density, currently ${density}`}
     >
       <Sparkles className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors shrink-0" />
-      <span className="hidden sm:inline uppercase text-[10px] tracking-wider font-semibold whitespace-nowrap">
+      <span className="hidden xl:inline uppercase text-[10px] tracking-wider font-semibold whitespace-nowrap">
         {density}
       </span>
     </button>

@@ -6,7 +6,7 @@ import { Clock, MapPin, Navigation, ArrowRight } from "lucide-react";
 import { sound } from "@/lib/sound";
 
 interface FooterProps {
-  onOpenKundli: () => void;
+  onOpenKundli?: () => void;
 }
 
 export function Footer({ onOpenKundli }: FooterProps) {
@@ -60,7 +60,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
             <button
               onClick={() => {
                 sound.playChime();
-                onOpenKundli();
+                onOpenKundli?.();
               }}
               type="button"
               className="px-9 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 flex items-center gap-2"
@@ -126,24 +126,29 @@ export function Footer({ onOpenKundli }: FooterProps) {
             </h4>
             <ul className="space-y-2.5 text-xs font-normal font-sans">
               <li>
-                <a href="#services" className="text-zinc-400 hover:text-white transition-colors">
-                  About us
-                </a>
+                <Link href="/about" className="text-zinc-400 hover:text-white transition-colors">
+                  About Us &amp; Team
+                </Link>
               </li>
               <li>
-                <a href="#clients" className="text-zinc-400 hover:text-white transition-colors">
-                  Clients
-                </a>
+                <Link href="/services" className="text-zinc-400 hover:text-white transition-colors">
+                  Services (8 Disciplines)
+                </Link>
               </li>
               <li>
-                <a href="#karname" className="text-zinc-400 hover:text-white transition-colors">
-                  Work
-                </a>
+                <Link href="/work" className="text-zinc-400 hover:text-white transition-colors">
+                  Work (50 Projects)
+                </Link>
               </li>
               <li>
-                <a href="#footer" className="text-zinc-400 hover:text-white transition-colors">
-                  Contact us
-                </a>
+                <Link href="/success-stories" className="text-zinc-400 hover:text-white transition-colors">
+                  Success Stories
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="text-zinc-400 hover:text-white transition-colors">
+                  Pricing &amp; Retainers
+                </Link>
               </li>
             </ul>
           </div>
