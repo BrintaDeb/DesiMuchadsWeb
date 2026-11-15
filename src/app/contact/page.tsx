@@ -8,6 +8,7 @@ import {
   MapPin,
   PhoneCall,
   Mail,
+  Globe,
   Sparkles,
   CheckCircle2,
   MessageCircle,
@@ -1139,25 +1140,27 @@ export default function ContactPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Rahul Datt (CEO) */}
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-black">
-                  <img
-                    src="/brand-logo.jpg"
-                    alt="Rahul Datt CEO"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-display font-black text-lg text-white">Rahul Datt</h3>
-                  <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
-                    Chief Executive Officer (CEO)
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-gradient-to-b from-[#1c1c24] to-[#0d0d12] shadow-md">
+                    <img
+                      src="/team/rahul-datt.jpg"
+                      alt="Rahul Datt CEO"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-black text-lg text-white">Rahul Datt</h3>
+                    <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
+                      Chief Executive Officer (CEO)
+                    </p>
+                  </div>
+                  <p className="text-xs font-sans text-zinc-300 leading-relaxed">
+                    Agency Vision, Client Scaling Strategy &amp; Executive Leadership. Oversees all major
+                    client growth war-rooms and creative trajectory.
                   </p>
                 </div>
-                <p className="text-xs font-sans text-zinc-300 leading-relaxed">
-                  Agency Vision, Client Scaling Strategy &amp; Executive Leadership. Oversees all major
-                  client growth war-rooms and creative trajectory.
-                </p>
-                <div className="pt-2 border-t border-white/10">
+                <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
                   <a
                     href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                       "Pranam Rahul Sir! I would like to schedule an Executive CEO Baithak for my brand."
@@ -1169,29 +1172,39 @@ export default function ContactPage() {
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
                     <span>WhatsApp Rahul Sir ↗</span>
                   </a>
+                  <a
+                    href="mailto:rahuldesimuchads@gmail.com"
+                    className="text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1"
+                    title="Direct Mail"
+                  >
+                    <Mail className="w-3 h-3 text-zinc-400" />
+                    <span>Email</span>
+                  </a>
                 </div>
               </div>
 
               {/* Brinta Deb (CTO) */}
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-black">
-                  <img
-                    src="/brand-logo.jpg"
-                    alt="Brinta Deb CTO"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-display font-black text-lg text-white">Brinta Deb</h3>
-                  <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
-                    Chief Technology Officer (CTO)
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-gradient-to-b from-[#1c1c24] to-[#0d0d12] shadow-md">
+                    <img
+                      src="/team/brinta-deb.jpg"
+                      alt="Brinta Deb CTO"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-black text-lg text-white">Brinta Deb</h3>
+                    <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
+                      Chief Technology Officer (CTO)
+                    </p>
+                  </div>
+                  <p className="text-xs font-sans text-zinc-300 leading-relaxed">
+                    Fullstack Engineering, Conversion Architecture &amp; Telemetry Systems. Architects
+                    sub-second Next.js engines and automated reporting pipes.
                   </p>
                 </div>
-                <p className="text-xs font-sans text-zinc-300 leading-relaxed">
-                  Fullstack Engineering, Conversion Architecture &amp; Telemetry Systems. Architects
-                  sub-second Next.js engines and automated reporting pipes.
-                </p>
-                <div className="pt-2 border-t border-white/10">
+                <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
                   <a
                     href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                       "Pranam Brinta Sir! I would like to consult on high-performance web engineering and conversion tech."
@@ -1203,29 +1216,49 @@ export default function ContactPage() {
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
                     <span>WhatsApp Brinta Sir ↗</span>
                   </a>
+                  <a
+                    href="https://brinta-deb-portfolio.onrender.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-emerald-400 hover:underline flex items-center gap-1 font-bold"
+                    title="View Portfolio"
+                  >
+                    <Globe className="w-3 h-3 text-emerald-400" />
+                    <span>Portfolio ↗</span>
+                  </a>
+                  <a
+                    href="mailto:brintadesimuchads@gmail.com"
+                    className="text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1"
+                    title="Direct Mail"
+                  >
+                    <Mail className="w-3 h-3 text-zinc-400" />
+                    <span>Email</span>
+                  </a>
                 </div>
               </div>
 
               {/* Omkar Dutta (CFO) */}
-              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-black">
-                  <img
-                    src="/brand-logo.jpg"
-                    alt="Omkar Dutta CFO"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-display font-black text-lg text-white">Omkar Dutta</h3>
-                  <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
-                    Chief Financial Officer (CFO)
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-gradient-to-b from-[#1c1c24] to-[#0d0d12] shadow-md">
+                    <img
+                      src="/team/omkar-dutta.png"
+                      alt="Omkar Dutta CFO"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-black text-lg text-white">Omkar Dutta</h3>
+                    <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
+                      Chief Financial Officer (CFO)
+                    </p>
+                  </div>
+                  <p className="text-xs font-sans text-zinc-300 leading-relaxed">
+                    Capital Allocation, Unit Economics &amp; Financial Governance. Optimizes blended CAC,
+                    contribution margins (CM3), and ad spend efficiency.
                   </p>
                 </div>
-                <p className="text-xs font-sans text-zinc-300 leading-relaxed">
-                  Capital Allocation, Unit Economics &amp; Financial Governance. Optimizes blended CAC,
-                  contribution margins (CM3), and ad spend efficiency.
-                </p>
-                <div className="pt-2 border-t border-white/10">
+                <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
                   <a
                     href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                       "Pranam Omkar Sir! I would like to review unit economics and financial media allocation."
@@ -1236,6 +1269,14 @@ export default function ContactPage() {
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
                     <span>WhatsApp Omkar Sir ↗</span>
+                  </a>
+                  <a
+                    href={`mailto:${OFFICIAL_EMAIL}?subject=${encodeURIComponent("Inquiry for Omkar Dutta (CFO)")}`}
+                    className="text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1"
+                    title="Direct Mail"
+                  >
+                    <Mail className="w-3 h-3 text-zinc-400" />
+                    <span>Email</span>
                   </a>
                 </div>
               </div>

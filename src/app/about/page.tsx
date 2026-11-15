@@ -11,6 +11,7 @@ import {
   Users,
   Code2,
   Mail,
+  Globe,
 } from "lucide-react";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
@@ -31,6 +32,7 @@ interface TeamMember {
     linkedin?: string;
     twitter?: string;
     email?: string;
+    portfolio?: string;
   };
 }
 
@@ -41,12 +43,12 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CEO",
     tagline: "Agency Vision, Client Scaling Strategy & Executive Leadership",
     bio: "Directs overarching agency strategy, high-growth client partnerships, and market expansion. Leads enterprise acquisitions and scaling roadmaps.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    avatar: "/team/rahul-datt.jpg",
     badge: "CHIEF EXECUTIVE OFFICER",
     disciplines: ["Executive Leadership", "Growth Strategy", "Client Partnerships", "Brand Scaling"],
     socials: {
       linkedin: "https://linkedin.com",
-      email: "mailto:rahul@desimuchads.agency",
+      email: "mailto:rahuldesimuchads@gmail.com",
     },
   },
   {
@@ -55,12 +57,13 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CTO",
     tagline: "Fullstack Engineering, Conversion Architecture & Systems",
     bio: "Architects high-performance Next.js web applications, sub-second conversion engines, and algorithmic ad tracking systems. Leads fullstack engineering and digital infrastructure.",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    avatar: "/team/brinta-deb.jpg",
     badge: "CHIEF TECHNOLOGY OFFICER",
     disciplines: ["Next.js App Router", "Fullstack Engineering", "Conversion Architecture", "Performance Systems"],
     socials: {
       linkedin: "https://linkedin.com",
-      email: "mailto:brinta@desimuchads.agency",
+      email: "mailto:brintadesimuchads@gmail.com",
+      portfolio: "https://brinta-deb-portfolio.onrender.com",
     },
   },
   {
@@ -69,12 +72,12 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CFO",
     tagline: "Capital Allocation, Unit Economics & Financial Governance",
     bio: "Oversees financial strategy, client ROI auditing, and unit economics. Ensures every marketing rupee spent yields measurable contribution margins and compounding returns.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    avatar: "/team/omkar-dutta.png",
     badge: "CHIEF FINANCIAL OFFICER",
     disciplines: ["Financial Strategy", "Unit Economics", "Profitability Audits", "Capital Allocation"],
     socials: {
       linkedin: "https://linkedin.com",
-      email: "mailto:omkar@desimuchads.agency",
+      email: "mailto:thedesimuchads@gmail.com?subject=CFO%20Financial%20Audit%20-%20Omkar%20Dutta",
     },
   },
 ];
@@ -237,22 +240,22 @@ export default function AboutPage() {
             >
               <div>
                 {/* Avatar with obsidian glass bezel */}
-                <div className="relative w-full h-64 sm:h-72 rounded-xl overflow-hidden mb-5 border border-white/15 bg-black">
+                <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden mb-5 border border-white/15 bg-gradient-to-b from-[#1c1c24] to-[#0d0d12]">
                   <img
                     src={member.avatar}
                     alt={`${member.name} Profile`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none" />
 
                   {/* Badge */}
-                  <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold text-white uppercase">
+                  <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold text-white uppercase shadow-md">
                     {member.badge}
                   </span>
 
                   {/* Name overlay on bottom */}
-                  <div className="absolute bottom-2.5 inset-x-3 text-left">
+                  <div className="absolute bottom-3 inset-x-3 text-left">
                     <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight">
                       {member.name}
                     </h3>
@@ -289,6 +292,18 @@ export default function AboutPage() {
               <div className="pt-3 border-t border-white/10 flex items-center justify-between text-zinc-400 text-xs font-mono">
                 <span className="text-[10px] uppercase text-zinc-500">Verified Member</span>
                 <div className="flex items-center gap-2">
+                  {member.socials.portfolio && (
+                    <a
+                      href={member.socials.portfolio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-mono flex items-center gap-1.5 transition-colors font-bold"
+                      title="View Engineer Portfolio"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>Portfolio ↗</span>
+                    </a>
+                  )}
                   {member.socials.linkedin && (
                     <a
                       href={member.socials.linkedin}
@@ -306,7 +321,7 @@ export default function AboutPage() {
                     <a
                       href={member.socials.email}
                       className="p-1.5 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
-                      title="Direct Email"
+                      title={`Direct Email: ${member.socials.email.replace("mailto:", "").split("?")[0]}`}
                     >
                       <Mail className="w-3.5 h-3.5" />
                     </a>
