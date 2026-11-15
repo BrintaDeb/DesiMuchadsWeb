@@ -25,6 +25,7 @@ import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
+import { RoasCalculator } from "@/components/calculator/RoasCalculator";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
 
@@ -51,6 +52,8 @@ export default function ServicesPage() {
         return <Code2 className={iconStyle} />;
       case "Package":
         return <Package className={iconStyle} />;
+      case "TrendingUp":
+        return <TrendingUp className={iconStyle} />;
       default:
         return <Sparkles className={iconStyle} />;
     }
@@ -61,14 +64,14 @@ export default function ServicesPage() {
       ? AGENCY_SERVICES
       : activeTab === "performance"
       ? AGENCY_SERVICES.filter((s) =>
-          ["seo-sem", "meta-ads", "google-ads", "cro-funnels"].includes(s.id)
+          ["seo-sem", "performance-marketing", "lead-generation", "unit-economics"].includes(s.id)
         )
       : activeTab === "creative"
       ? AGENCY_SERVICES.filter((s) =>
-          ["smm-content", "packaging-branding"].includes(s.id)
+          ["social-media", "packaging-label"].includes(s.id)
         )
       : AGENCY_SERVICES.filter((s) =>
-          ["d2c-ecom", "web-engineering"].includes(s.id)
+          ["e-commerce", "quick-commerce", "web-development"].includes(s.id)
         );
 
   return (
@@ -202,7 +205,7 @@ export default function ServicesPage() {
 
         <SectionDivider />
 
-        {/* 3. Comprehensive Breakdown of All 8 Services */}
+        {/* 3. Comprehensive Breakdown of All 9 Services */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
@@ -210,7 +213,7 @@ export default function ServicesPage() {
                 Detailed Capabilities
               </span>
               <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
-                Our 8 Core Revenue Disciplines
+                Our 9 Core Revenue Disciplines
               </h2>
             </div>
 
@@ -429,6 +432,13 @@ export default function ServicesPage() {
               </tbody>
             </table>
           </div>
+        </section>
+
+        <SectionDivider />
+
+        {/* 4. Interactive ROAS & Margin Simulator */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
+          <RoasCalculator onOpenKundli={() => setIsKundliOpen(true)} />
         </section>
 
         <SectionDivider />

@@ -136,6 +136,14 @@ html {
   overscroll-behavior-y: none;
 }
 
+/* Din (Palace Ivory) Theme */
+html.theme-din,
+html[data-theme="din"] {
+  background-color: #f7f6f0 !important;
+  color: #121215 !important;
+  color-scheme: light;
+}
+
 body {
   background-color: #09090b;
   color: #ffffff;
@@ -144,6 +152,17 @@ body {
   overflow-wrap: anywhere;
   -webkit-tap-highlight-color: transparent;
   touch-action: pan-y;
+}
+
+html.theme-din body,
+html[data-theme="din"] body {
+  background-color: #f7f6f0 !important;
+  color: #121215 !important;
+}
+
+html.theme-din ::selection {
+  background-color: #121215;
+  color: #ffffff;
 }
 
 /* Fluid responsive typography balance */

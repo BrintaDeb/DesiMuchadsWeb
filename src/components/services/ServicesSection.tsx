@@ -11,6 +11,7 @@ import {
   Zap,
   Code2,
   Package,
+  TrendingUp,
   ArrowRight,
   Sparkles,
   CheckCircle2,
@@ -94,6 +95,8 @@ export function ServicesSection({ onOpenKundli }: ServicesSectionProps) {
         return <Code2 className={iconClass} />;
       case "Package":
         return <Package className={iconClass} />;
+      case "TrendingUp":
+        return <TrendingUp className={iconClass} />;
       default:
         return <Sparkles className={iconClass} />;
     }

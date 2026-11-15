@@ -22,6 +22,7 @@ import {
   PhoneCall,
   Users,
   Award,
+  TrendingUp,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { AGENCY_SERVICES } from "@/data/servicesData";
@@ -171,6 +172,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         return <Code2 className={iconStyle} />;
       case "Package":
         return <Package className={iconStyle} />;
+      case "TrendingUp":
+        return <TrendingUp className={iconStyle} />;
       default:
         return <Sparkles className={iconStyle} />;
     }

@@ -22,6 +22,7 @@ import {
   Zap,
   Code2,
   Package,
+  TrendingUp,
 } from "lucide-react";
 import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
@@ -202,6 +203,8 @@ async function ServiceDetailContent({ params }: PageProps) {
         return <Code2 className={iconClass} />;
       case "Package":
         return <Package className={iconClass} />;
+      case "TrendingUp":
+        return <TrendingUp className={iconClass} />;
       default:
         return <Sparkles className={iconClass} />;
     }

@@ -15,7 +15,7 @@ import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { PricingSection } from "@/components/pricing/PricingSection";
-import { RoiCalculator } from "@/components/calculator/RoiCalculator";
+import { RoasCalculator } from "@/components/calculator/RoasCalculator";
 import { sound } from "@/lib/sound";
 
 export default function PricingPage() {
@@ -87,21 +87,9 @@ export default function PricingPage() {
 
         <SectionDivider />
 
-        {/* 3. The Live Hisab-Kitab ROI Simulator */}
+        {/* 3. The Live Hisab-Kitab ROAS & Margin Simulator */}
         <section id="simulator" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
-          <div className="mb-12">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-zinc-400 block mb-2">
-              Interactive Mathematics
-            </span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight mb-3">
-              The Real-Time Hisab-Kitab Simulator
-            </h2>
-            <p className="text-sm font-sans text-zinc-300 max-w-2xl">
-              Model your prospective monthly ad spend, estimated conversion lift, and projected contribution margin before making a commitment.
-            </p>
-          </div>
-
-          <RoiCalculator />
+          <RoasCalculator onOpenKundli={() => setIsKundliOpen(true)} />
         </section>
 
         <SectionDivider />

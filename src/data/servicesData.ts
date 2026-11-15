@@ -27,7 +27,7 @@ export interface ServiceItem {
   fullDesc: string;
   metric: string;
   anchor: string;
-  iconName: "Search" | "Rocket" | "Magnet" | "Share2" | "ShoppingBag" | "Zap" | "Code2" | "Package";
+  iconName: "Search" | "Rocket" | "Magnet" | "Share2" | "ShoppingBag" | "Zap" | "Code2" | "Package" | "TrendingUp";
   gradient: string;
   philosophy: string;
   framework: {
@@ -777,5 +777,101 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
     ],
     projectSlugs: ["royal-rajwada-spices", "kamakesh-hair-elixir"],
+  },
+  {
+    id: "unit-economics",
+    slug: "unit-economics",
+    title: "Unit Economics & Margin Auditing",
+    shortDesc: "Eliminate Ad Spend Bleed. Maximize CM3 Contribution & Cash Flow.",
+    fullDesc:
+      "Directly led by CFO Omkar Dutta. We conduct microscopic post-mortems on your blended CAC, COD return-to-origin (RTO) leakages, payment gateway fees, and unit economics to ensure every marketing rupee turns into compounding net profit.",
+    metric: "Zero Cash Bleed & 35%+ Contribution Margins",
+    anchor: "#service-unit-economics",
+    iconName: "TrendingUp",
+    gradient: "from-emerald-500/20 to-white/[0.03]",
+    philosophy:
+      "Too many modern D2C founders celebrate vanity top-line GMV while silently bleeding cash on return-to-origin (RTO), platform commissions, logistics overheads, and bloated ad accounts. At Desi Muchads, our CFO-led Unit Economics practice treats every rupee as working capital. We audit your true Contribution Margin 3 (CM3), insulate COD orders with predictive verification, and model sustainable scaling thresholds so you grow profitably without external burn.",
+    framework: [
+      {
+        step: "01",
+        title: "Microscopic P&L & Ad Spend Post-Mortem",
+        desc: "Forensic audit of your past 90 days of marketing spend, payment gateway take-rates, shipping charges, and returns to uncover exact profit leakages.",
+      },
+      {
+        step: "02",
+        title: "True Blended CAC & CM3 Financial Modeling",
+        desc: "Constructing custom financial models separating first-order CAC from blended ROAS, accounting for COGS, NDR (non-delivery reports), and return logistics.",
+      },
+      {
+        step: "03",
+        title: "COD Verification & RTO Risk Shield",
+        desc: "Implementing automated OTP verification, high-risk pincode blacklists, and WhatsApp address re-confirmation to drop RTO rates below 12%.",
+      },
+      {
+        step: "04",
+        title: "Working Capital & Ad Budget Allocation Pacing",
+        desc: "Dynamic media pacing curves synced with inventory turnover cycles and supplier payment terms to prevent cash crunches during peak festive scale.",
+      },
+      {
+        step: "05",
+        title: "Bi-Weekly Executive CFO Baithak",
+        desc: "Direct strategic consultations with CFO Omkar Dutta reviewing contribution margin reports, unit economics trends, and acquisition thresholds.",
+      },
+    ],
+    specs: {
+      deliverables: [
+        "Forensic Contribution Margin 3 (CM3) financial model",
+        "RTO reduction framework & automated COD verification protocols",
+        "Payment gateway & 3PL logistics contract rate negotiation audit",
+        "Bi-weekly executive financial review with CFO Omkar Dutta",
+      ],
+      tools: ["TallyPrime", "Zoho Books", "RazorpayX", "Shiprocket", "BigQuery", "Meta CAPI"],
+      turnaround: "72h Full Financial Diagnostic · Continuous Bi-Weekly Audits",
+      targetKpi: "+18% Net Margin Expansion · RTO Dropped Below 12%",
+      bestFor: "D2C brands spending ₹2L+/month in ad media or struggling with COD returns",
+    },
+    packages: [
+      {
+        name: "Unit Economics Diagnostic Audit",
+        price: "₹45,000",
+        period: "one-time sprint",
+        desc: "A complete 10-day forensic audit of your brand's unit economics, P&L leakages, and CAC/LTV health.",
+        highlights: [
+          "Complete 90-day ad spend and logistics post-mortem",
+          "Contribution Margin (CM3) breakdown across all SKUs",
+          "RTO leakage map and COD verification gameplan",
+          "Comprehensive 25-page CFO Executive Diagnostic Dossier",
+          "60-minute 1-on-1 Strategy Baithak with CFO Omkar Dutta",
+        ],
+      },
+      {
+        name: "Continuous Financial Governance & Margin Shield",
+        price: "₹95,000",
+        period: "per month",
+        desc: "Ongoing CFO-level financial stewardship for scaling brands spending ₹5L to ₹30L monthly.",
+        highlights: [
+          "Real-time daily ad spend vs. net margin pacing dashboard",
+          "Automated WhatsApp COD address & intent confirmation system",
+          "Bi-weekly executive CFO strategy war-rooms",
+          "3PL shipping and payment gateway rate audits",
+          "Quarterly tax, GST hisab, and working capital cash flow planning",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Why do we need a CFO audit if our agency reports a 4.5x ROAS?",
+        a: "Because platform ROAS reported by Meta and Google ignores return-to-origin (RTO) rates (which often hit 25–40% on COD in India), gateway fees, packaging, and shipping overhead. A 4.5x platform ROAS can often mean negative net profit. We audit the true cash that stays in your bank account.",
+      },
+      {
+        q: "Who conducts this service at Desi Muchads?",
+        a: "This service is directly architected and overseen by our Chief Financial Officer, Omkar Dutta. No junior analysts or third-party agencies are involved.",
+      },
+      {
+        q: "Can this help reduce our high COD return rates?",
+        a: "Yes. Our clients typically see COD RTO drop by 30% to 50% within 3 weeks through our proprietary verification triggers, predictive high-risk pincode filters, and automated WhatsApp address validation.",
+      },
+    ],
+    projectSlugs: ["royal-rajwada-spices", "darbar-fine-watches"],
   },
 ];
