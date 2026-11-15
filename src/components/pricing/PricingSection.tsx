@@ -53,6 +53,23 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
 
   const retainers = [
     {
+      id: "aarambh",
+      name: "SEED LAUNCH STACK",
+      hindi: "AARAMBH",
+      badge: "KICKSTART",
+      price: Math.round(35000 * discountMultiplier),
+      desc: "Essential growth launchpad for early-stage brands, boutique studios & local founders getting started.",
+      features: [
+        "Basic Meta (FB & IG) Ad Setup & Targeting",
+        "Basic Brand Identity Kit (Logo Polish & Palette)",
+        "4 High-Impact Static / Carousel Creatives / mo",
+        "Essential Campaign Budget & ROAS Monitoring",
+        "Bi-Weekly Performance Progress Snapshot",
+        "Standard Email & WhatsApp Support",
+      ],
+      isPopular: false,
+    },
+    {
       id: "shuruwat",
       name: "FOUNDATION STACK",
       hindi: "SHURUWAT",
@@ -61,7 +78,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
       desc: "For challenger brands seeking disciplined, profitable scaling from ₹3L–₹15L/mo ad spend.",
       features: [
         "Meta & Google Ads Engine Setup",
-        "Weekly 4 High-Hook Creative Refresh",
+        "Weekly 4 High-Hook Creative Refresh (8/mo)",
         "Weekly ROAS & Contribution Margin Audit",
         "Dedicated Growth Strategist via Slack",
         "Creative Angle & Offer Testing Framework",
@@ -207,7 +224,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
         `✦ Estimated ROAS Multiplier: ${thaliStats.roas}x\n\n` +
         `Let's schedule a Baithak to lock in this custom stack! 〰️`
     );
-    window.open(`https://wa.me/919999999999?text=${text}`, "_blank");
+    window.open(`https://wa.me/919180252831?text=${text}`, "_blank");
   };
 
   return (
@@ -225,7 +242,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
             Transparent Retainers.<br />Custom Marketing Thali.
           </h2>
           <p className="mt-4 text-zinc-400 text-sm sm:text-base font-sans">
-            Choose our battle-tested all-in-one growth retainers, or build your own custom marketing platter tailored to your exact balance of firepower.
+            Choose our battle-tested all-in-one growth retainers starting from ₹35,000/mo, or build your own custom marketing platter tailored to your exact balance of firepower.
           </p>
 
           {/* Mode Switcher: Retainers vs Build-A-Thali */}
@@ -242,7 +259,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                   : "text-zinc-400 hover:text-white"
               }`}
             >
-              Ready-Made Retainers (3 Tiers)
+              Ready-Made Retainers (4 Tiers • Starting Rates)
             </button>
             <button
               type="button"
@@ -324,8 +341,8 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
               </div>
             </div>
 
-            {/* 3 Pricing Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-2">
+            {/* 4 Pricing Cards (Starting From Baseline Retainers) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-7 items-stretch pt-2">
               {retainers.map((tier) => {
                 return (
                   <div key={tier.id} className="relative flex flex-col h-full group">
@@ -334,7 +351,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                       borderColor={tier.isPopular ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.35)"}
                       maxTilt={3}
                       onMouseEnter={() => sound.playPluck(110)}
-                      className={`rounded-3xl p-6 sm:p-8 flex-1 flex flex-col justify-between transition-all duration-300 ${
+                      className={`rounded-3xl p-5 sm:p-6 lg:p-7 flex-1 flex flex-col justify-between transition-all duration-300 ${
                         tier.isPopular
                           ? "ios-glass-panel border-2 border-white shadow-[0_0_45px_rgba(255,255,255,0.18)]"
                           : "ios-glass-card hover:border-white/35"
@@ -367,32 +384,39 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                         </div>
 
                         {/* Tier Name */}
-                        <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight mb-4">
+                        <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight mb-4">
                           {tier.name}
                         </h3>
 
-                        {/* Pricing */}
+                        {/* Pricing with Clear Starting From Note */}
                         <div className="mb-6 pb-6 border-b border-white/10">
+                          <div className="flex items-center gap-1.5 text-zinc-400 font-mono text-[10px] uppercase tracking-wider font-bold mb-1">
+                            <span>Starting From</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          </div>
                           <div className="flex items-baseline gap-1.5">
-                            <span className="text-3xl sm:text-4xl font-metric font-black text-white tracking-tight">
+                            <span className="text-2xl sm:text-3xl xl:text-4xl font-metric font-black text-white tracking-tight">
                               {formatPrice(tier.price)}
                             </span>
-                            <span className="text-xs font-mono text-zinc-400">/ month</span>
+                            <span className="text-xs font-mono text-zinc-400">/ mo*</span>
                           </div>
-                          <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans min-h-[48px] flex items-center">
+                          <span className="text-[10px] font-mono text-zinc-400 italic block mt-1.5 leading-tight">
+                            *Base starting quote. Flexes up or down based on your brand needs.
+                          </span>
+                          <p className="text-xs text-zinc-300 mt-3 leading-relaxed font-sans min-h-[44px] flex items-center">
                             {tier.desc}
                           </p>
                         </div>
 
                         {/* Features List */}
-                        <div className="space-y-3 mb-8">
-                          <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase block font-bold">
+                        <div className="space-y-2.5 mb-8">
+                          <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block font-bold">
                             WHAT&apos;S INCLUDED:
                           </span>
                           {tier.features.map((feat, i) => (
-                            <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200 font-mono min-h-[22px]">
-                              <Check className="w-4 h-4 text-white/80 shrink-0 mt-0.5" />
-                              <span>{feat}</span>
+                            <div key={i} className="flex items-start gap-2 text-xs text-zinc-200 font-mono min-h-[20px]">
+                              <Check className="w-3.5 h-3.5 text-white/80 shrink-0 mt-0.5" />
+                              <span className="leading-snug">{feat}</span>
                             </div>
                           ))}
                         </div>
@@ -404,19 +428,41 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                           sound.playChime();
                           onOpenKundli();
                         }}
-                        className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 min-h-[44px] ${
+                        className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 min-h-[44px] ${
                           tier.isPopular
                             ? "bg-white hover:bg-zinc-200 text-black shadow-[0_0_25px_rgba(255,255,255,0.3)] font-black"
                             : "bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold"
                         }`}
                       >
-                        <span>DEPLOY {tier.name}</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <span>DEPLOY {tier.hindi}</span>
+                        <ArrowRight className="w-4 h-4 shrink-0" />
                       </button>
                     </SpotlightCard>
                   </div>
                 );
               })}
+            </div>
+
+            {/* Transparent Starting-From Flex Pricing Notice Banner */}
+            <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+              <div className="flex items-center gap-3 text-left">
+                <span className="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold text-[10px] uppercase tracking-wider shrink-0">
+                  Flexible Scope Policy
+                </span>
+                <span className="text-zinc-300 font-sans text-xs">
+                  All retainers above are <strong>Starting From</strong> baseline quotes. Monthly investments flex up or down depending on your catalog size, ad volume, and bespoke creative velocity.
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playChime();
+                  onOpenKundli();
+                }}
+                className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider shrink-0 transition-all shadow-md active:scale-95"
+              >
+                Discuss Custom Scope &gt;
+              </button>
             </div>
           </div>
         )}

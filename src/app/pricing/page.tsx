@@ -173,7 +173,7 @@ export default function PricingPage() {
               },
               {
                 q: "How many creative assets are delivered monthly?",
-                a: "Depending on your selected tier, you receive between 12 to 24 net-new bespoke creative assets every month (vernacular video hooks, UGC edits, motion graphics, and high-CTR static carousels).",
+                a: "Depending on your selected tier, you receive between 4 to 24 net-new bespoke creative assets every month (vernacular video hooks, UGC edits, motion graphics, and high-CTR static carousels).",
               },
               {
                 q: "Can we mix and match services in a custom retainer?",
