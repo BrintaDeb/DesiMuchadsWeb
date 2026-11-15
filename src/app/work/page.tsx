@@ -8,19 +8,19 @@ import {
   ArrowRight,
   ExternalLink,
   Eye,
-  TrendingUp,
   ChevronRight,
   Maximize2,
   ShieldCheck,
-  Palette,
-  Code2,
   Compass,
+  LayoutGrid,
+  ListFilter,
 } from "lucide-react";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
+import { WorkDesignTheorySection } from "@/components/casestudies/WorkDesignTheorySection";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { sound } from "@/lib/sound";
 
@@ -39,11 +39,56 @@ export default function WorkPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
+  const [activeModalTab, setActiveModalTab] = useState<"preview" | "theory">("preview");
+  const [viewMode, setViewMode] = useState<"grid" | "showcase">("grid");
 
   const isDemoProject = (p: ProjectItem) =>
     p.liveUrl.startsWith("/demos/") ||
     p.serviceId === "ecommerce-services" ||
     p.serviceId === "quick-commerce";
+
+  const getDesignTheoryBadge = (proj: ProjectItem) => {
+    if (proj.serviceId === "illustrations-art") {
+      return {
+        pill: "Sacred Cultural Semiotics",
+        color: "text-amber-400 bg-amber-400/10 border-amber-400/25",
+        axiom: "Hand-rendered Sumi-e & iconic cultural focal points commanding subconscious loyalty.",
+      };
+    }
+    if (proj.serviceId === "graphic-design" || proj.serviceId === "packaging-label") {
+      return {
+        pill: "φ Golden Ratio Symmetry",
+        color: "text-purple-400 bg-purple-400/10 border-purple-400/25",
+        axiom: "1:1.618 modular logarithmic scale, optical alignment & tactile luxury dielines.",
+      };
+    }
+    if (proj.serviceId === "web-development") {
+      return {
+        pill: "Sub-Second Next.js & 60FPS",
+        color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/25",
+        axiom: "Zero CLS, edge-rendered React Server Components & sub-400ms TTFB rendering.",
+      };
+    }
+    if (proj.serviceId === "social-media") {
+      return {
+        pill: "Vernacular Hinglish Hook",
+        color: "text-rose-400 bg-rose-400/10 border-rose-400/25",
+        axiom: "0–1.5s scroll-stop thumb arrest with street-smart cultural pride & urgency.",
+      };
+    }
+    if (proj.serviceId === "seo-sem" || proj.serviceId === "performance-marketing") {
+      return {
+        pill: "Algorithmic Search Intent",
+        color: "text-blue-400 bg-blue-400/10 border-blue-400/25",
+        axiom: "Topical entity clustering, Core Web Vitals speed & high-intent commercial capture.",
+      };
+    }
+    return {
+      pill: "Fitts's Law Thumb Ergonomics",
+      color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/25",
+      axiom: "Lower-third thumb sweep hit targets & 2-tap frictionless checkout velocity.",
+    };
+  };
 
   const filteredProjects = useMemo(() => {
     return AGENCY_PROJECTS.filter((proj) => {
@@ -73,6 +118,7 @@ export default function WorkPage() {
   const handleOpenPreview = (proj: ProjectItem) => {
     sound.playChime();
     setActiveProject(proj);
+    setActiveModalTab("preview");
   };
 
   return (
@@ -81,7 +127,7 @@ export default function WorkPage() {
 
       <main className="pt-24 sm:pt-28 md:pt-32 pb-24">
         {/* 1. Header Section */}
-        <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 overflow-hidden">
+        <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 overflow-hidden text-left">
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-white/[0.03] blur-[120px] rounded-full pointer-events-none" />
 
           {/* Breadcrumb */}
@@ -99,7 +145,7 @@ export default function WorkPage() {
               <span>50 Verified Production Architectures &amp; Master Artworks</span>
             </div>
 
-            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-[1.08] mb-6">
+            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.05] mb-6">
               Our Karname:{" "}
               <span className="text-zinc-400 underline decoration-white/20 underline-offset-8">
                 Work That Converts
@@ -136,9 +182,14 @@ export default function WorkPage() {
 
         <SectionDivider />
 
-        {/* 2. Filter & Instant Search Tool Bar */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-12">
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 p-4 rounded-2xl bg-[#121215] border border-white/10">
+        {/* 2. Enhanced UI Design Theory & Mathematical Foundations */}
+        <WorkDesignTheorySection />
+
+        <SectionDivider />
+
+        {/* 3. Filter, Instant Search & View Mode Switcher Toolbar */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-12 text-left">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 p-4 rounded-2xl bg-[#121215] border border-white/10 shadow-lg">
             {/* Filter Pills */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
               {FILTER_PILLS.map((pill) => (
@@ -148,7 +199,7 @@ export default function WorkPage() {
                     sound.playPluck(150);
                     setSelectedCategory(pill.id);
                   }}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap shrink-0 ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                     selectedCategory === pill.id
                       ? "bg-white text-black font-bold shadow-md"
                       : "text-zinc-400 hover:text-white bg-white/[0.02] border border-white/5 hover:border-white/15"
@@ -159,30 +210,69 @@ export default function WorkPage() {
               ))}
             </div>
 
-            {/* Instant Search Bar */}
-            <div className="relative shrink-0 w-full lg:w-72">
-              <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search works, brands, tags..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/40 transition-all font-mono"
-              />
-              {searchQuery && (
+            {/* Right Tools: View Mode Toggle & Instant Search */}
+            <div className="flex items-center gap-3 shrink-0">
+              {/* View Mode Toggle Switcher */}
+              <div className="flex items-center p-1 rounded-xl bg-black/60 border border-white/10 shrink-0">
                 <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-zinc-400 hover:text-white"
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    setViewMode("grid");
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                    viewMode === "grid"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                  title="Grid Bento View"
                 >
-                  Clear
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Grid</span>
                 </button>
-              )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(160);
+                    setViewMode("showcase");
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                    viewMode === "showcase"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                  title="Cinematic Showcase View"
+                >
+                  <ListFilter className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Showcase</span>
+                </button>
+              </div>
+
+              {/* Instant Search Bar */}
+              <div className="relative shrink-0 w-full sm:w-64">
+                <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search works, brands, tags..."
+                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/40 transition-all font-mono"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-zinc-400 hover:text-white"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 3. The Work Grid (50 Works) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
+        {/* 4. The Work Showcase (50 Works in Grid or Showcase View) */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-left">
           {filteredProjects.length === 0 ? (
             <div className="py-24 text-center rounded-3xl bg-[#121215] border border-white/10 p-8 space-y-4">
               <Compass className="w-10 h-10 text-zinc-500 mx-auto" />
@@ -202,188 +292,290 @@ export default function WorkPage() {
                 Reset Filters
               </button>
             </div>
-          ) : (
+          ) : viewMode === "grid" ? (
+            /* Mode A: Grid Bento View */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((proj) => (
-                <div
-                  key={proj.id}
-                  className="group relative rounded-2xl bg-[#121215] border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl"
-                >
-                  {/* Project Media Thumbnail */}
+              {filteredProjects.map((proj) => {
+                const theory = getDesignTheoryBadge(proj);
+
+                return (
                   <div
-                    onClick={() => handleOpenPreview(proj)}
-                    className="relative aspect-[16/10] overflow-hidden bg-black/60 cursor-pointer"
+                    key={proj.id}
+                    className="group relative rounded-2xl bg-[#121215] border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl"
                   >
-                    <img
-                      src={proj.thumbnail}
-                      alt={proj.client}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    {/* Project Media Thumbnail */}
+                    <div
+                      onClick={() => handleOpenPreview(proj)}
+                      className="relative aspect-[16/10] overflow-hidden bg-black/60 cursor-pointer"
+                    >
+                      <img
+                        src={proj.thumbnail}
+                        alt={proj.client}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                    {/* Top Badges */}
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-                      <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-200">
-                        {proj.category}
-                      </span>
-                      {isDemoProject(proj) && (
-                        <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-[10px] font-mono font-bold text-emerald-300">
-                          LIVE DEMO
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Hover Preview Overlay */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleOpenPreview(proj);
-                        }}
-                        className="px-4 py-2 rounded-xl bg-white text-black text-xs font-bold font-display uppercase tracking-wider flex items-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>PREVIEW NOW</span>
-                      </button>
-
-                      {proj.liveUrl && (
-                        <a
-                          href={proj.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-xl bg-black/80 text-white border border-white/20 hover:border-white transition-all"
-                          title="Open Live Platform"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      )}
-                    </div>
-
-                    {/* Bottom Metric Strip on Image */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs">
-                      <span className="font-metric font-bold text-white bg-white/10 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/20">
-                        {proj.heroStat}
-                      </span>
-                      <span className="font-mono text-[10px] text-zinc-300">
-                        {proj.stats[0]?.val || proj.year}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Project Information */}
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[10px] font-mono text-zinc-500 uppercase">
+                      {/* Top Badges */}
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                        <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-200">
                           {proj.category}
                         </span>
-                        <span className="text-[10px] font-mono text-zinc-500">
-                          {proj.year}
-                        </span>
+                        {isDemoProject(proj) && (
+                          <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-[10px] font-mono font-bold text-emerald-300">
+                            LIVE DEMO
+                          </span>
+                        )}
                       </div>
 
-                      <h3
-                        onClick={() => handleOpenPreview(proj)}
-                        className="font-display font-black text-lg text-white uppercase tracking-tight group-hover:text-zinc-200 transition-colors cursor-pointer"
-                      >
-                        {proj.client}
-                      </h3>
-
-                      <p className="font-sans text-xs text-zinc-400 leading-snug mt-1.5 line-clamp-2">
-                        {proj.tagline}
-                      </p>
-                    </div>
-
-                    {/* Tag Pills */}
-                    <div className="pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
-                      {proj.techStack.slice(0, 3).map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-0.5 rounded-md bg-white/[0.04] text-zinc-400 font-mono text-[9.5px]"
+                      {/* Hover Preview Overlay */}
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenPreview(proj);
+                          }}
+                          className="px-4 py-2 rounded-xl bg-white text-black text-xs font-bold font-display uppercase tracking-wider flex items-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
                         >
-                          {tag}
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>PREVIEW NOW</span>
+                        </button>
+
+                        {proj.liveUrl && (
+                          <a
+                            href={proj.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="p-2 rounded-xl bg-black/80 text-white border border-white/20 hover:border-white transition-all"
+                            title="Open Live Platform"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+
+                      {/* Bottom Metric Strip on Image */}
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs">
+                        <span className="font-metric font-bold text-white bg-white/10 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/20">
+                          {proj.heroStat}
                         </span>
-                      ))}
+                        <span className="font-mono text-[10px] text-zinc-300">
+                          {proj.stats[0]?.val || proj.year}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Action Bar */}
-                    <div className="pt-2 flex items-center justify-between gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleOpenPreview(proj)}
-                        className="flex-1 py-2 px-3 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white text-[11px] font-mono uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
-                      >
-                        <Maximize2 className="w-3 h-3" />
-                        <span>Inspect Work</span>
-                      </button>
+                    {/* Project Information & Design Theory Badge */}
+                    <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                      <div>
+                        {/* Design Theory Principle Badge */}
+                        <div className="mb-2">
+                          <span
+                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold border ${theory.color}`}
+                          >
+                            <span>THEORY: {theory.pill}</span>
+                          </span>
+                        </div>
 
-                      <Link
-                        href={`/work/${proj.slug}`}
-                        className="p-2 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-zinc-300 hover:text-white transition-all"
-                        title="View Full Case Study"
-                      >
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[10px] font-mono text-zinc-500 uppercase">
+                            {proj.category}
+                          </span>
+                          <span className="text-[10px] font-mono text-zinc-500">
+                            {proj.year}
+                          </span>
+                        </div>
+
+                        <h3
+                          onClick={() => handleOpenPreview(proj)}
+                          className="font-display font-black text-lg text-white uppercase tracking-tight group-hover:text-zinc-200 transition-colors cursor-pointer"
+                        >
+                          {proj.client}
+                        </h3>
+
+                        <p className="font-sans text-xs text-zinc-400 leading-snug mt-1.5 line-clamp-2">
+                          {proj.tagline}
+                        </p>
+                      </div>
+
+                      {/* Tag Pills */}
+                      <div className="pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
+                        {proj.techStack.slice(0, 3).map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 rounded-md bg-white/[0.04] text-zinc-400 font-mono text-[9.5px]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Bar */}
+                      <div className="pt-2 flex items-center justify-between gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenPreview(proj)}
+                          className="flex-1 py-2 px-3 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white text-[11px] font-mono uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        >
+                          <Maximize2 className="w-3 h-3" />
+                          <span>Inspect Work</span>
+                        </button>
+
+                        <Link
+                          href={`/work/${proj.slug}`}
+                          className="p-2 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-zinc-300 hover:text-white transition-all"
+                          title="View Full Case Study"
+                        >
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
+            </div>
+          ) : (
+            /* Mode B: Cinematic Showcase View (Panoramic Cards with Full Strategic Breakdown) */
+            <div className="space-y-8">
+              {filteredProjects.map((proj) => {
+                const theory = getDesignTheoryBadge(proj);
+
+                return (
+                  <div
+                    key={proj.id}
+                    className="p-6 sm:p-8 rounded-3xl bg-[#121215] border border-white/10 hover:border-white/25 transition-all shadow-xl"
+                  >
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                      {/* Left: Panoramic Media Preview (5 Cols) */}
+                      <div
+                        onClick={() => handleOpenPreview(proj)}
+                        className="lg:col-span-5 relative aspect-[16/10] rounded-2xl overflow-hidden bg-black/60 border border-white/10 cursor-pointer group"
+                      >
+                        <img
+                          src={proj.thumbnail}
+                          alt={proj.client}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+                        <div className="absolute top-3 left-3">
+                          <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold uppercase text-zinc-200">
+                            {proj.category}
+                          </span>
+                        </div>
+
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <button
+                            type="button"
+                            className="px-4 py-2 rounded-xl bg-white text-black font-display font-bold text-xs uppercase flex items-center gap-1.5 shadow-xl"
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>LAUNCH PREVIEW</span>
+                          </button>
+                        </div>
+
+                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs">
+                          <span className="font-metric font-bold text-white bg-white/10 backdrop-blur-md px-2.5 py-0.5 rounded border border-white/20">
+                            {proj.heroStat}
+                          </span>
+                          <span className="font-mono text-[10px] text-zinc-300">
+                            {proj.year}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Right: Detailed Strategic Blueprint (7 Cols) */}
+                      <div className="lg:col-span-7 space-y-4">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span
+                            className={`px-3 py-1 rounded-md text-[10px] font-mono font-bold border ${theory.color}`}
+                          >
+                            DESIGN THEORY: {theory.pill}
+                          </span>
+
+                          <div className="flex items-center gap-2">
+                            {proj.liveUrl && (
+                              <a
+                                href={proj.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white text-xs font-mono flex items-center gap-1"
+                              >
+                                <span>Live Site</span>
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3
+                            onClick={() => handleOpenPreview(proj)}
+                            className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight hover:text-zinc-200 cursor-pointer"
+                          >
+                            {proj.client}
+                          </h3>
+                          <p className="font-sans text-xs sm:text-sm text-zinc-300 mt-1 font-medium">
+                            {proj.tagline}
+                          </p>
+                        </div>
+
+                        {/* Design Theory Axiom in Practice */}
+                        <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/5 text-xs font-mono text-zinc-300">
+                          <span className="text-zinc-500 font-bold block mb-0.5">THEORY APPLIED:</span>
+                          {theory.axiom}
+                        </div>
+
+                        {/* Stats Row */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
+                          {proj.stats.slice(0, 3).map((st, sIdx) => (
+                            <div
+                              key={sIdx}
+                              className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
+                            >
+                              <span className="text-[10px] font-mono text-zinc-400 block truncate">
+                                {st.label}
+                              </span>
+                              <span className="font-metric font-black text-base text-white block mt-0.5">
+                                {st.val}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="pt-3 border-t border-white/10 flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => handleOpenPreview(proj)}
+                            className="px-5 py-2.5 rounded-xl bg-white text-black font-display font-black text-xs uppercase tracking-wider hover:bg-zinc-200 transition-all shadow cursor-pointer"
+                          >
+                            Inspect Live Platform
+                          </button>
+                          <Link
+                            href={`/work/${proj.slug}`}
+                            className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs uppercase transition-all flex items-center gap-1.5"
+                          >
+                            <span>Read Strategic Dossier</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </section>
 
         <SectionDivider />
 
-        {/* 4. Creative Engineering Philosophy */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
-          <div className="mb-12">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-zinc-400 block mb-2">
-              Portfolio Philosophy
-            </span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
-              Why We Showcase Live Architectures &amp; Fine Art
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-[#121215] border border-white/10 space-y-3">
-              <Palette className="w-8 h-8 text-white mb-2" />
-              <h3 className="font-display font-black text-lg text-white uppercase">
-                1. Human Soul In Every Brushstroke
-              </h3>
-              <p className="font-sans text-xs text-zinc-400 leading-relaxed">
-                We believe fine art, bespoke illustrations, and high-craft typography evoke trust that programmatic AI templates will never replicate. Every brand we touch receives hand-crafted visual gravitas.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-[#121215] border border-white/10 space-y-3">
-              <Code2 className="w-8 h-8 text-white mb-2" />
-              <h3 className="font-display font-black text-lg text-white uppercase">
-                2. Sub-Second Code Execution
-              </h3>
-              <p className="font-sans text-xs text-zinc-400 leading-relaxed">
-                Our web storefronts aren&apos;t bloated Shopify themes bogged down by 40 unoptimized apps. We build bespoke Next.js and Tailwind stores that hit 99 PageSpeed scores, slashing bounce rates by 68%.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-[#121215] border border-white/10 space-y-3">
-              <TrendingUp className="w-8 h-8 text-white mb-2" />
-              <h3 className="font-display font-black text-lg text-white uppercase">
-                3. High-Velocity Commercial Validation
-              </h3>
-              <p className="font-sans text-xs text-zinc-400 leading-relaxed">
-                Every demo storefront in this portfolio is a fully functional business prototype featuring realistic checkout flows, cart sliders, dark store ingestion, and calculated ROAS triggers.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* 5. Direct CTA */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-24">
-          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/20 text-center space-y-6 shadow-2xl relative overflow-hidden">
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-24 text-center">
+          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/20 space-y-6 shadow-2xl relative overflow-hidden">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-mono uppercase tracking-wider text-white">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>Commission A Production Architecture</span>
@@ -404,7 +596,7 @@ export default function WorkPage() {
                   setIsKundliOpen(true);
                 }}
                 type="button"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95 cursor-pointer"
               >
                 START A CONVERSATION &gt;
               </button>
@@ -420,31 +612,161 @@ export default function WorkPage() {
         </section>
       </main>
 
-      {/* Global Interactive Project Preview Modal Shell */}
+      {/* 6. Dual-Mode Lightbox Modal Shell (Preview vs Design Theory Dossier) */}
       {activeProject && (
         <div className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
           <div className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20">
-            <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between">
-              <div className="flex items-center gap-2">
+            {/* Modal Header Bar with Dual Tabs */}
+            <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-2.5 min-w-0">
                 <span
                   onClick={() => setActiveProject(null)}
-                  className="w-3 h-3 rounded-full bg-[#FF5F56] cursor-pointer"
+                  className="w-3 h-3 rounded-full bg-[#FF5F56] cursor-pointer shrink-0"
                   title="Close Preview"
                 />
-                <span className="font-display font-black text-xs uppercase tracking-wider text-white ml-2">
+                <span className="font-display font-black text-xs sm:text-sm uppercase tracking-wider text-white truncate">
                   {activeProject.client}
                 </span>
+                <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-mono text-zinc-400">
+                  {activeProject.category}
+                </span>
               </div>
-              <button
-                type="button"
-                onClick={() => setActiveProject(null)}
-                className="p-1.5 px-3 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-xs font-mono"
-              >
-                CLOSE ✕
-              </button>
+
+              {/* View Mode Switcher: Live View vs Design Theory Dossier */}
+              <div className="flex items-center gap-2">
+                <div className="flex items-center p-0.5 rounded-xl bg-black/60 border border-white/15">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playPluck(140);
+                      setActiveModalTab("preview");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                      activeModalTab === "preview"
+                        ? "bg-white text-black shadow"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>Live View</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playPluck(160);
+                      setActiveModalTab("theory");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                      activeModalTab === "theory"
+                        ? "bg-white text-black shadow"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    <Compass className="w-3.5 h-3.5" />
+                    <span>Design Theory</span>
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveProject(null)}
+                  className="p-1.5 px-3 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-xs font-mono cursor-pointer"
+                >
+                  CLOSE ✕
+                </button>
+              </div>
             </div>
+
+            {/* Modal Body */}
             <div className="flex-1 overflow-hidden">
-              <ProjectPreviewShowcase project={activeProject} />
+              {activeModalTab === "preview" ? (
+                <ProjectPreviewShowcase project={activeProject} />
+              ) : (
+                /* Design Theory & Strategic Dossier Tab */
+                <div className="h-full overflow-y-auto overscroll-contain p-6 sm:p-10 space-y-8 text-left bg-black/80 font-sans">
+                  {/* Top Header */}
+                  <div className="border-b border-white/10 pb-6 space-y-2">
+                    <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest font-bold">
+                      THE ARCHITECTURAL CASE STUDY &amp; THEORY DOSSIER
+                    </span>
+                    <h2 className="font-display font-black text-2xl sm:text-4xl uppercase text-white">
+                      {activeProject.client}
+                    </h2>
+                    <p className="text-sm text-zinc-300 font-sans max-w-3xl">
+                      {activeProject.desc}
+                    </p>
+                  </div>
+
+                  {/* 3 Classical Problem/Solution/Result Pillars */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-5 rounded-2xl bg-[#121215] border border-red-500/20 space-y-2">
+                      <span className="font-mono text-xs text-red-400 font-bold uppercase">
+                        01. THE BOTTLENECK (MUSHKIL)
+                      </span>
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
+                        {activeProject.mushkil}
+                      </p>
+                    </div>
+
+                    <div className="p-5 rounded-2xl bg-[#121215] border border-blue-500/20 space-y-2">
+                      <span className="font-mono text-xs text-blue-400 font-bold uppercase">
+                        02. THE DESIGN FIX (JUGAAD)
+                      </span>
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
+                        {activeProject.jugaad}
+                      </p>
+                    </div>
+
+                    <div className="p-5 rounded-2xl bg-[#121215] border border-emerald-500/20 space-y-2">
+                      <span className="font-mono text-xs text-emerald-400 font-bold uppercase">
+                        03. THE MEASURED LIFT (NATEEJA)
+                      </span>
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
+                        {activeProject.nateeja}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Design Theory Execution Specifics */}
+                  <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+                    <h3 className="font-display font-black text-lg text-white uppercase tracking-tight flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-white" />
+                      <span>Applied Design Theory Framework for {activeProject.client}</span>
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
+                      {getDesignTheoryBadge(activeProject).axiom}
+                    </p>
+
+                    <div className="pt-2 flex flex-wrap gap-2">
+                      {activeProject.techStack.map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Testimonial Quote */}
+                  {activeProject.testimonial && (
+                    <div className="p-6 rounded-2xl bg-white/[0.03] border-l-2 border-white pl-6 space-y-2">
+                      <p className="text-sm sm:text-base text-zinc-200 italic font-sans leading-relaxed">
+                        &ldquo;{activeProject.testimonial.quote}&rdquo;
+                      </p>
+                      <div>
+                        <span className="font-display font-bold text-xs text-white uppercase block">
+                          {activeProject.testimonial.author}
+                        </span>
+                        <span className="text-[11px] font-mono text-zinc-500 block">
+                          {activeProject.testimonial.role}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

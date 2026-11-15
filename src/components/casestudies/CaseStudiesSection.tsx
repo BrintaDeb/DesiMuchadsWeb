@@ -56,6 +56,15 @@ export function CaseStudiesSection() {
     ? filteredCases.findIndex((c) => c.id === currentCase.id)
     : -1;
 
+  const getDesignTheoryBadge = (serviceId: string) => {
+    if (serviceId === "illustrations-art") return "Sacred Cultural Semiotics";
+    if (serviceId === "graphic-design" || serviceId === "packaging-label") return "φ Golden Ratio Symmetry";
+    if (serviceId === "web-development") return "Sub-Second Next.js & 60FPS";
+    if (serviceId === "social-media") return "Vernacular Hinglish Hook";
+    if (serviceId === "seo-sem" || serviceId === "performance-marketing") return "Algorithmic Search Intent";
+    return "Fitts's Law Thumb Ergonomics";
+  };
+
   // Open Lightbox handler
   const openLightbox = (proj: typeof cases[0], tab: "preview" | "strategy" = "preview") => {
     sound.playChime();
@@ -237,6 +246,11 @@ export function CaseStudiesSection() {
 
                 {/* Title & Category Below Thumbnail */}
                 <div className="text-left mb-3">
+                  <div className="mb-1.5">
+                    <span className="px-2 py-0.5 rounded text-[9.5px] font-mono font-bold uppercase tracking-wider bg-white/5 border border-white/10 text-zinc-300">
+                      Theory: {getDesignTheoryBadge(cs.serviceId)}
+                    </span>
+                  </div>
                   <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1">
                     {cs.category}
                   </span>
@@ -585,6 +599,19 @@ export function CaseStudiesSection() {
                         {tech}
                       </span>
                     ))}
+                  </div>
+
+                  {/* Applied Design Theory Framework */}
+                  <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 space-y-2 text-left">
+                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                      APPLIED DESIGN THEORY ARCHITECTURE
+                    </div>
+                    <div className="text-sm font-display font-black text-white uppercase">
+                      {getDesignTheoryBadge(currentCase.serviceId)}
+                    </div>
+                    <p className="text-xs text-zinc-300 font-sans leading-relaxed">
+                      Engineered according to Desi Muchads Design Theory: balancing sacred Fibonacci geometry, sub-second Next.js edge performance, vernacular cultural hooks, and Fitts&apos;s Law thumb ergonomics for peak conversion velocity.
+                    </p>
                   </div>
                 </div>
               )}

@@ -179,11 +179,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   return (
     <header
       ref={dropdownRef}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#09090b]/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.85)] border-b border-white/10"
-          : "bg-[#09090b] border-b border-white/10"
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-[#09090b]/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.85)] border-b border-white/10"
+        : "bg-[#09090b] border-b border-white/10"
+        }`}
     >
       {/* 1. Top Regulatory & Trust Announcement Bar */}
       <div className="bg-[#050507] text-zinc-300 py-1.5 px-3 sm:px-6 text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase border-b border-white/10 flex items-center justify-between select-none whitespace-nowrap overflow-hidden">
@@ -263,18 +262,16 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           >
             <Link
               href="/services"
-              className={`whitespace-nowrap shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors ${
-                activeDropdown === "services"
-                  ? "text-white"
-                  : "text-zinc-300 hover:text-white"
-              }`}
+              className={`whitespace-nowrap shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors ${activeDropdown === "services"
+                ? "text-white"
+                : "text-zinc-300 hover:text-white"
+                }`}
               style={{ whiteSpace: "nowrap" }}
             >
               <span>Services</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${
-                  activeDropdown === "services" ? "rotate-180 text-white" : ""
-                }`}
+                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${activeDropdown === "services" ? "rotate-180 text-white" : ""
+                  }`}
               />
             </Link>
 
@@ -355,18 +352,16 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           >
             <Link
               href="/work"
-              className={`whitespace-nowrap shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors ${
-                activeDropdown === "work"
-                  ? "text-white"
-                  : "text-zinc-300 hover:text-white"
-              }`}
+              className={`whitespace-nowrap shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors ${activeDropdown === "work"
+                ? "text-white"
+                : "text-zinc-300 hover:text-white"
+                }`}
               style={{ whiteSpace: "nowrap" }}
             >
               <span>Work</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${
-                  activeDropdown === "work" ? "rotate-180 text-white" : ""
-                }`}
+                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${activeDropdown === "work" ? "rotate-180 text-white" : ""
+                  }`}
               />
             </Link>
 
@@ -636,9 +631,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                       className="p-1 text-zinc-400 hover:text-white"
                     >
                       <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          mobileAccordion === "services" ? "rotate-180 text-white" : ""
-                        }`}
+                        className={`w-4 h-4 transition-transform duration-200 ${mobileAccordion === "services" ? "rotate-180 text-white" : ""
+                          }`}
                       />
                     </button>
                   </div>
