@@ -135,7 +135,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
         a: "100%. We believe in total transparency. Your ad account, historical pixel data, and conversion assets are owned entirely by your company with zero lock-in.",
       },
     ],
-    projectSlugs: ["vedaroots-ayurveda", "urbandrift-ev"],
+    projectSlugs: ["vedaroots-ayurveda", "zenith-seo-growth", "urbandrift-ev"],
   },
   {
     id: "performance-marketing",
@@ -685,7 +685,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
         a: "Generic templates are packed with bloated CSS and slow plugins that degrade mobile PageSpeed. Next.js gives sub-second load times, resulting in 30% to 50% higher ad conversion rates.",
       },
     ],
-    projectSlugs: ["darbar-fine-watches", "kisaandirect-agri"],
+    projectSlugs: ["kartflow-headless", "darbar-fine-watches", "kisaandirect-agri"],
   },
   {
     id: "packaging-label",

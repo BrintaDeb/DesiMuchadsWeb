@@ -2272,4 +2272,87 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
+  // 47. Zenith RankMatrix Organic Growth Engine (SEO & SEM Flagship)
+  {
+    id: 47,
+    slug: "zenith-seo-growth",
+    client: "Zenith RankMatrix Growth Engine",
+    tagline: "Enterprise Organic Topical Authority & AI Search Optimization (GEO)",
+    category: "SEO & SEM Services",
+    serviceId: "seo-sem",
+    heroStat: "+580% ORGANIC INBOUND PIPELINE",
+    liveUrl: "/demos/zenith-seo-growth",
+    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    desc: "Zenith RankMatrix is an enterprise search intelligence engine engineered for B2B tech and high-growth SaaS brands seeking programmatic Google SERP dominance and Generative Engine Optimization.",
+    mushkil:
+      "Enterprise software buyers had stopped clicking traditional low-quality affiliate blogs, instead researching through conversational AI answer engines (Perplexity, ChatGPT, Google AI Overviews) and searching ultra-specific commercial queries. Zenith was burning ₹18L/mo on broad Google Ads while losing organic search share to competitors with zero topical authority.",
+    jugaad:
+      "Desi Muchads re-architected their entire digital footprint using Next.js 16 semantic rendering with full Schema.org Graph entity injection. We published 50 deeply clustered technical pillar dossiers and engineered a continuous AI citation grounding framework ensuring Perplexity and SearchGPT cite Zenith as the primary source. Concurrently, we deployed 24/7 automated negative keyword scripts across Google PMax and Exact Search campaigns.",
+    nateeja:
+      "Captured #1 positions across 480+ high-commercial search queries, generating 3.4M monthly impressions and driving a +580% increase in inbound qualified sales pipeline at an 8.4x blended search ROAS with zero budget leakage.",
+    stats: [
+      { label: "Organic Inbound Lift", val: "+580%" },
+      { label: "Blended Search ROAS", val: "8.4x" },
+      { label: "Rank #1 SERP Terms", val: "480+" },
+      { label: "AI GEO Citation Share", val: "94.2%" },
+    ],
+    deliverables: [
+      "Full Next.js 16 Semantic HTML & Schema.org Graph Architecture",
+      "50 High-Intent Topical Authority Pillar Dossiers",
+      "Generative Engine Optimization (GEO) AI Grounding Engine",
+      "Google Search & PMax Precision Bidding & Negative Shield",
+      "Real-Time Multi-Region SERP Telemetry Dashboard",
+    ],
+    testimonial: {
+      quote:
+        "Desi Muchads transformed search from a chaotic paid expense into an unstoppable enterprise equity flywheel. We now dominate Google Page 1 and AI answer engines across our most lucrative commercial keywords.",
+      author: "Devendra Singhania",
+      role: "Chief Commercial Officer, Zenith RankMatrix",
+    },
+    accentColor: "#06b6d4",
+    techStack: ["Next.js 16", "Schema.org Graph", "Perplexity GEO", "Google PMax", "Semantic Entity Modeling"],
+    year: "2024 - 2026",
+  },
+
+  // 48. KartFlow Headless Commerce OS (Product / Web Development Flagship)
+  {
+    id: 48,
+    slug: "kartflow-headless",
+    client: "KartFlow Headless Commerce OS",
+    tagline: "Edge-Rendered Sub-Millisecond Headless D2C Commerce Engine",
+    category: "Web Development",
+    serviceId: "web-development",
+    heroStat: "38MS GLOBAL EDGE TTFB · 100/100 CWV",
+    liveUrl: "/demos/kartflow-headless",
+    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    desc: "KartFlow is a Next.js 16 headless commerce operating system engineered for enterprise D2C retail brands demanding sub-50ms page speeds, instant cart mutations, and 50,000+ flash sale concurrency.",
+    mushkil:
+      "Fast-growing D2C lifestyle brand was losing over 42% of mobile shoppers due to bloated Shopify Liquid scripts, 4.2-second mobile load times, and frequent checkout gateway crashes during holiday drop sales.",
+    jugaad:
+      "Engineered an edge-native composable headless storefront on Next.js 16 and Cloudflare Workers Edge CDN while retaining their existing Shopify product catalog backend. Implemented optimistic in-memory cart mutations (<2ms), distributed Redis inventory locking for flash sale drops, and a streamlined 1-click UPI & Card checkout.",
+    nateeja:
+      "Reduced global TTFB to 38ms with a perfect 100/100 Google Lighthouse Core Web Vitals score. Mobile checkout conversion surged by +380%, and the system smoothly handled a 42,000-user concurrent Diwali drop with zero dropped carts.",
+    stats: [
+      { label: "Global Edge TTFB", val: "38ms" },
+      { label: "Mobile Lighthouse", val: "100 / 100" },
+      { label: "Conversion Uplift", val: "+380%" },
+      { label: "Flash Concurrency", val: "50,000+" },
+    ],
+    deliverables: [
+      "Next.js 16 Composable Headless Storefront",
+      "Sub-Millisecond Optimistic Cart Mutation State Engine",
+      "Distributed Redis Flash Sale Inventory Locker",
+      "Single-Step 1-Click UPI & Card Checkout Module",
+      "Omnichannel ERP / WMS Event Webhook Fabric",
+    ],
+    testimonial: {
+      quote:
+        "Switching to KartFlow's headless architecture felt like upgrading from a bullock cart to a supersonic jet. Our mobile shoppers experience instant navigation, and our flash drops execute without a hitch.",
+      author: "Kunal Mehra",
+      role: "VP of Engineering & E-Commerce, KartFlow OS",
+    },
+    accentColor: "#8b5cf6",
+    techStack: ["Next.js 16", "Cloudflare Workers", "Redis Distributed Cache", "Turbopack", "Shopify Storefront API"],
+    year: "2024 - 2026",
+  },
 ];

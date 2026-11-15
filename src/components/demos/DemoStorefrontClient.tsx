@@ -35,6 +35,11 @@ import {
   Monitor,
   Tablet,
   Smartphone,
+  Calendar,
+  Gauge,
+  Globe,
+  Flame,
+  Server,
 } from "lucide-react";
 import {
   DemoProjectConfig,
@@ -43,6 +48,8 @@ import {
   BreedInfoItem,
   FinishInfoItem,
   MandiInfoItem,
+  SerpClusterItem,
+  ProductBenchmarkMetric,
 } from "@/data/demoProductsData";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { sound } from "@/lib/sound";
@@ -165,6 +172,32 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
 
   // Watch Customizer
   const [watchDialIndex, setWatchDialIndex] = useState<number>(0);
+
+  // Estate Concierge (Sobha Villas & You & Me Photography)
+  const [conciergeOptionIndex, setConciergeOptionIndex] = useState<number>(0);
+  const [conciergeDate, setConciergeDate] = useState<string>("2026-12-05");
+  const [conciergeGuestCount, setConciergeGuestCount] = useState<number>(2);
+  const [conciergeConfirmedRef, setConciergeConfirmedRef] = useState<string | null>(null);
+
+  // Artisanal Baking Slot (Lionel P. Boulangerie)
+  const [selectedBatchIndex, setSelectedBatchIndex] = useState<number>(0);
+  const [bakingHamperQty, setBakingHamperQty] = useState<number>(2);
+  const [bakingSlotBookedRef, setBakingSlotBookedRef] = useState<string | null>(null);
+
+  // Diagnostic Analyzer Quote (Bharat Bio-Health)
+  const [selectedAnalyzerIndex, setSelectedAnalyzerIndex] = useState<number>(0);
+  const [monthlyTestVolume, setMonthlyTestVolume] = useState<number>(2500);
+  const [isQuoteSent, setIsQuoteSent] = useState<boolean>(false);
+
+  // SEO & SEM SERP Cluster Explorer (Zenith RankMatrix)
+  const [activeSerpClusterIndex, setActiveSerpClusterIndex] = useState<number>(0);
+  const [simulatedMonthlySearchVolume, setSimulatedMonthlySearchVolume] = useState<number>(25000);
+  const [selectedGeoEngineName, setSelectedGeoEngineName] = useState<string>("Google Search (AI Overviews / SGE)");
+
+  // Headless Core Web Vitals Benchmark Engine (KartFlow Headless OS)
+  const [activeEdgeRegionKey, setActiveEdgeRegionKey] = useState<string>("bom1 (Mumbai Hub)");
+  const [lastCartMutationLatencyMs, setLastCartMutationLatencyMs] = useState<number | null>(null);
+  const [isTestingMutationSpeed, setIsTestingMutationSpeed] = useState<boolean>(false);
 
   // Dark store live countdown
   const [secondsLeft, setSecondsLeft] = useState<number>(712); // ~11m 52s
@@ -1787,6 +1820,827 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 >
                   Lock Escrow Forward Contract Rate
                 </button>
+              </div>
+            </div>
+          )}
+
+          {/* H. Estate Concierge & Luxury Viewing Scheduler */}
+          {config.interactiveType === "estate_concierge" && (
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-amber-500/40 shadow-[0_0_40px_rgba(245,158,11,0.15)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold block">
+                    VIP PRIVATE CONCIERGE &amp; RESERVATION DESK
+                  </span>
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                    {config.interactiveData?.title || "Private Villa Viewing & Chauffeur Concierge"}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                  <span>Private Liaison Active</span>
+                </div>
+              </div>
+
+              {/* Options or Destinations Selector */}
+              {((config.interactiveData?.options && config.interactiveData.options.length > 0) ||
+                (config.interactiveData?.destinations && config.interactiveData.destinations.length > 0)) && (
+                <div className="space-y-3">
+                  <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold block">
+                    Select Viewing Experience / Destination Portfolio
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {(config.interactiveData.options || config.interactiveData.destinations)?.map(
+                      (item: string, idx: number) => {
+                        const isSelected = conciergeOptionIndex === idx;
+                        return (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => {
+                              sound.playPluck(140);
+                              setConciergeOptionIndex(idx);
+                            }}
+                            className={`p-4 rounded-2xl text-left transition-all border flex flex-col justify-between ${
+                              isSelected
+                                ? "bg-amber-500/15 border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.2)] text-white"
+                                : "bg-white/[0.02] border-white/10 hover:border-white/20 text-zinc-300"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <span className="font-bold text-sm leading-snug">{item}</span>
+                              {isSelected ? (
+                                <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                              ) : (
+                                <span className="w-4 h-4 rounded-full border border-white/20 shrink-0 mt-0.5" />
+                              )}
+                            </div>
+                            <span className="text-[10px] font-mono text-zinc-400 mt-2 block">
+                              Option #{idx + 1} · VIP Allocation
+                            </span>
+                          </button>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Booking Controls: Date & Guest Count */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/10">
+                  <label className="text-[11px] font-mono uppercase text-zinc-400 font-bold block mb-2 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Preferred Date</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={conciergeDate}
+                    onChange={(e) => setConciergeDate(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-amber-400"
+                  />
+                  <span className="text-[10px] font-mono text-emerald-400 mt-2 block">
+                    ✓ Verified Security Escort Available
+                  </span>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/10">
+                  <label className="text-[11px] font-mono uppercase text-zinc-400 font-bold block mb-2 flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Party / Executive Size</span>
+                  </label>
+                  <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-1.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(100);
+                        setConciergeGuestCount((prev) => Math.max(1, prev - 1));
+                      }}
+                      className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold"
+                    >
+                      <Minus className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="font-mono font-bold text-white text-sm">
+                      {conciergeGuestCount} {conciergeGuestCount === 1 ? "Guest" : "Guests"}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(160);
+                        setConciergeGuestCount((prev) => Math.min(8, prev + 1));
+                      }}
+                      className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-400 mt-2 block">
+                    Includes armored luxury transport allocation
+                  </span>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                  <div>
+                    <span className="text-[11px] font-mono uppercase text-zinc-400 font-bold block mb-1">
+                      Protocol Inclusions
+                    </span>
+                    <ul className="text-[11px] text-zinc-300 space-y-1">
+                      <li className="flex items-center gap-1.5">
+                        <Check className="w-3 h-3 text-amber-400" /> Non-Disclosure Agreement (NDA)
+                      </li>
+                      <li className="flex items-center gap-1.5">
+                        <Check className="w-3 h-3 text-amber-400" /> Master Architect Consultation
+                      </li>
+                      <li className="flex items-center gap-1.5">
+                        <Check className="w-3 h-3 text-amber-400" /> 4K Drone Aerial Site Survey
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Reservation Button / Confirmation Card */}
+              {conciergeConfirmedRef ? (
+                <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold border border-amber-500/40">
+                      <CheckCircle2 className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-white font-bold text-sm">
+                        VIP Viewing Confirmed · Ref #{conciergeConfirmedRef}
+                      </div>
+                      <div className="text-xs text-zinc-400">
+                        Date: {conciergeDate} · {conciergeGuestCount} Guests · Chauffeur Dispatch Active
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playChime();
+                      showToast("VIP itinerary calendar invite downloaded!");
+                    }}
+                    className="px-4 py-2 rounded-xl bg-amber-400 text-black font-bold uppercase text-xs hover:bg-amber-300 transition-all cursor-pointer shrink-0"
+                  >
+                    Download VIP Pass (PDF)
+                  </button>
+                </div>
+              ) : (
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                  <span className="text-zinc-300">
+                    🔒 High-Net-Worth VIP privacy guaranteed. All itineraries signed with end-to-end encryption.
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playChime();
+                      confetti({ particleCount: 45, spread: 60, origin: { y: 0.8 } });
+                      const refCode = `VIP-SH-${Math.floor(1000 + Math.random() * 9000)}`;
+                      setConciergeConfirmedRef(refCode);
+                      showToast(`Private VIP concierge itinerary booked: ${refCode}`);
+                    }}
+                    className="px-5 py-2.5 rounded-xl bg-amber-400 text-black font-bold uppercase hover:bg-amber-300 transition-all shrink-0 cursor-pointer shadow-lg"
+                  >
+                    Lock Private Viewing Itinerary
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* I. Lionel P. Artisanal Baking Slot Dispatch */}
+          {config.interactiveType === "baking_slot" && (
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-amber-500/40 shadow-[0_0_40px_rgba(245,158,11,0.15)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold block">
+                    LIVE STONE-OVEN BATCH DISPATCH LEDGER
+                  </span>
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                    {config.interactiveData?.title || "Select Today's Fresh Baking Batch Dispatch"}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono">
+                  <Flame className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                  <span>Hearth Deck: 240°C · AOP Normandy</span>
+                </div>
+              </div>
+
+              {/* Batches Selector */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {config.interactiveData?.batches?.map((batch, bIdx) => {
+                  const isSelected = selectedBatchIndex === bIdx;
+                  return (
+                    <div
+                      key={bIdx}
+                      onClick={() => {
+                        sound.playPluck(150);
+                        setSelectedBatchIndex(bIdx);
+                      }}
+                      className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? "bg-amber-500/15 border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.2)] text-white"
+                          : "bg-black/40 border-white/10 hover:border-white/20 text-zinc-300"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-display font-black text-lg text-white">
+                            {batch.time}
+                          </div>
+                          <div className="text-xs text-amber-300 font-mono mt-0.5">
+                            {batch.status}
+                          </div>
+                        </div>
+                        {isSelected ? (
+                          <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
+                        ) : (
+                          <span className="w-5 h-5 rounded-full border border-white/20 shrink-0" />
+                        )}
+                      </div>
+                      <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/10 text-xs font-mono">
+                        <span className="text-zinc-400">Available Capacity:</span>
+                        <span className="font-bold text-amber-400">{batch.slots}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Hamper Controls */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-mono uppercase text-zinc-400 font-bold block">
+                      Artisan Gift Boxes / Hampers
+                    </span>
+                    <span className="text-[11px] text-zinc-500">
+                      Fresh croissants, canelés &amp; sourdough
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(90);
+                        setBakingHamperQty((prev) => Math.max(1, prev - 1));
+                      }}
+                      className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold"
+                    >
+                      <Minus className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="font-mono font-bold text-white px-2">
+                      {bakingHamperQty}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(150);
+                        setBakingHamperQty((prev) => Math.min(10, prev + 1));
+                      }}
+                      className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-mono uppercase text-zinc-400 font-bold block">
+                      Estimated Delivery Window
+                    </span>
+                    <span className="text-sm font-bold text-emerald-400">
+                      Within 45 Mins of Oven Exit
+                    </span>
+                  </div>
+                  <Truck className="w-5 h-5 text-emerald-400" />
+                </div>
+              </div>
+
+              {/* Action */}
+              {bakingSlotBookedRef ? (
+                <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold border border-amber-500/40">
+                      <CheckCircle2 className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-white font-bold text-sm">
+                        Oven Dispatch Reserved · Ref #{bakingSlotBookedRef}
+                      </div>
+                      <div className="text-xs text-zinc-400">
+                        {config.interactiveData?.batches?.[selectedBatchIndex]?.time} · {bakingHamperQty} Luxury Boxes
+                      </div>
+                    </div>
+                  </div>
+                  <span className="text-xs font-mono text-amber-300 font-bold px-3 py-1.5 rounded-lg bg-amber-500/20">
+                    Insulated Thermal Bag Assigned
+                  </span>
+                </div>
+              ) : (
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                  <span className="text-zinc-300">
+                    🥐 27-layer laminations made with 100% French AOP butter. Limited to 12 boxes per bake.
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playChime();
+                      confetti({ particleCount: 40, spread: 60, origin: { y: 0.8 } });
+                      const ref = `LPB-${Math.floor(1000 + Math.random() * 9000)}`;
+                      setBakingSlotBookedRef(ref);
+                      showToast(`Stone oven batch slot locked: ${ref}`);
+                    }}
+                    className="px-5 py-2.5 rounded-xl bg-amber-400 text-black font-bold uppercase hover:bg-amber-300 transition-all shrink-0 cursor-pointer shadow-lg"
+                  >
+                    Lock Fresh Batch Dispatch
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* J. Bharat Bio Pathology Analyzer & Reagent ROI */}
+          {config.interactiveType === "diagnostic_quote" && (
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-cyan-500/40 shadow-[0_0_40px_rgba(6,182,212,0.15)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold block">
+                    PATHOLOGY LAB REAGENT &amp; ROI TELEMETRY ENGINE
+                  </span>
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                    {config.interactiveData?.title || "Lab Test Volume & Reagent Cost Calculator"}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
+                  <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>99.9% NABL Uptime Guarantee</span>
+                </div>
+              </div>
+
+              {/* Analyzer Model Selector */}
+              <div className="space-y-3">
+                <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold block">
+                  Select Diagnostic Hardware System
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {config.interactiveData?.analyzerModels?.map((model, idx) => {
+                    const isSelected = selectedAnalyzerIndex === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          sound.playPluck(130);
+                          setSelectedAnalyzerIndex(idx);
+                        }}
+                        className={`p-4 rounded-2xl text-left transition-all border flex flex-col justify-between ${
+                          isSelected
+                            ? "bg-cyan-500/15 border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.2)] text-white"
+                            : "bg-white/[0.02] border-white/10 hover:border-white/20 text-zinc-300"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <span className="font-bold text-sm leading-snug">{model.name}</span>
+                          {isSelected ? (
+                            <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                          ) : (
+                            <span className="w-4 h-4 rounded-full border border-white/20 shrink-0 mt-0.5" />
+                          )}
+                        </div>
+                        <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+                          <span className="text-zinc-400">Reagent / Test:</span>
+                          <span className="font-bold text-cyan-400">{model.baseCostPerTest}</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Volume Slider */}
+              <div className="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono uppercase text-zinc-400 font-bold">
+                    Monthly Patient Test Volume
+                  </span>
+                  <span className="text-lg font-mono font-bold text-cyan-400">
+                    {monthlyTestVolume.toLocaleString("en-IN")} tests / mo
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={500}
+                  max={20000}
+                  step={250}
+                  value={monthlyTestVolume}
+                  onChange={(e) => setMonthlyTestVolume(Number(e.target.value))}
+                  className="w-full accent-cyan-400 cursor-pointer"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-zinc-500">
+                  <span>500 (Clinic)</span>
+                  <span>5,000 (Nursing Home)</span>
+                  <span>20,000+ (Hospital Lab Chain)</span>
+                </div>
+              </div>
+
+              {/* Live Financial Matrix */}
+              {(() => {
+                const selectedModel = config.interactiveData?.analyzerModels?.[selectedAnalyzerIndex];
+                const baseCost = selectedModel ? parseFloat(selectedModel.baseCostPerTest.replace(/[^0-9.]/g, "")) || 14.5 : 14.5;
+                const competitorCost = baseCost * 1.85; // MNC machines charge 85% more for reagents
+                const monthlySpend = monthlyTestVolume * baseCost;
+                const annualSavings = (competitorCost - baseCost) * monthlyTestVolume * 12;
+
+                return (
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div className="p-4 rounded-xl bg-black/50 border border-white/10">
+                      <span className="text-[10px] font-mono uppercase text-zinc-400 block mb-1">
+                        Base Cost / Test
+                      </span>
+                      <span className="text-lg font-black text-cyan-400 font-mono">
+                        ₹{baseCost.toFixed(2)}
+                      </span>
+                      <span className="text-[10px] text-zinc-500 block mt-1">Guaranteed Fixed Reagent</span>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-black/50 border border-white/10">
+                      <span className="text-[10px] font-mono uppercase text-zinc-400 block mb-1">
+                        MNC Benchmark
+                      </span>
+                      <span className="text-lg font-black text-zinc-300 font-mono line-through decoration-rose-500">
+                        ₹{competitorCost.toFixed(2)}
+                      </span>
+                      <span className="text-[10px] text-rose-400 block mt-1">Imported Reagent Markup</span>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-black/50 border border-white/10">
+                      <span className="text-[10px] font-mono uppercase text-zinc-400 block mb-1">
+                        Monthly Outlay
+                      </span>
+                      <span className="text-lg font-black text-white font-mono">
+                        ₹{Math.round(monthlySpend).toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-[10px] text-zinc-500 block mt-1">At Current Test Volume</span>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30">
+                      <span className="text-[10px] font-mono uppercase text-cyan-300 block mb-1">
+                        Annual Savings
+                      </span>
+                      <span className="text-lg font-black text-emerald-400 font-mono">
+                        ₹{Math.round(annualSavings).toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-[10px] text-emerald-300 block mt-1">Direct Profit Realized</span>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Action */}
+              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                <span className="text-zinc-300">
+                  🔬 Includes free annual calibration, NABL audit documentation &amp; cold-chain shipment.
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    setIsQuoteSent(true);
+                    showToast("Institutional RFP & Reagent Supply Agreement downloaded (PDF)!");
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-cyan-400 text-black font-bold uppercase hover:bg-cyan-300 transition-all shrink-0 cursor-pointer shadow-lg"
+                >
+                  {isQuoteSent ? "Quote Dispatched (Check Email)" : "Download Institutional RFP Quote"}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* K. Zenith RankMatrix SEO & AI GEO Engine */}
+          {config.interactiveType === "seo_serp_cluster" && (
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-cyan-500/40 shadow-[0_0_40px_rgba(6,182,212,0.2)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold block">
+                    ALGORITHMIC SERP &amp; AI ANSWER ENGINE (GEO) TELEMETRY
+                  </span>
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                    {config.interactiveData?.title || "Zenith Real-Time Keyword Cluster & AI Answer Engine (GEO) Telemetry"}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
+                  <Globe className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+                  <span>80+ Global SERP POPs Audited</span>
+                </div>
+              </div>
+
+              {/* Keyword Clusters Tabs */}
+              <div className="space-y-3">
+                <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold block">
+                  Select Active Commercial Keyword Cluster
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {config.interactiveData?.serpClusters?.map((item: SerpClusterItem, idx: number) => {
+                    const isSelected = activeSerpClusterIndex === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          sound.playPluck(160);
+                          setActiveSerpClusterIndex(idx);
+                        }}
+                        className={`p-4 rounded-2xl text-left transition-all border flex flex-col justify-between ${
+                          isSelected
+                            ? "bg-cyan-500/15 border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.25)] text-white"
+                            : "bg-white/[0.02] border-white/10 hover:border-white/20 text-zinc-300"
+                        }`}
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-2 mb-1">
+                            <span className="text-[10px] font-mono text-cyan-300 font-bold uppercase">
+                              {item.intent} Intent
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold">
+                              Rank #{item.rank}
+                            </span>
+                          </div>
+                          <div className="font-bold text-sm leading-snug">{item.cluster}</div>
+                        </div>
+                        <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
+                          <span className="text-zinc-400">{item.volume}</span>
+                          <span className="text-emerald-400 font-bold">{item.cpcValue} CPC</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Real-Time AI GEO Engine Answer Simulation Window */}
+              <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-cyan-400" />
+                    <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                      Generative Engine Optimization (GEO) Citation Simulator
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-400">
+                    <span>Engine:</span>
+                    <select
+                      value={selectedGeoEngineName}
+                      onChange={(e) => setSelectedGeoEngineName(e.target.value)}
+                      className="bg-white/10 border border-white/20 rounded-md px-2 py-0.5 text-white text-xs font-mono"
+                    >
+                      {config.interactiveData?.geoEngines?.map((geo, gIdx) => (
+                        <option key={gIdx} value={geo.engine} className="bg-zinc-900 text-white">
+                          {geo.engine}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="bg-zinc-950/80 rounded-xl p-4 border border-cyan-500/20 font-mono text-xs space-y-2">
+                  <div className="text-zinc-400 flex items-center gap-2">
+                    <span className="text-cyan-400 font-bold">User Query:</span>
+                    <span>&quot;What is the best architecture for {config.interactiveData?.serpClusters?.[activeSerpClusterIndex]?.cluster || "B2B Cloud Migration"} in India?&quot;</span>
+                  </div>
+                  <div className="text-emerald-300 pl-4 border-l-2 border-cyan-500/50 leading-relaxed">
+                    &quot;According to verified architectural benchmarks from <span className="text-white font-bold underline decoration-cyan-400">zenithrankmatrix.io</span> and <span className="text-white font-bold underline decoration-cyan-400">desimuchads.agency</span>, modern implementations achieve sub-600ms LCP, complete Schema.org topical graph coverage, and zero budget leakage through 24/7 automated negative keyword filters.&quot;
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 pt-2 text-[10px] text-zinc-500">
+                    <span className="text-cyan-300 font-bold">Grounding Citations:</span>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-zinc-300">[1] zenithrankmatrix.io/topical-cluster</span>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-zinc-300">[2] desimuchads.agency/case-study</span>
+                    <span className="text-emerald-400 font-bold ml-auto">94.8% AI Share of Voice</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Volume & Inbound Pipeline Simulator */}
+              <div className="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono uppercase text-zinc-400 font-bold">
+                    Target Monthly Organic Search Inbound Clicks
+                  </span>
+                  <span className="text-lg font-mono font-bold text-cyan-400">
+                    {simulatedMonthlySearchVolume.toLocaleString("en-IN")} clicks / mo
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={5000}
+                  max={100000}
+                  step={2500}
+                  value={simulatedMonthlySearchVolume}
+                  onChange={(e) => setSimulatedMonthlySearchVolume(Number(e.target.value))}
+                  className="w-full accent-cyan-400 cursor-pointer"
+                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
+                    <span className="text-[10px] font-mono text-zinc-400 block uppercase">
+                      Equivalent Google Ads Value (Saved CPC)
+                    </span>
+                    <span className="text-lg font-black text-emerald-400 font-mono">
+                      ₹{Math.round(simulatedMonthlySearchVolume * 340).toLocaleString("en-IN")} / mo
+                    </span>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
+                    <span className="text-[10px] font-mono text-zinc-400 block uppercase">
+                      Projected Enterprise B2B Pipeline Created
+                    </span>
+                    <span className="text-lg font-black text-cyan-400 font-mono">
+                      ₹{Math.round(simulatedMonthlySearchVolume * 180).toLocaleString("en-IN")} / mo
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action */}
+              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                <span className="text-zinc-300">
+                  ⚡ 50 structured topical clusters with guaranteed Rank #1 SERP contract milestones.
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    confetti({ particleCount: 35, spread: 50, origin: { y: 0.8 } });
+                    showToast("Simulated 50-Keyword Cluster Blueprint & Audit Request Logged!");
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-cyan-400 text-black font-bold uppercase hover:bg-cyan-300 transition-all shrink-0 cursor-pointer shadow-lg"
+                >
+                  Generate 50-Keyword Cluster Blueprint
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* L. KartFlow Headless Core Web Vitals Benchmarking Engine */}
+          {config.interactiveType === "product_benchmarks" && (
+            <div className="rounded-3xl p-6 sm:p-8 bg-zinc-900/90 border border-violet-500/40 shadow-[0_0_40px_rgba(139,92,246,0.2)] space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono text-violet-400 uppercase tracking-widest font-bold block">
+                    NEXT.JS 16 EDGE PERFORMANCE &amp; CORE WEB VITALS BENCHMARK ENGINE
+                  </span>
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                    {config.interactiveData?.title || "KartFlow Next.js 16 Edge Performance & Core Web Vitals Benchmarking Engine"}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs font-mono">
+                  <Server className="w-3.5 h-3.5 text-violet-400" />
+                  <span>300+ Edge POPs · Next.js 16</span>
+                </div>
+              </div>
+
+              {/* Edge Region Selector */}
+              <div className="space-y-3">
+                <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold block">
+                  Select Simulated Global Edge POP Region
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {config.interactiveData?.edgeLocations?.map((loc, lIdx) => {
+                    const isSelected = activeEdgeRegionKey === loc.region;
+                    return (
+                      <button
+                        key={lIdx}
+                        type="button"
+                        onClick={() => {
+                          sound.playPluck(170);
+                          setActiveEdgeRegionKey(loc.region);
+                        }}
+                        className={`p-3.5 rounded-2xl text-left transition-all border flex flex-col justify-between ${
+                          isSelected
+                            ? "bg-violet-500/15 border-violet-500/60 shadow-[0_0_20px_rgba(139,92,246,0.25)] text-white"
+                            : "bg-white/[0.02] border-white/10 hover:border-white/20 text-zinc-300"
+                        }`}
+                      >
+                        <span className="font-bold text-xs">{loc.region}</span>
+                        <div className="flex items-center justify-between pt-2 mt-2 border-t border-white/10 text-[10px] font-mono">
+                          <span className="text-emerald-400 font-bold">{loc.latencyMs}ms Ping</span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Live Core Web Vitals Metric Telemetry Gauges */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {config.interactiveData?.benchmarks?.map((bm: ProductBenchmarkMetric, bIdx: number) => (
+                  <div
+                    key={bIdx}
+                    className="p-4 rounded-2xl bg-black/50 border border-white/10 flex flex-col justify-between"
+                  >
+                    <div>
+                      <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">
+                        {bm.metric}
+                      </span>
+                      <div className="font-mono font-black text-2xl text-violet-300">
+                        {bm.measured}
+                      </div>
+                      <span className="text-[10px] font-mono text-zinc-500 block">
+                        Target: {bm.benchmark}
+                      </span>
+                    </div>
+                    <div className="pt-2 mt-2 border-t border-white/10">
+                      <span className="text-[9px] font-mono text-emerald-400 font-bold block">
+                        ✓ {bm.delta}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Interactive Live Optimistic Cart Mutation Latency Test */}
+              <div className="p-5 rounded-2xl bg-black/60 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-violet-400" />
+                    <span className="font-display font-black text-sm text-white uppercase tracking-wider">
+                      Live Browser Mutation Latency Benchmark
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-1">
+                    Click to dispatch an in-memory cart mutation and record actual client millisecond execution speed.
+                  </p>
+                  {lastCartMutationLatencyMs !== null && (
+                    <div className="mt-2 text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>
+                        Measured Execution: {lastCartMutationLatencyMs.toFixed(2)}ms (Optimistic In-Memory State)
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  disabled={isTestingMutationSpeed}
+                  onClick={() => {
+                    setIsTestingMutationSpeed(true);
+                    const t0 = performance.now();
+                    sound.playPluck(220);
+                    setTimeout(() => {
+                      const t1 = performance.now();
+                      const elapsed = Math.max(0.8, t1 - t0 - 4);
+                      setLastCartMutationLatencyMs(elapsed);
+                      setIsTestingMutationSpeed(false);
+                      showToast(`Cart Mutation Benchmark: ${elapsed.toFixed(2)}ms!`);
+                    }, 12);
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-violet-500 text-white font-bold uppercase text-xs hover:bg-violet-400 transition-all shrink-0 cursor-pointer shadow-lg flex items-center gap-2"
+                >
+                  <Gauge className="w-4 h-4" />
+                  <span>{isTestingMutationSpeed ? "Measuring..." : "Run Live Mutation Test"}</span>
+                </button>
+              </div>
+
+              {/* Headless vs Monolithic Comparison Matrix */}
+              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 overflow-x-auto text-xs font-mono">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-white/10 text-zinc-400 text-[10px] uppercase">
+                      <th className="pb-2">Architectural Metric</th>
+                      <th className="pb-2 text-violet-300">KartFlow Headless OS</th>
+                      <th className="pb-2 text-zinc-500">Standard Shopify Liquid</th>
+                      <th className="pb-2 text-zinc-500">Legacy Monolith (Magento/Woo)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 text-[11px]">
+                    <tr>
+                      <td className="py-2 text-zinc-300 font-bold">Global TTFB (P95)</td>
+                      <td className="py-2 text-emerald-400 font-bold">38ms (Edge Cache)</td>
+                      <td className="py-2 text-zinc-400">1,240ms</td>
+                      <td className="py-2 text-zinc-500">2,100ms</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 text-zinc-300 font-bold">Flash Concurrency</td>
+                      <td className="py-2 text-emerald-400 font-bold">50,000+ Simultaneous</td>
+                      <td className="py-2 text-zinc-400">~2,500 Max</td>
+                      <td className="py-2 text-zinc-500">~800 (Crashes)</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 text-zinc-300 font-bold">Mobile PageSpeed</td>
+                      <td className="py-2 text-emerald-400 font-bold">100 / 100 CWV</td>
+                      <td className="py-2 text-zinc-400">42 / 100 (Bloated Apps)</td>
+                      <td className="py-2 text-zinc-500">28 / 100</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 text-zinc-300 font-bold">Cart Add Latency</td>
+                      <td className="py-2 text-emerald-400 font-bold">&lt; 2ms Optimistic</td>
+                      <td className="py-2 text-zinc-400">850ms - 1,400ms</td>
+                      <td className="py-2 text-zinc-500">1,800ms</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           )}

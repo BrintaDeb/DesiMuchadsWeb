@@ -38,6 +38,23 @@ export interface MandiInfoItem {
   trend: string;
 }
 
+export interface SerpClusterItem {
+  cluster: string;
+  volume: string;
+  rank: number;
+  aiGeoShare: string;
+  cpcValue: string;
+  intent: "Commercial" | "Transactional" | "Informational";
+}
+
+export interface ProductBenchmarkMetric {
+  metric: string;
+  benchmark: string;
+  measured: string;
+  status: "Sub-Second" | "Optimal" | "Instant";
+  delta: string;
+}
+
 export interface InteractiveDataConfig {
   title?: string;
   herbs?: HerbInfoItem[];
@@ -50,15 +67,19 @@ export interface InteractiveDataConfig {
   destinations?: string[];
   flavours?: string[];
   bundleDiscount?: string;
-  analyzerModels?: { name: string; baseCostPerTest: string }[];
+  analyzerModels?: { name: string; baseCostPerTest: string; throughput?: string }[];
   options?: string[];
   breeds?: BreedInfoItem[];
-  batches?: { time: string; status: string; slots: string }[];
+  batches?: { time: string; status: string; slots: string; chefNote?: string }[];
   storeHub?: string;
   currentEtaMinutes?: number;
   currentEtaSeconds?: number;
   finishes?: FinishInfoItem[];
   mandis?: MandiInfoItem[];
+  serpClusters?: SerpClusterItem[];
+  geoEngines?: { engine: string; aiShare: string; citationsCount: number; status: string }[];
+  benchmarks?: ProductBenchmarkMetric[];
+  edgeLocations?: { region: string; latencyMs: number; status: string }[];
 }
 
 export interface DemoServiceCriteria {
@@ -102,7 +123,9 @@ export interface DemoProjectConfig {
     | "herb_explorer"
     | "mandi_rates"
     | "baking_slot"
-    | "diagnostic_quote";
+    | "diagnostic_quote"
+    | "seo_serp_cluster"
+    | "product_benchmarks";
   interactiveData: InteractiveDataConfig;
   products: DemoProductItem[];
   trustBadges: { title: string; desc: string }[];
@@ -1058,7 +1081,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     brandName: "Chai Chaska Co.",
     brandTagline: "High-Elevation Assam Royal CTC & Kadak Tapri Blends",
     serviceCriteria: {
-      "serviceId": "ecommerce",
+      "serviceId": "ecommerce-services",
       "serviceTitle": "E-Commerce Services",
       "primaryObjective": "Frictionless Direct D2C Storefront & High-AOV Subscription",
       "targetKpi": "5.2% Storefront Conversion Rate · ₹890 AOV (2.4x Industry Baseline)",
@@ -1212,7 +1235,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     brandName: "StreeThreads Varanasi",
     brandTagline: "Master Weaver Silk Mark Certified Handloom Sarees",
     serviceCriteria: {
-      "serviceId": "ecommerce",
+      "serviceId": "ecommerce-services",
       "serviceTitle": "E-Commerce & Packaging Design",
       "primaryObjective": "Preserving Indian Heritage Craft with Luxury D2C Architecture",
       "targetKpi": "4.4% Conversion Rate · ₹4,800 AOV on Pure Handloom Silk",
@@ -1389,6 +1412,25 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     slug: "lionelp-restaurant",
     brandName: "Lionel P. Boulangerie & Bistro",
     brandTagline: "Artisanal French Patisserie, Wild Sourdough & Gourmet Hampers",
+    serviceCriteria: {
+      "serviceId": "ecommerce-services",
+      "serviceTitle": "E-Commerce & Food-Tech Services",
+      "primaryObjective": "Automated Daily Oven Batch Inventory & Pre-order Delivery Slot Architecture",
+      "targetKpi": "98.4% Pre-order Sellout Rate · ₹1,850 Average Hamper Value",
+      "techArchitecture": [
+        "Real-time Batch Capacity Ledger",
+        "Cold-Chain Logistics Integration",
+        "Next.js 16 Static Regeneration",
+        "WhatsApp Live Dispatch Alerts"
+      ],
+      "deliverablesDeployed": [
+        "Artisanal Bakery E-Commerce Storefront",
+        "Morning/Evening Stone-Oven Slot Scheduler",
+        "Dynamic Luxury Gift Hamper Customizer",
+        "Corporate Pre-Order Invoicing Gateway"
+      ],
+      "verifiedImpact": "2,400+ Croissants Baked Daily · 99.1% On-Time Breakfast Delivery"
+    },
     categoryBadge: "Normandy Butter Viennoiserie · Baked Fresh at 5:00 AM",
     domainUrl: "lionelp-boulangerie.com",
     theme: {
@@ -2275,7 +2317,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     brandName: "Royal Rajwada Spices",
     brandTagline: "Single-Origin Heirloom Spices in Collectible Embossed Tin Architecture",
     serviceCriteria: {
-      "serviceId": "packaging-design",
+      "serviceId": "packaging-label",
       "serviceTitle": "Packaging & Label Designing Services",
       "primaryObjective": "Royal Octagonal UV-Proof Luxury Spice Tins & Export Identity",
       "targetKpi": "Zero Essential Terpene Evaporation · 3.8x Export Price Realization",
@@ -2449,7 +2491,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
     brandName: "Kamakesh Ayurvedic Scalp Oil",
     brandTagline: "21-Herb Classical Scalp Elixir in Pharmaceutical Amber Glass Architecture",
     serviceCriteria: {
-      "serviceId": "packaging-design",
+      "serviceId": "packaging-label",
       "serviceTitle": "Packaging Design & Performance Marketing",
       "primaryObjective": "72-Hour Kshirapak Botanical Formula & Luxury Glass Architecture",
       "targetKpi": "4.9x Meta Ad ROAS · 68% Telogen Hair Shedding Reduction",
@@ -2616,6 +2658,317 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       {
         q: "How often should I apply the scalp elixir?",
         a: "Apply 2 to 3 full droppers directly to scalp roots 3 nights per week. Massage gently for 5 minutes and leave overnight for maximum nourishment.",
+      },
+    ],
+  },
+
+  // 17. Zenith RankMatrix Organic Growth Engine (SEO & SEM Flagship)
+  "zenith-seo-growth": {
+    slug: "zenith-seo-growth",
+    brandName: "Zenith RankMatrix Growth Engine",
+    brandTagline: "Enterprise Organic Topical Authority & AI Search Optimization (GEO)",
+    serviceCriteria: {
+      serviceId: "seo-sem",
+      serviceTitle: "SEO & SEM Services",
+      primaryObjective: "Topical Cluster Architecture, AI Search Engine Optimization (GEO) & High-Intent Commercial Acquisition",
+      targetKpi: "Top 3 SERP for 480+ High-Commercial Queries · 8.4x Blended Search ROAS",
+      techArchitecture: [
+        "Next.js 16 Server Components & Structured Data",
+        "Deep Topical Authority Graph Modeling",
+        "Schema.org Rich Graph & Organization Engine",
+        "Real-Time AI GEO Search Citation Tracker",
+      ],
+      deliverablesDeployed: [
+        "Semantic Cluster Intelligence & 50 Pillar Dossiers",
+        "Programmatic Search Landing Page Architecture",
+        "Generative Engine Optimization (Perplexity/ChatGPT/Gemini)",
+        "Automated High-Intent Bidding & Search Negative Shields",
+      ],
+      verifiedImpact: "480+ #1 Positions · 3.4M Monthly Organic Impressions · ₹2.4Cr Pipeline Value",
+    },
+    categoryBadge: "Enterprise Organic Search Engine & AI Citation Architecture",
+    domainUrl: "zenithrankmatrix.io",
+    theme: {
+      primaryBg: "bg-[#090d16]",
+      accentColor: "text-cyan-400",
+      accentBorder: "border-cyan-500/30",
+      pillBg: "bg-cyan-500/10 text-cyan-300 border-cyan-500/20",
+      heroGlow: "from-cyan-900/30 via-blue-800/10 to-transparent",
+    },
+    hero: {
+      eyebrow: "ENTERPRISE SEARCH & AI ANSWER ENGINE OPTIMIZATION",
+      title: "Capture Customers at the Exact Nanosecond of Purchase Intent.",
+      subtitle:
+        "We replace vanity keywords with algorithmic topical dominance. High-intent commercial clusters, sub-second Core Web Vitals, and Generative Engine Optimization (GEO) that makes your brand the default cited source across Google, ChatGPT, and Perplexity.",
+      primaryCta: "Explore Keyword Cluster Matrix",
+      secondaryCta: "View Technical SEO Audit Specs",
+      stats: [
+        { label: "Top 3 SERP Ranks", val: "480+" },
+        { label: "Search Ad ROAS", val: "8.4x" },
+        { label: "AI GEO Citation Share", val: "94.2%" },
+        { label: "Monthly Organic Clicks", val: "680,000+" },
+      ],
+    },
+    interactiveType: "seo_serp_cluster",
+    interactiveData: {
+      title: "Zenith Real-Time Keyword Cluster & AI Answer Engine (GEO) Telemetry",
+      serpClusters: [
+        { cluster: "Enterprise B2B Cloud Migration", volume: "24,500/mo", rank: 1, aiGeoShare: "96.4%", cpcValue: "₹420", intent: "Commercial" },
+        { cluster: "SOC-2 Compliant FinTech Infrastructure", volume: "18,200/mo", rank: 2, aiGeoShare: "91.8%", cpcValue: "₹680", intent: "Commercial" },
+        { cluster: "Headless D2C Next.js Architecture", volume: "32,000/mo", rank: 1, aiGeoShare: "98.1%", cpcValue: "₹310", intent: "Transactional" },
+        { cluster: "High-Throughput Microservices Orchestration", volume: "14,800/mo", rank: 2, aiGeoShare: "89.5%", cpcValue: "₹540", intent: "Informational" },
+      ],
+      geoEngines: [
+        { engine: "Google Search (AI Overviews / SGE)", aiShare: "94.8%", citationsCount: 1420, status: "Primary Cited Source" },
+        { engine: "Perplexity AI Pro", aiShare: "97.2%", citationsCount: 980, status: "Dominant Source Citation" },
+        { engine: "OpenAI SearchGPT", aiShare: "92.5%", citationsCount: 750, status: "Top 3 Grounding Result" },
+        { engine: "Google Gemini 2.5 Live", aiShare: "95.1%", citationsCount: 1120, status: "Synthesized Expert Answer" },
+      ],
+    },
+    products: [
+      {
+        id: "zenith-01",
+        name: "Enterprise Core Web Vitals & Crawl Budget Sprint",
+        category: "Technical Architecture",
+        price: 85000,
+        badge: "72-Hour Rapid Deployment",
+        rating: 5.0,
+        reviewCount: 42,
+        description:
+          "Exhaustive algorithmic audit and remediation: Sub-600ms LCP compression, Schema.org Organization Graph, edge cache invalidation, and crawl budget defragmentation.",
+        specs: ["Sub-600ms LCP Guarantee", "Complete Schema.org Graph", "Zero Indexing Bottlenecks", "C-Suite Impact Dashboard"],
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: "zenith-02",
+        name: "Topical Authority Cluster Architecture & 50 Pillar Dossiers",
+        category: "Organic Authority",
+        price: 145000,
+        badge: "Topical Monopoly",
+        rating: 4.9,
+        reviewCount: 38,
+        description:
+          "50 deeply researched, mathematically clustered topical authority articles engineered to monopolize semantic entities and dominate high-intent commercial SERPs.",
+        specs: ["50 Clustered Authority Articles", "Entity Graph Modeling", "Internal PageRank Siloing", "Rank #1 SERP Guarantee"],
+        image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: "zenith-03",
+        name: "Generative Engine Optimization (GEO) & AI Knowledge Graph",
+        category: "AI Search Optimization",
+        price: 120000,
+        badge: "Future-Proof AI Search",
+        rating: 5.0,
+        reviewCount: 29,
+        description:
+          "Optimizes your brand corpus for OpenAI SearchGPT, Perplexity, and Google SGE citations. Structured knowledge injection ensuring AI models recommend you first.",
+        specs: ["Perplexity & ChatGPT Citation Graph", "AI Knowledge Injection", "Prompt Grounding Benchmarks", "Weekly AI Share-of-Voice"],
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: "zenith-04",
+        name: "High-Intent Google Performance Max & Exact Search Bidding Shield",
+        category: "Paid Acquisition (SEM)",
+        price: 95000,
+        badge: "Negative Waste Shield",
+        rating: 4.9,
+        reviewCount: 64,
+        description:
+          "Laser-targeted Google Search & PMax management with automated 24/7 negative query scraping, value-based bidding, and competitor query interception.",
+        specs: ["Automated Negative Scraping", "Value-Based Bidding Scripts", "Competitor Query Interception", "Target Search ROAS > 6.0x"],
+        image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80",
+      },
+    ],
+    trustBadges: [
+      { title: "Google Premier Partner Caliber", desc: "Enterprise account governance with direct algorithmic search modeling" },
+      { title: "Zero Black-Hat Retainers", desc: "100% white-hat topical authority graph engineering and whitepaper citations" },
+      { title: "Live Real-Time SERP Telemetry", desc: "Hourly keyword tracking and AI citation monitoring across 80+ geolocations" },
+      { title: "Target ROAS or Escrow Refund", desc: "Contractually committed to predefined organic traffic and search revenue targets" },
+    ],
+    customerReviews: [
+      {
+        author: "Devendra Singhania",
+        location: "Bengaluru, Karnataka",
+        rating: 5,
+        title: "Ranked #1 for our highest-converting commercial queries in 45 days",
+        comment:
+          "We were burning ₹14L a month on generic Google ads. Zenith reorganized our entire technical cluster architecture. Organic inbound demos jumped by 420% and our customer acquisition cost dropped by 62%.",
+        verified: true,
+      },
+      {
+        author: "Tanvi Mathur",
+        location: "Gurugram, Haryana",
+        rating: 5,
+        title: "Perplexity and ChatGPT now quote us as the primary authority",
+        comment:
+          "Their Generative Engine Optimization sprint put our whitepapers and case studies directly into Perplexity Pro and SearchGPT answer citations. The quality of enterprise inbound leads has been extraordinary.",
+        verified: true,
+      },
+    ],
+    faq: [
+      {
+        q: "What is Generative Engine Optimization (GEO) and why is it crucial now?",
+        a: "GEO is the technical process of structuring your content, brand citations, and entity graphs so that AI search engines (like Perplexity, SearchGPT, and Google SGE) retrieve and quote your brand as the canonical authority in conversational answers, capturing users who no longer click traditional blue links.",
+      },
+      {
+        q: "How does Zenith protect search ad spend from budget waste?",
+        a: "We deploy automated negative keyword bidding scripts running 24/7 that intercept and blacklist irrelevant search terms within minutes, ensuring 100% of your paid budget is allocated only to high-commercial purchase queries.",
+      },
+    ],
+  },
+
+  // 18. KartFlow Headless Commerce OS (Product / Web Development Flagship)
+  "kartflow-headless": {
+    slug: "kartflow-headless",
+    brandName: "KartFlow Headless Commerce OS",
+    brandTagline: "Edge-Rendered Sub-Millisecond Headless D2C Commerce Engine",
+    serviceCriteria: {
+      serviceId: "web-development",
+      serviceTitle: "Web Development & Product Engineering",
+      primaryObjective: "Sub-50ms Global Edge TTFB, Sub-Millisecond Cart Mutations & High-Concurrency Flash Sale Architecture",
+      targetKpi: "38ms P95 Server Response · 100/100 Mobile Lighthouse · 0.00% Cart Dropoff During Surges",
+      techArchitecture: [
+        "Next.js 16 Edge Runtime & Turbopack",
+        "Distributed Redis & Cloudflare Workers Edge Cache",
+        "Stripe + Razorpay Ultra-Fast One-Click Checkout",
+        "Sub-Millisecond Optimistic Cart Mutation Ledger",
+      ],
+      deliverablesDeployed: [
+        "Composable Next.js 16 Headless Storefront",
+        "Optimistic In-Memory Local Cart Engine",
+        "Distributed Inventory Locking API",
+        "Edge Micro-Frontends & Instant Predictive Search",
+      ],
+      verifiedImpact: "3.8x Mobile Conversion Uplift · 38ms Global TTFB · Zero Flash Dropoff",
+    },
+    categoryBadge: "Sub-50ms Global Edge TTFB · 100/100 Lighthouse Performance",
+    domainUrl: "kartflowos.dev",
+    theme: {
+      primaryBg: "bg-[#0b0c10]",
+      accentColor: "text-violet-400",
+      accentBorder: "border-violet-500/30",
+      pillBg: "bg-violet-500/10 text-violet-300 border-violet-500/20",
+      heroGlow: "from-violet-900/30 via-indigo-800/10 to-transparent",
+    },
+    hero: {
+      eyebrow: "HEADLESS COMMERCE ARCHITECTURE · EDGE NATIVE",
+      title: "Liquid Storefronts Are Dead. Welcome to Sub-Millisecond D2C.",
+      subtitle:
+        "Engineered for high-volume modern D2C brands that have outgrown monolithic Shopify Liquid themes. Sub-50ms edge rendering, instant optimistic cart mutations, and 100/100 Google Lighthouse Core Web Vitals.",
+      primaryCta: "Launch Edge Benchmark Engine",
+      secondaryCta: "Inspect Headless Architecture",
+      stats: [
+        { label: "Global Edge TTFB", val: "38ms" },
+        { label: "Mobile Lighthouse Score", val: "100 / 100" },
+        { label: "Concurrent Flash Users", val: "50,000+" },
+        { label: "Checkout Conversion", val: "+380%" },
+      ],
+    },
+    interactiveType: "product_benchmarks",
+    interactiveData: {
+      title: "KartFlow Next.js 16 Edge Performance & Core Web Vitals Benchmarking Engine",
+      benchmarks: [
+        { metric: "Time to First Byte (TTFB)", benchmark: "< 100ms", measured: "38ms", status: "Sub-Second", delta: "4.8x faster than Shopify Liquid" },
+        { metric: "First Contentful Paint (FCP)", benchmark: "< 1.2s", measured: "0.28s", status: "Instant", delta: "Zero render-blocking scripts" },
+        { metric: "Largest Contentful Paint (LCP)", benchmark: "< 2.0s", measured: "0.62s", status: "Optimal", delta: "Edge-cached AVIF/WebP assets" },
+        { metric: "Cumulative Layout Shift (CLS)", benchmark: "< 0.05", measured: "0.000", status: "Optimal", delta: "Zero dynamic layout jumping" },
+        { metric: "Interaction to Next Paint (INP)", benchmark: "< 150ms", measured: "24ms", status: "Instant", delta: "Optimistic client state dispatch" },
+      ],
+      edgeLocations: [
+        { region: "bom1 (Mumbai Hub)", latencyMs: 18, status: "Active Tier 1 POP" },
+        { region: "sin1 (Singapore Hub)", latencyMs: 32, status: "Active Tier 1 POP" },
+        { region: "fra1 (Frankfurt Hub)", latencyMs: 84, status: "Active Tier 1 POP" },
+        { region: "sfo1 (San Francisco Hub)", latencyMs: 110, status: "Active Tier 1 POP" },
+      ],
+    },
+    products: [
+      {
+        id: "kart-01",
+        name: "KartFlow Core: Headless D2C Edge Foundation",
+        category: "Core Architecture",
+        price: 180000,
+        badge: "Edge Production Standard",
+        rating: 5.0,
+        reviewCount: 34,
+        description:
+          "Next.js 16 composable frontend architecture integrated with your existing headless Shopify / BigCommerce backend. Sub-50ms TTFB across 300+ global edge POPs.",
+        specs: ["Next.js 16 Turbopack Architecture", "100/100 Core Web Vitals", "Multi-Currency Edge Localization", "Zero-Downtime Deployment"],
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: "kart-02",
+        name: "Sub-Second One-Click Checkout & Anti-Drop Engine",
+        category: "Checkout Engineering",
+        price: 95000,
+        badge: "Conversion Multiplier",
+        rating: 4.9,
+        reviewCount: 52,
+        description:
+          "Single-step headless checkout module with pre-authenticated UPI, Apple Pay, and OTP autofill. Completely bypasses slow redirect gateways.",
+        specs: ["Instant OTP Autofill", "1-Click UPI & Credit Card", "Zero-Redirect Flow", "+34% Mobile Checkout Conversion"],
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: "kart-03",
+        name: "High-Concurrency Flash Drop & Inventory Locker API",
+        category: "Distributed Infrastructure",
+        price: 140000,
+        badge: "Surge Protection",
+        rating: 5.0,
+        reviewCount: 27,
+        description:
+          "Distributed Redis-backed inventory locker designed to withstand 50,000+ simultaneous checkouts during sneaker, apparel, or holiday flash sales without overselling.",
+        specs: ["50,000+ Concurrent Requests", "Redis Distributed Locking", "Zero Overselling Guarantee", "Automated Queue Room"],
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: "kart-04",
+        name: "Omnichannel ERP / WMS Sync Connector & Webhook Fabric",
+        category: "Integrations & APIs",
+        price: 115000,
+        badge: "Enterprise Automation",
+        rating: 4.8,
+        reviewCount: 41,
+        description:
+          "Real-time event-driven webhook fabric that syncs stock, fulfillment status, and returns across SAP, Unicommerce, Increff, Shiprocket, and BlueDart in <200ms.",
+        specs: ["Sub-200ms Event Webhooks", "Native Unicommerce & Increff", "Automated Reverse Pickup Sync", "99.99% Guaranteed Delivery"],
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+      },
+    ],
+    trustBadges: [
+      { title: "100/100 Google Lighthouse Guaranteed", desc: "Contractually committed Core Web Vitals on mobile and desktop devices" },
+      { title: "Zero Re-Platforming Pain", desc: "Keep your existing Shopify or Custom catalog backend while elevating the frontend to Next.js 16" },
+      { title: "50,000+ Flash Concurrency Tested", desc: "Stress-tested with automated k6 load suites up to 50k simultaneous shoppers" },
+      { title: "24/7 Edge Telemetry & Sentry SRE", desc: "Enterprise observability with sub-second error alerts and synthetic uptime tests" },
+    ],
+    customerReviews: [
+      {
+        author: "Kunal Mehra",
+        location: "Mumbai, Maharashtra",
+        rating: 5,
+        title: "Mobile conversion rose from 1.6% to 4.2% within 14 days",
+        comment:
+          "Our Shopify store had a 3.8s mobile load time. Switching to KartFlow Headless dropped our TTFB to 34ms. Shoppers tap, items land instantly in cart, and checkout takes 8 seconds with 1-click UPI.",
+        verified: true,
+      },
+      {
+        author: "Shalini Poddar",
+        location: "Bengaluru, Karnataka",
+        rating: 5,
+        title: "Zero server crashes during our Diwali flash sale",
+        comment:
+          "We ran a 2-hour drop with 42,000 live visitors. Past years on standard Shopify liquid caused cart freezes and angry DMs. KartFlow didn't drop a single millisecond of performance.",
+        verified: true,
+      },
+    ],
+    faq: [
+      {
+        q: "Do I have to abandon my Shopify product catalog and backend?",
+        a: "Not at all. KartFlow connects directly to your existing Shopify backend via Storefront APIs, GraphQL, and Webhooks. Your warehouse, orders, and products remain in Shopify while your customers experience an edge-rendered Next.js 16 frontend.",
+      },
+      {
+        q: "How does the sub-millisecond optimistic cart mutation work?",
+        a: "Instead of waiting for a round-trip network request to confirm an item addition, KartFlow updates the UI and in-memory cart ledger instantly in <2ms while quietly synchronizing the cryptographic session payload with the edge cache in the background.",
       },
     ],
   },
