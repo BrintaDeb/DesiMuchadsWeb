@@ -213,8 +213,8 @@ export function Footer({ onOpenKundli }: FooterProps) {
               CONTACTS
             </h4>
             <div className="space-y-2 text-xs text-zinc-400 font-normal leading-relaxed font-sans">
-              <a href="mailto:buzz@desimuchads.agency" className="text-white font-mono hover:underline block font-semibold">
-                buzz@desimuchads.agency
+              <a href="mailto:thedesimuchads@gmail.com" className="text-white font-mono hover:underline block font-semibold">
+                thedesimuchads@gmail.com
               </a>
               <a href="tel:+919180252831" className="text-zinc-300 font-mono hover:text-white block font-medium">
                 +91 9180252831

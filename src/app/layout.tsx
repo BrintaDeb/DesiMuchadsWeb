@@ -177,7 +177,7 @@ export default function RootLayout({
     iso6523Code: "0199:07AAECD5582M1ZX",
     priceRange: "₹₹₹",
     telephone: "+91-9180252831",
-    email: "buzz@desimuchads.agency",
+    email: "thedesimuchads@gmail.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Connaught Place, Barakhamba Road",
