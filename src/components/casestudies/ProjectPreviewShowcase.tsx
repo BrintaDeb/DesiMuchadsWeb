@@ -257,6 +257,17 @@ export function ProjectPreviewShowcase({
 
               {/* Top Right Controls: Frame Reload & Status */}
               <div className="flex items-center gap-2 text-[11px]">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playChime()}
+                  className="px-2.5 py-1 rounded bg-white hover:bg-zinc-200 text-black font-bold text-[10px] uppercase flex items-center gap-1 transition-all shadow-sm cursor-pointer"
+                  title="Open Full View in New Window"
+                >
+                  <span>FULL VIEW</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
                 {previewMode === "interactive" && (
                   <button
                     type="button"
@@ -431,7 +442,7 @@ export function ProjectPreviewShowcase({
                       onLoad={() => setIframeLoading(false)}
                       className="w-full h-full border-0"
                       title={`${project.client} Live Showcase`}
-                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation allow-top-navigation-by-user-activation"
                       loading="lazy"
                     />
                   </div>
@@ -608,7 +619,7 @@ export function ProjectPreviewShowcase({
                       onLoad={() => setIframeLoading(false)}
                       className="w-full h-full border-0"
                       title={`${project.client} Mobile Showcase`}
-                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation allow-top-navigation-by-user-activation"
                       loading="lazy"
                     />
                   </div>

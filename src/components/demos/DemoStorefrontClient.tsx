@@ -40,6 +40,7 @@ import {
   Globe,
   Flame,
   Server,
+  ExternalLink,
 } from "lucide-react";
 import {
   DemoProjectConfig,
@@ -74,6 +75,19 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isCheckoutSuccess, setIsCheckoutSuccess] = useState(false);
   const [orderRef, setOrderRef] = useState<string>("");
+
+  // Embedded iframe detection to prevent navigation entrapment
+  const isEmbedded = React.useSyncExternalStore(
+    () => () => {},
+    () => {
+      try {
+        return window.self !== window.top;
+      } catch {
+        return true;
+      }
+    },
+    () => false
+  );
 
   // Pro Developer Inspection & Architecture Protocol
   const [isDevToolsOpen, setIsDevToolsOpen] = useState<boolean>(false);
@@ -457,6 +471,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
           {config.serviceCriteria && (
             <Link
               href={`/services/${config.serviceCriteria.serviceId}`}
+              target={isEmbedded ? "_top" : undefined}
               className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-[10px] font-bold uppercase tracking-wider transition-all"
               title={`View ${config.serviceCriteria.serviceTitle} Specification`}
             >
@@ -536,16 +551,31 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             </button>
           </div>
 
+          {/* Direct Full View in New Window */}
+          <a
+            href={`/demos/${config.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sound.playChime()}
+            className="px-3 py-1 rounded-md bg-white hover:bg-zinc-200 text-black font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-sm text-[11px] shrink-0"
+            title="Open Demo in Full Screen New Tab"
+          >
+            <span>FULL VIEW</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+
           <Link
             href={`/work/${config.slug}`}
-            className="px-3 py-1 rounded-md bg-white hover:bg-zinc-200 text-black font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-sm text-[11px]"
+            target={isEmbedded ? "_top" : undefined}
+            className="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 text-white font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-sm text-[11px] shrink-0"
           >
             <span>DOSSIER</span>
             <ArrowRight className="w-3 h-3" />
           </Link>
           <Link
             href="/#karname"
-            className="hidden sm:inline-flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-[11px]"
+            target={isEmbedded ? "_top" : undefined}
+            className="hidden sm:inline-flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-[11px] shrink-0"
           >
             <ArrowLeft className="w-3 h-3" />
             <span>All Work</span>
@@ -3563,6 +3593,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
               </button>
               <Link
                 href={`/work/${config.slug}`}
+                target={isEmbedded ? "_top" : undefined}
                 className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all"
               >
                 Inspect Case Study Dossier ➔

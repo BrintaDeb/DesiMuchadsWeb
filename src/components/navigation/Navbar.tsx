@@ -268,7 +268,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           onMouseEnter={() => sound.playPluck(180)}
           className="flex items-center gap-3 sm:gap-4 focus:outline-none group shrink-0"
         >
-          <div className="relative w-14 h-14 sm:w-16 sm:h-16 lg:w-[68px] lg:h-[68px] rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_22px_rgba(255,255,255,0.18)] group-hover:scale-105 group-hover:border-white transition-all shrink-0 bg-black p-0.5">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 xl:w-[62px] xl:h-[62px] rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_22px_rgba(255,255,255,0.18)] group-hover:scale-105 group-hover:border-white transition-all shrink-0 bg-black p-0.5">
             <img
               src="/brand-logo.jpg"
               alt="Desi Muchads Official Brand Logo"
@@ -276,38 +276,38 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               loading="eager"
             />
           </div>
-          <div className="flex flex-col text-left justify-center">
-            <div className="font-display font-black text-lg sm:text-2xl lg:text-[26px] tracking-wider text-white uppercase flex items-center gap-1 sm:gap-1.5 leading-none">
+          <div className="flex flex-col text-left justify-center shrink-0">
+            <div className="font-display font-black text-lg sm:text-2xl xl:text-[24px] tracking-wider text-white uppercase flex items-center gap-1 sm:gap-1.5 leading-none whitespace-nowrap">
               <span>DESI</span>
               <span className="text-zinc-400">MUCH</span>
               <span>ADS</span>
             </div>
-            <span className="text-[9.5px] sm:text-[11px] lg:text-xs font-sans font-medium tracking-wide text-zinc-300 italic leading-tight mt-1 truncate max-w-[170px] sm:max-w-none">
+            <span className="text-[9.5px] sm:text-[11px] font-sans font-medium tracking-wide text-zinc-300 italic leading-tight mt-1 whitespace-nowrap truncate max-w-[200px] sm:max-w-none">
               We Scale Your Business Personally and Seriously!
             </span>
           </div>
         </a>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 font-display">
+        <nav className="hidden xl:flex items-center gap-3.5 2xl:gap-6 font-display shrink-0">
           {/* About Us */}
           <a
             href="#why-us"
             onMouseEnter={() => sound.playPluck(130)}
-            className="text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
+            className="whitespace-nowrap shrink-0 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
           >
             About Us
           </a>
 
           {/* Services Dropdown Trigger */}
           <div
-            className="relative"
+            className="relative shrink-0"
             onMouseEnter={() => handleMouseEnter("services")}
             onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={() => toggleDropdown("services")}
-              className={`flex items-center gap-1 text-xs font-bold tracking-wider uppercase transition-colors py-2 ${
+              className={`whitespace-nowrap shrink-0 flex items-center gap-1 text-xs font-bold tracking-wider uppercase transition-colors py-2 ${
                 activeDropdown === "services"
                   ? "text-white"
                   : "text-zinc-300 hover:text-white"
@@ -315,7 +315,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             >
               <span>Services</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${
                   activeDropdown === "services" ? "rotate-180 text-white" : ""
                 }`}
               />
@@ -396,13 +396,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
           {/* Quick Links Dropdown Trigger */}
           <div
-            className="relative"
+            className="relative shrink-0"
             onMouseEnter={() => handleMouseEnter("quick-links")}
             onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={() => toggleDropdown("quick-links")}
-              className={`flex items-center gap-1 text-xs font-bold tracking-wider uppercase transition-colors py-2 ${
+              className={`whitespace-nowrap shrink-0 flex items-center gap-1 text-xs font-bold tracking-wider uppercase transition-colors py-2 ${
                 activeDropdown === "quick-links"
                   ? "text-white"
                   : "text-zinc-300 hover:text-white"
@@ -410,7 +410,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             >
               <span>Quick Links</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${
                   activeDropdown === "quick-links" ? "rotate-180 text-white" : ""
                 }`}
               />
@@ -458,20 +458,20 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <a
             href="#karname"
             onMouseEnter={() => sound.playPluck(130)}
-            className="text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
+            className="whitespace-nowrap shrink-0 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
           >
             Success Story
           </a>
 
           {/* Portfolio Dropdown Trigger */}
           <div
-            className="relative"
+            className="relative shrink-0"
             onMouseEnter={() => handleMouseEnter("portfolio")}
             onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={() => toggleDropdown("portfolio")}
-              className={`flex items-center gap-1 text-xs font-bold tracking-wider uppercase transition-colors py-2 ${
+              className={`whitespace-nowrap shrink-0 flex items-center gap-1 text-xs font-bold tracking-wider uppercase transition-colors py-2 ${
                 activeDropdown === "portfolio"
                   ? "text-white"
                   : "text-zinc-300 hover:text-white"
@@ -479,7 +479,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             >
               <span>Portfolio</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${
                   activeDropdown === "portfolio" ? "rotate-180 text-white" : ""
                 }`}
               />
@@ -536,7 +536,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <a
             href="#pricing"
             onMouseEnter={() => sound.playPluck(130)}
-            className="text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
+            className="whitespace-nowrap shrink-0 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
           >
             Pricing
           </a>
@@ -547,13 +547,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               setIsCommandOpen(true);
             }}
             type="button"
-            className="flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            className="whitespace-nowrap shrink-0 flex items-center gap-1.5 xl:gap-2 px-3 xl:px-3.5 py-1.5 xl:py-2 min-h-[38px] rounded-full border border-white/20 bg-[#121215]/80 hover:border-white/50 hover:bg-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
             title="Open Quick Search & Command Palette (⌘K)"
             aria-label="Search and quick actions"
           >
-            <Search className="w-3.5 h-3.5 text-zinc-400" />
-            <span className="hidden xl:inline text-[11px]">Search</span>
-            <kbd className="px-1.5 py-0.5 text-[10px] rounded bg-white/10 border border-white/20 text-zinc-300 font-mono">
+            <Search className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+            <span className="hidden 2xl:inline text-[11px] whitespace-nowrap">Search</span>
+            <kbd className="px-1.5 py-0.5 text-[10px] rounded bg-white/10 border border-white/20 text-zinc-300 font-mono shrink-0">
               ⌘K
             </kbd>
           </button>
@@ -567,7 +567,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               onOpenKundli();
             }}
             type="button"
-            className="btn-luxury-shine px-6 py-2.5 min-h-[40px] rounded-full bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_22px_rgba(255,255,255,0.2)] active:scale-95 flex items-center gap-1.5 shrink-0"
+            className="btn-luxury-shine px-4 xl:px-6 py-2 xl:py-2.5 min-h-[38px] rounded-full bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-[0_0_22px_rgba(255,255,255,0.2)] active:scale-95 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
           >
             <span>LET&apos;S TALK</span>
             <span className="text-sm font-bold">&gt;</span>
@@ -575,7 +575,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         </nav>
 
         {/* Mobile Controls: Search Shortcut + Hamburger */}
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <button
             onClick={() => {
               setIsCommandOpen(true);
@@ -607,7 +607,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             setMobileMenuOpen(false);
           }}
           style={{ top: `${headerHeight}px` }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden transition-opacity duration-300"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 xl:hidden transition-opacity duration-300"
           aria-hidden="true"
         />
       )}
@@ -619,7 +619,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             top: `${headerHeight}px`,
             maxHeight: `calc(100dvh - ${headerHeight}px)`,
           }}
-          className="fixed inset-x-0 bottom-0 z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto overscroll-contain font-display animate-in slide-in-from-top-2 duration-200"
+          className="fixed inset-x-0 bottom-0 z-50 xl:hidden drawer-glass flex flex-col overflow-y-auto overscroll-contain font-display animate-in slide-in-from-top-2 duration-200"
         >
           <div className="p-4 sm:p-6 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between">
             {/* Top Interactive Tool Rows & Navigations */}

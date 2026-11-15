@@ -23,14 +23,14 @@ import { AGENCY_PROJECTS, getProjectAssetType } from "@/data/projectsData";
 import { ProjectPreviewShowcase } from "./ProjectPreviewShowcase";
 
 const FILTER_CATEGORIES = [
-  { id: "all", label: "All Work (48)" },
+  { id: "all", label: "All Work (46)" },
   { id: "packaging-label", label: "Packaging & Branding (13)" },
   { id: "web-development", label: "Fullstack Web & Apps (11)" },
   { id: "social-media", label: "Social Media & Video (7)" },
-  { id: "performance-marketing", label: "Performance Marketing (5)" },
+  { id: "performance-marketing", label: "Performance Marketing (4)" },
   { id: "lead-generation", label: "Lead Gen & Decks (4)" },
   { id: "seo-sem", label: "SEO & SEM (3)" },
-  { id: "ecommerce-services", label: "E-Commerce (3)" },
+  { id: "ecommerce-services", label: "E-Commerce (2)" },
   { id: "quick-commerce", label: "Quick Commerce (2)" },
 ];
 
@@ -122,7 +122,7 @@ export function CaseStudiesSection() {
         <div className="max-w-3xl mb-12 sm:mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-white font-royal text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>VERIFIED CLIENT WORK • 48 HUMAN-GRADE CASE STUDIES</span>
+            <span>VERIFIED CLIENT WORK • 46 HUMAN-GRADE CASE STUDIES</span>
           </div>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-none">
             Our Latest Work
