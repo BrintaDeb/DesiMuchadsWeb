@@ -37,115 +37,44 @@ interface TeamMember {
 const TEAM_ROSTER: TeamMember[] = [
   {
     id: 1,
-    name: "Brinta Deb",
-    role: "Founder & Chief Growth Architect",
-    tagline: "Fullstack Engineering, Conversion Optimization & Enterprise Systems",
-    bio: "Pioneered high-velocity human-engineered web architectures and conversion funnels. Specializes in building sub-second React/Next.js platforms, algorithmic ad systems, and scalable e-commerce infrastructure.",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-    badge: "FOUNDERSHIP",
-    disciplines: ["Next.js App Router", "Conversion Architecture", "Paid Traffic Science", "Brand Strategy"],
+    name: "Rahul Datt",
+    role: "CEO",
+    tagline: "Agency Vision, Client Scaling Strategy & Executive Leadership",
+    bio: "Directs overarching agency strategy, high-growth client partnerships, and market expansion. Leads enterprise acquisitions and scaling roadmaps.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    badge: "CHIEF EXECUTIVE OFFICER",
+    disciplines: ["Executive Leadership", "Growth Strategy", "Client Partnerships", "Brand Scaling"],
     socials: {
       linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "mailto:brinta@desimuchads.agency",
+      email: "mailto:rahul@desimuchads.agency",
     },
   },
   {
     id: 2,
-    name: "Aarav Singhania",
-    role: "Head of Creative Strategy & Media Buying",
-    tagline: "Meta ASC+ Architecture, Vernacular Video Hooks & ROAS Science",
-    bio: "Manages 8-figure monthly ad spend across D2C, Quick Commerce, and B2B SaaS. Specializes in vernacular Hinglish hooks, creative fatigue shields, and omnichannel cohort analytics.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-    badge: "PERFORMANCE LEAD",
-    disciplines: ["Meta ASC+", "Google PMax", "Vernacular Creatives", "Attribution Modeling"],
+    name: "Brinta Deb",
+    role: "CTO",
+    tagline: "Fullstack Engineering, Conversion Architecture & Systems",
+    bio: "Architects high-performance Next.js web applications, sub-second conversion engines, and algorithmic ad tracking systems. Leads fullstack engineering and digital infrastructure.",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    badge: "CHIEF TECHNOLOGY OFFICER",
+    disciplines: ["Next.js App Router", "Fullstack Engineering", "Conversion Architecture", "Performance Systems"],
     socials: {
       linkedin: "https://linkedin.com",
-      email: "mailto:aarav@desimuchads.agency",
+      email: "mailto:brinta@desimuchads.agency",
     },
   },
   {
     id: 3,
-    name: "Meera Krishnan",
-    role: "Principal Art Director & Brand Architect",
-    tagline: "Haute Couture Identity, Luxury Packaging & Visual Typography",
-    bio: "Fine Arts gold medalist with extensive experience directing luxury packaging dielines, editorial visual systems, and bespoke brand books for heritage and direct-to-consumer brands.",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
-    badge: "CREATIVE DIRECTION",
-    disciplines: ["Luxury Brand Identity", "Packaging Dielines", "Editorial Design", "Typography"],
+    name: "Omkar Dutta",
+    role: "CFO",
+    tagline: "Capital Allocation, Unit Economics & Financial Governance",
+    bio: "Oversees financial strategy, client ROI auditing, and unit economics. Ensures every marketing rupee spent yields measurable contribution margins and compounding returns.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    badge: "CHIEF FINANCIAL OFFICER",
+    disciplines: ["Financial Strategy", "Unit Economics", "Profitability Audits", "Capital Allocation"],
     socials: {
       linkedin: "https://linkedin.com",
-      email: "mailto:meera@desimuchads.agency",
-    },
-  },
-  {
-    id: 4,
-    name: "Kabir Malhotra",
-    role: "Lead Fullstack & WebGL Motion Engineer",
-    tagline: "Next.js 16, GSAP Kinetic Physics, Headless OS & 99 PageSpeed",
-    bio: "Obsessed with latency reduction, Core Web Vitals, and kinetic web physics. Crafts buttery sub-second e-commerce frontends, custom 3D shaders, and high-frequency booking engines.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    badge: "ENGINEERING",
-    disciplines: ["TypeScript", "WebGL / Three.js", "Tailwind CSS", "Shopify Storefront API"],
-    socials: {
-      linkedin: "https://linkedin.com",
-      email: "mailto:kabir@desimuchads.agency",
-    },
-  },
-  {
-    id: 5,
-    name: "Ananya Deshmukh",
-    role: "Senior Digital Illustrator & Concept Artist",
-    tagline: "Procreate 5X, Cyber-Mandalas, Manga Ink Sketches & Matte Painting",
-    bio: "Brings visceral Indian cultural heritage and futuristic cyberpunk aesthetics together. Creates original vector mandalas, digital anime illustrations, and keyframe concept paintings.",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
-    badge: "ILLUSTRATION & ART",
-    disciplines: ["Digital Concept Art", "Procreate 5X", "Sumi-e Ink Wash", "Vector Filigree"],
-    socials: {
-      linkedin: "https://linkedin.com",
-      email: "mailto:ananya@desimuchads.agency",
-    },
-  },
-  {
-    id: 6,
-    name: "Devendra Verma",
-    role: "Director of Technical SEO & Search Arbitrage",
-    tagline: "Topical Authority Clustering, Schema.org & Zero-Click Dominance",
-    bio: "Has engineered #1 SERP rankings for over 1,400+ high-commercial keywords. Expert in algorithmic search intent, programmatic SEO generation, and Google Search Console optimization.",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
-    badge: "SEARCH ARCHITECT",
-    disciplines: ["Technical SEO", "SERP Clustering", "Entity Graph Schema", "Speed Optimization"],
-    socials: {
-      linkedin: "https://linkedin.com",
-      email: "mailto:devendra@desimuchads.agency",
-    },
-  },
-  {
-    id: 7,
-    name: "Rhea Sen",
-    role: "Commercial Video Director & Motion Lead",
-    tagline: "4K 60FPS Macro Cinematography, Color Timing & Sound Mastering",
-    bio: "Directs cinematic commercial reels, food macro shoots, and festival event trailers. Specializes in DaVinci Resolve color timing, sound design, and viral social 9:16 storytelling.",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
-    badge: "MOTION DIRECTION",
-    disciplines: ["Cinematography", "DaVinci Resolve", "Sound Design", "Viral Hooks"],
-    socials: {
-      linkedin: "https://linkedin.com",
-      email: "mailto:rhea@desimuchads.agency",
-    },
-  },
-  {
-    id: 8,
-    name: "Vikramaditya Roy",
-    role: "Client Success & Revenue Retention Strategist",
-    tagline: "Customer LTV Multipliers, WhatsApp Automation & CRM Retention",
-    bio: "Bridges the gap between raw traffic and lifelong customer loyalty. Builds automated WhatsApp conversational funnels, post-purchase delight flows, and transparent client reporting.",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
-    badge: "GROWTH SUCCESS",
-    disciplines: ["WhatsApp CRM", "Retention Funnels", "Cohort LTV", "Transparent Reporting"],
-    socials: {
-      linkedin: "https://linkedin.com",
-      email: "mailto:vikram@desimuchads.agency",
+      email: "mailto:omkar@desimuchads.agency",
     },
   },
 ];
@@ -275,40 +204,40 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. The 8 Team Members & Leadership Roster (User-Specific Request) */}
+      {/* 4. The Core Executive Leadership (Rahul Datt CEO, Brinta Deb CTO, Omkar Dutta CFO) */}
       <section id="team" className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/10 text-left">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider mb-3">
               <Users className="w-3.5 h-3.5 text-emerald-400" />
-              <span>THE DARBAR ROSTER • 8 SPECIALIZED ARCHITECTS</span>
+              <span>THE DARBAR ROSTER • CORE EXECUTIVE LEADERSHIP</span>
             </div>
             <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white leading-tight">
               Meet The Minds Behind The Growth.
             </h2>
             <p className="mt-3 text-sm sm:text-base text-zinc-300 font-sans">
-              No interns, no outsourced white-label farms. Every specialist on this roster is a proven craftsman in their respective discipline.
+              No interns, no outsourced white-label farms. Direct founder-led accountability and technical mastery across every client engagement.
             </p>
           </div>
 
           <div className="shrink-0 flex items-center gap-2 font-mono text-xs text-zinc-400">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>ACTIVE LEADERSHIP ROSTER</span>
+            <span>ACTIVE EXECUTIVE ROSTER</span>
           </div>
         </div>
 
-        {/* 8 Team Member Cards Grid (2-col on mobile, 3-col on tablet, 4-col on desktop) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 3 Executive Leaders Grid (1-col on mobile, 3-col on desktop) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {TEAM_ROSTER.map((member) => (
             <SpotlightCard
               key={member.id}
               spotlightColor="rgba(255, 255, 255, 0.12)"
               borderColor="rgba(255, 255, 255, 0.35)"
-              className="rounded-2xl p-6 bg-[#0c0c10] flex flex-col justify-between group shadow-xl hover:shadow-2xl transition-all"
+              className="rounded-2xl p-6 sm:p-7 bg-[#0c0c10] flex flex-col justify-between group shadow-xl hover:shadow-2xl transition-all"
             >
               <div>
                 {/* Avatar with obsidian glass bezel */}
-                <div className="relative w-full h-56 rounded-xl overflow-hidden mb-5 border border-white/15 bg-black">
+                <div className="relative w-full h-64 sm:h-72 rounded-xl overflow-hidden mb-5 border border-white/15 bg-black">
                   <img
                     src={member.avatar}
                     alt={`${member.name} Profile`}
@@ -324,22 +253,22 @@ export default function AboutPage() {
 
                   {/* Name overlay on bottom */}
                   <div className="absolute bottom-2.5 inset-x-3 text-left">
-                    <h3 className="font-display font-black text-lg text-white uppercase tracking-tight leading-tight">
+                    <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-tight">
                       {member.name}
                     </h3>
-                    <span className="text-[11px] font-mono text-emerald-400 font-bold block mt-0.5">
+                    <span className="text-xs font-mono text-emerald-400 font-bold block mt-0.5">
                       {member.role}
                     </span>
                   </div>
                 </div>
 
                 {/* Tagline */}
-                <p className="text-xs font-mono text-zinc-400 leading-snug mb-3">
+                <p className="text-xs font-mono text-zinc-400 leading-snug mb-3 font-semibold">
                   {member.tagline}
                 </p>
 
-                {/* Bio */}
-                <p className="text-xs text-zinc-300 font-sans leading-relaxed mb-4">
+                {/* Bio / Short Working Description */}
+                <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed mb-4">
                   {member.bio}
                 </p>
 

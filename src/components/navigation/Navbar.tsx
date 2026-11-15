@@ -613,7 +613,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     <ShieldCheck className="w-4 h-4 text-zinc-400" />
                     <span>About Us &amp; Team</span>
                   </div>
-                  <span className="text-[10px] font-mono text-zinc-400">8 Members</span>
+                  <span className="text-[10px] font-mono text-zinc-400">Leadership</span>
                 </Link>
 
                 {/* All Services */}
