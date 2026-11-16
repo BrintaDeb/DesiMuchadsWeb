@@ -403,9 +403,9 @@ export function ProjectPreviewShowcase({
                   <div className="relative flex-1 w-full overflow-y-auto overscroll-contain bg-[#0a0a0d] p-3 sm:p-5 scrollbar-thin scrollbar-thumb-white/20">
                     <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black">
                       <img
-                        src={project.thumbnail}
+                        src={project.fullImage || project.thumbnail}
                         alt={`${project.client} Full Platform Architecture`}
-                        className="w-full h-auto object-cover object-top"
+                        className="w-full h-auto object-cover object-top block"
                         loading="eager"
                       />
                     </div>
@@ -566,9 +566,9 @@ export function ProjectPreviewShowcase({
               {assetType === "external_app" && (
                 <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-black p-2 scrollbar-none">
                   <img
-                    src={project.thumbnail}
+                    src={project.fullImage || project.thumbnail}
                     alt={`${project.client} Mobile Platform Architecture`}
-                    className="w-full h-auto object-cover rounded-lg"
+                    className="w-full h-auto object-cover object-top block rounded-lg"
                     loading="eager"
                   />
                 </div>

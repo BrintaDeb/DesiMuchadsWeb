@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { sound } from "@/lib/sound";
 import { SpotlightCard } from "../common/SpotlightCard";
 import { ArrowRight } from "lucide-react";
@@ -12,11 +13,11 @@ export function ClientsTrustStrip() {
     { name: "LIONELP", category: "Gourmet & Hospitality" },
     { name: "FRESHEATS", category: "Organic Food Storefront" },
     { name: "NESTSERVICES", category: "Concierge & Living Hub" },
-    { name: "MCDONALD'S", category: "QSR & Retail" },
+    { name: "VEDAROOTS", category: "Single-Estate Ayurveda" },
     { name: "FROSCH", category: "Eco-Friendly Living" },
     { name: "ATEA", category: "Enterprise IT & Cloud" },
     { name: "TRANSFERGO", category: "Fintech & Payments" },
-    { name: "CROCS", category: "Global Footwear" },
+    { name: "DARBAR", category: "Fine Mechanical Watches" },
     { name: "DESI D2C", category: "Direct-to-Consumer" },
     { name: "ROYAL MASALA", category: "Heritage Spices" },
   ];
@@ -55,13 +56,14 @@ export function ClientsTrustStrip() {
 
         {/* Center Bottom Action Button */}
         <div className="mt-16 text-center">
-          <a
-            href="#karname"
+          <Link
+            href="/work"
+            onClick={() => sound.playChime()}
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95"
           >
-            <span>MORE CLIENTS</span>
+            <span>VIEW ALL 50 CLIENTS</span>
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

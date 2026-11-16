@@ -134,6 +134,8 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: none;
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 /* Din (Palace Ivory) Theme */
@@ -148,10 +150,80 @@ body {
   background-color: #09090b;
   color: #ffffff;
   font-family: var(--font-jakarta), system-ui, sans-serif;
-  overflow-x: hidden;
+  max-width: 100vw;
+  overflow-x: clip;
   overflow-wrap: anywhere;
   -webkit-tap-highlight-color: transparent;
   touch-action: pan-y;
+}
+
+/* Touch manipulation: eliminate 300ms tap delay across all interactive mobile elements */
+button,
+a,
+input,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Mobile iOS Safari: Enforce 16px font-size to prevent automatic viewport zoom on focus */
+@media screen and (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* iOS Safe Area Utilities for Dynamic Island, Notches, and Home Indicator Bars */
+.safe-pt {
+  padding-top: max(1rem, env(safe-area-inset-top, 0px));
+}
+
+.safe-pb {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+}
+
+.safe-pl {
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+}
+
+.safe-pr {
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+}
+
+/* Mobile-friendly Range Slider Thumbs */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 2px solid #09090b;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 2px solid #09090b;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+  transform: scale(1.2);
 }
 
 html.theme-din body,
@@ -175,9 +247,36 @@ p, li {
 }
 
 /* Media never overflows on small mobile devices */
-img, video, iframe, canvas {
+img, video, canvas {
   max-inline-size: 100%;
   block-size: auto;
+}
+
+/* Map & Full-Bleed Embed iFrames (Prevents browser 150px default squashing) */
+iframe.map-embed-frame,
+iframe {
+  max-inline-size: 100%;
+}
+
+.map-embed-frame {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  display: block;
+}
+
+/* Opaque Solid Obsidian Dropdown Navigation Panels (Prevents underlying text blur & transparency bleed) */
+.nav-dropdown-solid {
+  background-color: #0b0b0e !important;
+  background: #0b0b0e !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 
+    0 30px 90px -10px rgba(0, 0, 0, 0.98),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 10px 40px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Modern Web Guidance: Form-factor adaptation touch targets */
@@ -685,6 +784,72 @@ img, video, iframe, canvas {
     opacity: 0;
   }
 }
+
+/* UI/UX Pro Max: Magnetic Spring & Tactile Click Micro-Interactions */
+.magnetic-spring {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+  will-change: transform;
+}
+
+.magnetic-spring:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.magnetic-spring:active {
+  transform: translateY(1px) scale(0.965);
+  transition-duration: 0.08s;
+}
+
+.tactile-press {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.15s ease,
+              border-color 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.tactile-press:active {
+  transform: scale(0.97) translateY(1px);
+}
+
+/* UI/UX Pro Max: Click Ripple Pulse */
+.sonic-pulse-host {
+  position: relative;
+  overflow: hidden;
+}
+
+.sonic-pulse-host::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+  transform: scale(0.6);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sonic-pulse-host:active::after {
+  opacity: 1;
+  transform: scale(1.6);
+  transition: 0s;
+}
+
+/* UI/UX Pro Max: Momentum horizontal scrollbar hide */
+.scroll-momentum-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-momentum-x::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 

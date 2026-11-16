@@ -25,6 +25,7 @@ import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { RoasCalculator } from "@/components/calculator/RoasCalculator";
+import { ClientPortalPreview } from "@/components/portal/ClientPortalPreview";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
 
@@ -108,7 +109,7 @@ export default function ServicesPage() {
             {/* Performance Metric Strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
               <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">8</span>
+                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">9</span>
                 <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Core In-House Disciplines</span>
               </div>
               <div className="p-3">
@@ -211,8 +212,8 @@ export default function ServicesPage() {
               </h2>
             </div>
 
-            {/* Filter Tabs */}
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/5 border border-white/10 overflow-x-auto">
+            {/* Filter Tabs with Silky Mobile Touch Momentum */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/5 border border-white/10 scroll-momentum-x">
               {[
                 { id: "all", label: "All Disciplines" },
                 { id: "performance", label: "Paid & Search" },
@@ -483,7 +484,12 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* 6. Grand Call to Action */}
+        <SectionDivider />
+
+        {/* 6. VIP Darbar Client Portal Live Preview */}
+        <ClientPortalPreview />
+
+        {/* 7. Grand Call to Action */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-24">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/20 text-center space-y-6 shadow-2xl relative overflow-hidden">
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight max-w-2xl mx-auto">

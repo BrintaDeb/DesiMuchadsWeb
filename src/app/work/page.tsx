@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -40,6 +40,16 @@ export default function WorkPage() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const [activeModalTab, setActiveModalTab] = useState<"preview" | "theory">("preview");
   const [viewMode, setViewMode] = useState<"grid" | "showcase">("grid");
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveProject(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const isDemoProject = (p: ProjectItem) =>
     p.liveUrl.startsWith("/demos/") ||
@@ -246,7 +256,10 @@ export default function WorkPage() {
               <div className="relative shrink-0 w-full sm:w-64">
                 <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
+                  id="workSearchInput"
+                  name="workSearchInput"
                   type="text"
+                  aria-label="Search works, brands, tags"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search works, brands, tags..."
@@ -463,7 +476,12 @@ export default function WorkPage() {
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <button
                             type="button"
-                            className="px-4 py-2 rounded-xl bg-white text-black font-display font-bold text-xs uppercase flex items-center gap-1.5 shadow-xl"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              sound.playChime();
+                              setActiveProject(proj);
+                            }}
+                            className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-bold text-xs uppercase flex items-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 transition-all"
                           >
                             <Eye className="w-3.5 h-3.5" />
                             <span>LAUNCH PREVIEW</span>
@@ -571,7 +589,7 @@ export default function WorkPage() {
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mt-24 text-center">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/20 space-y-6 shadow-2xl relative overflow-hidden">
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight max-w-2xl mx-auto">
-              Want Your Brand Featured in Our Next Success Story?
+              Ready to Scale Your Brand to Category Dominance?
             </h2>
 
             <p className="font-sans text-sm sm:text-base text-zinc-300 max-w-xl mx-auto leading-relaxed">
@@ -603,8 +621,19 @@ export default function WorkPage() {
 
       {/* 6. Dual-Mode Lightbox Modal Shell (Preview vs Design Theory Dossier) */}
       {activeProject && (
-        <div className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              sound.playPluck(120);
+              setActiveProject(null);
+            }
+          }}
+          className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200 cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20 cursor-default"
+          >
             {/* Modal Header Bar with Dual Tabs */}
             <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
               <div className="flex items-center gap-2.5 min-w-0">

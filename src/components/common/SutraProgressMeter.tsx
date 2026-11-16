@@ -1,20 +1,39 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { sound } from "@/lib/sound";
 
 export function SutraProgressMeter() {
+  const router = useRouter();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   const sections = [
     { id: "hero", name: "दरबार", eng: "Darbar (Hero)" },
     { id: "services", name: "शस्त्र", eng: "Weapons (Services)" },
-    { id: "calculator", name: "हिसाब-किताब", eng: "Hisab-Kitab (ROAS)" },
     { id: "karname", name: "कारनामे", eng: "Karname (Case Studies)" },
-    { id: "pricing", name: "थाली", eng: "Thali & Pricing" },
-    { id: "scanner", name: "कुण्डली", eng: "Kundli Scanner" },
+    { id: "clients", name: "विश्वास", eng: "Vishwas (Clients)" },
+    { id: "pricing", name: "थाली", eng: "Thali & Retainers" },
+    { id: "contact", name: "बैठक", eng: "Baithak (Contact)" },
   ];
+
+  const handleSectionClick = (id: string) => {
+    sound.playChime();
+    if (id === "hero") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      if (id === "pricing") router.push("/pricing");
+      else if (id === "services") router.push("/services");
+      else if (id === "karname") router.push("/work");
+      else if (id === "contact") router.push("/contact");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,12 +69,22 @@ export function SutraProgressMeter() {
         {sections.map((sec, idx) => (
           <div
             key={sec.id}
+            onClick={() => handleSectionClick(sec.id)}
+            role="button"
+            tabIndex={0}
+            aria-label={`Jump to ${sec.eng}`}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleSectionClick(sec.id);
+              }
+            }}
             onMouseEnter={() => {
               sound.playPluck(160 + idx * 15);
               setHoveredSection(sec.id);
             }}
             onMouseLeave={() => setHoveredSection(null)}
-            className="relative flex items-center justify-center cursor-pointer group"
+            className="relative flex items-center justify-center cursor-pointer group focus:outline-none"
           >
             <div className="w-2 h-2 rounded-full border border-white/60 bg-black group-hover:scale-150 group-hover:bg-white transition-all shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
 

@@ -71,6 +71,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
 
               <a
                 href="#karname"
+                onClick={() => sound.playPluck(150)}
                 className="btn-luxury-shine px-8 py-3.5 sm:py-4 rounded-xl border border-white/20 hover:border-white text-white font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all hover:bg-white/5 flex items-center justify-center min-h-[48px]"
               >
                 OUR WORK
@@ -106,12 +107,6 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               {/* Subtle Radial Pedestal Glow */}
               <div className="absolute -bottom-4 w-3/4 h-8 bg-white/10 blur-xl rounded-full pointer-events-none" />
               <ThreeHeroCenterpiece />
-              <div className="flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm pointer-events-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-                  Interactive 3D Moustache • Drag to Tilt • Tap to Spin
-                </span>
-              </div>
             </div>
           </div>
         </div>

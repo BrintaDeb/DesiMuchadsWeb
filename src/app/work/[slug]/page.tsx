@@ -226,7 +226,7 @@ async function ProjectDetailContent({ params }: PageProps) {
               </Link>
             )}
             <a
-              href="https://wa.me/919876543210?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
+              href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md flex items-center gap-1.5"

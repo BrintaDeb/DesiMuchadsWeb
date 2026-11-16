@@ -264,7 +264,7 @@ async function ServiceDetailContent({ params }: PageProps) {
               Portfolio Work
             </Link>
             <a
-              href="https://wa.me/919876543210?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
+              href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md flex items-center gap-1.5"
@@ -333,7 +333,7 @@ async function ServiceDetailContent({ params }: PageProps) {
             {/* CTA Buttons */}
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
-                href="https://wa.me/919876543210?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
+                href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
                 target="_blank"
                 rel="noreferrer"
                 className="btn-luxury-shine px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 inline-flex items-center gap-2"
@@ -612,7 +612,7 @@ async function ServiceDetailContent({ params }: PageProps) {
                 </div>
 
                 <a
-                  href={`https://wa.me/919876543210?text=Hi%20Desi%20Muchads%2C%20I%20want%20to%20discuss%20the%20${encodeURIComponent(
+                  href={`https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20I%20want%20to%20discuss%20the%20${encodeURIComponent(
                     pkg.name
                   )}%20for%20${encodeURIComponent(service.title)}.`}
                   target="_blank"
@@ -670,7 +670,7 @@ async function ServiceDetailContent({ params }: PageProps) {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <a
-              href="https://wa.me/919876543210?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
+              href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
               target="_blank"
               rel="noreferrer"
               className="px-8 py-4 rounded-xl bg-black hover:bg-zinc-800 text-white font-display text-xs font-black tracking-widest uppercase transition-all"

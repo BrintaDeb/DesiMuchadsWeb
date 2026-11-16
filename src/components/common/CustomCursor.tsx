@@ -14,6 +14,10 @@ export function CustomCursor() {
   const mousePos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
 
+  const isVisibleRef = useRef(false);
+  const isPointerRef = useRef(false);
+  const isExploreRef = useRef(false);
+
   useEffect(() => {
     // Only enable on fine pointer devices (desktop)
     if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -23,25 +27,40 @@ export function CustomCursor() {
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
 
       // Check if hovering over interactive elements or explore targets
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const exploreEl = target.closest('[data-cursor="explore"]');
-      setIsExplore(!!exploreEl);
+      const exploreEl = !!target.closest('[data-cursor="explore"]');
+      if (isExploreRef.current !== exploreEl) {
+        isExploreRef.current = exploreEl;
+        setIsExplore(exploreEl);
+      }
 
-      const clickableEl = target.closest(
+      const clickableEl = !!target.closest(
         'button, a, input, select, textarea, [role="button"], [data-cursor="pointer"]'
       );
-      setIsPointer(!!clickableEl);
+      if (isPointerRef.current !== clickableEl) {
+        isPointerRef.current = clickableEl;
+        setIsPointer(clickableEl);
+      }
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => {
+      isVisibleRef.current = false;
+      setIsVisible(false);
+    };
+    const handleMouseEnter = () => {
+      isVisibleRef.current = true;
+      setIsVisible(true);
+    };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
@@ -72,7 +91,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseenter", handleMouseEnter);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isVisible]);
+  }, []);
 
   if (!mounted) return null;
 

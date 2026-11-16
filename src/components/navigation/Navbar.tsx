@@ -21,7 +21,6 @@ import {
   Globe,
   PhoneCall,
   Users,
-  Award,
   TrendingUp,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
@@ -182,39 +181,12 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   return (
     <header
       ref={dropdownRef}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pt-[env(safe-area-inset-top,0px)] ${isScrolled
         ? "bg-[#09090b]/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.85)] border-b border-white/10"
         : "bg-[#09090b] border-b border-white/10"
         }`}
     >
-      {/* 1. Top Regulatory & Trust Announcement Bar */}
-      <div className="bg-[#050507] text-zinc-300 py-1.5 px-3 sm:px-6 text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase border-b border-white/10 flex items-center justify-between select-none whitespace-nowrap overflow-hidden">
-        <div className="flex items-center gap-2 truncate shrink-0">
-          <span className="font-extrabold text-white">UNIT OF DESI MUCHADS DIGITAL LLP</span>
-          <span className="hidden md:inline text-white/20">|</span>
-          <span className="hidden md:inline text-zinc-400">CIN: U74999DL2024PTC412891</span>
-          <span className="hidden lg:inline text-white/20">|</span>
-          <span className="hidden lg:inline text-emerald-400 font-bold">100% VERIFIED AGENCY</span>
-        </div>
-        <div className="flex items-center gap-3 shrink-0">
-          <span className="hidden sm:inline-flex items-center gap-1.5 text-white">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>5.8X BLENDED ROAS GUARANTEED</span>
-          </span>
-          <span className="hidden sm:inline text-white/20">|</span>
-          <a
-            href="https://wa.me/919180252831"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-1 text-zinc-300"
-          >
-            <PhoneCall className="w-3.5 h-3.5 text-white" />
-            <span>TALK TO FOUNDER (+91 9180252831)</span>
-          </a>
-        </div>
-      </div>
-
-      {/* 2. Main Navigation Bar */}
+      {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3">
         {/* Brand Mark with Official Logo and Tagline */}
         <Link
@@ -285,12 +257,12 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }}
                 onMouseLeave={handleMouseLeave}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[820px] ios-glass-panel text-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.98)] p-6 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[820px] max-w-[90vw] nav-dropdown-solid text-white rounded-2xl p-5 sm:p-6 z-50 whitespace-normal animate-in fade-in-50 slide-in-from-top-2 duration-200 shadow-[0_25px_70px_rgba(0,0,0,0.95)]"
               >
                 {/* Mega Menu Header */}
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+                <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/15">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-white" />
+                    <Sparkles className="w-4 h-4 text-white shrink-0" />
                     <span className="text-xs font-bold font-royal tracking-widest uppercase text-white">
                       Full-Suite Performance &amp; Growth Services
                     </span>
@@ -298,30 +270,30 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   <Link
                     href="/services"
                     onClick={() => setActiveDropdown(null)}
-                    className="text-xs font-bold text-zinc-300 hover:text-white transition-colors flex items-center gap-1 font-sans"
+                    className="text-xs font-bold text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 font-sans shrink-0 whitespace-nowrap"
                   >
-                    <span>View All 8 Capabilities</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <span>View All {AGENCY_SERVICES.length} Capabilities</span>
+                    <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                   </Link>
                 </div>
 
-                {/* 2-Column Grid of 8 Services */}
-                <div className="grid grid-cols-2 gap-x-6 gap-y-3.5">
+                {/* 2-Column Grid of 9 Services */}
+                <div className="grid grid-cols-2 gap-x-5 gap-y-3">
                   {AGENCY_SERVICES.map((srv) => (
                     <Link
                       key={srv.id}
                       href={`/services/${srv.slug}`}
                       onClick={() => setActiveDropdown(null)}
-                      className="group/item flex items-start gap-3.5 p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 transition-all"
+                      className="group/item flex items-start gap-3 p-2.5 sm:p-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 hover:border-white/25 transition-all shadow-sm min-w-0"
                     >
-                      <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:border-white/30 group-hover/item:bg-white/10 transition-all">
+                      <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 group-hover/item:border-white/40 group-hover/item:bg-white/15 transition-all">
                         {getServiceLucideIcon(srv.iconName)}
                       </div>
-                      <div className="flex flex-col text-left">
-                        <span className="font-display font-extrabold text-xs sm:text-sm text-white group-hover/item:text-white transition-colors leading-tight">
+                      <div className="flex flex-col text-left min-w-0 flex-1">
+                        <span className="font-display font-extrabold text-xs sm:text-sm text-white group-hover/item:text-white transition-colors leading-tight truncate">
                           {srv.title}
                         </span>
-                        <span className="font-sans text-[11px] text-zinc-400 leading-snug mt-0.5 line-clamp-2">
+                        <span className="font-sans text-[11px] text-zinc-300 leading-snug mt-1 line-clamp-2 whitespace-normal break-words">
                           {srv.shortDesc}
                         </span>
                       </div>
@@ -330,10 +302,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 </div>
 
                 {/* Bottom Highlight Banner */}
-                <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between bg-white/[0.03] -mx-6 -mb-6 p-4 rounded-b-2xl border-x-0 border-b-0">
+                <div className="mt-5 pt-3.5 border-t border-white/15 flex items-center justify-between bg-[#131317] -mx-6 -mb-6 p-4 rounded-b-2xl border-x-0 border-b-0">
                   <div className="flex items-center gap-2 text-xs text-zinc-300 font-sans">
                     <span className="font-bold text-white">Want Custom Retainer Architecture?</span>
-                    <span>Explore our 8 engineering disciplines.</span>
+                    <span>Explore our {AGENCY_SERVICES.length} engineering disciplines.</span>
                   </div>
                   <Link
                     href="/services"
@@ -375,10 +347,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }}
                 onMouseLeave={handleMouseLeave}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-96 ios-glass-panel text-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.98)] p-4 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-200"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-96 nav-dropdown-solid text-white rounded-2xl p-4 z-50 whitespace-normal animate-in fade-in-50 slide-in-from-top-2 duration-200"
               >
-                <div className="pb-2.5 mb-2 border-b border-white/10 flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 font-royal">
+                <div className="pb-2.5 mb-2 border-b border-white/15 flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-300 font-royal">
                     50 Verified Case Studies &amp; Artworks
                   </span>
                   <Link
@@ -395,13 +367,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                       key={proj.name}
                       href={proj.href}
                       onClick={() => setActiveDropdown(null)}
-                      className="group/port flex items-center justify-between p-2.5 rounded-xl hover:bg-white/[0.08] border border-transparent hover:border-white/10 transition-all"
+                      className="group/port flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.09] border border-white/5 hover:border-white/15 transition-all"
                     >
                       <div className="flex flex-col text-left">
                         <span className="font-display font-extrabold text-xs text-white uppercase">
                           {proj.name}
                         </span>
-                        <span className="font-sans text-[11px] text-zinc-400">
+                        <span className="font-sans text-[11px] text-zinc-300">
                           {proj.tagline}
                         </span>
                       </div>
@@ -415,15 +387,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             )}
           </div>
 
-          {/* Success Stories */}
-          <Link
-            href="/success-stories"
-            onMouseEnter={() => sound.playPluck(130)}
-            className="whitespace-nowrap shrink-0 px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase text-zinc-300 hover:text-white transition-colors"
-            style={{ whiteSpace: "nowrap" }}
-          >
-            Success Stories
-          </Link>
 
           {/* Pricing */}
           <Link
@@ -525,9 +488,17 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           }}
           className="fixed inset-x-0 bottom-0 z-50 lg:hidden drawer-glass flex flex-col overflow-y-auto overscroll-contain font-display animate-in slide-in-from-top-2 duration-200"
         >
-          <div className="p-4 sm:p-6 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between">
+          <div className="p-4 sm:p-6 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))]">
             {/* Top Interactive Tool Rows & Navigations */}
             <div className="space-y-3.5">
+              {/* Executive Theme & Density Controller for Mobile */}
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-between shadow-sm">
+                <span className="text-[11px] font-mono text-zinc-300 uppercase tracking-wider font-bold">
+                  Raat / Din &amp; Density
+                </span>
+                <ThemeToggle />
+              </div>
+
               {/* Tool Row 1: Quick Search Bar Pill */}
               <button
                 onClick={() => {
@@ -535,7 +506,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   setIsCommandOpen(true);
                 }}
                 type="button"
-                className="w-full flex items-center justify-between px-3.5 py-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] active:bg-white/[0.12] border border-white/15 text-zinc-300 text-xs font-mono transition-all shadow-[0_2px_12px_rgba(0,0,0,0.4)] group"
+                className="w-full flex items-center justify-between px-3.5 py-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] active:bg-white/[0.12] border border-white/15 text-zinc-300 text-xs font-mono transition-all shadow-[0_2px_12px_rgba(0,0,0,0.4)] group min-h-[44px]"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <Search className="w-4 h-4 text-white group-hover:scale-110 transition-transform shrink-0" />
@@ -552,7 +523,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 <Link
                   href="/pricing#simulator"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
+                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer min-h-[48px]"
                 >
                   <Calculator className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
                   <span className="text-[11px] font-display font-bold text-white group-hover:text-zinc-200 truncate w-full">
@@ -567,7 +538,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     setMobileMenuOpen(false);
                     onOpenKundli();
                   }}
-                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
+                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer min-h-[48px]"
                 >
                   <ShieldCheck className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
                   <span className="text-[11px] font-display font-bold text-white group-hover:text-zinc-200 truncate w-full">
@@ -579,7 +550,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 <Link
                   href="/about#team"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer"
+                  className="touch-tool-card p-2.5 sm:p-3 flex flex-col items-center justify-center text-center gap-1.5 group cursor-pointer min-h-[48px]"
                 >
                   <Users className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
                   <span className="text-[11px] font-display font-bold text-white group-hover:text-zinc-200 truncate w-full">
@@ -600,7 +571,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     sound.playPluck(140);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                  className="flex items-center justify-between p-3 min-h-[44px] rounded-xl bg-white/[0.03] hover:bg-white/[0.07] active:bg-white/[0.1] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all active:scale-[0.99]"
                 >
                   <span>Home</span>
                   <ArrowRight className="w-3.5 h-3.5 text-zinc-500" />
@@ -613,7 +584,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     sound.playPluck(140);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                  className="flex items-center justify-between p-3 min-h-[44px] rounded-xl bg-white/[0.03] hover:bg-white/[0.07] active:bg-white/[0.1] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all active:scale-[0.99]"
                 >
                   <div className="flex items-center gap-3">
                     <ShieldCheck className="w-4 h-4 text-zinc-400" />
@@ -624,13 +595,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
                 {/* All Services */}
                 <div className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.03] transition-all">
-                  <div className="flex items-center justify-between p-3">
+                  <div className="flex items-center justify-between p-2.5 sm:p-3">
                     <Link
                       href="/services"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2.5"
+                      className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2.5 flex-1 min-h-[44px]"
                     >
-                      <Sparkles className="w-4 h-4 text-white" />
+                      <Sparkles className="w-4 h-4 text-white shrink-0" />
                       <span>Services ({AGENCY_SERVICES.length})</span>
                     </Link>
                     <button
@@ -639,7 +610,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                         sound.playPluck(160);
                         setMobileAccordion(mobileAccordion === "services" ? null : "services");
                       }}
-                      className="p-1 text-zinc-400 hover:text-white"
+                      className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-white rounded-lg bg-white/5 border border-white/10 active:scale-95 transition-all touch-hit-expand"
+                      aria-label={mobileAccordion === "services" ? "Collapse services" : "Expand services"}
                     >
                       <ChevronDown
                         className={`w-4 h-4 transition-transform duration-200 ${mobileAccordion === "services" ? "rotate-180 text-white" : ""
@@ -649,7 +621,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   </div>
 
                   {mobileAccordion === "services" && (
-                    <div className="p-2.5 bg-black/60 border-t border-white/10 grid grid-cols-1 gap-1.5 animate-in fade-in duration-150">
+                    <div className="p-2 sm:p-2.5 bg-black/60 border-t border-white/10 grid grid-cols-1 gap-1.5 animate-in fade-in duration-150">
                       {AGENCY_SERVICES.map((s) => (
                         <Link
                           key={s.id}
@@ -658,10 +630,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                             sound.playPluck(180);
                             setMobileMenuOpen(false);
                           }}
-                          className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors"
+                          className="flex items-center justify-between p-2.5 sm:p-3 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] active:bg-white/[0.12] transition-colors min-h-[44px]"
                         >
                           <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                            <span className="p-1 rounded bg-white/10 shrink-0">
+                            <span className="p-1.5 rounded-lg bg-white/10 shrink-0">
                               {getServiceLucideIcon(s.iconName)}
                             </span>
                             <span className="text-xs font-semibold text-zinc-200 truncate">{s.title}</span>
@@ -682,7 +654,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     sound.playPluck(140);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                  className="flex items-center justify-between p-3 min-h-[44px] rounded-xl bg-white/[0.03] hover:bg-white/[0.07] active:bg-white/[0.1] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all active:scale-[0.99]"
                 >
                   <div className="flex items-center gap-3">
                     <Globe className="w-4 h-4 text-zinc-400" />
@@ -691,21 +663,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   <span className="text-[10px] font-mono text-zinc-400">50 Projects</span>
                 </Link>
 
-                {/* Success Stories */}
-                <Link
-                  href="/success-stories"
-                  onClick={() => {
-                    sound.playPluck(140);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
-                >
-                  <div className="flex items-center gap-3">
-                    <Award className="w-4 h-4 text-zinc-400" />
-                    <span>Success Stories</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-emerald-400">5.8x ROAS</span>
-                </Link>
 
                 {/* Pricing & Retainers */}
                 <Link
@@ -714,7 +671,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     sound.playPluck(140);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all"
+                  className="flex items-center justify-between p-3 min-h-[44px] rounded-xl bg-white/[0.03] hover:bg-white/[0.07] active:bg-white/[0.1] border border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all active:scale-[0.99]"
                 >
                   <div className="flex items-center gap-3">
                     <Sparkles className="w-4 h-4 text-zinc-400" />
@@ -730,7 +687,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     sound.playPluck(140);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/20 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all shadow-sm"
+                  className="flex items-center justify-between p-3 min-h-[44px] rounded-xl bg-white/[0.06] hover:bg-white/[0.1] active:bg-white/[0.15] border border-white/20 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all shadow-sm active:scale-[0.99]"
                 >
                   <div className="flex items-center gap-3">
                     <PhoneCall className="w-4 h-4 text-emerald-400" />
@@ -749,7 +706,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onOpenKundli();
                 }}
-                className="w-full py-3.5 rounded-full bg-white text-black font-display font-black text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-98 transition-transform"
+                className="w-full py-3.5 min-h-[48px] rounded-full bg-white text-black font-display font-black text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-98 transition-transform"
               >
                 <span>REQUEST FREE BRAND KUNDLI AUDIT</span>
                 <ArrowRight className="w-4 h-4" />

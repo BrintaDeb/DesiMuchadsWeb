@@ -89,9 +89,23 @@ export function LiquidPlatinumCanvas() {
       animId = requestAnimationFrame(render);
     };
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        isVisible = entry ? entry.isIntersecting : true;
+        if (!wasVisible && isVisible) {
+          animId = requestAnimationFrame(render);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
     animId = requestAnimationFrame(render);
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);

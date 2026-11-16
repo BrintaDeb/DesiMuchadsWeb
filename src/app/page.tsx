@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -32,6 +32,16 @@ export default function Home() {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [isKundliOpen, setIsKundliOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveProject(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // 6 Flagship Projects for Curated Executive Preview
   const flagshipProjects = AGENCY_PROJECTS.slice(0, 6);
@@ -72,7 +82,7 @@ export default function Home() {
           <HeroSection onOpenKundli={() => setIsKundliOpen(true)} />
 
           {/* Section 2: Executive Capabilities Bento Preview */}
-          <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 border-t border-white/10">
+          <section id="services" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 border-t border-white/10 scroll-mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div>
                 <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
@@ -144,7 +154,7 @@ export default function Home() {
           <SectionDivider />
 
           {/* Section 3: Flagship Works & Master Artworks Preview */}
-          <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24">
+          <section id="karname" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div>
                 <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
@@ -264,7 +274,7 @@ export default function Home() {
           <SectionDivider />
 
           {/* Section 5: Executive Retainer Teaser */}
-          <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24">
+          <section id="pricing" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight mb-4">
                 Transparent Partnerships
@@ -349,8 +359,19 @@ export default function Home() {
 
       {/* Global Interactive Project Preview Modal Shell */}
       {activeProject && (
-        <div className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              sound.playPluck(120);
+              setActiveProject(null);
+            }
+          }}
+          className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200 cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20 cursor-default"
+          >
             <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span

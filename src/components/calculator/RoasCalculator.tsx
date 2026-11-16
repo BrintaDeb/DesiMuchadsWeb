@@ -316,7 +316,7 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
                       sound.playPluck(140);
                       setSpend(p.value);
                     }}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
+                    className={`px-3 py-1.5 min-h-[36px] rounded-lg text-xs font-mono transition-all flex items-center justify-center active:scale-95 ${
                       spend === p.value
                         ? "bg-white text-black font-bold shadow-sm"
                         : "bg-white/5 hover:bg-white/10 text-zinc-300 border border-white/10"
@@ -490,7 +490,7 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
                 </button>
               ) : (
                 <Link
-                  href="/contact"
+                  href="/contact#baithak"
                   className="w-full py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5"
                 >
                   <span>Book Strategy Baithak with this Estimate</span>

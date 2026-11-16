@@ -8,6 +8,7 @@ export interface ProjectItem {
   heroStat: string;
   liveUrl: string;
   thumbnail: string;
+  fullImage?: string;
   desc: string;
   mushkil: string;
   jugaad: string;
@@ -35,7 +36,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "+65% INQUIRY CVR · HIGH-TICKET BOOKINGS",
     liveUrl: "https://youandme-smoky.vercel.app/",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/youandme_full.png",
+    thumbnail: "/projects/you-and-me-hero.png",
+    fullImage: "https://brinta-deb-portfolio.onrender.com/assets/media/youandme_full.png",
     desc: "YOU & ME is a premier cinematic destination wedding photography studio capturing timeless love stories across Udaipur, Tuscany, and Goa.",
     mushkil:
       "Their former portfolio was a heavy, slow-loading WordPress site that took 6+ seconds to render high-resolution photo galleries. Discerning high-net-worth couples bounced before viewing client galleries, leading to depressed booking conversions for ₹5L+ wedding packages.",
@@ -88,7 +90,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "ROYAL HERITAGE UI · 4.8X RESERVATIONS",
     liveUrl: "https://restaurantweb-ruby.vercel.app/",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/saffron_sage_full.png",
+    thumbnail: "/projects/saffron-sage-hero.png",
+    fullImage: "https://brinta-deb-portfolio.onrender.com/assets/media/saffron_sage_full.png",
     desc: "Saffron & Sage is an upscale fine-dining establishment reviving regal Awadhi and Mughal culinary traditions with modern gourmet finesse.",
     mushkil:
       "The restaurant relied on third-party aggregator portals that charged 15-20% commission on every diner reservation while diluting the regal brand prestige with generic dining directory UI.",
@@ -247,7 +250,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "SUB-1S LOAD · 3.4X ORDER FREQUENCY",
     liveUrl: "https://food-website-ashy-nine.vercel.app/",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/burger_food_full.png",
+    thumbnail: "/projects/currycraft-hero.png",
+    fullImage: "https://brinta-deb-portfolio.onrender.com/assets/media/burger_food_full.png",
     desc: "CurryCraft is an artisanal cloud kitchen collective preparing heritage regional curries from Chettinad, Malabar, and Kolhapur using stone-ground masala blends.",
     mushkil:
       "Existing food ordering websites suffered from bloated cart checkout flows with 6+ screen steps, causing a 68% checkout abandonment rate during peak dinner hours.",
@@ -300,7 +304,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "10,000+ PETS ONBOARDED · 78% RETENTION",
     liveUrl: "https://pet-first-web.vercel.app/",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/pet_first_full.png",
+    thumbnail: "/projects/pet-first-hero.png",
+    fullImage: "/projects/pet-first-full.webp",
     desc: "Pet-First provides holistic preventive pet wellness, breed-specific customized nutrition plans, and instant video consultations with certified veterinary specialists.",
     mushkil:
       "Pet parents lacked a unified destination for pet health records, struggled to calculate precise breed-specific caloric requirements, and delayed vital veterinary checkups.",

@@ -46,7 +46,7 @@ const TEAM_ROSTER: TeamMember[] = [
     badge: "CHIEF EXECUTIVE OFFICER",
     disciplines: ["Executive Leadership", "Growth Strategy", "Client Partnerships", "Brand Scaling"],
     socials: {
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/desi-muchads",
       email: "mailto:rahuldesimuchads@gmail.com",
     },
   },
@@ -60,7 +60,7 @@ const TEAM_ROSTER: TeamMember[] = [
     badge: "CHIEF TECHNOLOGY OFFICER",
     disciplines: ["Next.js App Router", "Fullstack Engineering", "Conversion Architecture", "Performance Systems"],
     socials: {
-      linkedin: "https://linkedin.com",
+      linkedin: "https://www.linkedin.com/company/desi-muchads",
       email: "mailto:brintadesimuchads@gmail.com",
       portfolio: "https://brinta-deb-portfolio.onrender.com",
     },
@@ -75,7 +75,7 @@ const TEAM_ROSTER: TeamMember[] = [
     badge: "CHIEF FINANCIAL OFFICER",
     disciplines: ["Financial Strategy", "Unit Economics", "Profitability Audits", "Capital Allocation"],
     socials: {
-      linkedin: "https://linkedin.com",
+      linkedin: "http://www.linkedin.com/in/reodomkar",
       email: "mailto:thedesimuchads@gmail.com?subject=CFO%20Financial%20Audit%20-%20Omkar%20Dutta",
     },
   },
@@ -230,14 +230,14 @@ export default function AboutPage() {
             >
               <div>
                 {/* Avatar with obsidian glass bezel */}
-                <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden mb-5 border border-white/15 bg-gradient-to-b from-[#1c1c24] to-[#0d0d12]">
+                <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden mb-5 border border-white/20 bg-[#09090c] shadow-[inset_0_0_30px_rgba(0,0,0,0.9)]">
                   <img
                     src={member.avatar}
                     alt={`${member.name} Profile`}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top grayscale contrast-[1.18] brightness-[0.95] group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/10 pointer-events-none" />
 
                   {/* Badge */}
                   <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold text-white uppercase shadow-md">

@@ -253,11 +253,13 @@ export function ThreeHeroCenterpiece() {
 
     window.addEventListener("resize", handleResize);
 
-    // 7. Animation Render Loop
+    // 7. Visibility-Aware Animation Render Loop (Pauses when offscreen to preserve 60FPS)
     let animationFrameId: number;
+    let isVisible = true;
     const startTime = performance.now();
 
     const animate = () => {
+      if (!isVisible) return;
       const elapsed = (performance.now() - startTime) / 1000;
 
       // Parallax lerp
@@ -289,9 +291,22 @@ export function ThreeHeroCenterpiece() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        isVisible = entry ? entry.isIntersecting : true;
+        if (!wasVisible && isVisible) {
+          animationFrameId = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
     animate();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("resize", handleResize);
       container.removeEventListener("click", handleClick);

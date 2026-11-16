@@ -198,7 +198,7 @@ export function ClientPortalPreview() {
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.03] blur-[160px] pointer-events-none" />
 
-      <SectionDivider label="INSIDE THE DARBAR" sublabel="CLIENT PORTAL PREVIEW" />
+      <SectionDivider />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -901,7 +901,7 @@ export function ClientPortalPreview() {
                       onClick={() => {
                         sound.playChime();
                         window.open(
-                          `https://wa.me/919999999999?text=${encodeURIComponent(
+                          `https://wa.me/919180252831?text=${encodeURIComponent(
                             `Pranam Desi Muchads! I would like to lock in the Strategy Baithak slot: ${slot}`
                           )}`,
                           "_blank"

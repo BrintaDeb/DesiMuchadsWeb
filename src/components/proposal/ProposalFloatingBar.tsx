@@ -46,6 +46,18 @@ export function ProposalFloatingBar() {
         colors: ["#ffffff", "#a1a1aa", "#27272a"],
       });
     } catch {}
+
+    const text = `*New 15-Minute Strategy Baithak Booking* ☕\n\n` +
+      `• *Name:* ${callData.name}\n` +
+      `• *WhatsApp:* ${callData.phone}\n` +
+      `• *Preferred Time:* ${callData.date}\n` +
+      `• *Topic:* ${callData.topic}\n` +
+      `• *Industry / Growth Category:* ${proposal.industry} (${formatINR(proposal.budget)})\n` +
+      `• *Projected ROAS:* ${proposal.estimatedRoas}\n\n` +
+      `Sent via Desi Muchads Strategy Engine`;
+
+    const whatsappUrl = `https://wa.me/919180252831?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -102,7 +114,8 @@ export function ProposalFloatingBar() {
                 }}
                 className="px-3 sm:px-4 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-mono text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 min-h-[44px]"
               >
-                <Coffee className="w-3.5 h-3.5 text-white" />
+                <Coffee className="w-3.5 h-3.5 text-white shrink-0" />
+                <span className="sm:hidden">Strategy</span>
                 <span className="hidden sm:inline">Strategy Call</span>
               </button>
 
@@ -243,12 +256,25 @@ export function ProposalFloatingBar() {
                 <p className="text-xs text-zinc-300 max-w-xs mx-auto font-sans">
                   Pranam, {callData.name}! Our founder has received your booking for <strong>{callData.date}</strong>. We will message you on WhatsApp with the Google Meet link.
                 </p>
-                <button
-                  onClick={() => setIsChaiModalOpen(false)}
-                  className="px-6 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase"
-                >
-                  Return to Site
-                </button>
+                <div className="pt-2 flex flex-col gap-2">
+                  <a
+                    href={`https://wa.me/919180252831?text=${encodeURIComponent(
+                      `Pranam Desi Muchads! I have confirmed my 15-Min Strategy Call for ${callData.date}. Looking forward to connecting!`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase flex items-center justify-center gap-1.5 shadow-lg"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>Open WhatsApp Dispatch (+91 9180252831)</span>
+                  </a>
+                  <button
+                    onClick={() => setIsChaiModalOpen(false)}
+                    className="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase transition-colors"
+                  >
+                    Return to Site
+                  </button>
+                </div>
               </div>
             )}
           </div>
