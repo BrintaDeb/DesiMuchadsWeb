@@ -211,30 +211,63 @@ export function ThreeHeroCenterpiece() {
       spinVelocity += Math.PI * 2;
     };
 
-    // Touch Gestures for Android & iOS (Non-blocking vertical scroll)
+    // Touch Gestures for Android & iOS (Non-blocking vertical scroll, multi-axis 3D tilt)
     let touchStartX = 0;
+    let touchStartY = 0;
     let isTouching = false;
+    let touchMoved = false;
 
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
         isTouching = true;
+        touchMoved = false;
       }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!isTouching || e.touches.length !== 1) return;
       const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
       const deltaX = (currentX - touchStartX) / (window.innerWidth || 360);
-      targetMouse.x += deltaX * 1.2;
+      const deltaY = (currentY - touchStartY) / (window.innerHeight || 600);
+
+      if (Math.abs(deltaX) > 0.005 || Math.abs(deltaY) > 0.005) {
+        touchMoved = true;
+      }
+
+      targetMouse.x += deltaX * 1.6;
+      targetMouse.y -= deltaY * 1.6;
+
+      // Dampen to ergonomic range
+      targetMouse.x = Math.max(-0.8, Math.min(0.8, targetMouse.x));
+      targetMouse.y = Math.max(-0.6, Math.min(0.6, targetMouse.y));
+
       touchStartX = currentX;
+      touchStartY = currentY;
     };
 
     const handleTouchEnd = () => {
+      if (isTouching && !touchMoved) {
+        // Quick tap: spin!
+        sound.playChime();
+        spinVelocity += Math.PI * 2;
+      }
       isTouching = false;
     };
 
+    // Mobile Gyroscope Spatial Parallax (Android & iOS)
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.gamma === null || e.beta === null || isTouching) return;
+      const normX = Math.max(-1, Math.min(1, e.gamma / 25));
+      const normY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+      targetMouse.x = normX * 0.45;
+      targetMouse.y = normY * 0.35;
+    };
+
     window.addEventListener("mousemove", handlePointerMove);
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
     container.addEventListener("click", handleClick);
     container.addEventListener("touchstart", handleTouchStart, { passive: true });
     container.addEventListener("touchmove", handleTouchMove, { passive: true });
@@ -308,6 +341,7 @@ export function ThreeHeroCenterpiece() {
     return () => {
       observer.disconnect();
       window.removeEventListener("mousemove", handlePointerMove);
+      window.removeEventListener("deviceorientation", handleOrientation);
       window.removeEventListener("resize", handleResize);
       container.removeEventListener("click", handleClick);
       container.removeEventListener("touchstart", handleTouchStart);

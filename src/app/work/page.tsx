@@ -18,6 +18,7 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SectionDivider } from "@/components/common/SectionDivider";
+import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
 import { WorkDesignTheorySection } from "@/components/casestudies/WorkDesignTheorySection";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
@@ -306,12 +307,14 @@ export default function WorkPage() {
                 const theory = getDesignTheoryBadge(proj);
 
                 return (
-                  <div
+                  <SpotlightCard
                     key={proj.id}
-                    className="group relative rounded-2xl bg-[#121215] border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl"
+                    isGlass={true}
+                    className="group relative rounded-2xl border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl"
                   >
                     {/* Project Media Thumbnail */}
                     <div
+                      data-cursor="view"
                       onClick={() => handleOpenPreview(proj)}
                       className="relative aspect-[16/10] overflow-hidden bg-black/60 cursor-pointer"
                     >
@@ -439,7 +442,7 @@ export default function WorkPage() {
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </SpotlightCard>
                 );
               })}
             </div>
@@ -450,13 +453,15 @@ export default function WorkPage() {
                 const theory = getDesignTheoryBadge(proj);
 
                 return (
-                  <div
+                  <SpotlightCard
                     key={proj.id}
-                    className="p-6 sm:p-8 rounded-3xl bg-[#121215] border border-white/10 hover:border-white/25 transition-all shadow-xl"
+                    isGlass={true}
+                    className="p-6 sm:p-8 rounded-3xl border border-white/10 hover:border-white/25 transition-all shadow-xl"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                       {/* Left: Panoramic Media Preview (5 Cols) */}
                       <div
+                        data-cursor="view"
                         onClick={() => handleOpenPreview(proj)}
                         className="lg:col-span-5 relative aspect-[16/10] rounded-2xl overflow-hidden bg-black/60 border border-white/10 cursor-pointer group"
                       >
@@ -576,7 +581,7 @@ export default function WorkPage() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </SpotlightCard>
                 );
               })}
             </div>

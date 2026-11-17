@@ -312,19 +312,14 @@ iframe {
   display: none;
 }
 
-/* On touch-only mobile devices, optimize blur and dampen 3D perspective transforms to prioritize silky 120Hz scroll */
+/* Mobile iOS Safari & Android Glassmorphism + GPU Acceleration */
 @media (hover: none) and (pointer: coarse) {
   .ios-glass-panel,
   .ios-glass-card {
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-  }
-
-  .ios-glass-panel:hover,
-  .ios-glass-card:hover,
-  .panel-highlight:hover,
-  .panel-highlight-pro:hover {
-    transform: none !important;
+    backdrop-filter: blur(20px) saturate(170%);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    transform: translateZ(0);
+    will-change: transform, backdrop-filter;
   }
 }
 

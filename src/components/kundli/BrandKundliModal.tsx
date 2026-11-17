@@ -69,6 +69,23 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
 
     setIsSubmitted(true);
 
+    // Pillar 3.1 & 3.2: Automated Dispatch to Telegram & Google Sheets CRM
+    try {
+      fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source: "brand_kundli",
+          name: formData.name,
+          phone: formData.whatsapp,
+          brandWebsite: formData.brandUrl,
+          message: `Brand: ${formData.brandName}`,
+          budget: selectedBudget,
+          service: selectedServices.join(", "),
+        }),
+      }).catch(() => {});
+    } catch {}
+
     // Launch celebratory luxury monochrome confetti
     try {
       confetti({

@@ -29,6 +29,19 @@ export function ProposalFloatingBar() {
 
   const handleWhatsAppClick = () => {
     sound.playChime();
+    // Dispatch to CRM / Telegram alert
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "proposal_floating_bar_whatsapp",
+        name: "Founder / Marketing Lead",
+        brandWebsite: proposal.industry,
+        budget: formatINR(proposal.budget),
+        service: `Scale Engine (${proposal.estimatedRoas} ROAS)`,
+        message: `Triggered WhatsApp Proposal from Floating Bar. Industry: ${proposal.industry}, Budget: ${formatINR(proposal.budget)}, Estimated ROAS: ${proposal.estimatedRoas}`,
+      }),
+    }).catch(() => {});
     window.open(generateWhatsAppPayload(), "_blank");
   };
 
@@ -38,6 +51,21 @@ export function ProposalFloatingBar() {
 
     sound.playChime();
     setCallBooked(true);
+
+    // Dispatch to CRM / Telegram alert
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "strategy_call_baithak_modal",
+        name: callData.name,
+        phone: callData.phone,
+        budget: formatINR(proposal.budget),
+        service: proposal.industry,
+        message: `Topic: ${callData.topic} | Preferred Time: ${callData.date} | Projected ROAS: ${proposal.estimatedRoas}`,
+      }),
+    }).catch(() => {});
+
     try {
       confetti({
         particleCount: 100,
@@ -98,7 +126,7 @@ export function ProposalFloatingBar() {
                 <span className="font-mono text-[11px] sm:text-xs font-bold text-white truncate">
                   {proposal.industry} • {formatINR(proposal.budget)}
                 </span>
-                <span className="font-mono text-[9px] sm:text-[10px] text-zinc-400 truncate">
+                <span data-cursor="flame" className="font-mono text-[9px] sm:text-[10px] text-zinc-400 truncate hover:text-amber-300 transition-colors cursor-pointer">
                   ROAS: {proposal.estimatedRoas} ✦ Ready to deploy
                 </span>
               </div>
@@ -108,6 +136,7 @@ export function ProposalFloatingBar() {
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               {/* Chai & Strategy Call Trigger */}
               <button
+                data-cursor="chai"
                 onClick={() => {
                   sound.playPluck(160);
                   setIsChaiModalOpen(true);

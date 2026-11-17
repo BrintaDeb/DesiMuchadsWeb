@@ -196,7 +196,7 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
 
   return (
     <section className={`relative scroll-mt-28 ${className}`}>
-      <SpotlightCard className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-[#0c0c10] border border-white/20 shadow-2xl relative overflow-hidden">
+      <SpotlightCard isGlass={true} className="p-6 sm:p-10 lg:p-12 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden">
         {/* Ambient Top Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-28 bg-gradient-to-b from-white/[0.08] to-transparent blur-3xl pointer-events-none" />
 
@@ -381,7 +381,10 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
           </div>
 
           {/* RIGHT: Live Telemetry Output Card */}
-          <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-[#14141a] to-[#0c0c10] border-2 border-white/20 shadow-xl space-y-6">
+          <div
+            data-cursor="flame"
+            className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-[#14141a] to-[#0c0c10] border-2 border-white/20 shadow-xl space-y-6"
+          >
             <div>
               {/* Top Badge: ROAS Guarantee */}
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -391,7 +394,10 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
                     Projected Blended ROAS
                   </span>
                 </div>
-                <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-sm font-black animate-pulse">
+                <div
+                  data-cursor="flame"
+                  className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-sm font-black animate-pulse cursor-pointer"
+                >
                   {calculation.projectedRoas}X
                 </div>
               </div>

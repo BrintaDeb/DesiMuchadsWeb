@@ -615,6 +615,23 @@ export default function ContactPage() {
       return;
     }
     sound.playChime();
+
+    // CRM & Instant Telegram Alert Dispatch
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "contact_qualification_whatsapp",
+        name: clientName.trim() || "Founder / Growth Lead",
+        brandName: brandName.trim(),
+        brandWebsite: brandUrl.trim(),
+        phone: contactWhatsapp.trim(),
+        budget: formatINR(monthlyBudget),
+        service: selectedServices.join(", "),
+        message: `Goals: ${selectedGoals.join(", ")} | Platforms: ${selectedPlatforms.join(", ")} | Slot: ${effectiveTimeSlot} (${selectedMeetingChannel}) | Notes: ${customNotes.trim()}`,
+      }),
+    }).catch(() => {});
+
     const message = generateWhatsAppMessage();
     const url = `https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -630,6 +647,23 @@ export default function ContactPage() {
 
   const handleAddToCalendar = () => {
     sound.playChime();
+
+    // CRM & Instant Telegram Alert Dispatch
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "contact_calendar_booking",
+        name: clientName.trim() || "Founder / Growth Lead",
+        brandName: brandName.trim(),
+        brandWebsite: brandUrl.trim(),
+        phone: contactWhatsapp.trim(),
+        budget: formatINR(monthlyBudget),
+        service: selectedServices.join(", "),
+        message: `Added to Calendar for slot: ${effectiveTimeSlot} (${selectedMeetingChannel}) | Goals: ${selectedGoals.join(", ")}`,
+      }),
+    }).catch(() => {});
+
     const formattedDate = `${selectedDate.dayName}, ${selectedDate.dayNumber} ${selectedDate.monthName} ${selectedDate.year}`;
     const channelName =
       MEETING_CHANNELS.find((c) => c.id === selectedMeetingChannel)?.name || "Google Meet";
@@ -1523,6 +1557,7 @@ export default function ContactPage() {
                 {/* PRIMARY ACTION: DIRECT WHATSAPP SEND */}
                 <div className="mt-5 space-y-2.5">
                   <button
+                    data-cursor="chai"
                     type="button"
                     onClick={handleSendToWhatsApp}
                     className="w-full py-4 px-5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center gap-2 active:scale-95 group cursor-pointer"
@@ -1552,6 +1587,7 @@ export default function ContactPage() {
                     </button>
 
                     <button
+                      data-cursor="chai"
                       type="button"
                       onClick={handleAddToCalendar}
                       className="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-mono text-[11px] border border-white/15 transition-all flex items-center justify-center gap-1.5 cursor-pointer"

@@ -36,7 +36,7 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
 
   return (
     <div className="relative py-16 px-4 max-w-4xl mx-auto my-12 text-center">
-      <div className="relative rounded-3xl p-8 sm:p-12 bg-[#121215] border border-white/15 border-t-white/30 shadow-2xl overflow-hidden">
+      <div className="relative rounded-3xl p-6 sm:p-12 ios-glass-panel border border-white/15 border-t-white/40 shadow-2xl overflow-hidden">
         {/* Filigree corner brackets */}
         <div className="absolute top-3 left-3 opacity-30 pointer-events-none">
           <FiligreeCorner className="w-5 h-5 text-white" position="top-left" />

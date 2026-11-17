@@ -11,6 +11,7 @@ export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement>
   maxTilt?: number; // max tilt degrees (default 3)
   perspective?: number; // 3D perspective in px (default 1200)
   scale?: number; // scale on hover (default 1.004)
+  isGlass?: boolean; // iOS & visionOS glassmorphism backdrop
 }
 
 export function SpotlightCard({
@@ -22,6 +23,7 @@ export function SpotlightCard({
   maxTilt = 3,
   perspective = 1200,
   scale = 1.004,
+  isGlass = false,
   ...props
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -30,12 +32,26 @@ export function SpotlightCard({
   const isCoarseRef = useRef<boolean>(false);
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isInView, setIsInView] = useState<boolean>(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     }
     return false;
   });
+
+  // Track viewport visibility for high-efficiency mobile gyro tilt
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Animation frame and interpolation targets for buttery 60/120fps physics
   const targetX = useRef(0);
@@ -86,18 +102,22 @@ export function SpotlightCard({
     [enableTilt, isHovered, maxTilt, perspective, prefersReducedMotion, scale]
   );
 
-  // Gyroscope mobile spatial tilt support (active only on hovered/tapped card to eliminate background GPU churn)
+  // Gyroscope mobile spatial tilt support (active when card is in view on Android & iOS)
   useEffect(() => {
-    if (typeof window === "undefined" || prefersReducedMotion || !enableTilt || !isHovered) return;
+    if (typeof window === "undefined" || prefersReducedMotion || !enableTilt || !isInView) return;
 
     const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma === null || e.beta === null) return;
-      // Normalize gamma (-25 to 25 deg) and beta (20 to 70 deg)
+      // When finger is touching, touch coordinate takes priority
+      if (isHovered) return;
+
+      // Normalize gamma (-25 to 25 deg roll) and beta (20 to 70 deg pitch)
       const normX = Math.max(-1, Math.min(1, e.gamma / 25));
       const normY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
 
-      targetX.current = normX;
-      targetY.current = normY;
+      // Gentle, refined ambient 3D tilt
+      targetX.current = normX * 0.45;
+      targetY.current = normY * 0.45;
 
       if (!animFrameId.current) {
         animFrameId.current = requestAnimationFrame(updatePhysics);
@@ -108,7 +128,7 @@ export function SpotlightCard({
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
     };
-  }, [enableTilt, isHovered, prefersReducedMotion, updatePhysics]);
+  }, [enableTilt, isInView, isHovered, prefersReducedMotion, updatePhysics]);
 
   const handlePointerMove = useCallback(
     (clientX: number, clientY: number) => {
@@ -160,9 +180,7 @@ export function SpotlightCard({
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
-      // On mobile coarse touch screens, preserve 100% fluid vertical scrolling without fighting 3D tilt
-      if (isCoarseRef.current) return;
-      if (e.touches[0]) {
+      if (e.touches && e.touches[0]) {
         handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
       }
     },
@@ -185,17 +203,23 @@ export function SpotlightCard({
     [props, updatePhysics]
   );
 
-  const handleTouchStart = useCallback(() => {
-    setIsHovered(true);
-    if (cardRef.current) {
-      cardRef.current.style.setProperty("--inner-size", "80px");
-      cardRef.current.style.setProperty("--outer-size", "220px");
-      cardRef.current.style.setProperty("--spotlight-opacity", "1");
-    }
-    if (!animFrameId.current) {
-      animFrameId.current = requestAnimationFrame(updatePhysics);
-    }
-  }, [updatePhysics]);
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      setIsHovered(true);
+      if (e.touches && e.touches[0]) {
+        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+      if (cardRef.current) {
+        cardRef.current.style.setProperty("--inner-size", "100px");
+        cardRef.current.style.setProperty("--outer-size", "260px");
+        cardRef.current.style.setProperty("--spotlight-opacity", "1");
+      }
+      if (!animFrameId.current) {
+        animFrameId.current = requestAnimationFrame(updatePhysics);
+      }
+    },
+    [handlePointerMove, updatePhysics]
+  );
 
   const handleMouseLeave = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -255,7 +279,7 @@ export function SpotlightCard({
           : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease",
         ...props.style,
       }}
-      className={`relative overflow-hidden select-none ${className}`}
+      className={`relative overflow-hidden select-none ${isGlass ? "ios-glass-card backdrop-blur-xl" : ""} ${className}`}
       {...props}
     >
       {/* 1. iOS Specular Reflection Sheen (Follows cursor in 3D) */}

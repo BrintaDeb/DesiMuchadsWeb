@@ -24,6 +24,10 @@ import { ProposalFloatingBar } from "@/components/proposal/ProposalFloatingBar";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
+import { BeforeAfterSlider } from "@/components/common/BeforeAfterSlider";
+import { GrowthJourneyScrollytelling } from "@/components/methodology/GrowthJourneyScrollytelling";
+import { WinterExpansionDiscountModal } from "@/components/common/WinterExpansionDiscountModal";
+import { StardustCursorTrail } from "@/components/common/StardustCursorTrail";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
@@ -153,6 +157,11 @@ export default function Home() {
 
           <SectionDivider />
 
+          {/* Section 2.5: The 3-Act Growth Journey Scrollytelling */}
+          <GrowthJourneyScrollytelling onOpenKundli={() => setIsKundliOpen(true)} />
+
+          <SectionDivider />
+
           {/* Section 3: Flagship Works & Master Artworks Preview */}
           <section id="karname" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -174,11 +183,13 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {flagshipProjects.map((proj) => (
-                <div
+                <SpotlightCard
                   key={proj.id}
-                  className="group rounded-2xl bg-[#121215] border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col justify-between shadow-lg"
+                  isGlass={true}
+                  className="group rounded-2xl border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col justify-between shadow-lg"
                 >
                   <div
+                    data-cursor="view"
                     onClick={() => {
                       sound.playChime();
                       setActiveProject(proj);
@@ -261,9 +272,16 @@ export default function Home() {
                       </Link>
                     </div>
                   </div>
-                </div>
+                </SpotlightCard>
               ))}
             </div>
+          </section>
+
+          <SectionDivider />
+
+          {/* Section 3.5: Creative Architecture Teardown Interactive Slider */}
+          <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12">
+            <BeforeAfterSlider />
           </section>
 
           <SectionDivider />
@@ -285,7 +303,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#121215] border border-white/10 space-y-4">
+              <SpotlightCard isGlass={true} className="p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
                 <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
                   FOUNDATION STACK
                 </span>
@@ -298,10 +316,10 @@ export default function Home() {
                 <p className="font-sans text-xs text-zinc-400 leading-relaxed">
                   For challenger brands pushing ₹3L–₹15L/mo ad spend seeking disciplined, profitable scaling.
                 </p>
-              </div>
+              </SpotlightCard>
 
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#121215] border-2 border-white/40 shadow-2xl space-y-4 relative">
-                <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-white text-black text-[9px] font-bold font-mono uppercase">
+              <SpotlightCard isGlass={true} className="p-6 sm:p-8 rounded-2xl border-2 border-white/40 shadow-2xl space-y-4 relative">
+                <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-white text-black text-[9px] font-bold font-mono uppercase z-30">
                   FLAGSHIP
                 </div>
                 <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
@@ -316,9 +334,9 @@ export default function Home() {
                 <p className="font-sans text-xs text-zinc-400 leading-relaxed">
                   Our flagship end-to-end engine for scaling brands pushing ₹15L–₹75L/mo ad volume.
                 </p>
-              </div>
+              </SpotlightCard>
 
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#121215] border border-white/10 space-y-4">
+              <SpotlightCard isGlass={true} className="p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
                 <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
                   ENTERPRISE STACK
                 </span>
@@ -331,7 +349,7 @@ export default function Home() {
                 <p className="font-sans text-xs text-zinc-400 leading-relaxed">
                   Full enterprise brand takeover for market leaders exceeding ₹75L/mo ad volume.
                 </p>
-              </div>
+              </SpotlightCard>
             </div>
 
             <div className="text-center">
@@ -403,6 +421,12 @@ export default function Home() {
         isOpen={isKundliOpen}
         onClose={() => setIsKundliOpen(false)}
       />
+
+      {/* Winter Scale & National Expansion 20% Discount Modal */}
+      <WinterExpansionDiscountModal onOpenKundli={() => setIsKundliOpen(true)} />
+
+      {/* Liquid Platinum Stardust Particle Cursor Trail */}
+      <StardustCursorTrail />
     </SmoothScrollProvider>
   );
 }

@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { Eye, Flame, Coffee, MoveHorizontal } from "lucide-react";
+
+export type CursorMode = "default" | "pointer" | "explore" | "view" | "flame" | "chai" | "drag";
 
 export function CustomCursor() {
   const [mounted, setMounted] = useState(false);
-  const [isPointer, setIsPointer] = useState(false);
-  const [isExplore, setIsExplore] = useState(false);
+  const [mode, setMode] = useState<CursorMode>("default");
   const [isVisible, setIsVisible] = useState(false);
 
   const dotRef = useRef<HTMLDivElement>(null);
@@ -15,8 +17,7 @@ export function CustomCursor() {
   const ringPos = useRef({ x: -100, y: -100 });
 
   const isVisibleRef = useRef(false);
-  const isPointerRef = useRef(false);
-  const isExploreRef = useRef(false);
+  const modeRef = useRef<CursorMode>("default");
 
   useEffect(() => {
     // Only enable on fine pointer devices (desktop)
@@ -32,22 +33,31 @@ export function CustomCursor() {
         setIsVisible(true);
       }
 
-      // Check if hovering over interactive elements or explore targets
+      // Check for specialized data-cursor attributes
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const exploreEl = !!target.closest('[data-cursor="explore"]');
-      if (isExploreRef.current !== exploreEl) {
-        isExploreRef.current = exploreEl;
-        setIsExplore(exploreEl);
+      let nextMode: CursorMode = "default";
+
+      if (target.closest('[data-cursor="view"]')) {
+        nextMode = "view";
+      } else if (target.closest('[data-cursor="flame"]')) {
+        nextMode = "flame";
+      } else if (target.closest('[data-cursor="chai"]')) {
+        nextMode = "chai";
+      } else if (target.closest('[data-cursor="drag"]')) {
+        nextMode = "drag";
+      } else if (target.closest('[data-cursor="explore"]')) {
+        nextMode = "explore";
+      } else if (
+        target.closest('button, a, input, select, textarea, [role="button"], [data-cursor="pointer"]')
+      ) {
+        nextMode = "pointer";
       }
 
-      const clickableEl = !!target.closest(
-        'button, a, input, select, textarea, [role="button"], [data-cursor="pointer"]'
-      );
-      if (isPointerRef.current !== clickableEl) {
-        isPointerRef.current = clickableEl;
-        setIsPointer(clickableEl);
+      if (modeRef.current !== nextMode) {
+        modeRef.current = nextMode;
+        setMode(nextMode);
       }
     };
 
@@ -65,10 +75,9 @@ export function CustomCursor() {
     document.addEventListener("mouseenter", handleMouseEnter);
 
     let animationFrameId: number;
-    const lerpFactor = 0.16;
+    const lerpFactor = 0.18;
 
     const render = () => {
-      // Lerp ring position toward mouse position
       ringPos.current.x += (mousePos.current.x - ringPos.current.x) * lerpFactor;
       ringPos.current.y += (mousePos.current.y - ringPos.current.y) * lerpFactor;
 
@@ -95,6 +104,8 @@ export function CustomCursor() {
 
   if (!mounted) return null;
 
+  const isSpecial = mode !== "default" && mode !== "pointer";
+
   return (
     <>
       {/* Center 8px stark white sharp dot */}
@@ -103,12 +114,12 @@ export function CustomCursor() {
         aria-hidden="true"
         className={`pointer-events-none fixed top-0 left-0 z-[100] transition-opacity duration-200 ${
           isVisible ? "opacity-100" : "opacity-0"
-        } ${isExplore ? "opacity-0" : ""}`}
+        } ${isSpecial ? "opacity-0" : ""}`}
       >
         <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_white]" />
       </div>
 
-      {/* Trailing 36px white ring or rotating stamp */}
+      {/* Trailing Ring / Metamorphosis Shape */}
       <div
         ref={ringRef}
         aria-hidden="true"
@@ -116,7 +127,7 @@ export function CustomCursor() {
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        {isExplore ? (
+        {mode === "explore" && (
           /* Circular rotating Hindi/English stamp */
           <div className="relative w-28 h-28 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center animate-spin-slow">
             <svg
@@ -138,11 +149,41 @@ export function CustomCursor() {
               <span className="text-black text-xs font-bold font-mono">〰️</span>
             </div>
           </div>
-        ) : (
+        )}
+
+        {mode === "view" && (
+          <div className="relative -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-white text-black flex items-center gap-1.5 shadow-[0_0_20px_white] animate-in zoom-in-75 duration-200">
+            <Eye className="w-3.5 h-3.5 text-black" />
+            <span className="font-mono text-[10px] font-black uppercase tracking-wider">INSPECT</span>
+          </div>
+        )}
+
+        {mode === "flame" && (
+          <div className="relative -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-amber-400 text-black flex items-center gap-1.5 shadow-[0_0_25px_rgba(251,191,36,0.8)] animate-in zoom-in-75 duration-200">
+            <Flame className="w-3.5 h-3.5 text-black animate-pulse" />
+            <span className="font-mono text-[10px] font-black uppercase tracking-wider">ROAS</span>
+          </div>
+        )}
+
+        {mode === "chai" && (
+          <div className="relative -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-emerald-400 text-black flex items-center gap-1.5 shadow-[0_0_25px_rgba(52,211,153,0.8)] animate-in zoom-in-75 duration-200">
+            <Coffee className="w-3.5 h-3.5 text-black" />
+            <span className="font-mono text-[10px] font-black uppercase tracking-wider">BAITHAK</span>
+          </div>
+        )}
+
+        {mode === "drag" && (
+          <div className="relative -translate-x-1/2 -translate-y-1/2 px-2.5 py-1 rounded-full bg-white text-black flex items-center gap-1 shadow-[0_0_15px_white] animate-in zoom-in-75 duration-200">
+            <MoveHorizontal className="w-3.5 h-3.5 text-black" />
+            <span className="font-mono text-[9px] font-bold uppercase">DRAG</span>
+          </div>
+        )}
+
+        {!isSpecial && (
           /* Normal Trailing Ring */
           <div
-            className={`rounded-full border border-white/60 transition-all duration-300 flex items-center justify-center ${
-              isPointer
+            className={`rounded-full border border-white/60 transition-all duration-300 flex items-center justify-center -translate-x-1/2 -translate-y-1/2 ${
+              mode === "pointer"
                 ? "w-14 h-14 bg-white/10 border-white scale-110"
                 : "w-9 h-9 border-white/40"
             }`}

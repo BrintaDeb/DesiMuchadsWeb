@@ -241,10 +241,11 @@ export default function ServicesPage() {
           {/* Service Cards Grid */}
           <div className="space-y-12">
             {filteredServices.map((service, index) => (
-              <div
+              <SpotlightCard
                 key={service.id}
                 id={service.id}
-                className="scroll-mt-32 p-6 sm:p-8 lg:p-10 rounded-3xl bg-[#121215] border border-white/10 hover:border-white/20 transition-all shadow-xl"
+                isGlass={true}
+                className="scroll-mt-32 p-6 sm:p-8 lg:p-10 rounded-3xl border border-white/10 hover:border-white/20 transition-all shadow-xl"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                   {/* Left Column: Overview & Philosophy */}
@@ -366,7 +367,7 @@ export default function ServicesPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </section>
