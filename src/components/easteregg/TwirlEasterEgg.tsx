@@ -46,13 +46,13 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
         </div>
 
         <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-2">
-          INTERACTIVE MUCHHAD PHYSICS EASTER EGG
+          INTERACTIVE MOUSTACHE PHYSICS
         </span>
         <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2">
-          Twirl the Muchh (Tension Check)
+          Twirl the Moustache (Tension Check)
         </h3>
         <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto mb-8">
-          Flick or pull the moustache with your cursor/finger. Test our spring physics and see what secret gift the Raja has in store.
+          Flick or pull the moustache with your cursor or finger. Test our spring physics and unlock your performance privilege.
         </p>
 
         {/* Draggable Spring-Physics Moustache (isolated touch-action for vertical scroll safety) */}

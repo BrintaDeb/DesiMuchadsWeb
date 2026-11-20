@@ -14,7 +14,6 @@ import {
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
-import { KhadiNoiseOverlay } from "@/components/common/KhadiNoiseOverlay";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
 
@@ -37,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${project.client} Case Study (${project.heroStat}) | DESI MUCHADS ✦ High-ROAS Agency`,
-    description: `${project.tagline} Verified Results: ${project.heroStat}. The Mushkil, Jugaad, and Nateeja breakdown by Desi Muchads Digital Growth Squad.`,
+    description: `${project.tagline} Verified Results: ${project.heroStat}. The Challenge, Strategy, and Outcome breakdown by Desi Muchads Digital Growth Squad.`,
     keywords: [
       project.client,
       `${project.client} Case Study`,
@@ -162,7 +161,7 @@ async function ProjectDetailContent({ params }: PageProps) {
         "@type": "ListItem",
         position: 2,
         name: "Portfolio Work",
-        item: "https://desimuchads.agency/#karname",
+        item: "https://desimuchads.agency/#work",
       },
       {
         "@type": "ListItem",
@@ -186,7 +185,6 @@ async function ProjectDetailContent({ params }: PageProps) {
       />
 
       {/* Background textures */}
-      <KhadiNoiseOverlay />
       <IndianArtBackgroundOverlay />
 
       {/* Top Floating Glass Navigation Header */}
@@ -204,14 +202,14 @@ async function ProjectDetailContent({ params }: PageProps) {
                 DESI MUCHADS
               </span>
               <span className="font-mono text-[9px] text-zinc-400 tracking-wider">
-                BACK TO DARBAR
+                BACK TO HOME
               </span>
             </div>
           </Link>
 
           <div className="flex items-center gap-3">
             <Link
-              href="/#karname"
+              href="/#work"
               className="text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors hidden sm:inline-flex items-center gap-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -232,7 +230,7 @@ async function ProjectDetailContent({ params }: PageProps) {
               className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md flex items-center gap-1.5"
             >
               <PhoneCall className="w-3 h-3" />
-              <span>Book Baithak</span>
+              <span>Strategy Call</span>
             </a>
           </div>
         </div>
@@ -243,10 +241,10 @@ async function ProjectDetailContent({ params }: PageProps) {
         {/* Breadcrumb Navigation */}
         <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
           <Link href="/" className="hover:text-white transition-colors">
-            Darbar Home
+            Home
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
-          <Link href="/#karname" className="hover:text-white transition-colors">
+          <Link href="/#work" className="hover:text-white transition-colors">
             Portfolio Work
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
@@ -371,7 +369,7 @@ async function ProjectDetailContent({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Section 3: The 3 Pillars of Truth (Mushkil, Jugaad, Nateeja) */}
+        {/* Section 3: The 3 Pillars of Truth (Challenge, Strategy, Outcome) */}
         <div className="space-y-6">
           <div className="max-w-2xl">
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
@@ -383,39 +381,39 @@ async function ProjectDetailContent({ params }: PageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* 1. Mushkil */}
+            {/* 1. Challenge */}
             <div className="rounded-3xl p-8 ios-glass-card border-red-500/25 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
               <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center font-mono text-xs font-bold text-red-400">
                 01
               </div>
               <span className="font-mono text-xs font-black uppercase tracking-widest text-red-400 block">
-                THE MUSHKIL (CHALLENGE)
+                STAGE 01: THE CHALLENGE
               </span>
               <p className="text-sm text-zinc-300 leading-relaxed font-sans">
                 {project.mushkil}
               </p>
             </div>
 
-            {/* 2. Jugaad */}
+            {/* 2. Strategy */}
             <div className="rounded-3xl p-8 ios-glass-card border-emerald-500/25 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-mono text-xs font-bold text-emerald-400">
                 02
               </div>
               <span className="font-mono text-xs font-black uppercase tracking-widest text-emerald-400 block">
-                THE JUGAAD (STRATEGY)
+                STAGE 02: THE STRATEGY
               </span>
               <p className="text-sm text-zinc-300 leading-relaxed font-sans">
                 {project.jugaad}
               </p>
             </div>
 
-            {/* 3. Nateeja */}
+            {/* 3. Results */}
             <div className="rounded-3xl p-8 ios-glass-card border-white/35 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
               <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/30 flex items-center justify-center font-mono text-xs font-bold text-white shadow-[0_0_15px_rgba(255,255,255,0.15)]">
                 03
               </div>
               <span className="font-mono text-xs font-black uppercase tracking-widest text-white block">
-                THE NATEEJA (RESULTS)
+                STAGE 03: THE OUTCOME
               </span>
               <p className="text-sm text-zinc-300 leading-relaxed font-sans">
                 {project.nateeja}

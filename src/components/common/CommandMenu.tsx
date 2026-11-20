@@ -63,7 +63,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
       id: "action-calculator",
       category: "Action",
       title: "Calculate ROAS & Unit Economics",
-      subtitle: "Run the real-time Hisab-Kitab simulator",
+      subtitle: "Run the real-time unit economics simulator",
       icon: Calculator,
       onSelect: () => {
         onClose();
@@ -74,7 +74,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
     {
       id: "action-kundli",
       category: "Action",
-      title: "Run Free AI Brand Kundli Audit",
+      title: "Run Free AI Brand Growth Audit",
       subtitle: "Audit speed, ads & revenue leaks",
       icon: ShieldCheck,
       onSelect: () => {
@@ -85,7 +85,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
     {
       id: "action-portal",
       category: "Action",
-      title: "Inside the Darbar (Client Portal)",
+      title: "Inside the Client Growth Portal",
       subtitle: "View live ROAS telemetry & pipeline",
       icon: Layers,
       onSelect: () => {
@@ -97,7 +97,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
     {
       id: "action-calendar",
       category: "Action",
-      title: "Schedule Live Growth Baithak (Calendar)",
+      title: "Schedule Live Strategy Session (Calendar)",
       subtitle: "Select appointment slot & request custom quotation",
       icon: Calendar,
       onSelect: () => {
@@ -115,7 +115,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
         onClose();
         window.open(
           "https://wa.me/919180252831?text=" +
-            encodeURIComponent("Pranam Desi Muchads! I would like to schedule a strategy baithak."),
+            encodeURIComponent("Hello Desi Muchads! I would like to schedule a strategy session."),
           "_blank"
         );
       },

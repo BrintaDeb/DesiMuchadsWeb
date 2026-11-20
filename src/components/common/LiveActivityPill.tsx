@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { sound } from "@/lib/sound";
-import { Activity, X, ChevronRight, ShieldCheck, Zap } from "lucide-react";
+import { X, ChevronRight } from "lucide-react";
 
 interface LiveActivityPillProps {
   onOpenKundli: () => void;
@@ -10,16 +10,16 @@ interface LiveActivityPillProps {
 
 const ACTIVITIES = [
   {
-    tag: "LIVE AUDIT",
-    text: "Founder in Indiranagar, Bengaluru ran Brand Kundli",
+    tag: "LIVE DIAGNOSTIC",
+    text: "E-Commerce founder in Bengaluru completed Growth Audit",
     time: "2m ago",
     metric: "+65% Lift",
   },
   {
-    tag: "SENTINEL HEALTH",
-    text: "100% Platform Uptime verified (avg 38ms TTFB)",
+    tag: "PLATFORM HEALTH",
+    text: "100% Core Web Vitals pass rate (avg 38ms TTFB)",
     time: "Just now",
-    metric: "4/4 Healthy",
+    metric: "4/4 Operational",
   },
   {
     tag: "SCALE WINNER",
@@ -28,10 +28,10 @@ const ACTIVITIES = [
     metric: "₹18.5L GMV",
   },
   {
-    tag: "BAITHAK BOOKED",
-    text: "Strategy Call scheduled for South Delhi D2C founder",
+    tag: "SESSION BOOKED",
+    text: "Executive Strategy Call scheduled for D2C founder",
     time: "28m ago",
-    metric: "Chai Ready",
+    metric: "Reserved",
   },
 ];
 
@@ -58,12 +58,12 @@ export function LiveActivityPill({ onOpenKundli }: LiveActivityPillProps) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="hidden md:flex fixed bottom-6 left-6 z-40 items-center gap-3 p-2.5 pr-3 rounded-full ios-glass-panel shadow-[0_15px_40px_rgba(0,0,0,0.8)] border border-white/20 select-none animate-in slide-in-from-bottom-4 duration-500 max-w-md group"
+      className="hidden md:flex fixed bottom-6 left-6 z-40 items-center gap-3 p-2.5 pr-3 rounded-[0.2rem] bg-[#09090b]/90 backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.85)] border border-[rgba(232,232,227,0.18)] select-none animate-in slide-in-from-bottom-4 duration-500 max-w-md group"
     >
       {/* Live Pulsing Beacon */}
-      <div className="relative flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/15 border border-emerald-400/40 shrink-0">
+      <div className="relative flex items-center justify-center w-6 h-6 rounded-[0.2rem] bg-emerald-500/15 border border-emerald-400/30 shrink-0">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-        <span className="absolute w-4 h-4 rounded-full border border-emerald-400/40 animate-ping pointer-events-none" />
+        <span className="absolute w-3.5 h-3.5 rounded-full border border-emerald-400/40 animate-ping pointer-events-none" />
       </div>
 
       {/* Activity Ticker Content */}
@@ -73,7 +73,7 @@ export function LiveActivityPill({ onOpenKundli }: LiveActivityPillProps) {
           onOpenKundli();
         }}
         className="flex flex-col min-w-0 cursor-pointer pr-1"
-        title="Click to run your brand's Kundli audit"
+        title="Click to run your brand's growth audit"
       >
         <div className="flex items-center gap-2">
           <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-400 uppercase">
@@ -87,7 +87,7 @@ export function LiveActivityPill({ onOpenKundli }: LiveActivityPillProps) {
       </div>
 
       {/* Metric Badge */}
-      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-white/10 text-white shrink-0 hidden lg:inline">
+      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-[0.2rem] bg-white/10 text-white shrink-0 hidden lg:inline">
         {current.metric}
       </span>
 
@@ -98,10 +98,10 @@ export function LiveActivityPill({ onOpenKundli }: LiveActivityPillProps) {
           sound.playChime();
           onOpenKundli();
         }}
-        className="p-1 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors shrink-0"
-        title="Audit My Brand"
+        className="text-zinc-400 hover:text-white p-1"
+        aria-label="View Audit"
       >
-        <ChevronRight className="w-4 h-4" />
+        <ChevronRight className="w-3.5 h-3.5" />
       </button>
 
       {/* Dismiss button */}
@@ -112,8 +112,8 @@ export function LiveActivityPill({ onOpenKundli }: LiveActivityPillProps) {
           sound.playPluck(120);
           setIsDismissed(true);
         }}
-        className="p-1 rounded-full hover:bg-white/10 text-zinc-500 hover:text-white transition-colors shrink-0"
-        title="Dismiss activity updates"
+        className="text-zinc-500 hover:text-zinc-300 p-0.5"
+        aria-label="Dismiss Notification"
       >
         <X className="w-3.5 h-3.5" />
       </button>

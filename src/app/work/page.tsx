@@ -151,7 +151,7 @@ export default function WorkPage() {
 
           <div className="max-w-4xl">
             <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.05] mb-6">
-              Our Karname:{" "}
+              Selected Portfolio:{" "}
               <span className="text-zinc-400 underline decoration-white/20 underline-offset-8">
                 Work That Converts
               </span>
@@ -722,27 +722,27 @@ export default function WorkPage() {
 
                   {/* 3 Classical Problem/Solution/Result Pillars */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-5 rounded-2xl bg-[#121215] border border-red-500/20 space-y-2">
+                    <div className="p-5 rounded-2xl bg-[#121211] border border-red-500/20 space-y-2">
                       <span className="font-mono text-xs text-red-400 font-bold uppercase">
-                        01. THE BOTTLENECK (MUSHKIL)
+                        01. THE BOTTLENECK (CHALLENGE)
                       </span>
                       <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
                         {activeProject.mushkil}
                       </p>
                     </div>
 
-                    <div className="p-5 rounded-2xl bg-[#121215] border border-blue-500/20 space-y-2">
+                    <div className="p-5 rounded-2xl bg-[#121211] border border-blue-500/20 space-y-2">
                       <span className="font-mono text-xs text-blue-400 font-bold uppercase">
-                        02. THE DESIGN FIX (JUGAAD)
+                        02. THE PERFORMANCE FIX (STRATEGY)
                       </span>
                       <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
                         {activeProject.jugaad}
                       </p>
                     </div>
 
-                    <div className="p-5 rounded-2xl bg-[#121215] border border-emerald-500/20 space-y-2">
+                    <div className="p-5 rounded-2xl bg-[#121211] border border-emerald-500/20 space-y-2">
                       <span className="font-mono text-xs text-emerald-400 font-bold uppercase">
-                        03. THE MEASURED LIFT (NATEEJA)
+                        03. THE MEASURED LIFT (OUTCOME)
                       </span>
                       <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
                         {activeProject.nateeja}

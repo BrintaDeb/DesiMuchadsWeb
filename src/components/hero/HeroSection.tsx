@@ -1,110 +1,151 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ThreeHeroCenterpiece } from "./ThreeHeroCenterpiece";
-import { LiquidPlatinumCanvas } from "./LiquidPlatinumCanvas";
-import { CheckCircle2 } from "lucide-react";
+import { ConstellationCanvas } from "./ConstellationCanvas";
 import { sound } from "@/lib/sound";
+import { BreydaqsButton } from "../common/BreydaqsButton";
 
 interface HeroSectionProps {
   onOpenKundli: () => void;
 }
 
+const ROTATING_KEYWORDS = [
+  "HIGH-ROAS PERFORMANCE",
+  "NEXT.JS 16 WEB PLATFORMS",
+  "QUICK COMMERCE ENGINES",
+  "VIRAL VISUAL IDENTITY",
+  "ENTERPRISE AUTOMATIONS",
+];
+
 export function HeroSection({ onOpenKundli }: HeroSectionProps) {
+  const [keywordIndex, setKeywordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setKeywordIndex((prev) => (prev + 1) % ROTATING_KEYWORDS.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="relative min-h-[90vh] pt-28 sm:pt-40 pb-16 sm:pb-20 flex items-center overflow-hidden bg-[#09090b] text-white font-display">
-      {/* Liquid Platinum Undulating Ribbon Canvas */}
-      <LiquidPlatinumCanvas />
-
-      {/* Subtle Starry Particle Accents */}
-      <div className="absolute inset-0 pointer-events-none opacity-25">
-        <div className="absolute top-1/4 left-1/6 w-1 h-1 bg-white rounded-full shadow-[0_0_8px_white]" />
-        <div className="absolute top-1/3 left-1/3 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_white]" />
-        <div className="absolute top-1/2 left-1/5 w-1 h-1 bg-white rounded-full" />
-        <div className="absolute top-1/5 right-1/4 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_white]" />
-        <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-white rounded-full" />
-        <div className="absolute top-1/6 right-1/6 w-1 h-1 bg-white rounded-full" />
-      </div>
-
-      {/* Ambient Matte Monochrome Halos */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-white/[0.03] blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
-
-      {/* Subtle Monochrome Drawing Watermark */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.04] mix-blend-screen grayscale">
-        { }
+    <section className="relative min-h-[92vh] pt-32 sm:pt-40 pb-20 sm:pb-28 flex items-center overflow-hidden bg-[#080807] text-[#e8e8e3] font-display border-b border-[rgba(232,232,227,0.12)]">
+      {/* Authentic Indian Cultural Pichwai & Kalamkari Artistry Drawing Watermark */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.08] mix-blend-screen">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/art/indian-art-bg-royal.jpg"
-          alt="Artistry Background Watermark"
+          alt="Authentic Indian Cultural Heritage Artistry"
           className="w-full h-full object-cover object-center filter contrast-125"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-[#09090b]/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080807] via-transparent to-[#080807]/80" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          {/* Left Column: Hero Proposition */}
+      {/* Interactive Micro-Star Constellation Canvas */}
+      <ConstellationCanvas />
+
+      {/* Atmospheric Carbon Radiance */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-white/[0.025] blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Stage 01 Monospace Metadata Indicator */}
+        <div className="flex items-center gap-3 mb-6 font-mono text-xs text-zinc-400">
+          <span className="text-white font-bold tracking-widest uppercase">
+            [ 01 / ARCHITECTURE ]
+          </span>
+          <span className="text-zinc-600">—</span>
+          <span className="tracking-wider uppercase text-zinc-400">
+            SYSTEMS BUILT TO → <span className="text-white font-bold">SCALE</span>
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          {/* Left Column: Monumental Breydaqs Headline & Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Giant Keyword-Rich Semantic Headline */}
-            <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.08]">
-              Scaling Ambitious Brands Across India &amp; Beyond
+            {/* Monumental Headline with Editorial Italic Accent */}
+            <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.035em] text-white uppercase leading-[0.92]">
+              WE ENGINEER BRANDS THAT <span className="font-editorial text-[#e8e8e3] font-normal lowercase tracking-normal">→ dominate.</span>
             </h1>
+
+            {/* Kinetic Rotating Focus Reel */}
+            <div className="flex items-center gap-2.5 font-mono text-xs sm:text-sm text-zinc-300">
+              <span className="text-zinc-500 uppercase tracking-widest font-bold">
+                FOCUS:
+              </span>
+              <div className="h-6 overflow-hidden relative inline-flex items-center">
+                <span
+                  key={keywordIndex}
+                  className="font-bold tracking-wider text-emerald-400 uppercase animate-in slide-in-from-bottom-2 duration-300"
+                >
+                  {ROTATING_KEYWORDS[keywordIndex]}
+                </span>
+              </div>
+            </div>
 
             {/* Subhead Paragraph */}
             <p className="text-sm sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl font-sans">
-              Desi Muchads engineers high-converting marketing architectures, viral social storytelling, sub-second Next.js web platforms, and hyper-growth Quick Commerce campaigns for visionary brands.
+              Desi Muchads engineers ruthless performance marketing architectures, viral digital storytelling, sub-second web platforms, and hyper-growth Quick Commerce campaigns for ambitious global brands.
             </p>
 
-            {/* Action Buttons */}
+            {/* Breydaqs Kinetic Double-Slide Action Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <button
-                onClick={() => {
-                  sound.playChime();
-                  onOpenKundli();
-                }}
-                type="button"
-                className="btn-luxury-shine px-8 py-3.5 sm:py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs sm:text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center justify-center gap-2 group active:scale-95 min-h-[48px]"
+              <BreydaqsButton
+                onClick={onOpenKundli}
+                variant="white"
+                className="py-3.5 px-7 text-xs sm:text-sm min-h-[48px]"
               >
-                <span>LET&apos;S TALK</span>
-                <span className="text-base group-hover:translate-x-1 transition-transform">&gt;</span>
-              </button>
+                REQUEST GROWTH AUDIT
+              </BreydaqsButton>
 
-              <a
-                href="#karname"
-                onClick={() => sound.playPluck(150)}
-                className="btn-luxury-shine px-8 py-3.5 sm:py-4 rounded-xl border border-white/20 hover:border-white text-white font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all hover:bg-white/5 flex items-center justify-center min-h-[48px]"
+              <BreydaqsButton
+                href="#work"
+                variant="dark"
+                className="py-3.5 px-7 text-xs sm:text-sm min-h-[48px]"
               >
-                OUR WORK
-              </a>
+                SELECTED WORKS
+              </BreydaqsButton>
             </div>
 
-            {/* Trust Proof Checklist */}
-            <div className="pt-5 border-t border-white/10 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-zinc-400 font-medium tracking-wide">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
-                <span>8+ Years Experience</span>
+            {/* Breydaqs Monospace Technical Specifications Grid */}
+            <div className="pt-6 border-t border-[rgba(232,232,227,0.12)] grid grid-cols-3 gap-4 font-mono text-xs">
+              <div>
+                <span className="text-zinc-500 text-[10px] block uppercase font-bold">
+                  PORTFOLIO GMV
+                </span>
+                <span className="text-white font-bold text-sm sm:text-base">
+                  ₹140Cr+ Scaled
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
-                <span>200+ Happy Brands</span>
+              <div>
+                <span className="text-zinc-500 text-[10px] block uppercase font-bold">
+                  AVERAGE ROAS
+                </span>
+                <span className="text-emerald-400 font-bold text-sm sm:text-base">
+                  5.4X Blended
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
-                <span>₹140Cr+ Scaled</span>
+              <div>
+                <span className="text-zinc-500 text-[10px] block uppercase font-bold">
+                  ACTIVE BRANDS
+                </span>
+                <span className="text-white font-bold text-sm sm:text-base">
+                  200+ Partners
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: 3D Centerpiece on Matte Obsidian */}
+          {/* Right Column: 3D Centerpiece on Matte Carbon */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative mt-4 lg:mt-0">
             <div className="w-full max-w-sm sm:max-w-lg relative flex flex-col items-center justify-center">
-              {/* Rotating subtle halo ring behind 3D object */}
+              {/* Rotating subtle architectural halo ring */}
               <div
-                className="absolute inset-0 rounded-full border border-white/10 animate-spin-slow opacity-30 pointer-events-none"
+                className="absolute inset-0 rounded-full border border-white/10 animate-spin-slow opacity-25 pointer-events-none"
                 style={{ animationDuration: "50s" }}
               />
-              <div className="absolute inset-4 rounded-full bg-white/5 blur-3xl opacity-40 pointer-events-none" />
-              {/* Subtle Radial Pedestal Glow */}
+              <div className="absolute inset-4 rounded-full bg-white/5 blur-3xl opacity-30 pointer-events-none" />
+              {/* Radial Pedestal Glow */}
               <div className="absolute -bottom-4 w-3/4 h-8 bg-white/10 blur-xl rounded-full pointer-events-none" />
               <ThreeHeroCenterpiece />
             </div>

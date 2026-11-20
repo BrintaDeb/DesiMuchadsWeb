@@ -61,7 +61,7 @@ export const OFFICIAL_SOCIAL_CHANNELS: SocialChannelItem[] = [
     id: "whatsapp",
     name: "WHATSAPP",
     handle: "+91 9180252831",
-    url: "https://wa.me/919180252831?text=Pranam%20Desi%20Muchads!%20I%20would%20like%20to%20discuss%20scaling%20my%20brand.",
+    url: "https://wa.me/919180252831?text=Hello%20Desi%20Muchads!%20I%20would%20like%20to%20discuss%20scaling%20my%20brand.",
     accentGlow: "rgba(37, 211, 102, 0.45)",
     brandColor: "bg-[#25D366]",
     desc: "Direct Founder War-Room",

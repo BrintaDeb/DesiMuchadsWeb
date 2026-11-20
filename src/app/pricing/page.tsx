@@ -35,7 +35,7 @@ export default function PricingPage() {
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
-            <span className="text-white font-bold">Transparent Retainers &amp; Hisab-Kitab</span>
+            <span className="text-white font-bold">Transparent Retainers &amp; Unit Economics</span>
           </div>
 
           <div className="max-w-4xl">
@@ -81,7 +81,7 @@ export default function PricingPage() {
 
         <SectionDivider />
 
-        {/* 3. The Live Hisab-Kitab ROAS & Margin Simulator */}
+        {/* 3. The Live ROAS & Margin Simulator */}
         <section id="simulator" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
           <RoasCalculator onOpenKundli={() => setIsKundliOpen(true)} />
         </section>
@@ -159,7 +159,7 @@ export default function PricingPage() {
               },
               {
                 q: "Can we mix and match services in a custom retainer?",
-                a: "Yes! Use our 'Build Your Marketing Thali' configurator on this page to select only the exact services your brand needs right now, and the pricing updates automatically.",
+                a: "Yes! Use our 'Build Your Custom Growth Stack' configurator on this page to select only the exact services your brand needs right now, and the pricing updates automatically.",
               },
             ].map((faq, i) => (
               <div
@@ -198,7 +198,7 @@ export default function PricingPage() {
                 type="button"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95"
               >
-                REQUEST BRAND KUNDLI AUDIT &gt;
+                REQUEST BRAND GROWTH AUDIT &gt;
               </button>
 
               <Link

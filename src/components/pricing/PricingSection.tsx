@@ -55,7 +55,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     {
       id: "aarambh",
       name: "SEED LAUNCH STACK",
-      hindi: "AARAMBH",
+      hindi: "TIER 01",
       badge: "KICKSTART",
       price: Math.round(35000 * discountMultiplier),
       desc: "Essential growth launchpad for early-stage brands, boutique studios & local founders getting started.",
@@ -72,7 +72,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     {
       id: "shuruwat",
       name: "FOUNDATION STACK",
-      hindi: "SHURUWAT",
+      hindi: "TIER 02",
       badge: "STARTER",
       price: Math.round(75000 * discountMultiplier),
       desc: "For challenger brands seeking disciplined, profitable scaling from ₹3L–₹15L/mo ad spend.",
@@ -89,7 +89,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     {
       id: "hukumat",
       name: "DOMINANCE STACK",
-      hindi: "HUKUMAT",
+      hindi: "TIER 03",
       badge: "MOST POPULAR",
       price: Math.round(150000 * discountMultiplier),
       desc: "Our flagship end-to-end engine for scaling brands pushing ₹15L–₹75L/mo ad spend.",
@@ -98,7 +98,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
         "12 Cinematic UGC & Graphic Ad Packs / mo",
         "Shopify CRO & Checkout Speed Optimization",
         "Retention CRM (Klaviyo + WhatsApp Flows)",
-        "Daily Live Dashboard & Weekly Baithak",
+        "Daily Live Telemetry & Weekly Strategy Session",
         "Algorithmic Broad Scale Architecture",
       ],
       isPopular: true,
@@ -106,7 +106,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
     {
       id: "shehenshah",
       name: "MONOPOLY STACK",
-      hindi: "SHEHENSHAH",
+      hindi: "TIER 04",
       badge: "ENTERPRISE",
       price: Math.round(300000 * discountMultiplier),
       desc: "Full enterprise brand takeover for market leaders exceeding ₹75L/mo ad volume.",
@@ -217,12 +217,12 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
       .join("\n");
 
     const text = encodeURIComponent(
-      `Pranam Desi Muchads! Here is my custom Marketing Thali selection:\n\n` +
+      `Hello Desi Muchads! Here is my custom Modular Growth Stack selection:\n\n` +
         `${selectedNames}\n\n` +
         `✦ Monthly Investment: ${formatPrice(thaliStats.investment)}\n` +
         `✦ Projected Team Hours Saved: ${thaliStats.hoursSaved} hrs/mo\n` +
         `✦ Estimated ROAS Multiplier: ${thaliStats.roas}x\n\n` +
-        `Let's schedule a Baithak to lock in this custom stack! 〰️`
+        `Let's schedule a strategy session to lock in this custom stack!`
     );
     window.open(`https://wa.me/919180252831?text=${text}`, "_blank");
   };
@@ -233,16 +233,16 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
       <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 -left-40 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
 
-      <SectionDivider label="PRICING & PACKAGES" sublabel="HISAB-KITAB WITH ZERO GHOSTING" />
+      <SectionDivider label="PRICING & PACKAGES" sublabel="UNIT ECONOMICS WITH ZERO GHOSTING" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-tight">
-            Transparent Retainers.<br />Custom Marketing Thali.
+            Transparent Retainers.<br />Modular Growth Stacks.
           </h2>
           <p className="mt-4 text-zinc-400 text-sm sm:text-base font-sans">
-            Choose our battle-tested all-in-one growth retainers starting from ₹35,000/mo, or build your own custom marketing platter tailored to your exact balance of firepower.
+            Choose our battle-tested all-in-one growth retainers starting from ₹35,000/mo, or build your own custom modular performance stack tailored to your exact balance of firepower.
           </p>
 
           {/* Mode Switcher: Retainers vs Build-A-Thali */}
@@ -273,7 +273,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                   : "text-zinc-400 hover:text-white"
               }`}
             >
-              <span>Build Your Marketing Thali</span>
+              <span>Build Your Modular Stack</span>
               <span className="px-1.5 py-0.5 rounded-full bg-white/20 text-[9px] text-white font-extrabold uppercase">
                 Custom
               </span>
@@ -467,23 +467,23 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
           </div>
         )}
 
-        {/* MODE B: "BUILD YOUR OWN MARKETING THALI" PLATTER */}
+        {/* MODE B: "BUILD YOUR OWN MODULAR GROWTH STACK" */}
         {mode === "thali" && (
           <div className="rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-12 ios-glass-panel shadow-2xl">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold block mb-2">
-                DESI MUCHADS MARKETING THALI
+                DESI MUCHADS MODULAR GROWTH STACK
               </span>
               <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase">
-                Pick Your Katoris (Modular Weapons)
+                Select Modular Capabilities
               </h3>
               <p className="text-xs text-zinc-300 mt-2 font-sans">
-                Click to add or remove services from your platter. Watch your monthly cost, team hours saved, and estimated ROAS adjust in real time.
+                Click to add or remove capabilities from your growth stack. Watch your monthly cost, team hours saved, and estimated ROAS adjust in real time.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Column: Modular Thali Dishes (7 cols) */}
+              {/* Left Column: Modular Dishes (7 cols) */}
               <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {thaliDishes.map((dish) => {
                   const isSelected = selectedDishes.includes(dish.id);
@@ -534,12 +534,12 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                 })}
               </div>
 
-              {/* Right Column: Visual Thali Platter Summary (5 cols) with iOS Glassmorphism */}
+              {/* Right Column: Visual Summary (5 cols) with iOS Glassmorphism */}
               <div className="lg:col-span-5 rounded-2xl p-6 sm:p-8 ios-glass-panel shadow-xl flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
                     <span className="font-mono text-xs uppercase tracking-widest text-zinc-300 font-bold">
-                      THALI SUMMARY
+                      STACK SUMMARY
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-mono font-bold">
                       {selectedDishes.length} Items Selected
@@ -549,7 +549,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                   {/* Computed Investment Highlight */}
                   <div className="p-5 rounded-2xl bg-[#121214] border border-white/15 text-center mb-6">
                     <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider block mb-1">
-                      Monthly Thali Investment
+                      Monthly Stack Investment
                     </span>
                     <div className="text-3xl sm:text-4xl font-metric font-black text-white">
                       {formatPrice(thaliStats.investment)}
@@ -583,14 +583,14 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
                   </div>
                 </div>
 
-                {/* Send Custom Thali via WhatsApp */}
+                {/* Send Custom Stack via WhatsApp */}
                 <button
                   onClick={handleThaliWhatsApp}
                   disabled={selectedDishes.length === 0}
                   className="w-full py-4 px-6 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-2.5 active:scale-95 disabled:opacity-40 min-h-[48px]"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Lock In Custom Thali → WhatsApp</span>
+                  <span>Lock In Custom Stack → WhatsApp</span>
                 </button>
               </div>
             </div>

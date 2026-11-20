@@ -377,7 +377,7 @@ export function ThreeHeroCenterpiece() {
     <div
       ref={mountRef}
       className="relative w-full max-w-xl h-60 sm:h-80 mx-auto my-1 flex items-center justify-center cursor-grab active:cursor-grabbing select-none touch-pan-y"
-      title="Interactive 3D Desi Muchhad & Mudras (Touch or move to tilt, tap to spin)"
+      title="Interactive 3D Moustache & Artifacts (Touch or move to tilt, tap to spin)"
     />
   );
 }

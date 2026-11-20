@@ -29,6 +29,7 @@ export function SpotlightCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
   const borderGlintRef = useRef<HTMLDivElement>(null);
+  const bevelRef = useRef<HTMLDivElement>(null);
   const isCoarseRef = useRef<boolean>(false);
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -164,6 +165,11 @@ export function SpotlightCard({
         borderGlintRef.current.style.webkitMaskImage = `radial-gradient(280px circle at ${x}px ${y}px, black var(--inner-size, 0%), transparent var(--outer-size, 75%))`;
       }
 
+      // Dynamic Specular Top Bevel Light Sweep
+      if (bevelRef.current) {
+        bevelRef.current.style.background = `radial-gradient(180px circle at ${x}px 0px, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.15) 60%, transparent 100%)`;
+      }
+
       if (!animFrameId.current) {
         animFrameId.current = requestAnimationFrame(updatePhysics);
       }
@@ -232,6 +238,9 @@ export function SpotlightCard({
         cardRef.current.style.setProperty("--outer-size", "0px");
         cardRef.current.style.setProperty("--spotlight-opacity", "0");
       }
+      if (bevelRef.current) {
+        bevelRef.current.style.background = "linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent)";
+      }
       if (!animFrameId.current) {
         animFrameId.current = requestAnimationFrame(updatePhysics);
       }
@@ -247,6 +256,9 @@ export function SpotlightCard({
       cardRef.current.style.setProperty("--inner-size", "0px");
       cardRef.current.style.setProperty("--outer-size", "0px");
       cardRef.current.style.setProperty("--spotlight-opacity", "0");
+    }
+    if (bevelRef.current) {
+      bevelRef.current.style.background = "linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent)";
     }
     if (!animFrameId.current) {
       animFrameId.current = requestAnimationFrame(updatePhysics);
@@ -303,8 +315,11 @@ export function SpotlightCard({
         }}
       />
 
-      {/* 3. iOS visionOS Specular Top Bevel Edge */}
-      <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent z-20" />
+      {/* 3. iOS visionOS Specular Top Bevel Edge (Liquid Light Sweep) */}
+      <div
+        ref={bevelRef}
+        className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent z-20 transition-all duration-100"
+      />
 
       {/* 4. Card Content with 3D Spatial Depth */}
       <div

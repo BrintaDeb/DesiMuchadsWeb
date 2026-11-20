@@ -141,7 +141,7 @@ export function CustomCursor() {
               />
               <text className="font-mono text-[9px] uppercase tracking-[0.22em] fill-white font-bold">
                 <textPath href="#dekhoCirclePath" startOffset="0%">
-                  ✦ DEKHO • EXPLORE ✦ DEKHO • EXPLORE
+                  ✦ INSPECT • EXPLORE ✦ INSPECT • EXPLORE
                 </textPath>
               </text>
             </svg>
@@ -168,7 +168,7 @@ export function CustomCursor() {
         {mode === "chai" && (
           <div className="relative -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-emerald-400 text-black flex items-center gap-1.5 shadow-[0_0_25px_rgba(52,211,153,0.8)] animate-in zoom-in-75 duration-200">
             <Coffee className="w-3.5 h-3.5 text-black" />
-            <span className="font-mono text-[10px] font-black uppercase tracking-wider">BAITHAK</span>
+            <span className="font-mono text-[10px] font-black uppercase tracking-wider">SESSION</span>
           </div>
         )}
 

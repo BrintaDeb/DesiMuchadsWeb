@@ -47,11 +47,11 @@ export async function POST(req: Request) {
         `• *Brand Website:* ${payload.brandWebsite || "Not provided"}\n` +
         `• *Instagram Handle:* ${payload.instagramHandle || "Not provided"}\n` +
         `• *Monthly Budget:* ${payload.budget || "Custom / Flexible"}\n` +
-        `• *Discipline:* ${payload.service || "Growth Darbar Retainer"}\n` +
+        `• *Discipline:* ${payload.service || "Dominance Engine Retainer"}\n` +
         (payload.estimatedRoas ? `• *Target ROAS:* ${payload.estimatedRoas}\n` : "") +
         (payload.message ? `• *Objective Notes:* ${payload.message}\n` : "") +
         `\n⏰ *Captured at:* ${timestamp}\n` +
-        `⚡ *Platform:* Desi Muchads Lead Sanchalan Engine`;
+        `⚡ *Platform:* Desi Muchads Lead Engine`;
 
       try {
         const tgRes = await fetch(

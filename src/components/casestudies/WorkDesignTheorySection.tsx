@@ -113,14 +113,14 @@ export const revalidate = 86400; // 24h ISR
     codeOrDiagramLabel: "SEMIOTIC PSYCHOLOGY MATRIX",
     codeSnippet: `// Cultural Conversion Grammar
 const HookArchetypes = {
-  STREET_CHALLENGE: "Generic ads se thak gaye ho? Dekho asli performance.",
-  PRIDE_ANCHOR: "Khandani zewar aur beshak mechanical horology ka darbar.",
-  HONOR_PLEDGE: "Muchh ka sawal: Zero ghosting, direct founder accountability.",
-  CONTRIBUTION_FOCUS: "Vanity views chhoro, bank account me profit kitna aaya?",
+  STREET_CHALLENGE: "Tired of generic agency ads? Experience verified performance.",
+  PRIDE_ANCHOR: "Generational craftsmanship meets precision mechanical horology.",
+  HONOR_PLEDGE: "The Muchads Guarantee: Zero ghosting, direct founder accountability.",
+  CONTRIBUTION_FOCUS: "Ignore vanity impressions: calculate verified bank account profit.",
 };
 const CulturalPalette = {
-  obsidian: '#09090b', // Royal Darbar Velvet
-  sindoor: '#ff3344',  // Sacred Conversion Focus
+  obsidian: '#09090b', // Executive Velvet Canvas
+  sindoor: '#ff3344',  // High-Intent Conversion Focus
   platinum: '#f4f4f5', // Precision Type Legibility
 };`,
   },

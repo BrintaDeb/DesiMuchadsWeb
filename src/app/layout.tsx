@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne } from "next/font/google";
+import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import "./globals.css";
@@ -29,6 +29,14 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -325,7 +333,7 @@ export default function RootLayout({
         position: 1,
         name: "Verified Client Work (46 Case Studies)",
         description: "Live production platforms, e-commerce storefronts, and verified ROAS case studies.",
-        url: "https://desimuchads.agency/#karname",
+        url: "https://desimuchads.agency/#work",
       },
       {
         "@type": "SiteNavigationElement",
@@ -337,7 +345,7 @@ export default function RootLayout({
       {
         "@type": "SiteNavigationElement",
         position: 3,
-        name: "Hisab-Kitab Simulator",
+        name: "Unit Economics & ROAS Simulator",
         description: "Simulate monthly ad spend, contribution margin, and projected ROAS in real time.",
         url: "https://desimuchads.agency/#calculator",
       },
@@ -345,7 +353,7 @@ export default function RootLayout({
         "@type": "SiteNavigationElement",
         position: 4,
         name: "Retainers & Pricing",
-        description: "Transparent growth retainers and modular marketing thali packages.",
+        description: "Transparent growth retainers and modular performance stacks.",
         url: "https://desimuchads.agency/#pricing",
       },
       {
@@ -401,7 +409,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} dark antialiased scroll-smooth`}
+      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} dark antialiased scroll-smooth`}
     >
       <head>
         {/* Geo Targeting Meta Tags for Local & Regional Search Dominance */}

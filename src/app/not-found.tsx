@@ -59,7 +59,7 @@ export default function NotFound() {
             <span>Return to Agency HQ</span>
           </Link>
           <Link
-            href="/#karname"
+            href="/#work"
             className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2"
           >
             <ArrowLeft className="w-4 h-4" />

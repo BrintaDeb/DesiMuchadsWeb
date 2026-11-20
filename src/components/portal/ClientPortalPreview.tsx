@@ -41,7 +41,7 @@ export function ClientPortalPreview() {
   const [timeRange, setTimeRange] = useState<"7d" | "30d" | "q3">("30d");
   const [metricMode, setMetricMode] = useState<"blended" | "first_order" | "contribution">("blended");
   const [scriptApproved, setScriptApproved] = useState<boolean>(false);
-  const [activeModal, setActiveModal] = useState<"invoice" | "brief" | "scriptDetail" | "baithak" | null>(null);
+  const [activeModal, setActiveModal] = useState<"invoice" | "brief" | "scriptDetail" | "session" | null>(null);
   const [hoveredBarIndex, setHoveredBarIndex] = useState<number | null>(null);
   const [isAuditingSpeed, setIsAuditingSpeed] = useState<boolean>(false);
   const [auditScore, setAuditScore] = useState<number>(99);
@@ -205,11 +205,11 @@ export function ClientPortalPreview() {
           <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-white">
             Zero Ghosting.{" "}
             <span className="text-gradient-silver block mt-1">
-              100% Hisab-Kitab.
+              100% Unit Economics.
             </span>
           </h2>
           <p className="mt-4 text-zinc-400 text-sm sm:text-base">
-            Every client gets 24/7 access to our custom Darbar portal. Track ad metrics in real time, approve scripts in one click, and see exactly where every Rupee goes.
+            Every client gets 24/7 access to our custom Client Growth Portal. Track ad metrics in real time, approve scripts in one click, and see exactly where every Rupee goes.
           </p>
 
           {/* 4 Tabs Selector with Silky Mobile Momentum Scroll */}
@@ -254,7 +254,7 @@ export function ClientPortalPreview() {
               <span className="w-3 h-3 rounded-full bg-red-500/80" />
               <span className="w-3 h-3 rounded-full bg-amber-500/80" />
               <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-              <span className="ml-3 text-zinc-300">darbar.desimuchads.com/client-portal</span>
+              <span className="ml-3 text-zinc-300">portal.desimuchads.com/client-portal</span>
             </div>
             <div className="flex items-center gap-3">
               {/* Interactive Time Horizon Switcher */}
@@ -577,7 +577,7 @@ export function ClientPortalPreview() {
                   </span>
                   <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                     <span className="text-[10px] font-mono text-zinc-400">✦ 5.4x ROAS</span>
-                    <p className="font-bold text-white">&ldquo;Bridal Kundli Quiz Funnel Hook&rdquo;</p>
+                    <p className="font-bold text-white">&ldquo;Bridal Heritage Quiz Funnel Hook&rdquo;</p>
                   </div>
                   <div className="p-3 rounded-xl bg-[#121215] border border-white/10 text-xs space-y-1">
                     <span className="text-[10px] font-mono text-zinc-400">✦ 4.9x ROAS</span>
@@ -716,13 +716,13 @@ export function ClientPortalPreview() {
                     <button
                       onClick={() => {
                         sound.playPluck(180);
-                        setActiveModal("baithak");
+                        setActiveModal("session");
                       }}
                       type="button"
                       className="px-3 py-1.5 rounded-lg bg-white text-black font-bold flex items-center gap-1.5 hover:bg-zinc-200 transition-colors"
                     >
                       <Calendar className="w-3.5 h-3.5" />
-                      <span>Book Baithak</span>
+                      <span>Book Session</span>
                     </button>
                   </div>
                 </div>
@@ -769,7 +769,7 @@ export function ClientPortalPreview() {
                   {activeModal === "invoice" && "GST Tax Invoice Preview"}
                   {activeModal === "brief" && "Strategy War-Room Brief"}
                   {activeModal === "scriptDetail" && "Script Breakdown & Creative Angle"}
-                  {activeModal === "baithak" && "Schedule Emergency Growth Baithak"}
+                  {activeModal === "session" && "Schedule Growth Strategy Session"}
                 </h3>
               </div>
               <button
@@ -883,7 +883,7 @@ export function ClientPortalPreview() {
               </div>
             )}
 
-            {activeModal === "baithak" && (
+            {activeModal === "session" && (
               <div className="py-6 space-y-4 font-mono text-xs text-zinc-300">
                 <p className="text-zinc-400">
                   Select a priority slot for a 30-minute private strategy war-room with our Principal Performance Architect:
@@ -902,7 +902,7 @@ export function ClientPortalPreview() {
                         sound.playChime();
                         window.open(
                           `https://wa.me/919180252831?text=${encodeURIComponent(
-                            `Pranam Desi Muchads! I would like to lock in the Strategy Baithak slot: ${slot}`
+                            `Hello Desi Muchads! I would like to lock in the Strategy Session slot: ${slot}`
                           )}`,
                           "_blank"
                         );

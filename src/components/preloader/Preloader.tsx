@@ -10,7 +10,7 @@ interface PreloaderProps {
 
 export function Preloader({ onComplete }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("Twirling the Muchh...");
+  const [statusText, setStatusText] = useState("Calibrating Performance Architecture...");
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
@@ -24,13 +24,13 @@ export function Preloader({ onComplete }: PreloaderProps) {
       setProgress(currentProgress);
 
       if (currentProgress < 30) {
-        setStatusText("Twirling the Muchh...");
+        setStatusText("Calibrating Performance Architecture...");
       } else if (currentProgress < 65) {
-        setStatusText("Brewing High-ROAS Masala...");
+        setStatusText("Engineering High-ROAS Systems...");
       } else if (currentProgress < 99) {
-        setStatusText("Summoning the Ad Gods...");
+        setStatusText("Deploying Sub-Second Platform...");
       } else {
-        setStatusText("Shaan Bhi. Strategy Bhi.");
+        setStatusText("Honor & Performance.");
       }
 
       if (currentProgress >= 100) {

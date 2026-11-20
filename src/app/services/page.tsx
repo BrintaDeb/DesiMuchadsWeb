@@ -63,16 +63,16 @@ export default function ServicesPage() {
     activeTab === "all"
       ? AGENCY_SERVICES
       : activeTab === "performance"
-      ? AGENCY_SERVICES.filter((s) =>
+        ? AGENCY_SERVICES.filter((s) =>
           ["seo-sem", "performance-marketing", "lead-generation", "unit-economics"].includes(s.id)
         )
-      : activeTab === "creative"
-      ? AGENCY_SERVICES.filter((s) =>
-          ["social-media", "packaging-label"].includes(s.id)
-        )
-      : AGENCY_SERVICES.filter((s) =>
-          ["e-commerce", "quick-commerce", "web-development"].includes(s.id)
-        );
+        : activeTab === "creative"
+          ? AGENCY_SERVICES.filter((s) =>
+            ["social-media", "packaging-label"].includes(s.id)
+          )
+          : AGENCY_SERVICES.filter((s) =>
+            ["e-commerce", "quick-commerce", "web-development"].includes(s.id)
+          );
 
   return (
     <div className="min-h-screen bg-[#09090b] text-white selection:bg-white selection:text-black">
@@ -226,11 +226,10 @@ export default function ServicesPage() {
                     sound.playPluck(150);
                     setActiveTab(tab.id);
                   }}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap ${
-                    activeTab === tab.id
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap ${activeTab === tab.id
                       ? "bg-white text-black font-bold shadow-md"
                       : "text-zinc-400 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -487,7 +486,7 @@ export default function ServicesPage() {
 
         <SectionDivider />
 
-        {/* 6. VIP Darbar Client Portal Live Preview */}
+        {/* 6. VIP Client Growth Portal Live Preview */}
         <ClientPortalPreview />
 
         {/* 7. Grand Call to Action */}
@@ -510,7 +509,7 @@ export default function ServicesPage() {
                 type="button"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95"
               >
-                REQUEST FREE BRAND KUNDLI AUDIT &gt;
+                REQUEST FREE BRAND GROWTH AUDIT &gt;
               </button>
 
               <Link

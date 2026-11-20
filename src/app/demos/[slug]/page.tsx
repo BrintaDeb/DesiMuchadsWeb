@@ -113,14 +113,14 @@ async function DemoProductContent({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Darbar Home",
+        name: "Home",
         item: "https://desimuchads.agency",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Live Demos",
-        item: "https://desimuchads.agency/#karname",
+        item: "https://desimuchads.agency/#work",
       },
       {
         "@type": "ListItem",

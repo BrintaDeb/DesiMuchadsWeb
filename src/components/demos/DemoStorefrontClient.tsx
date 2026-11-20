@@ -573,7 +573,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
             <ArrowRight className="w-3 h-3" />
           </Link>
           <Link
-            href="/#karname"
+            href="/#work"
             target={isEmbedded ? "_top" : undefined}
             className="hidden sm:inline-flex items-center gap-1 text-zinc-400 hover:text-white transition-colors text-[11px] shrink-0"
           >
@@ -3490,7 +3490,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
               <div>
                 <span className="text-zinc-500 block uppercase">Invoice Metadata:</span>
                 <div>Invoice No: <strong className="text-white">DM-INV-2025-9941</strong></div>
-                <div>Date: {new Date().toLocaleDateString("en-IN")}</div>
+                <div>Date: 20 Nov 2026</div>
                 <div>Place of Supply: Delhi (07)</div>
                 <div>Reverse Charge: No</div>
               </div>

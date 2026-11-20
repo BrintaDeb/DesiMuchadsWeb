@@ -337,7 +337,7 @@ export default function AboutPage() {
               In classical Indian lore, the *Muchh* (Moustache) is not merely facial grooming—it is a sacred emblem of word, dignity, and unyielding pride. When a traditional craftsman gives his word on his moustache, there is no backpedaling, no contractual loophole, and no excuses.
             </p>
             <p className="text-zinc-400 font-sans text-sm sm:text-base leading-relaxed">
-              At Desi Muchads, our name is our pledge: <strong>Personal, serious, and relentlessly honorable execution.</strong> If we take your brand into our Darbar, we treat your capital, your reputation, and your growth as our own.
+              At Desi Muchads, our name is our pledge: <strong>Personal, serious, and relentlessly honorable execution.</strong> If we take your brand into our agency cohort, we treat your capital, your reputation, and your growth as our own.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
@@ -349,7 +349,7 @@ export default function AboutPage() {
                 }}
                 className="px-6 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-xl active:scale-95"
               >
-                REQUEST BRAND KUNDLI AUDIT &gt;
+                REQUEST BRAND GROWTH AUDIT &gt;
               </button>
               <Link
                 href="/work"

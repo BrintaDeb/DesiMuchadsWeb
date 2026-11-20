@@ -51,6 +51,7 @@
   --font-metric: var(--font-space), monospace;
   --font-mono: var(--font-space), monospace;
   --font-heritage: var(--font-cinzel), serif;
+  --font-editorial: var(--font-instrument), "Instrument Serif", Georgia, serif;
 }
 
 :root {
@@ -844,6 +845,159 @@ iframe {
 .scroll-momentum-x::-webkit-scrollbar {
   display: none;
 }
+
+/* =========================================================================
+   BREYDAQS ARCHITECTURAL DESIGN THEORY TOKENS & KINETIC INTERACTIONS
+   ========================================================================= */
+
+/* Editorial Serif Accent (Breydaqs Style Headline Callouts) */
+.font-editorial {
+  font-family: var(--font-instrument), "Instrument Serif", Georgia, serif !important;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+}
+
+/* Breydaqs Micro-Border & Structural Grids */
+.border-breydaqs {
+  border-color: rgba(232, 232, 227, 0.12);
+}
+
+.bg-breydaqs-canvas {
+  background-color: #080807;
+}
+
+.bg-breydaqs-surface {
+  background-color: #0e0e0d;
+}
+
+.text-breydaqs-chalk {
+  color: #e8e8e3;
+}
+
+.text-breydaqs-dim {
+  color: #52524e;
+}
+
+/* Breydaqs Razor Sharp Micro Radii */
+.rounded-micro {
+  border-radius: 0.2rem;
+}
+
+/* Breydaqs Kinetic Double-Slide Button System (`data-btn="true"`) */
+.breydaqs-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-space), monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0.2rem;
+  border: 1px solid rgba(232, 232, 227, 0.22);
+  background: #080807;
+  color: #e8e8e3;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.breydaqs-btn-white {
+  background: #e8e8e3;
+  color: #080807;
+  border-color: #e8e8e3;
+}
+
+.breydaqs-btn:hover {
+  border-color: rgba(232, 232, 227, 0.75);
+}
+
+.breydaqs-btn-white:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+}
+
+.breydaqs-btn .btn-text-track {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 1.25em;
+  line-height: 1.25em;
+}
+
+.breydaqs-btn .btn-text-track span {
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.breydaqs-btn .btn-text-track span:nth-child(2) {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.breydaqs-btn:hover .btn-text-track span:nth-child(1) {
+  transform: translateY(-100%);
+}
+
+.breydaqs-btn:hover .btn-text-track span:nth-child(2) {
+  transform: translateY(-100%);
+}
+
+.breydaqs-btn .btn-icon-box {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breydaqs-btn .btn-icon-box svg,
+.breydaqs-btn .btn-icon-box span {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.breydaqs-btn .btn-icon-box .icon-primary {
+  display: block;
+}
+
+.breydaqs-btn .btn-icon-box .icon-secondary {
+  position: absolute;
+  top: 100%;
+  left: -100%;
+  display: block;
+}
+
+.breydaqs-btn:hover .btn-icon-box .icon-primary {
+  transform: translate(100%, -100%);
+}
+
+.breydaqs-btn:hover .btn-icon-box .icon-secondary {
+  transform: translate(100%, -100%);
+}
+
+/* Breydaqs Interactive Hover Focus List: dim inactive, highlight active */
+.breydaqs-hover-group:hover .breydaqs-hover-item {
+  color: #484844;
+  border-color: rgba(232, 232, 227, 0.05);
+}
+
+.breydaqs-hover-group:hover .breydaqs-hover-item:hover {
+  color: #e8e8e3;
+  border-color: rgba(232, 232, 227, 0.4);
+}
+
 
 
 

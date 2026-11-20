@@ -27,11 +27,11 @@ export default function ErrorBoundary({
       </span>
 
       <h1 className="font-display font-black text-3xl sm:text-4xl text-white uppercase mb-4">
-        Kuch Gadbad Ho Gayi
+        Something Went Wrong
       </h1>
 
       <p className="text-sm text-zinc-400 max-w-md mx-auto leading-relaxed mb-8">
-        An unexpected runtime event occurred. Our engineering telemetry has captured this event. Please reset the component view or return to the main baithak.
+        An unexpected runtime event occurred. Our engineering telemetry has captured this event. Please reset the component view or return to the homepage.
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-4">

@@ -63,14 +63,14 @@ export function AgencyProposalProvider({
       }).format(val);
 
     const msg =
-      `Pranam Desi Muchads! 🙏\n\n` +
+      `Hello Desi Muchads!\n\n` +
       `Here is my Customized Agency Proposal Request:\n` +
       `✦ Monthly Ad Budget: ${formatINR(proposal.budget)}\n` +
       `✦ Industry Sector: ${proposal.industry}\n` +
       `✦ Selected Stack: ${proposal.selectedServices.join(", ")}\n` +
       `✦ Target ROAS Multiplier: ${proposal.estimatedRoas}\n` +
       (proposal.brandUrl ? `✦ Brand URL: ${proposal.brandUrl}\n` : "") +
-      `\nLet's schedule our 15-Minute Chai & Strategy Call! 〰️`;
+      `\nLet's schedule our 15-Minute Strategy Call!`;
 
     return `https://wa.me/919180252831?text=${encodeURIComponent(msg)}`;
   };

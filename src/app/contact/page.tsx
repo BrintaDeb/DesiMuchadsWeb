@@ -67,7 +67,7 @@ const TIME_SLOTS = [
     ],
   },
   {
-    period: "Late War-Room Baithak",
+    period: "Late War-Room Session",
     icon: "🌙",
     slots: [
       { time: "07:30 PM IST", status: "Executive Only" },
@@ -206,11 +206,11 @@ const CONCIERGE_PROMPTS = [
   },
   {
     q: "How fast can you audit our ad account?",
-    a: "Our Principal Architects deliver a comprehensive 14-point telemetry and revenue leak audit within 24 to 48 hours of Baithak confirmation.",
+    a: "Our Principal Architects deliver a comprehensive 14-point telemetry and revenue leak audit within 24 to 48 hours of session confirmation.",
   },
   {
     q: "Can we meet in-person at your studio?",
-    a: "Yes! Our headquarters is at Connaught Place, Barakhamba Road, New Delhi 110001. In-person Baithaks are hosted Monday to Saturday.",
+    a: "Yes! Our headquarters is at Connaught Place, Barakhamba Road, New Delhi 110001. In-person strategy sessions are hosted Monday to Saturday.",
   },
   {
     q: "What are your monthly retainer packages?",
@@ -444,7 +444,7 @@ export default function ContactPage() {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Pranam! I am the Desi Muchads Executive AI Concierge. How can our performance marketing war-room scale your brand today?",
+      text: "Hello! I am the Desi Muchads Executive AI Concierge. How can our performance marketing war-room scale your brand today?",
       timestamp: "Just now",
     },
   ]);
@@ -477,17 +477,17 @@ export default function ContactPage() {
     // Simulated Intelligent Concierge Response
     setTimeout(() => {
       sound.playChime();
-      let reply = "Understood. Our Managing Principals review account audits daily. Would you like to lock this into a direct 15-Minute Strategy Baithak with our founder?";
+      let reply = "Understood. Our Managing Principals review account audits daily. Would you like to lock this into a direct 15-Minute Strategy Session with our founder?";
       
       const lower = text.toLowerCase();
       if (lower.includes("roas") || lower.includes("return")) {
-        reply = "We engineer 5.8x to 7.4x blended ROAS by combining vernacular thumb-stopping reels with ASC+ CBO media engines. What is your current monthly ad spend?";
+        reply = "We engineer 5.8x to 7.4x blended ROAS by combining high-hook cultural reels with ASC+ CBO media engines. What is your current monthly ad spend?";
       } else if (lower.includes("budget") || lower.includes("price") || lower.includes("package")) {
-        reply = "Our retainers range from ₹35,000/mo (Seed Sanchalan) to ₹1,50,000/mo (Growth Darbar) with 0% hidden markups. You can also assemble a custom Marketing Thali!";
+        reply = "Our retainers range from ₹75,000/mo (Foundation Sprint) to ₹1,50,000/mo (Dominance Engine) with 0% hidden markups. You can also assemble a custom modular retainer!";
       } else if (lower.includes("blinkit") || lower.includes("zepto") || lower.includes("quick")) {
         reply = "Our Quick Commerce squad indexes dark-store inventory and dominates in-app banner search on Zepto and Blinkit within 72 hours.";
       } else if (lower.includes("audit") || lower.includes("kundli") || lower.includes("free")) {
-        reply = "We can run an automated Brand Kundli audit on your website immediately! Simply share your store URL.";
+        reply = "We can run an automated Brand Growth Audit on your website immediately! Simply share your store URL.";
       }
 
       const botMsg: ChatMessage = {
@@ -570,8 +570,8 @@ export default function ContactPage() {
       MEETING_CHANNELS.find((c) => c.id === selectedMeetingChannel)?.name || "Google Meet";
 
     const text =
-      `Pranam Desi Muchads! 🙏\n\n` +
-      `Here is my Strategic Lead Qualification & Baithak Booking:\n` +
+      `Hello Desi Muchads! 👋\n\n` +
+      `Here is my Strategic Lead Qualification & Strategy Session Booking:\n` +
       `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
       `👤 Contact Name: ${clientName.trim() || "Founder / Growth Lead"}\n` +
       `🏢 Brand / Store Name: ${brandName.trim() || "Confidential Brand"}\n` +
@@ -590,7 +590,7 @@ export default function ContactPage() {
       `${platformTitles.join("\n") || "• Meta & Google Ads"}\n\n` +
       `🛠️ REQUESTED DELIVERABLES (${selectedServices.length}):\n` +
       `${selectedServiceTitles.join("\n")}\n\n` +
-      `🗓️ STRATEGIC BAITHAK RESERVATION:\n` +
+      `🗓️ STRATEGIC SESSION RESERVATION:\n` +
       `📅 Date: ${formattedDate}\n` +
       `⏰ Slot: ${effectiveTimeSlot}\n` +
       `🎥 Channel: ${channelName}\n` +
@@ -605,7 +605,7 @@ export default function ContactPage() {
     if (isSelectedDateToday && allSlotsExpiredToday) {
       sound.playPluck(120);
       alert(
-        "All Baithak slots for today have concluded. Please select tomorrow or an upcoming date to confirm your appointment!"
+        "All strategy session slots for today have concluded. Please select tomorrow or an upcoming date to confirm your appointment!"
       );
       return;
     }
@@ -668,10 +668,10 @@ export default function ContactPage() {
     const channelName =
       MEETING_CHANNELS.find((c) => c.id === selectedMeetingChannel)?.name || "Google Meet";
     const title = encodeURIComponent(
-      `Desi Muchads Strategy Baithak · ${brandName || "Brand Scaling"}`
+      `Desi Muchads Strategy Session · ${brandName || "Brand Scaling"}`
     );
     const details = encodeURIComponent(
-      `Confidential Strategy Baithak with Desi Muchads Digital Leadership.\n` +
+      `Confidential Strategy Session with Desi Muchads Digital Leadership.\n` +
       `Appointment Slot: ${formattedDate} at ${effectiveTimeSlot} (${channelName}).\n` +
       `Direct Founder Desk: +91 9180252831\n` +
       `Goals: ${STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id))
@@ -726,7 +726,7 @@ export default function ContactPage() {
           {/* Hero Section */}
           <div className="mb-12 text-left max-w-4xl space-y-4">
             <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight uppercase leading-[0.96] text-white">
-              Schedule Your Baithak. <br />
+              Schedule Your Session. <br />
               <span className="text-zinc-400">Qualify Your Brand Growth.</span>
             </h1>
 
@@ -754,7 +754,7 @@ export default function ContactPage() {
           </div>
 
           {/* Mode Switcher: Smart Calendar Booking vs Live VIP Chat Concierge */}
-          <div id="baithak" className="mb-8 flex items-center justify-between border-b border-white/10 pb-4">
+          <div id="session" className="mb-8 flex items-center justify-between border-b border-white/10 pb-4">
             <div className="flex items-center gap-2 p-1 rounded-xl bg-white/[0.04] border border-white/10">
               <button
                 type="button"
@@ -811,7 +811,7 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <h2 className="font-display font-black text-sm uppercase tracking-wider text-white">
-                            1. Select Baithak Date
+                            1. Select Session Date
                           </h2>
                           <p className="text-[11px] font-sans text-zinc-400">
                             Real-time availability for the next 30 days
@@ -1066,7 +1066,7 @@ export default function ContactPage() {
 
                     <a
                       href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                        "Pranam Desi Muchads! I would like to chat directly on WhatsApp about scaling my brand."
+                        "Hello Desi Muchads! I would like to chat directly on WhatsApp about scaling my brand."
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -1754,7 +1754,7 @@ export default function ContactPage() {
                 <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
                   <a
                     href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                      "Pranam Rahul Sir! I would like to schedule an Executive CEO Baithak for my brand."
+                      "Hello Rahul! I would like to schedule an Executive CEO Strategy Session for my brand."
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1798,14 +1798,14 @@ export default function ContactPage() {
                 <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
                   <a
                     href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                      "Pranam Brinta Sir! I would like to consult on high-performance web engineering and conversion tech."
+                      "Hello Brinta! I would like to consult on high-performance web engineering and conversion tech."
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs font-mono text-white hover:underline flex items-center gap-1.5 font-bold"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>WhatsApp Brinta Sir ↗</span>
+                    <span>WhatsApp Brinta ↗</span>
                   </a>
                   <a
                     href="https://brinta-deb-portfolio.onrender.com"
@@ -1852,14 +1852,14 @@ export default function ContactPage() {
                 <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
                   <a
                     href={`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                      "Pranam Omkar Sir! I would like to review unit economics and financial media allocation."
+                      "Hello Omkar! I would like to review unit economics and financial media allocation."
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs font-mono text-white hover:underline flex items-center gap-1.5 font-bold"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>WhatsApp Omkar Sir ↗</span>
+                    <span>WhatsApp Omkar ↗</span>
                   </a>
                   <a
                     href="http://www.linkedin.com/in/reodomkar"

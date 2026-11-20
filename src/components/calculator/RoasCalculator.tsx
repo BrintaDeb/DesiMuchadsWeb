@@ -166,7 +166,7 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
 
   // WhatsApp Dispatch Text
   const whatsappText = encodeURIComponent(
-    `Pranam Desi Muchads Team! I simulated my brand's revenue metrics on your website calculator:\n\n` +
+    `Hello Desi Muchads Team! I simulated my brand's revenue metrics on your website calculator:\n\n` +
       `✦ Category: ${selectedVertical.name}\n` +
       `✦ Monthly Ad Media: ${formatINR(spend)}\n` +
       `✦ Average Order Value: ${formatINR(aov)}\n` +
@@ -176,10 +176,10 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
       `✦ Projected Orders: ~${calculation.estimatedOrders.toLocaleString("en-IN")} orders\n` +
       `✦ Estimated Net Contribution (CM3): ${formatINR(calculation.estimatedNetContribution)} (${calculation.netMarginPct}% net)\n` +
       `✦ Recommended Tier: ${calculation.tierName}\n\n` +
-      `I would like to schedule an Executive Strategy Baithak to verify these numbers for my brand.`
+      `I would like to schedule an Executive Strategy Session to verify these numbers for my brand.`
   );
 
-  const copyHisab = () => {
+  const copyCalculation = () => {
     sound.playPluck(180);
     const textToCopy =
       `Desi Muchads Revenue & ROAS Simulation\n` +
@@ -214,9 +214,9 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
           <div className="shrink-0 flex items-center gap-2">
             <button
               type="button"
-              onClick={copyHisab}
+              onClick={copyCalculation}
               className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 active:scale-95"
-              title="Copy this Hisab calculation"
+              title="Copy this calculation"
             >
               {copied ? (
                 <>
@@ -226,7 +226,7 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5 text-zinc-400" />
-                  <span>Copy Hisab</span>
+                  <span>Copy Calculation</span>
                 </>
               )}
             </button>
@@ -479,7 +479,7 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
                 className="w-full py-3.5 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-lg flex items-center justify-center gap-2 active:scale-98"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Dispatch Hisab to WhatsApp ↗</span>
+                <span>Dispatch Calculation to WhatsApp ↗</span>
               </a>
 
               {onOpenKundli ? (
@@ -491,15 +491,15 @@ export function RoasCalculator({ onOpenKundli, className = "" }: RoasCalculatorP
                   }}
                   className="w-full py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5"
                 >
-                  <span>Request Full Brand Kundli Audit</span>
+                  <span>Request Full Brand Growth Audit</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               ) : (
                 <Link
-                  href="/contact#baithak"
+                  href="/contact#session"
                   className="w-full py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5"
                 >
-                  <span>Book Strategy Baithak with this Estimate</span>
+                  <span>Book Strategy Session with this Estimate</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               )}

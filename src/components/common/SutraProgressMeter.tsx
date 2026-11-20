@@ -10,12 +10,12 @@ export function SutraProgressMeter() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   const sections = [
-    { id: "hero", name: "दरबार", eng: "Darbar (Hero)" },
-    { id: "services", name: "शस्त्र", eng: "Weapons (Services)" },
-    { id: "karname", name: "कारनामे", eng: "Karname (Case Studies)" },
-    { id: "clients", name: "विश्वास", eng: "Vishwas (Clients)" },
-    { id: "pricing", name: "थाली", eng: "Thali & Retainers" },
-    { id: "contact", name: "बैठक", eng: "Baithak (Contact)" },
+    { id: "hero", name: "01", eng: "Vision & Architecture" },
+    { id: "services", name: "02", eng: "Disciplines & Services" },
+    { id: "work", name: "03", eng: "Selected Works & Art" },
+    { id: "clients", name: "04", eng: "Client Trust Proof" },
+    { id: "pricing", name: "05", eng: "Transparent Retainers" },
+    { id: "contact", name: "06", eng: "Strategy Session" },
   ];
 
   const handleSectionClick = (id: string) => {
@@ -30,7 +30,7 @@ export function SutraProgressMeter() {
     } else {
       if (id === "pricing") router.push("/pricing");
       else if (id === "services") router.push("/services");
-      else if (id === "karname") router.push("/work");
+      else if (id === "work") router.push("/work");
       else if (id === "contact") router.push("/contact");
     }
   };

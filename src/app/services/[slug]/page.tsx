@@ -26,7 +26,6 @@ import {
 import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
-import { KhadiNoiseOverlay } from "@/components/common/KhadiNoiseOverlay";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 
@@ -162,7 +161,7 @@ async function ServiceDetailContent({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Darbar Home",
+        name: "Home",
         item: "https://desimuchads.agency",
       },
       {
@@ -226,7 +225,6 @@ async function ServiceDetailContent({ params }: PageProps) {
       />
 
       {/* Background textures */}
-      <KhadiNoiseOverlay />
       <IndianArtBackgroundOverlay />
 
       {/* Top Floating Glass Navigation Header */}
@@ -244,7 +242,7 @@ async function ServiceDetailContent({ params }: PageProps) {
                 DESI MUCHADS
               </span>
               <span className="font-mono text-[9px] text-zinc-400 tracking-wider">
-                BACK TO DARBAR
+                BACK TO HOME
               </span>
             </div>
           </Link>
@@ -258,7 +256,7 @@ async function ServiceDetailContent({ params }: PageProps) {
               <span>All Capabilities</span>
             </Link>
             <Link
-              href="/#karname"
+              href="/#work"
               className="text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors hidden sm:inline"
             >
               Portfolio Work
@@ -270,7 +268,7 @@ async function ServiceDetailContent({ params }: PageProps) {
               className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md flex items-center gap-1.5"
             >
               <PhoneCall className="w-3 h-3" />
-              <span>Book Baithak</span>
+              <span>Strategy Call</span>
             </a>
           </div>
         </div>
@@ -281,7 +279,7 @@ async function ServiceDetailContent({ params }: PageProps) {
         {/* Breadcrumb Navigation */}
         <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
           <Link href="/" className="hover:text-white transition-colors">
-            Darbar Home
+            Home
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
           <Link href="/#services" className="hover:text-white transition-colors">
@@ -509,7 +507,7 @@ async function ServiceDetailContent({ params }: PageProps) {
                   <div className="space-y-3 pt-3 border-t border-white/10 mb-6">
                     <div>
                       <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest font-bold block mb-1">
-                        THE MUSHKIL (CHALLENGE):
+                        THE BOTTLENECK (CHALLENGE):
                       </span>
                       <p className="text-xs text-zinc-400 line-clamp-2 font-sans">
                         {project.mushkil}
@@ -517,7 +515,7 @@ async function ServiceDetailContent({ params }: PageProps) {
                     </div>
                     <div>
                       <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block mb-1">
-                        THE JUGAAD (STRATEGY):
+                        THE EXECUTION (STRATEGY):
                       </span>
                       <p className="text-xs text-zinc-400 line-clamp-2 font-sans">
                         {project.jugaad}
@@ -569,7 +567,7 @@ async function ServiceDetailContent({ params }: PageProps) {
         <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-              TRANSPARENT HISAB-KITAB
+              TRANSPARENT UNIT ECONOMICS
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
               Service Retainer Packages
@@ -666,7 +664,7 @@ async function ServiceDetailContent({ params }: PageProps) {
             Ready to scale {service.title} for your brand?
           </h2>
           <p className="text-zinc-700 text-sm sm:text-base font-sans max-w-xl mx-auto">
-            Book a direct strategy baithak with our senior growth architects. We audit your current accounts, pinpoint leakage points, and deliver your 90-day scaling roadmap.
+            Book a direct strategy session with our senior growth architects. We audit your current accounts, pinpoint leakage points, and deliver your 90-day scaling roadmap.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <a
@@ -675,7 +673,7 @@ async function ServiceDetailContent({ params }: PageProps) {
               rel="noreferrer"
               className="px-8 py-4 rounded-xl bg-black hover:bg-zinc-800 text-white font-display text-xs font-black tracking-widest uppercase transition-all"
             >
-              SCHEDULE CHAI BAITHAK
+              SCHEDULE STRATEGY SESSION
             </a>
             <Link
               href="/#services"
