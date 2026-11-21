@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { sound } from "@/lib/sound";
+import { haptics } from "@/lib/haptics";
 import { Volume2, VolumeX } from "lucide-react";
 
 export function SonicToggle() {
@@ -21,6 +22,7 @@ export function SonicToggle() {
   }, []);
 
   const handleToggle = () => {
+    haptics.medium();
     sound.toggle();
   };
 

@@ -1,10 +1,12 @@
 "use client";
 
+import { haptics } from "./haptics";
+
 /**
  * Desi Muchads Procedural Sound Engine (Web Audio API)
  * Zero external audio files (0 KB payload).
  * Generates tactile mechanical plucks, crystal chimes, and micro-ticks procedurally.
- * Includes localStorage persistence and a reactive listener system for UI visualizers.
+ * Coupled with synchronized native mobile haptic feedback.
  */
 
 type SoundListener = (muted: boolean) => void;
@@ -64,6 +66,7 @@ class SoundController {
   public toggle(): boolean {
     this.initAudio();
     this.isMuted = !this.isMuted;
+    haptics.medium();
     if (typeof window !== "undefined") {
       localStorage.setItem("dm_sound_muted", String(this.isMuted));
     }
@@ -86,6 +89,7 @@ class SoundController {
    * Procedural Mechanical Pluck (Low-frequency tactile resonant decay)
    */
   public playPluck(frequency: number = 220): void {
+    haptics.light();
     if (this.isMuted || typeof window === "undefined") return;
     this.initAudio();
     if (!this.audioCtx) return;
@@ -117,6 +121,7 @@ class SoundController {
    * Procedural Crystal Chime (Harmonic dual-oscillator chord with shimmering decay)
    */
   public playChime(): void {
+    haptics.selection();
     if (this.isMuted || typeof window === "undefined") return;
     this.initAudio();
     if (!this.audioCtx) return;
@@ -160,6 +165,7 @@ class SoundController {
    * Procedural Micro-Tick (Fast 8ms click for slider movement)
    */
   public playTick(): void {
+    haptics.light();
     if (this.isMuted || typeof window === "undefined") return;
     this.initAudio();
     if (!this.audioCtx) return;
@@ -189,6 +195,7 @@ class SoundController {
    * Procedural Modal Whoosh
    */
   public playWhoosh(): void {
+    haptics.medium();
     if (this.isMuted || typeof window === "undefined") return;
     this.initAudio();
     if (!this.audioCtx) return;

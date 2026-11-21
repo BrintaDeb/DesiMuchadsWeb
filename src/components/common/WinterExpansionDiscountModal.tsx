@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { sound } from "@/lib/sound";
+import { haptics } from "@/lib/haptics";
 import confetti from "canvas-confetti";
 import {
   Snowflake,
@@ -15,6 +16,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { BreydaqsButton } from "./BreydaqsButton";
+import { WinterSalePillBadge } from "./WinterSalePillBadge";
 
 interface WinterExpansionDiscountModalProps {
   onOpenKundli: () => void;
@@ -113,6 +115,7 @@ export function WinterExpansionDiscountModal({
 
   // Logo tap trigger
   const handleLogoTap = () => {
+    haptics.selection();
     sound.playChime();
     try {
       confetti({
@@ -128,6 +131,7 @@ export function WinterExpansionDiscountModal({
 
   // Copy Promo Code handler
   const handleCopyCode = async () => {
+    haptics.success();
     sound.playPluck(200);
     try {
       await navigator.clipboard.writeText(couponCode);
@@ -147,6 +151,7 @@ export function WinterExpansionDiscountModal({
 
   // WhatsApp claim handler
   const handleClaimWhatsApp = () => {
+    haptics.success();
     sound.playChime();
 
     const whatsappMessage =
@@ -159,6 +164,7 @@ export function WinterExpansionDiscountModal({
   };
 
   const handleClose = () => {
+    haptics.light();
     sound.playPluck(140);
     setIsOpen(false);
   };
@@ -166,7 +172,18 @@ export function WinterExpansionDiscountModal({
   return (
     <>
       {/* =========================================================================
-          DYNAMIC 20% DISCOUNT POPUP MODAL (Breydaqs Design Theory)
+          PERSISTENT FLOATING RE-OPENER BADGE (Mobile & Desktop)
+          Displayed when modal is closed so visitors can access the 20% sale anytime.
+          Centered on mobile with safe-area padding; bottom-left on desktop.
+          ========================================================================= */}
+      {!isOpen && (
+        <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 z-40 select-none animate-in fade-in slide-in-from-bottom-4 duration-300 max-w-[calc(100vw-2rem)]">
+          <WinterSalePillBadge onClick={() => setIsOpen(true)} size="compact" />
+        </div>
+      )}
+
+      {/* =========================================================================
+          DYNAMIC 20% DISCOUNT POPUP MODAL (Mobile & Desktop Perfection)
           ========================================================================= */}
       <AnimatePresence>
         {isOpen && (
@@ -174,7 +191,7 @@ export function WinterExpansionDiscountModal({
             role="dialog"
             aria-modal="true"
             aria-labelledby="discountModalTitle"
-            className="fixed inset-0 z-[160] flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-300"
+            className="fixed inset-0 z-[160] flex items-center justify-center p-3 sm:p-6 pt-[max(0.75rem,env(safe-area-inset-top))] pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-black/85 backdrop-blur-md animate-in fade-in duration-300"
             onClick={(e) => {
               if (e.target === e.currentTarget) handleClose();
             }}
@@ -184,18 +201,18 @@ export function WinterExpansionDiscountModal({
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.92, opacity: 0, y: 15 }}
               transition={{ type: "spring", stiffness: 350, damping: 25 }}
-              className="relative w-full max-w-lg max-h-[92dvh] overflow-y-auto overscroll-contain rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.22)] p-4 sm:p-8 text-[#e8e8e3] shadow-[0_30px_100px_rgba(0,0,0,0.95)] select-none text-left"
+              className="relative w-full max-w-md sm:max-w-lg max-h-[88dvh] sm:max-h-[92dvh] overflow-y-auto overscroll-contain rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.22)] p-4 sm:p-7 text-[#e8e8e3] shadow-[0_30px_100px_rgba(0,0,0,0.95)] select-none text-left"
             >
               {/* Monospace Header & Close */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4 mb-4 sm:mb-6">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3 sm:mb-5">
+                <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold truncate mr-2">
                   PRIVILEGE [ 20% WINTER SCALE ]
                 </span>
 
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-[0.2rem] border border-white/15 text-zinc-400 hover:text-white hover:border-white/50 transition-all font-mono text-xs active:scale-95"
+                  className="p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-[0.2rem] border border-white/15 text-zinc-400 hover:text-white hover:border-white/50 transition-all font-mono text-xs active:scale-95 shrink-0"
                   aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
@@ -203,60 +220,60 @@ export function WinterExpansionDiscountModal({
               </div>
 
               {/* Clean Transparent Brand Logo */}
-              <div className="flex justify-center py-2 mb-4">
+              <div className="flex justify-center py-1 sm:py-2 mb-2 sm:mb-3">
                 <BrandLogoDisplay onClick={handleLogoTap} />
               </div>
 
               {/* Main Headline with Breydaqs Editorial Serif Accent */}
-              <div className="space-y-2 mb-4 text-center">
+              <div className="space-y-1 sm:space-y-1.5 mb-2.5 sm:mb-4 text-center">
                 <h3
                   id="discountModalTitle"
-                  className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-white leading-tight"
+                  className="font-display font-black text-xl sm:text-2xl md:text-3xl uppercase tracking-tight text-white leading-tight"
                 >
                   FLAT 20% OFF ALL <span className="font-editorial text-[#e8e8e3]">Growth Retainers</span>
                 </h3>
-                <p className="text-xs text-zinc-400 font-mono tracking-wide uppercase">
+                <p className="text-[10px] sm:text-xs text-zinc-400 font-mono tracking-wide uppercase">
                   National Expansion Milestone · New Delhi · Mumbai · Bengaluru
                 </p>
               </div>
 
               {/* Narrative description */}
-              <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed text-center mb-6">
-                We are inaugurating dedicated performance pods across Mumbai and Bengaluru alongside our New Delhi headquarters. To celebrate this expansion, we are granting an exclusive <strong className="text-white">20% winter reduction</strong> for the next 15 challenger brands onboarding this season.
+              <p className="text-[11px] sm:text-xs text-zinc-300 font-sans leading-relaxed text-center mb-3 sm:mb-5 max-w-sm sm:max-w-md mx-auto">
+                Inaugurating dedicated performance pods across Mumbai and Bengaluru. Granting an exclusive <strong className="text-white">20% winter reduction</strong> for the next 15 challenger brands onboarding this season.
               </p>
 
-              {/* Real-time Limited Allocation Bar */}
-              <div className="mb-5 p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex items-center justify-between text-xs font-mono">
-                <div className="flex items-center gap-2 text-zinc-400">
-                  <Clock className="w-3.5 h-3.5 text-zinc-300" />
+              {/* Real-time Limited Allocation Bar with Symmetrical Timer */}
+              <div className="mb-3.5 sm:mb-4 p-2.5 sm:p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex flex-col xs:flex-row sm:flex-row items-center justify-between gap-2 text-xs font-mono">
+                <div className="flex items-center gap-2 text-zinc-400 text-[10px] sm:text-xs shrink-0">
+                  <Clock className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
                   <span>Allocation Closes In:</span>
                 </div>
-                <div className="flex items-center gap-1.5 font-bold text-white">
-                  <span className="px-1.5 py-0.5 rounded-[0.2rem] bg-black border border-white/10">
+                <div className="flex items-center gap-1 sm:gap-1.5 font-bold text-white text-[11px] sm:text-xs shrink-0 whitespace-nowrap">
+                  <span className="inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-[0.2rem] bg-black border border-white/10 min-w-[34px] sm:min-w-[38px] text-center whitespace-nowrap">
                     {timeLeft.days}d
                   </span>
-                  <span>:</span>
-                  <span className="px-1.5 py-0.5 rounded-[0.2rem] bg-black border border-white/10">
+                  <span className="text-zinc-500">:</span>
+                  <span className="inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-[0.2rem] bg-black border border-white/10 min-w-[34px] sm:min-w-[38px] text-center whitespace-nowrap">
                     {String(timeLeft.hours).padStart(2, "0")}h
                   </span>
-                  <span>:</span>
-                  <span className="px-1.5 py-0.5 rounded-[0.2rem] bg-black border border-white/10">
+                  <span className="text-zinc-500">:</span>
+                  <span className="inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-[0.2rem] bg-black border border-white/10 min-w-[34px] sm:min-w-[38px] text-center whitespace-nowrap">
                     {String(timeLeft.minutes).padStart(2, "0")}m
                   </span>
-                  <span>:</span>
-                  <span className="px-1.5 py-0.5 rounded-[0.2rem] bg-black border border-white/10 text-emerald-400">
+                  <span className="text-zinc-500">:</span>
+                  <span className="inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-[0.2rem] bg-black border border-white/10 min-w-[34px] sm:min-w-[38px] text-center text-emerald-400 whitespace-nowrap">
                     {String(timeLeft.seconds).padStart(2, "0")}s
                   </span>
                 </div>
               </div>
 
               {/* Interactive Coupon Box */}
-              <div className="mb-6 p-4 rounded-[0.2rem] bg-[#141412] border border-[rgba(232,232,227,0.2)] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="mb-4 sm:mb-5 p-3 sm:p-4 rounded-[0.2rem] bg-[#141412] border border-[rgba(232,232,227,0.2)] flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3 text-center sm:text-left">
                 <div>
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block font-bold">
+                  <span className="text-[9px] sm:text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
                     OFFICIAL PROMO CODE:
                   </span>
-                  <div className="font-mono font-black text-2xl tracking-widest text-white">
+                  <div className="font-mono font-black text-xl sm:text-2xl tracking-widest text-white">
                     {couponCode}
                   </div>
                 </div>
@@ -264,7 +281,7 @@ export function WinterExpansionDiscountModal({
                 <button
                   type="button"
                   onClick={handleCopyCode}
-                  className="w-full sm:w-auto px-4 py-2.5 rounded-[0.2rem] bg-white hover:bg-zinc-200 text-black font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-95"
+                  className="w-full sm:w-auto px-4 py-2 sm:py-2.5 rounded-[0.2rem] bg-white hover:bg-zinc-200 text-black font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all active:scale-95 min-h-[40px] shrink-0"
                 >
                   {copied ? (
                     <>
@@ -281,11 +298,11 @@ export function WinterExpansionDiscountModal({
               </div>
 
               {/* Action Buttons Row with Breydaqs Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-2.5 sm:space-y-3">
                 <BreydaqsButton
                   onClick={handleClaimWhatsApp}
                   variant="white"
-                  className="w-full py-3 text-xs"
+                  className="w-full py-3 text-xs min-h-[44px]"
                 >
                   CLAIM 20% DISCOUNT ON WHATSAPP
                 </BreydaqsButton>
@@ -296,15 +313,15 @@ export function WinterExpansionDiscountModal({
                     onOpenKundli();
                   }}
                   variant="dark"
-                  className="w-full py-2.5 text-xs text-zinc-400"
+                  className="w-full py-2.5 text-xs text-zinc-400 min-h-[42px]"
                 >
                   APPLY TO FREE GROWTH AUDIT
                 </BreydaqsButton>
               </div>
 
               {/* Trust Footer */}
-              <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-400">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="mt-3.5 sm:mt-5 pt-2.5 sm:pt-3 border-t border-white/10 flex items-center justify-center gap-1.5 text-[9px] sm:text-[10px] font-mono text-zinc-400 text-center">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>Applicable to Foundation, Dominance &amp; Sovereign retainers.</span>
               </div>
             </motion.div>

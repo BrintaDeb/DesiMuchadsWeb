@@ -5,6 +5,7 @@ import { ThreeHeroCenterpiece } from "./ThreeHeroCenterpiece";
 import { ConstellationCanvas } from "./ConstellationCanvas";
 import { sound } from "@/lib/sound";
 import { BreydaqsButton } from "../common/BreydaqsButton";
+import { WinterSalePillBadge } from "../common/WinterSalePillBadge";
 
 interface HeroSectionProps {
   onOpenKundli: () => void;
@@ -49,15 +50,19 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
       <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {/* Stage 01 Monospace Metadata Indicator */}
-        <div className="flex items-center gap-3 mb-6 font-mono text-xs text-zinc-400">
-          <span className="text-white font-bold tracking-widest uppercase">
-            [ 01 / ARCHITECTURE ]
-          </span>
-          <span className="text-zinc-600">—</span>
-          <span className="tracking-wider uppercase text-zinc-400">
-            SYSTEMS BUILT TO → <span className="text-white font-bold">SCALE</span>
-          </span>
+        {/* Winter Scale National Expansion Pill Badge & Stage 01 Indicator */}
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
+          <WinterSalePillBadge />
+          <div className="hidden sm:flex items-center gap-3 font-mono text-xs text-zinc-400">
+            <span className="text-zinc-600">—</span>
+            <span className="text-white font-bold tracking-widest uppercase">
+              [ 01 / ARCHITECTURE ]
+            </span>
+            <span className="text-zinc-600">—</span>
+            <span className="tracking-wider uppercase text-zinc-400">
+              SYSTEMS BUILT TO → <span className="text-white font-bold">SCALE</span>
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">

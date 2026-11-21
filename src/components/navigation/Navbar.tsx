@@ -24,6 +24,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
+import { haptics } from "@/lib/haptics";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { ThemeToggle } from "./ThemeToggle";
 import { SonicToggle } from "./SonicToggle";
@@ -437,7 +438,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <SonicToggle />
 
           <button
-            onClick={() => setIsCommandOpen(true)}
+            onClick={() => {
+              haptics.medium();
+              setIsCommandOpen(true);
+            }}
             type="button"
             className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] rounded-[0.2rem] bg-white/5 border border-white/15 text-white flex items-center justify-center active:scale-95 transition-transform"
             aria-label="Open Command Search (⌘K)"
@@ -446,7 +450,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           </button>
 
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              haptics.medium();
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
             className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] flex items-center justify-center rounded-[0.2rem] bg-white/5 border border-white/15 text-white active:scale-95 transition-transform"
             aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
           >

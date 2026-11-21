@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useCallback } from "react";
 import { sound } from "@/lib/sound";
+import { haptics } from "@/lib/haptics";
 import { TrendingDown, TrendingUp, Sparkles, SlidersHorizontal } from "lucide-react";
 
 interface BeforeAfterSliderProps {
@@ -13,16 +14,25 @@ export function BeforeAfterSlider({ className = "" }: BeforeAfterSliderProps) {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const lastHapticPos = useRef<number>(50);
+
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const pct = Math.max(15, Math.min(85, (x / rect.width) * 100));
     setSliderPos(pct);
+
+    // Subtle tactile tick when crossing 10% thresholds
+    if (Math.abs(pct - lastHapticPos.current) >= 12) {
+      haptics.light();
+      lastHapticPos.current = pct;
+    }
   }, []);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     setIsDragging(true);
+    haptics.light();
     sound.playPluck(150);
     handleMove(e.clientX);
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
@@ -35,6 +45,7 @@ export function BeforeAfterSlider({ className = "" }: BeforeAfterSliderProps) {
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     setIsDragging(false);
+    haptics.selection();
     (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
   };
 
@@ -60,6 +71,7 @@ export function BeforeAfterSlider({ className = "" }: BeforeAfterSliderProps) {
         <button
           type="button"
           onClick={() => {
+            haptics.selection();
             sound.playPluck(140);
             setSliderPos(80);
           }}
@@ -74,6 +86,7 @@ export function BeforeAfterSlider({ className = "" }: BeforeAfterSliderProps) {
         <button
           type="button"
           onClick={() => {
+            haptics.selection();
             sound.playPluck(160);
             setSliderPos(50);
           }}
@@ -88,6 +101,7 @@ export function BeforeAfterSlider({ className = "" }: BeforeAfterSliderProps) {
         <button
           type="button"
           onClick={() => {
+            haptics.selection();
             sound.playPluck(180);
             setSliderPos(20);
           }}

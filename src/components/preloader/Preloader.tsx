@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MandalaStamp } from "../common/Icons";
+import { haptics } from "@/lib/haptics";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -35,6 +36,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
       if (currentProgress >= 100) {
         clearInterval(interval);
+        haptics.selection();
         setTimeout(() => {
           setIsDone(true);
           setTimeout(onComplete, 850); // Allow curtain split animation to finish
@@ -48,47 +50,43 @@ export function Preloader({ onComplete }: PreloaderProps) {
   return (
     <AnimatePresence>
       {!isDone ? (
-        <div className="fixed inset-0 z-[999] flex flex-col justify-between p-6 sm:p-12 pointer-events-auto bg-[#09090b] overflow-hidden select-none font-display">
+        <div className="fixed inset-0 z-[999] flex flex-col justify-between pt-[max(1.25rem,env(safe-area-inset-top))] pb-[max(1.25rem,env(safe-area-inset-bottom))] px-5 sm:px-12 pointer-events-auto bg-[#09090b] overflow-hidden select-none font-display min-h-[100dvh]">
           {/* Subtle ambient glow particles */}
           <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-white/[0.05] blur-[100px]" />
-            <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-white/[0.05] blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-72 sm:w-80 h-72 sm:h-80 rounded-full bg-white/[0.05] blur-[100px]" />
+            <div className="absolute bottom-1/3 right-1/4 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-white/[0.05] blur-[120px]" />
           </div>
 
-          {/* Top Bar: Brand Status */}
-          <div className="relative z-10 flex items-center justify-between text-xs font-mono uppercase tracking-[0.25em] text-zinc-400">
-            <span className="flex items-center gap-2 text-white">
-              <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+          {/* Top Bar: Brand Status with Safe Mobile Alignment */}
+          <div className="relative z-10 flex items-center justify-between text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-[0.25em] text-zinc-400">
+            <span className="flex items-center gap-2 text-white font-bold whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               DESI MUCHADS
             </span>
-            <span className="text-zinc-400">PERFORMANCE MARKETING</span>
+            <span className="text-zinc-500 text-[10px] sm:text-xs tracking-widest whitespace-nowrap">
+              <span className="hidden sm:inline">PERFORMANCE MARKETING</span>
+              <span className="sm:hidden">[ STUDIO ]</span>
+            </span>
           </div>
 
-          {/* Centerpiece: Header Logo & Official Typography */}
-          <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto">
+          {/* Centerpiece: Clean Transparent White Logo & Typography */}
+          <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto px-4">
             {/* Ambient rotating subtle mandala behind logo */}
-            <div className="absolute -z-10 w-72 h-72 sm:w-96 sm:h-96 opacity-5 animate-spin-slow text-white">
+            <div className="absolute -z-10 w-64 h-64 sm:w-96 sm:h-96 opacity-5 animate-spin-slow text-white pointer-events-none">
               <MandalaStamp className="w-full h-full" />
             </div>
 
-            {/* Official Header Brand Logo Badge */}
-            <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.25)] mb-5 bg-[#121215] transform-gpu hover:scale-105 transition-transform">
-              { }
+            {/* Official Clean Transparent White Brand Logo with Ambient Glow */}
+            <div className="relative mb-4 sm:mb-6 flex items-center justify-center">
+              <div className="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-125 pointer-events-none" />
               <img
-                src="/brand-logo.jpg"
+                src="/desi-muchads-logo-white-transparent.png"
                 alt="Desi Muchads Logo"
-                className="w-full h-full object-cover"
+                className="relative z-10 w-44 sm:w-64 h-auto max-w-full object-contain filter drop-shadow-[0_4px_24px_rgba(255,255,255,0.25)]"
               />
             </div>
 
-            {/* Official Header Wordmark (MUCHADS Together) */}
-            <div className="font-display font-black text-2xl sm:text-4xl tracking-wider text-white uppercase flex items-center gap-2 leading-none mb-1">
-              <span>DESI</span>
-              <span>
-                <span className="text-zinc-400">MUCH</span>ADS
-              </span>
-            </div>
-            <span className="text-[10px] sm:text-xs font-mono tracking-widest text-zinc-400 uppercase mb-6 font-bold">
+            <span className="text-[10px] sm:text-xs font-mono tracking-widest text-zinc-400 uppercase mb-4 sm:mb-6 font-bold">
               PERFORMANCE MARKETING AGENCY
             </span>
 
@@ -99,25 +97,25 @@ export function Preloader({ onComplete }: PreloaderProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25 }}
-              className="text-base sm:text-xl font-sans font-medium tracking-wide text-zinc-300"
+              className="text-sm sm:text-lg font-sans font-medium tracking-wide text-zinc-300 max-w-xs sm:max-w-md"
             >
               {statusText}
             </motion.p>
           </div>
 
-          {/* Bottom Bar: Progress Counter & Track */}
+          {/* Bottom Bar: Progress Counter & Track with Mobile Safety */}
           <div className="relative z-10">
-            <div className="flex items-end justify-between mb-3 font-mono">
-              <span className="text-xs uppercase tracking-widest text-zinc-400">
+            <div className="flex items-end justify-between mb-2.5 sm:mb-3 font-mono">
+              <span className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-zinc-400 truncate mr-3">
                 SCALING E-COMMERCE POTENTIAL
               </span>
-              <span className="text-3xl sm:text-5xl font-bold tracking-tight text-white font-mono">
+              <span className="text-2xl sm:text-5xl font-bold tracking-tight text-white font-mono shrink-0">
                 {String(progress).padStart(2, "0")}%
               </span>
             </div>
 
             {/* White Monochrome Line Progress Bar */}
-            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div className="w-full h-1 sm:h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
                 className="h-full bg-white transition-all duration-75 shadow-[0_0_15px_rgba(255,255,255,0.4)]"
                 style={{ width: `${progress}%` }}

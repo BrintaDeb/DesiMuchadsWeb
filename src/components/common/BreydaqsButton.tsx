@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { sound } from "@/lib/sound";
+import { haptics } from "@/lib/haptics";
 import { MagneticWrapper } from "./MagneticWrapper";
 
 interface BreydaqsButtonProps {
@@ -67,8 +68,13 @@ export function BreydaqsButton({
   };
 
   const handleClick = (e: React.MouseEvent) => {
+    haptics.medium();
     sound.playChime();
     if (onClick) onClick(e);
+  };
+
+  const handleTouchStart = () => {
+    haptics.light();
   };
 
   const buttonElement = href ? (
@@ -77,6 +83,7 @@ export function BreydaqsButton({
       target={target}
       rel={rel}
       onMouseEnter={handleMouseEnter}
+      onTouchStart={handleTouchStart}
       onClick={handleClick}
       className={`breydaqs-btn ${variantClass} ${className}`}
     >
@@ -87,6 +94,7 @@ export function BreydaqsButton({
       type={type}
       disabled={disabled}
       onMouseEnter={handleMouseEnter}
+      onTouchStart={handleTouchStart}
       onClick={handleClick}
       className={`breydaqs-btn ${variantClass} ${className}`}
     >
