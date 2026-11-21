@@ -64,7 +64,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
           {/* Left Column: Monumental Breydaqs Headline & Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
             {/* Monumental Headline with Editorial Italic Accent */}
-            <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.035em] text-white uppercase leading-[0.92]">
+            <h1 className="font-display font-black text-3xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.035em] text-white uppercase leading-[0.95] sm:leading-[0.92]">
               WE ENGINEER BRANDS THAT <span className="font-editorial text-[#e8e8e3] font-normal lowercase tracking-normal">→ dominate.</span>
             </h1>
 
@@ -89,11 +89,11 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
             </p>
 
             {/* Breydaqs Kinetic Double-Slide Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full">
               <BreydaqsButton
                 onClick={onOpenKundli}
                 variant="white"
-                className="py-3.5 px-7 text-xs sm:text-sm min-h-[48px]"
+                className="w-full sm:w-auto py-3.5 px-7 text-xs sm:text-sm min-h-[48px]"
               >
                 REQUEST GROWTH AUDIT
               </BreydaqsButton>
@@ -101,35 +101,35 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               <BreydaqsButton
                 href="#work"
                 variant="dark"
-                className="py-3.5 px-7 text-xs sm:text-sm min-h-[48px]"
+                className="w-full sm:w-auto py-3.5 px-7 text-xs sm:text-sm min-h-[48px]"
               >
                 SELECTED WORKS
               </BreydaqsButton>
             </div>
 
             {/* Breydaqs Monospace Technical Specifications Grid */}
-            <div className="pt-6 border-t border-[rgba(232,232,227,0.12)] grid grid-cols-3 gap-4 font-mono text-xs">
-              <div>
-                <span className="text-zinc-500 text-[10px] block uppercase font-bold">
+            <div className="pt-6 border-t border-[rgba(232,232,227,0.12)] grid grid-cols-3 gap-2 sm:gap-4 font-mono text-[10px] sm:text-xs">
+              <div className="min-w-0">
+                <span className="text-zinc-500 text-[9px] sm:text-[10px] block uppercase font-bold truncate">
                   PORTFOLIO GMV
                 </span>
-                <span className="text-white font-bold text-sm sm:text-base">
+                <span className="text-white font-bold text-xs sm:text-base block truncate">
                   ₹140Cr+ Scaled
                 </span>
               </div>
-              <div>
-                <span className="text-zinc-500 text-[10px] block uppercase font-bold">
+              <div className="min-w-0">
+                <span className="text-zinc-500 text-[9px] sm:text-[10px] block uppercase font-bold truncate">
                   AVERAGE ROAS
                 </span>
-                <span className="text-emerald-400 font-bold text-sm sm:text-base">
+                <span className="text-emerald-400 font-bold text-xs sm:text-base block truncate">
                   5.4X Blended
                 </span>
               </div>
-              <div>
-                <span className="text-zinc-500 text-[10px] block uppercase font-bold">
+              <div className="min-w-0">
+                <span className="text-zinc-500 text-[9px] sm:text-[10px] block uppercase font-bold truncate">
                   ACTIVE BRANDS
                 </span>
-                <span className="text-white font-bold text-sm sm:text-base">
+                <span className="text-white font-bold text-xs sm:text-base block truncate">
                   200+ Partners
                 </span>
               </div>
@@ -137,8 +137,8 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
           </div>
 
           {/* Right Column: 3D Centerpiece on Matte Carbon */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative mt-4 lg:mt-0">
-            <div className="w-full max-w-sm sm:max-w-lg relative flex flex-col items-center justify-center">
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative mt-4 lg:mt-0 overflow-hidden max-w-full">
+            <div className="w-full max-w-sm sm:max-w-lg relative flex flex-col items-center justify-center overflow-hidden">
               {/* Rotating subtle architectural halo ring */}
               <div
                 className="absolute inset-0 rounded-full border border-white/10 animate-spin-slow opacity-25 pointer-events-none"

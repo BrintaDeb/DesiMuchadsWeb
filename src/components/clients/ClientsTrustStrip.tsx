@@ -87,11 +87,11 @@ export function ClientsTrustStrip() {
         </div>
 
         {/* Velocity-Skewed Kinetic Marquee Ribbon */}
-        <div
-          ref={marqueeRef}
-          className="relative w-full overflow-hidden py-4 my-8 transition-transform will-change-transform"
-        >
-          <div className="flex gap-4 sm:gap-6 animate-marquee whitespace-nowrap">
+        <div className="relative w-full max-w-full overflow-hidden contain-paint py-4 my-8">
+          <div
+            ref={marqueeRef}
+            className="transition-transform will-change-transform flex gap-4 sm:gap-6 animate-marquee whitespace-nowrap"
+          >
             {[...clients, ...clients].map((c, idx) => (
               <div
                 key={idx}

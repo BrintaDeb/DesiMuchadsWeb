@@ -44,7 +44,7 @@ function BrandLogoDisplay({
       <img
         src="/desi-muchads-logo-white-transparent.png"
         alt="Desi Muchads Logo"
-        className="w-48 sm:w-60 h-auto max-w-full object-contain filter drop-shadow-[0_4px_24px_rgba(255,255,255,0.22)]"
+        className="w-36 sm:w-60 h-auto max-w-full object-contain filter drop-shadow-[0_4px_24px_rgba(255,255,255,0.22)]"
       />
     </motion.div>
   );
@@ -184,10 +184,10 @@ export function WinterExpansionDiscountModal({
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.92, opacity: 0, y: 15 }}
               transition={{ type: "spring", stiffness: 350, damping: 25 }}
-              className="relative w-full max-w-lg max-h-[94dvh] overflow-y-auto overscroll-contain rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.22)] p-6 sm:p-8 text-[#e8e8e3] shadow-[0_30px_100px_rgba(0,0,0,0.95)] select-none text-left"
+              className="relative w-full max-w-lg max-h-[92dvh] overflow-y-auto overscroll-contain rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.22)] p-4 sm:p-8 text-[#e8e8e3] shadow-[0_30px_100px_rgba(0,0,0,0.95)] select-none text-left"
             >
               {/* Monospace Header & Close */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4 mb-4 sm:mb-6">
                 <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase font-bold">
                   PRIVILEGE [ 20% WINTER SCALE ]
                 </span>
@@ -195,10 +195,10 @@ export function WinterExpansionDiscountModal({
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="p-1.5 rounded-[0.2rem] border border-white/15 text-zinc-400 hover:text-white hover:border-white/50 transition-all font-mono text-xs"
+                  className="p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-[0.2rem] border border-white/15 text-zinc-400 hover:text-white hover:border-white/50 transition-all font-mono text-xs active:scale-95"
                   aria-label="Close modal"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 

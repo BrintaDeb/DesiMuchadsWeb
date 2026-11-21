@@ -95,7 +95,12 @@ export function BreydaqsButton({
   );
 
   if (enableMagnetic) {
-    return <MagneticWrapper>{buttonElement}</MagneticWrapper>;
+    const isFullWidth = className.includes("w-full");
+    return (
+      <MagneticWrapper className={isFullWidth ? "w-full block" : ""}>
+        {buttonElement}
+      </MagneticWrapper>
+    );
   }
 
   return buttonElement;

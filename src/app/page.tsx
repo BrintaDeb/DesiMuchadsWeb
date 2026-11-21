@@ -71,8 +71,8 @@ export default function Home() {
 
       {/* Main Experience Container */}
       <div
-        className={`relative w-full transition-transform duration-1000 ease-out bg-[#080807] text-[#e8e8e3] ${
-          preloaderDone ? "scale-100 opacity-100" : "scale-[1.04] opacity-90"
+        className={`relative w-full max-w-full overflow-x-clip transition-all duration-1000 ease-out bg-[#080807] text-[#e8e8e3] ${
+          preloaderDone ? "scale-100 opacity-100" : "sm:scale-[1.02] opacity-90"
         }`}
       >
         {/* Architectural Navigation Bar */}

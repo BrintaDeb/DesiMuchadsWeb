@@ -40,14 +40,20 @@ export function MagneticWrapper({
     setPosition({ x: 0, y: 0 });
   };
 
+  const isFullWidth = className.includes("w-full");
+  const displayClass = isFullWidth ? "w-full block" : "inline-block";
+
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`inline-block transform-gpu ${className}`}
+      className={`${displayClass} transform-gpu ${className}`}
       style={{
-        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+        transform:
+          position.x !== 0 || position.y !== 0
+            ? `translate3d(${position.x}px, ${position.y}px, 0)`
+            : undefined,
         transition:
           position.x === 0 && position.y === 0
             ? "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)"

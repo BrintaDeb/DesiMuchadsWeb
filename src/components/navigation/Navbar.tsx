@@ -211,7 +211,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               <span>ADS</span>
             </div>
             {/* Architectural Live Studio Telemetry Clock */}
-            <div className="flex items-center gap-1.5 mt-1 font-mono text-[9px] text-zinc-400">
+            <div className="hidden sm:flex items-center gap-1.5 mt-1 font-mono text-[9px] text-zinc-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="tracking-widest uppercase">IST · 10:00 – 20:30 · NEW DELHI</span>
             </div>
@@ -433,13 +433,13 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         </nav>
 
         {/* Mobile Header Controls */}
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
           <SonicToggle />
 
           <button
             onClick={() => setIsCommandOpen(true)}
             type="button"
-            className="p-2 min-w-[40px] min-h-[40px] rounded-[0.2rem] bg-white/5 border border-white/15 text-white flex items-center justify-center"
+            className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] rounded-[0.2rem] bg-white/5 border border-white/15 text-white flex items-center justify-center active:scale-95 transition-transform"
             aria-label="Open Command Search (⌘K)"
           >
             <Search className="w-4 h-4" />
@@ -447,7 +447,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-[0.2rem] bg-white/5 border border-white/15 text-white"
+            className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] flex items-center justify-center rounded-[0.2rem] bg-white/5 border border-white/15 text-white active:scale-95 transition-transform"
             aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}

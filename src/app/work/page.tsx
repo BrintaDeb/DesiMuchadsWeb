@@ -132,13 +132,13 @@ export default function WorkPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white selection:bg-white selection:text-black">
+    <div className="min-h-screen max-w-full overflow-x-clip bg-[#09090b] text-white selection:bg-white selection:text-black">
       <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 
-      <main className="pt-24 sm:pt-28 md:pt-32 pb-24">
+      <main className="pt-24 sm:pt-28 md:pt-32 pb-24 max-w-full overflow-x-clip">
         {/* 1. Header Section */}
         <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 overflow-hidden text-left">
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-white/[0.03] blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[320px] sm:w-[700px] h-[250px] sm:h-[350px] bg-white/[0.03] blur-[100px] sm:blur-[120px] rounded-full pointer-events-none" />
 
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-400 mb-6">
