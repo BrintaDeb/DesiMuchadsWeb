@@ -691,20 +691,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-transparent text-white selection:bg-white selection:text-black relative overflow-x-hidden">
       <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 
-      <main className="min-h-screen bg-[#070709] text-white pt-28 sm:pt-32 pb-24 font-display relative overflow-hidden select-none">
-        {/* Background Decorative Gradients & Watermark */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.035] grayscale mix-blend-screen overflow-hidden">
-          <img
-            src="/art/indian-art-bg-royal.jpg"
-            alt="Desi Heritage Watermark"
-            className="w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#070709] via-transparent to-[#070709]" />
-        </div>
-
+      <main className="min-h-screen bg-transparent text-white pt-28 sm:pt-32 pb-24 font-display relative overflow-hidden select-none">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           {/* Header Breadcrumb & Tag */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-white/10">

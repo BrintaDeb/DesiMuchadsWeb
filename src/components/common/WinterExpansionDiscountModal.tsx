@@ -16,7 +16,6 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { BreydaqsButton } from "./BreydaqsButton";
-import { WinterSalePillBadge } from "./WinterSalePillBadge";
 
 interface WinterExpansionDiscountModalProps {
   onOpenKundli: () => void;
@@ -171,17 +170,6 @@ export function WinterExpansionDiscountModal({
 
   return (
     <>
-      {/* =========================================================================
-          PERSISTENT FLOATING RE-OPENER BADGE (Mobile & Desktop)
-          Displayed when modal is closed so visitors can access the 20% sale anytime.
-          Centered on mobile with safe-area padding; bottom-left on desktop.
-          ========================================================================= */}
-      {!isOpen && (
-        <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 z-40 select-none animate-in fade-in slide-in-from-bottom-4 duration-300 max-w-[calc(100vw-2rem)]">
-          <WinterSalePillBadge onClick={() => setIsOpen(true)} size="compact" />
-        </div>
-      )}
-
       {/* =========================================================================
           DYNAMIC 20% DISCOUNT POPUP MODAL (Mobile & Desktop Perfection)
           ========================================================================= */}

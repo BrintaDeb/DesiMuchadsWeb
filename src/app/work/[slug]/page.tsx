@@ -78,7 +78,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400 font-mono text-sm">
+        <div className="min-h-screen bg-transparent flex items-center justify-center text-zinc-400 font-mono text-sm">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
             <span>Loading Desi Muchads Case Study...</span>
@@ -173,7 +173,7 @@ async function ProjectDetailContent({ params }: PageProps) {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-white selection:bg-white selection:text-black font-display overflow-x-hidden">
+    <div className="relative min-h-screen bg-transparent text-white selection:bg-white selection:text-black font-display overflow-x-hidden">
       {/* Injected Rich Structured Data */}
       <script
         type="application/ld+json"
@@ -183,9 +183,6 @@ async function ProjectDetailContent({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-
-      {/* Background textures */}
-      <IndianArtBackgroundOverlay />
 
       {/* Top Floating Glass Navigation Header */}
       <header className="sticky top-0 z-50 px-4 sm:px-8 py-4 backdrop-blur-xl bg-black/60 border-b border-white/10">

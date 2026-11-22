@@ -21,7 +21,7 @@ export default function PricingPage() {
   const [isKundliOpen, setIsKundliOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-transparent text-white selection:bg-white selection:text-black relative overflow-x-hidden">
       <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 
       <main className="pt-24 sm:pt-28 md:pt-32 pb-24">

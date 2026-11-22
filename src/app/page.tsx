@@ -28,6 +28,10 @@ import { GrowthJourneyScrollytelling } from "@/components/methodology/GrowthJour
 import { WinterExpansionDiscountModal } from "@/components/common/WinterExpansionDiscountModal";
 import { StardustCursorTrail } from "@/components/common/StardustCursorTrail";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
+import { MagneticWrapper } from "@/components/common/MagneticWrapper";
+import { CaseStudyHoverPreview } from "@/components/casestudies/CaseStudyHoverPreview";
+import { InteractiveRoasSimulator } from "@/components/calculator/InteractiveRoasSimulator";
+import { ApkInstallPopup } from "@/components/common/ApkInstallPopup";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
@@ -55,9 +59,6 @@ export default function Home() {
 
   return (
     <SmoothScrollProvider>
-      {/* Cultural Artistry Background */}
-      <IndianArtBackgroundOverlay />
-
       {/* Custom dual cursor with 'INSPECT • EXPLORE' stamp */}
       <CustomCursor />
 
@@ -71,7 +72,7 @@ export default function Home() {
 
       {/* Main Experience Container */}
       <div
-        className={`relative w-full max-w-full overflow-x-clip transition-all duration-1000 ease-out bg-[#080807] text-[#e8e8e3] ${
+        className={`relative w-full max-w-full overflow-x-clip transition-all duration-1000 ease-out bg-transparent text-[#e8e8e3] ${
           preloaderDone ? "scale-100 opacity-100" : "sm:scale-[1.02] opacity-90"
         }`}
       >
@@ -179,96 +180,62 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {flagshipProjects.map((proj) => (
-                <SpotlightCard
+                <MagneticWrapper
                   key={proj.id}
-                  isGlass={true}
-                  className="group rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.15)] hover:border-white/50 transition-all overflow-hidden flex flex-col justify-between shadow-lg"
+                  strength={0.12}
+                  tiltStrength={2}
+                  enableSound={true}
+                  className="w-full h-full"
                 >
-                  <div
-                    data-cursor="view"
-                    onClick={() => {
-                      sound.playChime();
-                      setActiveProject(proj);
-                    }}
-                    className="relative aspect-[16/10] overflow-hidden bg-black/60 cursor-pointer"
+                  <SpotlightCard
+                    isGlass={true}
+                    className="group rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.15)] hover:border-white/50 transition-all overflow-hidden flex flex-col justify-between shadow-lg h-full"
                   >
-                    <img
-                      src={proj.thumbnail}
-                      alt={proj.client}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
+                    {/* Motion Video / Interactive Pan Hover Preview */}
+                    <CaseStudyHoverPreview
+                      project={proj}
+                      onInspect={setActiveProject}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
 
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2.5 py-1 rounded-[0.2rem] bg-black/80 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold uppercase text-zinc-200">
+                    <div className="p-5 space-y-3 font-mono">
+                      <span className="text-[10px] text-zinc-500 uppercase block">
                         {proj.category}
                       </span>
-                    </div>
-
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          sound.playChime();
-                          setActiveProject(proj);
-                        }}
-                        className="px-4 py-2 rounded-[0.2rem] bg-white text-black text-xs font-bold font-mono uppercase tracking-wider flex items-center gap-1.5 shadow-xl hover:scale-105 transition-all"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>INSPECT</span>
-                      </button>
-                    </div>
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono">
-                      <span className="font-bold text-white bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-[0.2rem] border border-white/20">
-                        {proj.heroStat}
-                      </span>
-                      <span className="text-[10px] text-zinc-300">
-                        {proj.stats[0]?.val || proj.year}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 space-y-3 font-mono">
-                    <span className="text-[10px] text-zinc-500 uppercase block">
-                      {proj.category}
-                    </span>
-                    <h3
-                      onClick={() => {
-                        sound.playChime();
-                        setActiveProject(proj);
-                      }}
-                      className="font-display font-black text-lg text-white uppercase tracking-tight hover:text-zinc-300 cursor-pointer transition-colors"
-                    >
-                      {proj.client}
-                    </h3>
-                    <p className="font-sans text-xs text-zinc-400 leading-snug line-clamp-2">
-                      {proj.tagline}
-                    </p>
-
-                    <div className="pt-3 border-t border-white/5 flex items-center justify-between font-mono">
-                      <button
-                        type="button"
+                      <h3
                         onClick={() => {
                           sound.playChime();
                           setActiveProject(proj);
                         }}
-                        className="text-xs text-white hover:underline flex items-center gap-1"
+                        className="font-display font-black text-lg text-white uppercase tracking-tight hover:text-zinc-300 cursor-pointer transition-colors"
                       >
-                        <span>Inspect Platform</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-                      <Link
-                        href={`/work/${proj.slug}`}
-                        className="text-[10px] text-zinc-500 hover:text-zinc-300"
-                      >
-                        Case Study ↗
-                      </Link>
+                        {proj.client}
+                      </h3>
+                      <p className="font-sans text-xs text-zinc-400 leading-snug line-clamp-2">
+                        {proj.tagline}
+                      </p>
+
+                      <div className="pt-3 border-t border-white/5 flex items-center justify-between font-mono">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            sound.playChime();
+                            setActiveProject(proj);
+                          }}
+                          className="text-xs text-white hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <span>Inspect Platform</span>
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </button>
+                        <Link
+                          href={`/work/${proj.slug}`}
+                          className="text-[10px] text-zinc-500 hover:text-zinc-300"
+                        >
+                          Case Study ↗
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </SpotlightCard>
+                  </SpotlightCard>
+                </MagneticWrapper>
               ))}
             </div>
           </section>
@@ -351,13 +318,18 @@ export default function Home() {
               </SpotlightCard>
             </div>
 
-            <div className="text-center">
+            {/* Live Interactive 3D ROAS & P&L Simulator */}
+            <div className="mt-16 pt-16 border-t border-[rgba(232,232,227,0.12)]">
+              <InteractiveRoasSimulator onOpenKundli={() => setIsKundliOpen(true)} />
+            </div>
+
+            <div className="mt-12 text-center">
               <BreydaqsButton
                 href="/pricing"
                 variant="white"
                 className="py-4 px-8 text-xs sm:text-sm"
               >
-                OPEN PRICING &amp; ROI SIMULATOR
+                VIEW DETAILED RETAINER DELIVERABLES
               </BreydaqsButton>
             </div>
           </section>
@@ -425,6 +397,9 @@ export default function Home() {
 
       {/* Liquid Platinum Stardust Particle Cursor Trail */}
       <StardustCursorTrail />
+
+      {/* Interactive Android APK & Live Phone View Pop-up */}
+      <ApkInstallPopup />
     </SmoothScrollProvider>
   );
 }

@@ -85,7 +85,7 @@ export default function AboutPage() {
   const [isKundliOpen, setIsKundliOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white font-sans selection:bg-white selection:text-black relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-white font-sans selection:bg-white selection:text-black relative overflow-x-hidden">
       {/* 1. Header Navigation */}
       <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 

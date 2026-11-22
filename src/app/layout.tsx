@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
+import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -104,10 +105,10 @@ export const metadata: Metadata = {
     siteName: "DESI MUCHADS Digital Agency",
     images: [
       {
-        url: "/brand-logo-white.jpg",
-        width: 1200,
-        height: 630,
-        alt: "DESI MUCHADS Official Brand Crest & Growth Agency Identity",
+        url: "/desi-muchads-original-logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "DESI MUCHADS Official Brand Logo",
       },
     ],
     locale: "en_IN",
@@ -118,7 +119,7 @@ export const metadata: Metadata = {
     title: "DESI MUCHADS ✦ High-ROAS Performance Marketing & Neo-Desi Creative Agency",
     description:
       "Unapologetic Desi Roots. Ruthless Global ROI. High-converting marketing architectures, viral reels, sub-second web platforms, and e-commerce scaling.",
-    images: ["/brand-logo-white.jpg"],
+    images: ["/desi-muchads-original-logo.png"],
     creator: "@desimuchads",
     site: "@desimuchads",
   },
@@ -142,9 +143,14 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
     shortcut: "/favicon.ico",
-    apple: "/brand-logo-white.jpg",
+    apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.webmanifest",
 };
@@ -171,11 +177,11 @@ export default function RootLayout({
     url: "https://desimuchads.agency",
     logo: {
       "@type": "ImageObject",
-      url: "https://desimuchads.agency/brand-logo-white.jpg",
-      width: 1200,
-      height: 630,
+      url: "https://desimuchads.agency/desi-muchads-square-logo.png",
+      width: 1024,
+      height: 1024,
     },
-    image: "https://desimuchads.agency/brand-logo-white.jpg",
+    image: "https://desimuchads.agency/desi-muchads-square-logo.png",
     description:
       "India's premier high-ROAS performance marketing, Quick Commerce growth, full-stack Next.js web engineering, and viral social storytelling agency.",
     slogan: "Unapologetic Desi Roots. Ruthless Global ROI.",
@@ -441,9 +447,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationJsonLd) }}
         />
       </head>
-      <body className="bg-[#09090b] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden font-sans">
+      <body className="bg-[#080807] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden font-sans">
         <ThemeProvider>
-          <AgencyProposalProvider>{children}</AgencyProposalProvider>
+          <AgencyProposalProvider>
+            {/* Authentic Cultural Indian Art Background across ALL pages & sections */}
+            <IndianArtBackgroundOverlay />
+            <div className="relative z-10 w-full min-h-screen">
+              {children}
+            </div>
+          </AgencyProposalProvider>
         </ThemeProvider>
       </body>
     </html>

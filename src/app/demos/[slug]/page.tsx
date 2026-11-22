@@ -67,7 +67,7 @@ export default function DemoProductPage({ params }: PageProps) {
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400 font-mono text-sm">
+        <div className="min-h-screen bg-transparent flex items-center justify-center text-zinc-400 font-mono text-sm">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
             <span>Loading Desi Muchads Demo Storefront...</span>

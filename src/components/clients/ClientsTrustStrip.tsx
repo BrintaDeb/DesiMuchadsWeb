@@ -70,7 +70,7 @@ export function ClientsTrustStrip() {
   return (
     <section
       id="clients"
-      className="relative py-28 sm:py-36 bg-[#080807] text-white overflow-hidden select-none font-display border-t border-white/10"
+      className="relative py-28 sm:py-36 bg-transparent text-white overflow-hidden select-none font-display border-t border-white/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

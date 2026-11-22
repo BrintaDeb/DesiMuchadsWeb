@@ -26,7 +26,6 @@ import {
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
 import { AGENCY_SERVICES } from "@/data/servicesData";
-import { ThemeToggle } from "./ThemeToggle";
 import { SonicToggle } from "./SonicToggle";
 import { CommandMenu } from "../common/CommandMenu";
 import { BreydaqsButton } from "../common/BreydaqsButton";
@@ -104,8 +103,15 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Prevent background body scroll when mobile drawer is open
+  // Prevent background body scroll and notify floating docks when mobile drawer is open
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("dm_mobile_drawer_change", {
+          detail: { open: mobileMenuOpen },
+        })
+      );
+    }
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -191,17 +197,18 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     >
       {/* Main Architectural Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
-        {/* Brand Mark with Preserved Official Logo */}
+        {/* Brand Mark with Official White Moustache Logo */}
         <Link
           href="/"
           onMouseEnter={() => sound.playPluck(180)}
-          className="flex items-center gap-3 focus:outline-none group shrink-0"
+          className="flex items-center gap-2.5 sm:gap-3 focus:outline-none group shrink-0"
         >
-          <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-[0.2rem] overflow-hidden border border-white/20 group-hover:border-white transition-all shrink-0 bg-black p-0.5">
+          {/* Authentic White Moustache Logo without box border */}
+          <div className="relative w-9 h-5 sm:w-11 sm:h-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
             <img
-              src="/brand-logo.jpg"
-              alt="Desi Muchads Official Brand Logo"
-              className="w-full h-full object-cover"
+              src="/desi-muchads-cropped-logo.png"
+              alt="Desi Muchads Official Logo"
+              className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(255,255,255,0.45)]"
               loading="eager"
             />
           </div>
@@ -211,27 +218,21 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               <span className="text-zinc-400">MUCH</span>
               <span>ADS</span>
             </div>
-            {/* Architectural Live Studio Telemetry Clock */}
-            <div className="hidden sm:flex items-center gap-1.5 mt-1 font-mono text-[9px] text-zinc-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="tracking-widest uppercase">IST · 10:00 – 20:30 · NEW DELHI</span>
-            </div>
           </div>
         </Link>
 
         {/* Desktop Nav Items with Monospace Indexes (Breydaqs Design Theory) */}
         <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-mono text-xs shrink-0 whitespace-nowrap">
-          {/* About Us 0 1 */}
+          {/* About Us */}
           <Link
             href="/about"
             onMouseEnter={() => sound.playPluck(130)}
             className="px-2.5 py-1.5 text-zinc-400 hover:text-[#e8e8e3] transition-colors flex items-center gap-1 uppercase tracking-wider"
           >
             <span>About</span>
-            <span className="text-[10px] opacity-40 font-bold">0 1</span>
           </Link>
 
-          {/* Services 0 2 */}
+          {/* Services */}
           <div
             className="relative"
             onMouseEnter={() => handleMouseEnter("services")}
@@ -245,7 +246,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 }`}
             >
               <span>Services</span>
-              <span className="text-[10px] opacity-40 font-bold">0 2</span>
               <ChevronDown
                 className={`w-3 h-3 transition-transform duration-200 ml-0.5 ${activeDropdown === "services" ? "rotate-180 text-white" : "opacity-60"
                   }`}
@@ -330,7 +330,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 }`}
             >
               <span>Work</span>
-              <span className="text-[10px] opacity-40 font-bold">0 3</span>
               <ChevronDown
                 className={`w-3 h-3 transition-transform duration-200 ml-0.5 ${activeDropdown === "work" ? "rotate-180 text-white" : "opacity-60"
                   }`}
@@ -384,24 +383,22 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             )}
           </div>
 
-          {/* Pricing 0 4 */}
+          {/* Pricing */}
           <Link
             href="/pricing"
             onMouseEnter={() => sound.playPluck(130)}
             className="px-2.5 py-1.5 text-zinc-400 hover:text-[#e8e8e3] transition-colors flex items-center gap-1 uppercase tracking-wider"
           >
             <span>Pricing</span>
-            <span className="text-[10px] opacity-40 font-bold">0 4</span>
           </Link>
 
-          {/* Contact 0 5 */}
+          {/* Contact */}
           <Link
             href="/contact"
             onMouseEnter={() => sound.playPluck(130)}
             className="px-2.5 py-1.5 text-zinc-400 hover:text-[#e8e8e3] transition-colors flex items-center gap-1 uppercase tracking-wider"
           >
             <span>Contact</span>
-            <span className="text-[10px] opacity-40 font-bold">0 5</span>
           </Link>
 
           {/* Command Palette Shortcut (⌘K) */}
@@ -416,9 +413,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               ⌘K
             </kbd>
           </button>
-
-          {/* Theme & Density Switcher */}
-          <ThemeToggle />
 
           {/* Zero-Payload Procedural Sound Toggle */}
           <SonicToggle />
@@ -483,14 +477,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         >
           <div className="p-5 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))]">
             <div className="space-y-3">
-              {/* Theme & Density */}
-              <div className="p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-300 uppercase tracking-wider font-bold">
-                  Theme &amp; Visual Density
-                </span>
-                <ThemeToggle />
-              </div>
-
               {/* Quick Navigation Deck */}
               <div className="grid grid-cols-3 gap-2 font-mono text-xs">
                 <Link
@@ -532,7 +518,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
                   <span>Home</span>
-                  <span className="text-zinc-500 text-[10px]">0 0</span>
                 </Link>
 
                 <Link
@@ -541,7 +526,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
                   <span>About &amp; Principles</span>
-                  <span className="text-zinc-500 text-[10px]">0 1</span>
                 </Link>
 
                 <Link
@@ -550,7 +534,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
                   <span>Services ({AGENCY_SERVICES.length})</span>
-                  <span className="text-zinc-500 text-[10px]">0 2</span>
                 </Link>
 
                 <Link
@@ -559,7 +542,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
                   <span>Selected Works (50)</span>
-                  <span className="text-zinc-500 text-[10px]">0 3</span>
                 </Link>
 
                 <Link
@@ -568,7 +550,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
                   <span>Transparent Retainers</span>
-                  <span className="text-zinc-500 text-[10px]">0 4</span>
                 </Link>
 
                 <Link
@@ -577,7 +558,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/20 text-white uppercase font-bold"
                 >
                   <span>Contact &amp; Strategy Call</span>
-                  <span className="text-emerald-400 text-[10px]">0 5</span>
                 </Link>
               </div>
             </div>

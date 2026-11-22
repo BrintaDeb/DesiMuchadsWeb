@@ -132,7 +132,7 @@ export default function WorkPage() {
   };
 
   return (
-    <div className="min-h-screen max-w-full overflow-x-clip bg-[#09090b] text-white selection:bg-white selection:text-black">
+    <div className="min-h-screen max-w-full overflow-x-clip bg-transparent text-white selection:bg-white selection:text-black">
       <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 
       <main className="pt-24 sm:pt-28 md:pt-32 pb-24 max-w-full overflow-x-clip">

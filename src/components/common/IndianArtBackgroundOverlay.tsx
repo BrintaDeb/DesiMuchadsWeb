@@ -1,31 +1,39 @@
 "use client";
 
 import React from "react";
+import { ConstellationCanvas } from "@/components/hero/ConstellationCanvas";
 
+/**
+ * Authentic Royal Indian Cultural Artistry & Architecture Background
+ * Renders globally across all sections and pages:
+ * 1. Authentic Pichwai & Kalamkari Palace Royal Artistry (/art/indian-art-bg-royal.jpg)
+ * 2. Interactive Micro-Star Constellation Canvas
+ * 3. Atmospheric Heritage Radiance Glows
+ */
 export function IndianArtBackgroundOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[1] h-full w-full max-w-full overflow-hidden contain-paint"
-      style={{
-        maxWidth: "100vw",
-        maxHeight: "100vh",
-      }}
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full max-w-full overflow-hidden select-none"
     >
-      {/* 1. Authentic Indian Architectural Jaali & Traditional Heritage Pattern Overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.045] mix-blend-screen"
-        style={{
-          backgroundImage: "url('/art/indian-art-jaali-pattern.jpg')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "360px 360px",
-        }}
-      />
+      {/* 1. Authentic Indian Cultural Pichwai & Kalamkari Artistry Drawing Watermark */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.085] mix-blend-screen">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/art/indian-art-bg-royal.jpg"
+          alt="Authentic Indian Cultural Heritage Artistry"
+          className="w-full h-full object-cover object-center filter contrast-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080807] via-transparent to-[#080807]/80" />
+      </div>
 
-      {/* 2. Soft Ambient Warm Heritage Halos to enhance Indian Art linework on Matte Black */}
-      <div className="absolute -top-32 -left-32 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] rounded-full bg-[#FFC400]/[0.025] blur-[100px] sm:blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 -right-20 sm:-right-40 w-[320px] sm:w-[700px] h-[320px] sm:h-[700px] rounded-full bg-[#F36700]/[0.02] blur-[100px] sm:blur-[160px] pointer-events-none" />
-      <div className="absolute -bottom-32 left-1/4 w-[360px] sm:w-[800px] h-[360px] sm:h-[800px] rounded-full bg-[#0e164c]/[0.045] blur-[120px] sm:blur-[180px] pointer-events-none" />
+      {/* 2. Interactive Micro-Star Constellation Canvas */}
+      <ConstellationCanvas />
+
+      {/* 3. Atmospheric Heritage Radiance Halos */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-white/[0.025] blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
+      <div className="absolute top-2/3 left-1/3 w-[500px] h-[500px] rounded-full bg-[#D4AF37]/[0.015] blur-[180px] pointer-events-none" />
     </div>
   );
 }

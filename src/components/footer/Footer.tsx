@@ -33,7 +33,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
   }, []);
 
   return (
-    <footer id="footer" className="relative bg-[#080807] text-[#e8e8e3] pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none font-display border-t border-[rgba(232,232,227,0.12)]">
+    <footer id="footer" className="relative bg-transparent text-[#e8e8e3] pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none font-display border-t border-[rgba(232,232,227,0.12)]">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Colossal Breydaqs Headline Callout */}
         <div className="mb-20 pb-16 border-b border-[rgba(232,232,227,0.12)] flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10">
@@ -51,21 +51,21 @@ export function Footer({ onOpenKundli }: FooterProps) {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
             <BreydaqsButton
-              onClick={() => onOpenKundli?.()}
+              href="tel:+919180252831"
               variant="white"
               className="py-4 px-8 text-xs sm:text-sm min-h-[48px]"
             >
-              REQUEST AUDIT
+              DIRECT STRATEGY CALL (+91 91802 52831)
             </BreydaqsButton>
 
             <BreydaqsButton
-              href="https://wa.me/919180252831?text=Hello%20Desi%20Muchads!%20We%20would%20like%20to%20discuss%20our%20e-commerce%20growth."
+              href="https://wa.me/919180252831?text=Hello%20Desi%20Muchads!%20We%20would%20like%20to%20discuss%20our%20growth%20proposal."
               target="_blank"
               rel="noopener noreferrer"
               variant="dark"
               className="py-4 px-8 text-xs sm:text-sm min-h-[48px]"
             >
-              WHATSAPP (+91 9180252831)
+              WHATSAPP PROPOSAL
             </BreydaqsButton>
           </div>
         </div>
@@ -76,11 +76,11 @@ export function Footer({ onOpenKundli }: FooterProps) {
           <div className="lg:col-span-5 space-y-6 text-left">
             <div className="flex items-center gap-3.5">
               <div className="relative group shrink-0">
-                <div className="relative w-12 h-12 rounded-[0.2rem] overflow-hidden border border-white/20 bg-black p-0.5">
+                <div className="relative w-11 h-7 flex items-center justify-center shrink-0">
                   <img
-                    src="/brand-logo.jpg"
+                    src="/desi-muchads-cropped-logo.png"
                     alt="Desi Muchads Logo"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]"
                   />
                 </div>
               </div>
