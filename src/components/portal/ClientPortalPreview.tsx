@@ -194,7 +194,7 @@ export function ClientPortalPreview() {
   };
 
   return (
-    <section id="portal" className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden border-t border-white/10">
+    <section id="portal" className="relative py-28 sm:py-36 bg-transparent text-white overflow-hidden border-t border-white/10">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.03] blur-[160px] pointer-events-none" />
 

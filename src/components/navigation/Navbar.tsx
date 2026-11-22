@@ -213,10 +213,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             />
           </div>
           <div className="flex flex-col text-left justify-center shrink-0">
-            <div className="font-display font-black text-base sm:text-lg tracking-wider text-white uppercase flex items-center gap-1 leading-none">
+            <div className="font-display font-black text-base sm:text-lg tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
               <span>DESI</span>
-              <span className="text-zinc-400">MUCH</span>
-              <span>ADS</span>
+              <span className="text-zinc-300">MUCHADS</span>
             </div>
           </div>
         </Link>

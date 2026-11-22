@@ -228,7 +228,7 @@ export function PricingSection({ onOpenKundli }: PricingSectionProps) {
   };
 
   return (
-    <section id="pricing" className="relative py-28 sm:py-36 bg-[#09090b] text-white overflow-hidden border-t border-white/10">
+    <section id="pricing" className="relative py-28 sm:py-36 bg-transparent text-white overflow-hidden border-t border-white/10">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 -left-40 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[160px] pointer-events-none" />

@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     siteName: "DESI MUCHADS Digital Agency",
     images: [
       {
-        url: "/desi-muchads-original-logo.png",
+        url: "https://desimuchads.agency/og-image.png",
         width: 1024,
         height: 1024,
         alt: "DESI MUCHADS Official Brand Logo",
@@ -119,7 +119,7 @@ export const metadata: Metadata = {
     title: "DESI MUCHADS ✦ High-ROAS Performance Marketing & Neo-Desi Creative Agency",
     description:
       "Unapologetic Desi Roots. Ruthless Global ROI. High-converting marketing architectures, viral reels, sub-second web platforms, and e-commerce scaling.",
-    images: ["/desi-muchads-original-logo.png"],
+    images: ["https://desimuchads.agency/og-image.png"],
     creator: "@desimuchads",
     site: "@desimuchads",
   },

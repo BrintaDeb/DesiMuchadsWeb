@@ -102,14 +102,23 @@ export function WinterExpansionDiscountModal({
     }
   }, []);
 
-  // Listen for custom trigger event
+  // Listen for custom trigger event & Escape key
   useEffect(() => {
     const handleOpen = () => {
       sound.playChime();
       setIsOpen(true);
     };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
     window.addEventListener("open-winter-sale", handleOpen);
-    return () => window.removeEventListener("open-winter-sale", handleOpen);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("open-winter-sale", handleOpen);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   // Logo tap trigger
