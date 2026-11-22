@@ -153,6 +153,11 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Desi Muchads",
+  },
 };
 
 export default function RootLayout({
@@ -194,16 +199,16 @@ export default function RootLayout({
     email: "thedesimuchads@gmail.com",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Connaught Place, Barakhamba Road",
-      addressLocality: "New Delhi",
-      addressRegion: "Delhi",
-      postalCode: "110001",
+      streetAddress: "Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar",
+      addressLocality: "Bengaluru",
+      addressRegion: "Karnataka",
+      postalCode: "560068",
       addressCountry: "IN",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 28.6315,
-      longitude: 77.2167,
+      latitude: 12.9157,
+      longitude: 77.6445,
     },
     areaServed: [
       { "@type": "Country", name: "India" },
@@ -406,7 +411,7 @@ export default function RootLayout({
         name: "Where is Desi Muchads located?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Desi Muchads is headquartered in Connaught Place, New Delhi, with regional production and growth squads in Mumbai, Bengaluru, and international client cohorts across the UAE, US, and UK.",
+          text: "Desi Muchads is headquartered at Splendid Royale, Bengaluru, Karnataka (560068), with regional production and growth squads in New Delhi, Mumbai, and international client cohorts across the UAE, US, and UK.",
         },
       },
     ],
@@ -419,15 +424,22 @@ export default function RootLayout({
     >
       <head>
         {/* Geo Targeting Meta Tags for Local & Regional Search Dominance */}
-        <meta name="geo.region" content="IN-DL" />
-        <meta name="geo.placename" content="New Delhi" />
-        <meta name="geo.position" content="28.6315;77.2167" />
-        <meta name="ICBM" content="28.6315, 77.2167" />
+        <meta name="geo.region" content="IN-KA" />
+        <meta name="geo.placename" content="Bengaluru" />
+        <meta name="geo.position" content="12.9157;77.6445" />
+        <meta name="ICBM" content="12.9157, 77.6445" />
         <meta name="target" content="all" />
         <meta name="audience" content="all" />
         <meta name="coverage" content="Worldwide" />
         <meta name="distribution" content="Global" />
         <meta name="rating" content="General" />
+
+        {/* iOS & Android Standalone Web App Meta Tags */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Desi Muchads" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Desi Muchads" />
 
         {/* Structured Data: Organization, WebSite Sitelinks SearchBox, & FAQPage */}
         <script

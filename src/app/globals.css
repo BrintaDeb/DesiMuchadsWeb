@@ -998,6 +998,47 @@ iframe {
   border-color: rgba(232, 232, 227, 0.4);
 }
 
+/* =========================================================================
+   MOBILE ARCHITECTURAL OPTIMIZATIONS (iOS & ANDROID)
+   ========================================================================= */
+
+/* Prevent iOS Safari 16px auto-zoom on form inputs */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  input[type="url"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Smooth mobile momentum scrolling & rubber-band containment */
+html,
+body {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior-x: none;
+}
+
+/* Safe touch target padding & tap highlight normalization */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile responsive safe area padding utilities */
+.safe-bottom-pad {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+}
+
+.safe-top-pad {
+  padding-top: max(1rem, env(safe-area-inset-top, 0px));
+}
+
 
 
 

@@ -84,7 +84,7 @@ export default function Home() {
           <HeroSection onOpenKundli={() => setIsKundliOpen(true)} />
 
           {/* Section 2: Executive Capabilities Bento Preview */}
-          <section id="services" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 border-t border-[rgba(232,232,227,0.12)] scroll-mt-24">
+          <section id="services" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-[rgba(232,232,227,0.12)] pb-6">
               <div>
                 <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-2">

@@ -145,7 +145,7 @@ const MEETING_CHANNELS = [
   { id: "meet", name: "Google Meet", note: "Instant HD Video Room", icon: Video, popular: true },
   { id: "whatsapp", name: "WhatsApp Video Call", note: "Direct Founder Phone", icon: MessageCircle },
   { id: "zoom", name: "Zoom Enterprise", note: "Screen Share & Telemetry", icon: Globe },
-  { id: "inperson", name: "Studio In-Person", note: "Connaught Place, New Delhi", icon: MapPin },
+  { id: "inperson", name: "Studio In-Person", note: "Splendid Royale, Bengaluru", icon: MapPin },
 ];
 
 const SERVICES_CATALOG = [
@@ -210,7 +210,7 @@ const CONCIERGE_PROMPTS = [
   },
   {
     q: "Can we meet in-person at your studio?",
-    a: "Yes! Our headquarters is at Connaught Place, Barakhamba Road, New Delhi 110001. In-person strategy sessions are hosted Monday to Saturday.",
+    a: "Yes! Our headquarters is at Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar, Bengaluru, Karnataka 560068. In-person strategy sessions are hosted Monday to Saturday.",
   },
   {
     q: "What are your monthly retainer packages?",
@@ -683,7 +683,7 @@ export default function ContactPage() {
     );
     const location = encodeURIComponent(
       channelName.includes("In-Person")
-        ? "Desi Muchads Headquarters, Connaught Place, New Delhi"
+        ? "Desi Muchads Headquarters, Splendid Royale, Bengaluru"
         : "Google Meet / Video Room"
     );
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
@@ -1642,9 +1642,9 @@ export default function ContactPage() {
 
                 <div className="space-y-2 text-xs font-mono text-zinc-400 pt-2">
                   <p className="text-white font-bold">DESI MUCHADS DIGITAL LLP</p>
-                  <p>Connaught Place, Barakhamba Road, New Delhi, 110001, India</p>
+                  <p>Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar, Bengaluru, Karnataka 560068</p>
                   <p className="text-emerald-400 font-bold">
-                    CIN: U74999DL2024PTC412891 &bull; 100% Verified
+                    CIN: U74999KA2024PTC412891 &bull; 100% Verified
                   </p>
                   <p className="text-zinc-300">
                     Email:{" "}
@@ -1659,7 +1659,7 @@ export default function ContactPage() {
 
                 <div className="pt-2">
                   <a
-                    href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                    href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono font-bold uppercase tracking-wider text-white transition-all shadow-sm"
@@ -1674,8 +1674,8 @@ export default function ContactPage() {
               <div className="lg:col-span-7">
                 <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-[#0c0c0e] h-80 sm:h-96 group">
                   <iframe
-                    title="Desi Muchads Official Headquarters Map - Connaught Place New Delhi"
-                    src="https://maps.google.com/maps?q=Connaught%20Place%2C%20New%20Delhi%2C%20Delhi%20110001&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    title="Desi Muchads Official Headquarters Map - Splendid Royale Bengaluru"
+                    src="https://maps.google.com/maps?q=Splendid+Royale%2C+3rd+Main+Rd%2C+Hosapalaya%2C+Muneshwara+Nagar%2C+Bengaluru%2C+Karnataka+560068&t=&z=16&ie=UTF8&iwloc=&output=embed"
                     className="w-full h-full border-0 filter contrast-[1.05] opacity-95 group-hover:opacity-100 transition-opacity map-embed-frame"
                     loading="lazy"
                     allowFullScreen
@@ -1685,11 +1685,11 @@ export default function ContactPage() {
                     <div className="flex items-center gap-2 truncate pr-2">
                       <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span className="text-white truncate font-bold">
-                        Connaught Place Hub &bull; New Delhi
+                        Splendid Royale Hub &bull; Bengaluru
                       </span>
                     </div>
                     <a
-                      href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                      href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-emerald-400 hover:text-emerald-300 shrink-0 font-bold flex items-center gap-1"

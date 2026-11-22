@@ -71,7 +71,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-[90vh] pt-20 sm:pt-32 lg:pt-40 pb-12 sm:pb-24 lg:pb-28 flex items-center overflow-hidden bg-transparent text-[#e8e8e3] font-display border-b border-[rgba(232,232,227,0.12)]">
+    <section className="relative min-h-[90vh] pt-20 sm:pt-32 lg:pt-40 pb-12 sm:pb-24 lg:pb-28 flex items-center overflow-hidden bg-transparent text-[#e8e8e3] font-display">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-8 items-center">
           {/* Left Column: Monumental Breydaqs Headline & Proposition */}

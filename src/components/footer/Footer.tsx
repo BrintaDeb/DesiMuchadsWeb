@@ -226,12 +226,12 @@ export function Footer({ onOpenKundli }: FooterProps) {
                   <span>HQ Coordinates</span>
                 </p>
                 <a
-                  href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                  href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-zinc-400 hover:text-white underline block"
                 >
-                  Connaught Place, New Delhi ↗
+                  Splendid Royale, Bengaluru 560068 ↗
                 </a>
               </div>
             </div>
@@ -254,7 +254,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
 
               <div className="pt-2">
                 <BreydaqsButton
-                  href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                  href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="white"
@@ -268,21 +268,21 @@ export function Footer({ onOpenKundli }: FooterProps) {
             <div className="lg:col-span-7">
               <div className="relative w-full h-72 sm:h-80 rounded-[0.25rem] overflow-hidden border border-[rgba(232,232,227,0.18)] shadow-2xl bg-[#0c0c0b]">
                 <iframe
-                  title="Desi Muchads Business Location - Connaught Place New Delhi"
-                  src="https://maps.google.com/maps?q=Connaught%20Place%2C%20New%20Delhi%2C%20Delhi%20110001&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  title="Desi Muchads Business Location - Splendid Royale Bengaluru"
+                  src="https://maps.google.com/maps?q=Splendid+Royale%2C+3rd+Main+Rd%2C+Hosapalaya%2C+Muneshwara+Nagar%2C+Bengaluru%2C+Karnataka+560068&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   className="w-full h-full border-0 filter contrast-[1.05] opacity-90 hover:opacity-100 transition-opacity"
                   loading="lazy"
                   allowFullScreen
                   style={{ width: "100%", height: "100%", minHeight: "288px", display: "block" }}
                 />
                 <a
-                  href="https://maps.app.goo.gl/WyD9PkPPEeMx6gGp7?g_st=aw"
+                  href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="absolute bottom-3 right-3 px-3 py-1.5 rounded-[0.2rem] bg-black/95 border border-white/20 text-white font-mono text-[11px] font-bold shadow-xl flex items-center gap-1.5 hover:bg-white hover:text-black transition-all"
                 >
                   <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Connaught Place, New Delhi ↗</span>
+                  <span>Splendid Royale, Bengaluru ↗</span>
                 </a>
               </div>
             </div>
@@ -317,7 +317,7 @@ export function Footer({ onOpenKundli }: FooterProps) {
             <span>© 2026 DESI MUCHADS DIGITAL LLP. ALL RIGHTS RESERVED.</span>
           </div>
           <div>
-            <span>NEW DELHI · MUMBAI · BENGALURU</span>
+            <span>BENGALURU (HQ) · NEW DELHI · MUMBAI</span>
           </div>
         </div>
       </div>

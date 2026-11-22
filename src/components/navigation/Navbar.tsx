@@ -533,7 +533,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
-                  <span>Services ({AGENCY_SERVICES.length})</span>
+                  <span>Services</span>
                 </Link>
 
                 <Link
@@ -541,7 +541,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
-                  <span>Selected Works (50)</span>
+                  <span>Work</span>
                 </Link>
 
                 <Link
@@ -549,7 +549,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
-                  <span>Transparent Retainers</span>
+                  <span>Pricing</span>
                 </Link>
 
                 <Link
@@ -557,7 +557,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/20 text-white uppercase font-bold"
                 >
-                  <span>Contact &amp; Strategy Call</span>
+                  <span>Contact</span>
                 </Link>
               </div>
             </div>
@@ -577,7 +577,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
               <div className="flex items-center justify-between px-1 text-[10px] font-mono text-zinc-500">
                 <span>© 2026 DESI MUCHADS</span>
-                <span>NEW DELHI · MUMBAI · BENGALURU</span>
+                <span>BENGALURU (HQ) · NEW DELHI · MUMBAI</span>
               </div>
             </div>
           </div>
