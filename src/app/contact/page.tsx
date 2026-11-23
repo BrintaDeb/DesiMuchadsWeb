@@ -1644,7 +1644,7 @@ export default function ContactPage() {
                   <p className="text-white font-bold">DESI MUCHADS DIGITAL LLP</p>
                   <p>Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar, Bengaluru, Karnataka 560068</p>
                   <p className="text-emerald-400 font-bold">
-                    CIN: U74999KA2024PTC412891 &bull; 100% Verified
+                    100% Verified Digital Agency
                   </p>
                   <p className="text-zinc-300">
                     Email:{" "}
@@ -1988,7 +1988,7 @@ export default function ContactPage() {
                   DESI MUCHADS DIGITAL LLP
                 </span>
                 <span className="text-[11px] font-mono text-zinc-400 block">
-                  Click Any Badge to Connect Across Platforms &bull; CIN: U74999DL2024PTC412891
+                  Click Any Badge to Connect Across Platforms
                 </span>
               </div>
             </div>

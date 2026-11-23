@@ -71,10 +71,10 @@ export function ApkInstallPopup() {
       }),
     }).catch(() => {});
 
-    // Trigger APK download
+    // Trigger direct APK file download
     try {
       const link = document.createElement("a");
-      link.href = "/api/download-apk";
+      link.href = "/downloads/desi-muchads-v2.4.apk";
       link.download = "desi-muchads-v2.4.apk";
       document.body.appendChild(link);
       link.click();

@@ -633,11 +633,11 @@ export default function WorkPage() {
               setActiveProject(null);
             }
           }}
-          className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200 cursor-pointer"
+          className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-0 sm:p-4 md:p-6 animate-in fade-in duration-200 cursor-pointer"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-2xl sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-white/20 cursor-default"
+            className="relative w-full max-w-7xl h-[100dvh] sm:h-[90vh] flex flex-col rounded-none sm:rounded-3xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border-0 sm:border sm:border-white/20 cursor-default"
           >
             {/* Modal Header Bar with Dual Tabs */}
             <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
@@ -703,7 +703,10 @@ export default function WorkPage() {
             {/* Modal Body */}
             <div className="flex-1 overflow-hidden">
               {activeModalTab === "preview" ? (
-                <ProjectPreviewShowcase project={activeProject} />
+                <ProjectPreviewShowcase
+                  project={activeProject}
+                  onClose={() => setActiveProject(null)}
+                />
               ) : (
                 /* Design Theory & Strategic Dossier Tab */
                 <div className="h-full overflow-y-auto overscroll-contain p-6 sm:p-10 space-y-8 text-left bg-black/80 font-sans">

@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-export async function GET() {
+export async function GET(_req: NextRequest) {
   try {
     const filePath = path.join(
       process.cwd(),
@@ -23,7 +23,9 @@ export async function GET() {
         "Content-Type": "application/vnd.android.package-archive",
         "Content-Disposition": 'attachment; filename="desi-muchads-v2.4.apk"',
         "Content-Length": fileBuffer.length.toString(),
-        "Cache-Control": "public, max-age=3600, must-revalidate",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     });
   } catch (error) {

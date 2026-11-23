@@ -17,6 +17,7 @@ import {
   Image as ImageIcon,
   Film,
   Sparkles,
+  Maximize2
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { ProjectItem, getProjectAssetType, ProjectAssetType } from "@/data/projectsData";
@@ -26,6 +27,7 @@ interface ProjectPreviewShowcaseProps {
   initialDeviceMode?: "desktop" | "mobile";
   className?: string;
   isStandalone?: boolean; // When rendered inline in /work/[slug] page
+  onClose?: () => void;
 }
 
 export function ProjectPreviewShowcase({
@@ -33,6 +35,7 @@ export function ProjectPreviewShowcase({
   initialDeviceMode = "desktop",
   className = "",
   isStandalone = false,
+  onClose,
 }: ProjectPreviewShowcaseProps) {
   const assetType: ProjectAssetType = getProjectAssetType(project);
 
@@ -40,6 +43,13 @@ export function ProjectPreviewShowcase({
   const [zoomLevel, setZoomLevel] = useState<"fit" | "full">("fit");
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [iframeLoading, setIframeLoading] = useState<boolean>(true);
+
+  // Detect real mobile screen width (< 768px)
+  const isRealMobile = React.useSyncExternalStore(
+    () => () => {},
+    () => typeof window !== "undefined" && window.innerWidth < 768,
+    () => false
+  );
 
   // Video state
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -49,9 +59,10 @@ export function ProjectPreviewShowcase({
   // Safety timeout on iframe spinner for internal demo storefronts
   useEffect(() => {
     if (assetType !== "internal_app") return;
+    setIframeLoading(true);
     const timer = setTimeout(() => {
       setIframeLoading(false);
-    }, 3500);
+    }, 2800);
     return () => clearTimeout(timer);
   }, [project.id, iframeKey, assetType]);
 
@@ -75,37 +86,40 @@ export function ProjectPreviewShowcase({
     setIsMuted(nextMuted);
   };
 
+  // Determine active view mode (if real mobile, force full mobile layout for ergonomics)
+  const effectiveDeviceMode = isRealMobile && !isStandalone ? "mobile" : deviceMode;
+
   return (
-    <div className={`w-full flex flex-col ${className}`}>
-      {/* Top Preview Control & Device Bar */}
-      <div className="w-full mb-3 flex flex-wrap items-center justify-between gap-2.5 text-xs font-mono">
-        {/* Left Side: Mode Toggles */}
-        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+    <div className={`w-full h-full flex-1 flex flex-col min-h-0 ${className} relative`}>
+      {/* Dynamic Ambient Aura Glow in Brand Accent Color */}
+      <div
+        className="absolute inset-0 blur-3xl opacity-20 pointer-events-none transition-all duration-700 -z-10"
+        style={{ backgroundColor: project.accentColor || "#10b981" }}
+      />
+
+      {/* Top Controls Bar */}
+      <div className="w-full px-3 py-2 shrink-0 flex flex-wrap items-center justify-between gap-2 text-xs font-mono bg-black/40 backdrop-blur-md border-b border-white/10 z-20">
+        {/* Left Side: Asset Type Pill */}
+        <div className="flex items-center gap-2">
           {assetType === "video_reel" ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold">
-              <Film className="w-3.5 h-3.5 text-emerald-400" />
-              <span>4K Motion Reel Preview</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-[11px]">
+              <Film className="w-3 h-3 text-emerald-400" />
+              <span>4K Motion Reel</span>
             </div>
           ) : assetType === "canva_deck" ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Executive Slide Deck Showcase</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-[11px]">
+              <Sparkles className="w-3 h-3 text-amber-400" />
+              <span>Slide Deck Showcase</span>
             </div>
           ) : assetType === "visual_showcase" ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 font-bold">
-              <ImageIcon className="w-3.5 h-3.5 text-purple-400" />
-              <span>Master Graphic Design &amp; Artwork</span>
-            </div>
-          ) : assetType === "external_app" ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/15 border border-blue-500/30 text-blue-300 font-bold">
-              <Globe className="w-3.5 h-3.5 text-blue-400" />
-              <span>Verified Production Architecture</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 font-bold text-[11px]">
+              <ImageIcon className="w-3 h-3 text-purple-400" />
+              <span>Master Art &amp; Design</span>
             </div>
           ) : (
-            /* Internal Demo Storefront Mode Switcher */
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold">
-              <Globe className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Interactive Live Demo Storefront</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-[11px]">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Interactive Live Storefront</span>
             </div>
           )}
 
@@ -117,105 +131,127 @@ export function ProjectPreviewShowcase({
                 sound.playPluck(130);
                 setZoomLevel((z) => (z === "fit" ? "full" : "fit"));
               }}
-              className="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 border border-white/15 text-zinc-300 hover:text-white flex items-center gap-1.5 transition-all cursor-pointer"
+              className="px-2 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/15 text-zinc-300 hover:text-white flex items-center gap-1 transition-all cursor-pointer text-[11px]"
               title={zoomLevel === "fit" ? "Inspect 100% Full Resolution" : "Fit Image to Viewport"}
             >
               {zoomLevel === "fit" ? (
                 <>
-                  <ZoomIn className="w-3.5 h-3.5 text-zinc-400" />
-                  <span className="hidden sm:inline">100% Zoom</span>
+                  <ZoomIn className="w-3 h-3 text-zinc-400" />
+                  <span>100% Zoom</span>
                 </>
               ) : (
                 <>
-                  <ZoomOut className="w-3.5 h-3.5 text-zinc-400" />
-                  <span className="hidden sm:inline">Fit Viewport</span>
+                  <ZoomOut className="w-3 h-3 text-zinc-400" />
+                  <span>Fit Viewport</span>
                 </>
               )}
             </button>
           )}
         </div>
 
-        {/* Right Side: Device Switcher (Desktop vs Mobile) & External Action */}
+        {/* Right Side: Device Switcher (Desktop vs Mobile) & Actions */}
         <div className="flex items-center gap-2 ml-auto">
-          {/* Device Viewport Toggle (Active for ALL project types) */}
-          <div className="flex items-center p-0.5 rounded-xl bg-black/60 border border-white/15">
+          {/* Device Viewport Toggle (Active on desktop monitors) */}
+          {!isRealMobile && (
+            <div className="flex items-center p-0.5 rounded-xl bg-black/60 border border-white/15">
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playPluck(140);
+                  setDeviceMode("desktop");
+                }}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                  deviceMode === "desktop"
+                    ? "bg-white/20 text-white font-bold"
+                    : "text-zinc-500 hover:text-white"
+                }`}
+                title="Desktop Studio View"
+              >
+                <Monitor className="w-3.5 h-3.5" />
+                <span className="text-[11px]">Desktop</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playPluck(160);
+                  setDeviceMode("mobile");
+                }}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                  deviceMode === "mobile"
+                    ? "bg-white/20 text-white font-bold"
+                    : "text-zinc-500 hover:text-white"
+                }`}
+                title="iPhone 16 Pro View"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span className="text-[11px]">iPhone 16</span>
+              </button>
+            </div>
+          )}
+
+          {/* Frame Reload Button (For iframes) */}
+          {assetType === "internal_app" && (
             <button
               type="button"
               onClick={() => {
-                sound.playPluck(140);
-                setDeviceMode("desktop");
+                sound.playPluck(150);
+                setIframeKey((k) => k + 1);
+                setIframeLoading(true);
               }}
-              className={`p-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 ${
-                deviceMode === "desktop"
-                  ? "bg-white/20 text-white font-bold"
-                  : "text-zinc-500 hover:text-white"
-              }`}
-              title="Desktop Studio View"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              title="Reload Frame"
             >
-              <Monitor className="w-4 h-4" />
-              <span className="text-[10px] hidden sm:inline">Studio</span>
+              <RefreshCw className="w-3.5 h-3.5" />
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                sound.playPluck(160);
-                setDeviceMode("mobile");
-              }}
-              className={`p-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1 ${
-                deviceMode === "mobile"
-                  ? "bg-white/20 text-white font-bold"
-                  : "text-zinc-500 hover:text-white"
-              }`}
-              title="Mobile iPhone View"
-            >
-              <Smartphone className="w-4 h-4" />
-              <span className="text-[10px] hidden sm:inline">iPhone</span>
-            </button>
-          </div>
+          )}
 
           {/* Direct External Link */}
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => sound.playPluck(190)}
-            className="px-3 py-1.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md shrink-0"
-            title="Open Live Project in New Tab"
+            onClick={() => sound.playChime()}
+            className="px-3 py-1 rounded-lg bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md shrink-0 cursor-pointer"
+            title="Launch Full Experience in New Window"
           >
             <span>Launch</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3 h-3" />
           </a>
         </div>
       </div>
 
-      {/* Main Viewport Container */}
-      <div className="w-full flex items-center justify-center relative">
-        {deviceMode === "desktop" ? (
+      {/* Main Viewport Container (Fills 100% of available space) */}
+      <div className="relative flex-1 w-full h-full min-h-0 flex items-center justify-center overflow-hidden p-2 sm:p-4">
+        {effectiveDeviceMode === "desktop" ? (
           /* =========================================================================
-             DESKTOP STUDIO MONITOR SHELL (macOS Window Chrome)
+             DESKTOP STUDIO MONITOR SHELL (Expanded full-width macOS Window Chrome)
              ========================================================================= */
           <div
-            className={`w-full ${
-              isStandalone ? "h-[540px] sm:h-[680px]" : "h-[54vh] sm:h-[60vh] min-h-[380px]"
-            } rounded-2xl overflow-hidden border border-white/20 bg-zinc-950 shadow-2xl relative flex flex-col`}
+            className={`w-full h-full flex-1 min-h-0 ${
+              isStandalone ? "h-[540px] sm:h-[680px]" : ""
+            } rounded-2xl overflow-hidden border border-white/20 bg-zinc-950 shadow-[0_25px_70px_rgba(0,0,0,0.95)] relative flex flex-col`}
           >
             {/* macOS Chrome Header Bar */}
-            <div className="px-4 py-2.5 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400 shrink-0 z-20 backdrop-blur-md">
+            <div className="px-4 py-2 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400 shrink-0 z-20 backdrop-blur-md">
               <div className="flex items-center gap-2.5">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-red-400/40" />
+                  <span
+                    onClick={onClose}
+                    className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-red-400/40 cursor-pointer hover:opacity-80"
+                    title="Close Preview"
+                  />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-amber-400/40" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-green-400/40" />
                 </div>
-                <span className="text-white font-bold tracking-tight uppercase truncate max-w-[180px] sm:max-w-xs">
+                <span className="text-white font-bold tracking-tight uppercase truncate max-w-[180px] sm:max-w-xs text-xs">
                   {project.client}
                 </span>
                 <span className="text-zinc-600 hidden sm:inline">•</span>
-                <span className="text-zinc-400 text-[11px] hidden sm:inline">{project.category}</span>
+                <span className="text-zinc-400 text-[10px] hidden sm:inline">{project.category}</span>
               </div>
 
               {/* Simulated SSL Live Address Bar */}
-              <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-lg bg-black/60 border border-white/10 text-[11px] font-mono text-zinc-300 max-w-sm truncate">
+              <div className="hidden md:flex items-center gap-2 px-3 py-0.5 rounded-lg bg-black/60 border border-white/10 text-[11px] font-mono text-zinc-300 max-w-sm truncate">
                 <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span className="truncate">
                   {project.liveUrl.startsWith("/")
@@ -227,41 +263,16 @@ export function ProjectPreviewShowcase({
                 </span>
               </div>
 
-              {/* Top Right Controls: Frame Reload & Status */}
+              {/* Top Right Metric Badge */}
               <div className="flex items-center gap-2 text-[11px]">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => sound.playChime()}
-                  className="px-2.5 py-1 rounded bg-white hover:bg-zinc-200 text-black font-bold text-[10px] uppercase flex items-center gap-1 transition-all shadow-sm cursor-pointer"
-                  title="Open Full View in New Window"
-                >
-                  <span>FULL VIEW</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-                {assetType === "internal_app" && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      sound.playPluck(150);
-                      setIframeKey((k) => k + 1);
-                      setIframeLoading(true);
-                    }}
-                    className="p-1 rounded hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
-                    title="Reload Live View"
-                  >
-                    <RefreshCw className="w-3.5 h-3.5" />
-                  </button>
-                )}
                 <span className="px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 font-metric text-[10px] font-black">
                   {project.heroStat}
                 </span>
               </div>
             </div>
 
-            {/* Desktop Viewport Body */}
-            <div className="relative flex-1 w-full h-full overflow-hidden bg-black flex items-center justify-center">
+            {/* Desktop Viewport Body (Flex-1 fills entire remaining height!) */}
+            <div className="relative flex-1 w-full h-full min-h-0 overflow-hidden bg-black flex items-center justify-center">
               {/* 1. VIDEO REEL MODE */}
               {assetType === "video_reel" && (
                 <div className="relative w-full h-full flex items-center justify-center bg-black">
@@ -276,13 +287,6 @@ export function ProjectPreviewShowcase({
                     playsInline
                     className="max-w-full max-h-full object-contain"
                   />
-
-                  {/* Dynamic Ambient Blur Backdrop */}
-                  <div
-                    className="absolute inset-0 -z-10 blur-3xl opacity-20 pointer-events-none transition-all duration-700"
-                    style={{ backgroundColor: project.accentColor || "#10b981" }}
-                  />
-
                   {/* Floating Video Overlay Bar */}
                   <div className="absolute bottom-4 inset-x-4 p-3 rounded-2xl bg-black/80 backdrop-blur-md border border-white/15 flex items-center justify-between gap-3 text-xs font-mono z-20">
                     <div className="flex items-center gap-2">
@@ -315,7 +319,7 @@ export function ProjectPreviewShowcase({
                 </div>
               )}
 
-              {/* 2. VISUAL SHOWCASE (Artwork / Packaging / Dielines / Posters) */}
+              {/* 2. VISUAL SHOWCASE (Artwork / Posters) */}
               {assetType === "visual_showcase" && (
                 <div className="relative w-full h-full overflow-y-auto overscroll-contain bg-zinc-950 flex flex-col items-center">
                   <div className="w-full flex-1 flex items-center justify-center p-3 sm:p-6">
@@ -324,34 +328,11 @@ export function ProjectPreviewShowcase({
                       alt={`${project.client} High-Resolution Master Artwork`}
                       className={`transition-all duration-500 rounded-lg shadow-2xl ${
                         zoomLevel === "fit"
-                          ? "max-w-full max-h-[46vh] sm:max-h-[50vh] object-contain"
+                          ? "max-w-full max-h-[70vh] object-contain"
                           : "w-auto max-w-none object-cover"
                       }`}
                       loading="lazy"
                     />
-                  </div>
-
-                  {/* Bottom Insight Card */}
-                  <div className="w-full p-4 bg-zinc-900/95 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono shrink-0">
-                    <div>
-                      <span className="text-zinc-400 uppercase block text-[10px] font-bold">
-                        Architectural Deliverable
-                      </span>
-                      <span className="text-white font-bold font-display text-sm">
-                        {project.deliverables[0] || project.tagline}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 rounded-xl bg-white text-black font-black text-xs uppercase tracking-wider hover:bg-zinc-200 transition-all flex items-center gap-1.5 shadow"
-                      >
-                        <span>Open Raw High-Res Master</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
                   </div>
                 </div>
               )}
@@ -363,7 +344,7 @@ export function ProjectPreviewShowcase({
                     <img
                       src={project.thumbnail}
                       alt={`${project.client} Slide Deck Preview`}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover object-center"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
@@ -371,14 +352,11 @@ export function ProjectPreviewShowcase({
                       <div>
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 font-mono text-xs font-bold uppercase mb-2">
                           <Sparkles className="w-3.5 h-3.5" />
-                          <span>Enterprise Canva Pitch Architecture</span>
+                          <span>Enterprise Pitch Architecture</span>
                         </div>
                         <h4 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
                           {project.client}
                         </h4>
-                        <p className="text-xs sm:text-sm text-zinc-300 max-w-xl font-sans mt-1">
-                          {project.mushkil}
-                        </p>
                       </div>
 
                       <a
@@ -399,7 +377,6 @@ export function ProjectPreviewShowcase({
               {/* 4. EXTERNAL PRODUCTION PLATFORM (Scrollable Full-Length Inspection Canvas) */}
               {assetType === "external_app" && (
                 <div className="relative w-full h-full bg-zinc-950 flex flex-col overflow-hidden">
-                  {/* Scrollable High-Res Web Viewport */}
                   <div className="relative flex-1 w-full overflow-y-auto overscroll-contain bg-[#0a0a0d] p-3 sm:p-5 scrollbar-thin scrollbar-thumb-white/20">
                     <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black">
                       <img
@@ -408,26 +385,6 @@ export function ProjectPreviewShowcase({
                         className="w-full h-auto object-cover object-top block"
                         loading="eager"
                       />
-                    </div>
-                  </div>
-
-                  {/* Bottom Action Bar */}
-                  <div className="px-4 py-2.5 bg-[#121215]/95 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono shrink-0">
-                    <div className="flex items-center gap-2 text-zinc-300 text-[11px]">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>SCROLL TO INSPECT FULL ARCHITECTURE • PRODUCTION WEB PLATFORM</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => sound.playChime()}
-                        className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow"
-                      >
-                        <span>LAUNCH LIVE PLATFORM</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -440,7 +397,7 @@ export function ProjectPreviewShowcase({
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
                       <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
                       <span className="font-mono text-xs text-white/70 tracking-wider">
-                        CONNECTING TO INTERACTIVE STOREFRONT...
+                        INITIALIZING INTERACTIVE STOREFRONT ENGINE...
                       </span>
                     </div>
                   )}
@@ -451,7 +408,7 @@ export function ProjectPreviewShowcase({
                     className="w-full h-full border-0"
                     title={`${project.client} Live Showcase`}
                     sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation allow-top-navigation-by-user-activation"
-                    loading="lazy"
+                    loading="eager"
                   />
                 </div>
               )}
@@ -459,33 +416,62 @@ export function ProjectPreviewShowcase({
           </div>
         ) : (
           /* =========================================================================
-             MOBILE IPHONE 16 PRO DEVICE FRAME (Titanium Bezel, Dynamic Island)
-             Works seamlessly across Video Reels, Visual Showcases, and Web Apps!
+             MOBILE VIEW (Optimized for both real phones & simulated iPhone 16 Pro)
              ========================================================================= */
           <div
-            className={`w-[320px] sm:w-[350px] ${
-              isStandalone ? "h-[580px] sm:h-[660px]" : "h-[54vh] sm:h-[60vh] min-h-[440px]"
-            } rounded-[44px] border-[8px] border-zinc-800 shadow-[0_25px_60px_rgba(0,0,0,0.95)] bg-black relative overflow-hidden flex flex-col mx-auto ring-1 ring-white/20`}
+            className={`relative flex flex-col overflow-hidden ${
+              isRealMobile
+                ? "w-full h-full flex-1 rounded-none border-0 bg-black"
+                : `w-[360px] sm:w-[380px] h-[92%] max-h-[740px] rounded-[48px] border-[10px] border-zinc-800 shadow-[0_25px_80px_rgba(0,0,0,0.98)] bg-black ring-1 ring-white/20`
+            }`}
           >
-            {/* iPhone Top Status Bar & Dynamic Island */}
-            <div className="absolute top-0 inset-x-0 h-9 px-6 flex items-center justify-between text-[11px] font-mono text-white/90 z-30 pointer-events-none bg-gradient-to-b from-black/80 to-transparent">
-              <span className="font-bold tracking-tight">9:41</span>
-              {/* Dynamic Island Pill */}
-              <div className="w-24 h-4 bg-black rounded-full border border-white/15 flex items-center justify-between px-2 shadow">
-                <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                <span className="w-2 h-2 rounded-full bg-emerald-400/80 animate-pulse" />
-              </div>
-              <div className="flex items-center gap-1.5 text-[10px]">
-                <span>5G</span>
-                <div className="w-4 h-2 rounded-xs border border-white/60 p-0.5 flex items-center">
-                  <div className="w-full h-full bg-white rounded-xs" />
+            {/* Dynamic Island / Status Bar (Only in desktop simulated iPhone view) */}
+            {!isRealMobile && (
+              <div className="absolute top-0 inset-x-0 h-8 px-6 flex items-center justify-between text-[11px] font-mono text-white/90 z-30 pointer-events-none bg-gradient-to-b from-black/80 to-transparent">
+                <span className="font-bold tracking-tight">9:41</span>
+                <div className="w-24 h-4 bg-black rounded-full border border-white/15 flex items-center justify-between px-2 shadow">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400/80 animate-pulse" />
+                </div>
+                <div className="flex items-center gap-1.5 text-[10px]">
+                  <span>5G</span>
+                  <div className="w-4 h-2 rounded-xs border border-white/60 p-0.5 flex items-center">
+                    <div className="w-full h-full bg-white rounded-xs" />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Mobile Viewport Body */}
-            <div className="relative flex-1 w-full h-full pt-9 pb-3 bg-black flex flex-col overflow-hidden">
-              {/* 1. VIDEO REEL IN MOBILE */}
+            <div
+              className={`relative flex-1 w-full h-full min-h-0 bg-black flex flex-col overflow-hidden ${
+                !isRealMobile ? "pt-8 pb-2" : ""
+              }`}
+            >
+              {/* Internal Demo Storefront in Mobile */}
+              {assetType === "internal_app" && (
+                <div className="relative flex-1 w-full h-full bg-black">
+                  {iframeLoading && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
+                      <div className="w-7 h-7 rounded-full border-2 border-white/20 border-t-white animate-spin mb-2" />
+                      <span className="font-mono text-[10px] text-white/70">
+                        LOADING STOREFRONT...
+                      </span>
+                    </div>
+                  )}
+                  <iframe
+                    key={`${project.id}-${iframeKey}-mobile`}
+                    src={project.liveUrl}
+                    onLoad={() => setIframeLoading(false)}
+                    className="w-full h-full border-0"
+                    title={`${project.client} Mobile Showcase`}
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation allow-top-navigation-by-user-activation"
+                    loading="eager"
+                  />
+                </div>
+              )}
+
+              {/* Video Reel in Mobile */}
               {assetType === "video_reel" && (
                 <div className="relative flex-1 w-full h-full bg-black flex items-center justify-center">
                   <video
@@ -499,8 +485,6 @@ export function ProjectPreviewShowcase({
                     playsInline
                     className="w-full h-full object-cover"
                   />
-
-                  {/* Mobile Tap Overlay for Play & Mute */}
                   <div className="absolute bottom-3 inset-x-3 p-2.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-between z-20">
                     <button
                       type="button"
@@ -523,23 +507,31 @@ export function ProjectPreviewShowcase({
                 </div>
               )}
 
-              {/* 2. VISUAL SHOWCASE IN MOBILE (Scrollable within iPhone screen!) */}
+              {/* Visual Showcase in Mobile */}
               {assetType === "visual_showcase" && (
-                <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-zinc-950 p-2 scrollbar-none">
+                <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-zinc-950 p-2 scrollbar-none flex flex-col items-center justify-center">
                   <img
                     src={project.liveUrl}
                     alt={`${project.client} Mobile Visual Showcase`}
                     className="w-full h-auto object-contain rounded-lg shadow"
                     loading="lazy"
                   />
-                  <div className="mt-3 p-3 rounded-xl bg-white/5 border border-white/10 text-center text-xs font-mono">
-                    <span className="text-zinc-400 block text-[10px]">SCROLLABLE ARCHITECTURE</span>
-                    <span className="text-white font-bold">{project.client}</span>
-                  </div>
                 </div>
               )}
 
-              {/* 3. CANVA DECK IN MOBILE */}
+              {/* External App in Mobile */}
+              {assetType === "external_app" && (
+                <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-black p-2 scrollbar-none">
+                  <img
+                    src={project.fullImage || project.thumbnail}
+                    alt={`${project.client} Mobile Platform Architecture`}
+                    className="w-full h-auto object-cover object-top block rounded-lg"
+                    loading="eager"
+                  />
+                </div>
+              )}
+
+              {/* Canva Deck in Mobile */}
               {assetType === "canva_deck" && (
                 <div className="relative flex-1 w-full h-full flex flex-col justify-between p-3 bg-zinc-950">
                   <div className="relative flex-1 w-full rounded-xl overflow-hidden border border-white/10 bg-black">
@@ -556,50 +548,17 @@ export function ProjectPreviewShowcase({
                       rel="noopener noreferrer"
                       className="w-full py-2.5 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-wider block shadow"
                     >
-                      Open Canva Deck ↗
+                      Open Slides ↗
                     </a>
                   </div>
                 </div>
               )}
-
-              {/* 4. EXTERNAL APP IN MOBILE (Scrollable High-Res Platform) */}
-              {assetType === "external_app" && (
-                <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-black p-2 scrollbar-none">
-                  <img
-                    src={project.fullImage || project.thumbnail}
-                    alt={`${project.client} Mobile Platform Architecture`}
-                    className="w-full h-auto object-cover object-top block rounded-lg"
-                    loading="eager"
-                  />
-                </div>
-              )}
-
-              {/* 5. INTERNAL DEMO STOREFRONT IN MOBILE */}
-              {assetType === "internal_app" && (
-                <div className="relative flex-1 w-full h-full bg-black">
-                  {iframeLoading && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
-                      <div className="w-7 h-7 rounded-full border-2 border-white/20 border-t-white animate-spin mb-2" />
-                      <span className="font-mono text-[10px] text-white/70">
-                        LOADING IPHONE VIEW...
-                      </span>
-                    </div>
-                  )}
-                  <iframe
-                    key={`${project.id}-${iframeKey}-mobile`}
-                    src={project.liveUrl}
-                    onLoad={() => setIframeLoading(false)}
-                    className="w-full h-full border-0"
-                    title={`${project.client} Mobile Showcase`}
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation allow-top-navigation-by-user-activation"
-                    loading="lazy"
-                  />
-                </div>
-              )}
             </div>
 
-            {/* iPhone Home Indicator Bar */}
-            <div className="w-32 h-1 bg-white/40 rounded-full mx-auto my-1.5 shrink-0" />
+            {/* Simulated iPhone Home Indicator Bar */}
+            {!isRealMobile && (
+              <div className="w-32 h-1 bg-white/40 rounded-full mx-auto my-1.5 shrink-0" />
+            )}
           </div>
         )}
       </div>

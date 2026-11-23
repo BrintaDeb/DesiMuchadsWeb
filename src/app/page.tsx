@@ -24,13 +24,11 @@ import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
 import { BeforeAfterSlider } from "@/components/common/BeforeAfterSlider";
-import { GrowthJourneyScrollytelling } from "@/components/methodology/GrowthJourneyScrollytelling";
 import { WinterExpansionDiscountModal } from "@/components/common/WinterExpansionDiscountModal";
 import { StardustCursorTrail } from "@/components/common/StardustCursorTrail";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
 import { MagneticWrapper } from "@/components/common/MagneticWrapper";
 import { CaseStudyHoverPreview } from "@/components/casestudies/CaseStudyHoverPreview";
-import { InteractiveRoasSimulator } from "@/components/calculator/InteractiveRoasSimulator";
 import { ApkInstallPopup } from "@/components/common/ApkInstallPopup";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
@@ -153,11 +151,6 @@ export default function Home() {
               ))}
             </div>
           </section>
-
-          <SectionDivider />
-
-          {/* Section 2.5: The 3-Stage Growth Journey */}
-          <GrowthJourneyScrollytelling onOpenKundli={() => setIsKundliOpen(true)} />
 
           <SectionDivider />
 
@@ -318,11 +311,6 @@ export default function Home() {
               </SpotlightCard>
             </div>
 
-            {/* Live Interactive 3D ROAS & P&L Simulator */}
-            <div className="mt-16 pt-16 border-t border-[rgba(232,232,227,0.12)]">
-              <InteractiveRoasSimulator onOpenKundli={() => setIsKundliOpen(true)} />
-            </div>
-
             <div className="mt-12 text-center">
               <BreydaqsButton
                 href="/pricing"
@@ -354,33 +342,39 @@ export default function Home() {
               setActiveProject(null);
             }
           }}
-          className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200 cursor-pointer"
+          className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-0 sm:p-4 md:p-6 animate-in fade-in duration-200 cursor-pointer"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-6xl h-[94dvh] sm:h-[88vh] flex flex-col rounded-[0.25rem] bg-[#0c0c0b] text-[#e8e8e3] overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border border-[rgba(232,232,227,0.2)] cursor-default"
+            className="relative w-full max-w-7xl h-[100dvh] sm:h-[90vh] flex flex-col rounded-none sm:rounded-2xl ios-glass-panel text-white overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.98)] border-0 sm:border sm:border-white/20 cursor-default"
           >
-            <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between font-mono">
+            <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between font-mono shrink-0">
               <div className="flex items-center gap-2">
                 <span
                   onClick={() => setActiveProject(null)}
-                  className="w-3 h-3 rounded-[0.2rem] bg-[#FF5F56] cursor-pointer"
+                  className="w-3 h-3 rounded-full bg-[#FF5F56] cursor-pointer"
                   title="Close Preview"
                 />
                 <span className="font-display font-black text-xs uppercase tracking-wider text-white ml-2">
                   {activeProject.client}
                 </span>
+                <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-white/10 text-[10px] text-zinc-400">
+                  {activeProject.category}
+                </span>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveProject(null)}
-                className="p-1 px-3 rounded-[0.2rem] bg-white/10 hover:bg-white hover:text-black transition-all text-xs font-mono"
+                className="p-1 px-3 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-xs font-mono cursor-pointer"
               >
                 CLOSE ✕
               </button>
             </div>
             <div className="flex-1 overflow-hidden">
-              <ProjectPreviewShowcase project={activeProject} />
+              <ProjectPreviewShowcase
+                project={activeProject}
+                onClose={() => setActiveProject(null)}
+              />
             </div>
           </div>
         </div>

@@ -684,7 +684,7 @@ async function ServiceDetailContent({ params }: PageProps) {
 
       {/* Footer Credentials */}
       <footer className="mt-20 border-t border-white/10 py-10 px-4 text-center text-xs font-mono text-zinc-500">
-        <p>UNIT OF DESI MUCHADS DIGITAL LLP · CIN: U74999DL2024PTC412891</p>
+        <p>UNIT OF DESI MUCHADS DIGITAL LLP</p>
         <p className="mt-2">© 2025 DESI MUCHADS. ALL RIGHTS RESERVED.</p>
       </footer>
     </div>

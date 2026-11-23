@@ -1629,7 +1629,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Illustrations & Art Sketches",
     serviceId: "illustrations-art",
     heroStat: "MASTER ARTWORK · 300 DPI VECTOR",
-    liveUrl: "/art/ganesha-cyber-mandala.jpg",
+    liveUrl: "/demos/ganesha-cyber-mandala",
     thumbnail: "/art/ganesha-cyber-mandala.jpg",
     desc: "Hand-crafted cyber-spiritual sacred geometry mandala featuring an ornate gold-filigreed elephant deity with liquid platinum accents, sacred geometric rings, and glowing circuitry against obsidian glass.",
     mushkil:
@@ -1682,7 +1682,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Illustrations & Art Sketches",
     serviceId: "illustrations-art",
     heroStat: "RAW INK SKETCH · SUMI-E MASTER",
-    liveUrl: "/art/samurai-ronin-ink-sketch.jpg",
+    liveUrl: "/demos/samurai-ronin-ink-sketch",
     thumbnail: "/art/samurai-ronin-ink-sketch.jpg",
     desc: "High-energy dynamic manga brush ink sketch capturing a wandering ronin in fierce wind, executed with traditional sumi-e splatter textures, expressive monochrome lineart, and a striking crimson katana accent.",
     mushkil:
@@ -1735,7 +1735,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Illustrations & Art Sketches",
     serviceId: "illustrations-art",
     heroStat: "CONCEPT ART · 240+ DETAIL ASSETS",
-    liveUrl: "/art/neotokyo-street-food-hawker.jpg",
+    liveUrl: "/demos/neotokyo-street-food-hawker",
     thumbnail: "/art/neotokyo-street-food-hawker.jpg",
     desc: "Detailed atmospheric isometric anime concept painting of a midnight street-food cart nestled in a rainy neon-lit Neo-Tokyo alleyway, featuring glowing paper lanterns, steam rising from ramen pots, and Ghibli-meets-Akira linework.",
     mushkil:
@@ -1788,7 +1788,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     category: "Illustrations & Art Sketches",
     serviceId: "illustrations-art",
     heroStat: "MATTE PAINTING · CINEMATIC KEYFRAME",
-    liveUrl: "/art/varanasi-ghats-heritage-matte.jpg",
+    liveUrl: "/demos/varanasi-ghats-heritage-matte",
     thumbnail: "/art/varanasi-ghats-heritage-matte.jpg",
     desc: "Serene cinematic digital concept matte painting of the ancient Varanasi riverfront steps at sunrise with soft golden morning mist, temple spires, floating marigolds, and wooden boats on the sacred river.",
     mushkil:
@@ -1842,7 +1842,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "seo-sem",
     heroStat: "+420% ORGANIC TRAFFIC LIFT",
     liveUrl: "/demos/vedaroots-ayurveda",
-    thumbnail: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/vedaroots-ayurveda-hero.jpg",
     desc: "VedaRoots is an authentic Ayurvedic wellness brand specializing in single-origin cold-pressed oils, adaptogenic tonics, and classical herb formulations.",
     mushkil:
       "VedaRoots was trapped paying ₹1,200+ per acquisition on generic Meta ads while competitors dominated Google Page 1 for high-intent search queries like 'authentic pure kshirabala oil' and 'cold-pressed sesame oil bulk'. Their technical site had 4.8s TTFB and 0 structured schema markup.",
@@ -1884,7 +1884,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "seo-sem",
     heroStat: "₹2.4CR PIPELINE · -48% CPA",
     liveUrl: "/demos/urbandrift-ev",
-    thumbnail: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/urbandrift-ev-hero.jpg",
     desc: "UrbanDrift manufactures lightweight commercial electric cargo scooters for delivery fleets and urban gig operators.",
     mushkil:
       "UrbanDrift struggled with ultra-high lead costs on generic B2B portals and LinkedIn ads. Competitors bid aggressively on broad EV keywords, causing 80% of budget to leak into consumer tire-kicking inquiries rather than commercial fleet buyers.",
@@ -1925,7 +1925,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "performance-marketing",
     heroStat: "5.8X BLENDED ROAS · ₹1.2CR 90-DAY",
     liveUrl: "/demos/snacknation-makhanas",
-    thumbnail: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/snacknation-hero.jpg",
     desc: "Roasted organic artisanal fox nuts (makhanas) in peri-peri, truffle, and Himalayan pink salt variants.",
     mushkil:
       "Single-pack purchase economics were unsustainable: average order value (AOV) was only ₹299 with a ₹220 customer acquisition cost, leaving zero margin after shipping.",
@@ -1966,7 +1966,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "lead-generation",
     heroStat: "₹3.2CR+ PIPELINE · ₹180 CPL",
     liveUrl: "/demos/bharat-bio-health",
-    thumbnail: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/bharat-biohealth-hero.jpg",
     desc: "National biotechnology provider of automated clinical laboratory equipment and preventive molecular diagnostics.",
     mushkil:
       "High-ticket diagnostic systems costing ₹15L–₹40L each were suffering from prolonged 9-month sales cycles, high lead drop-offs, and cold outbound calling fatigue.",
@@ -2007,7 +2007,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "lead-generation",
     heroStat: "38 HNI BUYERS · 72% SQL",
     liveUrl: "/demos/sobha-heritage-villas",
-    thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/sobha-heritage-villas-hero.jpg",
     desc: "Ultra-luxury gated enclave of 48 bespoke Portuguese-Goan architectural villas priced from ₹4.5Cr upwards.",
     mushkil:
       "Generic property portal leads were plagued by brokers and unqualified aspirational inquiries. Sales directors were wasting hours fielding calls from buyers without verified liquidity.",
@@ -2048,7 +2048,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "social-media",
     heroStat: "+477% VIRAL ORGANIC REACH",
     liveUrl: "/demos/chaichaska-ctc",
-    thumbnail: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/chaichaska-tea-hero.jpg",
     desc: "Artisanal Assam estate whole leaf tea and spiced tapri-style masala chai blends packaged for modern chai aficionados.",
     mushkil:
       "Brand account had flatlined with under 500 views per post, relying on boring stock photos of tea cups with generic 'Good Morning' captions that generated zero engagement.",
@@ -2089,7 +2089,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "social-media",
     heroStat: "18.4% ENGAGEMENT · 3.8X ROAS",
     liveUrl: "/demos/streethreads-handloom",
-    thumbnail: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/streetthreads-handloom-hero.jpg",
     desc: "Fair-trade handloom saree and contemporary ethnic wear cooperative supporting traditional weavers in Varanasi and Maheshwar.",
     mushkil:
       "Fast-fashion copycats were flooding the market with cheap synthetic sarees, drowning out StreeThreads' authentic craftsmanship. Their social posts looked like an outdated catalog.",
@@ -2130,7 +2130,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "ecommerce-services",
     heroStat: "+340% RESERVATION & ORDER LIFT",
     liveUrl: "/demos/lionelp-restaurant",
-    thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/lionelp-restaurant-hero.jpg",
     desc: "High-end culinary patisserie and fine dining storefront in Mumbai serving artisanal viennoiseries, gourmet breads, and private dining bookings.",
     mushkil:
       "Traditional boutique restaurant needing modern online ordering, menu showcase, and high-ticket private dining reservations without losing artisanal French prestige. 3rd-party aggregators were charging 28% commissions.",
