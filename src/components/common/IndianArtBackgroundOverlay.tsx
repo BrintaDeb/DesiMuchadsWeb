@@ -35,7 +35,6 @@ export function IndianArtBackgroundOverlay() {
 
       {/* 2. Desktop Landscape Panoramic Background */}
       <div className="hidden sm:block absolute inset-0 overflow-hidden opacity-[0.14] mix-blend-screen">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/art/indian-art-bg-royal.jpg"
           alt="Authentic Indian Cultural Heritage Artistry"

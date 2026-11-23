@@ -16,13 +16,13 @@ export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement>
 
 export function SpotlightCard({
   children,
-  spotlightColor = "rgba(255, 255, 255, 0.10)",
-  borderColor = "rgba(255, 255, 255, 0.40)",
+  spotlightColor = "rgba(255, 255, 255, 0.12)",
+  borderColor = "rgba(255, 255, 255, 0.45)",
   className = "",
   enableTilt = true,
-  maxTilt = 3,
-  perspective = 1200,
-  scale = 1.004,
+  maxTilt = 6,
+  perspective = 1000,
+  scale = 1.015,
   isGlass = false,
   ...props
 }: SpotlightCardProps) {
@@ -83,10 +83,15 @@ export function SpotlightCard({
       const rotX = -currentY.current * maxTilt;
       const rotY = currentX.current * maxTilt;
 
+      const shadowX = (-rotY * 1.8).toFixed(1);
+      const shadowY = (rotX * 1.8).toFixed(1);
+
       if (isHovered) {
         cardRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`;
+        cardRef.current.style.boxShadow = `${shadowX}px ${shadowY}px 36px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 255, 255, 0.05)`;
       } else {
         cardRef.current.style.transform = `perspective(${perspective}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1, 1, 1)`;
+        cardRef.current.style.boxShadow = "none";
       }
 
       // Continue loop until fully dampened when not hovered
@@ -96,6 +101,7 @@ export function SpotlightCard({
       } else {
         if (cardRef.current) {
           cardRef.current.style.transform = `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+          cardRef.current.style.boxShadow = "none";
         }
         animFrameId.current = null;
       }
@@ -116,9 +122,9 @@ export function SpotlightCard({
       const normX = Math.max(-1, Math.min(1, e.gamma / 25));
       const normY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
 
-      // Gentle, refined ambient 3D tilt
-      targetX.current = normX * 0.45;
-      targetY.current = normY * 0.45;
+      // Dynamic physical 3D tilt responding to device orientation
+      targetX.current = normX * 0.75;
+      targetY.current = normY * 0.75;
 
       if (!animFrameId.current) {
         animFrameId.current = requestAnimationFrame(updatePhysics);

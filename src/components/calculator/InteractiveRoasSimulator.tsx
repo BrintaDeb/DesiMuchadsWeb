@@ -2,15 +2,8 @@
 
 import React, { useState, useMemo, useCallback } from "react";
 import {
-  TrendingUp,
-  MessageCircle,
   PhoneCall,
-  SlidersHorizontal,
-  ArrowRight,
   ShieldCheck,
-  Zap,
-  BarChart3,
-  Percent,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";

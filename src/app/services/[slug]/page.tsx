@@ -26,7 +26,6 @@ import {
 import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
-import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 
 interface PageProps {

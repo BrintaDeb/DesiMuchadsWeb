@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Eye, ExternalLink, Play, Sparkles } from "lucide-react";
+import { Eye } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
 import { ProjectItem } from "@/data/projectsData";

@@ -187,57 +187,58 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [PORTFOLIO WORK #4] Hymalya Salt Mineral Heritage (hymalya-salt)
+  // [PORTFOLIO WORK #4] Lakeview Milk Bar & Bakes (lakeview-bakes)
   {
     id: 4,
-    slug: "hymalya-salt",
-    client: "Hymalya Salt Mineral Heritage",
-    tagline: "Luxury Direct-to-Consumer Organic Himalayan Pink Salt Web Showcase",
+    slug: "lakeview-bakes",
+    client: "Lakeview Milk Bar & Bakes",
+    tagline: "Iconic Bengaluru Heritage Bakery, 3D Cake Customizer & D2C Storefront",
     category: "E-Commerce Management Services",
     serviceId: "ecommerce-services",
-    heroStat: "+340% DIRECT SALES · ZERO DRIFT",
-    liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/media/humlya_salt_full.png",
-    thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/humlya_salt_full.png",
-    desc: "Hymalya Salt harvests hand-chiseled pristine mineral rock salt from ancient Himalayan salt deposits, delivering 84 essential trace minerals directly to gourmet kitchens.",
+    heroStat: "SINCE 1930 · +280% CAKE ORDERS",
+    liveUrl: "https://lakeview-bakes.vercel.app/",
+    thumbnail: "/projects/lakeview-bakes-hero.png",
+    fullImage: "/projects/lakeview-bakes-hero.png",
+    desc: "Lakeview Milk Bar is Bengaluru's iconic heritage confectionery on MG Road established in 1930, renowned for 100% eggless celebration cakes, Belgian chocolate truffles, and historic 1930 banana splits.",
     mushkil:
-      "Commoditized consumer perception of salt. Customers saw Himalayan pink salt as interchangeable with cheap supermarket brands and balked at a premium ₹599 culinary gift jar.",
+      "A 90-year-old culinary institution suffering from 3rd-party delivery aggregator commissions of 25–30% and clunky phone ordering for custom birthday cakes, causing high checkout abandonment and order miscommunications.",
     jugaad:
-      "Created an educational luxury storefront built around geological provenance storytelling. Features an interactive 84-mineral periodic explorer, culinary smoke-point guide, and high-DPI macro textures showcasing raw crystalline authenticity.",
+      "Architected an ultra-fast Next.js e-commerce storefront featuring an interactive 3D cake builder, real-time eggless celebration cake catalog, Bengaluru darkstore delivery scheduling, and seamless direct WhatsApp ordering.",
     nateeja:
-      "Direct-to-consumer store sales increased by +340%, with average order value jumping from ₹450 to ₹1,850 via gourmet salt gift pack bundles.",
+      "Direct online bakery orders surged by +280%, capturing 12,000+ direct orders and saving ₹42L in annual aggregator commissions while building an owned customer base of 45,000+ patrons.",
     stats: [
       {
-            "label": "Direct Sales Surge",
-            "val": "+340%"
+        label: "Direct Cake Orders",
+        val: "+280%",
       },
       {
-            "label": "Average Order Value",
-            "val": "₹1,850"
+        label: "Customer Rating",
+        val: "4.9★ (1.2K+)",
       },
       {
-            "label": "Gift Bundle Share",
-            "val": "62%"
+        label: "Commission Saved",
+        val: "₹42L/yr",
       },
       {
-            "label": "Organic Repeat Rate",
-            "val": "38%"
-      }
-],
+        label: "Repeat Order Rate",
+        val: "64%",
+      },
+    ],
     deliverables: [
-      "Interactive 84-Mineral Geological Explorer",
-      "High-Conversion Direct-to-Consumer E-Commerce Flow",
-      "Macro Visual Asset Production & Salt Crystal Artistry",
-      "Nutritional Authority Content & Chef Endorsement Showcase"
-],
+      "Next.js 16 High-Velocity E-Commerce Architecture",
+      "Interactive 3D Celebration Cake Customizer",
+      "Real-Time Bengaluru Darkstore Delivery Scheduling",
+      "1-Click Direct WhatsApp & Instant UPI Checkout"
+    ],
     testimonial: {
       quote:
-        "Desi Muchads elevated our humble salt rock into a gourmet luxury statement. Our gift boxes are now stocked in luxury boutique kitchens nationwide.",
-      author: "Tariq Malik",
-      role: "Managing Director, Hymalya Mineral Co.",
+        "Desi Muchads brought our 1930 bakery into the modern era without compromising an ounce of our heritage. Our custom cake orders tripled and customers love the direct experience.",
+      author: "Kiran Kalro",
+      role: "Managing Director, Lakeview Milk Bar Bengaluru",
     },
-    accentColor: "#f43f5e",
-    techStack: ["HTML5 Canvas","Tailwind CSS","JavaScript","Responsive E-Com","Render Cloud"],
-    year: "2024 - 2025",
+    accentColor: "#e11d48",
+    techStack: ["Next.js 16", "TypeScript", "Tailwind CSS", "Vercel Edge", "3D Customizer", "WhatsApp API"],
+    year: "2024 - 2026",
   },
 
   // [PORTFOLIO WORK #5] CurryCraft Gourmet Dining (currycraft-gourmet)

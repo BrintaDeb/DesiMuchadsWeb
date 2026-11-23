@@ -13,11 +13,9 @@ import {
   RefreshCw,
   ExternalLink,
   Lock,
-  Globe,
   Image as ImageIcon,
   Film,
   Sparkles,
-  Maximize2
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { ProjectItem, getProjectAssetType, ProjectAssetType } from "@/data/projectsData";
@@ -59,7 +57,6 @@ export function ProjectPreviewShowcase({
   // Safety timeout on iframe spinner for internal demo storefronts
   useEffect(() => {
     if (assetType !== "internal_app") return;
-    setIframeLoading(true);
     const timer = setTimeout(() => {
       setIframeLoading(false);
     }, 2800);
@@ -190,7 +187,7 @@ export function ProjectPreviewShowcase({
           )}
 
           {/* Frame Reload Button (For iframes) */}
-          {assetType === "internal_app" && (
+          {(assetType === "internal_app" || assetType === "external_app") && (
             <button
               type="button"
               onClick={() => {
@@ -374,30 +371,14 @@ export function ProjectPreviewShowcase({
                 </div>
               )}
 
-              {/* 4. EXTERNAL PRODUCTION PLATFORM (Scrollable Full-Length Inspection Canvas) */}
-              {assetType === "external_app" && (
-                <div className="relative w-full h-full bg-zinc-950 flex flex-col overflow-hidden">
-                  <div className="relative flex-1 w-full overflow-y-auto overscroll-contain bg-[#0a0a0d] p-3 sm:p-5 scrollbar-thin scrollbar-thumb-white/20">
-                    <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black">
-                      <img
-                        src={project.fullImage || project.thumbnail}
-                        alt={`${project.client} Full Platform Architecture`}
-                        className="w-full h-auto object-cover object-top block"
-                        loading="eager"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* 5. INTERNAL DEMO STOREFRONT (Native Next.js Interactive Iframe) */}
-              {assetType === "internal_app" && (
+              {/* 4. LIVE INTERACTIVE WEB PLATFORM & DEMO STOREFRONT (Internal Next.js & External Production Apps) */}
+              {(assetType === "internal_app" || assetType === "external_app") && (
                 <div className="relative w-full h-full bg-black">
                   {iframeLoading && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
                       <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
                       <span className="font-mono text-xs text-white/70 tracking-wider">
-                        INITIALIZING INTERACTIVE STOREFRONT ENGINE...
+                        INITIALIZING INTERACTIVE PLATFORM ENGINE...
                       </span>
                     </div>
                   )}
@@ -448,14 +429,14 @@ export function ProjectPreviewShowcase({
                 !isRealMobile ? "pt-8 pb-2" : ""
               }`}
             >
-              {/* Internal Demo Storefront in Mobile */}
-              {assetType === "internal_app" && (
+              {/* Internal Demo Storefront & External Production Platform in Mobile */}
+              {(assetType === "internal_app" || assetType === "external_app") && (
                 <div className="relative flex-1 w-full h-full bg-black">
                   {iframeLoading && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
                       <div className="w-7 h-7 rounded-full border-2 border-white/20 border-t-white animate-spin mb-2" />
                       <span className="font-mono text-[10px] text-white/70">
-                        LOADING STOREFRONT...
+                        LOADING PLATFORM...
                       </span>
                     </div>
                   )}
@@ -519,17 +500,7 @@ export function ProjectPreviewShowcase({
                 </div>
               )}
 
-              {/* External App in Mobile */}
-              {assetType === "external_app" && (
-                <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-black p-2 scrollbar-none">
-                  <img
-                    src={project.fullImage || project.thumbnail}
-                    alt={`${project.client} Mobile Platform Architecture`}
-                    className="w-full h-auto object-cover object-top block rounded-lg"
-                    loading="eager"
-                  />
-                </div>
-              )}
+
 
               {/* Canva Deck in Mobile */}
               {assetType === "canva_deck" && (

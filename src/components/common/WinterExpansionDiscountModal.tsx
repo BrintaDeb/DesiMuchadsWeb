@@ -6,12 +6,9 @@ import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
 import confetti from "canvas-confetti";
 import {
-  Snowflake,
   Copy,
   Check,
   X,
-  ArrowRight,
-  MessageCircle,
   Clock,
   ShieldCheck,
 } from "lucide-react";

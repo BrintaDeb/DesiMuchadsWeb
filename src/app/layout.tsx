@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif } from
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
+import { PwaRegistration } from "@/components/common/PwaRegistration";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -199,7 +200,7 @@ export default function RootLayout({
     email: "thedesimuchads@gmail.com",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar",
+      streetAddress: "Hosapalaya",
       addressLocality: "Bengaluru",
       addressRegion: "Karnataka",
       postalCode: "560068",
@@ -207,8 +208,8 @@ export default function RootLayout({
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 12.9157,
-      longitude: 77.6445,
+      latitude: 12.9002701,
+      longitude: 77.6454546,
     },
     areaServed: [
       { "@type": "Country", name: "India" },
@@ -411,7 +412,7 @@ export default function RootLayout({
         name: "Where is Desi Muchads located?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Desi Muchads is headquartered at Splendid Royale, Bengaluru, Karnataka (560068), with regional production and growth squads in New Delhi, Mumbai, and international client cohorts across the UAE, US, and UK.",
+          text: "Desi Muchads is headquartered at Hosapalaya, Bengaluru, Karnataka (560068), with regional production and growth squads in New Delhi, Mumbai, and international client cohorts across the UAE, US, and UK.",
         },
       },
     ],
@@ -426,8 +427,8 @@ export default function RootLayout({
         {/* Geo Targeting Meta Tags for Local & Regional Search Dominance */}
         <meta name="geo.region" content="IN-KA" />
         <meta name="geo.placename" content="Bengaluru" />
-        <meta name="geo.position" content="12.9157;77.6445" />
-        <meta name="ICBM" content="12.9157, 77.6445" />
+        <meta name="geo.position" content="12.9002701;77.6454546" />
+        <meta name="ICBM" content="12.9002701, 77.6454546" />
         <meta name="target" content="all" />
         <meta name="audience" content="all" />
         <meta name="coverage" content="Worldwide" />
@@ -462,6 +463,8 @@ export default function RootLayout({
       <body className="bg-[#080807] text-white selection:bg-white selection:text-black min-h-screen overflow-x-hidden font-sans">
         <ThemeProvider>
           <AgencyProposalProvider>
+            {/* Automatic PWA Service Worker Registration & Push Controller */}
+            <PwaRegistration />
             {/* Authentic Cultural Indian Art Background across ALL pages & sections */}
             <IndianArtBackgroundOverlay />
             <div className="relative z-10 w-full min-h-screen">

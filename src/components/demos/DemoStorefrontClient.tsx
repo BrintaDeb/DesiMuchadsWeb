@@ -3745,7 +3745,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
               <div>
                 <span className="text-zinc-500 block uppercase">Supplier Identity:</span>
                 <strong className="text-white">DESI MUCHADS COMMERCE LABS PVT LTD</strong>
-                <div>Regd Office: Splendid Royale, Bengaluru 560068</div>
+                <div>Regd Office: Hosapalaya, Bengaluru 560068</div>
                 <div>GSTIN: <span className="text-white font-bold">07AAECD5582M1ZX</span></div>
                 <div>State: Delhi (Code: 07)</div>
               </div>

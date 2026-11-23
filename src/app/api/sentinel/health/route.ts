@@ -46,7 +46,7 @@ export async function GET() {
           latencyMs,
           lastChecked: timestamp,
         };
-      } catch (e: any) {
+      } catch {
         const latencyMs = Date.now() - start;
         return {
           id: target.id,

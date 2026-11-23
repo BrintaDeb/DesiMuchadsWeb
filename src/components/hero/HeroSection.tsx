@@ -76,6 +76,20 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-8 items-center">
           {/* Left Column: Monumental Breydaqs Headline & Proposition */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-left">
+            {/* Authentic Brand Emblem Badge */}
+            <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg group select-none transition-all">
+              <div className="w-8 h-4 sm:w-9 sm:h-4.5 flex items-center justify-center">
+                <img
+                  src="/desi-muchads-cropped-logo.png"
+                  alt="Desi Muchads Official Logo"
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                />
+              </div>
+              <span className="text-[10px] font-mono tracking-widest text-zinc-300 uppercase font-bold">
+                PERFORMANCE CREATIVE &amp; GROWTH STUDIO
+              </span>
+            </div>
+
             {/* Monumental Headline with Editorial Italic Accent */}
             <h1 className="font-display font-black text-[28px] xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.035em] text-white uppercase leading-[1.0] sm:leading-[0.92]">
               WE ENGINEER BRANDS THAT{" "}

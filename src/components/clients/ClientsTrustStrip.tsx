@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 import { sound } from "@/lib/sound";
 import { SpotlightCard } from "../common/SpotlightCard";
-import { ArrowRight, Sparkles } from "lucide-react";
 import { BreydaqsButton } from "../common/BreydaqsButton";
 
 export function ClientsTrustStrip() {

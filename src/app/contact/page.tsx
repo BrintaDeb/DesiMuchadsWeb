@@ -23,8 +23,11 @@ import {
   Video,
   ExternalLink,
   MessageSquare,
+  Download,
+  RefreshCw,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
+import { triggerSessionNotification } from "@/lib/pwa";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
@@ -39,6 +42,28 @@ interface DateOption {
   year: number;
   badge?: string;
   isWeekend: boolean;
+}
+
+interface BookingResponseData {
+  dossierId: string;
+  googleMeetUrl: string;
+  googleCalendarUrl: string;
+  whatsappDirectUrl: string;
+  whatsappMessage: string;
+  icsContent: string;
+  locationString: string;
+  dossier: {
+    client: { name: string; brand: string; website?: string };
+    engagement: {
+      scheduledDate: string;
+      scheduledSlot: string;
+      channel: string;
+      googleMeetUrl: string;
+      location: string;
+    };
+    assignedTeam: Array<{ name: string; role: string }>;
+    preSessionChecklist: Array<{ item: string; status: string }>;
+  };
 }
 
 const TIME_SLOTS = [
@@ -145,7 +170,7 @@ const MEETING_CHANNELS = [
   { id: "meet", name: "Google Meet", note: "Instant HD Video Room", icon: Video, popular: true },
   { id: "whatsapp", name: "WhatsApp Video Call", note: "Direct Founder Phone", icon: MessageCircle },
   { id: "zoom", name: "Zoom Enterprise", note: "Screen Share & Telemetry", icon: Globe },
-  { id: "inperson", name: "Studio In-Person", note: "Splendid Royale, Bengaluru", icon: MapPin },
+  { id: "inperson", name: "Studio In-Person", note: "Hosapalaya, Bengaluru", icon: MapPin },
 ];
 
 const SERVICES_CATALOG = [
@@ -210,7 +235,7 @@ const CONCIERGE_PROMPTS = [
   },
   {
     q: "Can we meet in-person at your studio?",
-    a: "Yes! Our headquarters is at Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar, Bengaluru, Karnataka 560068. In-person strategy sessions are hosted Monday to Saturday.",
+    a: "Yes! Our headquarters is located at Hosapalaya, Bengaluru, Karnataka 560068 (Coordinates: 12.9002701, 77.6454546). In-person strategy sessions are hosted Monday to Saturday.",
   },
   {
     q: "What are your monthly retainer packages?",
@@ -226,6 +251,10 @@ export default function ContactPage() {
 
   // Mode Switcher: Smart Booking vs Live Chat Concierge
   const [activeInteractiveMode, setActiveInteractiveMode] = useState<"booking" | "chat">("booking");
+
+  // Automated WhatsApp Onboarding & Calendar Webhook Agent Modal State
+  const [bookingModalData, setBookingModalData] = useState<BookingResponseData | null>(null);
+  const [isBookingSubmitting, setIsBookingSubmitting] = useState<boolean>(false);
 
   // Live IST Time
   const [liveIstTime, setLiveIstTime] = useState("");
@@ -601,7 +630,7 @@ export default function ContactPage() {
     return text;
   };
 
-  const handleSendToWhatsApp = () => {
+  const handleSendToWhatsApp = async () => {
     if (isSelectedDateToday && allSlotsExpiredToday) {
       sound.playPluck(120);
       alert(
@@ -615,8 +644,22 @@ export default function ContactPage() {
       return;
     }
     sound.playChime();
+    setIsBookingSubmitting(true);
 
-    // CRM & Instant Telegram Alert Dispatch
+    const bookingPayload = {
+      clientName: clientName.trim() || "Founder / Growth Lead",
+      clientPhone: contactWhatsapp.trim() || undefined,
+      brandWebsite: brandUrl.trim() || undefined,
+      industry: selectedIndustry,
+      budgetTier: formatINR(monthlyBudget),
+      selectedDate: selectedDate.isoString.split("T")[0],
+      selectedSlot: effectiveTimeSlot,
+      meetingChannel: selectedMeetingChannel,
+      strategicGoals: STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id)).map((g) => g.label),
+      message: customNotes.trim() || undefined,
+    };
+
+    // 1. Dispatch CRM lead
     fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -632,6 +675,34 @@ export default function ContactPage() {
       }),
     }).catch(() => {});
 
+    // 2. Trigger Automated WhatsApp Onboarding & Calendar Webhook Agent
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingPayload),
+      });
+      const data: BookingResponseData = await res.json();
+      if (data && data.dossierId) {
+        setBookingModalData(data);
+        triggerSessionNotification({
+          title: `Strategy Session Confirmed · ${data.dossierId}`,
+          body: `Confirmed for ${effectiveTimeSlot} with Rahul & Omkar. Dossier synced.`,
+          url: "/contact",
+        });
+        sound.playChime();
+        if (data.whatsappDirectUrl) {
+          window.open(data.whatsappDirectUrl, "_blank");
+        }
+        return;
+      }
+    } catch (e) {
+      console.warn("[Booking Webhook Fallback]:", e);
+    } finally {
+      setIsBookingSubmitting(false);
+    }
+
+    // Fallback if webhook API offline
     const message = generateWhatsAppMessage();
     const url = `https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -645,24 +716,44 @@ export default function ContactPage() {
     setTimeout(() => setCopiedNotification(false), 3000);
   };
 
-  const handleAddToCalendar = () => {
+  const handleAddToCalendar = async () => {
     sound.playChime();
+    if (bookingModalData?.googleCalendarUrl) {
+      window.open(bookingModalData.googleCalendarUrl, "_blank");
+      return;
+    }
 
-    // CRM & Instant Telegram Alert Dispatch
-    fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        source: "contact_calendar_booking",
-        name: clientName.trim() || "Founder / Growth Lead",
-        brandName: brandName.trim(),
-        brandWebsite: brandUrl.trim(),
-        phone: contactWhatsapp.trim(),
-        budget: formatINR(monthlyBudget),
-        service: selectedServices.join(", "),
-        message: `Added to Calendar for slot: ${effectiveTimeSlot} (${selectedMeetingChannel}) | Goals: ${selectedGoals.join(", ")}`,
-      }),
-    }).catch(() => {});
+    const bookingPayload = {
+      clientName: clientName.trim() || "Founder / Growth Lead",
+      clientPhone: contactWhatsapp.trim() || undefined,
+      brandWebsite: brandUrl.trim() || undefined,
+      industry: selectedIndustry,
+      budgetTier: formatINR(monthlyBudget),
+      selectedDate: selectedDate.isoString.split("T")[0],
+      selectedSlot: effectiveTimeSlot,
+      meetingChannel: selectedMeetingChannel,
+      strategicGoals: STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id)).map((g) => g.label),
+      message: customNotes.trim() || undefined,
+    };
+
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingPayload),
+      });
+      const data: BookingResponseData = await res.json();
+      if (data && data.googleCalendarUrl) {
+        setBookingModalData(data);
+        triggerSessionNotification({
+          title: `Strategy Session Confirmed · ${data.dossierId}`,
+          body: `Added to Google Calendar for ${effectiveTimeSlot}.`,
+          url: "/contact",
+        });
+        window.open(data.googleCalendarUrl, "_blank");
+        return;
+      }
+    } catch {}
 
     const formattedDate = `${selectedDate.dayName}, ${selectedDate.dayNumber} ${selectedDate.monthName} ${selectedDate.year}`;
     const channelName =
@@ -683,7 +774,7 @@ export default function ContactPage() {
     );
     const location = encodeURIComponent(
       channelName.includes("In-Person")
-        ? "Desi Muchads Headquarters, Splendid Royale, Bengaluru"
+        ? "Desi Muchads Headquarters, Hosapalaya, Bengaluru"
         : "Google Meet / Video Room"
     );
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
@@ -1040,8 +1131,8 @@ export default function ContactPage() {
                 <div className="p-6 sm:p-7 rounded-2xl bg-[#0c0c10] border border-white/20 shadow-2xl space-y-4 flex flex-col h-[540px]">
                   <div className="flex items-center justify-between pb-3 border-b border-white/10">
                     <div className="flex items-center gap-3">
-                      <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/30 bg-black">
-                        <img src="/brand-logo.jpg" alt="Concierge" className="w-full h-full object-cover" />
+                      <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/30 bg-black flex items-center justify-center p-1">
+                        <img src="/brand-logo-bw-square.png" alt="Desi Muchads Logo" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
                         <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-black" />
                       </div>
                       <div>
@@ -1549,11 +1640,21 @@ export default function ContactPage() {
                   <button
                     data-cursor="chai"
                     type="button"
+                    disabled={isBookingSubmitting}
                     onClick={handleSendToWhatsApp}
-                    className="w-full py-4 px-5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center gap-2 active:scale-95 group cursor-pointer"
+                    className="w-full py-4 px-5 rounded-full bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center gap-2 active:scale-95 group cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <MessageCircle className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
-                    <span>DISPATCH QUALIFIED LEAD TO WHATSAPP &gt;</span>
+                    {isBookingSubmitting ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin text-black" />
+                        <span>DISPATCHING LEAD &amp; SYNCING DOSSIER...</span>
+                      </>
+                    ) : (
+                      <>
+                        <MessageCircle className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
+                        <span>DISPATCH QUALIFIED LEAD TO WHATSAPP &gt;</span>
+                      </>
+                    )}
                   </button>
 
                   {/* Secondary Utility Actions */}
@@ -1642,7 +1743,8 @@ export default function ContactPage() {
 
                 <div className="space-y-2 text-xs font-mono text-zinc-400 pt-2">
                   <p className="text-white font-bold">DESI MUCHADS DIGITAL LLP</p>
-                  <p>Splendid Royale, 3rd Main Rd, Hosapalaya, Muneshwara Nagar, Bengaluru, Karnataka 560068</p>
+                  <p>Hosapalaya, Bengaluru, Karnataka 560068</p>
+                  <p className="text-[11px] text-zinc-400">HQ Pinpoint: 12.9002701° N, 77.6454546° E</p>
                   <p className="text-emerald-400 font-bold">
                     100% Verified Digital Agency
                   </p>
@@ -1659,7 +1761,7 @@ export default function ContactPage() {
 
                 <div className="pt-2">
                   <a
-                    href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
+                    href="https://maps.app.goo.gl/qNmRs1e5AeqprpuL8?g_st=iw"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono font-bold uppercase tracking-wider text-white transition-all shadow-sm"
@@ -1674,8 +1776,8 @@ export default function ContactPage() {
               <div className="lg:col-span-7">
                 <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-[#0c0c0e] h-80 sm:h-96 group">
                   <iframe
-                    title="Desi Muchads Official Headquarters Map - Splendid Royale Bengaluru"
-                    src="https://maps.google.com/maps?q=Splendid+Royale%2C+3rd+Main+Rd%2C+Hosapalaya%2C+Muneshwara+Nagar%2C+Bengaluru%2C+Karnataka+560068&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                    title="Desi Muchads Official Headquarters Map - Hosapalaya Bengaluru"
+                    src="https://maps.google.com/maps?q=12.9002701%2C77.6454546&t=&z=16&ie=UTF8&iwloc=&output=embed"
                     className="w-full h-full border-0 filter contrast-[1.05] opacity-95 group-hover:opacity-100 transition-opacity map-embed-frame"
                     loading="lazy"
                     allowFullScreen
@@ -1685,11 +1787,11 @@ export default function ContactPage() {
                     <div className="flex items-center gap-2 truncate pr-2">
                       <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span className="text-white truncate font-bold">
-                        Splendid Royale Hub &bull; Bengaluru
+                        Hosapalaya Hub &bull; Bengaluru
                       </span>
                     </div>
                     <a
-                      href="https://maps.app.goo.gl/k4LoVj2pqinVFZsA8?g_st=iw"
+                      href="https://maps.app.goo.gl/qNmRs1e5AeqprpuL8?g_st=iw"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-emerald-400 hover:text-emerald-300 shrink-0 font-bold flex items-center gap-1"
@@ -2002,6 +2104,139 @@ export default function ContactPage() {
         isOpen={isKundliOpen}
         onClose={() => setIsKundliOpen(false)}
       />
+
+      {/* Automated WhatsApp Onboarding & Calendar Webhook Agent Modal */}
+      {bookingModalData && (
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              sound.playPluck(120);
+              setBookingModalData(null);
+            }
+          }}
+          className="fixed inset-0 z-[160] bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200 cursor-pointer overflow-y-auto"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-2xl bg-[#0c0c10] border border-white/20 rounded-3xl p-6 sm:p-8 space-y-6 shadow-[0_25px_80px_rgba(0,0,0,0.95)] text-left cursor-default my-auto"
+          >
+            {/* Top Bar with Dossier ID & Close Button */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">
+                  {bookingModalData.dossierId} &bull; Onboarding Agent Synced
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setBookingModalData(null)}
+                className="p-1.5 px-3 rounded-lg bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white transition-all text-xs font-mono cursor-pointer"
+              >
+                ✕ CLOSE
+              </button>
+            </div>
+
+            {/* Main Success Content */}
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>SESSION RESERVED &amp; DOSSIER DISPATCHED</span>
+              </div>
+              <h3 className="font-display font-black text-2xl sm:text-3xl uppercase text-white tracking-tight">
+                Executive Strategy War-Room Confirmed
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+                Your strategic brand qualification has been automatically dispatched to Principals{" "}
+                <strong className="text-white">Rahul Datt (CEO)</strong> and{" "}
+                <strong className="text-white">Omkar Dutta (CFO)</strong>. Access your instant Google Meet room, calendar invite, and WhatsApp war-room below.
+              </p>
+            </div>
+
+            {/* Details Bento Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-xs font-mono">
+              <div>
+                <span className="text-zinc-500 block text-[10px] uppercase">Date &amp; Slot</span>
+                <span className="text-white font-bold block mt-0.5">
+                  {bookingModalData.dossier.engagement.scheduledDate} @ {bookingModalData.dossier.engagement.scheduledSlot}
+                </span>
+              </div>
+              <div>
+                <span className="text-zinc-500 block text-[10px] uppercase">Channel &amp; Meeting Room</span>
+                <a
+                  href={bookingModalData.googleMeetUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-400 hover:text-emerald-300 underline font-bold block mt-0.5 truncate"
+                >
+                  {bookingModalData.googleMeetUrl} ↗
+                </a>
+              </div>
+              <div className="sm:col-span-2 pt-2 border-t border-white/5">
+                <span className="text-zinc-500 block text-[10px] uppercase">Headquarters Pinpoint (Hosapalaya HQ)</span>
+                <a
+                  href="https://maps.app.goo.gl/qNmRs1e5AeqprpuL8?g_st=iw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-300 hover:text-white underline block mt-0.5 text-[11px]"
+                >
+                  {bookingModalData.locationString} ↗
+                </a>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="space-y-3 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* 1. Add to Google Calendar */}
+                <a
+                  href={bookingModalData.googleCalendarUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playChime()}
+                  className="py-3 px-4 rounded-xl bg-white text-black font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-zinc-200 shadow-lg transition-all"
+                >
+                  <CalendarIcon className="w-4 h-4 text-black" />
+                  <span>Add to Google Calendar</span>
+                </a>
+
+                {/* 2. Download .ics File */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playChime();
+                    const blob = new Blob([bookingModalData.icsContent], { type: "text/calendar;charset=utf-8" });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.setAttribute("download", `desi-muchads-session-${bookingModalData.dossierId}.ics`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                  }}
+                  className="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider border border-white/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  <Download className="w-4 h-4 text-emerald-400" />
+                  <span>Download .ICS Invite</span>
+                </button>
+              </div>
+
+              {/* 3. Open WhatsApp War-Room */}
+              <a
+                href={bookingModalData.whatsappDirectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playChime()}
+                className="w-full py-3.5 px-4 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <span>Open WhatsApp War-Room (+91 9180252831)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

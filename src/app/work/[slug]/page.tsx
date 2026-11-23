@@ -14,7 +14,6 @@ import {
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
-import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
 
 interface PageProps {

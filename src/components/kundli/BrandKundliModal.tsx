@@ -10,7 +10,6 @@ import {
   Crown,
   Flame,
   Check,
-  ArrowRight,
   ArrowLeft,
   CheckCircle2,
   Calendar,

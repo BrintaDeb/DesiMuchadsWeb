@@ -18,8 +18,9 @@ export function ProposalFloatingBar() {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const handleDrawer = (e: any) => {
-      setIsDrawerOpen(!!e.detail?.open);
+    const handleDrawer = (e: Event) => {
+      const customEvent = e as CustomEvent<{ open?: boolean }>;
+      setIsDrawerOpen(!!customEvent.detail?.open);
     };
     window.addEventListener("dm_mobile_drawer_change", handleDrawer);
     return () => window.removeEventListener("dm_mobile_drawer_change", handleDrawer);

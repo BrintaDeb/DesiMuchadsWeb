@@ -3,13 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
-  ArrowRight,
   CheckCircle2,
-  Eye,
   ChevronRight,
 } from "lucide-react";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { CustomCursor } from "@/components/common/CustomCursor";
 import { SutraProgressMeter } from "@/components/common/SutraProgressMeter";
 import { Preloader } from "@/components/preloader/Preloader";
@@ -175,14 +172,18 @@ export default function Home() {
               {flagshipProjects.map((proj) => (
                 <MagneticWrapper
                   key={proj.id}
-                  strength={0.12}
-                  tiltStrength={2}
+                  strength={0.08}
+                  tiltStrength={0}
                   enableSound={true}
                   className="w-full h-full"
                 >
                   <SpotlightCard
                     isGlass={true}
-                    className="group rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.15)] hover:border-white/50 transition-all overflow-hidden flex flex-col justify-between shadow-lg h-full"
+                    enableTilt={true}
+                    maxTilt={6}
+                    scale={1.015}
+                    perspective={1000}
+                    className="group rounded-2xl bg-[#0c0c0b] border border-[rgba(232,232,227,0.15)] hover:border-white/50 transition-all overflow-hidden flex flex-col justify-between shadow-lg h-full"
                   >
                     {/* Motion Video / Interactive Pan Hover Preview */}
                     <CaseStudyHoverPreview

@@ -17,11 +17,9 @@ import {
   Calculator,
   ShieldCheck,
   Sparkles,
-  ArrowRight,
-  Globe,
-  PhoneCall,
   Users,
   TrendingUp,
+  Download,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
@@ -38,7 +36,6 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState<number>(84);
 
@@ -208,7 +205,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             <img
               src="/desi-muchads-cropped-logo.png"
               alt="Desi Muchads Official Logo"
-              className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(255,255,255,0.45)]"
+              className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] drop-shadow-[0_0_16px_rgba(255,255,255,0.35)] transition-all group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.9)]"
               loading="eager"
             />
           </div>
@@ -274,7 +271,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  {AGENCY_SERVICES.map((srv, idx) => (
+                  {AGENCY_SERVICES.map((srv) => (
                     <Link
                       key={srv.id}
                       href={`/services/${srv.slug}`}
@@ -562,7 +559,16 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-4 space-y-3">
+            <div className="pt-4 space-y-2.5">
+              <a
+                href="/api/download-apk"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-2.5 px-3 rounded-[0.2rem] bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+              >
+                <Download className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Get Mobile App (iOS &amp; Android)</span>
+              </a>
+
               <BreydaqsButton
                 onClick={() => {
                   setMobileMenuOpen(false);
