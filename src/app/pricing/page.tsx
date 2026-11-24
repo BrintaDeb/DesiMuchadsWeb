@@ -14,7 +14,6 @@ import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { PricingSection } from "@/components/pricing/PricingSection";
-import { RoasCalculator } from "@/components/calculator/RoasCalculator";
 import { sound } from "@/lib/sound";
 
 export default function PricingPage() {
@@ -81,14 +80,7 @@ export default function PricingPage() {
 
         <SectionDivider />
 
-        {/* 3. The Live ROAS & Margin Simulator */}
-        <section id="simulator" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
-          <RoasCalculator onOpenKundli={() => setIsKundliOpen(true)} />
-        </section>
-
-        <SectionDivider />
-
-        {/* 4. Service Level Guarantees Matrix */}
+        {/* 3. Service Level Guarantees Matrix */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
           <div className="mb-12">
             <span className="text-xs font-mono font-bold tracking-widest uppercase text-zinc-400 block mb-2">

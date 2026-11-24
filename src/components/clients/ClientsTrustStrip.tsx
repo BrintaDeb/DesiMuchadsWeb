@@ -51,18 +51,18 @@ export function ClientsTrustStrip() {
   }, []);
 
   const clients = [
-    { name: "PET-FIRST", category: "Wellness & Pet Care", metric: "6.2X ROAS" },
-    { name: "YOU & ME", category: "Cinematic Photography", metric: "₹1.4Cr GMV" },
-    { name: "LIONELP", category: "Gourmet & Hospitality", metric: "+480% Orders" },
-    { name: "FRESHEATS", category: "Organic Storefront", metric: "Sub-1s LCP" },
-    { name: "NESTSERVICES", category: "Concierge Hub", metric: "8.1X ROAS" },
-    { name: "VEDAROOTS", category: "Single-Estate Ayurveda", metric: "₹92 Target CPA" },
-    { name: "FROSCH", category: "Eco-Friendly Living", metric: "14k+ Customers" },
-    { name: "ATEA", category: "Enterprise IT & Cloud", metric: "+320% Leads" },
-    { name: "TRANSFERGO", category: "Fintech & Payments", metric: "Zero Drop" },
-    { name: "DARBAR", category: "Fine Horology", metric: "₹380k AOV" },
-    { name: "DESI D2C", category: "Direct-to-Consumer", metric: "5.8X Blended" },
-    { name: "ROYAL MASALA", category: "Heritage Spices", metric: "24k+ Jars Sold" },
+    { name: "PET-FIRST", category: "Wellness & Pet Care" },
+    { name: "YOU & ME", category: "Cinematic Photography" },
+    { name: "LIONELP", category: "Gourmet & Hospitality" },
+    { name: "FRESHEATS", category: "Organic Storefront" },
+    { name: "NESTSERVICES", category: "Concierge Hub" },
+    { name: "VEDAROOTS", category: "Single-Estate Ayurveda" },
+    { name: "FROSCH", category: "Eco-Friendly Living" },
+    { name: "ATEA", category: "Enterprise IT & Cloud" },
+    { name: "TRANSFERGO", category: "Fintech & Payments" },
+    { name: "DARBAR", category: "Fine Horology" },
+    { name: "DESI D2C", category: "Direct-to-Consumer" },
+    { name: "ROYAL MASALA", category: "Heritage Spices" },
   ];
 
   return (
@@ -106,9 +106,6 @@ export function ClientsTrustStrip() {
                 <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">
                   {c.category}
                 </span>
-                <span className="px-2 py-0.5 rounded-[0.2rem] bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] font-bold">
-                  {c.metric}
-                </span>
               </div>
             ))}
           </div>
@@ -128,9 +125,6 @@ export function ClientsTrustStrip() {
               </span>
               <span className="mt-2 text-[9px] font-mono tracking-wider text-zinc-400 uppercase transition-colors">
                 {c.category}
-              </span>
-              <span className="mt-2 text-[9px] font-mono text-emerald-400 font-bold">
-                {c.metric}
               </span>
             </SpotlightCard>
           ))}

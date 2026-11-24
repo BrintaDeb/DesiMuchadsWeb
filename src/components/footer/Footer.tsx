@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Clock, MapPin } from "lucide-react";
+import { Clock, MapPin, Download } from "lucide-react";
 import { SocialRedirectionDeck } from "@/components/common/SocialRedirectionDeck";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
+import { MoustacheClock } from "@/components/common/MoustacheClock";
 
 interface FooterProps {
   onOpenKundli?: () => void;
@@ -165,6 +166,21 @@ export function Footer({ onOpenKundli: _onOpenKundli }: FooterProps) {
                   Strategy Session
                 </Link>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
+                    }
+                  }}
+                  className="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5 cursor-pointer font-bold"
+                  title="Install Universal Mobile App for iOS & Android"
+                >
+                  <Download className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Download App (iOS &amp; Android)</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -250,6 +266,25 @@ export function Footer({ onOpenKundli: _onOpenKundli }: FooterProps) {
               <p className="text-sm text-zinc-400 leading-relaxed font-sans">
                 Visit our agency headquarters for executive strategy sessions, creative direction reviews, and growth war-rooms.
               </p>
+
+              {/* Live Moustache Analog Clock Widget */}
+              <div className="pt-2">
+                <div className="flex items-center gap-4 p-3.5 rounded-[0.25rem] bg-white/[0.03] border border-white/10 max-w-sm">
+                  <MoustacheClock size={68} showDigital={false} />
+                  <div className="flex flex-col text-left">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold">
+                      BENGALURU HQ · LIVE IST
+                    </span>
+                    <span className="font-mono font-bold text-base text-white mt-0.5">
+                      {currentTime || "06:30:00 PM"}
+                    </span>
+                    <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1.5 mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Executive Desk Active
+                    </span>
+                  </div>
+                </div>
+              </div>
 
               <div className="pt-2">
                 <BreydaqsButton

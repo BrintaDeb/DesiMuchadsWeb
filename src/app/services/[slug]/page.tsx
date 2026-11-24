@@ -6,12 +6,9 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  Clock,
   Sparkles,
-  ShieldCheck,
   ChevronRight,
   HelpCircle,
-  ExternalLink,
   PhoneCall,
   Search,
   Rocket,
@@ -24,7 +21,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
-import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 
@@ -178,9 +174,6 @@ async function ServiceDetailContent({ params }: PageProps) {
     ],
   };
 
-  // Find demo projects matching this service
-  const matchedProjects = AGENCY_PROJECTS.filter((p) => p.serviceId === service.id);
-
   const getServiceIcon = (name: ServiceItem["iconName"]) => {
     const iconClass = "w-7 h-7 text-white";
     switch (name) {
@@ -312,18 +305,6 @@ async function ServiceDetailContent({ params }: PageProps) {
               {service.fullDesc}
             </p>
 
-            {/* Turnaround & SLA Strip */}
-            <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-white/10">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                <Clock className="w-4 h-4 text-white" />
-                <span>{service.specs.turnaround}</span>
-              </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Target: {service.specs.targetKpi}</span>
-              </div>
-            </div>
-
             {/* CTA Buttons */}
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
@@ -335,12 +316,12 @@ async function ServiceDetailContent({ params }: PageProps) {
                 <span>CLAIM FREE STRATEGY AUDIT</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
-              <a
-                href="#demo-projects"
+              <Link
+                href="/work"
                 className="btn-luxury-shine px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all border border-white/15"
               >
-                Explore Demo Projects ({matchedProjects.length})
-              </a>
+                Explore All Portfolio Works
+              </Link>
             </div>
           </div>
         </div>
@@ -398,163 +379,6 @@ async function ServiceDetailContent({ params }: PageProps) {
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Section 4: Full Deliverables & Tech Architecture with iOS Glassmorphism */}
-        <div className="rounded-3xl p-8 sm:p-12 ios-glass-panel shadow-2xl">
-          <div className="max-w-2xl mb-8">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-              ZERO-AMBIGUITY SCOPE
-            </span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
-              Full Deliverables &amp; Tech Stack
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left: Deliverables Checklist */}
-            <div className="space-y-4">
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-300">
-                Core Deliverables Included:
-              </h3>
-              <ul className="space-y-3">
-                {service.specs.deliverables.map((item, dIdx) => (
-                  <li
-                    key={dIdx}
-                    className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="text-sm text-zinc-200 font-sans">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Right: Tooling & Tech Architecture */}
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-300 mb-3">
-                  Tools &amp; Platform Architecture:
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {service.specs.tools.map((tool, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/15 text-white font-mono text-xs font-semibold"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider block font-bold">
-                  Target SLA &amp; Commitment:
-                </span>
-                <p className="text-sm text-white font-sans font-medium">
-                  {service.specs.turnaround} with live daily portal dashboards and 100% full account ownership.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Section 5: Real Showcase Projects (Human-Grade Demos) */}
-        <div id="demo-projects" className="space-y-8 scroll-mt-24">
-          <div>
-            <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
-              Demonstrated Case Studies
-            </h2>
-            <p className="text-zinc-400 text-sm sm:text-base font-sans mt-2 max-w-2xl">
-              Inspect the real strategic breakdowns, metrics, and live platforms engineered by Desi Muchads for this capability.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {matchedProjects.map((project) => (
-              <SpotlightCard
-                key={project.id}
-                spotlightColor="rgba(255, 255, 255, 0.08)"
-                borderColor="rgba(255, 255, 255, 0.4)"
-                className="group rounded-3xl p-6 sm:p-8 bg-[#121215] border border-white/10 hover:border-white/30 flex flex-col justify-between shadow-xl transition-all"
-              >
-                <div>
-                  {/* Hero Stat & Tag */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-white text-black font-metric text-xs font-black tracking-wider uppercase shadow-md">
-                      {project.heroStat}
-                    </span>
-                    <span className="font-mono text-[10px] text-zinc-400">
-                      {project.year}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display font-black text-2xl text-white uppercase mb-2">
-                    {project.client}
-                  </h3>
-                  <p className="text-xs text-zinc-300 font-sans mb-4 leading-relaxed">
-                    {project.tagline}
-                  </p>
-
-                  {/* The Problem & Solution Breakdown */}
-                  <div className="space-y-3 pt-3 border-t border-white/10 mb-6">
-                    <div>
-                      <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest font-bold block mb-1">
-                        THE BOTTLENECK (CHALLENGE):
-                      </span>
-                      <p className="text-xs text-zinc-400 line-clamp-2 font-sans">
-                        {project.mushkil}
-                      </p>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block mb-1">
-                        THE EXECUTION (STRATEGY):
-                      </span>
-                      <p className="text-xs text-zinc-400 line-clamp-2 font-sans">
-                        {project.jugaad}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* 4 Performance Metrics Grid */}
-                  <div className="grid grid-cols-2 gap-2 mb-6 p-3 rounded-xl bg-white/[0.03] border border-white/5">
-                    {project.stats.slice(0, 4).map((st, sIdx) => (
-                      <div key={sIdx}>
-                        <div className="font-metric font-black text-base text-white">
-                          {st.val}
-                        </div>
-                        <div className="text-[9px] font-mono text-zinc-400 uppercase">
-                          {st.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Card Action Link to Full Case Study */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:underline uppercase font-sans"
-                  >
-                    <span>Inspect Full Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-2 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-all"
-                    title="Live Web Preview"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </SpotlightCard>
             ))}
           </div>
         </div>

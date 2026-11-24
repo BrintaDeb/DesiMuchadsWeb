@@ -101,10 +101,21 @@ export function ApkInstallPopup() {
     };
     window.addEventListener("dm_mobile_drawer_change", handleDrawer);
 
+    // Global listener so header, mobile menu, and footer can launch the installer sheet on demand
+    const handleOpenInstaller = () => {
+      setIsVisible(true);
+      setIsMinimized(false);
+      setIsModalOpen(true);
+      sound.playPluck(160);
+      haptics.selection();
+    };
+    window.addEventListener("dm_open_app_installer", handleOpenInstaller);
+
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstall);
       window.removeEventListener("appinstalled", handleAppInstalled);
       window.removeEventListener("dm_mobile_drawer_change", handleDrawer);
+      window.removeEventListener("dm_open_app_installer", handleOpenInstaller);
     };
   }, []);
 

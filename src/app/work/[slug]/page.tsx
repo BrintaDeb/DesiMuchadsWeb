@@ -282,20 +282,6 @@ async function ProjectDetailContent({ params }: PageProps) {
               {project.desc}
             </p>
 
-            {/* Quick Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 mb-8">
-              {project.stats.map((st, sIdx) => (
-                <div key={sIdx} className="text-left">
-                  <div className="font-metric font-black text-2xl sm:text-3xl text-white">
-                    {st.val}
-                  </div>
-                  <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider mt-0.5">
-                    {st.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {/* CTA & Live Links */}
             <div className="flex flex-wrap items-center gap-4">
               <a
@@ -347,22 +333,6 @@ async function ProjectDetailContent({ params }: PageProps) {
             isStandalone={true}
             initialDeviceMode="desktop"
           />
-
-          {/* Anti-AI Pro Developer Architecture Guarantee Strip */}
-          <div className="mt-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono">
-            <div className="text-zinc-400">
-              <strong className="text-white">Anti-AI Engineering Guarantee:</strong> Custom Shopify Liquid &amp; Next.js 16 components · Zero generic automated builders · Scaled to ₹140Cr+ GMV.
-            </div>
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-white hover:underline font-bold shrink-0 flex items-center gap-1"
-            >
-              <span>Explore Live Production Store</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
         </div>
 
         {/* Section 3: The 3 Pillars of Truth (Challenge, Strategy, Outcome) */}

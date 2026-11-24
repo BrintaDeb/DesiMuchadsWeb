@@ -171,34 +171,6 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                 SELECTED WORKS
               </BreydaqsButton>
             </div>
-
-            {/* Breydaqs Monospace Technical Specifications Grid */}
-            <div className="pt-4 sm:pt-6 border-t border-[rgba(232,232,227,0.12)] grid grid-cols-3 gap-1.5 sm:gap-4 font-mono text-[9px] sm:text-xs text-center sm:text-left">
-              <div className="min-w-0">
-                <span className="text-zinc-500 text-[8px] sm:text-[10px] block uppercase font-bold truncate">
-                  PORTFOLIO GMV
-                </span>
-                <span className="text-white font-bold text-[11px] sm:text-base block truncate">
-                  ₹140Cr+ Scaled
-                </span>
-              </div>
-              <div className="min-w-0">
-                <span className="text-zinc-500 text-[8px] sm:text-[10px] block uppercase font-bold truncate">
-                  AVERAGE ROAS
-                </span>
-                <span className="text-emerald-400 font-bold text-[11px] sm:text-base block truncate">
-                  5.4X Blended
-                </span>
-              </div>
-              <div className="min-w-0">
-                <span className="text-zinc-500 text-[8px] sm:text-[10px] block uppercase font-bold truncate">
-                  ACTIVE BRANDS
-                </span>
-                <span className="text-white font-bold text-[11px] sm:text-base block truncate">
-                  200+ Partners
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: 3D Centerpiece on Matte Carbon */}

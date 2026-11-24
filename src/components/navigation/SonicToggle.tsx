@@ -5,7 +5,11 @@ import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
 import { Volume2, VolumeX } from "lucide-react";
 
-export function SonicToggle() {
+/**
+ * Micro Compact Sonic Toggle
+ * Minimized to a sleek, micro icon button for seamless header elegance.
+ */
+export function SonicToggle({ className = "" }: { className?: string }) {
   const [isMuted, setIsMuted] = useState(true);
   const [isPulsing, setIsPulsing] = useState(false);
 
@@ -30,44 +34,24 @@ export function SonicToggle() {
     <button
       type="button"
       onClick={handleToggle}
-      className={`inline-flex items-center justify-center gap-1.5 px-2 sm:px-2.5 py-1.5 min-h-[38px] sm:min-h-[42px] min-w-[38px] sm:min-w-[42px] rounded-[0.2rem] border transition-all text-[11px] font-mono select-none group active:scale-95 ${
+      className={`relative inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border transition-all duration-200 select-none group active:scale-90 cursor-pointer ${
         isMuted
-          ? "border-white/10 text-zinc-500 hover:border-white/30 hover:text-zinc-300 bg-white/[0.02]"
-          : "border-emerald-500/40 text-emerald-300 bg-emerald-500/10 hover:border-emerald-400"
-      }`}
-      title={isMuted ? "Enable Tactile Audio Feedback" : "Mute Audio"}
-      aria-label={isMuted ? "Unmute sound" : "Mute sound"}
+          ? "border-white/15 bg-white/5 text-zinc-400 hover:border-white/30 hover:text-white"
+          : "border-emerald-500/50 bg-emerald-500/10 text-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.35)] hover:border-emerald-400"
+      } ${className}`}
+      title={isMuted ? "Enable Sound" : "Mute Sound"}
+      aria-label={isMuted ? "Enable Sound" : "Mute Sound"}
     >
       {isMuted ? (
-        <>
-          <VolumeX className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300" />
-          <span className="hidden sm:inline text-[10px] tracking-wider uppercase font-semibold">
-            SOUND OFF
-          </span>
-        </>
+        <VolumeX className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors" />
       ) : (
         <>
           <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-          <div className="flex items-end gap-0.5 h-2.5 w-3 shrink-0">
-            <span
-              className={`w-0.5 bg-emerald-400 rounded-full transition-all duration-150 ${
-                isPulsing ? "h-2.5" : "h-1"
-              }`}
-            />
-            <span
-              className={`w-0.5 bg-emerald-400 rounded-full transition-all duration-150 ${
-                isPulsing ? "h-3" : "h-2"
-              }`}
-            />
-            <span
-              className={`w-0.5 bg-emerald-400 rounded-full transition-all duration-150 ${
-                isPulsing ? "h-2" : "h-1.5"
-              }`}
-            />
-          </div>
-          <span className="hidden sm:inline text-[10px] tracking-wider uppercase font-semibold">
-            SOUND ON
-          </span>
+          <span
+            className={`absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-400 transition-transform ${
+              isPulsing ? "scale-150" : "scale-100"
+            }`}
+          />
         </>
       )}
     </button>

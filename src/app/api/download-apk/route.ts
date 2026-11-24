@@ -33,3 +33,7 @@ export async function GET(_req: NextRequest) {
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
+
+export async function HEAD(req: NextRequest) {
+  return GET(req);
+}

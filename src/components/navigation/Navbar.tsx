@@ -24,6 +24,7 @@ import {
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
 import { AGENCY_SERVICES } from "@/data/servicesData";
+import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { SonicToggle } from "./SonicToggle";
 import { CommandMenu } from "../common/CommandMenu";
 import { BreydaqsButton } from "../common/BreydaqsButton";
@@ -131,32 +132,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
     }, 150);
   };
 
-  const portfolioHighlights = [
-    {
-      name: "VedaRoots Ayurveda",
-      tagline: "Classical Single-Estate Ayurveda",
-      metric: "+420% Organic",
-      href: "/demos/vedaroots-ayurveda",
-    },
-    {
-      name: "Darbar Fine Watches",
-      tagline: "Bespoke Royal Mechanical Horology",
-      metric: "99 PageSpeed",
-      href: "/demos/darbar-fine-watches",
-    },
-    {
-      name: "SnackNation Makhanas",
-      tagline: "D2C Clean-Label Superfoods",
-      metric: "5.8x ROAS",
-      href: "/demos/snacknation-makhanas",
-    },
-    {
-      name: "Mithai Magic Sweets",
-      tagline: "10-Minute Dark Store Ingestion",
-      metric: "8.4x Flash",
-      href: "/demos/mithaimagic-sweets",
-    },
-  ];
+  // The exact featured works showcased in the homepage auto-slider
+  const featuredHomepageWorks = AGENCY_PROJECTS.slice(0, 8);
 
   const getServiceLucideIcon = (name: string) => {
     const iconStyle = "w-3.5 h-3.5 text-white";
@@ -204,6 +181,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <div className="relative w-9 h-5 sm:w-11 sm:h-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
             <img
               src="/desi-muchads-cropped-logo.png"
+              srcSet="/desi-muchads-cropped-logo.png 1x, /desi-muchads-cropped-logo@2x.png 2x"
               alt="Desi Muchads Official Logo"
               className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] drop-shadow-[0_0_16px_rgba(255,255,255,0.35)] transition-all group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.9)]"
               loading="eager"
@@ -339,41 +317,89 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }}
                 onMouseLeave={handleMouseLeave}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-96 bg-[#0c0c0b] text-[#e8e8e3] rounded-[0.25rem] border border-[rgba(232,232,227,0.18)] p-5 z-50 shadow-[0_30px_90px_rgba(0,0,0,0.98)] animate-in fade-in slide-in-from-top-2 duration-200"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[460px] max-w-[92vw] bg-[#0c0c0b] text-[#e8e8e3] rounded-[0.25rem] border border-[rgba(232,232,227,0.18)] p-5 z-50 shadow-[0_30px_90px_rgba(0,0,0,0.98)] animate-in fade-in slide-in-from-top-2 duration-200"
               >
                 <div className="pb-3 mb-3 border-b border-white/10 flex items-center justify-between font-mono text-xs">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                    SELECTED WORKS [ 50 ARCHIVES ]
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-white" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white">
+                      HOMEPAGE FEATURED WORK
+                    </span>
+                  </div>
+                  <Link
+                    href="/#work"
+                    onClick={() => setActiveDropdown(null)}
+                    className="text-zinc-400 hover:text-white transition-colors text-[11px] font-bold"
+                  >
+                    View on Home ↗
+                  </Link>
+                </div>
+
+                {/* Featured Work Banner Card -> links directly to /#work */}
+                <Link
+                  href="/#work"
+                  onClick={() => setActiveDropdown(null)}
+                  className="group/feat mb-3 p-3 rounded-[0.2rem] bg-gradient-to-r from-white/10 to-white/5 border border-white/20 hover:border-white/40 transition-all flex items-center justify-between"
+                >
+                  <div className="flex flex-col text-left">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">
+                        Homepage Auto-Slider
+                      </span>
+                    </div>
+                    <span className="font-display font-black text-sm text-white uppercase group-hover/feat:text-zinc-200">
+                      Flagship Revenue Architectures
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-white group-hover/feat:translate-x-1 transition-transform">
+                    Explore →
                   </span>
+                </Link>
+
+                {/* Featured Projects List: Exact Works from Homepage */}
+                <div className="space-y-1.5 max-h-[360px] overflow-y-auto pr-1 scrollbar-thin">
+                  {featuredHomepageWorks.map((proj) => (
+                    <Link
+                      key={proj.id}
+                      href={`/work/${proj.slug}`}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group/port flex items-center justify-between p-2.5 rounded-[0.2rem] bg-[#121211] hover:bg-[#181816] border border-white/5 hover:border-white/20 transition-all"
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                        <div className="w-9 h-7 rounded-[0.15rem] overflow-hidden bg-black/60 shrink-0 border border-white/10">
+                          <img
+                            src={proj.thumbnail}
+                            alt={proj.client}
+                            className="w-full h-full object-cover group-hover/port:scale-105 transition-transform"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="flex flex-col text-left min-w-0 flex-1">
+                          <span className="font-display font-black text-xs text-white uppercase group-hover/port:text-zinc-200 truncate">
+                            {proj.client}
+                          </span>
+                          <span className="font-sans text-[10.5px] text-zinc-400 truncate max-w-[220px]">
+                            {proj.tagline}
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-[0.2rem] bg-white/10 border border-white/15 text-white font-mono text-[9.5px] font-bold shrink-0 ml-2">
+                        {proj.heroStat ? proj.heroStat.split("·")[0].trim() : proj.category}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-zinc-400">
+                  <span>Curated Homepage Flagships</span>
                   <Link
                     href="/work"
                     onClick={() => setActiveDropdown(null)}
                     className="text-white hover:underline font-bold"
                   >
-                    View All ↗
+                    All 50 Works ↗
                   </Link>
-                </div>
-                <div className="space-y-2">
-                  {portfolioHighlights.map((proj) => (
-                    <Link
-                      key={proj.name}
-                      href={proj.href}
-                      onClick={() => setActiveDropdown(null)}
-                      className="group/port flex items-center justify-between p-2.5 rounded-[0.2rem] bg-[#121211] hover:bg-[#181816] border border-white/5 hover:border-white/20 transition-all"
-                    >
-                      <div className="flex flex-col text-left">
-                        <span className="font-display font-black text-xs text-white uppercase">
-                          {proj.name}
-                        </span>
-                        <span className="font-sans text-[11px] text-zinc-400">
-                          {proj.tagline}
-                        </span>
-                      </div>
-                      <span className="px-2 py-0.5 rounded-[0.2rem] bg-white/10 border border-white/15 text-white font-mono text-[10px] font-bold">
-                        {proj.metric}
-                      </span>
-                    </Link>
-                  ))}
                 </div>
               </div>
             )}
@@ -481,7 +507,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5"
                 >
                   <Calculator className="w-4 h-4 text-zinc-400" />
-                  <span className="text-[10px] uppercase font-bold text-white">ROAS Engine</span>
+                  <span className="text-[10px] uppercase font-bold text-white">Retainers</span>
                 </Link>
 
                 <button
@@ -537,7 +563,20 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
                 >
-                  <span>Work</span>
+                  <span>Work (All 50+ Case Studies)</span>
+                  <span className="text-[10px] font-mono text-zinc-400">Archive ↗</span>
+                </Link>
+
+                <Link
+                  href="/#work"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#161614] border border-white/20 text-white uppercase"
+                >
+                  <span className="flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5 text-white" />
+                    <span>Featured Work (Homepage Slider)</span>
+                  </span>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Explore →</span>
                 </Link>
 
                 <Link
@@ -560,14 +599,20 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
             {/* Bottom Actions */}
             <div className="pt-4 space-y-2.5">
-              <a
-                href="/api/download-apk"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-2.5 px-3 rounded-[0.2rem] bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  sound.playPluck(160);
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
+                  }
+                }}
+                className="w-full py-2.5 px-3 rounded-[0.2rem] bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer min-h-[44px]"
               >
                 <Download className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Get Mobile App (iOS &amp; Android)</span>
-              </a>
+              </button>
 
               <BreydaqsButton
                 onClick={() => {

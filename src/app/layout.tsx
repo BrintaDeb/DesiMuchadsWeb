@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { PwaRegistration } from "@/components/common/PwaRegistration";
+import { ApkInstallPopup } from "@/components/common/ApkInstallPopup";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -465,6 +466,8 @@ export default function RootLayout({
           <AgencyProposalProvider>
             {/* Automatic PWA Service Worker Registration & Push Controller */}
             <PwaRegistration />
+            {/* Universal App Installer & Downloader for iOS & Android */}
+            <ApkInstallPopup />
             {/* Authentic Cultural Indian Art Background across ALL pages & sections */}
             <IndianArtBackgroundOverlay />
             <div className="relative z-10 w-full min-h-screen">

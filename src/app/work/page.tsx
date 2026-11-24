@@ -13,6 +13,7 @@ import {
   Compass,
   LayoutGrid,
   ListFilter,
+  SlidersHorizontal,
 } from "lucide-react";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
@@ -20,7 +21,7 @@ import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
-import { WorkDesignTheorySection } from "@/components/casestudies/WorkDesignTheorySection";
+import { WorkAutoCarousel } from "@/components/work/WorkAutoCarousel";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { sound } from "@/lib/sound";
 
@@ -40,7 +41,7 @@ export default function WorkPage() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const [activeModalTab, setActiveModalTab] = useState<"preview" | "theory">("preview");
-  const [viewMode, setViewMode] = useState<"grid" | "showcase">("grid");
+  const [viewMode, setViewMode] = useState<"carousel" | "grid" | "showcase">("carousel");
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,49 +57,6 @@ export default function WorkPage() {
     p.liveUrl.startsWith("/demos/") ||
     p.serviceId === "ecommerce-services" ||
     p.serviceId === "quick-commerce";
-
-  const getDesignTheoryBadge = (proj: ProjectItem) => {
-    if (proj.serviceId === "illustrations-art") {
-      return {
-        pill: "Sacred Cultural Semiotics",
-        color: "text-amber-400 bg-amber-400/10 border-amber-400/25",
-        axiom: "Hand-rendered Sumi-e & iconic cultural focal points commanding subconscious loyalty.",
-      };
-    }
-    if (proj.serviceId === "graphic-design" || proj.serviceId === "packaging-label") {
-      return {
-        pill: "φ Golden Ratio Symmetry",
-        color: "text-purple-400 bg-purple-400/10 border-purple-400/25",
-        axiom: "1:1.618 modular logarithmic scale, optical alignment & tactile luxury dielines.",
-      };
-    }
-    if (proj.serviceId === "web-development") {
-      return {
-        pill: "Sub-Second Next.js & 60FPS",
-        color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/25",
-        axiom: "Zero CLS, edge-rendered React Server Components & sub-400ms TTFB rendering.",
-      };
-    }
-    if (proj.serviceId === "social-media") {
-      return {
-        pill: "Vernacular Hinglish Hook",
-        color: "text-rose-400 bg-rose-400/10 border-rose-400/25",
-        axiom: "0–1.5s scroll-stop thumb arrest with street-smart cultural pride & urgency.",
-      };
-    }
-    if (proj.serviceId === "seo-sem" || proj.serviceId === "performance-marketing") {
-      return {
-        pill: "Algorithmic Search Intent",
-        color: "text-blue-400 bg-blue-400/10 border-blue-400/25",
-        axiom: "Topical entity clustering, Core Web Vitals speed & high-intent commercial capture.",
-      };
-    }
-    return {
-      pill: "Fitts's Law Thumb Ergonomics",
-      color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/25",
-      axiom: "Lower-third thumb sweep hit targets & 2-tap frictionless checkout velocity.",
-    };
-  };
 
   const filteredProjects = useMemo(() => {
     return AGENCY_PROJECTS.filter((proj) => {
@@ -162,37 +120,12 @@ export default function WorkPage() {
               high-performance Next.js web applications, viral social media campaigns, and
               interactive high-velocity e-commerce storefronts.
             </p>
-
-            {/* Portfolio Highlights Bar */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-              <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">50</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Total Master Works</span>
-              </div>
-              <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">₹14.8Cr+</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Verified Client GMV</span>
-              </div>
-              <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">5.8x</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Average Blended ROAS</span>
-              </div>
-              <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">0%</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Generic AI Slop</span>
-              </div>
-            </div>
           </div>
         </section>
 
         <SectionDivider />
 
-        {/* 2. Enhanced UI Design Theory & Mathematical Foundations */}
-        <WorkDesignTheorySection />
-
-        <SectionDivider />
-
-        {/* 3. Filter, Instant Search & View Mode Switcher Toolbar */}
+        {/* 2. Filter, Instant Search & View Mode Switcher Toolbar */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-12 text-left">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 p-4 rounded-2xl bg-[#121215] border border-white/10 shadow-lg">
             {/* Filter Pills */}
@@ -204,11 +137,10 @@ export default function WorkPage() {
                     sound.playPluck(150);
                     setSelectedCategory(pill.id);
                   }}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap shrink-0 cursor-pointer ${
-                    selectedCategory === pill.id
-                      ? "bg-white text-black font-bold shadow-md"
-                      : "text-zinc-400 hover:text-white bg-white/[0.02] border border-white/5 hover:border-white/15"
-                  }`}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap shrink-0 cursor-pointer ${selectedCategory === pill.id
+                    ? "bg-white text-black font-bold shadow-md"
+                    : "text-zinc-400 hover:text-white bg-white/[0.02] border border-white/5 hover:border-white/15"
+                    }`}
                 >
                   {pill.label}
                 </button>
@@ -223,6 +155,22 @@ export default function WorkPage() {
                   type="button"
                   onClick={() => {
                     sound.playPluck(140);
+                    setViewMode("carousel");
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
+                    viewMode === "carousel"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                  title="Interactive 3D Auto-Slider"
+                >
+                  <SlidersHorizontal className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Auto-Slider</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(150);
                     setViewMode("grid");
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
@@ -279,8 +227,8 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* 4. The Work Showcase (50 Works in Grid or Showcase View) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-left">
+        {/* 4. The Work Showcase (50 Works in Auto-Slider, Grid, or Showcase View) */}
+        <section id="featured" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-left">
           {filteredProjects.length === 0 ? (
             <div className="py-24 text-center rounded-3xl bg-[#121215] border border-white/10 p-8 space-y-4">
               <Compass className="w-10 h-10 text-zinc-500 mx-auto" />
@@ -300,12 +248,18 @@ export default function WorkPage() {
                 Reset Filters
               </button>
             </div>
+          ) : viewMode === "carousel" ? (
+            /* Mode C: Interactive Auto-Slide 3D Carousel */
+            <div className="w-full py-4">
+              <WorkAutoCarousel
+                projects={filteredProjects}
+                onOpenPreview={handleOpenPreview}
+              />
+            </div>
           ) : viewMode === "grid" ? (
             /* Mode A: Grid Bento View */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((proj) => {
-                const theory = getDesignTheoryBadge(proj);
-
                 return (
                   <SpotlightCard
                     key={proj.id}
@@ -365,30 +319,11 @@ export default function WorkPage() {
                           </a>
                         )}
                       </div>
-
-                      {/* Bottom Metric Strip on Image */}
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs">
-                        <span className="font-metric font-bold text-white bg-white/10 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/20">
-                          {proj.heroStat}
-                        </span>
-                        <span className="font-mono text-[10px] text-zinc-300">
-                          {proj.stats[0]?.val || proj.year}
-                        </span>
-                      </div>
                     </div>
 
-                    {/* Project Information & Design Theory Badge */}
+                    {/* Project Information */}
                     <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                       <div>
-                        {/* Design Theory Principle Badge */}
-                        <div className="mb-2">
-                          <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold border ${theory.color}`}
-                          >
-                            <span>THEORY: {theory.pill}</span>
-                          </span>
-                        </div>
-
                         <div className="flex items-center justify-between mb-1.5">
                           <span className="text-[10px] font-mono text-zinc-500 uppercase">
                             {proj.category}
@@ -408,18 +343,6 @@ export default function WorkPage() {
                         <p className="font-sans text-xs text-zinc-400 leading-snug mt-1.5 line-clamp-2">
                           {proj.tagline}
                         </p>
-                      </div>
-
-                      {/* Tag Pills */}
-                      <div className="pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
-                        {proj.techStack.slice(0, 3).map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-2 py-0.5 rounded-md bg-white/[0.04] text-zinc-400 font-mono text-[9.5px]"
-                          >
-                            {tag}
-                          </span>
-                        ))}
                       </div>
 
                       {/* Action Bar */}
@@ -450,8 +373,6 @@ export default function WorkPage() {
             /* Mode B: Cinematic Showcase View (Panoramic Cards with Full Strategic Breakdown) */
             <div className="space-y-8">
               {filteredProjects.map((proj) => {
-                const theory = getDesignTheoryBadge(proj);
-
                 return (
                   <SpotlightCard
                     key={proj.id}
@@ -492,24 +413,13 @@ export default function WorkPage() {
                             <span>LAUNCH PREVIEW</span>
                           </button>
                         </div>
-
-                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs">
-                          <span className="font-metric font-bold text-white bg-white/10 backdrop-blur-md px-2.5 py-0.5 rounded border border-white/20">
-                            {proj.heroStat}
-                          </span>
-                          <span className="font-mono text-[10px] text-zinc-300">
-                            {proj.year}
-                          </span>
-                        </div>
                       </div>
 
                       {/* Right: Detailed Strategic Blueprint (7 Cols) */}
                       <div className="lg:col-span-7 space-y-4">
                         <div className="flex flex-wrap items-center justify-between gap-2">
-                          <span
-                            className={`px-3 py-1 rounded-md text-[10px] font-mono font-bold border ${theory.color}`}
-                          >
-                            DESIGN THEORY: {theory.pill}
+                          <span className="text-xs font-mono text-zinc-400 uppercase">
+                            {proj.category} · {proj.year}
                           </span>
 
                           <div className="flex items-center gap-2">
@@ -537,29 +447,6 @@ export default function WorkPage() {
                           <p className="font-sans text-xs sm:text-sm text-zinc-300 mt-1 font-medium">
                             {proj.tagline}
                           </p>
-                        </div>
-
-                        {/* Design Theory Axiom in Practice */}
-                        <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/5 text-xs font-mono text-zinc-300">
-                          <span className="text-zinc-500 font-bold block mb-0.5">THEORY APPLIED:</span>
-                          {theory.axiom}
-                        </div>
-
-                        {/* Stats Row */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
-                          {proj.stats.slice(0, 3).map((st, sIdx) => (
-                            <div
-                              key={sIdx}
-                              className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
-                            >
-                              <span className="text-[10px] font-mono text-zinc-400 block truncate">
-                                {st.label}
-                              </span>
-                              <span className="font-metric font-black text-base text-white block mt-0.5">
-                                {st.val}
-                              </span>
-                            </div>
-                          ))}
                         </div>
 
                         {/* Actions */}
@@ -664,11 +551,10 @@ export default function WorkPage() {
                       sound.playPluck(140);
                       setActiveModalTab("preview");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                      activeModalTab === "preview"
-                        ? "bg-white text-black shadow"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${activeModalTab === "preview"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     <Eye className="w-3.5 h-3.5" />
                     <span>Live View</span>
@@ -679,14 +565,13 @@ export default function WorkPage() {
                       sound.playPluck(160);
                       setActiveModalTab("theory");
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                      activeModalTab === "theory"
-                        ? "bg-white text-black shadow"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${activeModalTab === "theory"
+                      ? "bg-white text-black shadow"
+                      : "text-zinc-400 hover:text-white"
+                      }`}
                   >
                     <Compass className="w-3.5 h-3.5" />
-                    <span>Design Theory</span>
+                    <span>Strategic Dossier</span>
                   </button>
                 </div>
 
@@ -753,17 +638,14 @@ export default function WorkPage() {
                     </div>
                   </div>
 
-                  {/* Design Theory Execution Specifics */}
-                  <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-                    <h3 className="font-display font-black text-lg text-white uppercase tracking-tight flex items-center gap-2">
+                  {/* Technologies & Deliverables */}
+                  <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                    <h3 className="font-display font-black text-sm text-white uppercase tracking-tight flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-white" />
-                      <span>Applied Design Theory Framework for {activeProject.client}</span>
+                      <span>Technologies &amp; Disciplines</span>
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
-                      {getDesignTheoryBadge(activeProject).axiom}
-                    </p>
 
-                    <div className="pt-2 flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {activeProject.techStack.map((tech, tIdx) => (
                         <span
                           key={tIdx}

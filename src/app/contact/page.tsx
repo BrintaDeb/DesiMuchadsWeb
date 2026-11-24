@@ -12,13 +12,11 @@ import {
   CheckCircle2,
   MessageCircle,
   ShieldCheck,
-  Check,
   Copy,
   Sliders,
   Compass,
   Zap,
   Award,
-  Target,
   Send,
   Video,
   ExternalLink,
@@ -32,6 +30,7 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SocialRedirectionDeck } from "@/components/common/SocialRedirectionDeck";
+import { MoustacheClock } from "@/components/common/MoustacheClock";
 
 interface DateOption {
   date: Date;
@@ -132,26 +131,6 @@ const BUDGET_TIERS = [
   { label: "₹35L+", val: 3500000, desc: "Enterprise Sovereign" },
 ];
 
-const STRATEGIC_GOALS = [
-  { id: "roas", label: "Scale Blended ROAS (5.8x+)", category: "Growth" },
-  { id: "cac", label: "Slash CAC & CPM Fatigue", category: "Efficiency" },
-  { id: "qcom", label: "Dominate Blinkit & Zepto", category: "Channel" },
-  { id: "ugc", label: "Viral UGC & Cinematic Video Ads", category: "Creative" },
-  { id: "web", label: "Sub-Second Next.js 16 Web Rebuild", category: "Tech" },
-  { id: "margin", label: "Fix Contribution Margin (CM3)", category: "Finance" },
-  { id: "brand", label: "Luxury Packaging & Sacred Branding", category: "Identity" },
-  { id: "pmax", label: "High-Intent Google Ads & P-Max", category: "Search" },
-];
-
-const PREFERRED_PLATFORMS = [
-  { id: "meta", name: "Meta Ads (Instagram & FB)", icon: "📱", badge: "Highest ROAS" },
-  { id: "google", name: "Google Search & P-Max", icon: "🔍", badge: "High-Intent" },
-  { id: "qcom", name: "Quick Commerce (Blinkit/Zepto)", icon: "⚡", badge: "10-Min Fast" },
-  { id: "youtube", name: "YouTube & Connected TV", icon: "▶️", badge: "Mass Reach" },
-  { id: "shopify", name: "Next.js 16 / Shopify Headless", icon: "💻", badge: "0.6s LCP" },
-  { id: "amazon", name: "Amazon & Marketplaces", icon: "📦", badge: "Scale" },
-];
-
 const CURRENT_ROAS_OPTIONS = [
   "Under 2.0x (Bleeding cash, need urgent reset)",
   "2.0x – 3.5x (Breakeven / Moderate stability)",
@@ -171,45 +150,6 @@ const MEETING_CHANNELS = [
   { id: "whatsapp", name: "WhatsApp Video Call", note: "Direct Founder Phone", icon: MessageCircle },
   { id: "zoom", name: "Zoom Enterprise", note: "Screen Share & Telemetry", icon: Globe },
   { id: "inperson", name: "Studio In-Person", note: "Hosapalaya, Bengaluru", icon: MapPin },
-];
-
-const SERVICES_CATALOG = [
-  {
-    id: "meta-ads",
-    title: "Meta & Instagram ROAS Engine",
-    desc: "CBO architecture, creative fatigue defense, 5.8x blended ROAS.",
-    tier: "Scale",
-  },
-  {
-    id: "google-sem",
-    title: "High-Intent Google Ads & Search",
-    desc: "Precision shopping, P-Max audit, exact negative keyword shields.",
-    tier: "Intent",
-  },
-  {
-    id: "q-commerce",
-    title: "Quick Commerce Scaling (Zepto & Blinkit)",
-    desc: "Dark store catalog indexing, in-app brand search dominance.",
-    tier: "Instant",
-  },
-  {
-    id: "video-reels",
-    title: "Viral Video Ads & UGC Reels",
-    desc: "Scripting, cinematic production, thumb-stopping 3-second hooks.",
-    tier: "Creative",
-  },
-  {
-    id: "nextjs-web",
-    title: "Full-Stack Next.js 16 Web Engineering",
-    desc: "Sub-second load times, 99 Mobile PageSpeed, zero checkout friction.",
-    tier: "Code",
-  },
-  {
-    id: "brand-identity",
-    title: "Luxury Brand Identity & Packaging",
-    desc: "Sacred geometry packaging, vector typography, luxury foil labels.",
-    tier: "Craft",
-  },
 ];
 
 // Pre-seeded Interactive Concierge Messages
@@ -449,15 +389,8 @@ export default function ContactPage() {
   // Lead Qualification States
   const [monthlyBudget, setMonthlyBudget] = useState<number>(350000);
   const [selectedIndustry, setSelectedIndustry] = useState<string>("D2C E-Commerce & Retail");
-  const [selectedGoals, setSelectedGoals] = useState<string[]>(["roas", "ugc", "qcom"]);
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(["meta", "google", "qcom"]);
   const [currentRoas, setCurrentRoas] = useState<string>(CURRENT_ROAS_OPTIONS[1]);
   const [launchTimeline, setLaunchTimeline] = useState<string>(LAUNCH_TIMELINES[0]);
-  const [selectedServices, setSelectedServices] = useState<string[]>([
-    "meta-ads",
-    "google-sem",
-    "video-reels",
-  ]);
 
   // Lead Contact Information
   const [clientName, setClientName] = useState("");
@@ -534,28 +467,6 @@ export default function ContactPage() {
     }, 600);
   };
 
-  // Toggle Selection Helpers
-  const handleToggleService = (serviceId: string) => {
-    sound.playPluck(150);
-    setSelectedServices((prev) =>
-      prev.includes(serviceId) ? prev.filter((s) => s !== serviceId) : [...prev, serviceId]
-    );
-  };
-
-  const handleToggleGoal = (goalId: string) => {
-    sound.playPluck(150);
-    setSelectedGoals((prev) =>
-      prev.includes(goalId) ? prev.filter((g) => g !== goalId) : [...prev, goalId]
-    );
-  };
-
-  const handleTogglePlatform = (platformId: string) => {
-    sound.playPluck(150);
-    setSelectedPlatforms((prev) =>
-      prev.includes(platformId) ? prev.filter((p) => p !== platformId) : [...prev, platformId]
-    );
-  };
-
   // Format INR Currency
   const formatINR = (val: number) => {
     if (val >= 10000000) {
@@ -569,31 +480,17 @@ export default function ContactPage() {
 
   // Lead Qualification Score Calculation (0 - 100)
   const leadQualificationIndex = useMemo(() => {
-    let score = 50;
+    let score = 65;
     if (monthlyBudget >= 1500000) score += 25;
     else if (monthlyBudget >= 500000) score += 20;
     else score += 10;
 
-    if (selectedGoals.length >= 3) score += 10;
-    if (selectedPlatforms.length >= 2) score += 10;
-    if (brandUrl.trim().length > 3) score += 5;
+    if (brandUrl.trim().length > 3) score += 10;
     return Math.min(score, 99);
-  }, [monthlyBudget, selectedGoals, selectedPlatforms, brandUrl]);
+  }, [monthlyBudget, brandUrl]);
 
   // Compile Comprehensive WhatsApp Message Payload
   const generateWhatsAppMessage = () => {
-    const selectedServiceTitles = SERVICES_CATALOG.filter((s) =>
-      selectedServices.includes(s.id)
-    ).map((s) => `• ${s.title}`);
-
-    const goalTitles = STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id)).map(
-      (g) => `• ${g.label}`
-    );
-
-    const platformTitles = PREFERRED_PLATFORMS.filter((p) =>
-      selectedPlatforms.includes(p.id)
-    ).map((p) => `• ${p.name}`);
-
     const formattedDate = `${selectedDate.dayName}, ${selectedDate.dayNumber} ${selectedDate.monthName} ${selectedDate.year}`;
     const channelName =
       MEETING_CHANNELS.find((c) => c.id === selectedMeetingChannel)?.name || "Google Meet";
@@ -613,12 +510,6 @@ export default function ContactPage() {
       `📈 Baseline ROAS: ${currentRoas}\n` +
       `⏱️ Target Timeline: ${launchTimeline}\n` +
       `⭐ Qualification Match Index: ${leadQualificationIndex}% (VIP Priority)\n\n` +
-      `🎯 PRIMARY STRATEGIC GOALS (${selectedGoals.length}):\n` +
-      `${goalTitles.join("\n") || "• Rapid ROAS Scaling"}\n\n` +
-      `🚀 PREFERRED PLATFORMS (${selectedPlatforms.length}):\n` +
-      `${platformTitles.join("\n") || "• Meta & Google Ads"}\n\n` +
-      `🛠️ REQUESTED DELIVERABLES (${selectedServices.length}):\n` +
-      `${selectedServiceTitles.join("\n")}\n\n` +
       `🗓️ STRATEGIC SESSION RESERVATION:\n` +
       `📅 Date: ${formattedDate}\n` +
       `⏰ Slot: ${effectiveTimeSlot}\n` +
@@ -655,7 +546,6 @@ export default function ContactPage() {
       selectedDate: selectedDate.isoString.split("T")[0],
       selectedSlot: effectiveTimeSlot,
       meetingChannel: selectedMeetingChannel,
-      strategicGoals: STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id)).map((g) => g.label),
       message: customNotes.trim() || undefined,
     };
 
@@ -670,8 +560,8 @@ export default function ContactPage() {
         brandWebsite: brandUrl.trim(),
         phone: contactWhatsapp.trim(),
         budget: formatINR(monthlyBudget),
-        service: selectedServices.join(", "),
-        message: `Goals: ${selectedGoals.join(", ")} | Platforms: ${selectedPlatforms.join(", ")} | Slot: ${effectiveTimeSlot} (${selectedMeetingChannel}) | Notes: ${customNotes.trim()}`,
+        service: "Strategy Session Booking",
+        message: `Slot: ${effectiveTimeSlot} (${selectedMeetingChannel}) | Industry: ${selectedIndustry} | Notes: ${customNotes.trim()}`,
       }),
     }).catch(() => {});
 
@@ -732,7 +622,6 @@ export default function ContactPage() {
       selectedDate: selectedDate.isoString.split("T")[0],
       selectedSlot: effectiveTimeSlot,
       meetingChannel: selectedMeetingChannel,
-      strategicGoals: STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id)).map((g) => g.label),
       message: customNotes.trim() || undefined,
     };
 
@@ -765,12 +654,8 @@ export default function ContactPage() {
       `Confidential Strategy Session with Desi Muchads Digital Leadership.\n` +
       `Appointment Slot: ${formattedDate} at ${effectiveTimeSlot} (${channelName}).\n` +
       `Direct Founder Desk: +91 9180252831\n` +
-      `Goals: ${STRATEGIC_GOALS.filter((g) => selectedGoals.includes(g.id))
-        .map((g) => g.label)
-        .join(", ")}\n` +
-      `Platforms: ${PREFERRED_PLATFORMS.filter((p) => selectedPlatforms.includes(p.id))
-        .map((p) => p.name)
-        .join(", ")}`
+      `Industry: ${selectedIndustry}\n` +
+      `Budget Tier: ${formatINR(monthlyBudget)}`
     );
     const location = encodeURIComponent(
       channelName.includes("In-Person")
@@ -797,8 +682,8 @@ export default function ContactPage() {
               <span className="text-white font-bold">Contact Us &amp; Live Qualification</span>
             </div>
 
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 text-xs font-mono text-zinc-300">
-              <Clock className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-white/15 bg-white/5 text-xs font-mono text-zinc-300">
+              <MoustacheClock size={20} showDigital={false} />
               <span>LIVE IST // {liveIstTime || "06:00:00 PM"}</span>
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             </div>
@@ -812,7 +697,7 @@ export default function ContactPage() {
             </h1>
 
             <p className="text-base sm:text-lg text-zinc-300 font-sans font-normal leading-relaxed max-w-3xl">
-              Qualify your performance goals, preferred advertising channels, and budget parameters below.
+              Select your session date, strategic time slot, and meeting format below.
               Dispatch your customized quotation directly to our official agency WhatsApp desk at{" "}
               <strong className="text-white font-bold">{WHATSAPP_DISPLAY}</strong>, or chat live with our
               strategy concierge. Zero junior gatekeepers, 100% executive access.
@@ -965,9 +850,28 @@ export default function ContactPage() {
 
                     {/* Step 2: Time Window Selector with Real-Time Current Time Filter */}
                     <div className="mt-7 pt-6 border-t border-white/10 space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-white" />
+                      {/* Live Studio Analog Clock Card */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
+                        <div className="flex items-center gap-3">
+                          <MoustacheClock size={52} showDigital={false} />
+                          <div>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold block">
+                              LIVE STUDIO TIMING · ASIA/KOLKATA
+                            </span>
+                            <span className="font-mono font-bold text-sm text-white">
+                              {liveIstTime || "06:30:00 PM"}
+                            </span>
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center gap-1.5 self-start sm:self-auto">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          IST Synchronized
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-1">
+                        <div className="flex items-center gap-2.5">
+                          <MoustacheClock size={22} showDigital={false} />
                           <h3 className="font-display font-black text-xs uppercase tracking-wider text-white">
                             2. Choose Strategic Time Slot
                           </h3>
@@ -1231,165 +1135,6 @@ export default function ContactPage() {
                   </form>
                 </div>
               )}
-
-              {/* LEAD QUALIFICATION SECTION: Goals, Platforms & Requirements */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md shadow-2xl relative space-y-7">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center">
-                      <Target className="w-4 h-4 text-emerald-400" />
-                    </div>
-                    <div>
-                      <h2 className="font-display font-black text-sm uppercase tracking-wider text-white">
-                        4. Lead Qualification &amp; Growth Goals
-                      </h2>
-                      <p className="text-[11px] font-sans text-zinc-400">
-                        Help our principals tailor your custom performance architecture
-                      </p>
-                    </div>
-                  </div>
-
-                  <span className="text-xs font-mono font-bold text-emerald-400 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
-                    Match: {leadQualificationIndex}%
-                  </span>
-                </div>
-
-                {/* Sub-step A: Strategic Goals */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-mono uppercase tracking-wider text-white font-bold flex items-center gap-1.5">
-                      <span>Core Growth Objectives *</span>
-                      <span className="text-zinc-500 font-normal">({selectedGoals.length} selected)</span>
-                    </label>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {STRATEGIC_GOALS.map((goal) => {
-                      const isSelected = selectedGoals.includes(goal.id);
-                      return (
-                        <button
-                          key={goal.id}
-                          type="button"
-                          onClick={() => handleToggleGoal(goal.id)}
-                          className={`p-3 rounded-xl border text-left flex items-start gap-2.5 transition-all ${
-                            isSelected
-                              ? "bg-white/10 border-white text-white shadow-sm"
-                              : "bg-white/[0.02] border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
-                          }`}
-                        >
-                          <div
-                            className={`w-4 h-4 rounded mt-0.5 flex items-center justify-center shrink-0 border transition-all ${
-                              isSelected ? "bg-white text-black border-white" : "border-white/30"
-                            }`}
-                          >
-                            {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <span className="text-xs font-display font-bold block leading-tight text-white truncate">
-                              {goal.label}
-                            </span>
-                            <span className="text-[10px] font-mono text-zinc-400 block mt-0.5">
-                              {goal.category}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Sub-step B: Preferred Platforms */}
-                <div className="space-y-3 pt-4 border-t border-white/10">
-                  <label className="text-xs font-mono uppercase tracking-wider text-white font-bold flex items-center gap-1.5">
-                    <span>Preferred Advertising Platforms *</span>
-                    <span className="text-zinc-500 font-normal">({selectedPlatforms.length} selected)</span>
-                  </label>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {PREFERRED_PLATFORMS.map((plat) => {
-                      const isSelected = selectedPlatforms.includes(plat.id);
-                      return (
-                        <button
-                          key={plat.id}
-                          type="button"
-                          onClick={() => handleTogglePlatform(plat.id)}
-                          className={`p-3 rounded-xl border text-left flex flex-col justify-between transition-all ${
-                            isSelected
-                              ? "bg-white text-black border-white font-bold shadow-md"
-                              : "bg-white/[0.03] border-white/10 text-zinc-300 hover:border-white/25 hover:bg-white/[0.07]"
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-base">{plat.icon}</span>
-                            <span
-                              className={`text-[8px] font-mono uppercase px-1.5 py-0.5 rounded ${
-                                isSelected
-                                  ? "bg-black text-white"
-                                  : "bg-white/10 text-zinc-400 border border-white/10"
-                              }`}
-                            >
-                              {plat.badge}
-                            </span>
-                          </div>
-                          <span className={`text-[11px] font-display font-bold leading-tight ${isSelected ? "text-black" : "text-white"}`}>
-                            {plat.name}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Sub-step C: Deliverables Stack */}
-                <div className="space-y-3 pt-4 border-t border-white/10">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-mono uppercase tracking-wider text-white font-bold flex items-center gap-1.5">
-                      <span>Specific Deliverables Needed</span>
-                      <span className="text-zinc-500 font-normal">({selectedServices.length} selected)</span>
-                    </label>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {SERVICES_CATALOG.map((item) => {
-                      const isChecked = selectedServices.includes(item.id);
-                      return (
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => handleToggleService(item.id)}
-                          className={`p-3 rounded-xl border text-left transition-all flex items-start gap-2.5 ${
-                            isChecked
-                              ? "bg-white/10 border-white text-white shadow-sm"
-                              : "bg-white/[0.02] border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
-                          }`}
-                        >
-                          <div
-                            className={`w-4 h-4 rounded flex items-center justify-center shrink-0 mt-0.5 border transition-all ${
-                              isChecked ? "bg-white text-black border-white" : "border-white/30"
-                            }`}
-                          >
-                            {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                          </div>
-
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <p className="text-xs font-display font-extrabold text-white leading-tight truncate">
-                                {item.title}
-                              </p>
-                              <span className="text-[9px] font-mono text-zinc-400 uppercase bg-white/5 px-1.5 py-0.5 rounded border border-white/10 ml-2">
-                                {item.tier}
-                              </span>
-                            </div>
-                            <p className="text-[11px] font-sans text-zinc-400 leading-snug mt-1 line-clamp-2">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* RIGHT COLUMN: Interactive Lead Dossier, Budget Slider & WhatsApp Direct Dispatch (5 Cols) */}
