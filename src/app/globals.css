@@ -26,6 +26,7 @@
 }
 
 @theme {
+  --breakpoint-xs: 23.75rem;
   --color-canvas: #09090b;
   --color-canvas-subtle: #0c0c0e;
   --color-surface: #121214;
@@ -140,6 +141,7 @@ html {
 }
 
 /* Din (Palace Ivory) Theme */
+html:has(> head > meta[name="color-scheme"][content="light"]),
 html.theme-din,
 html[data-theme="din"] {
   background-color: #f7f6f0 !important;
@@ -581,6 +583,7 @@ iframe {
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   pointer-events: none;
   opacity: 0;
@@ -730,7 +733,10 @@ iframe {
   .btn-luxury-shine::after,
   .interactive-scale-tap,
   .animate-spin-slow,
-  .animate-marquee {
+  .animate-marquee,
+  .radar-ping::before,
+  .animate-pulse,
+  .animate-bounce {
     transition: none !important;
     animation: none !important;
   }

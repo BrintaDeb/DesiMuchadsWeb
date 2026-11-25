@@ -13,6 +13,7 @@ import {
   Layers,
   X,
   Calendar,
+  Download,
 } from "lucide-react";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
@@ -60,21 +61,20 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
   // Define Quick Actions
   const quickActions = [
     {
-      id: "action-calculator",
+      id: "action-services",
       category: "Action",
-      title: "Calculate ROAS & Unit Economics",
-      subtitle: "Run the real-time unit economics simulator",
+      title: "Explore Growth Capabilities",
+      subtitle: "Meta & Google ads, Next.js stores, and Q-Commerce scaling",
       icon: Calculator,
       onSelect: () => {
         onClose();
-        const el = document.getElementById("calculator");
-        el?.scrollIntoView({ behavior: "smooth" });
+        router.push("/services");
       },
     },
     {
       id: "action-kundli",
       category: "Action",
-      title: "Run Free AI Brand Growth Audit",
+      title: "Run Free Brand Growth Audit",
       subtitle: "Audit speed, ads & revenue leaks",
       icon: ShieldCheck,
       onSelect: () => {
@@ -83,15 +83,27 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
       },
     },
     {
-      id: "action-portal",
+      id: "action-engagement",
       category: "Action",
-      title: "Inside the Client Growth Portal",
-      subtitle: "View live ROAS telemetry & pipeline",
+      title: "Clear 4-Step Product Process",
+      subtitle: "Discover · Define · Design · Build and scale",
       icon: Layers,
       onSelect: () => {
         onClose();
-        const el = document.getElementById("portal");
-        el?.scrollIntoView({ behavior: "smooth" });
+        const el = document.getElementById("process");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        else router.push("/#process");
+      },
+    },
+    {
+      id: "action-pricing",
+      category: "Action",
+      title: "View 4-Tier Service Pricing",
+      subtitle: "Graphics, SEO, Social Media, Web Dev & Branding plans",
+      icon: Layers,
+      onSelect: () => {
+        onClose();
+        router.push("/pricing");
       },
     },
     {
@@ -103,6 +115,19 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
       onSelect: () => {
         onClose();
         router.push("/contact");
+      },
+    },
+    {
+      id: "action-app",
+      category: "Action",
+      title: "Download / Install Mobile App (iOS & Android APK)",
+      subtitle: "Install standalone Web App, scan phone QR, or download APK v2.4",
+      icon: Download,
+      onSelect: () => {
+        onClose();
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
+        }
       },
     },
     {
@@ -177,10 +202,12 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
   const handleKeyNav = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
+      if (filteredItems.length === 0) return;
       setSelectedIndex((prev) => (prev + 1) % filteredItems.length);
       sound.playPluck(120);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
+      if (filteredItems.length === 0) return;
       setSelectedIndex((prev) => (prev - 1 + filteredItems.length) % filteredItems.length);
       sound.playPluck(120);
     } else if (e.key === "Enter") {
@@ -195,7 +222,15 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Fast Navigation Command Menu"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200 overscroll-contain"
+    >
       <div
         className="relative w-full max-w-2xl ios-glass-panel rounded-2xl shadow-[0_35px_100px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[85dvh] overscroll-contain"
         onClick={(e) => e.stopPropagation()}
@@ -207,6 +242,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
             ref={inputRef}
             type="text"
             value={query}
+            aria-label="Search services, case studies, live demos, or commands"
             onChange={(e) => {
               setQuery(e.target.value);
               setSelectedIndex(0);
@@ -217,15 +253,17 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
           />
           {query && (
             <button
+              type="button"
               onClick={() => setQuery("")}
-              className="text-zinc-500 hover:text-white text-xs px-2 py-1 min-h-[36px] flex items-center rounded"
+              className="text-zinc-500 hover:text-white text-xs px-2.5 py-1 min-h-[44px] flex items-center rounded cursor-pointer"
             >
               Clear
             </button>
           )}
           <button
+            type="button"
             onClick={onClose}
-            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors touch-hit-expand"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors touch-hit-expand cursor-pointer"
             aria-label="Close command palette"
           >
             <X className="w-5 h-5" />
@@ -243,14 +281,15 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
               const Icon = item.icon;
               const isSelected = index === selectedIndex;
               return (
-                <div
+                <button
+                  type="button"
                   key={item.id}
                   onClick={() => {
                     sound.playChime();
                     item.onSelect();
                   }}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all min-h-[44px] ${
+                  className={`w-full text-left flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all min-h-[44px] ${
                     isSelected ? "bg-white/10 text-white" : "text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -284,7 +323,7 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
                       isSelected ? "translate-x-0.5 text-white" : "opacity-0"
                     }`}
                   />
-                </div>
+                </button>
               );
             })
           )}

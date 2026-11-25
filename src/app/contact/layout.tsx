@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us & Strategy Session | Desi Muchads Agency",
+  title: "Contact Us & Strategy Session",
   description:
     "Schedule your strategic Growth Session with Desi Muchads leadership. Select your live date and time slot, configure your custom performance marketing quotation, and dispatch directly to WhatsApp +91 9180252831.",
   alternates: {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Schedule A Strategy Session & Custom Quotation | Desi Muchads",
     description:
-      "Reserve real-time appointment slots with Rahul Datt (CEO), Brinta Deb (CTO), and Omkar Dutta (CFO). Direct WhatsApp dispatch to +91 9180252831.",
+      "Reserve real-time appointment slots with Rahul Datta (CEO), Brinta Deb (CTO), and Omkar Dutta (CFO). Direct WhatsApp dispatch to +91 9180252831.",
     url: "https://desimuchads.agency/contact",
     siteName: "Desi Muchads Performance Marketing Agency",
     images: [

@@ -18,12 +18,12 @@ import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { ProposalFloatingBar } from "@/components/proposal/ProposalFloatingBar";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
+import { AllerProcessSection } from "@/components/home/AllerProcessSection";
+import { PricingSection } from "@/components/pricing/PricingSection";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
 import { WinterExpansionDiscountModal } from "@/components/common/WinterExpansionDiscountModal";
 import { StardustCursorTrail } from "@/components/common/StardustCursorTrail";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
-import { MagneticWrapper } from "@/components/common/MagneticWrapper";
-import { CaseStudyHoverPreview } from "@/components/casestudies/CaseStudyHoverPreview";
 import { WorkAutoCarousel } from "@/components/work/WorkAutoCarousel";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
@@ -63,10 +63,10 @@ export default function Home() {
         <Preloader onComplete={() => setPreloaderDone(true)} />
       )}
 
-      {/* Main Experience Container */}
+      {/* Main Experience Container (no scale transform on fixed-nav ancestor) */}
       <div
-        className={`relative w-full max-w-full overflow-x-clip transition-all duration-1000 ease-out bg-transparent text-[#e8e8e3] ${
-          preloaderDone ? "scale-100 opacity-100" : "sm:scale-[1.02] opacity-90"
+        className={`relative w-full max-w-full overflow-x-clip transition-opacity duration-700 ease-out bg-transparent text-[#e8e8e3] ${
+          preloaderDone ? "opacity-100" : "opacity-90"
         }`}
       >
         {/* Architectural Navigation Bar */}
@@ -168,82 +168,11 @@ export default function Home() {
           {/* Section 4: Client Trust Proof Strip */}
           <ClientsTrustStrip />
 
-          <SectionDivider />
+          {/* Section 5: Exact Aller Studio Clear Process for Complex Products */}
+          <AllerProcessSection />
 
-          {/* Section 5: Executive Retainer Teaser */}
-          <section id="pricing" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-2">
-                04 / PARTNERSHIP TIERS
-              </span>
-              <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight mb-4">
-                Transparent Retainer Architecture
-              </h2>
-              <p className="font-sans text-sm sm:text-base text-zinc-300 leading-relaxed">
-                Choose a structured performance tier or customize your modular growth stack. Every rupee is tied to clear SLAs and daily contribution margin tracking.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <SpotlightCard isGlass={true} className="p-6 sm:p-8 rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.18)] space-y-4">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
-                  FOUNDATION TIER
-                </span>
-                <h3 className="font-display font-black text-2xl text-white uppercase">
-                  Foundation Sprint
-                </h3>
-                <div className="font-metric font-black text-3xl text-white">
-                  ₹75,000<span className="text-xs font-mono text-zinc-500 font-normal"> / month</span>
-                </div>
-                <p className="font-sans text-xs text-zinc-400 leading-relaxed">
-                  For challenger brands scaling ₹3L–₹15L/month ad spend seeking disciplined, profitable acquisition.
-                </p>
-              </SpotlightCard>
-
-              <SpotlightCard isGlass={true} className="p-6 sm:p-8 rounded-[0.25rem] bg-[#0e0e0d] border-2 border-white/50 shadow-2xl space-y-4 relative">
-                <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-[0.2rem] bg-white text-black text-[9px] font-bold font-mono uppercase z-30">
-                  FLAGSHIP
-                </div>
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
-                  DOMINANCE TIER
-                </span>
-                <h3 className="font-display font-black text-2xl text-white uppercase">
-                  Dominance Engine
-                </h3>
-                <div className="font-metric font-black text-3xl text-white">
-                  ₹1,50,000<span className="text-xs font-mono text-zinc-500 font-normal"> / month</span>
-                </div>
-                <p className="font-sans text-xs text-zinc-400 leading-relaxed">
-                  Our flagship end-to-end engine for scaling brands pushing ₹15L–₹75L/month ad volume.
-                </p>
-              </SpotlightCard>
-
-              <SpotlightCard isGlass={true} className="p-6 sm:p-8 rounded-[0.25rem] bg-[#0c0c0b] border border-[rgba(232,232,227,0.18)] space-y-4">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">
-                  ENTERPRISE TIER
-                </span>
-                <h3 className="font-display font-black text-2xl text-white uppercase">
-                  Enterprise Sovereign
-                </h3>
-                <div className="font-metric font-black text-3xl text-white">
-                  ₹3,00,000<span className="text-xs font-mono text-zinc-500 font-normal"> / month</span>
-                </div>
-                <p className="font-sans text-xs text-zinc-400 leading-relaxed">
-                  Full enterprise brand takeover for market leaders exceeding ₹75L/month ad volume.
-                </p>
-              </SpotlightCard>
-            </div>
-
-            <div className="mt-12 text-center">
-              <BreydaqsButton
-                href="/pricing"
-                variant="white"
-                className="py-4 px-8 text-xs sm:text-sm"
-              >
-                VIEW DETAILED RETAINER DELIVERABLES
-              </BreydaqsButton>
-            </div>
-          </section>
+          {/* Section 6: 5-Discipline × 4-Tier Accessible Pricing Architecture */}
+          <PricingSection variant="home" onOpenKundli={() => setIsKundliOpen(true)} />
 
           {/* Section 7: Interactive Spring-Physics Easter Egg */}
           <TwirlEasterEgg onOpenKundli={() => setIsKundliOpen(true)} />
@@ -259,6 +188,9 @@ export default function Home() {
       {/* Global Interactive Project Preview Modal Shell */}
       {activeProject && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="home-preview-title"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               sound.playPluck(120);
@@ -273,12 +205,8 @@ export default function Home() {
           >
             <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between font-mono shrink-0">
               <div className="flex items-center gap-2">
-                <span
-                  onClick={() => setActiveProject(null)}
-                  className="w-3 h-3 rounded-full bg-[#FF5F56] cursor-pointer"
-                  title="Close Preview"
-                />
-                <span className="font-display font-black text-xs uppercase tracking-wider text-white ml-2">
+                <span aria-hidden="true" className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+                <span id="home-preview-title" className="font-display font-black text-xs uppercase tracking-wider text-white ml-2">
                   {activeProject.client}
                 </span>
                 <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-white/10 text-[10px] text-zinc-400">
@@ -288,7 +216,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setActiveProject(null)}
-                className="p-1 px-3 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-xs font-mono cursor-pointer"
+                className="p-1.5 px-3 min-h-[36px] min-w-[44px] rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-xs font-mono cursor-pointer"
               >
                 CLOSE ✕
               </button>

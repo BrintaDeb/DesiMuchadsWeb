@@ -232,11 +232,15 @@ export function ProjectPreviewShowcase({
             <div className="px-4 py-2 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400 shrink-0 z-20 backdrop-blur-md">
               <div className="flex items-center gap-2.5">
                 <div className="flex items-center gap-1.5">
-                  <span
+                  <button
+                    type="button"
                     onClick={onClose}
-                    className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-red-400/40 cursor-pointer hover:opacity-80"
+                    className="w-6 h-6 -m-1.5 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Close Preview"
                     title="Close Preview"
-                  />
+                  >
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-red-400/40" />
+                  </button>
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-amber-400/40" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-green-400/40" />
                 </div>

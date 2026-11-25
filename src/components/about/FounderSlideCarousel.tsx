@@ -19,6 +19,7 @@ export interface Founder {
   tagline: string;
   bio: string;
   avatar: string;
+  tileBgClass?: string;
   badge: string;
   disciplines: string[];
   socials: {
@@ -113,7 +114,7 @@ export function FounderSlideCarousel({ founders }: FounderSlideCarouselProps) {
     <div className="w-full relative flex flex-col items-center">
       {/* 1. Main Aller Studio Style 3D Sliding Picture Stage */}
       <div
-        className="relative w-full h-[400px] sm:h-[450px] md:h-[480px] flex items-center justify-center overflow-hidden sm:overflow-visible select-none my-4"
+        className="relative w-full h-[400px] sm:h-[450px] md:h-[480px] flex items-center justify-center overflow-hidden sm:overflow-visible select-none touch-pan-y my-4"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -146,9 +147,8 @@ export function FounderSlideCarousel({ founders }: FounderSlideCarouselProps) {
               }}
               tabIndex={isCenter ? 0 : -1}
               aria-label={`View ${founder.name}`}
-              className={`absolute top-1/2 left-1/2 block rounded-3xl overflow-hidden cursor-pointer group focus:outline-none transition-all ${
-                isCenter ? "shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)]" : "shadow-xl"
-              }`}
+              className={`absolute top-1/2 left-1/2 block rounded-3xl overflow-hidden cursor-pointer group focus:outline-none transition-all ${isCenter ? "shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)]" : "shadow-xl"
+                }`}
               style={{
                 width: isMobile ? "240px" : "290px",
                 height: isMobile ? "350px" : "415px",
@@ -161,11 +161,15 @@ export function FounderSlideCarousel({ founders }: FounderSlideCarouselProps) {
               }}
             >
               {/* Card Container Frame */}
-              <div className="relative w-full h-full bg-[#0d0d12] border border-white/20 rounded-3xl overflow-hidden group-hover:border-white/40 transition-colors">
+              <div
+                className={`relative w-full h-full ${founder.tileBgClass || "bg-[#0d0d12]"
+                  } border border-white/20 rounded-3xl overflow-hidden group-hover:border-white/40 transition-colors`}
+              >
                 <img
                   src={founder.avatar}
                   alt={founder.name}
                   draggable={false}
+                  style={{ height: "100%", blockSize: "100%" }}
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   loading="eager"
                 />
@@ -210,7 +214,7 @@ export function FounderSlideCarousel({ founders }: FounderSlideCarouselProps) {
           type="button"
           onClick={handlePrev}
           aria-label="Previous Founder"
-          className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md"
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/15 hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md"
         >
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
@@ -224,11 +228,10 @@ export function FounderSlideCarousel({ founders }: FounderSlideCarouselProps) {
                 type="button"
                 onClick={() => navigateTo(dotIdx)}
                 aria-label={`Go to slide ${dotIdx + 1}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  dotIdx === activeIndex
-                    ? "w-7 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-                    : "w-2 h-1.5 bg-white/25 hover:bg-white/50"
-                }`}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${dotIdx === activeIndex
+                  ? "w-7 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                  : "w-2 h-1.5 bg-white/25 hover:bg-white/50"
+                  }`}
               />
             ))}
           </div>
@@ -242,7 +245,7 @@ export function FounderSlideCarousel({ founders }: FounderSlideCarouselProps) {
           type="button"
           onClick={handleNext}
           aria-label="Next Founder"
-          className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md"
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/15 hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md"
         >
           <ChevronRight className="w-5 h-5 text-white" />
         </button>

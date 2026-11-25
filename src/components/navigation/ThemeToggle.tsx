@@ -1,40 +1,68 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useSyncExternalStore } from "react";
 import { Sparkles, Moon, Sun } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { useTheme } from "@/context/ThemeContext";
 
 export type DensityMode = "compact" | "comfortable" | "spacious";
 
+const DENSITY_STORAGE_KEY = "dm-density";
+const DENSITY_EVENT = "dm-density-change";
+
+function readDensity(): DensityMode {
+  if (typeof window === "undefined") return "comfortable";
+  try {
+    const saved = localStorage.getItem(DENSITY_STORAGE_KEY) as DensityMode | null;
+    if (saved && ["compact", "comfortable", "spacious"].includes(saved)) {
+      return saved;
+    }
+  } catch {
+    // Ignore storage read errors
+  }
+  return "comfortable";
+}
+
+function subscribeDensity(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === DENSITY_STORAGE_KEY) callback();
+  };
+  window.addEventListener("storage", onStorage);
+  window.addEventListener(DENSITY_EVENT, callback);
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener(DENSITY_EVENT, callback);
+  };
+}
+
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  const [density, setDensity] = useState<DensityMode>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("dm-density") as DensityMode | null;
-      if (saved && ["compact", "comfortable", "spacious"].includes(saved)) {
-        return saved;
-      }
-    }
-    return "comfortable";
-  });
+  const density = useSyncExternalStore<DensityMode>(
+    subscribeDensity,
+    readDensity,
+    () => "comfortable"
+  );
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.documentElement.setAttribute("data-density", density);
-      localStorage.setItem("dm-density", density);
-    }
+    document.documentElement.setAttribute("data-density", density);
   }, [density]);
 
   const cycleDensity = () => {
     sound.playPluck(150);
-    setDensity((prev) =>
-      prev === "comfortable"
+    const nextDensity: DensityMode =
+      density === "comfortable"
         ? "compact"
-        : prev === "compact"
+        : density === "compact"
         ? "spacious"
-        : "comfortable"
-    );
+        : "comfortable";
+    try {
+      localStorage.setItem(DENSITY_STORAGE_KEY, nextDensity);
+    } catch {
+      // Ignore storage write errors
+    }
+    document.documentElement.setAttribute("data-density", nextDensity);
+    window.dispatchEvent(new Event(DENSITY_EVENT));
   };
 
   const isDin = theme === "din";

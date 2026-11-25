@@ -529,11 +529,15 @@ export default function WorkPage() {
             {/* Modal Header Bar with Dual Tabs */}
             <div className="px-4 py-3 border-b border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
               <div className="flex items-center gap-2.5 min-w-0">
-                <span
+                <button
+                  type="button"
                   onClick={() => setActiveProject(null)}
-                  className="w-3 h-3 rounded-full bg-[#FF5F56] cursor-pointer shrink-0"
+                  className="w-6 h-6 -m-1.5 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                  aria-label="Close Preview"
                   title="Close Preview"
-                />
+                >
+                  <span className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+                </button>
                 <span className="font-display font-black text-xs sm:text-sm uppercase tracking-wider text-white truncate">
                   {activeProject.client}
                 </span>

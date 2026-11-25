@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif } from "next/font/google";
+import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif, Rajdhani } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
@@ -40,6 +40,13 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -147,12 +154,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.png", type: "image/png", sizes: "64x64" },
       { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
       { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
@@ -344,7 +355,7 @@ export default function RootLayout({
       {
         "@type": "SiteNavigationElement",
         position: 1,
-        name: "Verified Client Work (46 Case Studies)",
+        name: "Verified Client Work (50+ Case Studies)",
         description: "Live production platforms, e-commerce storefronts, and verified ROAS case studies.",
         url: "https://desimuchads.agency/#work",
       },
@@ -358,9 +369,9 @@ export default function RootLayout({
       {
         "@type": "SiteNavigationElement",
         position: 3,
-        name: "Unit Economics & ROAS Simulator",
-        description: "Simulate monthly ad spend, contribution margin, and projected ROAS in real time.",
-        url: "https://desimuchads.agency/#calculator",
+        name: "Why Desi Muchads",
+        description: "Anti-AI performance growth architecture, unit economics audit, and zero-ghosting SLA.",
+        url: "https://desimuchads.agency/#why-us",
       },
       {
         "@type": "SiteNavigationElement",
@@ -372,9 +383,9 @@ export default function RootLayout({
       {
         "@type": "SiteNavigationElement",
         position: 5,
-        name: "Why Desi Muchads",
-        description: "Anti-AI performance growth architecture, unit economics audit, and zero-ghosting SLA.",
-        url: "https://desimuchads.agency/#why-us",
+        name: "Book Strategy Audit",
+        description: "Schedule a 1-on-1 growth and unit economics consultation with our founders.",
+        url: "https://desimuchads.agency/contact",
       },
     ],
   };
@@ -422,9 +433,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} dark antialiased scroll-smooth`}
+      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} ${rajdhani.variable} dark antialiased scroll-smooth`}
     >
       <head>
+        <meta name="color-scheme" content="dark light" />
         {/* Geo Targeting Meta Tags for Local & Regional Search Dominance */}
         <meta name="geo.region" content="IN-KA" />
         <meta name="geo.placename" content="Bengaluru" />
@@ -443,6 +455,12 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="Desi Muchads" />
 
+        {/* Capture native PWA beforeinstallprompt early before React hydrates */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__dmDeferredPrompt=e;window.dispatchEvent(new Event('dm_pwa_prompt_ready'));});`,
+          }}
+        />
         {/* Structured Data: Organization, WebSite Sitelinks SearchBox, & FAQPage */}
         <script
           type="application/ld+json"

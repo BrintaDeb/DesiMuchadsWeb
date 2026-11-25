@@ -8,7 +8,7 @@
  *  - Background Sync & Notification Click Dispatch
  */
 
-const CACHE_VERSION = "desi-muchads-v2.4.0";
+const CACHE_VERSION = "desi-muchads-v2.7.0";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const MEDIA_CACHE = `media-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
@@ -22,6 +22,13 @@ const PRECACHE_ASSETS = [
   "/contact",
   "/pricing",
   "/manifest.webmanifest",
+  "/manifest.json",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/favicon.ico",
+  "/apple-touch-icon.png",
   "/desi-muchads-cropped-logo.png",
   "/desi-muchads-square-logo.png",
   "/brand-logo-white.jpg",
@@ -123,26 +130,26 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // 3. HTML Navigation Pages: Stale-While-Revalidate with Offline Shell Fallback
-  if (request.mode === "navigate") {
+  // 3. HTML Navigation Pages & Next.js RSC payloads: Network-First with Cache Fallback
+  if (
+    request.mode === "navigate" ||
+    request.headers.get("RSC") === "1" ||
+    url.searchParams.has("_rsc")
+  ) {
     event.respondWith(
-      caches.open(STATIC_CACHE).then((cache) => {
-        return cache.match(request).then((cachedResponse) => {
-          const fetchPromise = fetch(request)
-            .then((networkResponse) => {
-              if (networkResponse && networkResponse.status === 200) {
-                cache.put(request, networkResponse.clone());
-              }
-              return networkResponse;
-            })
-            .catch(() => {
-              // If completely offline and page not in cache, fallback to homepage shell
-              return cachedResponse || caches.match("/");
-            });
-
-          return cachedResponse || fetchPromise;
-        });
-      })
+      fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(STATIC_CACHE).then((cache) => cache.put(request, responseToCache));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(request).then((cachedResponse) => {
+            return cachedResponse || caches.match("/");
+          });
+        })
     );
     return;
   }
@@ -161,13 +168,20 @@ self.addEventListener("fetch", (event) => {
         return cachedResponse;
       }
 
-      return fetch(request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, responseToCache));
-        }
-        return networkResponse;
-      });
+      return fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, responseToCache));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return new Response("", {
+            status: 503,
+            statusText: "Offline",
+          });
+        });
     })
   );
 });

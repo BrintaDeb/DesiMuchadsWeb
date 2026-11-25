@@ -24,15 +24,11 @@ export async function GET() {
     MONITORED_PLATFORMS.map(async (target) => {
       const start = Date.now();
       try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 4000);
-
         const res = await fetch(target.url, {
           method: "HEAD",
-          signal: controller.signal,
+          signal: AbortSignal.timeout(4000),
           headers: { "User-Agent": "DesiMuchads-Sentinel-Uptime/1.0" },
         });
-        clearTimeout(timeout);
 
         const latencyMs = Date.now() - start;
         const healthy = res.status >= 200 && res.status < 400;

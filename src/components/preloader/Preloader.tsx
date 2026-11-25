@@ -50,6 +50,12 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const [isDone, setIsDone] = useState(false);
   const [hasSkipped, setHasSkipped] = useState(false);
   const audioMilestoneRef = useRef<number>(0);
+  const onCompleteRef = useRef(onComplete);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   // Fast-Forward to 100% instantly on click, tap, or Space key
   const fastForward = useCallback(() => {
@@ -58,15 +64,18 @@ export function Preloader({ onComplete }: PreloaderProps) {
     setProgress(100);
     sound.playChime();
     haptics.success();
-    setTimeout(() => {
+    const t1 = setTimeout(() => {
       setIsDone(true);
-      setTimeout(onComplete, 850);
-    }, 200);
-  }, [isDone, hasSkipped, onComplete]);
+      const t2 = setTimeout(() => onCompleteRef.current(), 650);
+      timersRef.current.push(t2);
+    }, 150);
+    timersRef.current.push(t1);
+  }, [isDone, hasSkipped]);
 
-  // Keyboard shortcut listener (Space, Enter, Escape)
+  // Keyboard shortcut listener (Space, Enter, Escape) — active only while visible
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (isDone || hasSkipped) return;
       if (e.key === " " || e.key === "Enter" || e.key === "Escape") {
         e.preventDefault();
         fastForward();
@@ -74,46 +83,53 @@ export function Preloader({ onComplete }: PreloaderProps) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [fastForward]);
+  }, [fastForward, isDone, hasSkipped]);
 
-  // Main calibration simulation loop (2.4s graceful royal pacing)
+  // Main calibration simulation loop (respects reduced motion cleanly)
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const startTime = Date.now();
-    const duration = 2400;
+    const duration = prefersReducedMotion ? 700 : 2400;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const currentProgress = Math.min(100, Math.floor((elapsed / duration) * 100));
       setProgress(currentProgress);
 
-      // Acoustic milestone chimes at 25%, 50%, 75%
-      if (currentProgress >= 25 && audioMilestoneRef.current < 1) {
-        audioMilestoneRef.current = 1;
-        sound.playPluck(180);
-        haptics.light();
-      } else if (currentProgress >= 50 && audioMilestoneRef.current < 2) {
-        audioMilestoneRef.current = 2;
-        sound.playPluck(220);
-        haptics.light();
-      } else if (currentProgress >= 75 && audioMilestoneRef.current < 3) {
-        audioMilestoneRef.current = 3;
-        sound.playPluck(260);
-        haptics.medium();
+      // Acoustic milestone chimes at 25%, 50%, 75% (sound skips haptics automatically before user tap)
+      if (!prefersReducedMotion) {
+        if (currentProgress >= 25 && audioMilestoneRef.current < 1) {
+          audioMilestoneRef.current = 1;
+          sound.playPluck(180);
+        } else if (currentProgress >= 50 && audioMilestoneRef.current < 2) {
+          audioMilestoneRef.current = 2;
+          sound.playPluck(220);
+        } else if (currentProgress >= 75 && audioMilestoneRef.current < 3) {
+          audioMilestoneRef.current = 3;
+          sound.playPluck(260);
+        }
       }
 
       if (currentProgress >= 100) {
         clearInterval(interval);
         sound.playChime();
-        haptics.success();
-        setTimeout(() => {
+        const t1 = setTimeout(() => {
           setIsDone(true);
-          setTimeout(onComplete, 850);
-        }, 320);
+          const t2 = setTimeout(() => onCompleteRef.current(), prefersReducedMotion ? 150 : 650);
+          timersRef.current.push(t2);
+        }, prefersReducedMotion ? 100 : 280);
+        timersRef.current.push(t1);
       }
     }, 24);
 
-    return () => clearInterval(interval);
-  }, [onComplete]);
+    return () => {
+      clearInterval(interval);
+      timersRef.current.forEach(clearTimeout);
+      timersRef.current = [];
+    };
+  }, []);
 
   // Current cultural stage
   const currentStage =
@@ -229,7 +245,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           </header>
 
           {/* Centerpiece: Handcrafted Royal Indian Jharokha, Lotus Mandala, Floral Arabesque & Illuminated Logo */}
-          <main className="relative z-10 flex flex-col items-center justify-center text-center my-auto px-4 max-w-xl mx-auto">
+          <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto px-4 max-w-xl mx-auto">
             {/* Royal Jharokha Scalloped Arch Accent (Matte Gold & Ivory) */}
             <div className="w-64 sm:w-80 text-[#dfb76c]/35 mb-2 pointer-events-none">
               <RoyalJharokhaArch />
@@ -276,9 +292,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
             {/* Brand Title & Royal Identity */}
             <div className="space-y-1.5 mb-4 sm:mb-5">
-              <h1 className="font-display font-black text-2xl sm:text-3xl tracking-[0.35em] uppercase text-[#faf9f5] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
+              <div className="font-display font-black text-2xl sm:text-3xl tracking-[0.35em] uppercase text-[#faf9f5] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
                 DESI MUCHADS
-              </h1>
+              </div>
               <p className="text-[11px] sm:text-xs font-serif tracking-[0.25em] text-[#dfb76c] uppercase font-semibold">
                 ARTISANAL CREATIVE AGENCY &bull; BENGALURU
               </p>
@@ -304,7 +320,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
                 </p>
               </motion.div>
             </div>
-          </main>
+          </div>
 
           {/* Bottom Bar: Royal Toran Pattern & Artisanal Progress Gauge */}
           <footer className="relative z-10 space-y-3 max-w-xl mx-auto w-full">

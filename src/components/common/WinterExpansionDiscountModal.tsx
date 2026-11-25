@@ -316,7 +316,7 @@ export function WinterExpansionDiscountModal({
               {/* Trust Footer */}
               <div className="mt-3.5 sm:mt-5 pt-2.5 sm:pt-3 border-t border-white/10 flex items-center justify-center gap-1.5 text-[9px] sm:text-[10px] font-mono text-zinc-400 text-center">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Applicable to Foundation, Dominance &amp; Sovereign retainers.</span>
+                <span>Applicable across Graphics, SEO, Social Media, Web &amp; Branding plans.</span>
               </div>
             </motion.div>
           </div>

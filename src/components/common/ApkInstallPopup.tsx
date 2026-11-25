@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useSyncExternalStore } from "react";
+import React, { useState, useEffect, useMemo, useSyncExternalStore } from "react";
 import {
   Smartphone,
   Download,
@@ -11,37 +11,132 @@ import {
   ShieldCheck,
   Check,
   Zap,
+  Copy,
+  QrCode,
+  ExternalLink,
+  AlertTriangle,
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
+import { generateQrMatrix } from "@/lib/qr";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
 
+declare global {
+  interface Window {
+    __dmDeferredPrompt?: BeforeInstallPromptEvent | null;
+  }
+}
+
+type DeviceProfile =
+  | "ios-safari"
+  | "ios-alt"
+  | "ios-inapp"
+  | "android"
+  | "android-inapp"
+  | "desktop";
+
+type ModalTab = "android" | "ios" | "desktop";
+
+const DISMISS_KEY = "dm_apk_popup_dismissed";
+const DISMISS_EVENT = "dm_apk_dismiss_change";
+
+function subscribeDeferredPrompt(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("dm_pwa_prompt_ready", callback);
+  window.addEventListener("beforeinstallprompt", callback);
+  window.addEventListener("appinstalled", callback);
+  return () => {
+    window.removeEventListener("dm_pwa_prompt_ready", callback);
+    window.removeEventListener("beforeinstallprompt", callback);
+    window.removeEventListener("appinstalled", callback);
+  };
+}
+
+function getDeferredPrompt(): BeforeInstallPromptEvent | null {
+  if (typeof window === "undefined") return null;
+  return window.__dmDeferredPrompt || null;
+}
+
+function subscribeDismissed(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener(DISMISS_EVENT, callback);
+  return () => window.removeEventListener(DISMISS_EVENT, callback);
+}
+
+function readDismissed(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return sessionStorage.getItem(DISMISS_KEY) === "true";
+  } catch {
+    return false;
+  }
+}
+
+function detectDeviceProfile(): DeviceProfile {
+  if (typeof window === "undefined") return "desktop";
+  const ua = navigator.userAgent || "";
+  const isInApp = /FBAN|FBAV|Instagram|WhatsApp|LinkedInApp|Line\/|MicroMessenger/i.test(ua);
+  const isIOSDevice =
+    (/iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) &&
+    !(window as unknown as { MSStream?: boolean }).MSStream;
+
+  if (isIOSDevice) {
+    if (isInApp) return "ios-inapp";
+    if (/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua)) return "ios-alt";
+    return "ios-safari";
+  }
+
+  if (/Android/i.test(ua)) {
+    return isInApp ? "android-inapp" : "android";
+  }
+
+  return "desktop";
+}
+
+function subscribeOrigin(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("popstate", callback);
+  return () => window.removeEventListener("popstate", callback);
+}
+
 /**
- * Universal Mobile App Installation Controller
- * - Automatically detects device: iOS (iPhone/iPad), Android, or Desktop.
- * - iOS: Interactive step-by-step "Add to Home Screen" sheet with animated Safari share icons.
- * - Android: 1-Click PWA WebAPK install via beforeinstallprompt + Direct APK Sideload (/api/download-apk).
- * - Desktop: Native Chrome/Edge PWA install.
- * - Completely hides when already in standalone display mode.
- * - High-res icons, offline caching, sound effects, and haptic feedback.
+ * Universal Mobile App & PWA Installer Controller
+ * - Automatically detects iOS (Safari, Chrome iOS, In-App browsers), Android, and Desktop.
+ * - Hooks early-captured beforeinstallprompt event for reliable 1-click Web App install.
+ * - Direct APK sideload via <a download> pointing cleanly to /api/download-apk.
+ * - Includes scannable ISO-18004 SVG QR Code on Desktop to install directly on phone.
+ * - Supports ?install=app deep-link auto-open and Header/Footer/Mobile Drawer triggers.
  */
 export function ApkInstallPopup() {
-  const [isVisible, setIsVisible] = useState(true);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [tabOverride, setTabOverride] = useState<ModalTab | null>(null);
+  const [copiedLink, setCopiedLink] = useState(false);
   const [downloadStatus, setDownloadStatus] = useState<
     "idle" | "downloading" | "installed"
   >("idle");
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
-  // 1. Detect if running inside standalone installed PWA without triggering effect setState warnings
+  const deferredPrompt = useSyncExternalStore(
+    subscribeDeferredPrompt,
+    getDeferredPrompt,
+    () => null
+  );
+
+  const isBannerDismissed = useSyncExternalStore(
+    subscribeDismissed,
+    readDismissed,
+    () => false
+  );
+
   const isStandalone = useSyncExternalStore(
     (callback) => {
+      if (typeof window === "undefined") return () => {};
       window.addEventListener("appinstalled", callback);
       return () => window.removeEventListener("appinstalled", callback);
     },
@@ -52,42 +147,40 @@ export function ApkInstallPopup() {
     () => false
   );
 
-  // 2. Synchronous client platform detection without effect cascading renders
-  const platform = useSyncExternalStore<"ios" | "android" | "desktop">(
+  const profile = useSyncExternalStore<DeviceProfile>(
     () => () => {},
-    () => {
-      if (typeof window === "undefined") return "desktop";
-      const ua = navigator.userAgent || "";
-      const isIOSDevice =
-        /iPad|iPhone|iPod/.test(ua) && !(window as unknown as { MSStream?: boolean }).MSStream;
-      if (isIOSDevice) return "ios";
-      if (/Android/i.test(ua)) return "android";
-      return "desktop";
-    },
+    detectDeviceProfile,
     () => "desktop"
   );
 
-  // 3. Check session dismiss state without cascading renders
-  const isDismissed = useSyncExternalStore(
-    () => () => {},
+  const phoneInstallUrl = useSyncExternalStore(
+    subscribeOrigin,
     () =>
-      typeof window !== "undefined" &&
-      sessionStorage.getItem("dm_apk_popup_dismissed") === "true",
-    () => false
+      typeof window !== "undefined"
+        ? `${window.location.origin}/?install=app`
+        : "https://desimuchads.agency/?install=app",
+    () => "https://desimuchads.agency/?install=app"
   );
+
+  const isIOS = profile.startsWith("ios");
+  const isAndroid = profile.startsWith("android");
+  const defaultTab: ModalTab = isIOS ? "ios" : isAndroid ? "android" : "desktop";
+  const activeTab: ModalTab = tabOverride || defaultTab;
+
+  const qrMatrix = useMemo(() => generateQrMatrix(phoneInstallUrl), [phoneInstallUrl]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // 4. Capture native PWA install prompt (Android & Chromium)
     const handleBeforeInstall = (e: Event) => {
       e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      window.__dmDeferredPrompt = e as BeforeInstallPromptEvent;
+      window.dispatchEvent(new Event("dm_pwa_prompt_ready"));
     };
     window.addEventListener("beforeinstallprompt", handleBeforeInstall);
 
-    // 5. Track successful installation
     const handleAppInstalled = () => {
+      window.__dmDeferredPrompt = null;
       setDownloadStatus("installed");
       setIsModalOpen(false);
       sound.playChime();
@@ -101,54 +194,72 @@ export function ApkInstallPopup() {
     };
     window.addEventListener("dm_mobile_drawer_change", handleDrawer);
 
-    // Global listener so header, mobile menu, and footer can launch the installer sheet on demand
     const handleOpenInstaller = () => {
-      setIsVisible(true);
-      setIsMinimized(false);
       setIsModalOpen(true);
       sound.playPluck(160);
       haptics.selection();
     };
     window.addEventListener("dm_open_app_installer", handleOpenInstaller);
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Support direct ?install=app deep link (from QR code scan on phone!)
+    const params = new URLSearchParams(window.location.search);
+    let rafId: number | null = null;
+    if (params.get("install") === "app") {
+      rafId = requestAnimationFrame(() => {
+        setIsModalOpen(true);
+      });
+    }
+
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
       window.removeEventListener("beforeinstallprompt", handleBeforeInstall);
       window.removeEventListener("appinstalled", handleAppInstalled);
       window.removeEventListener("dm_mobile_drawer_change", handleDrawer);
       window.removeEventListener("dm_open_app_installer", handleOpenInstaller);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
-  // Primary trigger: opens platform-tailored installation flow
-  const handleOpenInstallation = () => {
+  const triggerNativeWebInstall = async () => {
+    const promptEvt = window.__dmDeferredPrompt || deferredPrompt;
+    if (!promptEvt) return false;
+    try {
+      sound.playChime();
+      haptics.heavy();
+      await promptEvt.prompt();
+      const choiceResult = await promptEvt.userChoice;
+      if (choiceResult && choiceResult.outcome === "accepted") {
+        setDownloadStatus("installed");
+        setIsModalOpen(false);
+        sound.playChime();
+        haptics.success();
+      }
+      window.__dmDeferredPrompt = null;
+      window.dispatchEvent(new Event("dm_pwa_prompt_ready"));
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const handleOpenInstallation = async () => {
     sound.playPluck(160);
     haptics.selection();
-
-    // If native prompt is immediately available on Android/Desktop, invoke it
-    if (deferredPrompt && platform !== "ios") {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult && choiceResult.outcome === "accepted") {
-          setDownloadStatus("installed");
-          sound.playChime();
-          haptics.success();
-        }
-        setDeferredPrompt(null);
-      });
-      return;
-    }
-
-    // Otherwise open the tailored installation sheet
     setIsModalOpen(true);
   };
 
-  // Direct APK file download handler
   const handleDirectApkDownload = () => {
     sound.playChime();
     haptics.heavy();
     setDownloadStatus("downloading");
 
-    // Track download intent in CRM
     fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -157,21 +268,9 @@ export function ApkInstallPopup() {
         name: "Mobile App Downloader",
         budget: "Mobile App Direct",
         service: "Android APK v2.4",
-        message: `User triggered direct APK download on ${platform}.`,
+        message: `User triggered direct APK download on ${profile}.`,
       }),
     }).catch(() => {});
-
-    // Reliable direct attachment download via API route
-    try {
-      const link = document.createElement("a");
-      link.href = "/api/download-apk";
-      link.setAttribute("download", "desi-muchads-v2.4.apk");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch {
-      window.open("/api/download-apk", "_blank");
-    }
 
     setTimeout(() => {
       setDownloadStatus("installed");
@@ -184,149 +283,160 @@ export function ApkInstallPopup() {
     }, 5000);
   };
 
-  const handleDismiss = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    sound.playPluck(120);
-    haptics.light();
-    setIsVisible(false);
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem("dm_apk_popup_dismissed", "true");
+  const handleCopyPhoneLink = async () => {
+    sound.playPluck(180);
+    haptics.selection();
+    try {
+      await navigator.clipboard.writeText(phoneInstallUrl);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    } catch {
+      setCopiedLink(false);
     }
   };
 
-  // If already running inside installed standalone PWA, hide floating install prompt
-  if (isStandalone || isDismissed || !isVisible || isDrawerOpen) return null;
+  const handleDismissBanner = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    sound.playPluck(120);
+    haptics.light();
+    try {
+      sessionStorage.setItem(DISMISS_KEY, "true");
+    } catch {
+      // Ignore storage restrictions
+    }
+    window.dispatchEvent(new Event(DISMISS_EVENT));
+  };
+
+  const showFloatingWidget = !isStandalone && !isBannerDismissed && !isDrawerOpen;
 
   return (
     <>
-      {/* 1. FLOATING INSTALLATION WIDGET (Corner Pill) */}
-      {isMinimized ? (
-        <aside
-          aria-label="Direct Mobile App Installation"
-          className="fixed bottom-[4.5rem] sm:bottom-6 right-3 sm:right-6 z-40 select-none animate-in fade-in zoom-in-90 duration-200"
-        >
-          <button
-            type="button"
-            onClick={() => {
-              sound.playPluck(180);
-              haptics.selection();
-              setIsMinimized(false);
-            }}
-            className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#0c0c0b] border border-white/20 hover:border-emerald-400 text-white shadow-[0_8px_30px_rgba(0,0,0,0.9)] backdrop-blur-xl active:scale-95 transition-all p-1.5 cursor-pointer"
-            title="Open Mobile App Installer"
-            aria-label="Open Mobile App Installer"
+      {/* 1. FLOATING INSTALLATION WIDGET (Always clears mobile bottom dock cleanly!) */}
+      {showFloatingWidget &&
+        (isMinimized ? (
+          <aside
+            aria-label="Direct Mobile App Installation"
+            className="fixed bottom-[5.25rem] sm:bottom-6 right-3 sm:right-6 z-40 select-none animate-in fade-in zoom-in-90 duration-200"
           >
-            <img
-              src="/icon-192.png"
-              alt="Desi Muchads App Icon"
-              className="w-full h-full object-contain rounded-xl"
-            />
-            <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-            </span>
-          </button>
-        </aside>
-      ) : (
-        <aside
-          aria-label="Direct Mobile App Installation"
-          className="fixed bottom-[4.5rem] sm:bottom-6 right-2.5 sm:right-6 z-40 animate-in fade-in slide-in-from-bottom-2 duration-200 select-none max-w-[calc(100vw-1.25rem)]"
-        >
-          <div className="relative group">
-            {/* Subtle ambient border backlight */}
-            <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-emerald-500/30 to-teal-400/20 opacity-50 group-hover:opacity-90 blur-[2px] transition-opacity" />
-
-            {/* Clickable Action Container */}
-            <div
-              onClick={handleOpenInstallation}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  handleOpenInstallation();
-                }
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(180);
+                haptics.selection();
+                setIsMinimized(false);
               }}
-              className="relative flex items-center gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl bg-[#0c0c0b]/95 hover:bg-[#141412] border border-white/20 hover:border-emerald-400/80 text-white shadow-[0_12px_35px_rgba(0,0,0,0.95)] backdrop-blur-xl transition-all cursor-pointer active:scale-95"
-              title="Click to Install Official Desi Muchads App"
+              className="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-[#0c0c0b] border border-white/25 hover:border-emerald-400 text-white shadow-[0_8px_30px_rgba(0,0,0,0.9)] backdrop-blur-xl active:scale-95 transition-all p-1.5 cursor-pointer"
+              title="Open Mobile App Installer"
+              aria-label="Open Mobile App Installer"
             >
-              {/* App Icon */}
-              <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden border border-white/20 bg-black shrink-0 flex items-center justify-center p-0.5">
-                <img
-                  src="/icon-192.png"
-                  alt="Desi Muchads App Icon"
-                  className="w-full h-full object-contain rounded-lg"
-                />
-              </div>
+              <img
+                src="/icon-192.png"
+                alt="Desi Muchads App Icon"
+                className="w-full h-full object-contain rounded-xl"
+              />
+              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              </span>
+            </button>
+          </aside>
+        ) : (
+          <aside
+            aria-label="Direct Mobile App Installation"
+            className="fixed bottom-[5.25rem] sm:bottom-6 right-3 sm:right-6 z-40 animate-in fade-in slide-in-from-bottom-2 duration-200 select-none max-w-[calc(100vw-1.5rem)]"
+          >
+            <div className="relative group">
+              <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-emerald-500/35 to-teal-400/20 opacity-55 group-hover:opacity-95 blur-[2px] transition-opacity" />
 
-              {/* Status & Label */}
-              <div className="flex flex-col text-left font-mono min-w-0 pr-0.5">
-                <div className="flex items-center gap-1.5 leading-tight">
-                  <span className="font-bold text-xs tracking-wider text-white uppercase group-hover:text-emerald-300 transition-colors truncate">
-                    {downloadStatus === "downloading"
-                      ? "DOWNLOADING..."
-                      : downloadStatus === "installed"
-                      ? "APP READY"
-                      : "INSTALL APP"}
-                  </span>
-                  <span className="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1 py-0.2 rounded font-bold shrink-0">
-                    v2.4
+              <div
+                onClick={handleOpenInstallation}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleOpenInstallation();
+                  }
+                }}
+                className="relative flex items-center gap-2 sm:gap-2.5 px-2.5 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl bg-[#0c0c0b]/95 hover:bg-[#141412] border border-white/20 hover:border-emerald-400/80 text-white shadow-[0_12px_35px_rgba(0,0,0,0.95)] backdrop-blur-xl transition-all cursor-pointer active:scale-95"
+                title="Install Official Desi Muchads App on Phone or Desktop"
+              >
+                <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden border border-white/20 bg-[#09090b] shrink-0 flex items-center justify-center p-0.5">
+                  <img
+                    src="/icon-192.png"
+                    alt="Desi Muchads App Icon"
+                    className="w-full h-full object-contain rounded-lg"
+                  />
+                </div>
+
+                <div className="flex flex-col text-left font-mono min-w-0 pr-0.5">
+                  <div className="flex items-center gap-1.5 leading-tight">
+                    <span className="font-bold text-[11px] sm:text-xs tracking-wider text-white uppercase group-hover:text-emerald-300 transition-colors truncate">
+                      {downloadStatus === "downloading"
+                        ? "DOWNLOADING..."
+                        : downloadStatus === "installed"
+                        ? "APP READY"
+                        : "GET APP"}
+                    </span>
+                    <span className="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1 py-0.2 rounded font-bold shrink-0">
+                      v2.4
+                    </span>
+                  </div>
+                  <span className="text-[9px] text-zinc-400 group-hover:text-zinc-300 transition-colors truncate leading-none mt-0.5">
+                    {isIOS
+                      ? "iPhone • Add to Home"
+                      : isAndroid
+                      ? "Android APK & Web App"
+                      : "Scan QR / APK / PWA"}
                   </span>
                 </div>
-                <span className="text-[9px] text-zinc-400 group-hover:text-zinc-300 transition-colors truncate leading-none mt-0.5">
-                  {platform === "ios"
-                    ? "iOS / iPhone • 120Hz"
-                    : platform === "android"
-                    ? "Android 1-Click & APK"
-                    : "PWA Standalone App"}
-                </span>
-              </div>
 
-              {/* Action Glyph */}
-              <div className="p-1 rounded-lg bg-white/5 group-hover:bg-emerald-500 group-hover:text-black text-zinc-400 transition-all shrink-0">
-                {downloadStatus === "installed" ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 group-hover:text-black" />
-                ) : downloadStatus === "downloading" ? (
-                  <span className="animate-spin w-3.5 h-3.5 border-2 border-emerald-400 border-t-transparent rounded-full block" />
-                ) : (
-                  <Download className="w-3.5 h-3.5" />
-                )}
-              </div>
+                <div className="p-1 rounded-lg bg-white/5 group-hover:bg-emerald-500 group-hover:text-black text-zinc-400 transition-all shrink-0">
+                  {downloadStatus === "installed" ? (
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 group-hover:text-black" />
+                  ) : downloadStatus === "downloading" ? (
+                    <span className="animate-spin w-3.5 h-3.5 border-2 border-emerald-400 border-t-transparent rounded-full block" />
+                  ) : (
+                    <Download className="w-3.5 h-3.5" />
+                  )}
+                </div>
 
-              {/* Minimize / Dismiss Controls */}
-              <div className="flex items-center gap-0.5 border-l border-white/10 pl-1 shrink-0">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    sound.playPluck(120);
-                    haptics.selection();
-                    setIsMinimized(true);
-                  }}
-                  className="p-1 rounded text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                  title="Minimize"
-                  aria-label="Minimize App Widget"
-                >
-                  <span className="text-xs font-bold leading-none block">−</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleDismiss}
-                  className="p-1 rounded text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                  title="Dismiss"
-                  aria-label="Dismiss App Widget"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-0.5 border-l border-white/10 pl-1 shrink-0">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      sound.playPluck(120);
+                      haptics.selection();
+                      setIsMinimized(true);
+                    }}
+                    className="p-1 min-w-[26px] min-h-[26px] flex items-center justify-center rounded text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    title="Minimize"
+                    aria-label="Minimize App Widget"
+                  >
+                    <span className="text-xs font-bold leading-none block">−</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDismissBanner}
+                    className="p-1 min-w-[26px] min-h-[26px] flex items-center justify-center rounded text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    title="Dismiss Floating Pill"
+                    aria-label="Dismiss App Widget"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </aside>
-      )}
+          </aside>
+        ))}
 
-      {/* 2. UNIVERSAL INSTALLATION MODAL SHEET (Tailored for iOS & Android) */}
+      {/* 2. UNIVERSAL APP & WEB APP INSTALLER MODAL (ALWAYS reachable even after dismissing pill) */}
       {isModalOpen && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="dm-app-installer-title"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               sound.playPluck(120);
@@ -337,24 +447,27 @@ export function ApkInstallPopup() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-lg bg-[#0e0e12] border-t sm:border border-white/20 rounded-t-3xl sm:rounded-3xl p-6 sm:p-7 space-y-6 text-left text-white shadow-[0_25px_80px_rgba(0,0,0,0.95)] relative cursor-default max-h-[92vh] overflow-y-auto my-auto"
+            className="w-full max-w-lg bg-[#0c0c10] border-t sm:border border-white/20 rounded-t-3xl sm:rounded-3xl p-5 sm:p-7 space-y-5 text-left text-white shadow-[0_25px_80px_rgba(0,0,0,0.95)] relative cursor-default max-h-[92dvh] overflow-y-auto my-auto pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]"
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-black border border-white/25 overflow-hidden p-1 shadow-lg shrink-0">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10 gap-2">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-11 h-11 rounded-2xl bg-[#09090b] border border-white/25 overflow-hidden p-1 shadow-lg shrink-0">
                   <img
                     src="/icon-192.png"
                     alt="Desi Muchads Official App Icon"
                     className="w-full h-full object-contain rounded-xl"
                   />
                 </div>
-                <div>
-                  <h3 className="font-display font-black text-base sm:text-lg uppercase text-white tracking-tight leading-none">
-                    Desi Muchads App
+                <div className="min-w-0">
+                  <h3
+                    id="dm-app-installer-title"
+                    className="font-display font-black text-base sm:text-lg uppercase text-white tracking-tight leading-none truncate"
+                  >
+                    Desi Muchads Mobile App
                   </h3>
-                  <p className="text-[11px] font-mono text-zinc-400 mt-1">
-                    v2.4 Production • iOS &amp; Android Standalone
+                  <p className="text-[11px] font-mono text-zinc-400 mt-1 truncate">
+                    v2.4 Signed APK &amp; Standalone Web App (iOS / Android)
                   </p>
                 </div>
               </div>
@@ -365,57 +478,240 @@ export function ApkInstallPopup() {
                   sound.playPluck(120);
                   setIsModalOpen(false);
                 }}
-                className="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-white transition-all text-xs font-mono cursor-pointer"
+                aria-label="Close App Installer"
+                className="px-3 py-2 min-h-[40px] rounded-xl bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white transition-all text-xs font-mono cursor-pointer shrink-0"
               >
                 ✕ CLOSE
               </button>
             </div>
 
-            {/* PLATFORM SPECIFIC INSTRUCTIONS */}
-            {platform === "ios" ? (
-              /* iOS SAFARI INSTALLATION GUIDE */
+            {/* In-App Browser Warning if opened inside Instagram / WhatsApp / LinkedIn */}
+            {(profile === "ios-inapp" || profile === "android-inapp") && (
+              <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/40 text-xs font-sans space-y-2">
+                <div className="flex items-center gap-2 font-mono font-bold text-amber-300">
+                  <AlertTriangle className="w-4 h-4 shrink-0" />
+                  <span>Open in {profile === "ios-inapp" ? "Safari" : "Chrome"} to Install</span>
+                </div>
+                <p className="text-zinc-300 leading-relaxed text-[11px]">
+                  You&apos;re viewing inside an in-app browser which blocks app downloads. Tap the{" "}
+                  <strong>⋯ / Compass</strong> icon and choose{" "}
+                  <strong>&quot;Open in {profile === "ios-inapp" ? "Safari" : "Browser"}&quot;</strong>, or copy this link:
+                </p>
+                <button
+                  type="button"
+                  onClick={handleCopyPhoneLink}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-400 text-black font-mono font-bold text-[11px] cursor-pointer"
+                >
+                  {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedLink ? "Copied Install URL!" : "Copy Browser Install URL"}</span>
+                </button>
+              </div>
+            )}
+
+            {/* Platform Switcher Tabs (Auto-selected for visitor's device, switchable anytime) */}
+            <div
+              role="tablist"
+              aria-label="Choose installation platform"
+              className="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-white/[0.04] border border-white/10 font-mono text-[11px]"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "android"}
+                onClick={() => {
+                  sound.playPluck(150);
+                  setTabOverride("android");
+                }}
+                className={`py-2 px-2 rounded-xl font-bold transition-all cursor-pointer ${
+                  activeTab === "android"
+                    ? "bg-white text-black shadow-md"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                Android / APK
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "ios"}
+                onClick={() => {
+                  sound.playPluck(150);
+                  setTabOverride("ios");
+                }}
+                className={`py-2 px-2 rounded-xl font-bold transition-all cursor-pointer ${
+                  activeTab === "ios"
+                    ? "bg-white text-black shadow-md"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                iPhone / iPad
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "desktop"}
+                onClick={() => {
+                  sound.playPluck(150);
+                  setTabOverride("desktop");
+                }}
+                className={`py-2 px-2 rounded-xl font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                  activeTab === "desktop"
+                    ? "bg-white text-black shadow-md"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                <QrCode className="w-3.5 h-3.5" />
+                <span>Send to Phone</span>
+              </button>
+            </div>
+
+            {/* TAB 1: ANDROID & DIRECT APK DOWNLOAD */}
+            {activeTab === "android" && (
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold">
+                  <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Direct Android APK &amp; 1-Click Web App</span>
+                </div>
+
+                {/* Primary: Direct Signed Android APK Download (Real <a download> anchor!) */}
+                <a
+                  href="/api/download-apk"
+                  download="DesiMuchads-App-v2.4.apk"
+                  onClick={handleDirectApkDownload}
+                  className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl transition-all cursor-pointer group min-h-[48px]"
+                >
+                  {downloadStatus === "downloading" ? (
+                    <>
+                      <span className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full" />
+                      <span>Downloading Signed APK (v2.4)...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4 text-black group-hover:translate-y-0.5 transition-transform" />
+                      <span>Download Android APK Direct (v2.4 · 85 KB)</span>
+                    </>
+                  )}
+                </a>
+
+                {/* Secondary: Native 1-Click Web App (PWA) if browser prompt captured */}
+                {deferredPrompt ? (
+                  <button
+                    type="button"
+                    onClick={triggerNativeWebInstall}
+                    className="w-full py-3.5 px-4 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-mono text-xs font-bold uppercase tracking-wider border border-emerald-500/40 flex items-center justify-center gap-2 transition-all cursor-pointer min-h-[48px]"
+                  >
+                    <Zap className="w-4 h-4 text-emerald-400" />
+                    <span>⚡ Or 1-Click Install Web App (No APK Sideload)</span>
+                  </button>
+                ) : (
+                  <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 text-xs font-sans space-y-1.5">
+                    <div className="font-mono text-[11px] font-bold text-emerald-300 flex items-center gap-1.5">
+                      <Smartphone className="w-3.5 h-3.5" />
+                      <span>Prefer Instant Chrome Web App (No APK needed)?</span>
+                    </div>
+                    <p className="text-zinc-300 text-[11px] leading-relaxed">
+                      In Android Chrome, tap the <strong>⋮ Menu (top-right)</strong> →{" "}
+                      <strong>&quot;Add to Home screen&quot;</strong> → <strong>&quot;Install&quot;</strong>.
+                      It adds the official app icon straight to your Android app drawer with full offline caching.
+                    </p>
+                  </div>
+                )}
+
+                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 text-[11px] font-mono text-zinc-400 space-y-1">
+                  <div className="flex items-center justify-between text-zinc-300 font-bold">
+                    <span className="flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Android APK Verified (v1 / v2 / v3 Signed)</span>
+                    </span>
+                    <a
+                      href="/downloads/desi-muchads-v2.4.apk"
+                      download="DesiMuchads-App-v2.4.apk"
+                      className="text-emerald-400 hover:underline flex items-center gap-1"
+                    >
+                      <span>Mirror</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                  <p>
+                    After downloading the APK, tap <strong>Open</strong> in your notification bar. If prompted, allow{" "}
+                    &quot;Install unknown apps&quot; for your browser.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* TAB 2: IPHONE / IPAD (iOS) */}
+            {activeTab === "ios" && (
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-mono font-bold">
                   <Smartphone className="w-3.5 h-3.5 text-blue-400" />
-                  <span>iPhone &amp; iPad Safari Direct Install</span>
+                  <span>
+                    {profile === "ios-alt"
+                      ? "iPhone Chrome / Edge Home Screen Guide"
+                      : "iPhone & iPad Direct Web App Install"}
+                  </span>
                 </div>
 
                 <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
-                  Install Desi Muchads directly to your iOS Home Screen for instant 120Hz ProMotion velocity, zero browser bars, and full offline case study playback:
+                  Install <strong>Desi Muchads</strong> directly on your iPhone/iPad Home Screen (Apple prohibits `.apk` files on iOS—Web App gives you full-screen 120Hz performance and offline playback):
                 </p>
 
-                {/* 3 Step Visual Guide */}
                 <div className="space-y-2.5 font-sans text-xs">
                   <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
-                    <div className="w-7 h-7 rounded-xl bg-blue-500/20 border border-blue-500/40 text-blue-300 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-blue-500/20 border border-blue-500/40 text-blue-300 flex items-center justify-center shrink-0">
                       <Share className="w-4 h-4 text-blue-400" />
                     </div>
                     <div>
-                      <strong className="text-white block font-semibold">1. Tap the Share button</strong>
-                      <span className="text-zinc-400 text-[11px]">Located in the bottom Safari toolbar (or top right on iPad).</span>
+                      <strong className="text-white block font-semibold">
+                        1. Tap the Share button
+                      </strong>
+                      <span className="text-zinc-400 text-[11px]">
+                        {profile === "ios-alt"
+                          ? "Tap the Share icon at the top-right next to the URL bar in Chrome."
+                          : "Located in the bottom Safari toolbar (or top-right on iPad)."}
+                      </span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
-                    <div className="w-7 h-7 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 flex items-center justify-center shrink-0">
                       <PlusSquare className="w-4 h-4 text-emerald-400" />
                     </div>
                     <div>
-                      <strong className="text-white block font-semibold">2. Select &quot;Add to Home Screen&quot;</strong>
-                      <span className="text-zinc-400 text-[11px]">Scroll down the iOS share sheet and tap Add to Home Screen.</span>
+                      <strong className="text-white block font-semibold">
+                        2. Select &quot;Add to Home Screen&quot;
+                      </strong>
+                      <span className="text-zinc-400 text-[11px]">
+                        Scroll down the iOS share sheet and tap &quot;Add to Home Screen&quot;.
+                      </span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
-                    <div className="w-7 h-7 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 flex items-center justify-center shrink-0">
                       <Check className="w-4 h-4 text-purple-400" />
                     </div>
                     <div>
-                      <strong className="text-white block font-semibold">3. Tap &quot;Add&quot; in top right</strong>
-                      <span className="text-zinc-400 text-[11px]">The standalone app icon will appear instantly on your Home Screen.</span>
+                      <strong className="text-white block font-semibold">
+                        3. Tap &quot;Add&quot; in the top right
+                      </strong>
+                      <span className="text-zinc-400 text-[11px]">
+                        The official black &amp; white Desi Muchads moustache icon installs immediately.
+                      </span>
                     </div>
                   </div>
                 </div>
+
+                {!isIOS && (
+                  <button
+                    type="button"
+                    onClick={() => setTabOverride("desktop")}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono text-zinc-200 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <QrCode className="w-4 h-4 text-emerald-400" />
+                    <span>Show iPhone Camera QR Code</span>
+                  </button>
+                )}
 
                 <button
                   type="button"
@@ -424,74 +720,107 @@ export function ApkInstallPopup() {
                     haptics.success();
                     setIsModalOpen(false);
                   }}
-                  className="w-full py-3.5 px-4 rounded-xl bg-white text-black font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all shadow-lg cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl bg-white text-black font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all shadow-lg cursor-pointer min-h-[46px]"
                 >
                   <CheckCircle2 className="w-4 h-4 text-black" />
-                  <span>Got It — Ready to Add</span>
+                  <span>Done — Ready to Add</span>
                 </button>
               </div>
-            ) : (
-              /* ANDROID & DESKTOP INSTALLATION CONTROLS */
+            )}
+
+            {/* TAB 3: DESKTOP -> PHONE QR HANDOFF + DESKTOP PWA + APK */}
+            {activeTab === "desktop" && (
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold">
-                  <Zap className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Native Android &amp; Web Installation</span>
+                <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl bg-white/[0.04] border border-white/15">
+                  {/* Live Scannable ISO-18004 SVG QR Code */}
+                  <div className="p-2.5 rounded-2xl bg-white shrink-0 shadow-lg">
+                    <svg
+                      width="116"
+                      height="116"
+                      viewBox={`0 0 ${qrMatrix.length + 4} ${qrMatrix.length + 4}`}
+                      role="img"
+                      aria-label="QR Code to install Desi Muchads App on your phone"
+                      className="block w-[116px] h-[116px]"
+                    >
+                      <rect
+                        width={qrMatrix.length + 4}
+                        height={qrMatrix.length + 4}
+                        fill="#ffffff"
+                      />
+                      {qrMatrix.map((row, r) =>
+                        row.map((dark, c) =>
+                          dark ? (
+                            <rect
+                              key={`${r}-${c}`}
+                              x={c + 2}
+                              y={r + 2}
+                              width={1}
+                              height={1}
+                              fill="#09090b"
+                            />
+                          ) : null
+                        )
+                      )}
+                    </svg>
+                  </div>
+
+                  <div className="space-y-2 text-center sm:text-left min-w-0 flex-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono font-bold uppercase">
+                      <QrCode className="w-3 h-3" />
+                      <span>Scan With Phone Camera</span>
+                    </div>
+                    <h4 className="font-display font-bold text-sm text-white uppercase">
+                      Instant Phone Install (iOS &amp; Android)
+                    </h4>
+                    <p className="text-[11px] font-sans text-zinc-400 leading-relaxed">
+                      Point your iPhone or Android camera at this QR code to open the direct phone installer immediately.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleCopyPhoneLink}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-mono text-white transition-all cursor-pointer"
+                    >
+                      {copiedLink ? (
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5 text-zinc-300" />
+                      )}
+                      <span>{copiedLink ? "Phone Link Copied!" : "Copy Phone Link"}</span>
+                    </button>
+                  </div>
                 </div>
 
-                <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
-                  Choose your preferred installation method below. Both options offer full offline capabilities, video reel caching, and instant founder war-room access:
-                </p>
-
-                {/* Primary: 1-Click PWA Native App Install */}
-                {deferredPrompt ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      sound.playChime();
-                      haptics.heavy();
-                      deferredPrompt.prompt();
-                      deferredPrompt.userChoice.then((choice) => {
-                        if (choice && choice.outcome === "accepted") {
-                          setDownloadStatus("installed");
-                          setIsModalOpen(false);
-                        }
-                      });
-                    }}
-                    className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl transition-all cursor-pointer group"
-                  >
-                    <Zap className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
-                    <span>⚡ 1-Click Instant App Install (Official)</span>
-                  </button>
-                ) : null}
-
-                {/* Secondary: Direct APK Package Download */}
-                <button
-                  type="button"
-                  onClick={handleDirectApkDownload}
-                  disabled={downloadStatus === "downloading"}
-                  className="w-full py-3.5 px-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider border border-white/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
-                >
-                  {downloadStatus === "downloading" ? (
-                    <>
-                      <span className="animate-spin w-4 h-4 border-2 border-emerald-400 border-t-transparent rounded-full" />
-                      <span>Downloading Standalone APK...</span>
-                    </>
+                {/* Action buttons: 1-Click Desktop PWA + Direct Android APK */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {deferredPrompt ? (
+                    <button
+                      type="button"
+                      onClick={triggerNativeWebInstall}
+                      className="py-3 px-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px]"
+                    >
+                      <Zap className="w-4 h-4 text-black" />
+                      <span>Install Desktop App</span>
+                    </button>
                   ) : (
-                    <>
-                      <Download className="w-4 h-4 text-emerald-400" />
-                      <span>Download Standalone APK (v2.4 Package)</span>
-                    </>
+                    <button
+                      type="button"
+                      onClick={() => setTabOverride("ios")}
+                      className="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px]"
+                    >
+                      <Smartphone className="w-4 h-4 text-blue-400" />
+                      <span>iPhone Guide</span>
+                    </button>
                   )}
-                </button>
 
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 text-[11px] font-mono text-zinc-400 space-y-1">
-                  <div className="flex items-center gap-1.5 text-zinc-300 font-bold">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Android Installation Note:</span>
-                  </div>
-                  <p>
-                    After downloading the APK, tap the notification to open and install. If prompted, allow &quot;Install from this source&quot;.
-                  </p>
+                  <a
+                    href="/api/download-apk"
+                    download="DesiMuchads-App-v2.4.apk"
+                    onClick={handleDirectApkDownload}
+                    className="py-3 px-4 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px]"
+                  >
+                    <Download className="w-4 h-4 text-emerald-400" />
+                    <span>Download APK (85 KB)</span>
+                  </a>
                 </div>
               </div>
             )}
@@ -507,12 +836,12 @@ export function ApkInstallPopup() {
                 <span>Pre-Cached</span>
               </div>
               <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5 text-center">
-                <span className="block text-white font-bold">🔔 Push</span>
-                <span>War-Room</span>
+                <span className="block text-white font-bold">📲 Phone App</span>
+                <span>iOS + APK</span>
               </div>
               <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5 text-center">
-                <span className="block text-white font-bold">🔒 Verified</span>
-                <span>0% AI Slop</span>
+                <span className="block text-white font-bold">🔒 Signed</span>
+                <span>v1/v2/v3 APK</span>
               </div>
             </div>
           </div>

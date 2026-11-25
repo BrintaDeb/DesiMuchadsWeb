@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // 2. 8 Dedicated Service Capability Pages
+  // 2. Dedicated Service Capability Pages
   AGENCY_SERVICES.forEach((service) => {
     routes.push({
       url: `${baseUrl}/services/${service.slug}`,
@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 3. 46 Human-Grade Strategic Case Studies
+  // 3. Human-Grade Strategic Case Studies
   AGENCY_PROJECTS.forEach((project) => {
     routes.push({
       url: `${baseUrl}/work/${project.slug}`,

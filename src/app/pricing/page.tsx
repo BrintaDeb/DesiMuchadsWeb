@@ -34,38 +34,38 @@ export default function PricingPage() {
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
-            <span className="text-white font-bold">Transparent Retainers &amp; Unit Economics</span>
+            <span className="text-white font-bold">5-Service 4-Tier Pricing Matrix</span>
           </div>
 
           <div className="max-w-4xl">
             <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-[1.08] mb-6">
-              Investment Built On{" "}
+              Transparent Tiers{" "}
               <span className="text-zinc-400 underline decoration-white/20 underline-offset-8">
-                Direct Accountability
+                Scaled To Scope
               </span>
             </h1>
 
             <p className="font-sans text-base sm:text-lg md:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-8">
-              We publish our retainers transparently because we don&apos;t play pricing games based on how wealthy your brand looks. Every rupee is tied to clear deliverables, daily dashboard access, and strict performance SLAs.
+              Dedicated 4-tier plans for Graphics Designing, SEO Management, Social Media Management, Website Development &amp; Branding—start lean with essential deliverables and upgrade cleanly as volume scales.
             </p>
 
             {/* Metric Highlights */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
               <div className="p-3">
+                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">₹8,999</span>
+                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Starting Monthly Plans</span>
+              </div>
+              <div className="p-3">
+                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">5 × 4</span>
+                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Separate Service Tiers</span>
+              </div>
+              <div className="p-3">
                 <span className="block font-metric font-black text-2xl sm:text-3xl text-white">100%</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">IP &amp; Ad Account Ownership</span>
-              </div>
-              <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">&lt;4 Hours</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Guaranteed SLA Response</span>
-              </div>
-              <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">Daily</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Real-Time CM3 Telemetry</span>
+                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Source &amp; Account Ownership</span>
               </div>
               <div className="p-3">
                 <span className="block font-metric font-black text-2xl sm:text-3xl text-white">0 Lock-In</span>
-                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Month-to-Month Freedom</span>
+                <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Upgrade or Pause Anytime</span>
               </div>
             </div>
           </div>
@@ -73,9 +73,9 @@ export default function PricingPage() {
 
         <SectionDivider />
 
-        {/* 2. Main Pricing & Thali Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-12">
-          <PricingSection onOpenKundli={() => setIsKundliOpen(true)} />
+        {/* 2. Main 5-Discipline × 4-Tier Pricing Matrix */}
+        <section className="my-6">
+          <PricingSection variant="full" onOpenKundli={() => setIsKundliOpen(true)} />
         </section>
 
         <SectionDivider />
@@ -138,20 +138,20 @@ export default function PricingPage() {
           <div className="space-y-4">
             {[
               {
-                q: "What is the minimum contract term?",
-                a: "Our retainers operate on a month-to-month basis with a 30-day notice period. We believe our performance and compounding ROAS should earn your partnership every single month, not a predatory 12-month lock-in.",
+                q: "Why are lower tiers priced less than enterprise agency retainers?",
+                a: "Lower tiers (Tier 01 & Tier 02) focus strictly on essentials—fewer posts, fewer keywords, single-page websites, or core logo marks—without source files, reels production, or custom backend overhead. As your requirements grow, you only pay for higher deliverables in Tier 03 or Tier 04.",
               },
               {
-                q: "Do your fees include ad spend budget?",
-                a: "No. Ad spend is billed directly by Meta, Google, or other platforms to your company card. This ensures you maintain total control of billing thresholds, tax credits, and cash flows.",
+                q: "What is the minimum commitment on monthly plans?",
+                a: "Monthly services (Graphics Designing, SEO Management, Social Media Management) run month-to-month with zero annual lock-in. Choosing Quarterly billing saves 15% on monthly plans.",
               },
               {
-                q: "How many creative assets are delivered monthly?",
-                a: "Depending on your selected tier, you receive between 4 to 24 net-new bespoke creative assets every month (vernacular video hooks, UGC edits, motion graphics, and high-CTR static carousels).",
+                q: "Are Website Development and Branding one-time fees?",
+                a: "Yes. Website Development (from ₹12,999) and Branding (from ₹9,999) are fixed-scope project sprints billed once, with zero ongoing lock-in.",
               },
               {
-                q: "Can we mix and match services in a custom retainer?",
-                a: "Yes! Use our 'Build Your Custom Growth Stack' configurator on this page to select only the exact services your brand needs right now, and the pricing updates automatically.",
+                q: "Can we mix multiple services like Graphics + Social + SEO?",
+                a: "Yes! Switch to the 'Build Custom Bundle' tab above to select any combination across Graphics, SEO, Social Media, Web Dev, and Branding with up to 15% multi-service savings.",
               },
             ].map((faq, i) => (
               <div

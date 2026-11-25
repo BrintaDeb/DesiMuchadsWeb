@@ -954,6 +954,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
       )}
 
       {/* 3. HERO SHOWCASE SECTION */}
+      <main>
       <section className="relative px-4 sm:px-8 pt-12 sm:pt-20 pb-16 overflow-hidden">
         {/* Glow ambient background */}
         <div
@@ -3140,6 +3141,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
           ))}
         </div>
       </section>
+      </main>
 
       {/* 8. BRAND FOOTER */}
       <footer className="px-4 sm:px-8 py-12 border-t border-white/10 bg-black/60 text-xs text-zinc-500 font-mono">

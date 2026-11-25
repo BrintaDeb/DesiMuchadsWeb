@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageUrl = `https://desimuchads.agency/work/${slug}`;
 
   return {
-    title: `${project.client} Case Study (${project.heroStat}) | DESI MUCHADS ✦ High-ROAS Agency`,
+    title: `${project.client} Case Study (${project.heroStat})`,
     description: `${project.tagline} Verified Results: ${project.heroStat}. The Challenge, Strategy, and Outcome breakdown by Desi Muchads Digital Growth Squad.`,
     keywords: [
       project.client,

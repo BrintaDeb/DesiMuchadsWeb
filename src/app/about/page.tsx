@@ -19,6 +19,7 @@ interface TeamMember {
   tagline: string;
   bio: string;
   avatar: string;
+  tileBgClass?: string;
   badge: string;
   disciplines: string[];
   socials: {
@@ -32,11 +33,12 @@ interface TeamMember {
 const TEAM_ROSTER: TeamMember[] = [
   {
     id: 1,
-    name: "Rahul Datt",
+    name: "Rahul Datta",
     role: "CEO",
     tagline: "Agency Vision, Client Scaling Strategy & Executive Leadership",
     bio: "Directs overarching agency strategy, high-growth client partnerships, and market expansion. Leads enterprise acquisitions and scaling roadmaps.",
-    avatar: "/team/rahul-datt.jpg",
+    avatar: "/team/rahul-datt.png",
+    tileBgClass: "bg-black",
     badge: "CHIEF EXECUTIVE OFFICER",
     disciplines: ["Executive Leadership", "Growth Strategy", "Client Partnerships", "Brand Scaling"],
     socials: {
@@ -50,7 +52,8 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CTO",
     tagline: "Fullstack Engineering, Conversion Architecture & Systems",
     bio: "Architects high-performance Next.js web applications, sub-second conversion engines, and algorithmic ad tracking systems. Leads fullstack engineering and digital infrastructure.",
-    avatar: "/team/brinta-deb.jpg",
+    avatar: "/team/brinta-deb.png",
+    tileBgClass: "bg-black",
     badge: "CHIEF TECHNOLOGY OFFICER",
     disciplines: ["Next.js App Router", "Fullstack Engineering", "Conversion Architecture", "Performance Systems"],
     socials: {
@@ -69,7 +72,7 @@ const TEAM_ROSTER: TeamMember[] = [
     badge: "CHIEF FINANCIAL OFFICER",
     disciplines: ["Financial Strategy", "Unit Economics", "Profitability Audits", "Capital Allocation"],
     socials: {
-      linkedin: "http://www.linkedin.com/in/reodomkar",
+      linkedin: "https://www.linkedin.com/in/reodomkar",
       email: "mailto:thedesimuchads@gmail.com?subject=CFO%20Financial%20Audit%20-%20Omkar%20Dutta",
     },
   },
@@ -83,6 +86,7 @@ export default function AboutPage() {
       {/* 1. Header Navigation */}
       <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 
+      <main>
       {/* 2. Monumental Hero Section */}
       <section className="relative pt-36 sm:pt-44 pb-20 sm:pb-28 border-b border-white/10 overflow-hidden">
         {/* Ambient Dark Velvet Backdrop Glow */}
@@ -133,7 +137,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. The Core Executive Leadership (Rahul Datt CEO, Brinta Deb CTO, Omkar Dutta CFO) */}
+      {/* 4. The Core Executive Leadership (Rahul Datta CEO, Brinta Deb CTO, Omkar Dutta CFO) */}
       <section id="team" className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/10 text-left">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
           <div className="max-w-2xl">
@@ -194,6 +198,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* 6. Footer */}
       <Footer onOpenKundli={() => setIsKundliOpen(true)} />

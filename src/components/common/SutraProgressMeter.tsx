@@ -14,7 +14,7 @@ export function SutraProgressMeter() {
     { id: "services", name: "02", eng: "Disciplines & Services" },
     { id: "work", name: "03", eng: "Selected Works & Art" },
     { id: "clients", name: "04", eng: "Client Trust Proof" },
-    { id: "pricing", name: "05", eng: "Transparent Retainers" },
+    { id: "pricing", name: "05", eng: "4-Tier Service Pricing" },
     { id: "contact", name: "06", eng: "Strategy Session" },
   ];
 

@@ -178,8 +178,8 @@ const CONCIERGE_PROMPTS = [
     a: "Yes! Our headquarters is located at Hosapalaya, Bengaluru, Karnataka 560068 (Coordinates: 12.9002701, 77.6454546). In-person strategy sessions are hosted Monday to Saturday.",
   },
   {
-    q: "What are your monthly retainer packages?",
-    a: "Our structured retainers start from ₹35,000/mo (Seed Stack) up to ₹3,00,000/mo (Enterprise Sovereign), with zero hidden markups.",
+    q: "What are your service pricing tiers?",
+    a: "We offer accessible 4-tier plans separately across Graphics Designing (from ₹8,999/mo), SEO Management (from ₹9,999/mo), Social Media Management (from ₹9,999/mo), Branding (from ₹9,999), and Website Development (from ₹12,999), scaling with deliverables.",
   },
 ];
 
@@ -445,7 +445,7 @@ export default function ContactPage() {
       if (lower.includes("roas") || lower.includes("return")) {
         reply = "We engineer 5.8x to 7.4x blended ROAS by combining high-hook cultural reels with ASC+ CBO media engines. What is your current monthly ad spend?";
       } else if (lower.includes("budget") || lower.includes("price") || lower.includes("package")) {
-        reply = "Our retainers range from ₹75,000/mo (Foundation Sprint) to ₹1,50,000/mo (Dominance Engine) with 0% hidden markups. You can also assemble a custom modular retainer!";
+        reply = "We offer accessible 4-tier plans for each discipline separately: Graphics Designing (from ₹8,999/mo), SEO Management (from ₹9,999/mo), Social Media Management (from ₹9,999/mo), Branding (from ₹9,999), and Websites (from ₹12,999). Lower tiers include lean essentials and scale up as you grow!";
       } else if (lower.includes("blinkit") || lower.includes("zepto") || lower.includes("quick")) {
         reply = "Our Quick Commerce squad indexes dark-store inventory and dominates in-app banner search on Zepto and Blinkit within 72 hours.";
       } else if (lower.includes("audit") || lower.includes("kundli") || lower.includes("free")) {
@@ -1567,18 +1567,18 @@ export default function ContactPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Rahul Datt (CEO) */}
+              {/* Rahul Datta (CEO) */}
               <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4 flex flex-col justify-between group hover:border-white/30 transition-all">
                 <div className="space-y-4">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-[#09090c] shadow-md">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-black shadow-md">
                     <img
-                      src="/team/rahul-datt.jpg"
-                      alt="Rahul Datt CEO"
+                      src="/team/rahul-datt.png"
+                      alt="Rahul Datta CEO"
                       className="w-full h-full object-cover object-top grayscale contrast-[1.18] brightness-[0.95] group-hover:grayscale-0 transition-all duration-500"
                     />
                   </div>
                   <div>
-                    <h3 className="font-display font-black text-lg text-white">Rahul Datt</h3>
+                    <h3 className="font-display font-black text-lg text-white">Rahul Datta</h3>
                     <p className="text-xs font-mono text-zinc-400 uppercase font-bold">
                       Chief Executive Officer (CEO)
                     </p>
@@ -1614,9 +1614,9 @@ export default function ContactPage() {
               {/* Brinta Deb (CTO) */}
               <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/15 backdrop-blur-md space-y-4 flex flex-col justify-between group hover:border-white/30 transition-all">
                 <div className="space-y-4">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-[#09090c] shadow-md">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 bg-black shadow-md">
                     <img
-                      src="/team/brinta-deb.jpg"
+                      src="/team/brinta-deb.png"
                       alt="Brinta Deb CTO"
                       className="w-full h-full object-cover object-top grayscale contrast-[1.18] brightness-[0.95] group-hover:grayscale-0 transition-all duration-500"
                     />
@@ -1893,7 +1893,7 @@ export default function ContactPage() {
               </h3>
               <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
                 Your strategic brand qualification has been automatically dispatched to Principals{" "}
-                <strong className="text-white">Rahul Datt (CEO)</strong> and{" "}
+                <strong className="text-white">Rahul Datta (CEO)</strong> and{" "}
                 <strong className="text-white">Omkar Dutta (CFO)</strong>. Access your instant Google Meet room, calendar invite, and WhatsApp war-room below.
               </p>
             </div>

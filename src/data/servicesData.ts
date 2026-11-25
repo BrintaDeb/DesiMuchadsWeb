@@ -95,29 +95,55 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     },
     packages: [
       {
-        name: "Search Dominance Foundation",
-        price: "₹45,000",
+        name: "Tier 01 — Local Basics SEO",
+        price: "₹9,999",
         period: "per month",
-        desc: "For challenger brands seeking disciplined Google Search rankings and profitable initial ad capture.",
+        desc: "Lightweight starter plan covering essential keyword setup, meta fixes & local Google profile health.",
         highlights: [
-          "Complete Technical SEO & Schema Audit",
-          "Google Ads Search & PMax Setup",
-          "Up to ₹5L/mo managed ad spend",
-          "Weekly negative query pruning",
-          "Live 24/7 client performance portal",
+          "Up to 5 local & brand keywords tracked",
+          "Meta title & H1 setup on up to 5 pages",
+          "Google Business Profile basic optimization",
+          "Sitemap, robots.txt & Search Console setup",
+          "Monthly ranking summary snapshot",
         ],
       },
       {
-        name: "Omnichannel Search Scaling",
-        price: "₹85,000",
+        name: "Tier 02 — Search Foundation",
+        price: "₹14,999",
         period: "per month",
-        desc: "For scaling D2C brands and enterprises ready to dominate page 1 and capture category search volume.",
+        desc: "Consistent on-page optimization paired with regular SEO articles for steady organic growth.",
         highlights: [
-          "Advanced Core Web Vitals engineering",
-          "Competitor search conquesting campaigns",
-          "Uncapped ad spend management with tier bonuses",
-          "Custom landing page CRO & speed optimization",
-          "Dedicated Senior Search Architect & direct WhatsApp",
+          "Up to 15 commercial keywords tracked",
+          "On-page optimization across 12 pages",
+          "Technical broken-link & canonical fixes",
+          "2 SEO-optimized blog posts (800w) / mo",
+          "Bi-weekly GA4 traffic & rank report",
+        ],
+      },
+      {
+        name: "Tier 03 — Authority Engine",
+        price: "₹23,999",
+        period: "per month",
+        desc: "Core Web Vitals speed engineering, Schema JSON-LD, long-form articles & contextual backlinks.",
+        highlights: [
+          "35 high-intent regional & national keywords",
+          "Core Web Vitals & Schema JSON-LD setup",
+          "4 long-form authority blogs (1,200w+) / mo",
+          "8 contextual backlinks & citations / mo",
+          "Weekly SERP ROI & internal link tuning",
+        ],
+      },
+      {
+        name: "Tier 04 — Category Dominator",
+        price: "₹39,999",
+        period: "per month",
+        desc: "Aggressive national & e-commerce SEO architecture built to outrank legacy category leaders.",
+        highlights: [
+          "75+ competitive SKU & category keywords",
+          "Programmatic SEO pages & multi-region setup",
+          "8 research guides + 15+ high-DR links / mo",
+          "Log-level & SSR indexation engineering",
+          "Dedicated Senior SEO Lead + bi-weekly calls",
         ],
       },
     ],
@@ -191,7 +217,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Growth Catalyst Stack",
-        price: "₹75,000",
+        price: "₹80,000",
         period: "per month",
         desc: "Engineered for challenger D2C brands spending ₹3L–₹15L/month seeking disciplined profitability.",
         highlights: [
@@ -204,7 +230,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Maharaja Scale Suite",
-        price: "₹1,45,000",
+        price: "₹1,50,000",
         period: "per month",
         desc: "For category leaders ready to deploy ₹15L–₹1Cr+/mo with dedicated growth engineering.",
         highlights: [
@@ -286,7 +312,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "High-Intent Pipeline Starter",
-        price: "₹60,000",
+        price: "₹65,000",
         period: "per month",
         desc: "For boutique professional firms and consultants needing 100-300 qualified sales appointments per month.",
         highlights: [
@@ -299,7 +325,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Enterprise Pipeline Dominator",
-        price: "₹1,20,000",
+        price: "₹1,25,000",
         period: "per month",
         desc: "For luxury real estate, healthcare clinics, and enterprise B2B sales teams requiring high volume SQLs.",
         highlights: [
@@ -376,29 +402,55 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     },
     packages: [
       {
-        name: "Viral Momentum Stack",
-        price: "₹65,000",
+        name: "Tier 01 — Starter Presence",
+        price: "₹9,999",
         period: "per month",
-        desc: "For emerging consumer brands ready to establish category authority and organic reach.",
+        desc: "Essential 1-platform static posting plan to keep your primary social feed active on a lean budget.",
         highlights: [
-          "12 Custom High-Hook Reels & Shorts per month",
-          "Scriptwriting, voiceover, and kinetic editing",
-          "Trend scouting and algorithm timing schedule",
-          "Community engagement & comment banter",
-          "Monthly viral reach report",
+          "1 platform managed (Instagram or Facebook)",
+          "8 static posts + 2 simple story frames / mo",
+          "Clean captions & niche hashtag sets",
+          "Scheduled content publishing calendar",
+          "Monthly follower & reach summary",
         ],
       },
       {
-        name: "Cultural Movement Suite",
-        price: "₹1,25,000",
+        name: "Tier 02 — Consistent Growth",
+        price: "₹14,999",
         period: "per month",
-        desc: "Full-scale content machine producing daily viral video and creator amplification.",
+        desc: "Multi-platform presence adding edited Reels & interactive stories for organic audience growth.",
         highlights: [
-          "24 Custom Produced Reels & Shorts per month",
-          "On-site content shoot direction & creative producer",
-          "Micro-influencer product gifting & whitelisting",
-          "Brand meme architecture & reactive marketing",
-          "Integrated paid boost budget management",
+          "2 platforms (Instagram + FB or LinkedIn)",
+          "12 posts/mo (8 static/carousels + 4 Reels)",
+          "8 branded story sequences / month",
+          "Hook-driven copy & best-time scheduling",
+          "Standard comment moderation + bi-weekly review",
+        ],
+      },
+      {
+        name: "Tier 03 — Viral Momentum",
+        price: "₹24,999",
+        period: "per month",
+        desc: "Retention-first Reels scripting, kinetic edits & daily comment engagement engineered for reach.",
+        highlights: [
+          "3 platforms (Instagram, YT Shorts & LinkedIn)",
+          "18 deliverables/mo (10 Reels + 8 carousels)",
+          "3-second hook scripting & kinetic audio sync",
+          "Daily comment banter & DM inbox triage",
+          "UGC creator coordination + monthly call",
+        ],
+      },
+      {
+        name: "Tier 04 — Cultural Authority",
+        price: "₹39,999",
+        period: "per month",
+        desc: "Full-scale content machine spanning 4+ channels with shoot briefs, moment marketing & whitelisting.",
+        highlights: [
+          "4+ platforms (IG, YT Shorts, LinkedIn, X)",
+          "28+ deliverables (16 Reels + 12 carousels/memes)",
+          "Shoot direction briefs & Dedicated Strategist",
+          "Reactive trend-jacking & creator whitelisting",
+          "Bi-weekly review + paid boost funnel alignment",
         ],
       },
     ],
@@ -468,7 +520,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "E-Commerce Growth Retainer",
-        price: "₹70,000",
+        price: "₹75,000",
         period: "per month",
         desc: "For Shopify and WooCommerce stores seeking immediate conversion rate gains and automated retention.",
         highlights: [
@@ -481,7 +533,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Headless D2C Flagship Engine",
-        price: "₹1,35,000",
+        price: "₹1,40,000",
         period: "per month",
         desc: "For high-volume online retailers aiming for enterprise speed and deep custom personalization.",
         highlights: [
@@ -559,7 +611,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Q-Commerce Launch Sprint",
-        price: "₹55,000",
+        price: "₹60,000",
         period: "per month",
         desc: "For emerging FMCG and packaged food brands entering quick commerce in top 5 metro cities.",
         highlights: [
@@ -572,7 +624,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "National Dark Store Dominator",
-        price: "₹1,10,000",
+        price: "₹1,15,000",
         period: "per month",
         desc: "Full-scale national coverage across 400+ dark stores in Blinkit, Zepto, and Swiggy Instamart.",
         highlights: [
@@ -649,29 +701,55 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     },
     packages: [
       {
-        name: "High-Speed Flagship Landing Page",
-        price: "₹75,000",
+        name: "Tier 01 — Launch One-Pager",
+        price: "₹12,999",
         period: "one-time sprint",
-        desc: "Custom bespoke performance landing page engineered for high-converting media buying campaigns.",
+        desc: "Fast, credible single-page website built for local founders and quick campaign validation.",
         highlights: [
-          "Bespoke Next.js + Tailwind CSS build",
-          "Sub-0.8s load speed on Indian 4G/5G",
-          "Integrated WhatsApp, lead forms & Razorpay",
-          "Full mobile responsiveness & animations",
-          "7-Day delivery with 100% code ownership",
+          "1 responsive page (up to 5 sections)",
+          "Mobile-first UI + WhatsApp & lead form",
+          "Basic on-page meta tags & SSL readiness",
+          "1 revision round on layout & copy",
+          "5-day fast launch (Static React / WP)",
         ],
       },
       {
-        name: "Full-Stack Custom Storefront / Web App",
-        price: "₹1,85,000",
+        name: "Tier 02 — Business Website",
+        price: "₹19,999",
         period: "one-time sprint",
-        desc: "Complete enterprise digital flagship with custom product configurators, CMS, and headless commerce.",
+        desc: "Multi-page digital presence showcasing your company, offerings, testimonials & lead capture.",
         highlights: [
-          "Up to 10 custom designed responsive pages",
-          "Interactive 3D Three.js product showcase",
-          "Full headless Shopify or custom DB backend",
-          "Automated transactional emails and WhatsApp webhooks",
-          "14-Day deployment with 30 days post-launch support",
+          "Up to 5 custom pages (Home, About, Services+)",
+          "Clean typography & subtle motion effects",
+          "Google Sheets / WhatsApp lead hooks",
+          "90+ mobile speed & image optimization",
+          "7–10 day launch + 15 days support",
+        ],
+      },
+      {
+        name: "Tier 03 — Growth E-Com / Next.js",
+        price: "₹34,999",
+        period: "one-time sprint",
+        desc: "Conversion-tuned online store or custom Next.js build with instant UPI/card payments.",
+        highlights: [
+          "Up to 10 pages OR Store (up to 25 SKUs)",
+          "Custom Figma UI + Razorpay / UPI checkout",
+          "CMS / Blog + Schema SEO & Pixel tracking",
+          "<1s mobile speed (95+ Core Web Vitals)",
+          "14-day deployment + 30 days priority support",
+        ],
+      },
+      {
+        name: "Tier 04 — Custom Flagship Web App",
+        price: "₹64,999",
+        period: "one-time sprint",
+        desc: "Enterprise Next.js flagship with interactive 3D/WebGL visuals, custom portals & APIs.",
+        highlights: [
+          "15+ custom routes, portals or Headless D2C",
+          "Interactive 3D / WebGL UI & configurators",
+          "Custom backend APIs, auth & CRM webhooks",
+          "99/100 CWV tuning + GitHub source handover",
+          "Dedicated Lead Engineer + 60 days SLA",
         ],
       },
     ],
@@ -740,29 +818,29 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     },
     packages: [
       {
-        name: "Single Hero SKU Packaging Suite",
-        price: "₹45,000",
-        period: "per SKU",
-        desc: "Complete packaging and label identity for your flagship product with print-ready production files.",
+        name: "Logo & Essential Starter Kit",
+        price: "₹9,999",
+        period: "per project",
+        desc: "Sharp logo mark & primary color direction for new consumer brands launching on a budget.",
         highlights: [
-          "3 Unique creative design directions",
-          "Custom dieline layout & label design",
-          "FSSAI and regulatory compliance layout",
-          "Print-ready CMYK + spot foil vector files",
-          "3D photorealistic digital e-com renders",
+          "2 unique logo concepts & font pairings",
+          "Primary HEX color palette system",
+          "2 revision rounds on chosen concept",
+          "High-res PNG & SVG vector files",
+          "4–5 day rapid turnaround",
         ],
       },
       {
-        name: "Full Product Line Collection",
-        price: "₹1,20,000",
-        period: "up to 5 SKUs",
-        desc: "Cohesive packaging architecture across a full product range, variant jars, and unboxing shippers.",
+        name: "Single Hero SKU Packaging",
+        price: "₹24,999",
+        period: "per SKU",
+        desc: "Complete label & packaging architecture with print-ready dielines and 3D product renders.",
         highlights: [
-          "Consistent design system across 5 product variants",
-          "Outer shipper box and unboxing tissue paper design",
-          "Direct technical coordination with your packaging printer",
-          "Complete suite of 3D renders for e-commerce and ads",
-          "Full commercial vector copyright transfer",
+          "3 unique packaging directions",
+          "Custom dieline layout & FSSAI compliance",
+          "Print-ready CMYK + foil vector files",
+          "Photorealistic 3D digital e-com renders",
+          "Full commercial vector ownership",
         ],
       },
     ],
@@ -833,7 +911,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Unit Economics Diagnostic Audit",
-        price: "₹45,000",
+        price: "₹50,000",
         period: "one-time sprint",
         desc: "A complete 10-day forensic audit of your brand's unit economics, P&L leakages, and CAC/LTV health.",
         highlights: [
@@ -846,7 +924,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Continuous Financial Governance & Margin Shield",
-        price: "₹95,000",
+        price: "₹1,00,000",
         period: "per month",
         desc: "Ongoing CFO-level financial stewardship for scaling brands spending ₹5L to ₹30L monthly.",
         highlights: [

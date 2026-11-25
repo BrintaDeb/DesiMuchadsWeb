@@ -24,7 +24,7 @@ import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { ServicesSlideCarousel } from "@/components/services/ServicesSlideCarousel";
-import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
+import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
 
 export default function ServicesPage() {

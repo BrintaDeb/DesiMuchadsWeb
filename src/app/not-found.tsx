@@ -63,14 +63,14 @@ export default function NotFound() {
             className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Explore 16 Live Case Studies</span>
+            <span>Explore Live Case Studies</span>
           </Link>
         </div>
       </main>
 
       {/* Bottom Footer */}
       <footer className="max-w-7xl mx-auto w-full text-center text-xs font-mono text-zinc-500 z-10 pt-8 border-t border-white/10">
-        © 2025 DESI MUCHADS DIGITAL LLP · UNIT OF DESI MUCHADS DIGITAL AGENCY
+        © 2026 DESI MUCHADS DIGITAL LLP · UNIT OF DESI MUCHADS DIGITAL AGENCY
       </footer>
     </div>
   );

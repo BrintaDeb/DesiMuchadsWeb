@@ -16,7 +16,6 @@ import {
   Package,
   TrendingUp,
   Sparkles,
-  CheckCircle2,
 } from "lucide-react";
 import { ServiceItem } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
@@ -156,7 +155,7 @@ export function ServicesSlideCarousel({
     <div className="w-full max-w-full relative flex flex-col items-center overflow-x-clip">
       {/* 1. Main 3D Sliding Carousel Stage */}
       <div
-        className="relative w-full h-[470px] sm:h-[530px] md:h-[560px] flex items-center justify-center overflow-hidden sm:overflow-visible select-none my-6"
+        className="relative w-full h-[470px] sm:h-[530px] md:h-[560px] flex items-center justify-center overflow-hidden sm:overflow-visible select-none touch-pan-y my-6"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

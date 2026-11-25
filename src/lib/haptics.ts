@@ -39,10 +39,17 @@ class HapticsController {
   }
 
   /**
-   * Trigger a vibration pattern safely
+   * Trigger a vibration pattern safely (only after user activation to prevent browser console blocks)
    */
   public vibrate(presetOrPattern: HapticPreset | number | number[] = "medium"): boolean {
     if (!this.checkSupport()) return false;
+    if (
+      typeof navigator !== "undefined" &&
+      "userActivation" in navigator &&
+      !(navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive
+    ) {
+      return false;
+    }
 
     try {
       const pattern =

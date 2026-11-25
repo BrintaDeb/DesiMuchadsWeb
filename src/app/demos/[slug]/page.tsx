@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageUrl = `https://desimuchads.agency/demos/${slug}`;
 
   return {
-    title: `${config.brandName} · Live Client Storefront | Engineered by Desi Muchads`,
+    title: `${config.brandName} · Live Client Storefront`,
     description: `${config.brandTagline}. ${config.hero.title} · ${config.hero.subtitle}. Fully interactive production D2C experience with real-time checkout & analytics.`,
     keywords: [
       config.brandName,

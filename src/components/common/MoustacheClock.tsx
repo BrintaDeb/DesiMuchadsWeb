@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId, useSyncExternalStore } from "react";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
 
@@ -27,6 +27,13 @@ export function MoustacheClock({
   className = "",
   dialTheme = "dark",
 }: MoustacheClockProps) {
+  const uid = useId().replace(/:/g, "");
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
   const [time, setTime] = useState<{
     hours: number;
     minutes: number;
@@ -39,11 +46,9 @@ export function MoustacheClock({
     formatted: "10:10:30 AM",
   });
 
-  const [mounted, setMounted] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const updateTime = () => {
       const now = new Date();
       const formatter = new Intl.DateTimeFormat("en-US", {
@@ -51,7 +56,7 @@ export function MoustacheClock({
         hour: "numeric",
         minute: "numeric",
         second: "numeric",
-        hour12: false,
+        hourCycle: "h23",
       });
 
       const parts = formatter.formatToParts(now);
@@ -60,7 +65,7 @@ export function MoustacheClock({
       let s = 0;
 
       parts.forEach((part) => {
-        if (part.type === "hour") h = parseInt(part.value, 10);
+        if (part.type === "hour") h = parseInt(part.value, 10) % 24;
         if (part.type === "minute") m = parseInt(part.value, 10);
         if (part.type === "second") s = parseInt(part.value, 10);
       });
@@ -81,9 +86,12 @@ export function MoustacheClock({
       });
     };
 
-    updateTime();
+    const initRaf = requestAnimationFrame(updateTime);
     const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+    return () => {
+      cancelAnimationFrame(initRaf);
+      clearInterval(interval);
+    };
   }, [timeZone]);
 
   // Dimension mapping
@@ -156,25 +164,18 @@ export function MoustacheClock({
       >
         <defs>
           {/* Dial Gradient */}
-          <radialGradient id={`clockGrad-${pixelSize}`} cx="50%" cy="50%" r="50%">
+          <radialGradient id={`clockGrad-${uid}`} cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor={isLightOrStone ? "#f4f4f0" : "#1a1a1e"} />
             <stop offset="85%" stopColor={isLightOrStone ? "#deded8" : "#111114"} />
             <stop offset="100%" stopColor={isLightOrStone ? "#c5c5be" : "#08080a"} />
           </radialGradient>
 
           {/* Dial Outer Bezel Gradient */}
-          <linearGradient id={`bezelGrad-${pixelSize}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id={`bezelGrad-${uid}`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={isLightOrStone ? "#ffffff" : "rgba(255,255,255,0.3)"} />
             <stop offset="50%" stopColor={isLightOrStone ? "#999990" : "rgba(255,255,255,0.08)"} />
             <stop offset="100%" stopColor={isLightOrStone ? "#555550" : "rgba(255,255,255,0.2)"} />
           </linearGradient>
-
-          {/* Speckled Stone Pattern Filter */}
-          <filter id={`clockNoise-${pixelSize}`} x="0%" y="0%" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
-            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.08 0" />
-            <feComposite in2="SourceGraphic" in="gl" operator="in" />
-          </filter>
         </defs>
 
         {/* Outer Shadow Ring */}
@@ -185,8 +186,8 @@ export function MoustacheClock({
           cx="50"
           cy="50"
           r="48"
-          fill={`url(#clockGrad-${pixelSize})`}
-          stroke={`url(#bezelGrad-${pixelSize})`}
+          fill={`url(#clockGrad-${uid})`}
+          stroke={`url(#bezelGrad-${uid})`}
           strokeWidth="2.5"
         />
 

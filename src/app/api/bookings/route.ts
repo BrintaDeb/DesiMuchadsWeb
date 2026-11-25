@@ -44,7 +44,7 @@ function generateIcsContent(data: {
     `DESCRIPTION:${data.description.replace(/\n/g, "\\n")}`,
     `LOCATION:${data.location}`,
     "GEO:12.9002701;77.6454546",
-    `ORGANIZER;CN=Rahul Datt (CEO):mailto:${data.organizerEmail}`,
+    `ORGANIZER;CN=Rahul Datta (CEO):mailto:${data.organizerEmail}`,
     data.clientEmail
       ? `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=${data.clientName}:mailto:${data.clientEmail}`
       : "",
@@ -115,10 +115,10 @@ export async function POST(req: Request) {
     const dtEndStr = sessionUtcEnd.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
     // 2. Generate Google Calendar 1-Click Link
-    const gCalTitle = encodeURIComponent(`Desi Muchads Strategy War-Room: ${payload.clientName} × Rahul Datt & Omkar Dutta`);
+    const gCalTitle = encodeURIComponent(`Desi Muchads Strategy War-Room: ${payload.clientName} × Rahul Datta & Omkar Dutta`);
     const gCalDetails = encodeURIComponent(
       `Executive Growth & Unit Economics Session with Desi Muchads Principals.\n\n` +
-      `• Assigned Principals: Rahul Datt (CEO) & Omkar Dutta (CFO)\n` +
+      `• Assigned Principals: Rahul Datta (CEO) & Omkar Dutta (CFO)\n` +
       `• Brand: ${payload.brandWebsite || payload.clientName}\n` +
       `• Channel: ${isStudioInPerson ? "Studio In-Person" : "Google Meet Video"}\n` +
       `• Meeting Link: ${googleMeetUrl}\n` +
@@ -132,7 +132,7 @@ export async function POST(req: Request) {
     // 3. Generate .ics file content
     const icsContent = generateIcsContent({
       summary: `Desi Muchads Strategy War-Room: ${payload.clientName}`,
-      description: `Executive Growth & Unit Economics Session with Rahul Datt (CEO) & Omkar Dutta (CFO).\nMeeting URL: ${googleMeetUrl}\nHQ Directions: ${hqGpsLink}`,
+      description: `Executive Growth & Unit Economics Session with Rahul Datta (CEO) & Omkar Dutta (CFO).\nMeeting URL: ${googleMeetUrl}\nHQ Directions: ${hqGpsLink}`,
       location: locationString,
       meetUrl: googleMeetUrl,
       dtStartStr,
@@ -146,7 +146,7 @@ export async function POST(req: Request) {
     const whatsappText =
       `*DESI MUCHADS STRATEGY SESSION CONFIRMED* 👑\n\n` +
       `Hello ${payload.clientName},\n` +
-      `Your executive growth session with *Rahul Datt (CEO)* & *Omkar Dutta (CFO)* is booked.\n\n` +
+      `Your executive growth session with *Rahul Datta (CEO)* & *Omkar Dutta (CFO)* is booked.\n\n` +
       `📅 *Date:* ${payload.selectedDate}\n` +
       `⏰ *Time:* ${payload.selectedSlot}\n` +
       `📍 *Mode:* ${isStudioInPerson ? "In-Person at Bengaluru HQ" : "Google Meet Room"}\n` +
@@ -181,7 +181,7 @@ export async function POST(req: Request) {
       strategicObjectives: payload.strategicGoals || ["Scale Blended ROAS (5.8x+)"],
       clientNotes: payload.message || "No initial notes provided.",
       assignedTeam: [
-        { name: "Rahul Datt", role: "CEO & Growth Principal" },
+        { name: "Rahul Datta", role: "CEO & Growth Principal" },
         { name: "Omkar Dutta", role: "CFO & Unit Economics Principal" },
       ],
       preSessionChecklist: [

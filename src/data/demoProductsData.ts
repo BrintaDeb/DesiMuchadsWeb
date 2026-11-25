@@ -243,7 +243,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Concentrated 101 times in fresh cow milk and pure sesame oil according to Ashtanga Hridaya. For deep joint stiffness and neuromuscular relief.",
         specs: ["101 Cycles Concentrated", "100% Sesame & Cow Milk", "Ayush Certified"],
-        image: "https://images.unsplash.com/photo-1608248597359-54d762e8ea02?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "vr-02",
@@ -285,7 +285,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Adaptogenic tonic slow-fermented in earthen jars with raw honey and wild herbs. Designed to clear brain fog and lower stress hormones.",
         specs: ["Wild Ashwagandha KSM-66", "Natural Earthen Fermentation", "Non-drowsy"],
-        image: "https://images.unsplash.com/photo-1512290900672-1f55b9e07802?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
       },
     ],
     trustBadges: [
@@ -700,7 +700,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Slow roasted in Spanish olive oil and seasoned with African bird's eye chili, crushed garlic, and smoked paprika. 0% artificial flavors.",
         specs: ["12g Plant Protein", "0g Trans Fat", "Pure Cold-Pressed Olive Oil"],
-        image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281084?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "sn-02",
@@ -1824,7 +1824,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Translucent, chewy desi ghee halwa studded with toasted almond slivers and pistachios with gentle orange blossom undertones.",
         specs: ["Loaded with Nuts", "Pure Desi Ghee", "Long Shelf Life"],
-        image: "https://images.unsplash.com/photo-1505253758473-96b3015f21c9?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
       },
     ],
     trustBadges: [
@@ -2586,7 +2586,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "The authentic 72-hour cooked Kshirapak hair oil. Scented naturally with vetiver roots and damask rose. Packaged in a heavy-weight amber glass dropper bottle with debossed brass collar.",
         specs: ["21 Fresh Herbs & Goat Milk", "Debossed Brass Precision Dropper", "UV400 Light-Blocking Glass"],
-        image: "https://images.unsplash.com/photo-1608248597359-54d762e8ea02?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "km-02",

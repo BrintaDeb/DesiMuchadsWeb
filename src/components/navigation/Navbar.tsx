@@ -286,6 +286,18 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     Full Documentation ↗
                   </Link>
                 </div>
+
+                <Link
+                  href="/#process"
+                  onClick={() => setActiveDropdown(null)}
+                  className="mt-3 p-2.5 rounded-[0.2rem] bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 flex items-center justify-between text-xs font-mono transition-all"
+                >
+                  <div className="flex items-center gap-2 text-zinc-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#d5fe00] animate-pulse" />
+                    <span>Process Architecture: Discover · Define · Design · Build</span>
+                  </div>
+                  <span className="text-white font-bold">Explore ↗</span>
+                </Link>
               </div>
             )}
           </div>
@@ -436,6 +448,23 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             </kbd>
           </button>
 
+          {/* Direct Mobile / Desktop App Installer Button */}
+          <button
+            type="button"
+            onClick={() => {
+              sound.playPluck(180);
+              haptics.selection();
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
+              }
+            }}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[0.2rem] border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 hover:border-emerald-400 text-[11px] font-mono text-emerald-300 hover:text-emerald-200 transition-all ml-1 uppercase tracking-wider font-bold cursor-pointer"
+            title="Download / Install Official Desi Muchads Phone & Web App"
+          >
+            <Download className="w-3.5 h-3.5 text-emerald-400" />
+            <span>App</span>
+          </button>
+
           {/* Zero-Payload Procedural Sound Toggle */}
           <SonicToggle />
 
@@ -452,6 +481,23 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         {/* Mobile Header Controls */}
         <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
           <SonicToggle />
+
+          <button
+            type="button"
+            onClick={() => {
+              sound.playPluck(180);
+              haptics.medium();
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
+              }
+            }}
+            className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] rounded-[0.2rem] bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 flex items-center justify-center active:scale-95 transition-transform relative cursor-pointer"
+            aria-label="Download / Install Mobile App"
+            title="Get Mobile App (iOS & Android)"
+          >
+            <Download className="w-4 h-4 text-emerald-400" />
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400" />
+          </button>
 
           <button
             onClick={() => {

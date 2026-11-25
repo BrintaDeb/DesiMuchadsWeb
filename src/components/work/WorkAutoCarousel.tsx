@@ -5,21 +5,14 @@ import Link from "next/link";
 import {
   ChevronLeft,
   ChevronRight,
-  Play,
-  Pause,
-  ExternalLink,
   Eye,
   ArrowRight,
   Sparkles,
-  Layers,
-  Award,
   RotateCw,
-  Sliders,
   TrendingUp,
   Cpu,
   Target,
   CheckCircle2,
-  Clock,
 } from "lucide-react";
 import { ProjectItem } from "@/data/projectsData";
 import { sound } from "@/lib/sound";
@@ -51,9 +44,6 @@ export function WorkAutoCarousel({
   autoPlayInterval = 4500,
 }: WorkAutoCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [currentSpeed, setCurrentSpeed] = useState<number>(autoPlayInterval);
-  const [progress, setProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
@@ -63,7 +53,6 @@ export function WorkAutoCarousel({
   const touchDeltaXRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   // Responsive mobile breakpoint check
@@ -84,7 +73,6 @@ export function WorkAutoCarousel({
       if (total === 0) return;
       const nextIndex = (index + total) % total;
       setActiveIndex(nextIndex);
-      setProgress(0);
       setTilt({ x: 0, y: 0 });
       sound.playPluck(180);
       haptics.selection();
@@ -170,42 +158,30 @@ export function WorkAutoCarousel({
     setTilt({ x: 0, y: 0 });
   };
 
-  // Auto-play timer and smooth progress indicator
+  // Auto-play timer (pauses on hover/drag and honors reduced-motion preference)
   useEffect(() => {
-    if (!isPlaying || isHovered || isDraggingRef.current || total <= 1) {
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || isHovered || isDraggingRef.current || total <= 1) {
       if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
       return;
     }
 
-    const stepMs = 50;
-    const progressIncrement = (stepMs / currentSpeed) * 100;
-
-    progressIntervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          return 0;
-        }
-        return prev + progressIncrement;
-      });
-    }, stepMs);
-
     autoPlayTimerRef.current = setTimeout(() => {
       handleNext();
-    }, currentSpeed);
+    }, autoPlayInterval);
 
     return () => {
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
       if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
     };
-  }, [isPlaying, isHovered, activeIndex, currentSpeed, total, handleNext]);
+  }, [isHovered, activeIndex, autoPlayInterval, total, handleNext]);
 
   if (total === 0) {
     return null;
   }
 
   const activeProject = projects[activeIndex] || projects[0];
-  const isCurrentFlipped = Boolean(flippedCards[activeProject.id]);
 
   return (
     <div
@@ -213,110 +189,7 @@ export function WorkAutoCarousel({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeaveStage}
     >
-      {/* 1. Auto-Slide Control Toolbar (Play/Pause, Speed Switcher, Progress Bar) */}
-      <div className="w-full max-w-4xl px-4 mb-4 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-        {/* Left: Play/Pause Toggle & Status */}
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              sound.playPluck(140);
-              haptics.selection();
-              setIsPlaying((prev) => !prev);
-            }}
-            className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all cursor-pointer active:scale-95 ${
-              isPlaying
-                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
-                : "border-white/15 bg-white/5 text-zinc-400 hover:text-white"
-            }`}
-            title={isPlaying ? "Pause Auto-Slide" : "Resume Auto-Slide"}
-            aria-label={isPlaying ? "Pause Auto-Slide" : "Resume Auto-Slide"}
-          >
-            {isPlaying ? (
-              <Pause className="w-3.5 h-3.5" />
-            ) : (
-              <Play className="w-3.5 h-3.5 ml-0.5" />
-            )}
-          </button>
-
-          <div className="flex items-center gap-1.5 text-[11px] text-zinc-400">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                isPlaying ? "bg-emerald-400 animate-pulse" : "bg-zinc-600"
-              }`}
-            />
-            <span className="uppercase font-bold tracking-wider hidden sm:inline">
-              {isPlaying ? (isHovered ? "Paused on Hover" : "3D Auto-Slide") : "Paused"}
-            </span>
-          </div>
-
-          {/* Speed Presets */}
-          <div className="hidden sm:flex items-center gap-1 p-0.5 rounded-lg bg-black/60 border border-white/10 text-[10px]">
-            {[
-              { label: "3s", ms: 3000 },
-              { label: "4.5s", ms: 4500 },
-              { label: "6s", ms: 6000 },
-            ].map((spd) => (
-              <button
-                key={spd.ms}
-                type="button"
-                onClick={() => {
-                  sound.playPluck(160);
-                  haptics.selection();
-                  setCurrentSpeed(spd.ms);
-                  setProgress(0);
-                }}
-                className={`px-2 py-0.5 rounded font-bold transition-all cursor-pointer ${
-                  currentSpeed === spd.ms
-                    ? "bg-white text-black shadow-sm"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                {spd.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: Interactive 3D Info Flip Button & Timer Counter */}
-        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-          {/* Active Card Flip Toggle Button */}
-          <button
-            type="button"
-            onClick={(e) => toggleCardFlip(activeProject.id, e)}
-            className={`px-3 py-1.5 rounded-xl border text-[11px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer ${
-              isCurrentFlipped
-                ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/50 hover:bg-emerald-500/30"
-                : "bg-white/10 hover:bg-white/20 text-white border-white/20"
-            }`}
-            title="Flip 3D Card to View Deep ROI Specs"
-          >
-            <RotateCw
-              className={`w-3.5 h-3.5 transition-transform duration-500 ${
-                isCurrentFlipped ? "rotate-180 text-emerald-400" : ""
-              }`}
-            />
-            <span>{isCurrentFlipped ? "View Visual" : "Specs / ROI"}</span>
-          </button>
-
-          {/* Linear Progress Bar */}
-          <div className="w-16 sm:w-24 h-1.5 rounded-full bg-white/10 overflow-hidden shrink-0">
-            <div
-              style={{ width: `${progress}%` }}
-              className="h-full bg-gradient-to-r from-emerald-400 to-white transition-all duration-75 ease-linear rounded-full"
-            />
-          </div>
-
-          {/* Slide Numbers */}
-          <div className="flex items-center gap-1 font-mono text-[11px] sm:text-xs font-bold text-white tracking-widest whitespace-nowrap shrink-0">
-            <span>{activeIndex + 1 < 10 ? `0${activeIndex + 1}` : activeIndex + 1}</span>
-            <span className="text-zinc-600">/</span>
-            <span className="text-zinc-500">{total < 10 ? `0${total}` : total}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Main 3D Cylindrical Perspective Stage */}
+      {/* Main 3D Cylindrical Perspective Stage */}
       <div
         className="relative w-full h-[510px] sm:h-[560px] md:h-[600px] flex items-center justify-center my-2 touch-pan-y"
         style={{

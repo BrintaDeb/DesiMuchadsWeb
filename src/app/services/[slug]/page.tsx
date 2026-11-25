@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageUrl = `https://desimuchads.agency/services/${slug}`;
 
   return {
-    title: `${service.title} Agency India | DESI MUCHADS ✦ High-ROAS Growth`,
+    title: `${service.title} Agency India`,
     description: `${service.shortDesc} Scaled across ₹140Cr+ tracked GMV. Unapologetic Indian creative storytelling paired with ruthless mathematical ROI.`,
     keywords: [
       service.title,
@@ -397,7 +397,13 @@ async function ServiceDetailContent({ params }: PageProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 ${
+              service.packages.length >= 4
+                ? "xl:grid-cols-4 max-w-7xl gap-5"
+                : "max-w-4xl gap-8"
+            } mx-auto`}
+          >
             {service.packages.map((pkg, pIdx) => (
               <SpotlightCard
                 key={pIdx}
