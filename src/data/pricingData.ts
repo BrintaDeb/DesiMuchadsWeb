@@ -21,16 +21,22 @@ export interface PricingTier {
   isPopular?: boolean;
 }
 
+export interface ComparisonRow {
+  feature: string;
+  values: [string, string, string, string];
+}
+
 export interface ServicePricingCategory {
   id: ServiceCategoryId;
-  indexLabel: string;
   title: string;
   shortTitle: string;
   billingType: "monthly" | "one-time";
   startingPriceInr: number;
+  highlightSummary: string;
   tagline: string;
   scopePrinciple: string;
   tiers: PricingTier[];
+  comparisonRows: ComparisonRow[];
 }
 
 export interface CustomBundleModule {
@@ -45,22 +51,22 @@ export interface CustomBundleModule {
 export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
   {
     id: "graphics-designing",
-    indexLabel: "01",
     title: "Graphics Designing",
     shortTitle: "Graphics",
     billingType: "monthly",
-    startingPriceInr: 8999,
+    startingPriceInr: 11999,
+    highlightSummary: "Social posts, carousels & print",
     tagline:
       "Clean social creatives, carousels, ad banners & print layouts scaled by monthly asset volume.",
     scopePrinciple:
-      "Lower tiers cover static essentials & standard turnarounds; higher tiers unlock motion graphics, print files & source rights.",
+      "Lower tiers cover static essentials & standard turnarounds; higher tiers unlock motion graphics, print files & editable sources.",
     tiers: [
       {
         id: "gfx-t1",
         tierCode: "TIER 01",
         tierLabel: "LITE",
         name: "Basic Canvas",
-        priceInr: 8999,
+        priceInr: 11999,
         billingUnit: "/ mo",
         scopeLevel: 1,
         outputBadge: "6 Assets / mo",
@@ -81,7 +87,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 02",
         tierLabel: "CORE",
         name: "Creator Kit",
-        priceInr: 12999,
+        priceInr: 15999,
         billingUnit: "/ mo",
         scopeLevel: 2,
         outputBadge: "14 Assets / mo",
@@ -95,14 +101,14 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
           "2 revision rounds per creative",
           "48-hour standard turnaround",
         ],
-        excludedNote: "No editable AI/PSD files or animated GIFs",
+        excludedNote: "No editable source files or animated GIFs",
       },
       {
         id: "gfx-t3",
         tierCode: "TIER 03",
         tierLabel: "POPULAR",
         name: "Studio Growth",
-        priceInr: 19999,
+        priceInr: 22999,
         billingUnit: "/ mo",
         scopeLevel: 3,
         outputBadge: "26 Assets / mo",
@@ -123,41 +129,73 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 04",
         tierLabel: "POD",
         name: "Creative Desk",
-        priceInr: 29999,
+        priceInr: 32999,
         billingUnit: "/ mo",
         scopeLevel: 4,
         outputBadge: "40+ Assets / mo",
         turnaround: "<12h Express",
         summary:
-          "Dedicated visual design bandwidth for high-velocity D2C stores, agencies & multi-SKU catalogs.",
+          "Dedicated visual design bandwidth for high-velocity stores, agencies & multi-SKU catalogs.",
         deliverables: [
           "40+ static, carousel, ad & packaging layouts / mo",
           "Bespoke vector illustrations & custom icon sets",
           "A/B creative test variants for Meta & Google ads",
-          "Full Figma / AI / PSD library ownership",
+          "Full Figma / Illustrator / PSD library ownership",
           "Same-day (<12h) express turnaround + Art Director QA",
         ],
+      },
+    ],
+    comparisonRows: [
+      {
+        feature: "Monthly Creatives",
+        values: [
+          "6 static posts",
+          "12 posts + 2 carousels",
+          "22 designs + 4 motion",
+          "40+ multi-format",
+        ],
+      },
+      {
+        feature: "Formats & Print",
+        values: [
+          "Single size (PNG/JPG)",
+          "Feed + Story + Cutouts",
+          "Ads + Thumbnails + CMYK",
+          "Full Catalog + Packaging",
+        ],
+      },
+      {
+        feature: "Editable Source Files",
+        values: ["Not included", "Not included", "Figma / PSD Included", "Full Source Library"],
+      },
+      {
+        feature: "Revisions",
+        values: ["1 round", "2 rounds", "Unlimited tweaks", "Unlimited + Art QA"],
+      },
+      {
+        feature: "Turnaround Time",
+        values: ["72 Hours", "48 Hours", "24–36 Hours Priority", "Same-Day (<12h)"],
       },
     ],
   },
   {
     id: "seo-management",
-    indexLabel: "02",
     title: "SEO Management",
     shortTitle: "SEO",
     billingType: "monthly",
-    startingPriceInr: 9999,
+    startingPriceInr: 12999,
+    highlightSummary: "Keywords, blogs & backlinks",
     tagline:
       "Search visibility, on-page structure, technical speed & authority links built around compounding traffic.",
     scopePrinciple:
-      "Entry tier targets local maps & foundational tags; upper tiers add blogs, schema engineering & high-DA backlinks.",
+      "Entry tier targets local maps & foundational tags; upper tiers add blogs, schema markup & vetted backlinks.",
     tiers: [
       {
         id: "seo-t1",
         tierCode: "TIER 01",
         tierLabel: "LITE",
         name: "Local Basics",
-        priceInr: 9999,
+        priceInr: 12999,
         billingUnit: "/ mo",
         scopeLevel: 1,
         outputBadge: "5 Keywords",
@@ -178,7 +216,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 02",
         tierLabel: "CORE",
         name: "Search Foundation",
-        priceInr: 14999,
+        priceInr: 17999,
         billingUnit: "/ mo",
         scopeLevel: 2,
         outputBadge: "15 Keywords • 2 Blogs",
@@ -198,7 +236,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 03",
         tierLabel: "POPULAR",
         name: "Authority Engine",
-        priceInr: 23999,
+        priceInr: 26999,
         billingUnit: "/ mo",
         scopeLevel: 3,
         outputBadge: "35 Keywords • 8 Links",
@@ -219,41 +257,63 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 04",
         tierLabel: "SCALE",
         name: "Category Dominator",
-        priceInr: 39999,
+        priceInr: 42999,
         billingUnit: "/ mo",
         scopeLevel: 4,
         outputBadge: "75+ Keywords • 15 Links",
         turnaround: "Dedicated Lead",
         summary:
-          "Aggressive national & e-commerce SEO architecture engineered to outrank category incumbents.",
+          "Aggressive national & e-commerce SEO setup built to outrank category incumbents.",
         deliverables: [
           "75+ competitive e-commerce SKU & non-brand terms",
-          "Programmatic SEO landing pages & hreflang setup",
+          "Dynamic SEO landing pages & hreflang setup",
           "8 research articles + 15+ high-DR editorial links/mo",
-          "Crawl-budget, log-level & SSR index engineering",
-          "Dedicated Senior SEO Architect + bi-weekly calls",
+          "Crawl-budget, log-level & SSR index optimization",
+          "Dedicated Senior SEO Lead + bi-weekly calls",
         ],
+      },
+    ],
+    comparisonRows: [
+      {
+        feature: "Tracked Keywords",
+        values: ["5 local / brand", "15 commercial", "35 national", "75+ SKU & national"],
+      },
+      {
+        feature: "On-Page & Tech SEO",
+        values: ["5 pages + GMB", "12 pages + crawl fixes", "Schema JSON-LD + CWV", "Full SSR + Hreflang"],
+      },
+      {
+        feature: "SEO Blog Content",
+        values: ["Not included", "2 articles (800w) / mo", "4 articles (1,200w) / mo", "8 research guides / mo"],
+      },
+      {
+        feature: "Backlinks & Citations",
+        values: ["Sitemap & GSC only", "Directory cleanup", "8 backlinks / mo", "15+ high-DR outreach / mo"],
+      },
+      {
+        feature: "Reporting Cadence",
+        values: ["Monthly PDF", "Bi-weekly check-in", "Weekly SERP ROI", "Dedicated Lead + Calls"],
       },
     ],
   },
   {
     id: "social-media-management",
-    indexLabel: "03",
     title: "Social Media Management",
     shortTitle: "Social Media",
     billingType: "monthly",
-    startingPriceInr: 9999,
+    startingPriceInr: 12999,
+    highlightSummary: "Reels, feeds & community",
     tagline:
       "Consistent feeds, high-retention Reels, trend hooks & community engagement tailored per platform.",
     scopePrinciple:
-      "Starter covers 1 platform with static posts; advanced tiers expand channels, short-form video reels & active DM moderation.",
+      "Starter covers 1 platform with static posts; advanced tiers expand channels, short-form video reels & inbox replies.",
     tiers: [
       {
         id: "smm-t1",
         tierCode: "TIER 01",
         tierLabel: "LITE",
         name: "Starter Presence",
-        priceInr: 9999,
+        priceInr: 12999,
         billingUnit: "/ mo",
         scopeLevel: 1,
         outputBadge: "1 Platform • 8 Posts",
@@ -274,7 +334,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 02",
         tierLabel: "CORE",
         name: "Consistent Growth",
-        priceInr: 14999,
+        priceInr: 17999,
         billingUnit: "/ mo",
         scopeLevel: 2,
         outputBadge: "2 Platforms • 4 Reels",
@@ -294,18 +354,18 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 03",
         tierLabel: "POPULAR",
         name: "Viral Momentum",
-        priceInr: 24999,
+        priceInr: 27999,
         billingUnit: "/ mo",
         scopeLevel: 3,
         outputBadge: "3 Platforms • 10 Reels",
         turnaround: "Daily Active",
         summary:
-          "Retention-first Reels scripting, kinetic edits & daily comment engagement engineered for reach.",
+          "Retention-first Reels scripting, kinetic edits & daily comment engagement built for reach.",
         deliverables: [
           "3 platforms (Instagram, YT Shorts & LinkedIn/FB)",
           "18 deliverables / mo (10 Reels + 8 carousels)",
           "3-second hook scripts, kinetic text & audio sync",
-          "Daily active comment banter & DM triage",
+          "Daily active comment replies & DM triage",
           "UGC / creator brief templates + monthly strategy call",
         ],
         isPopular: true,
@@ -315,13 +375,13 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 04",
         tierLabel: "SCALE",
         name: "Cultural Authority",
-        priceInr: 39999,
+        priceInr: 42999,
         billingUnit: "/ mo",
         scopeLevel: 4,
         outputBadge: "4+ Channels • 16 Reels",
         turnaround: "Dedicated Strategist",
         summary:
-          "Full-throttle social content machine with shoot direction, moment marketing & whitelisting.",
+          "Full-throttle social content machine with shoot direction, trendjacking & creator whitelisting.",
         deliverables: [
           "4+ channels (IG, YT Shorts, LinkedIn, X / Threads)",
           "28+ deliverables (16 Reels + 12 carousels/memes)",
@@ -331,16 +391,43 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         ],
       },
     ],
+    comparisonRows: [
+      {
+        feature: "Platforms Covered",
+        values: ["1 platform", "2 platforms", "3 platforms", "4+ platforms"],
+      },
+      {
+        feature: "Posts & Reels / mo",
+        values: [
+          "8 static + 2 stories",
+          "8 posts + 4 Reels",
+          "10 Reels + 8 carousels",
+          "16 Reels + 12 carousels",
+        ],
+      },
+      {
+        feature: "Scripting & Video Edit",
+        values: ["Static posts only", "Standard Reel cuts", "Hook scripts + kinetic", "Shoot briefs + Strategist"],
+      },
+      {
+        feature: "Community & DMs",
+        values: ["Publishing only", "Comment moderation", "Daily comments & DM", "Proactive management"],
+      },
+      {
+        feature: "Creator Support",
+        values: ["—", "Hashtag & timing", "UGC brief templates", "Creator whitelisting"],
+      },
+    ],
   },
   {
     id: "website-development",
-    indexLabel: "04",
     title: "Website Development",
     shortTitle: "Web Dev",
     billingType: "one-time",
-    startingPriceInr: 12999,
+    startingPriceInr: 15999,
+    highlightSummary: "Sites, stores & custom apps",
     tagline:
-      "Fast, mobile-first websites engineered from sleek 1-page launchpads to custom Next.js storefronts.",
+      "Fast, mobile-first websites crafted from sleek 1-page launchpads to custom Next.js storefronts.",
     scopePrinciple:
       "One-page launches keep costs low for fast validation; upper tiers unlock multi-page UX, e-commerce checkout & custom code.",
     tiers: [
@@ -349,7 +436,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 01",
         tierLabel: "LITE",
         name: "Launch One-Pager",
-        priceInr: 12999,
+        priceInr: 15999,
         billingUnit: "/ project",
         scopeLevel: 1,
         outputBadge: "1 Page • 5-Day Sprint",
@@ -370,7 +457,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 02",
         tierLabel: "CORE",
         name: "Business Website",
-        priceInr: 19999,
+        priceInr: 22999,
         billingUnit: "/ project",
         scopeLevel: 2,
         outputBadge: "Up to 5 Pages",
@@ -390,13 +477,13 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 03",
         tierLabel: "POPULAR",
         name: "Growth E-Com / Next.js",
-        priceInr: 34999,
+        priceInr: 37999,
         billingUnit: "/ project",
         scopeLevel: 3,
         outputBadge: "10 Pages / 25-SKU Store",
         turnaround: "14 Days",
         summary:
-          "Conversion-focused D2C store or bespoke Next.js site with instant UPI/card checkout & tracking.",
+          "Conversion-focused store or custom Next.js site with instant UPI/card checkout & tracking.",
         deliverables: [
           "Up to 10 bespoke pages OR Store (up to 25 SKUs)",
           "Custom Figma UI + Razorpay / Cashfree / UPI checkout",
@@ -411,13 +498,13 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 04",
         tierLabel: "FLAGSHIP",
         name: "Custom Web App",
-        priceInr: 64999,
+        priceInr: 67999,
         billingUnit: "/ project",
         scopeLevel: 4,
         outputBadge: "15+ Routes • Full Stack",
         turnaround: "21–28 Days",
         summary:
-          "Enterprise-grade Next.js flagship, interactive WebGL/3D experiences, portals & custom backends.",
+          "Full-stack Next.js flagship, interactive WebGL/3D visuals, portals & custom backend integrations.",
         deliverables: [
           "15+ custom routes, portals or Headless D2C stack",
           "Interactive 3D / WebGL UI & custom calculators",
@@ -427,14 +514,36 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         ],
       },
     ],
+    comparisonRows: [
+      {
+        feature: "Pages / Products",
+        values: ["1 page (5 sections)", "Up to 5 pages", "10 pages or 25 SKUs", "15+ custom routes / App"],
+      },
+      {
+        feature: "Checkout & Features",
+        values: ["Lead form + WhatsApp", "CRM / Sheets webhooks", "Razorpay/UPI + Blog CMS", "3D UI + Auth + APIs"],
+      },
+      {
+        feature: "Speed Target",
+        values: ["Mobile responsive", "90+ mobile speed", "<1s load (95+ CWV)", "99/100 CWV + Edge"],
+      },
+      {
+        feature: "Launch Timeline",
+        values: ["5 Days", "7–10 Days", "14 Days", "21–28 Days"],
+      },
+      {
+        feature: "Post-Launch Care",
+        values: ["SSL setup help", "15 days support", "30 days priority", "60 days dedicated SLA"],
+      },
+    ],
   },
   {
     id: "branding",
-    indexLabel: "05",
     title: "Branding",
     shortTitle: "Branding",
     billingType: "one-time",
-    startingPriceInr: 9999,
+    startingPriceInr: 12999,
+    highlightSummary: "Logos, kits & brand books",
     tagline:
       "Memorable brand identities—from clean logo marks to complete visual worlds, stationery & packaging guidelines.",
     scopePrinciple:
@@ -445,7 +554,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 01",
         tierLabel: "LITE",
         name: "Logo Starter",
-        priceInr: 9999,
+        priceInr: 12999,
         billingUnit: "/ project",
         scopeLevel: 1,
         outputBadge: "2 Logo Concepts",
@@ -466,7 +575,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 02",
         tierLabel: "CORE",
         name: "Brand Essentials Kit",
-        priceInr: 14999,
+        priceInr: 17999,
         billingUnit: "/ project",
         scopeLevel: 2,
         outputBadge: "3 Concepts + Stationery",
@@ -477,7 +586,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
           "3 distinct logo concepts (Wordmark + Icon + Mono)",
           "Full HEX / RGB / CMYK color & typography guide",
           "Visiting card, letterhead & social profile covers",
-          "3 revision rounds + full vector files (AI/EPS/SVG)",
+          "3 revision rounds + full vector files (Illustrator / EPS / SVG)",
           "7-day turnaround",
         ],
       },
@@ -486,7 +595,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 03",
         tierLabel: "POPULAR",
         name: "Complete Identity System",
-        priceInr: 24999,
+        priceInr: 27999,
         billingUnit: "/ project",
         scopeLevel: 3,
         outputBadge: "20-Page Brand Book",
@@ -507,7 +616,7 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         tierCode: "TIER 04",
         tierLabel: "FLAGSHIP",
         name: "Flagship Brand Bible",
-        priceInr: 44999,
+        priceInr: 47999,
         billingUnit: "/ project",
         scopeLevel: 4,
         outputBadge: "30+ Page Bible + 3 SKUs",
@@ -523,6 +632,28 @@ export const SERVICE_PRICING_CATEGORIES: ServicePricingCategory[] = [
         ],
       },
     ],
+    comparisonRows: [
+      {
+        feature: "Logo Concepts",
+        values: ["2 initial concepts", "3 full lockup sets", "4 custom concepts + icons", "Custom monogram + art"],
+      },
+      {
+        feature: "Stationery & Social",
+        values: ["Not included", "Card + Letterhead + Covers", "Full Kit + 6 Templates", "UI Kit + 12-Slide Deck"],
+      },
+      {
+        feature: "Brand Guidelines",
+        values: ["Color & font sheet", "Color/Type rule card", "20-page Brand Book", "30+ page Brand Bible"],
+      },
+      {
+        feature: "Packaging & 3D",
+        values: ["—", "—", "1 SKU 3D label mockup", "3 SKU print dielines + 3D"],
+      },
+      {
+        feature: "Delivery Time",
+        values: ["4–5 Days", "7 Days", "10–12 Days", "14–18 Days"],
+      },
+    ],
   },
 ];
 
@@ -531,7 +662,7 @@ export const CUSTOM_BUNDLE_MODULES: CustomBundleModule[] = [
     id: "graphics-designing",
     name: "Graphics Designing (Starter)",
     billingNote: "Monthly Recurring",
-    basePriceInr: 8999,
+    basePriceInr: 11999,
     deliverableSummary: "6–14 custom static/carousel designs tailored to your feed & ads.",
     impactMetric: "+18h saved/mo",
   },
@@ -539,7 +670,7 @@ export const CUSTOM_BUNDLE_MODULES: CustomBundleModule[] = [
     id: "seo-management",
     name: "SEO Management (Foundation)",
     billingNote: "Monthly Recurring",
-    basePriceInr: 9999,
+    basePriceInr: 12999,
     deliverableSummary: "Keyword tracking, technical cleanup, GMB & on-page optimization.",
     impactMetric: "+Top SERP Lift",
   },
@@ -547,7 +678,7 @@ export const CUSTOM_BUNDLE_MODULES: CustomBundleModule[] = [
     id: "social-media-management",
     name: "Social Media Management",
     billingNote: "Monthly Recurring",
-    basePriceInr: 9999,
+    basePriceInr: 12999,
     deliverableSummary: "Consistent feed planning, captions, Reels/carousels & growth metrics.",
     impactMetric: "+3x Reach",
   },
@@ -555,7 +686,7 @@ export const CUSTOM_BUNDLE_MODULES: CustomBundleModule[] = [
     id: "website-development",
     name: "Website Development Sprint",
     billingNote: "One-Time Project Add-on",
-    basePriceInr: 12999,
+    basePriceInr: 15999,
     deliverableSummary: "High-speed responsive website with WhatsApp & lead capture flows.",
     impactMetric: "<1.2s Load Speed",
   },
@@ -563,7 +694,7 @@ export const CUSTOM_BUNDLE_MODULES: CustomBundleModule[] = [
     id: "branding",
     name: "Brand Identity & Logo Kit",
     billingNote: "One-Time Project Add-on",
-    basePriceInr: 9999,
+    basePriceInr: 12999,
     deliverableSummary: "Custom logo directions, color system & scalable vector exports.",
     impactMetric: "100% Ownership",
   },

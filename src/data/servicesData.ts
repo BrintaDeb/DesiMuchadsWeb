@@ -58,7 +58,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       {
         step: "01",
         title: "Technical & Core Web Vitals Audit",
-        desc: "Deep algorithmic audit of schema, crawl budget, TTFB, and indexing barriers to eliminate ranking bottlenecks within 72 hours.",
+        desc: "Deep technical audit of schema, crawl budget, TTFB, and indexing barriers to eliminate ranking bottlenecks within 72 hours.",
       },
       {
         step: "02",
@@ -78,7 +78,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       {
         step: "05",
         title: "Daily Automated Bid & Query Pacing",
-        desc: "Continuous algorithmic adjustments, negative search term pruning, and real-time rank tracking transparently shown in your portal.",
+        desc: "Continuous bid and pacing adjustments, negative search term pruning, and real-time rank tracking transparently shown in your portal.",
       },
     ],
     specs: {
@@ -96,7 +96,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Tier 01 — Local Basics SEO",
-        price: "₹9,999",
+        price: "₹12,999",
         period: "per month",
         desc: "Lightweight starter plan covering essential keyword setup, meta fixes & local Google profile health.",
         highlights: [
@@ -109,7 +109,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 02 — Search Foundation",
-        price: "₹14,999",
+        price: "₹17,999",
         period: "per month",
         desc: "Consistent on-page optimization paired with regular SEO articles for steady organic growth.",
         highlights: [
@@ -122,7 +122,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 03 — Authority Engine",
-        price: "₹23,999",
+        price: "₹26,999",
         period: "per month",
         desc: "Core Web Vitals speed engineering, Schema JSON-LD, long-form articles & contextual backlinks.",
         highlights: [
@@ -135,7 +135,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 04 — Category Dominator",
-        price: "₹39,999",
+        price: "₹42,999",
         period: "per month",
         desc: "Aggressive national & e-commerce SEO architecture built to outrank legacy category leaders.",
         highlights: [
@@ -174,7 +174,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     iconName: "Rocket",
     gradient: "from-white/15 to-white/[0.03]",
     philosophy:
-      "Most agencies blow through ad spend with spray-and-pray creative, blaming the iOS update or algorithm when campaigns stall. At Desi Muchads, performance marketing is an algorithmic science. We combine ruthless dynamic creative testing (DCT), first-party server-side tracking (CAPI), and broad Advantage+ scaling to deliver consistent 5x+ ROAS.",
+      "Most agencies blow through ad spend with spray-and-pray creative, blaming platform updates when campaigns stall. At Desi Muchads, performance marketing is a data-driven discipline. We combine ruthless dynamic creative testing (DCT), first-party server-side tracking (CAPI), and broad Advantage+ scaling to deliver consistent 5x+ ROAS.",
     framework: [
       {
         step: "01",
@@ -206,7 +206,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       deliverables: [
         "Meta & Google multi-touch conversion funnel architecture",
         "Dynamic Creative Testing (DCT) with 6+ weekly refreshed hooks",
-        "Broad & Advantage+ algorithmic scaling frameworks",
+        "Broad & Advantage+ precision scaling frameworks",
         "First-party Conversions API (CAPI) & offline lead sync",
       ],
       tools: ["Meta Ads Manager", "Google Ads", "Triple Whale", "Stape CAPI"],
@@ -217,7 +217,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Growth Catalyst Stack",
-        price: "₹80,000",
+        price: "₹83,000",
         period: "per month",
         desc: "Engineered for challenger D2C brands spending ₹3L–₹15L/month seeking disciplined profitability.",
         highlights: [
@@ -225,12 +225,12 @@ export const AGENCY_SERVICES: ServiceItem[] = [
           "Weekly 4 High-Hook creative refreshes",
           "Full CAPI server-side integration",
           "Daily pacing & bid adjustments",
-          "Shared Slack/WhatsApp war room",
+          "Shared Slack/WhatsApp strategy channel",
         ],
       },
       {
         name: "Maharaja Scale Suite",
-        price: "₹1,50,000",
+        price: "₹1,53,000",
         period: "per month",
         desc: "For category leaders ready to deploy ₹15L–₹1Cr+/mo with dedicated growth engineering.",
         highlights: [
@@ -312,7 +312,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "High-Intent Pipeline Starter",
-        price: "₹65,000",
+        price: "₹68,000",
         period: "per month",
         desc: "For boutique professional firms and consultants needing 100-300 qualified sales appointments per month.",
         highlights: [
@@ -325,7 +325,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Enterprise Pipeline Dominator",
-        price: "₹1,25,000",
+        price: "₹1,28,000",
         period: "per month",
         desc: "For luxury real estate, healthcare clinics, and enterprise B2B sales teams requiring high volume SQLs.",
         highlights: [
@@ -403,7 +403,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Tier 01 — Starter Presence",
-        price: "₹9,999",
+        price: "₹12,999",
         period: "per month",
         desc: "Essential 1-platform static posting plan to keep your primary social feed active on a lean budget.",
         highlights: [
@@ -416,7 +416,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 02 — Consistent Growth",
-        price: "₹14,999",
+        price: "₹17,999",
         period: "per month",
         desc: "Multi-platform presence adding edited Reels & interactive stories for organic audience growth.",
         highlights: [
@@ -429,7 +429,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 03 — Viral Momentum",
-        price: "₹24,999",
+        price: "₹27,999",
         period: "per month",
         desc: "Retention-first Reels scripting, kinetic edits & daily comment engagement engineered for reach.",
         highlights: [
@@ -442,7 +442,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 04 — Cultural Authority",
-        price: "₹39,999",
+        price: "₹42,999",
         period: "per month",
         desc: "Full-scale content machine spanning 4+ channels with shoot briefs, moment marketing & whitelisting.",
         highlights: [
@@ -520,7 +520,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "E-Commerce Growth Retainer",
-        price: "₹75,000",
+        price: "₹78,000",
         period: "per month",
         desc: "For Shopify and WooCommerce stores seeking immediate conversion rate gains and automated retention.",
         highlights: [
@@ -533,12 +533,12 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Headless D2C Flagship Engine",
-        price: "₹1,40,000",
+        price: "₹1,43,000",
         period: "per month",
         desc: "For high-volume online retailers aiming for enterprise speed and deep custom personalization.",
         highlights: [
           "Sub-0.8s mobile storefront architecture",
-          "Personalized AI product recommendation engine",
+          "Personalized dynamic product recommendation engine",
           "Full lifecycle retention flows on WhatsApp & Email",
           "Omnichannel inventory synchronization",
           "Dedicated E-Commerce CRO Engineer",
@@ -562,7 +562,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     slug: "quick-commerce",
     title: "Quick Commerce Services",
     shortDesc: "Get Live And Scale Fast On Blinkit, Zepto And Instamart.",
-    fullDesc: "Rapid onboarding, algorithmic dark-store inventory visibility, sponsored brand placements, and high-velocity catalog rank engineering on India's top 10-minute delivery apps.",
+    fullDesc: "Rapid onboarding, dark-store inventory visibility, sponsored brand placements, and high-velocity catalog rank engineering on India's top 10-minute delivery apps.",
     metric: "10-Min Dark Store Scale",
     anchor: "#service-qcommerce",
     iconName: "Zap",
@@ -599,7 +599,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     specs: {
       deliverables: [
         "Fast-track onboarding on Blinkit, Zepto & Swiggy Instamart",
-        "Algorithmic dark-store inventory allocation & stock forecasting",
+        "Data-driven dark-store inventory allocation & stock forecasting",
         "Sponsored search keywords & category banner bidding strategy",
         "Stockout mitigation alerts & hyper-local pin code analytics",
       ],
@@ -611,7 +611,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Q-Commerce Launch Sprint",
-        price: "₹60,000",
+        price: "₹63,000",
         period: "per month",
         desc: "For emerging FMCG and packaged food brands entering quick commerce in top 5 metro cities.",
         highlights: [
@@ -624,13 +624,13 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "National Dark Store Dominator",
-        price: "₹1,15,000",
+        price: "₹1,18,000",
         period: "per month",
         desc: "Full-scale national coverage across 400+ dark stores in Blinkit, Zepto, and Swiggy Instamart.",
         highlights: [
           "Complete triage across all 3 quick-commerce platforms",
           "Category banner negotiation and flash placement booking",
-          "Algorithmic re-order forecasting to prevent stockouts",
+          "Automated re-order forecasting to prevent stockouts",
           "Hyper-local pin code ad targeting campaigns",
           "Dedicated Quick-Commerce Operations Lead",
         ],
@@ -702,7 +702,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Tier 01 — Launch One-Pager",
-        price: "₹12,999",
+        price: "₹15,999",
         period: "one-time sprint",
         desc: "Fast, credible single-page website built for local founders and quick campaign validation.",
         highlights: [
@@ -715,7 +715,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 02 — Business Website",
-        price: "₹19,999",
+        price: "₹22,999",
         period: "one-time sprint",
         desc: "Multi-page digital presence showcasing your company, offerings, testimonials & lead capture.",
         highlights: [
@@ -728,7 +728,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 03 — Growth E-Com / Next.js",
-        price: "₹34,999",
+        price: "₹37,999",
         period: "one-time sprint",
         desc: "Conversion-tuned online store or custom Next.js build with instant UPI/card payments.",
         highlights: [
@@ -741,7 +741,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Tier 04 — Custom Flagship Web App",
-        price: "₹64,999",
+        price: "₹67,999",
         period: "one-time sprint",
         desc: "Enterprise Next.js flagship with interactive 3D/WebGL visuals, custom portals & APIs.",
         highlights: [
@@ -819,7 +819,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Logo & Essential Starter Kit",
-        price: "₹9,999",
+        price: "₹12,999",
         period: "per project",
         desc: "Sharp logo mark & primary color direction for new consumer brands launching on a budget.",
         highlights: [
@@ -832,7 +832,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Single Hero SKU Packaging",
-        price: "₹24,999",
+        price: "₹27,999",
         period: "per SKU",
         desc: "Complete label & packaging architecture with print-ready dielines and 3D product renders.",
         highlights: [
@@ -911,7 +911,7 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     packages: [
       {
         name: "Unit Economics Diagnostic Audit",
-        price: "₹50,000",
+        price: "₹53,000",
         period: "one-time sprint",
         desc: "A complete 10-day forensic audit of your brand's unit economics, P&L leakages, and CAC/LTV health.",
         highlights: [
@@ -924,13 +924,13 @@ export const AGENCY_SERVICES: ServiceItem[] = [
       },
       {
         name: "Continuous Financial Governance & Margin Shield",
-        price: "₹1,00,000",
+        price: "₹1,03,000",
         period: "per month",
         desc: "Ongoing CFO-level financial stewardship for scaling brands spending ₹5L to ₹30L monthly.",
         highlights: [
           "Real-time daily ad spend vs. net margin pacing dashboard",
           "Automated WhatsApp COD address & intent confirmation system",
-          "Bi-weekly executive CFO strategy war-rooms",
+          "Bi-weekly executive CFO strategy sessions",
           "3PL shipping and payment gateway rate audits",
           "Quarterly tax, GST accounting, and working capital cash flow planning",
         ],

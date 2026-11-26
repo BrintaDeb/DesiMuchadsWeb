@@ -256,7 +256,7 @@ export function ProjectPreviewShowcase({
                 <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span className="truncate">
                   {project.liveUrl.startsWith("/")
-                    ? `https://desimuchads.agency${project.liveUrl}`
+                    ? `https://desimuchads.in${project.liveUrl}`
                     : project.liveUrl.replace("https://", "")}
                 </span>
                 <span className="ml-auto text-[9px] px-1 rounded bg-emerald-500/20 text-emerald-300 font-bold shrink-0">

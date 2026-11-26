@@ -23,17 +23,20 @@ import {
 } from "lucide-react";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
+import { useProposal } from "@/context/AgencyProposalContext";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { SonicToggle } from "./SonicToggle";
 import { CommandMenu } from "../common/CommandMenu";
 import { BreydaqsButton } from "../common/BreydaqsButton";
+import { ReadingProgressBar } from "../common/ReadingProgressBar";
 
 interface NavbarProps {
   onOpenKundli: () => void;
 }
 
 export function Navbar({ onOpenKundli }: NavbarProps) {
+  const { cartCount, openCart } = useProposal();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -170,15 +173,16 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         }`}
     >
       {/* Main Architectural Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Mark with Official White Moustache Logo */}
         <Link
           href="/"
+          data-slingshot-logo="true"
           onMouseEnter={() => sound.playPluck(180)}
-          className="flex items-center gap-2.5 sm:gap-3 focus:outline-none group shrink-0"
+          className="flex items-center gap-2 sm:gap-3 focus:outline-none group min-w-0 shrink"
         >
           {/* Authentic White Moustache Logo without box border */}
-          <div className="relative w-9 h-5 sm:w-11 sm:h-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <div className="relative w-8 h-4 sm:w-11 sm:h-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
             <img
               src="/desi-muchads-cropped-logo.png"
               srcSet="/desi-muchads-cropped-logo.png 1x, /desi-muchads-cropped-logo@2x.png 2x"
@@ -187,8 +191,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               loading="eager"
             />
           </div>
-          <div className="flex flex-col text-left justify-center shrink-0">
-            <div className="font-display font-black text-base sm:text-lg tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
+          <div className="flex flex-col text-left justify-center min-w-0">
+            <div className="font-display font-black text-sm sm:text-lg tracking-wide sm:tracking-wider text-white uppercase flex items-center gap-1 sm:gap-1.5 leading-none whitespace-nowrap">
               <span>DESI</span>
               <span className="text-zinc-300">MUCHADS</span>
             </div>
@@ -260,14 +264,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                         {getServiceLucideIcon(srv.iconName)}
                       </div>
                       <div className="flex flex-col text-left min-w-0 flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="font-display font-black text-xs text-white group-hover/item:text-[#e8e8e3] uppercase truncate">
-                            {srv.title}
-                          </span>
-                          <span className="text-[9px] font-mono text-emerald-400 font-bold ml-1">
-                            {srv.metric}
-                          </span>
-                        </div>
+                        <span className="font-display font-black text-xs text-white group-hover/item:text-[#e8e8e3] uppercase truncate">
+                          {srv.title}
+                        </span>
                         <span className="font-sans text-[11px] text-zinc-400 leading-snug mt-1 line-clamp-1">
                           {srv.shortDesc}
                         </span>
@@ -293,7 +292,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   className="mt-3 p-2.5 rounded-[0.2rem] bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 flex items-center justify-between text-xs font-mono transition-all"
                 >
                   <div className="flex items-center gap-2 text-zinc-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#d5fe00] animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/75" />
                     <span>Process Architecture: Discover · Define · Design · Build</span>
                   </div>
                   <span className="text-white font-bold">Explore ↗</span>
@@ -355,8 +354,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 >
                   <div className="flex flex-col text-left">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-300 font-bold">
                         Homepage Auto-Slider
                       </span>
                     </div>
@@ -465,6 +464,31 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             <span>App</span>
           </button>
 
+          {/* Service Cart Trigger */}
+          <button
+            type="button"
+            onClick={() => {
+              sound.playPluck(170);
+              haptics.selection();
+              openCart();
+            }}
+            className={`relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-[0.2rem] border text-[11px] font-mono transition-all ml-1 uppercase tracking-wider font-bold cursor-pointer ${
+              cartCount > 0
+                ? "border-white bg-white text-black shadow-[0_0_16px_rgba(255,255,255,0.25)]"
+                : "border-white/15 bg-[#121211] hover:border-white/40 text-zinc-300 hover:text-white"
+            }`}
+            title="Open Selected Service Cart & Dispatch via WhatsApp"
+            aria-label={`Open service cart (${cartCount} items)`}
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Cart</span>
+            {cartCount > 0 && (
+              <span className="px-1.5 py-0.5 rounded bg-black text-white text-[10px] font-black leading-none">
+                {cartCount}
+              </span>
+            )}
+          </button>
+
           {/* Zero-Payload Procedural Sound Toggle */}
           <SonicToggle />
 
@@ -479,7 +503,31 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
         </nav>
 
         {/* Mobile Header Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 lg:hidden shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              sound.playPluck(170);
+              haptics.medium();
+              openCart();
+            }}
+            style={{ minBlockSize: 0 }}
+            className={`touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] rounded-[0.2rem] border flex items-center justify-center active:scale-95 transition-transform relative cursor-pointer ${
+              cartCount > 0
+                ? "bg-white border-white text-black"
+                : "bg-white/5 border-white/15 text-white"
+            }`}
+            aria-label={`Open service cart (${cartCount} items)`}
+            title="Open Service Cart"
+          >
+            <ShoppingBag className="w-4 h-4" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full bg-emerald-500 text-black text-[9px] font-mono font-black flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+
           <SonicToggle />
 
           <button
@@ -491,7 +539,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
               }
             }}
-            className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] rounded-[0.2rem] bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 flex items-center justify-center active:scale-95 transition-transform relative cursor-pointer"
+            style={{ minBlockSize: 0 }}
+            className="touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] rounded-[0.2rem] bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 flex items-center justify-center active:scale-95 transition-transform relative cursor-pointer"
             aria-label="Download / Install Mobile App"
             title="Get Mobile App (iOS & Android)"
           >
@@ -505,7 +554,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               setIsCommandOpen(true);
             }}
             type="button"
-            className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] rounded-[0.2rem] bg-white/5 border border-white/15 text-white flex items-center justify-center active:scale-95 transition-transform"
+            style={{ minBlockSize: 0 }}
+            className="touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] rounded-[0.2rem] bg-white/5 border border-white/15 text-white flex items-center justify-center active:scale-95 transition-transform"
             aria-label="Open Command Search (⌘K)"
           >
             <Search className="w-4 h-4" />
@@ -516,7 +566,8 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               haptics.medium();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="p-2 min-w-[38px] min-h-[38px] sm:min-w-[42px] sm:min-h-[42px] flex items-center justify-center rounded-[0.2rem] bg-white/5 border border-white/15 text-white active:scale-95 transition-transform"
+            style={{ minBlockSize: 0 }}
+            className="touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] flex items-center justify-center rounded-[0.2rem] bg-white/5 border border-white/15 text-white active:scale-95 transition-transform"
             aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
@@ -622,7 +673,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                     <Sparkles className="w-3.5 h-3.5 text-white" />
                     <span>Featured Work (Homepage Slider)</span>
                   </span>
-                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Explore →</span>
+                  <span className="text-[10px] font-mono text-white font-bold">Explore →</span>
                 </Link>
 
                 <Link
@@ -689,6 +740,9 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           onOpenKundli();
         }}
       />
+
+      {/* Top Scroll-Linked Reading Progress Bar (copied from segmentsix.de) */}
+      <ReadingProgressBar />
     </header>
   );
 }

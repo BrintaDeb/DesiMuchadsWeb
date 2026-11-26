@@ -9,6 +9,7 @@ interface ProcessStep {
   number: string;
   title: string;
   description: string;
+  deliverables: string[];
   icon: string;
   x: number;
   y: number;
@@ -26,6 +27,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     number: "01",
     title: "Discover",
     description: "Business goals, users, constraints and technical context.",
+    deliverables: ["Unit Economics Audit", "Attribution Check", "Funnel Leakage Map"],
     icon: "icon-discover.svg",
     x: 0,
     y: 0,
@@ -34,6 +36,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     number: "02",
     title: "Define",
     description: "Product strategy, priorities, architecture and success criteria.",
+    deliverables: ["CM3 Growth Targets", "Offer Architecture", "Channel Split Plan"],
     icon: "icon-define.svg",
     x: 606,
     y: 0,
@@ -42,6 +45,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     number: "03",
     title: "Design",
     description: "UX flows, visual system, prototypes and validation.",
+    deliverables: ["Sub-Second Edge UI", "High-Hook Ad Creatives", "1-Tap Checkout UX"],
     icon: "icon-design.svg",
     x: 0,
     y: 362,
@@ -50,6 +54,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     number: "04",
     title: "Build and scale",
     description: "Development, implementation support and continuous improvement.",
+    deliverables: ["Next.js Production Ship", "Meta & Google Scale", "Daily Live Telemetry"],
     icon: "icon-build.svg",
     x: 606,
     y: 362,
@@ -95,6 +100,7 @@ const ASSET_BASE = "/process";
 export function AllerProcessSection() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const mobileListRef = useRef<HTMLOListElement>(null);
+  const mobileCardRefs = useRef<(HTMLLIElement | null)[]>([]);
   const haloRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLSpanElement>(null);
   const keyRef = useRef<HTMLDivElement>(null);
@@ -103,7 +109,6 @@ export function AllerProcessSection() {
   const [scale, setScale] = useState(1);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobileVisible, setIsMobileVisible] = useState(false);
   const [mobileActive, setMobileActive] = useState(0);
   const [anim, setAnim] = useState<AnimState>(INITIAL_ANIM);
 
@@ -131,29 +136,31 @@ export function AllerProcessSection() {
     return () => io.disconnect();
   }, []);
 
+  // Scroll-driven intersection observer for mobile timeline cards (zero JS scroll loop lag)
   useEffect(() => {
-    const el = mobileListRef.current;
-    if (!el) return;
+    const cards = mobileCardRefs.current.filter((c): c is HTMLLIElement => c !== null);
+    if (cards.length === 0) return;
+
     const io = new IntersectionObserver(
-      ([entry]) => setIsMobileVisible(entry.isIntersecting),
-      { threshold: 0.2 }
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const idxAttr = entry.target.getAttribute("data-step-idx");
+            if (idxAttr !== null) {
+              const parsed = parseInt(idxAttr, 10);
+              if (!Number.isNaN(parsed)) {
+                setMobileActive(parsed);
+              }
+            }
+          }
+        }
+      },
+      { rootMargin: "-32% 0px -38% 0px", threshold: 0.15 }
     );
-    io.observe(el);
+
+    cards.forEach((card) => io.observe(card));
     return () => io.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (
-      !isMobileVisible ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-    const timer = setInterval(() => {
-      setMobileActive((prev) => (prev + 1) % PROCESS_STEPS.length);
-    }, 1900);
-    return () => clearInterval(timer);
-  }, [isMobileVisible]);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -291,11 +298,8 @@ export function AllerProcessSection() {
         </div>
 
         {/* Top Asymmetric Split Heading Matching Site Typography */}
-        <div className="flex flex-col gap-6 lg:mx-auto lg:w-[1100px] max-w-full lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+        <div className="flex flex-col gap-6 lg:mx-auto lg:w-[1100px] max-w-full lg:flex-row lg:items-end lg:justify-between lg:gap-12 dm-scroll-reveal">
           <div className="lg:w-[540px]">
-            <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-3">
-              [ 05 / EXECUTION ARCHITECTURE ]
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight leading-[1.02]">
               <span className="text-zinc-400">A Clear Process</span>{" "}
               <span className="text-white">For Complex Products.</span>
@@ -307,8 +311,58 @@ export function AllerProcessSection() {
           </p>
         </div>
 
+        {/* Interactive System Flow Quick Stepper HUD */}
+        <div className="mt-8 lg:mx-auto lg:w-[1100px] max-w-full rounded-2xl bg-[#111114] border border-white/15 p-3 sm:p-4 space-y-3">
+          <div className="flex items-center gap-2 overflow-x-auto scroll-momentum-x pb-0.5">
+            {PROCESS_STEPS.map((step, idx) => {
+              const activePhase = hoveredIdx ?? mobileActive;
+              const isSelectedPhase = activePhase === idx;
+              return (
+                <button
+                  key={step.number}
+                  type="button"
+                  onClick={() => {
+                    sound.playPluck(155 + idx * 20);
+                    haptics.selection();
+                    setHoveredIdx(idx);
+                    setMobileActive(idx);
+                    mobileCardRefs.current[idx]?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "nearest",
+                    });
+                  }}
+                  className={`flex items-center gap-2 px-3 py-2 min-h-[40px] rounded-xl font-mono text-[11px] uppercase tracking-wider border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                    isSelectedPhase
+                      ? "bg-white text-black border-white font-bold shadow-md"
+                      : "bg-white/[0.04] text-zinc-300 border-white/10 hover:border-white/30"
+                  }`}
+                >
+                  <span className="opacity-70">{step.number}</span>
+                  <span>{step.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10 text-[11px] font-mono">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-zinc-400 uppercase mr-1">System Output:</span>
+              {PROCESS_STEPS[hoveredIdx ?? mobileActive].deliverables.map((d) => (
+                <span
+                  key={d}
+                  className="px-2 py-0.5 rounded bg-white/[0.07] border border-white/10 text-zinc-200"
+                >
+                  {d}
+                </span>
+              ))}
+            </div>
+            <span className="text-zinc-400">
+              Phase 0{(hoveredIdx ?? mobileActive) + 1} / 0{PROCESS_STEPS.length}
+            </span>
+          </div>
+        </div>
+
         {/* Mobile Vertical Timeline (< lg) */}
-        <div className="mt-12 lg:hidden">
+        <div className="mt-8 lg:hidden">
           <ol ref={mobileListRef} className="relative flex flex-col gap-4 pl-10">
             <span
               aria-hidden="true"
@@ -316,7 +370,7 @@ export function AllerProcessSection() {
             />
             <span
               aria-hidden="true"
-              className="absolute top-6 left-[11px] w-0.5 -translate-x-[0.5px] rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.45)] transition-[height] duration-700"
+              className="absolute top-6 left-[11px] w-0.5 -translate-x-[0.5px] rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.45)] transition-[height] duration-500"
               style={{
                 height: `calc((100% - 48px) * ${mobileActive / (PROCESS_STEPS.length - 1)})`,
               }}
@@ -325,7 +379,14 @@ export function AllerProcessSection() {
             {PROCESS_STEPS.map((step, idx) => {
               const isCardActive = idx === mobileActive;
               return (
-                <li key={step.number} className="relative">
+                <li
+                  key={step.number}
+                  data-step-idx={idx}
+                  ref={(el) => {
+                    mobileCardRefs.current[idx] = el;
+                  }}
+                  className="relative"
+                >
                   <span
                     aria-hidden="true"
                     className="absolute top-6 -left-10 size-6"

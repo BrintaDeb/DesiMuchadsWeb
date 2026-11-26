@@ -6,12 +6,13 @@ import { Clock, MapPin, Download } from "lucide-react";
 import { SocialRedirectionDeck } from "@/components/common/SocialRedirectionDeck";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
 import { MoustacheClock } from "@/components/common/MoustacheClock";
+import { MoustacheSlingshot } from "@/components/easteregg/MoustacheSlingshot";
 
 interface FooterProps {
   onOpenKundli?: () => void;
 }
 
-export function Footer({ onOpenKundli: _onOpenKundli }: FooterProps) {
+export function Footer({ onOpenKundli }: FooterProps) {
   const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
@@ -33,14 +34,11 @@ export function Footer({ onOpenKundli: _onOpenKundli }: FooterProps) {
   }, []);
 
   return (
-    <footer id="footer" className="relative bg-transparent text-[#e8e8e3] pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none font-display border-t border-[rgba(232,232,227,0.12)]">
+    <footer id="footer" className="relative bg-transparent text-[#e8e8e3] pt-24 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] overflow-x-clip select-none font-display border-t border-[rgba(232,232,227,0.12)]">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Colossal Breydaqs Headline Callout */}
         <div className="mb-20 pb-16 border-b border-[rgba(232,232,227,0.12)] flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10">
           <div className="max-w-3xl">
-            <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-3">
-              [ 05 / INITIATE ENGAGEMENT ]
-            </span>
             <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.035em] text-white uppercase leading-[0.92]">
               LET&apos;S MAKE SOMETHING PEOPLE <span className="font-editorial text-[#e8e8e3] font-normal lowercase tracking-normal">→ remember.</span>
             </h2>
@@ -264,7 +262,7 @@ export function Footer({ onOpenKundli: _onOpenKundli }: FooterProps) {
                 Our Headquarters &amp; Studio Hub
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed font-sans">
-                Visit our agency headquarters for executive strategy sessions, creative direction reviews, and growth war-rooms.
+                Visit our agency headquarters for executive strategy sessions, creative direction reviews, and growth workshops.
               </p>
 
               {/* Live Moustache Analog Clock Widget */}
@@ -323,26 +321,10 @@ export function Footer({ onOpenKundli: _onOpenKundli }: FooterProps) {
           </div>
         </div>
 
-        {/* Wordmark (MUCHADS Together) & Interactive Social Redirection Coins */}
-        <div className="py-12 sm:py-16 text-center select-none border-b border-[rgba(232,232,227,0.12)] flex flex-col items-center">
+        {/* Wordmark (DESI MUCHADS) & Interactive Slingshot + Social Redirection Coins */}
+        <div className="pt-12 sm:pt-16 pb-2 text-center select-none border-b border-[rgba(232,232,227,0.12)] flex flex-col items-center">
           <SocialRedirectionDeck className="mb-10" showTitle={false} />
-
-          <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-6 md:gap-x-8 text-4xl sm:text-6xl md:text-7xl lg:text-[8vw] font-display font-black tracking-tight uppercase leading-tight">
-            <span className="text-white/25 hover:text-white transition-colors duration-300">
-              DESI
-            </span>
-            <span className="inline-block transition-colors duration-300">
-              <span className="text-white">
-                MUCH
-              </span>
-              <span className="text-white/25 hover:text-white transition-colors duration-300">
-                ADS
-              </span>
-            </span>
-          </div>
-          <p className="mt-3 text-xs sm:text-sm font-mono tracking-widest text-zinc-500 uppercase font-medium">
-            HIGH-CONVERSION PERFORMANCE MARKETING STUDIO
-          </p>
+          <MoustacheSlingshot onOpenKundli={onOpenKundli} />
         </div>
 
         {/* Bottom Credits & Copyright */}

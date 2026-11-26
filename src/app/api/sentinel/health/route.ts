@@ -64,7 +64,7 @@ export async function GET() {
 
   return NextResponse.json({
     system: "Desi Muchads Platform Uptime Sentinel",
-    overallStatus: allHealthy ? "100% OPERATIONAL" : "DEGRADED TELEMETRY",
+    overallStatus: allHealthy ? "100% OPERATIONAL" : "DEGRADED STATUS",
     averageLatencyMs: avgLatency,
     verifiedPlatforms: checks.length,
     timestamp,

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Demo Product Not Found" };
   }
 
-  const pageUrl = `https://desimuchads.agency/demos/${slug}`;
+  const pageUrl = `https://desimuchads.in/demos/${slug}`;
 
   return {
     title: `${config.brandName} · Live Client Storefront`,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "DESI MUCHADS",
       images: [
         {
-          url: config.products[0]?.image || "/brand-logo-white.jpg",
+          url: config.products[0]?.image || "/og-banner.png",
           width: 1200,
           height: 630,
           alt: `${config.brandName} Flagship Experience`,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: `${config.brandName} · Live Storefront`,
       description: config.brandTagline,
-      images: [config.products[0]?.image || "/brand-logo-white.jpg"],
+      images: [config.products[0]?.image || "/og-banner.png"],
       creator: "@desimuchads",
     },
   };
@@ -93,7 +93,7 @@ async function DemoProductContent({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Store",
     name: config.brandName,
-    url: `https://desimuchads.agency/demos/${slug}`,
+    url: `https://desimuchads.in/demos/${slug}`,
     description: config.brandTagline,
     image: config.products[0]?.image,
     priceRange: "₹₹",
@@ -114,19 +114,19 @@ async function DemoProductContent({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://desimuchads.agency",
+        item: "https://desimuchads.in",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Live Demos",
-        item: "https://desimuchads.agency/#work",
+        item: "https://desimuchads.in/#work",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: config.brandName,
-        item: `https://desimuchads.agency/demos/${slug}`,
+        item: `https://desimuchads.in/demos/${slug}`,
       },
     ],
   };

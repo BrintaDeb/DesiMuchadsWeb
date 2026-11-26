@@ -71,7 +71,10 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-[90vh] pt-20 sm:pt-32 lg:pt-40 pb-12 sm:pb-24 lg:pb-28 flex items-center overflow-hidden bg-transparent text-[#e8e8e3] font-display">
+    <section
+      id="hero"
+      className="relative min-h-[90vh] pt-20 sm:pt-32 lg:pt-40 pb-12 sm:pb-24 lg:pb-28 flex items-center overflow-hidden bg-transparent text-[#e8e8e3] font-display scroll-mt-24"
+    >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-8 items-center">
           {/* Left Column: Monumental Breydaqs Headline & Proposition */}
@@ -101,21 +104,21 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                 aria-label="dominate - Click to Contact Us"
                 className="group relative inline-block cursor-pointer select-none font-editorial font-normal lowercase tracking-normal transition-all duration-300"
               >
-                {/* Floating Holographic Telemetry Pill on Hover */}
+                {/* Floating Holographic Telemetry Pill on Hover (pseudo-element keeps H1 DOM text clean for SEO) */}
                 <span
-                  className={`absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-[0.2rem] bg-[#0c0c0b]/95 border border-[#D4AF37]/60 shadow-[0_0_20px_rgba(212,175,55,0.35)] backdrop-blur-md font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-white whitespace-nowrap pointer-events-none transition-all duration-200 flex items-center gap-1.5 ${
+                  aria-hidden="true"
+                  data-hover-pill="CONTACT US → SCHEDULE CALL ↗"
+                  className={`before:content-[attr(data-hover-pill)] absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-[0.2rem] bg-[#0c0c0b]/95 border border-[#D4AF37]/60 shadow-[0_0_20px_rgba(212,175,55,0.35)] backdrop-blur-md font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-[#F3E5AB] whitespace-nowrap pointer-events-none transition-all duration-200 flex items-center gap-1.5 ${
                     isDominateHovered
                       ? "opacity-100 translate-y-0 scale-100"
                       : "opacity-0 translate-y-2 scale-95"
                   }`}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping" />
-                  <span className="text-[#F3E5AB] font-black">CONTACT US</span>
-                  <span className="text-zinc-400">→ SCHEDULE CALL ↗</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping order-first" />
                 </span>
 
                 {/* Kinetic Matte Gold Arrow */}
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-2.5 text-[#D4AF37] group-hover:text-[#F3E5AB] mr-1 sm:mr-2">
+                <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-2.5 text-[#D4AF37] group-hover:text-[#F3E5AB] mr-1 sm:mr-2">
                   →
                 </span>
 

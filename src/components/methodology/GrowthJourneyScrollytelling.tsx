@@ -56,7 +56,7 @@ const STAGES = [
       "Sub-400ms progressive WebP streaming with zero Cumulative Layout Shift (CLS)",
       "High-retention 3-second psychological hook formulas scripted for regional cultural resonance",
       "Dynamic 1-tap instant checkout eliminating multi-step form drop-offs",
-      "Algorithmic bid orchestration feeding verified offline purchase signals back to Meta/Google pixels",
+      "Data-driven bid orchestration feeding verified offline purchase signals back to Meta/Google pixels",
     ],
     telemetry: {
       headline: "ENGINEERING RECONSTRUCTION",
@@ -104,9 +104,6 @@ export function GrowthJourneyScrollytelling({
       {/* Header with Breydaqs Monospace Index */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-white/10 pb-6">
         <div>
-          <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-2">
-            02 / OPERATIONAL METHODOLOGY
-          </span>
           <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight">
             How We Turn Bleeding Ad Spend Into Category Dominance
           </h2>
@@ -187,11 +184,11 @@ export function GrowthJourneyScrollytelling({
             </div>
 
             {/* Kinetic Buttons */}
-            <div className="pt-4 flex items-center gap-4">
+            <div className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
               <BreydaqsButton
                 onClick={onOpenKundli}
                 variant="white"
-                className="py-3 px-6 text-xs"
+                className="py-3 px-6 text-xs w-full sm:w-auto"
               >
                 REQUEST GROWTH AUDIT
               </BreydaqsButton>
@@ -202,21 +199,59 @@ export function GrowthJourneyScrollytelling({
                   sound.playPluck(180);
                   setActiveStageIndex((prev) => (prev + 1) % STAGES.length);
                 }}
-                className="text-xs font-mono text-zinc-400 hover:text-white transition-colors uppercase tracking-wider"
+                className="min-h-[44px] px-4 py-2.5 rounded-[0.2rem] border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-xs font-mono text-zinc-300 hover:text-white transition-all uppercase tracking-wider cursor-pointer w-full sm:w-auto"
               >
-                Next Phase →
+                Next Phase ({((activeStageIndex + 1) % STAGES.length) + 1}/{STAGES.length}) →
               </button>
             </div>
           </div>
 
-          {/* Right Column: Live Telemetry Instrument HUD */}
+          {/* Right Column: Live Campaign Performance HUD */}
           <div className="lg:col-span-5">
-            <div className="p-6 sm:p-8 rounded-[0.25rem] bg-[#121211] border border-white/10 backdrop-blur-xl shadow-2xl space-y-6 relative overflow-hidden">
+            <div className="p-6 sm:p-8 rounded-[0.25rem] bg-[#121211] border border-white/10 sm:backdrop-blur-xl shadow-2xl space-y-6 relative overflow-hidden">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="text-[10px] font-mono font-bold tracking-widest text-zinc-400 uppercase">
                   {activeStage.telemetry.headline}
                 </span>
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  <span>0{activeStageIndex + 1}/0{STAGES.length}</span>
+                </span>
+              </div>
+
+              {/* Interactive System Flow Progress Segmented Bar */}
+              <div className="grid grid-cols-3 gap-1.5" role="group" aria-label="System maturity progress">
+                {STAGES.map((st, idx) => {
+                  const isPassed = idx <= activeStageIndex;
+                  return (
+                    <button
+                      key={st.id}
+                      type="button"
+                      onClick={() => {
+                        sound.playPluck(150 + idx * 25);
+                        setActiveStageIndex(idx);
+                      }}
+                      className="text-left group cursor-pointer focus:outline-none"
+                    >
+                      <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden mb-1.5">
+                        <div
+                          className="h-full w-full rounded-full transition-transform duration-500 origin-left"
+                          style={{
+                            transform: `scaleX(${isPassed ? 1 : 0})`,
+                            backgroundColor: isPassed ? activeStage.accentColor : "transparent",
+                          }}
+                        />
+                      </div>
+                      <span
+                        className={`block text-[9px] font-mono uppercase tracking-wider transition-colors ${
+                          idx === activeStageIndex ? "text-white font-bold" : "text-zinc-500 group-hover:text-zinc-300"
+                        }`}
+                      >
+                        {st.num}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Measured Metric */}
@@ -230,28 +265,46 @@ export function GrowthJourneyScrollytelling({
                 </div>
               </div>
 
-              {/* Grid of Micro Signals */}
-              <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="p-3 rounded-[0.2rem] bg-black/40 border border-white/10 text-center">
-                  <span className="text-[9px] font-mono text-zinc-400 block mb-0.5">SPEED</span>
-                  <span className="font-metric font-bold text-xs text-white block">
-                    {activeStage.telemetry.speed}
-                  </span>
-                </div>
-
-                <div className="p-3 rounded-[0.2rem] bg-black/40 border border-white/10 text-center">
-                  <span className="text-[9px] font-mono text-zinc-400 block mb-0.5">CVR</span>
-                  <span className="font-metric font-bold text-xs text-white block">
-                    {activeStage.telemetry.cvr}
-                  </span>
-                </div>
-
-                <div className="p-3 rounded-[0.2rem] bg-black/40 border border-white/10 text-center">
-                  <span className="text-[9px] font-mono text-zinc-400 block mb-0.5">RTO RISK</span>
-                  <span className="font-metric font-bold text-xs text-white block">
-                    {activeStage.telemetry.rto}
-                  </span>
-                </div>
+              {/* Grid of Micro Signals with Visual Efficiency Meters */}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-2">
+                {[
+                  {
+                    label: "SPEED",
+                    val: activeStage.telemetry.speed,
+                    pct: activeStageIndex === 0 ? 0.22 : activeStageIndex === 1 ? 0.86 : 0.99,
+                  },
+                  {
+                    label: "CVR",
+                    val: activeStage.telemetry.cvr,
+                    pct: activeStageIndex === 0 ? 0.18 : activeStageIndex === 1 ? 0.72 : 0.95,
+                  },
+                  {
+                    label: "RTO RISK",
+                    val: activeStage.telemetry.rto,
+                    pct: activeStageIndex === 0 ? 0.34 : activeStageIndex === 1 ? 0.76 : 0.94,
+                  },
+                ].map((sig) => (
+                  <div
+                    key={sig.label}
+                    className="p-3 rounded-[0.2rem] bg-black/40 border border-white/10 text-center flex flex-col justify-between gap-2"
+                  >
+                    <div>
+                      <span className="text-[9px] font-mono text-zinc-400 block mb-0.5">{sig.label}</span>
+                      <span className="font-metric font-bold text-xs text-white block">
+                        {sig.val}
+                      </span>
+                    </div>
+                    <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                      <div
+                        className="h-full w-full rounded-full transition-transform duration-500 origin-left"
+                        style={{
+                          transform: `scaleX(${sig.pct})`,
+                          backgroundColor: activeStage.accentColor,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
 
               <div className="p-3 rounded-[0.2rem] bg-black/20 border border-white/5 text-[11px] font-mono text-zinc-400 leading-relaxed text-left">

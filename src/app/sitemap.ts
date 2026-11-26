@@ -4,8 +4,8 @@ import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { DEMO_PROJECTS_DATABASE } from "@/data/demoProductsData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://desimuchads.agency";
-  const currentDate = new Date("2026-11-20T00:00:00.000Z");
+  const baseUrl = "https://desimuchads.in";
+  const currentDate = new Date("2026-11-26T00:00:00.000Z");
 
   // 1. Core Landing & Main Anchor Routes
   const routes: MetadataRoute.Sitemap = [

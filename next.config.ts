@@ -6,6 +6,18 @@ const nextConfig: NextConfig = {
   compress: true,
   cacheComponents: true,
   partialPrefetching: true,
+  outputFileTracingIncludes: {
+    "/api/download-apk": ["./public/downloads/**/*"],
+  },
+  outputFileTracingExcludes: {
+    "/api/*": [
+      "./public/projects/**/*",
+      "./public/art/**/*",
+      "./public/team/**/*",
+      "./public/logos/**/*",
+      "./scratch/**/*",
+    ],
+  },
   images: {
     remotePatterns: [
       {
@@ -14,8 +26,38 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: ".*\\.vercel\\.app",
+          },
+        ],
+        destination: "https://desimuchads.in/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: ".*\\.vercel\\.app",
+          },
+        ],
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow, noarchive",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: [

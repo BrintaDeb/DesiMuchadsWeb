@@ -109,20 +109,25 @@ export function SpotlightCard({
     [enableTilt, isHovered, maxTilt, perspective, prefersReducedMotion, scale]
   );
 
-  // Gyroscope mobile spatial tilt support (active when card is in view on Android & iOS)
+  // Skip per-card gyroscope physics on coarse mobile touchscreens to eliminate multi-card RAF churn during scroll
   useEffect(() => {
-    if (typeof window === "undefined" || prefersReducedMotion || !enableTilt || !isInView) return;
+    if (
+      typeof window === "undefined" ||
+      prefersReducedMotion ||
+      !enableTilt ||
+      !isInView ||
+      isCoarseRef.current
+    ) {
+      return;
+    }
 
     const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma === null || e.beta === null) return;
-      // When finger is touching, touch coordinate takes priority
       if (isHovered) return;
 
-      // Normalize gamma (-25 to 25 deg roll) and beta (20 to 70 deg pitch)
       const normX = Math.max(-1, Math.min(1, e.gamma / 25));
       const normY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
 
-      // Dynamic physical 3D tilt responding to device orientation
       targetX.current = normX * 0.75;
       targetY.current = normY * 0.75;
 
@@ -192,6 +197,8 @@ export function SpotlightCard({
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
+      // Skip 3D physics recalculations during mobile finger scroll
+      if (isCoarseRef.current) return;
       if (e.touches && e.touches[0]) {
         handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
       }
@@ -291,13 +298,13 @@ export function SpotlightCard({
       onTouchCancel={handleTouchEnd}
       style={{
         transformStyle: "preserve-3d",
-        willChange: "transform",
+        willChange: isHovered ? "transform" : "auto",
         transition: isHovered
           ? "none"
-          : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease",
+          : "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease",
         ...props.style,
       }}
-      className={`relative overflow-hidden select-none ${isGlass ? "ios-glass-card backdrop-blur-xl" : ""} ${className}`}
+      className={`relative overflow-hidden select-none active:scale-[0.99] ${isGlass ? "ios-glass-card sm:backdrop-blur-xl" : ""} ${className}`}
       {...props}
     >
       {/* 1. iOS Specular Reflection Sheen (Follows cursor in 3D) */}

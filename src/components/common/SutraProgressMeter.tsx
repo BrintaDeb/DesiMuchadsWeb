@@ -1,110 +1,240 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { sound } from "@/lib/sound";
+import { haptics } from "@/lib/haptics";
 
+interface RailSection {
+  id: string;
+  number: string;
+  title: string;
+  fallbackRoute?: string;
+}
+
+const RAIL_SECTIONS: RailSection[] = [
+  { id: "hero", number: "01", title: "Vision & Manifesto" },
+  {
+    id: "services",
+    number: "02",
+    title: "Disciplines & Services",
+    fallbackRoute: "/services",
+  },
+  {
+    id: "work",
+    number: "03",
+    title: "Selected Works",
+    fallbackRoute: "/work",
+  },
+  { id: "clients", number: "04", title: "Partners & Process" },
+  {
+    id: "pricing",
+    number: "05",
+    title: "4-Tier Pricing",
+    fallbackRoute: "/pricing",
+  },
+  {
+    id: "footer",
+    number: "06",
+    title: "Strategy & Contact",
+    fallbackRoute: "/contact",
+  },
+];
+
+/**
+ * Right-edge floating circular chapter rail (`01`–`06`) modeled on segmentsix.de's `.chapter-rail`.
+ * Features accessible 36px touch/hit targets, terracotta `#d4a48a` active location pill,
+ * 1900ms click-lock released immediately on manual wheel/touch, and ResizeObserver recalibration.
+ */
 export function SutraProgressMeter() {
   const router = useRouter();
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string>("hero");
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const railRef = useRef<HTMLElement>(null);
+  const lockedIdRef = useRef<string | null>(null);
+  const lockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const sections = [
-    { id: "hero", name: "01", eng: "Vision & Architecture" },
-    { id: "services", name: "02", eng: "Disciplines & Services" },
-    { id: "work", name: "03", eng: "Selected Works & Art" },
-    { id: "clients", name: "04", eng: "Client Trust Proof" },
-    { id: "pricing", name: "05", eng: "4-Tier Service Pricing" },
-    { id: "contact", name: "06", eng: "Strategy Session" },
-  ];
+  const evaluateActiveSection = useCallback(() => {
+    const header = document.querySelector("header");
+    const headerHeight = header ? header.getBoundingClientRect().height : 84;
+    const threshold = Math.max(headerHeight + 90, 170);
+    const root = document.documentElement;
 
-  const handleSectionClick = (id: string) => {
-    sound.playChime();
-    if (id === "hero") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (lockedIdRef.current) {
+      setActiveId(lockedIdRef.current);
       return;
     }
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      if (id === "pricing") router.push("/pricing");
-      else if (id === "services") router.push("/services");
-      else if (id === "work") router.push("/work");
-      else if (id === "contact") router.push("/contact");
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    if (
+      root.scrollHeight > window.innerHeight + 100 &&
+      scrollBottom >= root.scrollHeight - 28
+    ) {
+      const last = RAIL_SECTIONS[RAIL_SECTIONS.length - 1];
+      if (document.getElementById(last.id)) {
+        setActiveId(last.id);
+        return;
+      }
     }
-  };
+
+    let current = RAIL_SECTIONS[0].id;
+    for (const sec of RAIL_SECTIONS) {
+      const el = document.getElementById(sec.id);
+      if (!el) continue;
+      if (el.getBoundingClientRect().top <= threshold) {
+        current = sec.id;
+      }
+    }
+
+    setActiveId(current);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        const currentProgress = (window.scrollY / totalScroll) * 100;
-        setScrollProgress(currentProgress);
+    let rafId = 0;
+
+    const scheduleEval = () => {
+      if (!document.hidden && !rafId) {
+        rafId = requestAnimationFrame(() => {
+          rafId = 0;
+          evaluateActiveSection();
+        });
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const clearLock = () => {
+      if (lockTimerRef.current) {
+        clearTimeout(lockTimerRef.current);
+        lockTimerRef.current = null;
+      }
+      if (lockedIdRef.current) {
+        lockedIdRef.current = null;
+        scheduleEval();
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (
+        e.target instanceof Element &&
+        !e.target.closest(".dm-chapter-rail")
+      ) {
+        clearLock();
+      }
+    };
+
+    scheduleEval();
+
+    window.addEventListener("scroll", scheduleEval, { passive: true });
+    window.addEventListener("resize", scheduleEval, { passive: true });
+    window.addEventListener("wheel", clearLock, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    document.addEventListener("visibilitychange", scheduleEval);
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(scheduleEval);
+      ro.observe(document.body);
+    }
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+      window.removeEventListener("scroll", scheduleEval);
+      window.removeEventListener("resize", scheduleEval);
+      window.removeEventListener("wheel", clearLock);
+      window.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("visibilitychange", scheduleEval);
+      ro?.disconnect();
+    };
+  }, [evaluateActiveSection]);
+
+  const handleJump = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sec: RailSection
+  ) => {
+    const el = document.getElementById(sec.id);
+    if (!el && sec.fallbackRoute) {
+      e.preventDefault();
+      sound.playChime();
+      haptics.selection();
+      router.push(sec.fallbackRoute);
+      return;
+    }
+
+    e.preventDefault();
+    sound.playChime();
+    haptics.selection();
+
+    if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+    lockedIdRef.current = sec.id;
+    lockTimerRef.current = setTimeout(() => {
+      lockedIdRef.current = null;
+      lockTimerRef.current = null;
+      evaluateActiveSection();
+    }, 1900);
+    setActiveId(sec.id);
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const behavior: ScrollBehavior = reducedMotion ? "auto" : "smooth";
+
+    if (sec.id === "hero") {
+      window.scrollTo({ top: 0, behavior });
+    } else if (el) {
+      el.scrollIntoView({ behavior, block: "start" });
+    }
+  };
 
   return (
-    <aside
-      aria-label="Scroll progress sutra"
-      className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center select-none pointer-events-auto"
+    <nav
+      ref={railRef}
+      aria-label="Page sections"
+      className="dm-chapter-rail hidden md:grid"
     >
-      {/* Top Diamond Pinnacle */}
-      <div className="w-2.5 h-2.5 rotate-45 border border-white/60 bg-white/20 mb-2" />
+      {/* Vertical Monochrome Scroll Progress Spine */}
+      <span aria-hidden="true" className="dm-rail-spine">
+        <span className="dm-rail-spine-fill" />
+      </span>
 
-      {/* Sutra Track with Dynamic Glowing White Fill */}
-      <div className="relative w-[3px] h-64 sm:h-80 bg-white/15 rounded-full overflow-hidden">
-        <div
-          className="w-full bg-white shadow-[0_0_10px_white] transition-all duration-150"
-          style={{ height: `${scrollProgress}%` }}
-        />
-      </div>
+      {RAIL_SECTIONS.map((sec, idx) => {
+        const isCurrent = activeId === sec.id;
+        const isHovered = hoveredId === sec.id;
 
-      {/* 6 Checkpoint Dots & Hindi Transliterated Tooltips */}
-      <div className="absolute inset-y-6 flex flex-col justify-between items-center pointer-events-auto">
-        {sections.map((sec, idx) => (
-          <div
+        return (
+          <a
             key={sec.id}
-            onClick={() => handleSectionClick(sec.id)}
-            role="button"
-            tabIndex={0}
-            aria-label={`Jump to ${sec.eng}`}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleSectionClick(sec.id);
-              }
-            }}
+            href={`#${sec.id}`}
+            aria-label={sec.title}
+            aria-current={isCurrent ? "location" : undefined}
+            className={isCurrent ? "is-current" : undefined}
+            onClick={(e) => handleJump(e, sec)}
             onMouseEnter={() => {
-              sound.playPluck(160 + idx * 15);
-              setHoveredSection(sec.id);
+              sound.playPluck(155 + idx * 14);
+              setHoveredId(sec.id);
             }}
-            onMouseLeave={() => setHoveredSection(null)}
-            className="relative flex items-center justify-center cursor-pointer group focus:outline-none"
+            onMouseLeave={() => setHoveredId(null)}
+            onFocus={() => setHoveredId(sec.id)}
+            onBlur={() => setHoveredId(null)}
           >
-            <div className="w-2 h-2 rounded-full border border-white/60 bg-black group-hover:scale-150 group-hover:bg-white transition-all shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
+            <span aria-hidden="true" className="dm-rail-number">
+              {sec.number}
+            </span>
 
-            {/* Hover Tooltip Pill */}
-            {hoveredSection === sec.id && (
-              <div className="absolute right-6 px-3 py-1 rounded-full bg-black/95 border border-white/30 backdrop-blur-md shadow-2xl whitespace-nowrap text-right animate-in fade-in slide-in-from-right-2 duration-150">
-                <span className="font-royal text-xs text-white block font-semibold leading-tight">
-                  {sec.name}
-                </span>
-                <span className="font-mono text-[9px] uppercase tracking-wider text-zinc-400 block">
-                  {sec.eng}
-                </span>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Bottom Diamond Base */}
-      <div className="w-2.5 h-2.5 rotate-45 border border-white/60 bg-white/20 mt-2" />
-    </aside>
+            <span
+              aria-hidden="true"
+              className={`dm-rail-tooltip ${isHovered ? "is-visible" : ""
+                }`}
+            >
+              <span className="dm-rail-tooltip-num font-mono text-[9px] font-bold mr-1.5">
+                {sec.number}
+              </span>
+              <span className="font-sans text-[11px] font-medium">
+                {sec.title}
+              </span>
+            </span>
+          </a>
+        );
+      })}
+    </nav>
   );
 }

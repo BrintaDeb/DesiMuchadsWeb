@@ -1,0 +1,8 @@
+# Local build artifacts and scratch data
+.next
+node_modules
+scratch
+screenshot.png
+*.tsbuildinfo
+playwright-report
+test-results

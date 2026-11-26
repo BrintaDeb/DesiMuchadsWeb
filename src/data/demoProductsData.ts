@@ -364,7 +364,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       eyebrow: "B2B COMMERCIAL FLEET ELECTRIFICATION",
       title: "Cut Last-Mile Fleet Running Costs by 72%. Zero Capex.",
       subtitle:
-        "Engineered for high-duty delivery operations. Heavy-payload electric 2W and 3W vehicles with 90-second swappable batteries and IoT fleet telemetry.",
+        "Engineered for high-duty delivery operations. Heavy-payload electric 2W and 3W vehicles with 90-second swappable batteries and IoT fleet tracking.",
       primaryCta: "Calculate Fleet Savings",
       secondaryCta: "Book Fleet Pilot (10 EVs)",
       stats: [
@@ -2672,27 +2672,27 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
   "zenith-seo-growth": {
     slug: "zenith-seo-growth",
     brandName: "Zenith RankMatrix Growth Engine",
-    brandTagline: "Enterprise Organic Topical Authority & AI Search Optimization (GEO)",
+    brandTagline: "Enterprise Organic Topical Authority & Search Optimization (GEO)",
     serviceCriteria: {
       serviceId: "seo-sem",
       serviceTitle: "SEO & SEM Services",
-      primaryObjective: "Topical Cluster Architecture, AI Search Engine Optimization (GEO) & High-Intent Commercial Acquisition",
+      primaryObjective: "Topical Cluster Architecture, Structured Answer Visibility (GEO) & High-Intent Acquisition",
       targetKpi: "Top 3 SERP for 480+ High-Commercial Queries · 8.4x Blended Search ROAS",
       techArchitecture: [
         "Next.js 16 Server Components & Structured Data",
         "Deep Topical Authority Graph Modeling",
         "Schema.org Rich Graph & Organization Engine",
-        "Real-Time AI GEO Search Citation Tracker",
+        "Real-Time Search Answer Citation Tracker",
       ],
       deliverablesDeployed: [
         "Semantic Cluster Intelligence & 50 Pillar Dossiers",
         "Programmatic Search Landing Page Architecture",
-        "Generative Engine Optimization (Perplexity/ChatGPT/Gemini)",
+        "Answer Engine Optimization (Search & Answer Citations)",
         "Automated High-Intent Bidding & Search Negative Shields",
       ],
       verifiedImpact: "480+ #1 Positions · 3.4M Monthly Organic Impressions · ₹2.4Cr Pipeline Value",
     },
-    categoryBadge: "Enterprise Organic Search Engine & AI Citation Architecture",
+    categoryBadge: "Enterprise Organic Search Engine & Citation Architecture",
     domainUrl: "zenithrankmatrix.io",
     theme: {
       primaryBg: "bg-[#090d16]",
@@ -2702,22 +2702,22 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       heroGlow: "from-cyan-900/30 via-blue-800/10 to-transparent",
     },
     hero: {
-      eyebrow: "ENTERPRISE SEARCH & AI ANSWER ENGINE OPTIMIZATION",
+      eyebrow: "ENTERPRISE SEARCH & TECHNICAL AUTHORITY OPTIMIZATION",
       title: "Capture Customers at the Exact Nanosecond of Purchase Intent.",
       subtitle:
-        "We replace vanity keywords with algorithmic topical dominance. High-intent commercial clusters, sub-second Core Web Vitals, and Generative Engine Optimization (GEO) that makes your brand the default cited source across Google, ChatGPT, and Perplexity.",
+        "We replace vanity keywords with structured topical dominance. High-intent commercial clusters, sub-second Core Web Vitals, and semantic schema architecture that makes your brand the canonical source across Google and modern search engines.",
       primaryCta: "Explore Keyword Cluster Matrix",
       secondaryCta: "View Technical SEO Audit Specs",
       stats: [
         { label: "Top 3 SERP Ranks", val: "480+" },
         { label: "Search Ad ROAS", val: "8.4x" },
-        { label: "AI GEO Citation Share", val: "94.2%" },
+        { label: "Search Citation Share", val: "94.2%" },
         { label: "Monthly Organic Clicks", val: "680,000+" },
       ],
     },
     interactiveType: "seo_serp_cluster",
     interactiveData: {
-      title: "Zenith Real-Time Keyword Cluster & AI Answer Engine (GEO) Telemetry",
+      title: "Zenith Real-Time Keyword Cluster & Search Visibility Matrix",
       serpClusters: [
         { cluster: "Enterprise B2B Cloud Migration", volume: "24,500/mo", rank: 1, aiGeoShare: "96.4%", cpcValue: "₹420", intent: "Commercial" },
         { cluster: "SOC-2 Compliant FinTech Infrastructure", volume: "18,200/mo", rank: 2, aiGeoShare: "91.8%", cpcValue: "₹680", intent: "Commercial" },
@@ -2725,10 +2725,10 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         { cluster: "High-Throughput Microservices Orchestration", volume: "14,800/mo", rank: 2, aiGeoShare: "89.5%", cpcValue: "₹540", intent: "Informational" },
       ],
       geoEngines: [
-        { engine: "Google Search (AI Overviews / SGE)", aiShare: "94.8%", citationsCount: 1420, status: "Primary Cited Source" },
-        { engine: "Perplexity AI Pro", aiShare: "97.2%", citationsCount: 980, status: "Dominant Source Citation" },
-        { engine: "OpenAI SearchGPT", aiShare: "92.5%", citationsCount: 750, status: "Top 3 Grounding Result" },
-        { engine: "Google Gemini 2.5 Live", aiShare: "95.1%", citationsCount: 1120, status: "Synthesized Expert Answer" },
+        { engine: "Google Search (Rich Snippets)", aiShare: "94.8%", citationsCount: 1420, status: "Primary Cited Source" },
+        { engine: "Google Discover & News", aiShare: "97.2%", citationsCount: 980, status: "Dominant Source Citation" },
+        { engine: "Enterprise Search Answers", aiShare: "92.5%", citationsCount: 750, status: "Top 3 Grounding Result" },
+        { engine: "Featured Knowledge Panel", aiShare: "95.1%", citationsCount: 1120, status: "Canonical Brand Source" },
       ],
     },
     products: [
@@ -2741,7 +2741,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         rating: 5.0,
         reviewCount: 42,
         description:
-          "Exhaustive algorithmic audit and remediation: Sub-600ms LCP compression, Schema.org Organization Graph, edge cache invalidation, and crawl budget defragmentation.",
+          "Exhaustive technical audit and remediation: Sub-600ms LCP compression, Schema.org Organization Graph, edge cache invalidation, and crawl budget defragmentation.",
         specs: ["Sub-600ms LCP Guarantee", "Complete Schema.org Graph", "Zero Indexing Bottlenecks", "C-Suite Impact Dashboard"],
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
       },
@@ -2754,21 +2754,21 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         rating: 4.9,
         reviewCount: 38,
         description:
-          "50 deeply researched, mathematically clustered topical authority articles engineered to monopolize semantic entities and dominate high-intent commercial SERPs.",
+          "50 deeply researched, carefully structured topical authority articles engineered to monopolize semantic entities and dominate high-intent commercial SERPs.",
         specs: ["50 Clustered Authority Articles", "Entity Graph Modeling", "Internal PageRank Siloing", "Rank #1 SERP Guarantee"],
         image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
       },
       {
         id: "zenith-03",
-        name: "Generative Engine Optimization (GEO) & AI Knowledge Graph",
-        category: "AI Search Optimization",
+        name: "Structured Entity Optimization (GEO) & Brand Knowledge Graph",
+        category: "Technical Search Optimization",
         price: 120000,
-        badge: "Future-Proof AI Search",
+        badge: "Future-Ready Search",
         rating: 5.0,
         reviewCount: 29,
         description:
-          "Optimizes your brand corpus for OpenAI SearchGPT, Perplexity, and Google SGE citations. Structured knowledge injection ensuring AI models recommend you first.",
-        specs: ["Perplexity & ChatGPT Citation Graph", "AI Knowledge Injection", "Prompt Grounding Benchmarks", "Weekly AI Share-of-Voice"],
+          "Structures your brand corpus for featured snippets, knowledge panels, and modern answer engines so verified citations always point to you first.",
+        specs: ["Structured Knowledge Graph", "Entity Attribution Mapping", "Citation Share Benchmarks", "Weekly Visibility Reports"],
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
       },
       {
@@ -2780,15 +2780,15 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         rating: 4.9,
         reviewCount: 64,
         description:
-          "Laser-targeted Google Search & PMax management with automated 24/7 negative query scraping, value-based bidding, and competitor query interception.",
-        specs: ["Automated Negative Scraping", "Value-Based Bidding Scripts", "Competitor Query Interception", "Target Search ROAS > 6.0x"],
+          "Laser-targeted Google Search & PMax management with automated 24/7 negative query filtering, value-based bidding, and competitor query interception.",
+        specs: ["Automated Negative Filtering", "Value-Based Bidding Scripts", "Competitor Query Interception", "Target Search ROAS > 6.0x"],
         image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80",
       },
     ],
     trustBadges: [
-      { title: "Google Premier Partner Caliber", desc: "Enterprise account governance with direct algorithmic search modeling" },
+      { title: "Google Premier Partner Caliber", desc: "Enterprise account governance with direct search demand modeling" },
       { title: "Zero Black-Hat Retainers", desc: "100% white-hat topical authority graph engineering and whitepaper citations" },
-      { title: "Live Real-Time SERP Telemetry", desc: "Hourly keyword tracking and AI citation monitoring across 80+ geolocations" },
+      { title: "Live Real-Time SERP Tracking", desc: "Hourly keyword tracking and citation monitoring across 80+ geolocations" },
       { title: "Target ROAS or Escrow Refund", desc: "Contractually committed to predefined organic traffic and search revenue targets" },
     ],
     customerReviews: [
@@ -2805,16 +2805,16 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         author: "Tanvi Mathur",
         location: "Gurugram, Haryana",
         rating: 5,
-        title: "Perplexity and ChatGPT now quote us as the primary authority",
+        title: "Modern search platforms now quote us as the primary authority",
         comment:
-          "Their Generative Engine Optimization sprint put our whitepapers and case studies directly into Perplexity Pro and SearchGPT answer citations. The quality of enterprise inbound leads has been extraordinary.",
+          "Their technical schema sprint put our whitepapers and case studies into top answer snippets and featured panels. The quality of enterprise inbound leads has been extraordinary.",
         verified: true,
       },
     ],
     faq: [
       {
-        q: "What is Generative Engine Optimization (GEO) and why is it crucial now?",
-        a: "GEO is the technical process of structuring your content, brand citations, and entity graphs so that AI search engines (like Perplexity, SearchGPT, and Google SGE) retrieve and quote your brand as the canonical authority in conversational answers, capturing users who no longer click traditional blue links.",
+        q: "What is Structured Entity Optimization (GEO) and why does it matter?",
+        a: "GEO is the technical process of structuring your content, brand citations, and entity graphs so modern search platforms retrieve and feature your brand as the canonical authority directly in high-intent search results.",
       },
       {
         q: "How does Zenith protect search ad spend from budget waste?",
@@ -2945,7 +2945,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       { title: "100/100 Google Lighthouse Guaranteed", desc: "Contractually committed Core Web Vitals on mobile and desktop devices" },
       { title: "Zero Re-Platforming Pain", desc: "Keep your existing Shopify or Custom catalog backend while elevating the frontend to Next.js 16" },
       { title: "50,000+ Flash Concurrency Tested", desc: "Stress-tested with automated k6 load suites up to 50k simultaneous shoppers" },
-      { title: "24/7 Edge Telemetry & Sentry SRE", desc: "Enterprise observability with sub-second error alerts and synthetic uptime tests" },
+      { title: "24/7 Edge Monitoring & Sentry SRE", desc: "Enterprise observability with sub-second error alerts and automated uptime tests" },
     ],
     customerReviews: [
       {
@@ -3004,7 +3004,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       verifiedImpact: "Benchmark Feature across International Design & Digital Art Forums"
     },
     categoryBadge: "Master Artwork · 300 DPI Vector Edition",
-    domainUrl: "art.desimuchads.agency/ganesha",
+    domainUrl: "art.desimuchads.in/ganesha",
     theme: {
       primaryBg: "bg-[#07070a]",
       accentColor: "text-amber-400",
@@ -3032,7 +3032,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       artworkMasterImage: "/art/ganesha-cyber-mandala.jpg",
       artAudioAmbience: "Cosmic Om Drone & Sacred Tibetan Singing Bowls",
       artVectorSpecs: {
-        format: "Lossless Scalable SVG / AI / 8K TIFF",
+        format: "Lossless Scalable SVG / Illustrator / 8K TIFF",
         resolution: "300 DPI High-Density Print",
         layersCount: 42,
         colorSpace: "Display P3 Wide Gamut",
@@ -3066,7 +3066,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       },
       {
         id: "gcm-02",
-        name: "Full Commercial Vector Architecture License (Scalable SVG, AI, EPS, 8K TIFF)",
+        name: "Full Commercial Vector Architecture License (Scalable SVG, Illustrator, EPS, 8K TIFF)",
         category: "Commercial Digital License",
         price: 14999,
         originalPrice: 19999,
@@ -3111,7 +3111,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         location: "Singapore",
         rating: 5,
         title: "Incredible blend of spiritual sacred art and cyberpunk aesthetics",
-        comment: "Purchased the commercial vector license for an experiential hospitality project. Cleanest AI file paths I've ever opened from an agency studio.",
+        comment: "Purchased the commercial vector license for an experiential hospitality project. Cleanest Illustrator file paths I've ever opened from an agency studio.",
         verified: true,
       },
     ],
@@ -3152,7 +3152,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       verifiedImpact: "Viral Visual Asset in Anime Culture & Streetwear Licensing"
     },
     categoryBadge: "Raw Sumi-e Master · Action Manga",
-    domainUrl: "art.desimuchads.agency/samurai",
+    domainUrl: "art.desimuchads.in/samurai",
     theme: {
       primaryBg: "bg-[#09090b]",
       accentColor: "text-red-500",
@@ -3275,7 +3275,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       verifiedImpact: "Acclaimed Architectural & Concept Art Portfolio Showcase Piece"
     },
     categoryBadge: "Concept Art · 240+ Detail Assets",
-    domainUrl: "art.desimuchads.agency/neotokyo",
+    domainUrl: "art.desimuchads.in/neotokyo",
     theme: {
       primaryBg: "bg-[#060814]",
       accentColor: "text-cyan-400",
@@ -3398,7 +3398,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
       verifiedImpact: "Curated in International Digital Concept Art & Matte Painting Archives"
     },
     categoryBadge: "Matte Painting · 28 Atmospheric Layers",
-    domainUrl: "art.desimuchads.agency/varanasi",
+    domainUrl: "art.desimuchads.in/varanasi",
     theme: {
       primaryBg: "bg-[#0d0906]",
       accentColor: "text-amber-300",

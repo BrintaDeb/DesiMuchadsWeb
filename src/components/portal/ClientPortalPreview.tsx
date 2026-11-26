@@ -81,7 +81,7 @@ export function ClientPortalPreview() {
   ]);
 
   const tabs = [
-    { id: "telemetry", label: "Live ROAS & Funnel Telemetry", icon: BarChart3 },
+    { id: "telemetry", label: "Live ROAS & Funnel Metrics", icon: BarChart3 },
     { id: "kanban", label: "Reels Approval Pipeline", icon: Kanban },
     { id: "speed", label: "Web Speed & SEO Rank Tracker", icon: Gauge },
     { id: "billing", label: "GST Billing & Strategy Logs", icon: Receipt },
@@ -279,7 +279,7 @@ export function ClientPortalPreview() {
             </div>
           </div>
 
-          {/* Live Telemetry Stream Ticker with Interactive Webhook Ping */}
+          {/* Live Revenue Stream Ticker with Interactive Webhook Ping */}
           <div className="mb-6 p-2.5 sm:p-3 rounded-xl bg-black/60 border border-white/10 flex items-center justify-between text-xs font-mono text-zinc-300">
             <div className="flex items-center gap-2 truncate">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
@@ -385,15 +385,15 @@ export function ClientPortalPreview() {
                 </div>
               </div>
 
-              {/* Dynamic Animated Chart Bars with Interactive Tooltips */}
-              <div className="p-6 rounded-2xl bg-[#18181c] border border-white/10 relative">
-                <div className="flex items-center justify-between mb-4">
+              {/* Dynamic Animated Chart Bars with Interactive Hover & Mobile Tap Tooltips */}
+              <div className="p-4 sm:p-6 rounded-2xl bg-[#18181c] border border-white/10 relative">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                   <div>
                     <span className="font-mono text-xs text-zinc-300 uppercase tracking-wider block font-bold">
                       Attributed Revenue vs. Ad Spend Trajectory
                     </span>
                     <span className="text-[11px] font-mono text-zinc-500">
-                      Hover bars to inspect exact spend &amp; attributed returns
+                      Tap or hover any bar to inspect exact spend &amp; attributed returns
                     </span>
                   </div>
                   <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">
@@ -401,51 +401,82 @@ export function ClientPortalPreview() {
                   </span>
                 </div>
 
-                <div className="h-48 flex items-end justify-between gap-4 pt-6 pb-2 border-b border-white/10 relative">
-                  {currentMetrics.weeks.map((w, i) => (
-                    <div
-                      key={i}
-                      onMouseEnter={() => {
-                        sound.playPluck(130 + i * 15);
-                        setHoveredBarIndex(i);
-                      }}
-                      onMouseLeave={() => setHoveredBarIndex(null)}
-                      onTouchStart={() => {
-                        sound.playPluck(130 + i * 15);
-                        setHoveredBarIndex(i);
-                      }}
-                      className="flex-1 flex flex-col items-center gap-2 relative cursor-pointer group"
-                    >
-                      {/* Interactive Hover Tooltip */}
-                      {hoveredBarIndex === i && (
-                        <div className="absolute -top-12 z-30 px-3 py-1.5 rounded-lg bg-black border border-white/30 text-center shadow-xl animate-in zoom-in-95 duration-150 pointer-events-none whitespace-nowrap">
-                          <span className="text-[11px] font-mono font-bold text-white block">
-                            Rev: {w.revInr} · Spend: {w.spendInr}
-                          </span>
-                          <span className="text-[9px] font-mono text-emerald-400">
-                            Effective Return: {w.roas}
-                          </span>
-                        </div>
-                      )}
+                <div className="h-48 flex items-end justify-between gap-2 sm:gap-4 pt-6 pb-2 border-b border-white/10 relative">
+                  {currentMetrics.weeks.map((w, i) => {
+                    const isFocused = hoveredBarIndex === i;
+                    return (
+                      <button
+                        type="button"
+                        key={i}
+                        onMouseEnter={() => {
+                          sound.playPluck(130 + i * 15);
+                          setHoveredBarIndex(i);
+                        }}
+                        onMouseLeave={() => setHoveredBarIndex(null)}
+                        onClick={() => {
+                          sound.playPluck(130 + i * 15);
+                          setHoveredBarIndex((prev) => (prev === i ? null : i));
+                        }}
+                        aria-pressed={isFocused}
+                        className="flex-1 flex flex-col items-center gap-2 relative cursor-pointer group focus:outline-none"
+                      >
+                        {/* Interactive Hover/Tap Tooltip (Desktop & Pinned) */}
+                        {isFocused && (
+                          <div className="hidden sm:block absolute -top-12 z-30 px-3 py-1.5 rounded-lg bg-black border border-white/30 text-center shadow-xl pointer-events-none whitespace-nowrap">
+                            <span className="text-[11px] font-mono font-bold text-white block">
+                              Rev: {w.revInr} · Spend: {w.spendInr}
+                            </span>
+                            <span className="text-[9px] font-mono text-emerald-400">
+                              Effective Return: {w.roas}
+                            </span>
+                          </div>
+                        )}
 
-                      <div className="w-full flex items-end justify-center gap-2 h-36">
-                        <div
-                          className="w-4 sm:w-8 bg-zinc-700 rounded-t-md transition-all duration-300 group-hover:bg-zinc-500"
-                          style={{ height: `${w.spend}%` }}
-                          title={`Spend: ${w.spend}%`}
-                        />
-                        <div
-                          className="w-4 sm:w-8 bg-white rounded-t-md transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:bg-zinc-200 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]"
-                          style={{ height: `${w.rev}%` }}
-                          title={`Revenue: ${w.rev}%`}
-                        />
-                      </div>
-                      <span className="text-[10px] font-mono text-zinc-400 group-hover:text-white transition-colors">
-                        {w.label}
-                      </span>
-                    </div>
-                  ))}
+                        <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2 h-36">
+                          <div
+                            className={`w-3.5 sm:w-8 rounded-t-md transition-all duration-300 ${
+                              isFocused ? "bg-zinc-400" : "bg-zinc-700 group-hover:bg-zinc-500"
+                            }`}
+                            style={{ height: `${w.spend}%` }}
+                            title={`Spend: ${w.spend}%`}
+                          />
+                          <div
+                            className={`w-3.5 sm:w-8 rounded-t-md transition-all duration-300 ${
+                              isFocused
+                                ? "bg-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.45)]"
+                                : "bg-white shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:bg-zinc-200"
+                            }`}
+                            style={{ height: `${w.rev}%` }}
+                            title={`Revenue: ${w.rev}%`}
+                          />
+                        </div>
+                        <span
+                          className={`text-[10px] font-mono transition-colors ${
+                            isFocused ? "text-white font-bold" : "text-zinc-400 group-hover:text-white"
+                          }`}
+                        >
+                          {w.label}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
+
+                {/* Mobile & Screen-Friendly Pinned Inspector Pill */}
+                {hoveredBarIndex !== null && currentMetrics.weeks[hoveredBarIndex] && (
+                  <div className="mt-3 px-3 py-2 rounded-xl bg-black/70 border border-white/15 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
+                    <span className="text-zinc-300 font-bold uppercase">
+                      {currentMetrics.weeks[hoveredBarIndex].label} Breakdown:
+                    </span>
+                    <span className="text-white font-bold">
+                      Rev {currentMetrics.weeks[hoveredBarIndex].revInr} · Spend{" "}
+                      {currentMetrics.weeks[hoveredBarIndex].spendInr}
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      {currentMetrics.weeks[hoveredBarIndex].roas} ROAS
+                    </span>
+                  </div>
+                )}
 
                 {/* Modern Web Guidance: Semantic accessible data table alternative for screen readers */}
                 <table className="sr-only-accessible-table">
@@ -601,13 +632,19 @@ export function ClientPortalPreview() {
                       `${auditScore}/100`
                     )}
                   </div>
+                  <div className="mt-3 h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                    <div
+                      className="h-full w-full rounded-full bg-emerald-400 origin-left transition-transform duration-500"
+                      style={{ transform: `scaleX(${isAuditingSpeed ? 0.65 : auditScore / 100})` }}
+                    />
+                  </div>
                   <span className="text-xs font-mono text-zinc-400 mt-2 block">LCP 0.6s • INP 14ms • CLS 0.00</span>
 
                   <button
                     type="button"
                     onClick={handleRunSpeedAudit}
                     disabled={isAuditingSpeed}
-                    className="mt-4 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono text-xs flex items-center justify-center gap-1.5 mx-auto transition-all"
+                    className="mt-4 px-4 py-2 min-h-[44px] rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed text-white font-mono text-xs flex items-center justify-center gap-1.5 mx-auto transition-all cursor-pointer"
                   >
                     <RefreshCw className={`w-3.5 h-3.5 ${isAuditingSpeed ? "animate-spin" : ""}`} />
                     <span>{isAuditingSpeed ? "Testing Mobile Speed..." : "Run Live Speed Audit"}</span>
@@ -622,10 +659,10 @@ export function ClientPortalPreview() {
                 </div>
 
                 <div className="p-6 rounded-2xl bg-[#18181c] border border-white/15 text-center">
-                  <span className="font-mono text-xs text-zinc-400 block mb-2">AI GEO Engine Visibility</span>
+                  <span className="font-mono text-xs text-zinc-400 block mb-2">Answer Engine Visibility (GEO)</span>
                   <div className="text-4xl font-display font-extrabold text-white">88% Share</div>
-                  <span className="text-xs font-mono text-zinc-400 mt-2 block">Recommended in Perplexity &amp; ChatGPT</span>
-                  <span className="text-[10px] font-mono text-zinc-500 mt-2 block">Generative Engine Optimization (GEO)</span>
+                  <span className="text-xs font-mono text-zinc-400 mt-2 block">Cited in Modern Search Engines</span>
+                  <span className="text-[10px] font-mono text-zinc-500 mt-2 block">Generative Search Visibility (GEO)</span>
                 </div>
               </div>
 
@@ -698,7 +735,7 @@ export function ClientPortalPreview() {
               <div className="p-5 rounded-2xl bg-[#18181c] border border-white/10 space-y-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-white font-bold block text-sm">Weekly Strategy War-Room Directives</span>
+                    <span className="text-white font-bold block text-sm">Weekly Strategy Directives</span>
                     <span className="text-zinc-400 text-[11px]">Interactive Action Items for Current Sprint</span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -767,7 +804,7 @@ export function ClientPortalPreview() {
                 <FileText className="w-5 h-5 text-white" />
                 <h3 className="font-display font-extrabold text-base uppercase text-white">
                   {activeModal === "invoice" && "GST Tax Invoice Preview"}
-                  {activeModal === "brief" && "Strategy War-Room Brief"}
+                  {activeModal === "brief" && "Strategy Brief"}
                   {activeModal === "scriptDetail" && "Script Breakdown & Creative Angle"}
                   {activeModal === "session" && "Schedule Growth Strategy Session"}
                 </h3>
@@ -886,7 +923,7 @@ export function ClientPortalPreview() {
             {activeModal === "session" && (
               <div className="py-6 space-y-4 font-mono text-xs text-zinc-300">
                 <p className="text-zinc-400">
-                  Select a priority slot for a 30-minute private strategy war-room with our Principal Performance Architect:
+                  Select a priority slot for a 30-minute private strategy session with our Principal Performance Architect:
                 </p>
                 <div className="grid grid-cols-2 gap-2.5">
                   {[

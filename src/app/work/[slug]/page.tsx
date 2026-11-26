@@ -9,12 +9,12 @@ import {
   CheckCircle2,
   ChevronRight,
   Quote,
-  PhoneCall,
 } from "lucide-react";
 import { AGENCY_PROJECTS } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
+import { DetailHeaderStrategyCta } from "@/components/cta/DetailPageAuditActions";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = AGENCY_PROJECTS.find((p) => p.slug === slug);
   if (!project) return { title: "Case Study Not Found" };
 
-  const pageUrl = `https://desimuchads.agency/work/${slug}`;
+  const pageUrl = `https://desimuchads.in/work/${slug}`;
 
   return {
     title: `${project.client} Case Study (${project.heroStat})`,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "DESI MUCHADS",
       images: [
         {
-          url: "/brand-logo-white.jpg",
+          url: "/og-banner.png",
           width: 1200,
           height: 630,
           alt: `${project.client} Case Study - Desi Muchads`,
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: `${project.client} Case Study · ${project.heroStat} | DESI MUCHADS`,
       description: project.tagline,
-      images: ["/brand-logo-white.jpg"],
+      images: ["/og-banner.png"],
       creator: "@desimuchads",
     },
   };
@@ -112,19 +112,19 @@ async function ProjectDetailContent({ params }: PageProps) {
     author: {
       "@type": "Organization",
       name: "DESI MUCHADS Digital Agency",
-      url: "https://desimuchads.agency",
+      url: "https://desimuchads.in",
     },
     publisher: {
       "@type": "Organization",
       name: "DESI MUCHADS",
       logo: {
         "@type": "ImageObject",
-        url: "https://desimuchads.agency/brand-logo-white.jpg",
+        url: "https://desimuchads.in/desi-muchads-square-logo.png",
       },
     },
     datePublished: "2025-01-15T00:00:00+05:30",
     dateModified: "2026-03-15T00:00:00+05:30",
-    mainEntityOfPage: `https://desimuchads.agency/work/${project.slug}`,
+    mainEntityOfPage: `https://desimuchads.in/work/${project.slug}`,
     about: {
       "@type": "Organization",
       name: project.client,
@@ -154,19 +154,19 @@ async function ProjectDetailContent({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Darbar Home",
-        item: "https://desimuchads.agency",
+        item: "https://desimuchads.in",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Portfolio Work",
-        item: "https://desimuchads.agency/#work",
+        item: "https://desimuchads.in/#work",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: project.client,
-        item: `https://desimuchads.agency/work/${project.slug}`,
+        item: `https://desimuchads.in/work/${project.slug}`,
       },
     ],
   };
@@ -219,15 +219,10 @@ async function ProjectDetailContent({ params }: PageProps) {
                 {matchedService.title}
               </Link>
             )}
-            <a
-              href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md flex items-center gap-1.5"
-            >
-              <PhoneCall className="w-3 h-3" />
-              <span>Strategy Call</span>
-            </a>
+            <DetailHeaderStrategyCta
+              label="Free Audit"
+              defaultService={matchedService?.title}
+            />
           </div>
         </div>
       </header>
@@ -309,9 +304,6 @@ async function ProjectDetailContent({ params }: PageProps) {
         <div className="rounded-3xl p-6 sm:p-10 ios-glass-panel shadow-2xl">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-1">
-                LIVE INTERACTIVE ENVIRONMENT
-              </span>
               <h2 className="font-display font-black text-2xl sm:text-3xl text-white uppercase">
                 Platform Architecture Preview
               </h2>
@@ -338,9 +330,6 @@ async function ProjectDetailContent({ params }: PageProps) {
         {/* Section 3: The 3 Pillars of Truth (Challenge, Strategy, Outcome) */}
         <div className="space-y-6">
           <div className="max-w-2xl">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-              THE STRATEGIC DOSSIER
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
               How the Battle Was Won
             </h2>

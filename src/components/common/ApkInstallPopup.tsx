@@ -158,8 +158,8 @@ export function ApkInstallPopup() {
     () =>
       typeof window !== "undefined"
         ? `${window.location.origin}/?install=app`
-        : "https://desimuchads.agency/?install=app",
-    () => "https://desimuchads.agency/?install=app"
+        : "https://desimuchads.in/?install=app",
+    () => "https://desimuchads.in/?install=app"
   );
 
   const isIOS = profile.startsWith("ios");

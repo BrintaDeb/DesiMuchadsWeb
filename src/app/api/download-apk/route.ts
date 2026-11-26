@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-export async function GET(_req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     const filePath = path.join(
       process.cwd(),
@@ -12,7 +12,10 @@ export async function GET(_req: NextRequest) {
     );
 
     if (!fs.existsSync(filePath)) {
-      return new NextResponse("APK file not found on server", { status: 404 });
+      return NextResponse.redirect(
+        new URL("/downloads/desi-muchads-v2.4.apk", req.url),
+        { status: 307 }
+      );
     }
 
     const fileBuffer = fs.readFileSync(filePath);

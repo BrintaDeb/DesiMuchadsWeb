@@ -50,11 +50,11 @@ export function ThreeHeroCenterpiece() {
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
+      antialias: !isMobile,
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2.0));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.35 : 2.0));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.45;
 
@@ -166,10 +166,11 @@ export function ThreeHeroCenterpiece() {
       orbitY: number;
     }[] = [];
 
-    const coinGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.08, 32);
+    const coinSegments = isMobile ? 20 : 32;
+    const coinGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.08, coinSegments);
     coinGeo.rotateX(Math.PI / 2);
 
-    const coinInnerGeo = new THREE.CylinderGeometry(0.40, 0.40, 0.09, 32);
+    const coinInnerGeo = new THREE.CylinderGeometry(0.40, 0.40, 0.09, coinSegments);
     coinInnerGeo.rotateX(Math.PI / 2);
 
     const coinConfigs = [
@@ -286,13 +287,14 @@ export function ThreeHeroCenterpiece() {
 
     window.addEventListener("resize", handleResize);
 
-    // 7. Visibility-Aware Animation Render Loop (Pauses when offscreen to preserve 60FPS)
-    let animationFrameId: number;
+    // 7. Visibility-Aware Animation Render Loop (Pauses when offscreen or tab hidden)
+    let animationFrameId = 0;
     let isVisible = true;
+    let isPageVisible = !document.hidden;
     const startTime = performance.now();
 
     const animate = () => {
-      if (!isVisible) return;
+      if (!isVisible || !isPageVisible) return;
       const elapsed = (performance.now() - startTime) / 1000;
 
       // Parallax lerp
@@ -324,12 +326,25 @@ export function ThreeHeroCenterpiece() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    const resumeRender = () => {
+      cancelAnimationFrame(animationFrameId);
+      if (isVisible && isPageVisible) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      isPageVisible = !document.hidden;
+      resumeRender();
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         const wasVisible = isVisible;
         isVisible = entry ? entry.isIntersecting : true;
         if (!wasVisible && isVisible) {
-          animationFrameId = requestAnimationFrame(animate);
+          resumeRender();
         }
       },
       { threshold: 0.05 }
@@ -340,6 +355,7 @@ export function ThreeHeroCenterpiece() {
 
     return () => {
       observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("deviceorientation", handleOrientation);
       window.removeEventListener("resize", handleResize);

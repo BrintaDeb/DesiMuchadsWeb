@@ -601,9 +601,6 @@ export default function WorkPage() {
                 <div className="h-full overflow-y-auto overscroll-contain p-6 sm:p-10 space-y-8 text-left bg-black/80 font-sans">
                   {/* Top Header */}
                   <div className="border-b border-white/10 pb-6 space-y-2">
-                    <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest font-bold">
-                      THE ARCHITECTURAL CASE STUDY &amp; THEORY DOSSIER
-                    </span>
                     <h2 className="font-display font-black text-2xl sm:text-4xl uppercase text-white">
                       {activeProject.client}
                     </h2>

@@ -94,7 +94,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Lead recorded in Desi Muchads War Room",
+      message: "Lead recorded with Desi Muchads Studio",
       data: {
         timestamp,
         telegramDispatched,

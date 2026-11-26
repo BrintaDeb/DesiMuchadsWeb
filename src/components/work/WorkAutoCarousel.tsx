@@ -7,9 +7,7 @@ import {
   ChevronRight,
   Eye,
   ArrowRight,
-  Sparkles,
   RotateCw,
-  TrendingUp,
   Cpu,
   Target,
   CheckCircle2,
@@ -362,14 +360,6 @@ export function WorkAutoCarousel({
                       </p>
                     </div>
 
-                    {/* Verified Impact Metric */}
-                    {proj.heroStat && (
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono font-bold text-emerald-300">
-                        <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                        <span className="truncate">{proj.heroStat}</span>
-                      </div>
-                    )}
-
                     {/* Tech Stack Chips */}
                     <div className="flex flex-wrap gap-1 pt-0.5">
                       {proj.techStack.slice(0, 3).map((tech, tIdx) => (
@@ -458,19 +448,6 @@ export function WorkAutoCarousel({
                         Category: {proj.category} • Year: {proj.year}
                       </p>
                     </div>
-
-                    {/* Hero Metric Highlight Card */}
-                    {proj.heroStat && (
-                      <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 space-y-1">
-                        <span className="text-[10px] font-mono text-zinc-400 uppercase block">
-                          Verified Growth Multiplier:
-                        </span>
-                        <div className="flex items-center gap-2 text-emerald-300 font-display font-black text-lg">
-                          <TrendingUp className="w-4 h-4 text-emerald-400" />
-                          <span>{proj.heroStat}</span>
-                        </div>
-                      </div>
-                    )}
 
                     {/* Problem Solved & Strategy */}
                     <div className="space-y-1.5 font-sans">

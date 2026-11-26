@@ -45,9 +45,6 @@ export function TwirlEasterEgg({ onOpenKundli }: TwirlEasterEggProps) {
           <FiligreeCorner className="w-5 h-5 text-white" position="top-right" />
         </div>
 
-        <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-2">
-          INTERACTIVE MOUSTACHE PHYSICS
-        </span>
         <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2">
           Twirl the Moustache (Tension Check)
         </h3>

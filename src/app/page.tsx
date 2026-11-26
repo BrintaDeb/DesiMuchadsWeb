@@ -12,7 +12,6 @@ import { Preloader } from "@/components/preloader/Preloader";
 import { Navbar } from "@/components/navigation/Navbar";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { ClientsTrustStrip } from "@/components/clients/ClientsTrustStrip";
-import { TwirlEasterEgg } from "@/components/easteregg/TwirlEasterEgg";
 import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { ProposalFloatingBar } from "@/components/proposal/ProposalFloatingBar";
@@ -25,6 +24,7 @@ import { WinterExpansionDiscountModal } from "@/components/common/WinterExpansio
 import { StardustCursorTrail } from "@/components/common/StardustCursorTrail";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
 import { WorkAutoCarousel } from "@/components/work/WorkAutoCarousel";
+import { DevStackGuruSection } from "@/components/services/DevStackGuruSection";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
@@ -72,17 +72,14 @@ export default function Home() {
         {/* Architectural Navigation Bar */}
         <Navbar onOpenKundli={() => setIsKundliOpen(true)} />
 
-        <main className="relative flex flex-col">
+        <main className="relative flex flex-col w-full">
           {/* Section 1: Monumental Hero with Three.js 3D Centerpiece */}
           <HeroSection onOpenKundli={() => setIsKundliOpen(true)} />
 
           {/* Section 2: Executive Capabilities Bento Preview */}
-          <section id="services" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
+          <section id="services" className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-[rgba(232,232,227,0.12)] pb-6">
               <div>
-                <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-2">
-                  02 / DISCIPLINES &amp; CAPABILITIES
-                </span>
                 <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
                   What We Engineer
                 </h2>
@@ -135,12 +132,9 @@ export default function Home() {
           <SectionDivider />
 
           {/* Section 3: Flagship Works & Projects Preview */}
-          <section id="work" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24">
+          <section id="work" className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24 dm-scroll-reveal">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-[rgba(232,232,227,0.12)] pb-6">
               <div>
-                <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-2">
-                  03 / SELECTED WORKS — PROJECTS
-                </span>
                 <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
                   PROVEN REVENUE ARCHITECTURES
                 </h2>
@@ -174,8 +168,12 @@ export default function Home() {
           {/* Section 6: 5-Discipline × 4-Tier Accessible Pricing Architecture */}
           <PricingSection variant="home" onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 7: Interactive Spring-Physics Easter Egg */}
-          <TwirlEasterEgg onOpenKundli={() => setIsKundliOpen(true)} />
+          <SectionDivider />
+
+          {/* Section 7: Engineering & Growth Tech Stack In Orbit */}
+          <section className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-16 sm:py-20">
+            <DevStackGuruSection />
+          </section>
         </main>
 
         {/* Section 8: Wordmark & Architecture Footer */}

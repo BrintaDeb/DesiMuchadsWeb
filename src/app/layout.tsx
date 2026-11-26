@@ -5,6 +5,7 @@ import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { PwaRegistration } from "@/components/common/PwaRegistration";
 import { ApkInstallPopup } from "@/components/common/ApkInstallPopup";
+import { ServiceCartDrawer } from "@/components/cart/ServiceCartDrawer";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -59,13 +60,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://desimuchads.agency"),
+  metadataBase: new URL("https://desimuchads.in"),
   title: {
-    default: "DESI MUCHADS ✦ High-ROAS Performance Marketing & Neo-Desi Creative Agency",
+    default: "Desi Muchads | Performance Marketing, Next.js Web & Growth Agency India",
     template: "%s | DESI MUCHADS Digital Agency",
   },
   description:
-    "Desi Muchads is India's premier high-ROAS performance marketing and neo-desi creative agency. We engineer viral social storytelling, sub-second Next.js web platforms, and hyper-growth Quick Commerce (Zepto/Blinkit) architectures for ambitious global brands.",
+    "Desi Muchads (desimuchads.in) is India's high-ROAS performance marketing, Quick Commerce (Blinkit & Zepto), and Next.js web engineering agency for D2C brands.",
   keywords: [
     "Desi Muchads",
     "Desi Muchads Agency",
@@ -84,10 +85,10 @@ export const metadata: Metadata = {
     "Luxury Packaging & Visual Identity",
     "B2B Lead Generation Cold Pipeline",
     "High-Ticket Client Acquisition",
-    "Anti-AI Human Engineered Agency",
+    "Senior Human-Crafted Agency",
     "Desi Advertising Agency",
   ],
-  authors: [{ name: "Desi Muchads Digital LLP", url: "https://desimuchads.agency" }],
+  authors: [{ name: "Desi Muchads Digital LLP", url: "https://desimuchads.in" }],
   creator: "Desi Muchads Digital LLP",
   publisher: "Desi Muchads Digital LLP",
   category: "Digital Marketing & Software Engineering Agency",
@@ -98,26 +99,26 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "https://desimuchads.agency",
+    canonical: "https://desimuchads.in",
     languages: {
-      "en-IN": "https://desimuchads.agency",
-      "en-US": "https://desimuchads.agency",
-      "en-GB": "https://desimuchads.agency",
-      "en-AE": "https://desimuchads.agency",
+      "en-IN": "https://desimuchads.in",
+      "en-US": "https://desimuchads.in",
+      "en-GB": "https://desimuchads.in",
+      "en-AE": "https://desimuchads.in",
     },
   },
   openGraph: {
-    title: "DESI MUCHADS ✦ High-ROAS Performance Marketing & Neo-Desi Creative Agency",
+    title: "Desi Muchads | Performance Marketing, Next.js Web & Growth Agency India",
     description:
-      "Unapologetic Desi Roots. Ruthless Global ROI. High-converting performance marketing architectures, viral reels, sub-second web platforms, and e-commerce scaling.",
-    url: "https://desimuchads.agency",
-    siteName: "DESI MUCHADS Digital Agency",
+      "Unapologetic Desi Roots. Ruthless Global ROI. High-converting performance marketing, viral reels, sub-second Next.js platforms, and D2C / Quick Commerce scaling.",
+    url: "https://desimuchads.in",
+    siteName: "DESI MUCHADS",
     images: [
       {
-        url: "https://desimuchads.agency/og-image.png",
-        width: 1024,
-        height: 1024,
-        alt: "DESI MUCHADS Official Brand Logo",
+        url: "https://desimuchads.in/og-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "DESI MUCHADS — Performance Marketing & Web Engineering Agency",
       },
     ],
     locale: "en_IN",
@@ -125,10 +126,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DESI MUCHADS ✦ High-ROAS Performance Marketing & Neo-Desi Creative Agency",
+    title: "Desi Muchads | Performance Marketing, Next.js Web & Growth Agency India",
     description:
-      "Unapologetic Desi Roots. Ruthless Global ROI. High-converting marketing architectures, viral reels, sub-second web platforms, and e-commerce scaling.",
-    images: ["https://desimuchads.agency/og-image.png"],
+      "High-ROAS performance marketing, viral reels, sub-second Next.js web platforms, and Quick Commerce growth engineering.",
+    images: ["https://desimuchads.in/og-banner.png"],
     creator: "@desimuchads",
     site: "@desimuchads",
   },
@@ -144,13 +145,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "google-site-verification-desi-muchads-official-verified",
-    yandex: "yandex-verification-desi-muchads",
-    other: {
-      "msvalidate.01": "msvalidate-desi-muchads-webmaster",
-    },
-  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || process.env.NEXT_PUBLIC_BING_VERIFICATION
+    ? {
+        verification: {
+          ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+            ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+            : {}),
+          ...(process.env.NEXT_PUBLIC_BING_VERIFICATION
+            ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } }
+            : {}),
+        },
+      }
+    : {}),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -182,7 +188,7 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": ["MarketingAgency", "ProfessionalService", "LocalBusiness"],
-    "@id": "https://desimuchads.agency/#organization",
+    "@id": "https://desimuchads.in/#organization",
     name: "DESI MUCHADS",
     alternateName: [
       "Desi Muchads Agency",
@@ -192,14 +198,14 @@ export default function RootLayout({
       "Desi Muchads Digital LLP",
     ],
     legalName: "Desi Muchads Digital LLP",
-    url: "https://desimuchads.agency",
+    url: "https://desimuchads.in",
     logo: {
       "@type": "ImageObject",
-      url: "https://desimuchads.agency/desi-muchads-square-logo.png",
-      width: 1024,
-      height: 1024,
+      url: "https://desimuchads.in/desi-muchads-square-logo.png",
+      width: 512,
+      height: 512,
     },
-    image: "https://desimuchads.agency/desi-muchads-square-logo.png",
+    image: "https://desimuchads.in/og-banner.png",
     description:
       "India's premier high-ROAS performance marketing, Quick Commerce growth, full-stack Next.js web engineering, and viral social storytelling agency.",
     slogan: "Unapologetic Desi Roots. Ruthless Global ROI.",
@@ -240,7 +246,7 @@ export default function RootLayout({
       worstRating: "1",
     },
     sameAs: [
-      "https://instagram.com/desimuchads",
+      "https://www.instagram.com/the_desi_muchads/",
       "https://linkedin.com/company/desi-muchads",
       "https://twitter.com/desimuchads",
       "https://github.com/BrintaDeb/DesiMuchadsWeb",
@@ -254,7 +260,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "High-Intent SEO & Organic Search Domination",
-            url: "https://desimuchads.agency/services/seo-sem",
+            url: "https://desimuchads.in/services/seo-sem",
             description: "Data-driven SEO architectures, semantic entities, and technical sub-second indexing.",
           },
         },
@@ -263,7 +269,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Performance Marketing & Meta/Google ROAS Scaling",
-            url: "https://desimuchads.agency/services/performance-marketing",
+            url: "https://desimuchads.in/services/performance-marketing",
             description: "High-velocity paid ad architectures delivering 4.8x+ ROAS across Meta, Google, and YouTube.",
           },
         },
@@ -272,7 +278,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "High-Ticket B2B Lead Generation",
-            url: "https://desimuchads.agency/services/lead-generation",
+            url: "https://desimuchads.in/services/lead-generation",
             description: "LinkedIn ABM campaigns and cold outreach pipelines for enterprise contract closures.",
           },
         },
@@ -281,7 +287,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Viral Social Media & Reel Storytelling",
-            url: "https://desimuchads.agency/services/social-media",
+            url: "https://desimuchads.in/services/social-media",
             description: "Organic short-form video hooks, cultural relevance, and high-retention reel production.",
           },
         },
@@ -290,7 +296,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "D2C E-Commerce & Shopify Plus CRO",
-            url: "https://desimuchads.agency/services/ecommerce-services",
+            url: "https://desimuchads.in/services/ecommerce-services",
             description: "Conversion rate optimization, headless Shopify engineering, and checkout velocity.",
           },
         },
@@ -299,8 +305,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Quick Commerce Growth (Zepto, Blinkit, Instamart)",
-            url: "https://desimuchads.agency/services/quick-commerce",
-            description: "Dark store inventory placement, algorithmic ad bidding, and 10-minute delivery scaling.",
+            url: "https://desimuchads.in/services/quick-commerce",
+            description: "Dark store inventory placement, precision ad bidding, and 10-minute delivery scaling.",
           },
         },
         {
@@ -308,7 +314,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Sub-Second Full-Stack Web Development",
-            url: "https://desimuchads.agency/services/web-development",
+            url: "https://desimuchads.in/services/web-development",
             description: "Next.js 16 Turbopack web apps with sub-second hydration, 99 PageSpeed, and custom animations.",
           },
         },
@@ -317,32 +323,42 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Packaging, Unboxing & Visual Identity Architecture",
-            url: "https://desimuchads.agency/services/packaging-label",
+            url: "https://desimuchads.in/services/packaging-label",
             description: "Tactile structural packaging, luxury finishes, and memorable brand unboxing rituals.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Unit Economics & Contribution Margin Auditing",
+            url: "https://desimuchads.in/services/unit-economics",
+            description: "CM3 contribution margin telemetry, RazorpayX prepaid conversion optimization, and RTO mitigation.",
           },
         },
       ],
     },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-9180252831",
+      contactType: "customer service",
+      email: "thedesimuchads@gmail.com",
+      areaServed: ["IN", "US", "AE", "GB"],
+      availableLanguage: ["English", "Hindi"],
+    },
   };
 
-  // Google SERP Sitelinks SearchBox Schema
+  // Google WebSite Knowledge Graph Schema
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://desimuchads.agency/#website",
-    url: "https://desimuchads.agency",
+    "@id": "https://desimuchads.in/#website",
+    url: "https://desimuchads.in",
     name: "DESI MUCHADS",
-    alternateName: ["Desi Muchads Agency", "Much Ads"],
+    alternateName: ["Desi Muchads Agency", "desimuchads.in", "Much Ads"],
+    inLanguage: "en-IN",
     publisher: {
-      "@id": "https://desimuchads.agency/#organization",
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://desimuchads.agency/?q={search_term_string}",
-      },
-      "query-input": "required name=search_term_string",
+      "@id": "https://desimuchads.in/#organization",
     },
   };
 
@@ -357,35 +373,35 @@ export default function RootLayout({
         position: 1,
         name: "Verified Client Work (50+ Case Studies)",
         description: "Live production platforms, e-commerce storefronts, and verified ROAS case studies.",
-        url: "https://desimuchads.agency/#work",
+        url: "https://desimuchads.in/work",
       },
       {
         "@type": "SiteNavigationElement",
         position: 2,
         name: "Capabilities & Services",
         description: "Full-funnel Meta & Google ads, Next.js web platforms, and Quick Commerce scaling.",
-        url: "https://desimuchads.agency/#services",
+        url: "https://desimuchads.in/services",
       },
       {
         "@type": "SiteNavigationElement",
         position: 3,
-        name: "Why Desi Muchads",
-        description: "Anti-AI performance growth architecture, unit economics audit, and zero-ghosting SLA.",
-        url: "https://desimuchads.agency/#why-us",
+        name: "About Desi Muchads",
+        description: "Leadership team, creative thesis, and engineering principles.",
+        url: "https://desimuchads.in/about",
       },
       {
         "@type": "SiteNavigationElement",
         position: 4,
         name: "Retainers & Pricing",
-        description: "Transparent growth retainers and modular performance stacks.",
-        url: "https://desimuchads.agency/#pricing",
+        description: "Transparent 4-tier growth retainers and modular performance plans.",
+        url: "https://desimuchads.in/pricing",
       },
       {
         "@type": "SiteNavigationElement",
         position: 5,
         name: "Book Strategy Audit",
         description: "Schedule a 1-on-1 growth and unit economics consultation with our founders.",
-        url: "https://desimuchads.agency/contact",
+        url: "https://desimuchads.in/contact",
       },
     ],
   };
@@ -400,7 +416,7 @@ export default function RootLayout({
         name: "What makes Desi Muchads different from typical digital marketing agencies?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Desi Muchads eliminates generic AI templates and junior account handoffs. We combine deep cultural Indian storytelling with ruthless Silicon Valley mathematical optimization, operating on contribution margins and verified ROAS rather than vanity impressions.",
+          text: "Desi Muchads eliminates generic templates and junior account handoffs. We combine deep cultural Indian storytelling with disciplined financial optimization, operating on contribution margins and verified ROAS rather than vanity impressions.",
         },
       },
       {
@@ -486,6 +502,8 @@ export default function RootLayout({
             <PwaRegistration />
             {/* Universal App Installer & Downloader for iOS & Android */}
             <ApkInstallPopup />
+            {/* Persistent Slide-Over Service Cart with WhatsApp Dispatch */}
+            <ServiceCartDrawer />
             {/* Authentic Cultural Indian Art Background across ALL pages & sections */}
             <IndianArtBackgroundOverlay />
             <div className="relative z-10 w-full min-h-screen">

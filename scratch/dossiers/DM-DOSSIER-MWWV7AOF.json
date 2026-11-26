@@ -1,0 +1,49 @@
+{
+  "dossierId": "DM-DOSSIER-MWWV7AOF",
+  "status": "SCHEDULED_CONFIRMED",
+  "createdAt": "Thursday, 26 November 2026 at 6:49:31 am",
+  "client": {
+    "name": "Founder / Growth Lead",
+    "email": "N/A",
+    "phone": "N/A",
+    "website": "N/A",
+    "instagram": "N/A"
+  },
+  "engagement": {
+    "industry": "D2C & Brand Growth",
+    "budgetTier": "₹50K – ₹1.5L",
+    "channel": "meet",
+    "scheduledDate": "2026-11-27",
+    "scheduledSlot": "11:00 AM IST",
+    "googleMeetUrl": "https://meet.google.com/dsm-dfei-avvj",
+    "location": "Google Meet (https://meet.google.com/dsm-dfei-avvj)"
+  },
+  "strategicObjectives": [
+    "Scale Blended ROAS (5.8x+)"
+  ],
+  "clientNotes": "No initial notes provided.",
+  "assignedTeam": [
+    {
+      "name": "Rahul Datta",
+      "role": "CEO & Growth Principal"
+    },
+    {
+      "name": "Omkar Dutta",
+      "role": "CFO & Unit Economics Principal"
+    }
+  ],
+  "preSessionChecklist": [
+    {
+      "item": "Inspect Pixel & CBO Architecture",
+      "status": "PENDING"
+    },
+    {
+      "item": "Calculate True CM3 Contribution Margin",
+      "status": "PENDING"
+    },
+    {
+      "item": "Benchmark Against Category Leader",
+      "status": "READY"
+    }
+  ]
+}

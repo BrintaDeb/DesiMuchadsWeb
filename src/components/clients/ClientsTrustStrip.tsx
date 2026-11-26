@@ -73,9 +73,6 @@ export function ClientsTrustStrip() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20 text-left">
-          <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-3">
-            [ 04 / PROVEN PARTNERSHIPS ]
-          </span>
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-[-0.035em] text-white uppercase leading-[0.92]">
             Category Leaders Built to <span className="font-editorial text-[#e8e8e3] font-normal lowercase tracking-normal">→ scale.</span>
           </h2>

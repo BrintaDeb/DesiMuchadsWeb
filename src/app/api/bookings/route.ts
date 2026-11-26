@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
+import os from "os";
 import path from "path";
 
 export interface BookingRequestPayload {
@@ -36,7 +37,7 @@ function generateIcsContent(data: {
     "CALSCALE:GREGORIAN",
     "METHOD:REQUEST",
     "BEGIN:VEVENT",
-    `UID:dm-session-${Date.now()}@desimuchads.agency`,
+    `UID:dm-session-${Date.now()}@desimuchads.in`,
     `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z`,
     `DTSTART:${data.dtStartStr}`,
     `DTEND:${data.dtEndStr}`,
@@ -52,7 +53,7 @@ function generateIcsContent(data: {
     "TRANSP:OPAQUE",
     "BEGIN:VALARM",
     "ACTION:DISPLAY",
-    "DESCRIPTION:Reminder: Desi Muchads Strategy War-Room Session",
+    "DESCRIPTION:Reminder: Desi Muchads Strategy Session",
     "TRIGGER:-PT30M",
     "END:VALARM",
     "END:VEVENT",
@@ -115,7 +116,7 @@ export async function POST(req: Request) {
     const dtEndStr = sessionUtcEnd.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
     // 2. Generate Google Calendar 1-Click Link
-    const gCalTitle = encodeURIComponent(`Desi Muchads Strategy War-Room: ${payload.clientName} × Rahul Datta & Omkar Dutta`);
+    const gCalTitle = encodeURIComponent(`Desi Muchads Strategy Session: ${payload.clientName} × Rahul Datta & Omkar Dutta`);
     const gCalDetails = encodeURIComponent(
       `Executive Growth & Unit Economics Session with Desi Muchads Principals.\n\n` +
       `• Assigned Principals: Rahul Datta (CEO) & Omkar Dutta (CFO)\n` +
@@ -131,7 +132,7 @@ export async function POST(req: Request) {
 
     // 3. Generate .ics file content
     const icsContent = generateIcsContent({
-      summary: `Desi Muchads Strategy War-Room: ${payload.clientName}`,
+      summary: `Desi Muchads Strategy Session: ${payload.clientName}`,
       description: `Executive Growth & Unit Economics Session with Rahul Datta (CEO) & Omkar Dutta (CFO).\nMeeting URL: ${googleMeetUrl}\nHQ Directions: ${hqGpsLink}`,
       location: locationString,
       meetUrl: googleMeetUrl,
@@ -191,9 +192,11 @@ export async function POST(req: Request) {
       ],
     };
 
-    // Save dossier to persistent scratch folder for record-keeping
+    // Save dossier to writable runtime storage (/tmp on Vercel serverless, scratch locally)
     try {
-      const dossierDir = path.join(process.cwd(), "scratch", "dossiers");
+      const dossierDir = process.env.VERCEL
+        ? path.join(os.tmpdir(), "desimuchads-dossiers")
+        : path.join(process.cwd(), "scratch", "dossiers");
       if (!fs.existsSync(dossierDir)) {
         fs.mkdirSync(dossierDir, { recursive: true });
       }
@@ -211,7 +214,7 @@ export async function POST(req: Request) {
     const telegramChatId = process.env.TELEGRAM_CHAT_ID;
     if (telegramBotToken && telegramChatId) {
       const tgMsg =
-        `⚡ *NEW STRATEGY WAR-ROOM SESSION BOOKED* ⚡\n\n` +
+        `⚡ *NEW STRATEGY SESSION BOOKED* ⚡\n\n` +
         `• *Client:* ${payload.clientName}\n` +
         `• *Date & Slot:* ${payload.selectedDate} @ ${payload.selectedSlot}\n` +
         `• *Channel:* ${payload.meetingChannel?.toUpperCase() || "MEET"}\n` +

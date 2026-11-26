@@ -4,12 +4,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   ArrowLeft,
-  ArrowRight,
   CheckCircle2,
   Sparkles,
   ChevronRight,
   HelpCircle,
-  PhoneCall,
   Search,
   Rocket,
   Magnet,
@@ -23,6 +21,16 @@ import {
 import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
+import {
+  ServicePackageAddToCartButton,
+  ServiceCartHeaderTrigger,
+} from "@/components/cart/ServicePackageAddToCartButton";
+import { ReadingProgressBar } from "@/components/common/ReadingProgressBar";
+import {
+  DetailHeaderStrategyCta,
+  ServiceHeroAuditActions,
+  ServiceBottomAuditActions,
+} from "@/components/cta/DetailPageAuditActions";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -39,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = AGENCY_SERVICES.find((s) => s.slug === slug);
   if (!service) return { title: "Service Not Found" };
 
-  const pageUrl = `https://desimuchads.agency/services/${slug}`;
+  const pageUrl = `https://desimuchads.in/services/${slug}`;
 
   return {
     title: `${service.title} Agency India`,
@@ -63,7 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "DESI MUCHADS",
       images: [
         {
-          url: "/brand-logo-white.jpg",
+          url: "/og-banner.png",
           width: 1200,
           height: 630,
           alt: `${service.title} - Desi Muchads`,
@@ -75,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: `${service.title} Agency India | DESI MUCHADS`,
       description: service.shortDesc,
-      images: ["/brand-logo-white.jpg"],
+      images: ["/og-banner.png"],
       creator: "@desimuchads",
     },
   };
@@ -115,7 +123,7 @@ async function ServiceDetailContent({ params }: PageProps) {
     provider: {
       "@type": "Organization",
       name: "DESI MUCHADS",
-      url: "https://desimuchads.agency",
+      url: "https://desimuchads.in",
     },
     areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates"],
     description: service.fullDesc,
@@ -157,19 +165,19 @@ async function ServiceDetailContent({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://desimuchads.agency",
+        item: "https://desimuchads.in",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Services",
-        item: "https://desimuchads.agency/#services",
+        item: "https://desimuchads.in/#services",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: service.title,
-        item: `https://desimuchads.agency/services/${service.slug}`,
+        item: `https://desimuchads.in/services/${service.slug}`,
       },
     ],
   };
@@ -250,17 +258,11 @@ async function ServiceDetailContent({ params }: PageProps) {
             >
               Portfolio Work
             </Link>
-            <a
-              href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md flex items-center gap-1.5"
-            >
-              <PhoneCall className="w-3 h-3" />
-              <span>Strategy Call</span>
-            </a>
+            <ServiceCartHeaderTrigger />
+            <DetailHeaderStrategyCta label="Free Audit" defaultService={service.title} />
           </div>
         </div>
+        <ReadingProgressBar />
       </header>
 
       {/* Main Content */}
@@ -305,33 +307,14 @@ async function ServiceDetailContent({ params }: PageProps) {
               {service.fullDesc}
             </p>
 
-            {/* CTA Buttons */}
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
-                target="_blank"
-                rel="noreferrer"
-                className="btn-luxury-shine px-8 py-4 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 inline-flex items-center gap-2"
-              >
-                <span>CLAIM FREE STRATEGY AUDIT</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link
-                href="/work"
-                className="btn-luxury-shine px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all border border-white/15"
-              >
-                Explore All Portfolio Works
-              </Link>
-            </div>
+            {/* Interactive Audit, Strategy Call & Portfolio CTAs */}
+            <ServiceHeroAuditActions serviceTitle={service.title} />
           </div>
         </div>
 
         {/* Section 2: Strategic Edge & Philosophy */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-5 space-y-4">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block">
-              THE MUCHADS ADVANTAGE
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase leading-tight">
               Why Ordinary Agencies Fail &amp; How We Deliver Compounding ROI
             </h2>
@@ -353,9 +336,6 @@ async function ServiceDetailContent({ params }: PageProps) {
         {/* Section 3: 5-Stage Execution Framework */}
         <div className="space-y-8">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-              METHODICAL BLUEPRINT
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
               The 5-Stage Execution Framework
             </h2>
@@ -386,9 +366,6 @@ async function ServiceDetailContent({ params }: PageProps) {
         {/* Section 6: Retainer Packages */}
         <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-              TRANSPARENT UNIT ECONOMICS
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
               Service Retainer Packages
             </h2>
@@ -398,11 +375,10 @@ async function ServiceDetailContent({ params }: PageProps) {
           </div>
 
           <div
-            className={`grid grid-cols-1 md:grid-cols-2 ${
-              service.packages.length >= 4
-                ? "xl:grid-cols-4 max-w-7xl gap-5"
-                : "max-w-4xl gap-8"
-            } mx-auto`}
+            className={`grid grid-cols-1 md:grid-cols-2 ${service.packages.length >= 4
+              ? "xl:grid-cols-4 max-w-7xl gap-5"
+              : "max-w-4xl gap-8"
+              } mx-auto`}
           >
             {service.packages.map((pkg, pIdx) => (
               <SpotlightCard
@@ -415,15 +391,12 @@ async function ServiceDetailContent({ params }: PageProps) {
                   <h3 className="font-display font-black text-2xl text-white uppercase mb-2">
                     {pkg.name}
                   </h3>
-                  <div className="flex items-baseline gap-1 my-4 pb-4 border-b border-white/10">
+                  <div className="flex items-baseline gap-1 mt-4 mb-6 pb-4 border-b border-white/10">
                     <span className="font-metric font-black text-4xl text-white">
                       {pkg.price}
                     </span>
                     <span className="font-mono text-xs text-zinc-400">/{pkg.period}</span>
                   </div>
-                  <p className="text-xs text-zinc-300 font-sans mb-6 leading-relaxed">
-                    {pkg.desc}
-                  </p>
 
                   <ul className="space-y-2.5 mb-8">
                     {pkg.highlights.map((h, hIdx) => (
@@ -435,16 +408,14 @@ async function ServiceDetailContent({ params }: PageProps) {
                   </ul>
                 </div>
 
-                <a
-                  href={`https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20I%20want%20to%20discuss%20the%20${encodeURIComponent(
-                    pkg.name
-                  )}%20for%20${encodeURIComponent(service.title)}.`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-widest uppercase transition-all text-center"
-                >
-                  DEPLOY THIS PACKAGE
-                </a>
+                <ServicePackageAddToCartButton
+                  packageId={`${service.slug}-pkg-${pIdx}`}
+                  categoryTitle={service.title}
+                  tierCode={`TIER 0${pIdx + 1}`}
+                  tierName={pkg.name}
+                  priceDisplay={pkg.price}
+                  period={pkg.period}
+                />
               </SpotlightCard>
             ))}
           </div>
@@ -453,9 +424,6 @@ async function ServiceDetailContent({ params }: PageProps) {
         {/* Section 7: FAQs */}
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center mb-8">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-              CLARITY FIRST
-            </span>
             <h2 className="font-display font-black text-2xl sm:text-3xl text-white uppercase">
               Frequently Asked Questions
             </h2>
@@ -483,27 +451,17 @@ async function ServiceDetailContent({ params }: PageProps) {
 
         {/* Bottom Banner */}
         <div className="rounded-3xl p-8 sm:p-12 bg-white text-black text-center max-w-4xl mx-auto space-y-6 shadow-[0_0_50px_rgba(255,255,255,0.15)]">
-          <span className="font-mono text-xs font-black uppercase tracking-widest text-zinc-800">
-            RADICAL TRANSPARENCY · NO COMMISSIONS · NO LOCK-IN
-          </span>
           <h2 className="font-display font-black text-3xl sm:text-5xl uppercase leading-tight">
             Ready to scale {service.title} for your brand?
           </h2>
           <p className="text-zinc-700 text-sm sm:text-base font-sans max-w-xl mx-auto">
             Book a direct strategy session with our senior growth architects. We audit your current accounts, pinpoint leakage points, and deliver your 90-day scaling roadmap.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <a
-              href="https://wa.me/919180252831?text=Hi%20Desi%20Muchads%2C%20let%27s%20discuss%20our%20strategy."
-              target="_blank"
-              rel="noreferrer"
-              className="px-8 py-4 rounded-xl bg-black hover:bg-zinc-800 text-white font-display text-xs font-black tracking-widest uppercase transition-all"
-            >
-              SCHEDULE STRATEGY SESSION
-            </a>
+          <ServiceBottomAuditActions serviceTitle={service.title} />
+          <div className="pt-1">
             <Link
               href="/#services"
-              className="px-8 py-4 rounded-xl bg-zinc-200 hover:bg-zinc-300 text-black font-mono text-xs font-bold uppercase tracking-wider transition-all"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-black font-mono text-xs font-bold uppercase tracking-wider transition-all"
             >
               Explore Other Services
             </Link>

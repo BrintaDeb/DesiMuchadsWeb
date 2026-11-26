@@ -24,6 +24,7 @@ import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { ServicesSlideCarousel } from "@/components/services/ServicesSlideCarousel";
+import { DevStackGuruSection } from "@/components/services/DevStackGuruSection";
 import { AGENCY_SERVICES } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
 
@@ -105,6 +106,13 @@ export default function ServicesPage() {
               CAC, scale blended ROAS, and elevate brand equity with custom engineering and human-crafted creative.
             </p>
           </div>
+        </section>
+
+        <SectionDivider />
+
+        {/* Interactive Next.js & Agency Tech Stack Showcase */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-12">
+          <DevStackGuruSection />
         </section>
 
         <SectionDivider />

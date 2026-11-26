@@ -75,7 +75,7 @@ const DESIGN_PILLARS: DesignPillar[] = [
       "Edge Route Prefetching: Hover triggers prefetch underlying platform state in 80ms",
       "Asset Decimation: Vector SVGs and WebP assets compressed under 85KB budgets",
     ],
-    codeOrDiagramLabel: "RUNTIME LATENCY & PIPELINE TELEMETRY",
+    codeOrDiagramLabel: "RUNTIME LATENCY & PIPELINE PERFORMANCE",
     codeSnippet: `// Sub-Second Render Architecture
 export const runtime = 'edge';
 export const dynamic = 'force-static';
@@ -106,7 +106,7 @@ export const revalidate = 86400; // 24h ISR
     ],
     principles: [
       "Vernacular Street Hooks: Conversational Hinglish tailored to tier-1 & tier-2 consumer psyche",
-      "Human-Engineered Artistry: Zero AI slop; bespoke hand-drawn illustrations and authentic brushwork",
+      "Human-Engineered Artistry: Bespoke hand-drawn illustrations and authentic cultural brushwork",
       "Cultural Color Resonances: Sacred Sindoor crimson accents on deep velvet Obsidian canvases",
       "Dignity & Word: Positioning brands not as discount hawkers, but as proud cultural leaders",
     ],
@@ -333,7 +333,7 @@ export function WorkDesignTheorySection() {
             {/* Bottom Callout */}
             <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400">
               <span>Standard Across All 50 Works</span>
-              <span className="text-emerald-400 font-bold">100% Zero-AI Boilerplate</span>
+              <span className="text-emerald-400 font-bold">100% Bespoke Craftsmanship</span>
             </div>
           </div>
         </div>
@@ -355,7 +355,7 @@ export function WorkDesignTheorySection() {
           <div className="p-5 sm:p-6 rounded-2xl bg-red-950/20 border border-red-500/20 space-y-3">
             <div className="flex items-center gap-2 text-red-400 font-mono font-bold uppercase text-xs">
               <span className="w-2 h-2 rounded-full bg-red-400" />
-              <span>Generic Agency / AI Template Approach</span>
+              <span>Generic Agency / Cookie-Cutter Approach</span>
             </div>
             <ul className="space-y-2 text-zinc-300">
               <li className="flex items-start gap-2">
@@ -364,7 +364,7 @@ export function WorkDesignTheorySection() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-red-400 font-bold shrink-0">✕</span>
-                <span>Sterile Western stock photos and corporate ChatGPT copy with zero Indian cultural relevance.</span>
+                <span>Sterile Western stock photos and generic corporate copy with zero Indian cultural relevance.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-red-400 font-bold shrink-0">✕</span>

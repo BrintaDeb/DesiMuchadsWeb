@@ -22,15 +22,31 @@ import { BreydaqsButton } from "../common/BreydaqsButton";
 interface BrandKundliModalProps {
   isOpen: boolean;
   onClose: () => void;
+  defaultService?: string;
 }
 
-export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
+function resolveDefaultServices(defaultService?: string): string[] {
+  if (!defaultService) return [];
+  const lower = defaultService.toLowerCase();
+  const ids: string[] = [];
+  if (/paid|media|meta|google|seo|sem|lead|ecom|commerce|unit/.test(lower)) ids.push("ads");
+  if (/brand|packag|label/.test(lower)) ids.push("branding");
+  if (/social|reel|content/.test(lower)) ids.push("reels");
+  if (/web|dev|shopify|store|next/.test(lower)) ids.push("web");
+  if (/360|full/.test(lower)) ids.push("fullstack");
+  return ids.length > 0 ? ids : ["ads"];
+}
+
+export function BrandKundliModal({ isOpen, onClose, defaultService }: BrandKundliModalProps) {
   const [step, setStep] = useState(1);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedServices, setSelectedServices] = useState<string[]>(() =>
+    resolveDefaultServices(defaultService)
+  );
   const [selectedBudget, setSelectedBudget] = useState<string>("");
   const [selectedDay, setSelectedDay] = useState<string>("Tomorrow");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("3:00 PM IST");
   const [isBookedOnCalendar, setIsBookedOnCalendar] = useState<boolean>(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     brandName: "",
@@ -41,22 +57,28 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
 
   const resetForm = useCallback(() => {
     setStep(1);
-    setSelectedServices([]);
+    setSelectedServices(resolveDefaultServices(defaultService));
     setSelectedBudget("");
+    setValidationError(null);
     setFormData({ name: "", brandName: "", brandUrl: "", whatsapp: "" });
     setIsSubmitted(false);
     onClose();
-  }, [onClose]);
+  }, [defaultService, onClose]);
 
   useEffect(() => {
     if (!isOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         resetForm();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen, resetForm]);
 
   if (!isOpen) return null;
@@ -85,10 +107,29 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.whatsapp) return;
+    const trimmedName = formData.name.trim();
+    const trimmedPhone = formData.whatsapp.trim();
+    if (!trimmedName) {
+      sound.playPluck(120);
+      setValidationError("Please enter your name so our strategy lead knows how to address you.");
+      return;
+    }
+    if (!trimmedPhone || trimmedPhone.replace(/\D/g, "").length < 8) {
+      sound.playPluck(120);
+      setValidationError("Please enter a valid 10-digit phone or WhatsApp number for report delivery.");
+      return;
+    }
 
+    setValidationError(null);
     sound.playChime();
     setIsSubmitted(true);
+
+    const resolvedBudgetLabel =
+      budgetTiers.find((b) => b.id === selectedBudget)?.label || selectedBudget;
+    const resolvedServiceLabels =
+      selectedServices
+        .map((id) => servicesList.find((s) => s.id === id)?.label || id)
+        .join(", ") || defaultService || "Growth Audit";
 
     try {
       fetch("/api/leads", {
@@ -96,12 +137,12 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           source: "growth_audit",
-          name: formData.name,
-          phone: formData.whatsapp,
-          brandWebsite: formData.brandUrl,
-          message: `Brand: ${formData.brandName}`,
-          budget: selectedBudget,
-          service: selectedServices.join(", "),
+          name: trimmedName,
+          phone: trimmedPhone,
+          brandWebsite: formData.brandUrl.trim(),
+          message: `Brand: ${formData.brandName.trim() || "Unspecified"}`,
+          budget: resolvedBudgetLabel,
+          service: resolvedServiceLabels,
         }),
       }).catch(() => { });
     } catch { }
@@ -124,7 +165,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
       onClick={(e) => {
         if (e.target === e.currentTarget) resetForm();
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 overscroll-contain"
+      className="fixed inset-0 z-[180] flex items-center justify-center p-3 sm:p-6 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))] bg-black/90 sm:bg-black/85 sm:backdrop-blur-md animate-in fade-in duration-200 overscroll-contain"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -145,7 +186,7 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
               {/* Modal Header & Progress */}
               <div className="text-left mb-8 border-b border-white/10 pb-6">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-bold block mb-2">
-                  DIAGNOSTIC TELEMETRY [ STEP 0{step} / 03 ]
+                  BRAND DIAGNOSTIC [ STEP 0{step} / 03 ]
                 </span>
                 <h3 id="auditModalTitle" className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
                   {step === 1 && "Select Growth Disciplines"}
@@ -366,11 +407,23 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
                   </div>
                 </div>
 
-                  <div className="mt-8 flex items-center justify-between">
+                {validationError && (
+                  <div
+                    role="alert"
+                    className="p-3 rounded-[0.2rem] bg-red-500/10 border border-red-500/35 text-xs font-mono text-red-300"
+                  >
+                    {validationError}
+                  </div>
+                )}
+
+                  <div className="mt-8 flex items-center justify-between gap-3">
                     <button
                       type="button"
-                      onClick={() => setStep(2)}
-                      className="px-3 py-2 text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1.5 uppercase"
+                      onClick={() => {
+                        setValidationError(null);
+                        setStep(2);
+                      }}
+                      className="px-3 py-2 min-h-[44px] text-xs font-mono text-zinc-400 hover:text-white flex items-center gap-1.5 uppercase cursor-pointer"
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
                       <span>Back</span>
@@ -476,9 +529,9 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
                       sound.playChime();
                       setIsBookedOnCalendar(true);
                       const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Desi+Muchads+Strategy+Session+·+${encodeURIComponent(formData.brandName || "Brand")}&details=Strategic+Unit+Economics+%26+Ad+Scaling+Session+with+Desi+Muchads+Principals.&location=Google+Meet`;
-                      window.open(googleCalUrl, "_blank");
+                      window.open(googleCalUrl, "_blank", "noopener,noreferrer");
                     }}
-                    className="flex-1 py-2.5 px-4 rounded-[0.2rem] bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+                    className="flex-1 py-2.5 px-4 min-h-[44px] rounded-[0.2rem] bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95 cursor-pointer"
                   >
                     <Video className="w-3.5 h-3.5 text-black" />
                     <span>{isBookedOnCalendar ? "✓ Calendar Linked" : "Add to Calendar"}</span>
@@ -495,9 +548,9 @@ export function BrandKundliModal({ isOpen, onClose }: BrandKundliModalProps) {
                         `✦ Preferred Time: ${selectedDay} at ${selectedTimeSlot}\n\n` +
                         `Looking forward to meeting the creative pod!`
                       );
-                      window.open(`https://wa.me/919180252831?text=${text}`, "_blank");
+                      window.open(`https://wa.me/919180252831?text=${text}`, "_blank", "noopener,noreferrer");
                     }}
-                    className="py-2.5 px-4 rounded-[0.2rem] bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5"
+                    className="py-2.5 px-4 min-h-[44px] rounded-[0.2rem] bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
                     <span>WhatsApp VIP</span>

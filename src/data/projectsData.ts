@@ -311,7 +311,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     mushkil:
       "Pet parents lacked a unified destination for pet health records, struggled to calculate precise breed-specific caloric requirements, and delayed vital veterinary checkups.",
     jugaad:
-      "Developed a vibrant, joyful Next.js platform featuring an algorithmic Pet Calorie & Nutrient Calculator, digital vaccination passport, and one-click veterinary telehealth scheduling.",
+      "Developed a vibrant, joyful Next.js platform featuring a custom Pet Calorie & Nutrient Calculator, digital vaccination passport, and one-click veterinary telehealth scheduling.",
     nateeja:
       "Onboarded 10,000+ active pets within the first quarter. Achieved an industry-leading 78% 90-day subscription retention rate for recurring wellness nutrition boxes.",
     stats: [
@@ -333,7 +333,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
       }
 ],
     deliverables: [
-      "Algorithmic Breed & Weight Calorie Calculator",
+      "Precision Breed & Weight Calorie Calculator",
       "Digital Pet Health Record & Vaccination Passport",
       "Video Telehealth Consultation Scheduling Engine",
       "Recurring Monthly Nutrition Box Subscription Flow"
@@ -731,9 +731,9 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "25K+ BOOKMARKS · 4.8X SHARE RATE",
     liveUrl: "https://brinta-deb-portfolio.onrender.com/assets/video/9cfd35179075b14a6522145e2dd51717.mp4",
     thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80",
-    desc: "A proprietary educational growth carousel system engineered to maximize Instagram algorithmic watch time, save rates, and profile conversion.",
+    desc: "A proprietary educational growth carousel system engineered to maximize Instagram watch time, save rates, and profile conversion.",
     mushkil:
-      "Generic graphic design carousels were experiencing severe reach decay due to Instagram's shifting algorithmic preference toward retention time and saves over passive likes.",
+      "Generic graphic design carousels were experiencing severe reach decay due to Instagram's shifting platform preference toward retention time and saves over passive likes.",
     jugaad:
       "Architected a 10-slide high-density educational framework utilizing progressive information disclosure, high-contrast monospace typographic accents, and actionable micro-diagrams.",
     nateeja:
@@ -759,7 +759,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     deliverables: [
       "10-Slide High-Retention Educational Carousel Framework",
       "Custom Monospace & Display Typographic Hierarchy",
-      "Algorithmic Hook & Swiping Call-to-Action Sequences",
+      "High-Retention Hook & Swiping Call-to-Action Sequences",
       "Repurposable Design System Master Templates"
 ],
     testimonial: {
@@ -1515,20 +1515,20 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     year: "2024 - 2025",
   },
 
-  // [PORTFOLIO WORK #29] Seed Stage AI Venture Deck (canva-pitch-deck-01)
+  // [PORTFOLIO WORK #29] Seed Stage Venture Deck (canva-pitch-deck-01)
   {
     id: 29,
     slug: "canva-pitch-deck-01",
-    client: "Seed Stage AI Venture Deck",
+    client: "Seed Stage Venture Deck",
     tagline: "High-Stakes Investor Pitch Deck, Financial Modeling & Visual Narrative",
     category: "Graphic Design & Branding",
     serviceId: "graphic-design",
     heroStat: "$150K ANGEL ROUND SECURED · CANVA",
     liveUrl: "https://www.canva.com/design/DAEgOcD46u8/qXha20201-C-BVE0ggTrIw/view",
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png",
-    desc: "A precision-crafted investor pitch deck designed for an emerging enterprise AI startup pitching Tier-1 angel investors and venture funds.",
+    desc: "A precision-crafted investor pitch deck designed for an emerging enterprise software startup pitching Tier-1 angel investors and venture funds.",
     mushkil:
-      "The founding team had groundbreaking technical AI architecture but their slide deck was a text-heavy, impenetrable wall of academic jargon that lost investors by slide 3.",
+      "The founding team had groundbreaking technical product architecture but their slide deck was a text-heavy, impenetrable wall of academic jargon that lost investors by slide 3.",
     jugaad:
       "Transformed the narrative into a razor-sharp 12-slide visual story: problem quantification, market size TAM breakdown, unit economics flywheels, and competitive moats in Canva Enterprise.",
     nateeja:
@@ -1561,7 +1561,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
       quote:
         "Investors told us this was the clearest, most compelling pitch deck they saw all quarter. It helped us close our angel round in record time.",
       author: "Kunal Mehra",
-      role: "Founder & CEO, DeepScale AI",
+      role: "Founder & CEO, DeepScale Technologies",
     },
     accentColor: "#00c4cc",
     techStack: ["Canva Pro Systems","Data Visualization","Investor Narrative","Figma"],
@@ -1581,7 +1581,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     thumbnail: "https://brinta-deb-portfolio.onrender.com/assets/media/c2194f22302142b78cdcb5cdc7e5e30a.png",
     desc: "An enterprise keynote presentation delivered at a national industry summit to 500+ corporate executives, enterprise buyers, and industry analysts.",
     mushkil:
-      "The speaker needed to present complex digital transformation telemetry and compliance benchmarks to a distracted C-suite audience without losing momentum.",
+      "The speaker needed to present complex digital transformation metrics and compliance benchmarks to a distracted C-suite audience without losing momentum.",
     jugaad:
       "Crafted high-contrast, bold typography slides with custom animated transitions, bold metric callouts, and clean conceptual diagrams built directly in Canva.",
     nateeja:
@@ -1606,7 +1606,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
 ],
     deliverables: [
       "28-Slide Stage-Optimized Executive Keynote Deck",
-      "Enterprise Data Telemetry Visualizations",
+      "Enterprise Data & Benchmark Visualizations",
       "Presenter Cue Notes & Audience Pacing Guide",
       "Reusable Corporate Brand Identity Slide Library"
 ],
@@ -2175,7 +2175,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     thumbnail: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=800&q=80",
     desc: "Artisanal dry fruit sweets, Kaju Katli, and festive mithai gift boxes packaged in vacuum-sealed luxury gift tins.",
     mushkil:
-      "MithaiMagic missed festival revenue spikes because their stock was constantly out-of-stock in high-demand dark stores across Mumbai and Bangalore, causing algorithmic demotion on Zepto and Blinkit.",
+      "MithaiMagic missed festival revenue spikes because their stock was constantly out-of-stock in high-demand dark stores across Mumbai and Bangalore, causing catalog rank demotion on Zepto and Blinkit.",
     jugaad:
       "We mapped 85 high-density urban dark stores and instituted an automated stock-velocity replenishment system. Concurrently, we booked prime morning breakfast & festive gifting sponsored banners and targeted hyper-local pin codes with 8x flash bids during Rakhi and Diwali.",
     nateeja:
@@ -2188,7 +2188,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     ],
     deliverables: [
       "Zepto, Blinkit & Swiggy Instamart Ingestion",
-      "Algorithmic Dark Store Stock Forecasting Radar",
+      "Automated Dark Store Stock Forecasting Radar",
       "In-App Sponsored Search & Category Banners",
       "Hyper-Local Pin Code Flash Bidding Engine",
     ],
@@ -2413,40 +2413,40 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     id: 49,
     slug: "zenith-seo-growth",
     client: "Zenith RankMatrix Growth Engine",
-    tagline: "Enterprise Organic Topical Authority & AI Search Optimization (GEO)",
+    tagline: "Enterprise Organic Topical Authority & Technical Search Optimization (GEO)",
     category: "SEO & SEM Services",
     serviceId: "seo-sem",
     heroStat: "+580% ORGANIC INBOUND PIPELINE",
     liveUrl: "/demos/zenith-seo-growth",
     thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-    desc: "Zenith RankMatrix is an enterprise search intelligence engine engineered for B2B tech and high-growth SaaS brands seeking programmatic Google SERP dominance and Generative Engine Optimization.",
+    desc: "Zenith RankMatrix is an enterprise search engine growth system built for B2B tech and high-growth SaaS brands seeking structured Google SERP dominance.",
     mushkil:
-      "Enterprise software buyers had stopped clicking traditional low-quality affiliate blogs, instead researching through conversational AI answer engines (Perplexity, ChatGPT, Google AI Overviews) and searching ultra-specific commercial queries. Zenith was burning ₹18L/mo on broad Google Ads while losing organic search share to competitors with zero topical authority.",
+      "Enterprise software buyers had stopped clicking traditional low-quality affiliate blogs, instead researching direct vendor benchmarks and ultra-specific commercial queries. Zenith was burning ₹18L/mo on broad Google Ads while losing organic search share to competitors with stronger topical authority.",
     jugaad:
-      "Desi Muchads re-architected their entire digital footprint using Next.js 16 semantic rendering with full Schema.org Graph entity injection. We published 50 deeply clustered technical pillar dossiers and engineered a continuous AI citation grounding framework ensuring Perplexity and SearchGPT cite Zenith as the primary source. Concurrently, we deployed 24/7 automated negative keyword scripts across Google PMax and Exact Search campaigns.",
+      "Desi Muchads re-architected their entire digital footprint using Next.js 16 semantic rendering with full Schema.org Graph entity injection. We published 50 deeply clustered technical pillar dossiers and built a continuous citation grounding framework across search engines. Concurrently, we deployed 24/7 negative keyword scripts across Google PMax and Exact Search campaigns.",
     nateeja:
       "Captured #1 positions across 480+ high-commercial search queries, generating 3.4M monthly impressions and driving a +580% increase in inbound qualified sales pipeline at an 8.4x blended search ROAS with zero budget leakage.",
     stats: [
       { label: "Organic Inbound Lift", val: "+580%" },
       { label: "Blended Search ROAS", val: "8.4x" },
       { label: "Rank #1 SERP Terms", val: "480+" },
-      { label: "AI GEO Citation Share", val: "94.2%" },
+      { label: "Search Citation Share", val: "94.2%" },
     ],
     deliverables: [
       "Full Next.js 16 Semantic HTML & Schema.org Graph Architecture",
       "50 High-Intent Topical Authority Pillar Dossiers",
-      "Generative Engine Optimization (GEO) AI Grounding Engine",
+      "Structured Entity Optimization & Knowledge Graph",
       "Google Search & PMax Precision Bidding & Negative Shield",
-      "Real-Time Multi-Region SERP Telemetry Dashboard",
+      "Real-Time Multi-Region SERP Rank Dashboard",
     ],
     testimonial: {
       quote:
-        "Desi Muchads transformed search from a chaotic paid expense into an unstoppable enterprise equity flywheel. We now dominate Google Page 1 and AI answer engines across our most lucrative commercial keywords.",
+        "Desi Muchads transformed search from a chaotic paid expense into an unstoppable enterprise equity flywheel. We now dominate Google Page 1 across our most lucrative commercial keywords.",
       author: "Devendra Singhania",
       role: "Chief Commercial Officer, Zenith RankMatrix",
     },
     accentColor: "#06b6d4",
-    techStack: ["Next.js 16", "Schema.org Graph", "Perplexity GEO", "Google PMax", "Semantic Entity Modeling"],
+    techStack: ["Next.js 16", "Schema.org Graph", "Search GEO", "Google PMax", "Semantic Entity Modeling"],
     year: "2024 - 2026",
   },
 

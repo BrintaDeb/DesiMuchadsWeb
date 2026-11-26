@@ -96,7 +96,7 @@ export function BreydaqsButton({
       onMouseEnter={handleMouseEnter}
       onTouchStart={handleTouchStart}
       onClick={handleClick}
-      className={`breydaqs-btn ${variantClass} ${className}`}
+      className={`breydaqs-btn ${variantClass} touch-manipulation disabled:opacity-45 disabled:cursor-not-allowed disabled:pointer-events-none ${className}`}
     >
       {content}
     </button>

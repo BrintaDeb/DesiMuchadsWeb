@@ -54,9 +54,6 @@ export function BeforeAfterSlider({ className = "" }: BeforeAfterSliderProps) {
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 border-b border-white/10 pb-4 sm:pb-6">
         <div>
-          <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-bold block mb-1.5 sm:mb-2">
-            03 / ARCHITECTURE TEARDOWN
-          </span>
           <h3 className="font-display font-black text-xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight">
             Generic Advertising vs. Desi Muchads Engine
           </h3>

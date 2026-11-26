@@ -31,7 +31,7 @@ export default function ErrorBoundary({
       </h1>
 
       <p className="text-sm text-zinc-400 max-w-md mx-auto leading-relaxed mb-8">
-        An unexpected runtime event occurred. Our engineering telemetry has captured this event. Please reset the component view or return to the homepage.
+        An unexpected runtime event occurred. Our engineering team has logged this detail. Please reset the component view or return to the homepage.
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-4">

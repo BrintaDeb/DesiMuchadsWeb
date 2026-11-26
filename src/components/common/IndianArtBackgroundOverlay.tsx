@@ -23,13 +23,12 @@ export function IndianArtBackgroundOverlay() {
     >
       {/* 1. Mobile Portrait Dedicated Background (Vibrant, Repeating, High Visibility) */}
       <div
-        className="block sm:hidden absolute inset-0 opacity-[0.24] mix-blend-screen"
+        className="block sm:hidden absolute inset-0 opacity-[0.16]"
         style={{
           backgroundImage: "url('/art/indian-art-bg-royal.jpg')",
           backgroundRepeat: "repeat-y",
           backgroundPosition: "center top",
           backgroundSize: "440px auto",
-          filter: "contrast(135%) brightness(115%)",
         }}
       />
 
@@ -50,9 +49,18 @@ export function IndianArtBackgroundOverlay() {
       <ConstellationCanvas />
 
       {/* 5. Atmospheric Heritage Radiance Halos */}
-      <div className="absolute top-1/4 -left-32 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-white/[0.035] blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-white/[0.03] blur-[140px] pointer-events-none" />
-      <div className="absolute top-2/3 left-1/3 w-80 sm:w-[500px] h-80 sm:h-[500px] rounded-full bg-[#D4AF37]/[0.025] blur-[160px] pointer-events-none" />
+      <div
+        className="hidden sm:block absolute top-1/4 -left-32 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.035) 0%, transparent 70%)" }}
+      />
+      <div
+        className="hidden sm:block absolute bottom-1/4 right-0 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)" }}
+      />
+      <div
+        className="hidden sm:block absolute top-2/3 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.025) 0%, transparent 70%)" }}
+      />
     </div>
   );
 }

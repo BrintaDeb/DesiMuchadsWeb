@@ -37,7 +37,7 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CEO",
     tagline: "Agency Vision, Client Scaling Strategy & Executive Leadership",
     bio: "Directs overarching agency strategy, high-growth client partnerships, and market expansion. Leads enterprise acquisitions and scaling roadmaps.",
-    avatar: "/team/rahul-datt.png",
+    avatar: "/team/rahul-datt.jpg",
     tileBgClass: "bg-black",
     badge: "CHIEF EXECUTIVE OFFICER",
     disciplines: ["Executive Leadership", "Growth Strategy", "Client Partnerships", "Brand Scaling"],
@@ -51,7 +51,7 @@ const TEAM_ROSTER: TeamMember[] = [
     name: "Brinta Deb",
     role: "CTO",
     tagline: "Fullstack Engineering, Conversion Architecture & Systems",
-    bio: "Architects high-performance Next.js web applications, sub-second conversion engines, and algorithmic ad tracking systems. Leads fullstack engineering and digital infrastructure.",
+    bio: "Architects high-performance Next.js web applications, sub-second conversion engines, and server-side ad tracking systems. Leads fullstack engineering and digital infrastructure.",
     avatar: "/team/brinta-deb.png",
     tileBgClass: "bg-black",
     badge: "CHIEF TECHNOLOGY OFFICER",
@@ -107,7 +107,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="mt-6 sm:mt-8 text-lg sm:text-2xl text-zinc-300 font-normal leading-relaxed font-sans max-w-3xl">
-              Desi Muchads is an elite growth architecture and high-velocity engineering collective. We reject generic templates, outsourced complacency, and synthetic AI fluff in favor of deep commercial strategy, hand-crafted code, and relentless ROAS accountability.
+              Desi Muchads is an elite growth architecture and high-velocity engineering collective. We reject generic templates and outsourced complacency in favor of deep commercial strategy, hand-crafted code, and relentless ROAS accountability.
             </p>
           </div>
 
@@ -126,7 +126,7 @@ export default function AboutPage() {
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
               <span className="text-zinc-400 text-[10px] font-mono uppercase block mb-1">Human Craftsmanship</span>
               <div className="font-display font-black text-3xl sm:text-4xl text-white">100%</div>
-              <span className="text-xs text-zinc-400 font-sans mt-1 block">Zero synthetic boilerplate code</span>
+              <span className="text-xs text-zinc-400 font-sans mt-1 block">Hand-crafted bespoke architecture</span>
             </div>
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
               <span className="text-zinc-400 text-[10px] font-mono uppercase block mb-1">Average PageSpeed</span>
@@ -163,9 +163,6 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/10 text-left">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#121216] via-[#0d0d10] to-[#070709] border border-white/20 relative overflow-hidden shadow-2xl">
           <div className="max-w-3xl relative z-10 space-y-4">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 block">
-              03. CULTURAL ICONOGRAPHY
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight">
               The Moustache As A Seal Of Honor.
             </h2>

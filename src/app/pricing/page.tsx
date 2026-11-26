@@ -14,6 +14,7 @@ import { Footer } from "@/components/footer/Footer";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { PricingSection } from "@/components/pricing/PricingSection";
+import { DevStackGuruSection } from "@/components/services/DevStackGuruSection";
 import { sound } from "@/lib/sound";
 
 export default function PricingPage() {
@@ -52,7 +53,7 @@ export default function PricingPage() {
             {/* Metric Highlights */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
               <div className="p-3">
-                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">₹8,999</span>
+                <span className="block font-metric font-black text-2xl sm:text-3xl text-white">₹11,999</span>
                 <span className="text-xs text-zinc-400 font-sans mt-0.5 block">Starting Monthly Plans</span>
               </div>
               <div className="p-3">
@@ -80,12 +81,16 @@ export default function PricingPage() {
 
         <SectionDivider />
 
+        {/* 3. Engineering & Growth Tech Stack In Orbit */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-14">
+          <DevStackGuruSection />
+        </section>
+
+        <SectionDivider />
+
         {/* 3. Service Level Guarantees Matrix */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto my-20">
           <div className="mb-12">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-zinc-400 block mb-2">
-              Our Honor Pledge
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
               The Desi Muchads Service Level Agreement (SLA)
             </h2>
@@ -127,9 +132,6 @@ export default function PricingPage() {
         {/* 5. Retainer FAQ */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto my-20">
           <div className="text-center mb-12">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-zinc-400 block mb-2">
-              Straight Answers
-            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
               Frequently Asked Retainer Questions
             </h2>
@@ -147,7 +149,7 @@ export default function PricingPage() {
               },
               {
                 q: "Are Website Development and Branding one-time fees?",
-                a: "Yes. Website Development (from ₹12,999) and Branding (from ₹9,999) are fixed-scope project sprints billed once, with zero ongoing lock-in.",
+                a: "Yes. Website Development (from ₹15,999) and Branding (from ₹12,999) are fixed-scope project sprints billed once, with zero ongoing lock-in.",
               },
               {
                 q: "Can we mix multiple services like Graphics + Social + SEO?",

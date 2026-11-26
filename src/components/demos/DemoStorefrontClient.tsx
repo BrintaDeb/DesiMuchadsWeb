@@ -206,7 +206,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
   // SEO & SEM SERP Cluster Explorer (Zenith RankMatrix)
   const [activeSerpClusterIndex, setActiveSerpClusterIndex] = useState<number>(0);
   const [simulatedMonthlySearchVolume, setSimulatedMonthlySearchVolume] = useState<number>(25000);
-  const [selectedGeoEngineName, setSelectedGeoEngineName] = useState<string>("Google Search (AI Overviews / SGE)");
+  const [selectedGeoEngineName, setSelectedGeoEngineName] = useState<string>("Google Search (Rich Snippets)");
 
   // Headless Core Web Vitals Benchmark Engine (KartFlow Headless OS)
   const [activeEdgeRegionKey, setActiveEdgeRegionKey] = useState<string>("bom1 (Mumbai Hub)");
@@ -499,7 +499,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                 : "bg-white/10 hover:bg-white/20 text-zinc-300 border-white/20"
             }`}
-            title="Inspect Service Criteria, Architecture & Telemetry"
+            title="Inspect Service Criteria, Architecture & Metrics"
           >
             <Terminal className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">SERVICE CRITERIA &amp; SPECS</span>
@@ -591,7 +591,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
       </div>
       )}
 
-      {/* 1.1 EXPANDABLE PRO DEV TELEMETRY & AUDIT PROTOCOL DRAWER */}
+      {/* 1.1 EXPANDABLE PRO DEV ARCHITECTURE & AUDIT PROTOCOL DRAWER */}
       {isDevToolsOpen && (
         <div className="bg-[#0c0c10] border-b border-white/20 px-4 sm:px-8 py-6 text-xs font-mono shadow-2xl animate-in slide-in-from-top-2 duration-200 relative z-40">
           <div className="max-w-7xl mx-auto space-y-5">
@@ -669,19 +669,19 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 </div>
               </div>
 
-              {/* Box 4: Anti-AI Standard */}
+              {/* Box 4: Craftsmanship Standard */}
               <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
                 <div>
                   <div className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
                     <ShieldCheck className="w-3 h-3 text-white" />
-                    <span>Anti-AI Architecture</span>
+                    <span>Bespoke Architecture</span>
                   </div>
                   <div className="text-white font-black text-sm mt-1.5">
                     100% Handcrafted
                   </div>
                 </div>
                 <div className="text-[10px] text-zinc-400 mt-2 pt-2 border-t border-white/10">
-                  React 19 App Router Primitives · Zero AI builders
+                  React 19 App Router Primitives · Zero page-builders
                 </div>
               </div>
             </div>
@@ -1365,7 +1365,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                   </div>
                   <div>
                     <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold block">
-                      INSTANT MICRO-FULFILLMENT TELEMETRY
+                      INSTANT MICRO-FULFILLMENT METRICS
                     </span>
                     <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
                       Hyper-Local Dark Store Routing Active
@@ -1402,7 +1402,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 </div>
               </div>
 
-              {/* Radar Telemetry Grid & Countdown */}
+              {/* Radar Tracking Grid & Countdown */}
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs font-mono">
                 <div className="p-3.5 rounded-2xl bg-black/50 border border-white/10">
                   <div className="text-[10px] text-zinc-400 uppercase">Available Riders</div>
@@ -2207,7 +2207,7 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold block">
-                    PATHOLOGY LAB REAGENT &amp; ROI TELEMETRY ENGINE
+                    PATHOLOGY LAB REAGENT &amp; ROI REPORTING ENGINE
                   </span>
                   <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
                     {config.interactiveData?.title || "Lab Test Volume & Reagent Cost Calculator"}
@@ -2364,10 +2364,10 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold block">
-                    ALGORITHMIC SERP &amp; AI ANSWER ENGINE (GEO) TELEMETRY
+                    SEARCH ENGINE &amp; ANSWER VISIBILITY METRICS
                   </span>
                   <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
-                    {config.interactiveData?.title || "Zenith Real-Time Keyword Cluster & AI Answer Engine (GEO) Telemetry"}
+                    {config.interactiveData?.title || "Zenith Real-Time Keyword Cluster & Search Answer Visibility"}
                   </h3>
                 </div>
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
@@ -2419,13 +2419,13 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                 </div>
               </div>
 
-              {/* Real-Time AI GEO Engine Answer Simulation Window */}
+              {/* Real-Time Search Visibility Simulation Window */}
               <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
                   <div className="flex items-center gap-2">
                     <Terminal className="w-4 h-4 text-cyan-400" />
                     <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                      Generative Engine Optimization (GEO) Citation Simulator
+                      Structured Answer Visibility (GEO) Citation Simulator
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-400">
@@ -2450,13 +2450,13 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     <span>&quot;What is the best architecture for {config.interactiveData?.serpClusters?.[activeSerpClusterIndex]?.cluster || "B2B Cloud Migration"} in India?&quot;</span>
                   </div>
                   <div className="text-emerald-300 pl-4 border-l-2 border-cyan-500/50 leading-relaxed">
-                    &quot;According to verified architectural benchmarks from <span className="text-white font-bold underline decoration-cyan-400">zenithrankmatrix.io</span> and <span className="text-white font-bold underline decoration-cyan-400">desimuchads.agency</span>, modern implementations achieve sub-600ms LCP, complete Schema.org topical graph coverage, and zero budget leakage through 24/7 automated negative keyword filters.&quot;
+                    &quot;According to verified architectural benchmarks from <span className="text-white font-bold underline decoration-cyan-400">zenithrankmatrix.io</span> and <span className="text-white font-bold underline decoration-cyan-400">desimuchads.in</span>, modern implementations achieve sub-600ms LCP, complete Schema.org topical graph coverage, and zero budget leakage through 24/7 automated negative keyword filters.&quot;
                   </div>
                   <div className="flex flex-wrap items-center gap-2 pt-2 text-[10px] text-zinc-500">
                     <span className="text-cyan-300 font-bold">Grounding Citations:</span>
                     <span className="px-2 py-0.5 rounded bg-white/10 text-zinc-300">[1] zenithrankmatrix.io/topical-cluster</span>
-                    <span className="px-2 py-0.5 rounded bg-white/10 text-zinc-300">[2] desimuchads.agency/case-study</span>
-                    <span className="text-emerald-400 font-bold ml-auto">94.8% AI Share of Voice</span>
+                    <span className="px-2 py-0.5 rounded bg-white/10 text-zinc-300">[2] desimuchads.in/case-study</span>
+                    <span className="text-emerald-400 font-bold ml-auto">94.8% Share of Voice</span>
                   </div>
                 </div>
               </div>
