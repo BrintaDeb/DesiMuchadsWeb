@@ -78,7 +78,11 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-8 items-center">
           {/* Left Column: Monumental Breydaqs Headline & Proposition */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-left">
+          <div className="relative lg:col-span-7 space-y-4 sm:space-y-6 text-left">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl bg-[radial-gradient(ellipse_at_left,rgba(8,8,7,0.72)_0%,transparent_75%)]"
+            />
             {/* Authentic Brand Emblem Badge */}
             <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg group select-none transition-all">
               <div className="w-8 h-4 sm:w-9 sm:h-4.5 flex items-center justify-center">
@@ -144,7 +148,7 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               <div className="h-6 overflow-hidden relative inline-flex items-center">
                 <span
                   key={keywordIndex}
-                  className="font-bold tracking-wider text-emerald-400 uppercase animate-in slide-in-from-bottom-2 duration-300"
+                  className="font-bold tracking-wider bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-white bg-clip-text text-transparent uppercase animate-in slide-in-from-bottom-2 duration-300"
                 >
                   {ROTATING_KEYWORDS[keywordIndex]}
                 </span>

@@ -32,10 +32,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return { title: "Case Study Not Found" };
 
   const pageUrl = `https://desimuchads.in/work/${slug}`;
+  const pageTitle = `${project.client} Case Study`.length <= 44 ? `${project.client} Case Study` : project.client;
+  const rawDesc = `${project.tagline} Verified: ${project.heroStat}.`;
+  const description = rawDesc.length <= 155 ? rawDesc : project.tagline.slice(0, 155);
 
   return {
-    title: `${project.client} Case Study (${project.heroStat})`,
-    description: `${project.tagline} Verified Results: ${project.heroStat}. The Challenge, Strategy, and Outcome breakdown by Desi Muchads Digital Growth Squad.`,
+    title: pageTitle,
+    description,
     keywords: [
       project.client,
       `${project.client} Case Study`,
@@ -49,13 +52,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: pageUrl,
     },
     openGraph: {
-      title: `${project.client} Case Study · ${project.heroStat} | DESI MUCHADS`,
-      description: project.tagline,
+      title: `${pageTitle} | DESI MUCHADS`,
+      description,
       url: pageUrl,
       siteName: "DESI MUCHADS",
       images: [
         {
-          url: "/og-banner.png",
+          url: "https://desimuchads.in/og-banner.png",
           width: 1200,
           height: 630,
           alt: `${project.client} Case Study - Desi Muchads`,
@@ -65,9 +68,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.client} Case Study · ${project.heroStat} | DESI MUCHADS`,
-      description: project.tagline,
-      images: ["/og-banner.png"],
+      title: `${pageTitle} | DESI MUCHADS`,
+      description,
+      images: ["https://desimuchads.in/og-banner.png"],
       creator: "@desimuchads",
     },
   };
@@ -101,7 +104,21 @@ async function ProjectDetailContent({ params }: PageProps) {
   const currentIndex = AGENCY_PROJECTS.findIndex((p) => p.slug === slug);
   const nextProject =
     AGENCY_PROJECTS[(currentIndex + 1) % AGENCY_PROJECTS.length];
-  const matchedService = AGENCY_SERVICES.find((s) => s.id === project.serviceId);
+  const normalizedServiceId =
+    project.serviceId === "seo-sem" ||
+    project.serviceId === "performance-marketing" ||
+    project.serviceId === "lead-generation"
+      ? "meta-google-ads"
+      : project.serviceId === "unit-economics"
+        ? "ecommerce-services"
+        : project.serviceId === "graphic-design" || project.serviceId === "illustrations-art"
+          ? "branding"
+          : project.serviceId;
+  const matchedService = AGENCY_SERVICES.find((s) => s.id === normalizedServiceId);
+
+  const articleImage = project.thumbnail.startsWith("/")
+    ? `https://desimuchads.in${project.thumbnail}`
+    : "https://desimuchads.in/og-banner.png";
 
   // Structured Data: Article / CreativeWork Schema
   const caseStudySchema = {
@@ -109,6 +126,7 @@ async function ProjectDetailContent({ params }: PageProps) {
     "@type": "Article",
     headline: `${project.client} Case Study: How Desi Muchads Delivered ${project.heroStat}`,
     description: `${project.tagline}. ${project.desc}`,
+    image: articleImage,
     author: {
       "@type": "Organization",
       name: "DESI MUCHADS Digital Agency",
@@ -160,7 +178,7 @@ async function ProjectDetailContent({ params }: PageProps) {
         "@type": "ListItem",
         position: 2,
         name: "Portfolio Work",
-        item: "https://desimuchads.in/#work",
+        item: "https://desimuchads.in/work",
       },
       {
         "@type": "ListItem",
@@ -309,8 +327,8 @@ async function ProjectDetailContent({ params }: PageProps) {
               </h2>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/12 border border-[#D4AF37]/35 text-[11px] font-mono text-[#F3E5AB]">
+                <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
                 <span>Live Edge Host (bom1)</span>
               </span>
               <span className="hidden sm:inline-flex px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono text-zinc-400">
@@ -350,11 +368,11 @@ async function ProjectDetailContent({ params }: PageProps) {
             </div>
 
             {/* 2. Strategy */}
-            <div className="rounded-3xl p-8 ios-glass-card border-emerald-500/25 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-mono text-xs font-bold text-emerald-400">
+            <div className="rounded-3xl p-8 ios-glass-card border-[#D4AF37]/30 shadow-xl space-y-4 hover:-translate-y-1 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/12 border border-[#D4AF37]/35 flex items-center justify-center font-mono text-xs font-bold text-[#F3E5AB]">
                 02
               </div>
-              <span className="font-mono text-xs font-black uppercase tracking-widest text-emerald-400 block">
+              <span className="font-mono text-xs font-black uppercase tracking-widest text-[#F3E5AB] block">
                 STAGE 02: THE STRATEGY
               </span>
               <p className="text-sm text-zinc-300 leading-relaxed font-sans">
@@ -393,7 +411,7 @@ async function ProjectDetailContent({ params }: PageProps) {
                     key={dIdx}
                     className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#F3E5AB] shrink-0 mt-0.5" />
                     <span className="text-sm text-zinc-200 font-sans">{deliv}</span>
                   </li>
                 ))}

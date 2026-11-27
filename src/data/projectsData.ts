@@ -36,7 +36,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "+65% INQUIRY CVR · HIGH-TICKET BOOKINGS",
     liveUrl: "https://youandme-smoky.vercel.app/",
-    thumbnail: "/projects/you-and-me-hero.png",
+    thumbnail: "/projects/you-and-me-hero.webp",
     fullImage: "https://brinta-deb-portfolio.onrender.com/assets/media/youandme_full.png",
     desc: "YOU & ME is a premier cinematic destination wedding photography studio capturing timeless love stories across Udaipur, Tuscany, and Goa.",
     mushkil:
@@ -90,7 +90,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "ROYAL HERITAGE UI · 4.8X RESERVATIONS",
     liveUrl: "https://restaurantweb-ruby.vercel.app/",
-    thumbnail: "/projects/saffron-sage-hero.png",
+    thumbnail: "/projects/saffron-sage-hero.webp",
     fullImage: "https://brinta-deb-portfolio.onrender.com/assets/media/saffron_sage_full.png",
     desc: "Saffron & Sage is an upscale fine-dining establishment reviving regal Awadhi and Mughal culinary traditions with modern gourmet finesse.",
     mushkil:

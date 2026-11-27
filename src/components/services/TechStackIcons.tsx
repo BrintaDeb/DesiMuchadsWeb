@@ -26,7 +26,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Turbopack", "Partial Prerendering", "Vercel Edge"],
     accent: "#FFFFFF",
     ring: 0,
-    phase: 0.04,
+    phase: 0.028,
   },
   {
     id: "react",
@@ -38,7 +38,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Server Components", "Zero-Jitter Hydration", "Custom Hooks"],
     accent: "#61DAFB",
     ring: 0,
-    phase: 0.21,
+    phase: 0.194,
   },
   {
     id: "typescript",
@@ -50,7 +50,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Strict Schemas", "API Contracts", "End-to-End Safety"],
     accent: "#60A5FA",
     ring: 0,
-    phase: 0.38,
+    phase: 0.361,
   },
   {
     id: "tailwind",
@@ -62,7 +62,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Fluid Typography", "GPU Transforms", "Dark Tokens"],
     accent: "#38BDF8",
     ring: 0,
-    phase: 0.54,
+    phase: 0.528,
   },
   {
     id: "gsap",
@@ -74,7 +74,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["ScrollTrigger", "Framer Motion", "Lenis Physics"],
     accent: "#88CE02",
     ring: 0,
-    phase: 0.71,
+    phase: 0.694,
   },
   {
     id: "threejs",
@@ -86,7 +86,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Custom Shaders", "ACES ToneMap", "60FPS PBR"],
     accent: "#F59E0B",
     ring: 0,
-    phase: 0.88,
+    phase: 0.861,
   },
 
   // Orbit 1 — Commerce, Payments & Creative Stack
@@ -100,31 +100,31 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Headless Cart", "Klaviyo Flows", "AOV Bundles"],
     accent: "#95BF47",
     ring: 1,
-    phase: 0.08,
+    phase: 0.028,
   },
   {
     id: "razorpay",
     name: "RazorpayX & UPI",
     shortTag: "UPI 1-TAP",
     category: "Instant Checkout",
-    serviceTitle: "Unit Economics & Margin Auditing",
-    serviceSlug: "unit-economics",
+    serviceTitle: "E-Commerce Services",
+    serviceSlug: "ecommerce-services",
     companionTools: ["Cashfree", "Stripe", "COD-to-Prepaid Nudges"],
     accent: "#38BDF8",
     ring: 1,
-    phase: 0.25,
+    phase: 0.194,
   },
   {
     id: "figma",
     name: "Figma Systems",
     shortTag: "FIGMA",
-    category: "Bespoke UI/UX",
-    serviceTitle: "Web Development Services",
-    serviceSlug: "web-development",
-    companionTools: ["Component Tokens", "Mobile Wireframes", "Design QA"],
+    category: "Brand & UI Systems",
+    serviceTitle: "Branding & Visual Identity",
+    serviceSlug: "branding",
+    companionTools: ["Brand Guidelines", "Design Tokens", "Visual Kits"],
     accent: "#A855F7",
     ring: 1,
-    phase: 0.42,
+    phase: 0.361,
   },
   {
     id: "aftereffects",
@@ -136,31 +136,31 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Premiere Pro", "CapCut Pro", "Lumetri Color"],
     accent: "#A78BFA",
     ring: 1,
-    phase: 0.58,
+    phase: 0.528,
   },
   {
     id: "blender",
     name: "Blender 3D & CAD",
     shortTag: "BLENDER",
     category: "Packaging Renders",
-    serviceTitle: "Packaging & Label Designing Services",
+    serviceTitle: "Packaging & Label Production",
     serviceSlug: "packaging-label",
     companionTools: ["Adobe Illustrator", "CMYK Foil Specs", "Dielines"],
     accent: "#F97316",
     ring: 1,
-    phase: 0.75,
+    phase: 0.694,
   },
   {
     id: "shiprocket",
     name: "Shiprocket Shield",
     shortTag: "RTO AI",
     category: "Logistics & COD Guard",
-    serviceTitle: "Unit Economics & Margin Auditing",
-    serviceSlug: "unit-economics",
-    companionTools: ["OTP Verification", "NDR Routing", "Zoho Books"],
+    serviceTitle: "E-Commerce Services",
+    serviceSlug: "ecommerce-services",
+    companionTools: ["OTP Verification", "NDR Routing", "Prepaid Nudges"],
     accent: "#C084FC",
     ring: 1,
-    phase: 0.92,
+    phase: 0.861,
   },
 
   // Orbit 2 — Growth, Ads & First-Party Attribution Stack
@@ -168,61 +168,61 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     id: "meta",
     name: "Meta CAPI",
     shortTag: "CAPI",
-    category: "Server-Side Ads",
-    serviceTitle: "Performance Marketing Services",
-    serviceSlug: "performance-marketing",
+    category: "Meta Advantage+ & Ads",
+    serviceTitle: "Meta & Google Ads",
+    serviceSlug: "meta-google-ads",
     companionTools: ["Stape Server GTM", "Advantage+", "Triple Whale"],
     accent: "#3B82F6",
     ring: 2,
-    phase: 0.12,
+    phase: 0.75,
   },
   {
     id: "google",
-    name: "Google PMax & SEM",
+    name: "Google PMax & Search Ads",
     shortTag: "PMAX",
-    category: "High-Intent Search",
-    serviceTitle: "SEO & SEM Services",
-    serviceSlug: "seo-sem",
-    companionTools: ["Semrush", "Ahrefs", "Schema JSON-LD"],
+    category: "Google Paid Acquisition",
+    serviceTitle: "Meta & Google Ads",
+    serviceSlug: "meta-google-ads",
+    companionTools: ["Google Search", "Performance Max", "YouTube Ads"],
     accent: "#FBBC04",
     ring: 2,
-    phase: 0.29,
+    phase: 0.917,
   },
   {
     id: "ga4",
     name: "GA4 Telemetry",
     shortTag: "GA4",
     category: "Full-Funnel Analytics",
-    serviceTitle: "SEO & SEM Services",
-    serviceSlug: "seo-sem",
-    companionTools: ["Search Console", "Core Web Vitals", "Event Deduplication"],
+    serviceTitle: "Meta & Google Ads",
+    serviceSlug: "meta-google-ads",
+    companionTools: ["Enhanced Conversions", "Meta CAPI", "Attribution Deduplication"],
     accent: "#F9AB00",
     ring: 2,
-    phase: 0.45,
+    phase: 0.083,
   },
   {
     id: "bigquery",
-    name: "BigQuery CM3",
-    shortTag: "CM3 DATA",
-    category: "Margin Modeling",
-    serviceTitle: "Unit Economics & Margin Auditing",
-    serviceSlug: "unit-economics",
-    companionTools: ["True Blended CAC", "Cohort LTV", "TallyPrime Sync"],
+    name: "BigQuery Analytics",
+    shortTag: "BI DATA",
+    category: "Attribution & Scaling",
+    serviceTitle: "Meta & Google Ads",
+    serviceSlug: "meta-google-ads",
+    companionTools: ["Blended ROAS", "Cohort LTV", "Server Telemetry"],
     accent: "#60A5FA",
     ring: 2,
-    phase: 0.62,
+    phase: 0.25,
   },
   {
     id: "whatsapp",
     name: "WhatsApp / Wati API",
     shortTag: "WATI BOT",
-    category: "60s Lead Qualification",
-    serviceTitle: "Lead Generation Services",
-    serviceSlug: "lead-generation",
-    companionTools: ["HubSpot CRM", "Make Webhooks", "Zoho CRM"],
+    category: "Storefront Retention",
+    serviceTitle: "E-Commerce Services",
+    serviceSlug: "ecommerce-services",
+    companionTools: ["Klaviyo Flows", "Cart Recovery", "Prepaid Nudges"],
     accent: "#25D366",
     ring: 2,
-    phase: 0.78,
+    phase: 0.417,
   },
   {
     id: "qcom",
@@ -234,7 +234,7 @@ export const SERVICE_TECH_STACK: ServiceTechNode[] = [
     companionTools: ["Dark Store Matrix", "Stockout Alerts", "Ad Central"],
     accent: "#FACC15",
     ring: 2,
-    phase: 0.95,
+    phase: 0.583,
   },
 ];
 
@@ -359,17 +359,14 @@ export function TechLogoGlyph({ id, className = "w-6 h-6" }: { id: string; class
       return (
         <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
           <rect x="3" y="3" width="26" height="26" rx="5.5" fill="#00005B" stroke="#9999FF" strokeWidth="1.5" />
-          <text
-            x="16"
-            y="20.5"
-            textAnchor="middle"
+          <path
+            d="M9.6 20.6L12.1 11.4H14.5L17 20.6H14.8L14.3 18.6H12.3L11.8 20.6H9.6ZM12.7 16.9H13.9L13.3 14.1L12.7 16.9Z"
             fill="#9999FF"
-            fontFamily="system-ui, sans-serif"
-            fontWeight="900"
-            fontSize="13.5"
-          >
-            Ae
-          </text>
+          />
+          <path
+            d="M21.2 20.8C19.2 20.8 18 19.4 18 17.3C18 15.1 19.3 13.7 21.1 13.7C23.1 13.7 24.1 15.1 24.1 17.2V17.9H19.9C20 18.8 20.5 19.3 21.4 19.3C22.1 19.3 22.6 19 23.1 18.6L23.9 19.8C23.2 20.4 22.3 20.8 21.2 20.8ZM20 16.5H22.2C22.1 15.6 21.8 15.1 21.1 15.1C20.5 15.1 20.1 15.6 20 16.5Z"
+            fill="#9999FF"
+          />
         </svg>
       );
     case "blender":

@@ -148,8 +148,8 @@ export function SocialRedirectionDeck({
               </div>
 
               {/* Subtle hover label tooltip below the button */}
-              <div className="mt-2.5 flex flex-col items-center opacity-70 group-hover:opacity-100 transition-opacity">
-                <span className="font-mono text-[9px] text-zinc-400 group-hover:text-zinc-200 transition-colors">
+              <div className="mt-2.5 flex flex-col items-center transition-opacity">
+                <span className="font-mono text-[9px] text-zinc-300 group-hover:text-white transition-colors">
                   {item.handle}
                 </span>
               </div>

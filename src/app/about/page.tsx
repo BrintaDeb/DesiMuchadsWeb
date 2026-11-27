@@ -37,7 +37,7 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CEO",
     tagline: "Agency Vision, Client Scaling Strategy & Executive Leadership",
     bio: "Directs overarching agency strategy, high-growth client partnerships, and market expansion. Leads enterprise acquisitions and scaling roadmaps.",
-    avatar: "/team/rahul-datt.jpg",
+    avatar: "/team/rahul-datta.png",
     tileBgClass: "bg-black",
     badge: "CHIEF EXECUTIVE OFFICER",
     disciplines: ["Executive Leadership", "Growth Strategy", "Client Partnerships", "Brand Scaling"],
@@ -52,7 +52,7 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CTO",
     tagline: "Fullstack Engineering, Conversion Architecture & Systems",
     bio: "Architects high-performance Next.js web applications, sub-second conversion engines, and server-side ad tracking systems. Leads fullstack engineering and digital infrastructure.",
-    avatar: "/team/brinta-deb.png",
+    avatar: "/team/brinta-deb.webp",
     tileBgClass: "bg-black",
     badge: "CHIEF TECHNOLOGY OFFICER",
     disciplines: ["Next.js App Router", "Fullstack Engineering", "Conversion Architecture", "Performance Systems"],
@@ -68,7 +68,7 @@ const TEAM_ROSTER: TeamMember[] = [
     role: "CFO",
     tagline: "Capital Allocation, Unit Economics & Financial Governance",
     bio: "Oversees financial strategy, client ROI auditing, and unit economics. Ensures every marketing rupee spent yields measurable contribution margins and compounding returns.",
-    avatar: "/team/omkar-dutta.png",
+    avatar: "/team/omkar-dutta.webp",
     badge: "CHIEF FINANCIAL OFFICER",
     disciplines: ["Financial Strategy", "Unit Economics", "Profitability Audits", "Capital Allocation"],
     socials: {
@@ -114,23 +114,23 @@ export default function AboutPage() {
           {/* 4 Hero Quantitative Impact Metrics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16">
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[10px] font-mono uppercase block mb-1">Blended ROAS Guarantee</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-emerald-400">5.8X</div>
-              <span className="text-xs text-zinc-400 font-sans mt-1 block">Contractually committed in retainers</span>
+              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Blended ROAS Guarantee</span>
+              <div className="font-display font-black text-3xl sm:text-4xl text-[#F3E5AB] tabular-nums">5.8X</div>
+              <span className="text-xs text-zinc-400 font-sans mt-1 block">Engineered across active campaigns</span>
             </div>
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[10px] font-mono uppercase block mb-1">Verified Works</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-white">50+</div>
+              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Verified Works</span>
+              <div className="font-display font-black text-3xl sm:text-4xl text-white tabular-nums">50+</div>
               <span className="text-xs text-zinc-400 font-sans mt-1 block">Live platforms, reels &amp; master art</span>
             </div>
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[10px] font-mono uppercase block mb-1">Human Craftsmanship</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-white">100%</div>
+              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Human Craftsmanship</span>
+              <div className="font-display font-black text-3xl sm:text-4xl text-white tabular-nums">100%</div>
               <span className="text-xs text-zinc-400 font-sans mt-1 block">Hand-crafted bespoke architecture</span>
             </div>
             <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[10px] font-mono uppercase block mb-1">Average PageSpeed</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-white">99/100</div>
+              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Average PageSpeed</span>
+              <div className="font-display font-black text-3xl sm:text-4xl text-white tabular-nums">99/100</div>
               <span className="text-xs text-zinc-400 font-sans mt-1 block">Core Web Vitals sub-0.7s LCP</span>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function AboutPage() {
           </div>
 
           <div className="shrink-0 flex items-center gap-2 font-mono text-xs text-zinc-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
             <span>ACTIVE EXECUTIVE ROSTER</span>
           </div>
         </div>

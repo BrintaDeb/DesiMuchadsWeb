@@ -23,7 +23,7 @@ const THEME = {
   band: "#FF6B2C",
   bandOutline: "#09090b",
   pocket: "#18181B",
-  bits: ["#D4AF37", "#FFFFFF", "#FF6B2C", "#10B981", "#F3E5AB"],
+  bits: ["#D4AF37", "#FFFFFF", "#FF6B2C", "#E5C158", "#F3E5AB"],
   boing: 1,
 };
 
@@ -199,6 +199,11 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
     let raf = 0;
     let last = 0;
     let destroyed = false;
+    let hovered = false;
+    let hoverAlpha = 0;
+    let hoverPulseT = 0;
+    const hoverTarget = { x: 0, y: 0 };
+    let lastHoverPos = { x: 0, y: 0 };
 
     const A = { x: 0, y: 0 };
     const R = { x: 0, y: 0 };
@@ -219,6 +224,9 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
     };
     const pocket = { x: 0, y: 0, vx: 0, vy: 0 };
     const fr = { sq: 0, sqv: 0, lean: 0, leanv: 0 };
+    let bandWave = 0;
+    let bandWaveT = 0;
+    const flyTrail: Array<{ x: number; y: number; r: number }> = [];
     const bits: Bit[] = [];
     const activeSkyCleanups = new Set<() => void>();
 
@@ -231,8 +239,8 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
 
     function updateGrabDom() {
       if (!grab) return;
-      const w = Math.max(88, size * 0.92);
-      const h = Math.max(76, size * 0.56);
+      const w = Math.max(92, size * 1.05);
+      const h = Math.max(82, size * 0.72);
       grab.style.width = `${w}px`;
       grab.style.height = `${h}px`;
       grab.style.transform = `translate3d(${(doll.x - w / 2).toFixed(1)}px, ${(doll.y - h * 0.5).toFixed(1)}px, 0)`;
@@ -252,8 +260,8 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       const sr = slotRef.current ? slotRef.current.getBoundingClientRect() : null;
       const hasSlot = Boolean(sr && sr.width > 0);
       S = hasSlot && sr
-        ? clamp(Math.min(sr.width * 0.44, sr.height * 0.38), 40, 74)
-        : clamp(Math.min(W * 0.14, H * 0.24), 44, 72);
+        ? clamp(Math.min(sr.width * 0.45, sr.height * 0.4), 30, 74)
+        : clamp(Math.min(W * 0.14, H * 0.24), 34, 72);
       size = S * 1.55;
       A.x = hasSlot && sr ? sr.left - r.left + sr.width * 0.5 : W * 0.5;
       A.y = hasSlot && sr ? sr.top - r.top + sr.height * 0.42 : H * 0.38;
@@ -574,11 +582,12 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       let lastTgt: number | null = null;
       const rad = size * 0.25;
       const pieces: SkyPiece[] = [];
+      const skyTrail: Array<{ x: number; y: number }> = [];
 
       // Safe visual targets across any page hosting the Footer
       const targets = Array.from(
         document.querySelectorAll<HTMLElement>(
-          "#services h2, #services .breydaqs-hover-item, #work h2, #clients h2, #clients .animate-marquee > div, #process h2, #process li, #pricing h2, main h1, main h2, footer h2"
+          "#services h2, #services .breydaqs-hover-item, #work h2, #clients h2, #clients .animate-marquee > div, #request-quote h2, main h1, main h2, footer h2"
         )
       ).filter((el) => !el.closest("header, .dm-ss-section"));
 
@@ -924,6 +933,28 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
         }
 
         if (M.phase === "up" || M.phase === "down") {
+          skyTrail.push({ x: M.x, y: M.y });
+          if (skyTrail.length > 18) skyTrail.shift();
+          if (skyTrail.length > 2) {
+            c.save();
+            c.lineCap = "round";
+            c.lineJoin = "round";
+            for (let i = 1; i < skyTrail.length; i++) {
+              const p0 = skyTrail[i - 1];
+              const p1 = skyTrail[i];
+              const ratio = i / skyTrail.length;
+              c.strokeStyle =
+                ratio > 0.65
+                  ? `rgba(255, 255, 255, ${(ratio * 0.55).toFixed(2)})`
+                  : `rgba(212, 175, 55, ${(ratio * 0.45).toFixed(2)})`;
+              c.lineWidth = Math.max(1.5, rad * 0.65 * ratio);
+              c.beginPath();
+              c.moveTo(p0.x, p0.y - window.scrollY);
+              c.lineTo(p1.x, p1.y - window.scrollY);
+              c.stroke();
+            }
+            c.restore();
+          }
           drawRocketLogo(M.x, M.y - window.scrollY, M.rot, M.phase === "down" ? spring1(Math.min(1, M.tt / 0.45)) : 0);
         }
         if (M.phase === "land" && !pieces.length) {
@@ -976,6 +1007,8 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       flyT = 0;
 
       slingshotSound.twang(power);
+      bandWave = 14 * power;
+      bandWaveT = 0;
       pocket.vx = ux * sp * 0.32;
       pocket.vy = uy * sp * 0.32;
       fr.sqv += 7 * THEME.boing * power;
@@ -999,11 +1032,41 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
     }
 
     function step(dt: number) {
+      hoverPulseT += dt;
+      bandWaveT += dt;
+      bandWave *= Math.pow(0.025, dt);
+      const wantHoverFx = hovered || doll.mode === "drag" ? 1 : 0;
+      hoverAlpha += (wantHoverFx - hoverAlpha) * Math.min(1, dt * 11);
+
       if (doll.mode !== "drag") {
-        pocket.vx += (-300 * (pocket.x - R.x) - 7 * pocket.vx) * dt;
-        pocket.vy += (-300 * (pocket.y - R.y) - 7 * pocket.vy) * dt;
+        const restX = R.x + (doll.mode === "rest" && hovered ? hoverTarget.x : 0);
+        const restY = R.y + (doll.mode === "rest" && hovered ? hoverTarget.y : 0);
+        pocket.vx += (-300 * (pocket.x - restX) - 7.5 * pocket.vx) * dt;
+        pocket.vy += (-300 * (pocket.y - restY) - 7.5 * pocket.vy) * dt;
         pocket.x += pocket.vx * dt;
         pocket.y += pocket.vy * dt;
+      }
+
+      if (doll.mode === "fly" || doll.mode === "drop") {
+        flyTrail.push({ x: doll.x, y: doll.y, r: size * 0.24 });
+        if (flyTrail.length > 14) flyTrail.shift();
+        if (doll.mode === "fly" && Math.random() < 0.6) {
+          bits.push({
+            x: doll.x + (Math.random() - 0.5) * 12,
+            y: doll.y + (Math.random() - 0.5) * 12,
+            vx: -doll.vx * 0.08 + (Math.random() - 0.5) * 45,
+            vy: -doll.vy * 0.08 + (Math.random() - 0.5) * 45,
+            r: 2.5 + Math.random() * 3.5,
+            life: 0.85,
+            decay: 2.2,
+            rot: Math.random() * 6,
+            vr: (Math.random() - 0.5) * 8,
+            color: THEME.bits[Math.random() > 0.4 ? 0 : 1],
+            shape: "dot",
+          });
+        }
+      } else if (flyTrail.length > 0) {
+        flyTrail.shift();
       }
 
       let tgtSt = 0;
@@ -1012,7 +1075,15 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       if (doll.mode === "rest") {
         doll.x = pocket.x;
         doll.y = pocket.y;
-        doll.rot *= Math.pow(0.02, dt);
+        const hoverMag = hovered ? Math.hypot(hoverTarget.x, hoverTarget.y) : 0;
+        if (hovered && hoverMag > 1) {
+          tgtSt = clamp(hoverMag / 110, 0, 0.14);
+          tgtAng = Math.atan2(hoverTarget.y, hoverTarget.x);
+          doll.rot += (clamp(hoverTarget.x * 0.012, -0.22, 0.22) - doll.rot) * Math.min(1, dt * 10);
+          fr.leanv += (clamp(hoverTarget.x * 0.008, -0.14, 0.14) - fr.lean) * 16 * dt;
+        } else {
+          doll.rot *= Math.pow(0.02, dt);
+        }
       } else if (doll.mode === "drag") {
         const dx = doll.x - R.x;
         const dy = doll.y - R.y;
@@ -1140,14 +1211,81 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       strokeLine([[b, j], [l, j, r]], S * 0.22, THEME.frame, THEME.frameOutline);
     }
 
-    function band(from: { x: number; y: number }, w: number) {
+    function band(from: { x: number; y: number }, w: number, dirSign = 1) {
       const len = Math.hypot(pocket.x - from.x, pocket.y - from.y);
-      strokeLine(
-        [[from, { x: pocket.x, y: pocket.y }]],
-        w * clamp(1.15 - len / (maxPull * 2.4), 0.45, 1),
-        THEME.band,
-        THEME.bandOutline
-      );
+      const powerRatio = clamp((len - S * 0.35) / maxPull, 0, 1);
+      const thickness = w * clamp(1.15 - len / (maxPull * 2.4), 0.45, 1);
+
+      // Compute perpendicular midpoint deflection for elastic post-shot string vibration
+      const dx = pocket.x - from.x;
+      const dy = pocket.y - from.y;
+      const segLen = Math.hypot(dx, dy) || 1;
+      const nx = -dy / segLen;
+      const ny = dx / segLen;
+      const waveAmp =
+        (doll.mode === "drag"
+          ? Math.sin(hoverPulseT * 28) * powerRatio * 2.4 * dirSign
+          : Math.sin(bandWaveT * 42) * bandWave * dirSign);
+      const midX = (from.x + pocket.x) * 0.5 + nx * waveAmp;
+      const midY = (from.y + pocket.y) * 0.5 + ny * waveAmp;
+
+      if (ctx) {
+        ctx.save();
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        // Outer dark stroke outline
+        ctx.shadowColor = "rgba(14,14,14,.35)";
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetY = 4;
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.quadraticCurveTo(midX, midY, pocket.x, pocket.y);
+        ctx.strokeStyle = THEME.bandOutline;
+        ctx.lineWidth = thickness + S * 0.1;
+        ctx.stroke();
+        ctx.restore();
+
+        // Tension heat color core along vibrating Bezier band
+        ctx.save();
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.quadraticCurveTo(midX, midY, pocket.x, pocket.y);
+        ctx.strokeStyle = powerRatio > 0.72 ? "#FFA63A" : THEME.band;
+        ctx.lineWidth = thickness;
+        ctx.stroke();
+
+        // Inner high-tension luminance filament
+        if (powerRatio > 0.35 || bandWave > 1) {
+          ctx.globalAlpha = clamp(powerRatio * 0.8 + bandWave * 0.05, 0, 0.85);
+          ctx.strokeStyle = "#FFF2B2";
+          ctx.lineWidth = Math.max(1.2, thickness * 0.28);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    }
+
+    function drawFlyTrail() {
+      if (!ctx || flyTrail.length < 2) return;
+      ctx.save();
+      ctx.lineCap = "round";
+      for (let i = 1; i < flyTrail.length; i++) {
+        const p0 = flyTrail[i - 1];
+        const p1 = flyTrail[i];
+        const ratio = i / flyTrail.length;
+        ctx.strokeStyle =
+          ratio > 0.6
+            ? `rgba(243, 229, 171, ${(ratio * 0.55).toFixed(2)})`
+            : `rgba(255, 107, 44, ${(ratio * 0.42).toFixed(2)})`;
+        ctx.lineWidth = Math.max(2, p1.r * ratio * 0.85);
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.stroke();
+      }
+      ctx.restore();
     }
 
     function drawDoll() {
@@ -1206,24 +1344,120 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       }
     }
 
+    function drawHoverFx() {
+      if (!ctx || hoverAlpha < 0.02 || (doll.mode !== "rest" && doll.mode !== "drag")) return;
+
+      const dx = R.x - doll.x;
+      const dy = R.y - doll.y;
+      const pull = Math.hypot(dx, dy);
+      const isPulling = doll.mode === "drag" && pull >= 16;
+      const power = isPulling ? clamp(pull / maxPull, 0, 1) : 0;
+
+      ctx.save();
+      ctx.globalAlpha = clamp(hoverAlpha, 0, 1);
+
+      // Pulsing golden/orange interactive aura around pocket
+      const pulse = 1 + Math.sin(hoverPulseT * 6) * 0.08;
+      const auraR = S * (0.62 + power * 0.35) * pulse;
+      const grad = ctx.createRadialGradient(pocket.x, pocket.y, S * 0.1, pocket.x, pocket.y, auraR * 1.45);
+      grad.addColorStop(0, isPulling ? "rgba(255, 107, 44, 0.36)" : "rgba(212, 175, 55, 0.28)");
+      grad.addColorStop(1, "rgba(212, 175, 55, 0)");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(pocket.x, pocket.y, auraR * 1.45, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Dual counter-rotating targeting reticles on hover/drag
+      const spinA = hoverPulseT * 1.4;
+      ctx.strokeStyle = isPulling ? "#FF6B2C" : "rgba(212, 175, 55, 0.78)";
+      ctx.lineWidth = isPulling ? 2.6 : 1.6;
+      ctx.setLineDash(isPulling ? [10, 6] : [5, 5]);
+      ctx.beginPath();
+      ctx.arc(pocket.x, pocket.y, S * (0.48 + power * 0.24), spinA, spinA + Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = isPulling ? "rgba(243, 229, 171, 0.65)" : "rgba(255, 255, 255, 0.35)";
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([3, 7]);
+      ctx.beginPath();
+      ctx.arc(pocket.x, pocket.y, S * (0.62 + power * 0.28), -spinA * 1.3, -spinA * 1.3 + Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Flowing animated parabolic aiming trajectory dots
+      const ux = isPulling ? dx / pull : clamp(-hoverTarget.x * 0.035 - 0.15, -0.55, 0.55);
+      const uy = isPulling ? dy / pull : -0.92;
+      const uNorm = Math.hypot(ux, uy) || 1;
+      const dirX = ux / uNorm;
+      const dirY = uy / uNorm;
+      const speed = isPulling ? vmax * 1.15 * Math.pow(power, 0.9) : Math.max(240, S * 5.2);
+      const flowShift = (hoverPulseT * (isPulling ? 3.2 : 1.8)) % 1;
+
+      for (let i = 0; i <= 8; i++) {
+        const dtDot = (i + flowShift) * (isPulling ? 0.042 : 0.038);
+        const px = doll.x + dirX * speed * dtDot;
+        const py = doll.y + dirY * speed * dtDot + 0.5 * g * 0.35 * dtDot * dtDot;
+        if (px < 10 || px > W - 10 || py < 6 || py > H - 6) break;
+        const fade = clamp(1 - (i + flowShift) * 0.1, 0, 1);
+        ctx.globalAlpha = clamp(hoverAlpha * fade, 0, 1);
+        ctx.fillStyle = isPulling ? (i % 2 === 0 ? "#FFF2B2" : "#FF6B2C") : "#FACC15";
+        ctx.beginPath();
+        ctx.arc(px, py, Math.max(2.0, (5.4 - (i + flowShift) * 0.42) * clamp(S / 55, 0.68, 1)), 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Floating high-contrast prompt pill cleanly clamped inside viewport canvas
+      ctx.globalAlpha = clamp(hoverAlpha, 0, 1);
+      const labelText = isPulling ? `${Math.round(power * 100)}% LAUNCH POWER` : "PULL BACK · LET GO";
+      const fontSize = clamp(Math.round(S * 0.19), 9, 12);
+      ctx.font = `900 ${fontSize}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+      const tw = ctx.measureText(labelText).width;
+      const pw = tw + 18;
+      const ph = fontSize + 12;
+      const rawBx = pocket.x - pw / 2;
+      const bx = clamp(rawBx, 8, Math.max(8, W - pw - 8));
+      const by = clamp(pocket.y - S * 0.88 - ph, 6, Math.max(6, H - ph - 6));
+
+      ctx.shadowColor = "rgba(0,0,0,0.45)";
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetY = 3;
+      ctx.fillStyle = isPulling ? "#FF6B2C" : "#FACC15";
+      ctx.beginPath();
+      roundedRect(ctx, bx, by, pw, ph, ph / 2);
+      ctx.fill();
+      ctx.shadowColor = "transparent";
+
+      ctx.fillStyle = "#09090B";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(labelText, bx + pw / 2, by + ph / 2 + 0.5);
+      ctx.restore();
+    }
+
     function draw() {
       if (!ctx) return;
       ctx.clearRect(0, 0, W, H);
       const [l, r] = tips();
       const bw = S * 0.11;
-      band(l, bw);
+      band(l, bw, 1);
       drawFrame();
       ctx.fillStyle = THEME.pocket;
       ctx.beginPath();
       ctx.ellipse(pocket.x, pocket.y, S * 0.2, S * 0.1, 0, 0, Math.PI * 2);
       ctx.fill();
+      drawHoverFx();
+      drawFlyTrail();
       drawDoll();
-      band(r, bw);
+      band(r, bw, -1);
       drawBits();
     }
 
     const still = () =>
       doll.mode === "rest" &&
+      !hovered &&
+      hoverAlpha < 0.02 &&
+      Math.abs(bandWave) < 0.08 &&
+      flyTrail.length === 0 &&
       !bits.length &&
       Math.abs(pocket.x - R.x) + Math.abs(pocket.y - R.y) + Math.abs(pocket.vx) + Math.abs(pocket.vy) < 0.02 &&
       Math.abs(doll.sq) +
@@ -1265,9 +1499,36 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
     let off = { x: 0, y: 0 };
     const snd = { lx: 0, ly: 0, t: 0 };
 
+    const onPointerEnter = (e: PointerEvent) => {
+      hovered = true;
+      root.classList.add("dm-ss-hover");
+      const p = pt(e);
+      hoverTarget.x = clamp((p.x - R.x) * 0.36, -18, 18);
+      hoverTarget.y = clamp((p.y - R.y) * 0.36 + 5, -10, 18);
+      lastHoverPos = p;
+      if (doll.mode === "rest") {
+        pocket.vy += 48;
+        doll.sqv += 0.9;
+        fr.sqv += 0.7;
+        triggerPop(headlineRef.current);
+        burst(doll.x, doll.y, 5, 0, -1, 0.45, 2.8);
+        slingshotSound.hoverPluck(false);
+      }
+      wake();
+    };
+
+    const onPointerLeave = () => {
+      hovered = false;
+      root.classList.remove("dm-ss-hover");
+      hoverTarget.x = 0;
+      hoverTarget.y = 0;
+      wake();
+    };
+
     const onPointerDown = (e: PointerEvent) => {
       if (e.button !== 0 || doll.mode !== "rest") return;
       e.preventDefault();
+      slingshotSound.unlock();
       try {
         grab.setPointerCapture(e.pointerId);
       } catch { }
@@ -1283,8 +1544,19 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
     };
 
     const onPointerMove = (e: PointerEvent) => {
-      if (doll.mode !== "drag") return;
       const p = pt(e);
+      if (doll.mode === "rest" && hovered) {
+        hoverTarget.x = clamp((p.x - R.x) * 0.36, -18, 18);
+        hoverTarget.y = clamp((p.y - R.y) * 0.36 + 5, -10, 18);
+        const sweepDist = Math.hypot(p.x - lastHoverPos.x, p.y - lastHoverPos.y);
+        if (sweepDist > 22) {
+          lastHoverPos = p;
+          slingshotSound.hoverPluck(true);
+        }
+        wake();
+        return;
+      }
+      if (doll.mode !== "drag") return;
       let dx = p.x + off.x - R.x;
       let dy = p.y + off.y - R.y;
       const m = Math.hypot(dx, dy);
@@ -1316,6 +1588,15 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       if (pull < 16) {
         doll.mode = "rest";
         doll.rot = 0;
+        bandWave = 7;
+        bandWaveT = 0;
+        pocket.vy += 240;
+        doll.sqv += 2.2;
+        fr.sqv += 1.4;
+        burst(doll.x, doll.y, 10, 0, -1, 0.85, 2.6);
+        slingshotSound.twang(0.35);
+        setLiveMsg("Pull back further and let go to launch, or press Space.");
+        wake();
         return;
       }
       launch(dx / pull, dy / pull, pull / maxPull);
@@ -1399,6 +1680,8 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       if (doll.mode === "drag" && kb) unpull();
     };
 
+    grab.addEventListener("pointerenter", onPointerEnter);
+    grab.addEventListener("pointerleave", onPointerLeave);
     grab.addEventListener("pointerdown", onPointerDown);
     grab.addEventListener("pointermove", onPointerMove);
     grab.addEventListener("pointerup", release);
@@ -1430,6 +1713,8 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       activeSkyCleanups.forEach((fn) => fn());
       activeSkyCleanups.clear();
       slingshotSound.slideEnd();
+      grab.removeEventListener("pointerenter", onPointerEnter);
+      grab.removeEventListener("pointerleave", onPointerLeave);
       grab.removeEventListener("pointerdown", onPointerDown);
       grab.removeEventListener("pointermove", onPointerMove);
       grab.removeEventListener("pointerup", release);
@@ -1450,35 +1735,33 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
       aria-label="DESI MUCHADS Interactive Slingshot Wordmark"
       className="dm-ss-section dm-ss-asleep relative w-full select-none pt-2 pb-14 sm:pb-20"
     >
-      {/* Original Monochrome DESI MUCHADS Bold Wordmark with Slingshot Directly Beside It */}
-      <div className="relative z-10 flex flex-row items-center justify-center gap-3 sm:gap-7 md:gap-10 pointer-events-none">
-        <div className="text-left sm:text-center">
+      {/* Single-Line Monochrome DESIMUCHADS Bold Wordmark with Interactive Slingshot Alongside */}
+      <div className="relative z-10 flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-5 md:gap-8 px-2 max-w-full pointer-events-none">
+        <div className="text-center shrink min-w-0">
           <h2
             ref={headlineRef}
-            className="flex flex-wrap items-center justify-start sm:justify-center gap-x-2 sm:gap-x-5 md:gap-x-6 text-[28px] sm:text-6xl md:text-7xl lg:text-[7vw] font-display font-black tracking-tight uppercase leading-[1.02]"
+            className="inline-flex flex-nowrap items-baseline justify-center whitespace-nowrap text-[clamp(1.625rem,6.8vw,5.4rem)] font-display font-black tracking-tight uppercase leading-[1]"
           >
-            <span className="text-white/25 hover:text-white transition-colors duration-300 pointer-events-auto">
+            <span className="text-zinc-400 hover:text-white transition-colors duration-300 pointer-events-auto">
               DESI
             </span>
-            <span className="inline-block transition-colors duration-300 pointer-events-auto">
-              <span className="text-white">
-                MUCH
-              </span>
-              <span className="text-white/25 hover:text-white transition-colors duration-300">
-                ADS
-              </span>
+            <span className="text-white pointer-events-auto">
+              MUCH
+            </span>
+            <span className="text-zinc-400 hover:text-white transition-colors duration-300 pointer-events-auto">
+              ADS
             </span>
           </h2>
-          <p className="mt-2 sm:mt-3 text-[10px] sm:text-xs md:text-sm font-mono tracking-widest text-zinc-500 uppercase font-medium">
+          <p className="mt-2 sm:mt-3 text-[9px] sm:text-xs md:text-sm font-mono tracking-widest text-zinc-400 uppercase font-medium">
             HIGH-CONVERSION PERFORMANCE MARKETING STUDIO
           </p>
         </div>
 
-        {/* Positioned Anchor Slot Directly Next to the Bold Words */}
+        {/* Positioned Anchor Slot Directly Next to the Bold Letters */}
         <div
           ref={slotRef}
           aria-hidden="true"
-          className="w-[96px] sm:w-[152px] md:w-[184px] h-[118px] sm:h-[164px] md:h-[188px] shrink-0"
+          className="w-[64px] sm:w-[116px] md:w-[152px] lg:w-[172px] h-[84px] sm:h-[132px] md:h-[164px] lg:h-[182px] shrink-0"
         />
       </div>
 

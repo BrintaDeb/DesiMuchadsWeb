@@ -42,8 +42,12 @@ export function IndianArtBackgroundOverlay() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#080807]/60 via-transparent to-[#080807]/50" />
       </div>
 
-      {/* 3. Subtle Mobile & Desktop Vignette Edge Shadow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#080807]/40 via-transparent to-[#080807]/60 pointer-events-none" />
+      {/* 3. Subtle Mobile & Desktop Vignette Edge + Center Readability Scrim */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#080807]/50 via-[#080807]/20 to-[#080807]/65 pointer-events-none" />
+      <div
+        className="hidden sm:block absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 50% 35%, rgba(8,8,7,0.34) 0%, transparent 72%)" }}
+      />
 
       {/* 4. Interactive Micro-Star Constellation Canvas */}
       <ConstellationCanvas />
@@ -55,11 +59,11 @@ export function IndianArtBackgroundOverlay() {
       />
       <div
         className="hidden sm:block absolute bottom-1/4 right-0 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.032) 0%, transparent 70%)" }}
       />
       <div
         className="hidden sm:block absolute top-2/3 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.025) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.028) 0%, transparent 70%)" }}
       />
     </div>
   );

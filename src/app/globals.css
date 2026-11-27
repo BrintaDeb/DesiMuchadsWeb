@@ -45,6 +45,8 @@
 
   --color-accent-white: #ffffff;
   --color-accent-black: #000000;
+  --color-accent-gold: #d4af37;
+  --color-accent-gold-light: #f3e5ab;
 
   --font-display: var(--font-jakarta), var(--font-syne), system-ui, sans-serif;
   --font-royal: var(--font-cinzel), serif;
@@ -1565,6 +1567,32 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   .dm-guru-levitate {
     animation: dmGuruFloat 4.2s ease-in-out infinite;
+  }
+
+  .dm-ribbon-pulse {
+    animation: dmRibbonPulse 4.6s linear infinite;
+  }
+
+  .dm-ribbon-pulse-mob {
+    animation: dmRibbonPulseMob 3.6s linear infinite;
+  }
+}
+
+@keyframes dmRibbonPulse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -7840;
+  }
+}
+
+@keyframes dmRibbonPulseMob {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -3610;
   }
 }
 

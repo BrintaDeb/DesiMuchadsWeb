@@ -1,0 +1,74 @@
+# DESI MUCHADS — Search Engine, Google Search Console & AI Crawler Directives
+# Canonical Host: https://desimuchads.in
+
+User-agent: *
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image
+Disallow: /api/
+Disallow: /_next/static/development/
+
+User-agent: Googlebot
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /api/
+
+User-agent: Googlebot-Video
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image
+Disallow: /api/
+
+User-agent: Applebot
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+Sitemap: https://desimuchads.in/sitemap.xml
+Host: https://desimuchads.in

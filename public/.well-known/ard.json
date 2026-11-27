@@ -1,0 +1,21 @@
+{
+  "specVersion": "0.91",
+  "host": {
+    "displayName": "DESI MUCHADS",
+    "identifier": "desimuchads.in"
+  },
+  "entries": [
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:desimuchads.in:docs:llms-directory",
+      "displayName": "Desi Muchads Services, Case Studies & Contact Directory",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://desimuchads.in/llms.txt",
+      "representativeQueries": [
+        "What digital marketing, Meta & Google Ads, Branding, and Next.js engineering services does Desi Muchads provide?",
+        "Explore Desi Muchads case studies and Quick Commerce growth capabilities",
+        "Request a custom quote or book a strategy session at Desi Muchads Bengaluru HQ"
+      ]
+    }
+  ]
+}

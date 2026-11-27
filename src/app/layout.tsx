@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif, Rajdhani } from "next/font/google";
+import { Plus_Jakarta_Sans, Cinzel, Space_Grotesk, Syne, Instrument_Serif } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AgencyProposalProvider } from "@/context/AgencyProposalContext";
 import { IndianArtBackgroundOverlay } from "@/components/common/IndianArtBackgroundOverlay";
 import { PwaRegistration } from "@/components/common/PwaRegistration";
 import { ApkInstallPopup } from "@/components/common/ApkInstallPopup";
-import { ServiceCartDrawer } from "@/components/cart/ServiceCartDrawer";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -44,13 +43,6 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const rajdhani = Rajdhani({
-  variable: "--font-rajdhani",
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -62,11 +54,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://desimuchads.in"),
   title: {
-    default: "Desi Muchads | Performance Marketing, Next.js Web & Growth Agency India",
-    template: "%s | DESI MUCHADS Digital Agency",
+    default: "Desi Muchads | Performance Marketing & Web Agency India",
+    template: "%s | DESI MUCHADS",
   },
   description:
-    "Desi Muchads (desimuchads.in) is India's high-ROAS performance marketing, Quick Commerce (Blinkit & Zepto), and Next.js web engineering agency for D2C brands.",
+    "Desi Muchads (desimuchads.in) is India's high-ROAS performance marketing, Quick Commerce & Next.js web agency for D2C brands.",
   keywords: [
     "Desi Muchads",
     "Desi Muchads Agency",
@@ -83,8 +75,8 @@ export const metadata: Metadata = {
     "Shopify Plus CRO Agency India",
     "Viral Reels Production Agency",
     "Luxury Packaging & Visual Identity",
-    "B2B Lead Generation Cold Pipeline",
-    "High-Ticket Client Acquisition",
+    "Meta & Google Ads Performance Marketing",
+    "Branding & Visual Identity India",
     "Senior Human-Crafted Agency",
     "Desi Advertising Agency",
   ],
@@ -100,15 +92,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://desimuchads.in",
-    languages: {
-      "en-IN": "https://desimuchads.in",
-      "en-US": "https://desimuchads.in",
-      "en-GB": "https://desimuchads.in",
-      "en-AE": "https://desimuchads.in",
-    },
   },
   openGraph: {
-    title: "Desi Muchads | Performance Marketing, Next.js Web & Growth Agency India",
+    title: "Desi Muchads | Performance Marketing & Web Agency India",
     description:
       "Unapologetic Desi Roots. Ruthless Global ROI. High-converting performance marketing, viral reels, sub-second Next.js platforms, and D2C / Quick Commerce scaling.",
     url: "https://desimuchads.in",
@@ -126,7 +112,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Desi Muchads | Performance Marketing, Next.js Web & Growth Agency India",
+    title: "Desi Muchads | Performance Marketing & Web Agency India",
     description:
       "High-ROAS performance marketing, viral reels, sub-second Next.js web platforms, and Quick Commerce growth engineering.",
     images: ["https://desimuchads.in/og-banner.png"],
@@ -229,6 +215,39 @@ export default function RootLayout({
       latitude: 12.9002701,
       longitude: 77.6454546,
     },
+    founder: [
+      {
+        "@type": "Person",
+        name: "Rahul Datta",
+        jobTitle: "Chief Executive Officer",
+      },
+      {
+        "@type": "Person",
+        name: "Brinta Deb",
+        jobTitle: "Chief Technology Officer",
+      },
+      {
+        "@type": "Person",
+        name: "Omkar Dutta",
+        jobTitle: "Chief Financial Officer",
+      },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "10:00",
+        closes: "20:00",
+      },
+    ],
+    knowsAbout: [
+      "Meta & Google Ads (Performance Marketing)",
+      "Social Media Management & Viral Content",
+      "Website Development (Next.js & Shopify)",
+      "Branding & Visual Identity Systems",
+      "Quick Commerce Growth (Blinkit, Zepto, Instamart)",
+      "Packaging & Label Production",
+    ],
     areaServed: [
       { "@type": "Country", name: "India" },
       { "@type": "City", name: "New Delhi" },
@@ -259,27 +278,18 @@ export default function RootLayout({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "High-Intent SEO & Organic Search Domination",
-            url: "https://desimuchads.in/services/seo-sem",
-            description: "Data-driven SEO architectures, semantic entities, and technical sub-second indexing.",
+            name: "Meta & Google Ads Performance Scaling",
+            url: "https://desimuchads.in/services/meta-google-ads",
+            description: "High-velocity paid ad architectures delivering compounding ROAS across Meta Advantage+, Google Search, and PMax.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Performance Marketing & Meta/Google ROAS Scaling",
-            url: "https://desimuchads.in/services/performance-marketing",
-            description: "High-velocity paid ad architectures delivering 4.8x+ ROAS across Meta, Google, and YouTube.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "High-Ticket B2B Lead Generation",
-            url: "https://desimuchads.in/services/lead-generation",
-            description: "LinkedIn ABM campaigns and cold outreach pipelines for enterprise contract closures.",
+            name: "Branding & Visual Identity Architecture",
+            url: "https://desimuchads.in/services/branding",
+            description: "Custom logo marks, typography systems, Brand Guidelines books, and distinctive visual worlds.",
           },
         },
         {
@@ -313,7 +323,7 @@ export default function RootLayout({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Sub-Second Full-Stack Web Development",
+            name: "Sub-Second Full-Stack Website Development",
             url: "https://desimuchads.in/services/web-development",
             description: "Next.js 16 Turbopack web apps with sub-second hydration, 99 PageSpeed, and custom animations.",
           },
@@ -322,18 +332,9 @@ export default function RootLayout({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Packaging, Unboxing & Visual Identity Architecture",
+            name: "Packaging & Label Production",
             url: "https://desimuchads.in/services/packaging-label",
-            description: "Tactile structural packaging, luxury finishes, and memorable brand unboxing rituals.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Unit Economics & Contribution Margin Auditing",
-            url: "https://desimuchads.in/services/unit-economics",
-            description: "CM3 contribution margin telemetry, RazorpayX prepaid conversion optimization, and RTO mitigation.",
+            description: "Tactile structural packaging, luxury finishes, and photorealistic 3D mockups.",
           },
         },
       ],
@@ -379,7 +380,7 @@ export default function RootLayout({
         "@type": "SiteNavigationElement",
         position: 2,
         name: "Capabilities & Services",
-        description: "Full-funnel Meta & Google ads, Next.js web platforms, and Quick Commerce scaling.",
+        description: "Meta & Google Ads, Social Media Management, Website Development, Branding, and Quick Commerce scaling.",
         url: "https://desimuchads.in/services",
       },
       {
@@ -392,56 +393,9 @@ export default function RootLayout({
       {
         "@type": "SiteNavigationElement",
         position: 4,
-        name: "Retainers & Pricing",
-        description: "Transparent 4-tier growth retainers and modular performance plans.",
-        url: "https://desimuchads.in/pricing",
-      },
-      {
-        "@type": "SiteNavigationElement",
-        position: 5,
-        name: "Book Strategy Audit",
-        description: "Schedule a 1-on-1 growth and unit economics consultation with our founders.",
+        name: "Request Custom Quote & Book Strategy Session",
+        description: "Configure your service scope and schedule a 1-on-1 strategy session with our founders.",
         url: "https://desimuchads.in/contact",
-      },
-    ],
-  };
-
-  // Google SERP Rich FAQ Schema
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What makes Desi Muchads different from typical digital marketing agencies?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Desi Muchads eliminates generic templates and junior account handoffs. We combine deep cultural Indian storytelling with disciplined financial optimization, operating on contribution margins and verified ROAS rather than vanity impressions.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What ROAS does Desi Muchads deliver for D2C e-commerce brands?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Across our portfolio of over ₹140Cr+ tracked GMV, our clients maintain blended contribution margins of 38-46% and first-order ROAS benchmarks ranging from 3.8x to 7.2x across Meta, Google Ads, and Quick Commerce channels.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Does Desi Muchads handle Quick Commerce channels like Blinkit and Zepto?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, we engineer full-funnel Quick Commerce growth across Zepto, Blinkit, and Swiggy Instamart, optimizing dark store micro-fulfillment radius biddings, organic brand share-of-voice, and in-app sponsored product ROAS.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Where is Desi Muchads located?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Desi Muchads is headquartered at Hosapalaya, Bengaluru, Karnataka (560068), with regional production and growth squads in New Delhi, Mumbai, and international client cohorts across the UAE, US, and UK.",
-        },
       },
     ],
   };
@@ -449,10 +403,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} ${rajdhani.variable} dark antialiased scroll-smooth`}
+      className={`${plusJakarta.variable} ${cinzel.variable} ${syne.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} dark antialiased scroll-smooth`}
     >
       <head>
         <meta name="color-scheme" content="dark light" />
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="https://desimuchads.in/sitemap.xml" />
+        <link rel="ard" href="https://desimuchads.in/.well-known/ard.json" />
         {/* Geo Targeting Meta Tags for Local & Regional Search Dominance */}
         <meta name="geo.region" content="IN-KA" />
         <meta name="geo.placename" content="Bengaluru" />
@@ -477,7 +433,7 @@ export default function RootLayout({
             __html: `window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__dmDeferredPrompt=e;window.dispatchEvent(new Event('dm_pwa_prompt_ready'));});`,
           }}
         />
-        {/* Structured Data: Organization, WebSite Sitelinks SearchBox, & FAQPage */}
+        {/* Structured Data: Organization, WebSite Sitelinks SearchBox, & SiteNavigation */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -485,10 +441,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
         <script
           type="application/ld+json"
@@ -502,8 +454,6 @@ export default function RootLayout({
             <PwaRegistration />
             {/* Universal App Installer & Downloader for iOS & Android */}
             <ApkInstallPopup />
-            {/* Persistent Slide-Over Service Cart with WhatsApp Dispatch */}
-            <ServiceCartDrawer />
             {/* Authentic Cultural Indian Art Background across ALL pages & sections */}
             <IndianArtBackgroundOverlay />
             <div className="relative z-10 w-full min-h-screen">

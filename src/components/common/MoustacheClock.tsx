@@ -148,6 +148,7 @@ export function MoustacheClock({
 
   return (
     <div
+      role="img"
       className={`relative inline-flex flex-col items-center select-none group cursor-pointer ${className}`}
       onClick={handleClick}
       onMouseEnter={() => setShowTooltip(true)}
@@ -297,7 +298,7 @@ export function MoustacheClock({
           className="transition-transform duration-300 ease-out"
         />
 
-        {/* 3. Second Hand (Emerald Needle with Counterweight Tail) */}
+        {/* 3. Second Hand (Heritage Gold Needle with Counterweight Tail) */}
         {!isMini && (
           <g transform={`rotate(${mounted ? secondAngle : 180} 50 50)`} className="transition-transform duration-150 ease-linear">
             {/* Needle Body */}
@@ -306,12 +307,12 @@ export function MoustacheClock({
               y1="58"
               x2="50"
               y2="10"
-              stroke="#34d399"
+              stroke="#D4AF37"
               strokeWidth="0.85"
               strokeLinecap="round"
             />
             {/* Counterweight Tail Circle */}
-            <circle cx="50" cy="54" r="1.5" fill="#34d399" />
+            <circle cx="50" cy="54" r="1.5" fill="#F3E5AB" />
           </g>
         )}
 
@@ -329,12 +330,12 @@ export function MoustacheClock({
 
       {/* Interactive Hover Tooltip */}
       {showTooltip && (
-        <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 px-3 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border border-white/20 text-white font-mono text-[10px] whitespace-nowrap shadow-2xl pointer-events-none animate-in fade-in zoom-in-95 duration-150">
-          <div className="flex items-center gap-1.5 font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 px-3 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border border-white/20 text-white font-mono text-[10.5px] whitespace-nowrap shadow-2xl pointer-events-none animate-in fade-in zoom-in-95 duration-150">
+          <div className="flex items-center gap-1.5 font-bold tabular-nums">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
             <span>IST: {time.formatted}</span>
           </div>
-          <span className="text-[9px] text-zinc-400 block mt-0.5">
+          <span className="text-[10px] text-zinc-400 block mt-0.5">
             Bengaluru HQ (GMT+5:30)
           </span>
         </div>
@@ -344,14 +345,14 @@ export function MoustacheClock({
       {(showDigital || label) && (
         <div className="mt-2 text-center pointer-events-none">
           {label && (
-            <span className="block text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold">
+            <span className="block text-[10.5px] font-mono uppercase tracking-widest text-zinc-400 font-bold">
               {label}
             </span>
           )}
           {showDigital && (
-            <span className="font-mono text-xs font-bold text-white tracking-wider flex items-center justify-center gap-1.5 mt-0.5">
+            <span className="font-mono text-xs font-bold text-white tracking-wider flex items-center justify-center gap-1.5 mt-0.5 tabular-nums">
               <span>{time.formatted}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
             </span>
           )}
         </div>

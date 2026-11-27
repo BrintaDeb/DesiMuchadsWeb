@@ -83,27 +83,16 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
       },
     },
     {
-      id: "action-engagement",
+      id: "action-quote",
       category: "Action",
-      title: "Clear 4-Step Product Process",
-      subtitle: "Discover · Define · Design · Build and scale",
+      title: "Request Custom Quote & Strategy Session",
+      subtitle: "Meta & Google Ads, Social Media, Website Dev & Branding",
       icon: Layers,
       onSelect: () => {
         onClose();
-        const el = document.getElementById("process");
+        const el = document.getElementById("request-quote");
         if (el) el.scrollIntoView({ behavior: "smooth" });
-        else router.push("/#process");
-      },
-    },
-    {
-      id: "action-pricing",
-      category: "Action",
-      title: "View 4-Tier Service Pricing",
-      subtitle: "Graphics, SEO, Social Media, Web Dev & Branding plans",
-      icon: Layers,
-      onSelect: () => {
-        onClose();
-        router.push("/pricing");
+        else router.push("/contact");
       },
     },
     {
@@ -147,12 +136,12 @@ export function CommandMenu({ isOpen, onClose, onOpenKundli }: CommandMenuProps)
     },
   ];
 
-  // Map Services
+  // Map Services (Name + What We Do Only)
   const serviceItems = AGENCY_SERVICES.map((s) => ({
     id: `service-${s.slug}`,
     category: "Services",
     title: s.title,
-    subtitle: s.shortDesc,
+    subtitle: s.specs.deliverables.slice(0, 2).join(" · "),
     icon: Sparkles,
     onSelect: () => {
       onClose();

@@ -22,10 +22,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const pageUrl = `https://desimuchads.in/demos/${slug}`;
+  const pageTitle = config.brandName.length <= 31 ? `${config.brandName} · Storefront` : config.brandName;
+  const rawDesc = `${config.brandTagline}. ${config.hero.title} — Interactive D2C experience by Desi Muchads.`;
+  const description =
+    rawDesc.length <= 155 ? rawDesc : `${config.brandTagline}. Storefront by Desi Muchads.`.slice(0, 155);
+  const rawImg = config.products[0]?.image || "/og-banner.png";
+  const storeImage = rawImg.startsWith("http") ? rawImg : `https://desimuchads.in${rawImg}`;
 
   return {
-    title: `${config.brandName} · Live Client Storefront`,
-    description: `${config.brandTagline}. ${config.hero.title} · ${config.hero.subtitle}. Fully interactive production D2C experience with real-time checkout & analytics.`,
+    title: pageTitle,
+    description,
     keywords: [
       config.brandName,
       `${config.brandName} Official Store`,
@@ -39,13 +45,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: pageUrl,
     },
     openGraph: {
-      title: `${config.brandName} · Live Storefront | Desi Muchads`,
-      description: config.brandTagline,
+      title: `${pageTitle} | DESI MUCHADS`,
+      description,
       url: pageUrl,
       siteName: "DESI MUCHADS",
       images: [
         {
-          url: config.products[0]?.image || "/og-banner.png",
+          url: storeImage,
           width: 1200,
           height: 630,
           alt: `${config.brandName} Flagship Experience`,
@@ -55,9 +61,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${config.brandName} · Live Storefront`,
-      description: config.brandTagline,
-      images: [config.products[0]?.image || "/og-banner.png"],
+      title: `${pageTitle} | DESI MUCHADS`,
+      description,
+      images: [storeImage],
       creator: "@desimuchads",
     },
   };
@@ -88,6 +94,11 @@ async function DemoProductContent({ params }: PageProps) {
     notFound();
   }
 
+  const rawStoreImg = config.products[0]?.image || "/og-banner.png";
+  const storeSchemaImage = rawStoreImg.startsWith("http")
+    ? rawStoreImg
+    : `https://desimuchads.in${rawStoreImg}`;
+
   // Structured Data: Store & AggregateOffer Schema
   const storeSchema = {
     "@context": "https://schema.org",
@@ -95,7 +106,7 @@ async function DemoProductContent({ params }: PageProps) {
     name: config.brandName,
     url: `https://desimuchads.in/demos/${slug}`,
     description: config.brandTagline,
-    image: config.products[0]?.image,
+    image: storeSchemaImage,
     priceRange: "₹₹",
     aggregateRating: {
       "@type": "AggregateRating",
@@ -119,8 +130,8 @@ async function DemoProductContent({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Live Demos",
-        item: "https://desimuchads.in/#work",
+        name: "Portfolio Work",
+        item: "https://desimuchads.in/work",
       },
       {
         "@type": "ListItem",

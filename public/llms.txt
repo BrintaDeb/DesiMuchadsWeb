@@ -1,0 +1,26 @@
+# DESI MUCHADS
+
+> DESI MUCHADS (Desi Muchads Digital LLP) is an India-based performance marketing, Meta & Google Ads, Quick Commerce (Blinkit, Zepto, Swiggy Instamart), Branding, and Next.js Website Development agency headquartered in Hosapalaya, Bengaluru (560068).
+
+Contact: Rahul Datta (CEO), Brinta Deb (CTO), Omkar Dutta (CFO) · Phone: +91 9180252831 · Email: [thedesimuchads@gmail.com](mailto:thedesimuchads@gmail.com)
+
+## Core Agency Pages
+- [Home](https://desimuchads.in/): Agency overview, interactive 3D showcase, custom quote builder, and orbital tech stack.
+- [Services & Capabilities](https://desimuchads.in/services): All Meta & Google Ads, Social Media Management, Website Development, Branding, E-Commerce, and Quick Commerce disciplines.
+- [Portfolio & Case Studies](https://desimuchads.in/work): 50+ delivered D2C, Quick Commerce, SaaS, and hospitality builds with verified ROAS outcomes.
+- [About & Leadership](https://desimuchads.in/about): Leadership profiles, agency thesis, and Net Contribution Margin methodology.
+- [Request Quote & Book Strategy Session](https://desimuchads.in/contact): Direct consultation scheduling and custom quotation dispatch.
+
+## Service Disciplines
+- [Meta & Google Ads](https://desimuchads.in/services/meta-google-ads): Meta Advantage+, Google Search & Performance Max, creative testing loops, and server-side CAPI attribution.
+- [Social Media Services](https://desimuchads.in/services/social-media): Viral short-form video hooks, cultural storytelling, and retention editing.
+- [Website Development](https://desimuchads.in/services/web-development): Sub-second Next.js web platforms, custom motion choreography, and edge deployment.
+- [Branding & Visual Identity](https://desimuchads.in/services/branding): Logo marks, monograms, typography systems, and comprehensive Brand Guidelines books.
+- [E-Commerce & Shopify CRO](https://desimuchads.in/services/ecommerce-services): Conversion-engineered storefronts, bundle AOV lifts, and checkout optimization.
+- [Quick Commerce Growth](https://desimuchads.in/services/quick-commerce): Dark store availability telemetry, keyword share-of-voice, and ad bidding on Blinkit, Zepto, and Swiggy Instamart.
+- [Packaging & Label Production](https://desimuchads.in/services/packaging-label): Tactile packaging architecture, 3D mockups, and retail shelf differentiation.
+
+## Indexing & Discovery
+- [XML Sitemap](https://desimuchads.in/sitemap.xml): Complete canonical index of verified pages and image assets.
+- [Robots Directives](https://desimuchads.in/robots.txt): Crawler directives for Googlebot, Bingbot, Applebot, and AI search crawlers.
+- [ARD Discovery Manifest](https://desimuchads.in/.well-known/ard.json): Agentic Resource Discovery manifest for automated clients.

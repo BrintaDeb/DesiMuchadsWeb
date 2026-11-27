@@ -32,7 +32,7 @@ const FILTER_PILLS = [
   { id: "web-development", label: "Fullstack Web & Apps (11)" },
   { id: "social-media", label: "Social Media & Video (7)" },
   { id: "demos", label: "High-Velocity Demos (16)" },
-  { id: "seo-sem", label: "SEO & Growth (3)" },
+  { id: "meta-google-ads", label: "Meta & Google Growth (4)" },
 ];
 
 export default function WorkPage() {
@@ -64,6 +64,8 @@ export default function WorkPage() {
       let matchesCategory = true;
       if (selectedCategory === "demos") {
         matchesCategory = isDemoProject(proj);
+      } else if (selectedCategory === "meta-google-ads") {
+        matchesCategory = ["meta-google-ads", "performance-marketing", "seo-sem"].includes(proj.serviceId);
       } else if (selectedCategory !== "all") {
         matchesCategory = proj.serviceId === selectedCategory;
       }
@@ -157,11 +159,10 @@ export default function WorkPage() {
                     sound.playPluck(140);
                     setViewMode("carousel");
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                    viewMode === "carousel"
-                      ? "bg-white text-black shadow"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${viewMode === "carousel"
+                    ? "bg-white text-black shadow"
+                    : "text-zinc-400 hover:text-white"
+                    }`}
                   title="Interactive 3D Auto-Slider"
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -173,11 +174,10 @@ export default function WorkPage() {
                     sound.playPluck(150);
                     setViewMode("grid");
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                    viewMode === "grid"
-                      ? "bg-white text-black shadow"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${viewMode === "grid"
+                    ? "bg-white text-black shadow"
+                    : "text-zinc-400 hover:text-white"
+                    }`}
                   title="Grid Bento View"
                 >
                   <LayoutGrid className="w-3.5 h-3.5" />
@@ -189,11 +189,10 @@ export default function WorkPage() {
                     sound.playPluck(160);
                     setViewMode("showcase");
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${
-                    viewMode === "showcase"
-                      ? "bg-white text-black shadow"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer ${viewMode === "showcase"
+                    ? "bg-white text-black shadow"
+                    : "text-zinc-400 hover:text-white"
+                    }`}
                   title="Cinematic Showcase View"
                 >
                   <ListFilter className="w-3.5 h-3.5" />
@@ -229,6 +228,7 @@ export default function WorkPage() {
 
         {/* 4. The Work Showcase (50 Works in Auto-Slider, Grid, or Showcase View) */}
         <section id="featured" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-left">
+          <h2 className="sr-only">Portfolio Works</h2>
           {filteredProjects.length === 0 ? (
             <div className="py-24 text-center rounded-3xl bg-[#121215] border border-white/10 p-8 space-y-4">
               <Compass className="w-10 h-10 text-zinc-500 mx-auto" />
@@ -286,7 +286,7 @@ export default function WorkPage() {
                           {proj.category}
                         </span>
                         {isDemoProject(proj) && (
-                          <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-[10px] font-mono font-bold text-emerald-300">
+                          <span className="px-2.5 py-1 rounded-full bg-[#D4AF37]/18 backdrop-blur-md border border-[#D4AF37]/45 text-[10.5px] font-mono font-bold text-[#F3E5AB]">
                             LIVE DEMO
                           </span>
                         )}
@@ -629,8 +629,8 @@ export default function WorkPage() {
                       </p>
                     </div>
 
-                    <div className="p-5 rounded-2xl bg-[#121211] border border-emerald-500/20 space-y-2">
-                      <span className="font-mono text-xs text-emerald-400 font-bold uppercase">
+                    <div className="p-5 rounded-2xl bg-[#121211] border border-[#D4AF37]/25 space-y-2">
+                      <span className="font-mono text-xs text-[#F3E5AB] font-bold uppercase">
                         03. THE MEASURED LIFT (OUTCOME)
                       </span>
                       <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">

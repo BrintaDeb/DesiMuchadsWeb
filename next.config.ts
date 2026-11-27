@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
       "./public/projects/**/*",
       "./public/art/**/*",
       "./public/team/**/*",
-      "./public/logos/**/*",
       "./scratch/**/*",
     ],
   },
@@ -23,6 +22,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "brinta-deb-portfolio.onrender.com",
       },
     ],
   },
@@ -37,6 +40,31 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: "https://desimuchads.in/:path*",
+        permanent: true,
+      },
+      {
+        source: "/pricing",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/services/seo-sem",
+        destination: "/services/meta-google-ads",
+        permanent: true,
+      },
+      {
+        source: "/services/performance-marketing",
+        destination: "/services/meta-google-ads",
+        permanent: true,
+      },
+      {
+        source: "/services/lead-generation",
+        destination: "/services/meta-google-ads",
+        permanent: true,
+      },
+      {
+        source: "/services/unit-economics",
+        destination: "/services/ecommerce-services",
         permanent: true,
       },
     ];
@@ -84,6 +112,10 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Link",
+            value: '<https://desimuchads.in/.well-known/ard.json>; rel="ard"',
           },
         ],
       },

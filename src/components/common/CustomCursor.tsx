@@ -166,7 +166,7 @@ export function CustomCursor() {
         )}
 
         {mode === "chai" && (
-          <div className="relative -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-emerald-400 text-black flex items-center gap-1.5 shadow-[0_0_25px_rgba(52,211,153,0.8)] animate-in zoom-in-75 duration-200">
+          <div className="relative -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-[#F3E5AB] text-black flex items-center gap-1.5 shadow-[0_0_25px_rgba(212,175,55,0.75)] animate-in zoom-in-75 duration-200">
             <Coffee className="w-3.5 h-3.5 text-black" />
             <span className="font-mono text-[10px] font-black uppercase tracking-wider">SESSION</span>
           </div>

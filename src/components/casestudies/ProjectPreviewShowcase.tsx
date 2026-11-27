@@ -44,7 +44,7 @@ export function ProjectPreviewShowcase({
 
   // Detect real mobile screen width (< 768px)
   const isRealMobile = React.useSyncExternalStore(
-    () => () => {},
+    () => () => { },
     () => typeof window !== "undefined" && window.innerWidth < 768,
     () => false
   );
@@ -91,7 +91,7 @@ export function ProjectPreviewShowcase({
       {/* Dynamic Ambient Aura Glow in Brand Accent Color */}
       <div
         className="absolute inset-0 blur-3xl opacity-20 pointer-events-none transition-all duration-700 -z-10"
-        style={{ backgroundColor: project.accentColor || "#10b981" }}
+        style={{ backgroundColor: project.accentColor || "#D4AF37" }}
       />
 
       {/* Top Controls Bar */}
@@ -99,8 +99,8 @@ export function ProjectPreviewShowcase({
         {/* Left Side: Asset Type Pill */}
         <div className="flex items-center gap-2">
           {assetType === "video_reel" ? (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-[11px]">
-              <Film className="w-3 h-3 text-emerald-400" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 text-[#F3E5AB] font-bold text-[11px]">
+              <Film className="w-3 h-3 text-[#D4AF37]" />
               <span>4K Motion Reel</span>
             </div>
           ) : assetType === "canva_deck" ? (
@@ -114,8 +114,8 @@ export function ProjectPreviewShowcase({
               <span>Master Art &amp; Design</span>
             </div>
           ) : (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 text-[#F3E5AB] font-bold text-[11px]">
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
               <span>Interactive Live Storefront</span>
             </div>
           )}
@@ -157,11 +157,10 @@ export function ProjectPreviewShowcase({
                   sound.playPluck(140);
                   setDeviceMode("desktop");
                 }}
-                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                  deviceMode === "desktop"
-                    ? "bg-white/20 text-white font-bold"
-                    : "text-zinc-500 hover:text-white"
-                }`}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${deviceMode === "desktop"
+                  ? "bg-white/20 text-white font-bold"
+                  : "text-zinc-500 hover:text-white"
+                  }`}
                 title="Desktop Studio View"
               >
                 <Monitor className="w-3.5 h-3.5" />
@@ -173,11 +172,10 @@ export function ProjectPreviewShowcase({
                   sound.playPluck(160);
                   setDeviceMode("mobile");
                 }}
-                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
-                  deviceMode === "mobile"
-                    ? "bg-white/20 text-white font-bold"
-                    : "text-zinc-500 hover:text-white"
-                }`}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${deviceMode === "mobile"
+                  ? "bg-white/20 text-white font-bold"
+                  : "text-zinc-500 hover:text-white"
+                  }`}
                 title="iPhone 16 Pro View"
               >
                 <Smartphone className="w-3.5 h-3.5" />
@@ -224,9 +222,8 @@ export function ProjectPreviewShowcase({
              DESKTOP STUDIO MONITOR SHELL (Expanded full-width macOS Window Chrome)
              ========================================================================= */
           <div
-            className={`w-full h-full flex-1 min-h-0 ${
-              isStandalone ? "h-[540px] sm:h-[680px]" : ""
-            } rounded-2xl overflow-hidden border border-white/20 bg-zinc-950 shadow-[0_25px_70px_rgba(0,0,0,0.95)] relative flex flex-col`}
+            className={`w-full h-full flex-1 min-h-0 ${isStandalone ? "h-[540px] sm:h-[680px]" : ""
+              } rounded-2xl overflow-hidden border border-white/20 bg-zinc-950 shadow-[0_25px_70px_rgba(0,0,0,0.95)] relative flex flex-col`}
           >
             {/* macOS Chrome Header Bar */}
             <div className="px-4 py-2 bg-zinc-900/90 border-b border-white/10 flex items-center justify-between text-xs font-mono text-zinc-400 shrink-0 z-20 backdrop-blur-md">
@@ -253,13 +250,13 @@ export function ProjectPreviewShowcase({
 
               {/* Simulated SSL Live Address Bar */}
               <div className="hidden md:flex items-center gap-2 px-3 py-0.5 rounded-lg bg-black/60 border border-white/10 text-[11px] font-mono text-zinc-300 max-w-sm truncate">
-                <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                <Lock className="w-3 h-3 text-[#D4AF37] shrink-0" />
                 <span className="truncate">
                   {project.liveUrl.startsWith("/")
                     ? `https://desimuchads.in${project.liveUrl}`
                     : project.liveUrl.replace("https://", "")}
                 </span>
-                <span className="ml-auto text-[9px] px-1 rounded bg-emerald-500/20 text-emerald-300 font-bold shrink-0">
+                <span className="ml-auto text-[10px] px-1.5 rounded bg-[#D4AF37]/20 text-[#F3E5AB] font-bold shrink-0">
                   LIVE
                 </span>
               </div>
@@ -313,7 +310,7 @@ export function ProjectPreviewShowcase({
                     </div>
 
                     <div className="flex items-center gap-2 text-zinc-400 text-[11px]">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
                       <span>4K 60FPS MASTER</span>
                     </div>
                   </div>
@@ -327,11 +324,10 @@ export function ProjectPreviewShowcase({
                     <img
                       src={project.liveUrl}
                       alt={`${project.client} High-Resolution Master Artwork`}
-                      className={`transition-all duration-500 rounded-lg shadow-2xl ${
-                        zoomLevel === "fit"
-                          ? "max-w-full max-h-[70vh] object-contain"
-                          : "w-auto max-w-none object-cover"
-                      }`}
+                      className={`transition-all duration-500 rounded-lg shadow-2xl ${zoomLevel === "fit"
+                        ? "max-w-full max-h-[70vh] object-contain"
+                        : "w-auto max-w-none object-cover"
+                        }`}
                       loading="lazy"
                     />
                   </div>
@@ -404,11 +400,10 @@ export function ProjectPreviewShowcase({
              MOBILE VIEW (Optimized for both real phones & simulated iPhone 16 Pro)
              ========================================================================= */
           <div
-            className={`relative flex flex-col overflow-hidden ${
-              isRealMobile
-                ? "w-full h-full flex-1 rounded-none border-0 bg-black"
-                : `w-[360px] sm:w-[380px] h-[92%] max-h-[740px] rounded-[48px] border-[10px] border-zinc-800 shadow-[0_25px_80px_rgba(0,0,0,0.98)] bg-black ring-1 ring-white/20`
-            }`}
+            className={`relative flex flex-col overflow-hidden ${isRealMobile
+              ? "w-full h-full flex-1 rounded-none border-0 bg-black"
+              : `w-[360px] sm:w-[380px] h-[92%] max-h-[740px] rounded-[48px] border-[10px] border-zinc-800 shadow-[0_25px_80px_rgba(0,0,0,0.98)] bg-black ring-1 ring-white/20`
+              }`}
           >
             {/* Dynamic Island / Status Bar (Only in desktop simulated iPhone view) */}
             {!isRealMobile && (
@@ -416,7 +411,7 @@ export function ProjectPreviewShowcase({
                 <span className="font-bold tracking-tight">9:41</span>
                 <div className="w-24 h-4 bg-black rounded-full border border-white/15 flex items-center justify-between px-2 shadow">
                   <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                  <span className="w-2 h-2 rounded-full bg-emerald-400/80 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#D4AF37]/80 animate-pulse" />
                 </div>
                 <div className="flex items-center gap-1.5 text-[10px]">
                   <span>5G</span>
@@ -429,9 +424,8 @@ export function ProjectPreviewShowcase({
 
             {/* Mobile Viewport Body */}
             <div
-              className={`relative flex-1 w-full h-full min-h-0 bg-black flex flex-col overflow-hidden ${
-                !isRealMobile ? "pt-8 pb-2" : ""
-              }`}
+              className={`relative flex-1 w-full h-full min-h-0 bg-black flex flex-col overflow-hidden ${!isRealMobile ? "pt-8 pb-2" : ""
+                }`}
             >
               {/* Internal Demo Storefront & External Production Platform in Mobile */}
               {(assetType === "internal_app" || assetType === "external_app") && (
@@ -485,7 +479,7 @@ export function ProjectPreviewShowcase({
                     >
                       {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
                     </button>
-                    <span className="text-[10px] font-mono text-emerald-400 font-bold">
+                    <span className="text-[10.5px] font-mono text-[#F3E5AB] font-bold">
                       9:16 MOBILE REEL
                     </span>
                   </div>

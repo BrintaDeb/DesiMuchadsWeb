@@ -325,7 +325,7 @@ export function ApkInstallPopup() {
                 haptics.selection();
                 setIsMinimized(false);
               }}
-              className="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-[#0c0c0b] border border-white/25 hover:border-emerald-400 text-white shadow-[0_8px_30px_rgba(0,0,0,0.9)] backdrop-blur-xl active:scale-95 transition-all p-1.5 cursor-pointer"
+              className="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-[#0c0c0b] border border-white/25 hover:border-[#D4AF37] text-white shadow-[0_8px_30px_rgba(0,0,0,0.9)] backdrop-blur-xl active:scale-95 transition-all p-1.5 cursor-pointer"
               title="Open Mobile App Installer"
               aria-label="Open Mobile App Installer"
             >
@@ -335,8 +335,8 @@ export function ApkInstallPopup() {
                 className="w-full h-full object-contain rounded-xl"
               />
               <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F3E5AB] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D4AF37]" />
               </span>
             </button>
           </aside>
@@ -346,7 +346,7 @@ export function ApkInstallPopup() {
             className="fixed bottom-[5.25rem] sm:bottom-6 right-3 sm:right-6 z-40 animate-in fade-in slide-in-from-bottom-2 duration-200 select-none max-w-[calc(100vw-1.5rem)]"
           >
             <div className="relative group">
-              <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-emerald-500/35 to-teal-400/20 opacity-55 group-hover:opacity-95 blur-[2px] transition-opacity" />
+              <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#D4AF37]/35 to-amber-200/20 opacity-55 group-hover:opacity-95 blur-[2px] transition-opacity" />
 
               <div
                 onClick={handleOpenInstallation}
@@ -358,7 +358,7 @@ export function ApkInstallPopup() {
                     handleOpenInstallation();
                   }
                 }}
-                className="relative flex items-center gap-2 sm:gap-2.5 px-2.5 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl bg-[#0c0c0b]/95 hover:bg-[#141412] border border-white/20 hover:border-emerald-400/80 text-white shadow-[0_12px_35px_rgba(0,0,0,0.95)] backdrop-blur-xl transition-all cursor-pointer active:scale-95"
+                className="relative flex items-center gap-2 sm:gap-2.5 px-2.5 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl bg-[#0c0c0b]/95 hover:bg-[#141412] border border-white/20 hover:border-[#D4AF37]/80 text-white shadow-[0_12px_35px_rgba(0,0,0,0.95)] backdrop-blur-xl transition-all cursor-pointer active:scale-95"
                 title="Install Official Desi Muchads App on Phone or Desktop"
               >
                 <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-xl overflow-hidden border border-white/20 bg-[#09090b] shrink-0 flex items-center justify-center p-0.5">
@@ -371,18 +371,18 @@ export function ApkInstallPopup() {
 
                 <div className="flex flex-col text-left font-mono min-w-0 pr-0.5">
                   <div className="flex items-center gap-1.5 leading-tight">
-                    <span className="font-bold text-[11px] sm:text-xs tracking-wider text-white uppercase group-hover:text-emerald-300 transition-colors truncate">
+                    <span className="font-bold text-[11px] sm:text-xs tracking-wider text-white uppercase group-hover:text-[#F3E5AB] transition-colors truncate">
                       {downloadStatus === "downloading"
                         ? "DOWNLOADING..."
                         : downloadStatus === "installed"
                         ? "APP READY"
                         : "GET APP"}
                     </span>
-                    <span className="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1 py-0.2 rounded font-bold shrink-0">
+                    <span className="text-[10px] bg-[#D4AF37]/20 text-[#F3E5AB] border border-[#D4AF37]/35 px-1.5 py-0.2 rounded font-bold shrink-0">
                       v2.4
                     </span>
                   </div>
-                  <span className="text-[9px] text-zinc-400 group-hover:text-zinc-300 transition-colors truncate leading-none mt-0.5">
+                  <span className="text-[10px] text-zinc-400 group-hover:text-zinc-300 transition-colors truncate leading-none mt-0.5">
                     {isIOS
                       ? "iPhone • Add to Home"
                       : isAndroid
@@ -391,11 +391,11 @@ export function ApkInstallPopup() {
                   </span>
                 </div>
 
-                <div className="p-1 rounded-lg bg-white/5 group-hover:bg-emerald-500 group-hover:text-black text-zinc-400 transition-all shrink-0">
+                <div className="p-1 rounded-lg bg-white/5 group-hover:bg-[#D4AF37] group-hover:text-black text-zinc-400 transition-all shrink-0">
                   {downloadStatus === "installed" ? (
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 group-hover:text-black" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#F3E5AB] group-hover:text-black" />
                   ) : downloadStatus === "downloading" ? (
-                    <span className="animate-spin w-3.5 h-3.5 border-2 border-emerald-400 border-t-transparent rounded-full block" />
+                    <span className="animate-spin w-3.5 h-3.5 border-2 border-[#D4AF37] border-t-transparent rounded-full block" />
                   ) : (
                     <Download className="w-3.5 h-3.5" />
                   )}
@@ -568,8 +568,8 @@ export function ApkInstallPopup() {
             {/* TAB 1: ANDROID & DIRECT APK DOWNLOAD */}
             {activeTab === "android" && (
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold">
-                  <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/12 border border-[#D4AF37]/35 text-[#F3E5AB] text-xs font-mono font-bold">
+                  <Zap className="w-3.5 h-3.5 text-[#D4AF37]" />
                   <span>Direct Android APK &amp; 1-Click Web App</span>
                 </div>
 
@@ -598,14 +598,14 @@ export function ApkInstallPopup() {
                   <button
                     type="button"
                     onClick={triggerNativeWebInstall}
-                    className="w-full py-3.5 px-4 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-mono text-xs font-bold uppercase tracking-wider border border-emerald-500/40 flex items-center justify-center gap-2 transition-all cursor-pointer min-h-[48px]"
+                    className="w-full py-3.5 px-4 rounded-2xl bg-[#D4AF37]/15 hover:bg-[#D4AF37]/25 text-[#F3E5AB] font-mono text-xs font-bold uppercase tracking-wider border border-[#D4AF37]/40 flex items-center justify-center gap-2 transition-all cursor-pointer min-h-[48px]"
                   >
-                    <Zap className="w-4 h-4 text-emerald-400" />
+                    <Zap className="w-4 h-4 text-[#F3E5AB]" />
                     <span>⚡ Or 1-Click Install Web App (No APK Sideload)</span>
                   </button>
                 ) : (
                   <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 text-xs font-sans space-y-1.5">
-                    <div className="font-mono text-[11px] font-bold text-emerald-300 flex items-center gap-1.5">
+                    <div className="font-mono text-[11px] font-bold text-[#F3E5AB] flex items-center gap-1.5">
                       <Smartphone className="w-3.5 h-3.5" />
                       <span>Prefer Instant Chrome Web App (No APK needed)?</span>
                     </div>
@@ -620,13 +620,13 @@ export function ApkInstallPopup() {
                 <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 text-[11px] font-mono text-zinc-400 space-y-1">
                   <div className="flex items-center justify-between text-zinc-300 font-bold">
                     <span className="flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" />
                       <span>Android APK Verified (v1 / v2 / v3 Signed)</span>
                     </span>
                     <a
                       href="/downloads/desi-muchads-v2.4.apk"
                       download="DesiMuchads-App-v2.4.apk"
-                      className="text-emerald-400 hover:underline flex items-center gap-1"
+                      className="text-[#F3E5AB] hover:underline flex items-center gap-1"
                     >
                       <span>Mirror</span>
                       <ExternalLink className="w-3 h-3" />
@@ -674,8 +674,8 @@ export function ApkInstallPopup() {
                   </div>
 
                   <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 flex items-center justify-center shrink-0">
-                      <PlusSquare className="w-4 h-4 text-emerald-400" />
+                    <div className="w-8 h-8 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#F3E5AB] flex items-center justify-center shrink-0">
+                      <PlusSquare className="w-4 h-4 text-[#F3E5AB]" />
                     </div>
                     <div>
                       <strong className="text-white block font-semibold">
@@ -708,7 +708,7 @@ export function ApkInstallPopup() {
                     onClick={() => setTabOverride("desktop")}
                     className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono text-zinc-200 flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <QrCode className="w-4 h-4 text-emerald-400" />
+                    <QrCode className="w-4 h-4 text-[#F3E5AB]" />
                     <span>Show iPhone Camera QR Code</span>
                   </button>
                 )}
@@ -765,7 +765,7 @@ export function ApkInstallPopup() {
                   </div>
 
                   <div className="space-y-2 text-center sm:text-left min-w-0 flex-1">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono font-bold uppercase">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/35 text-[#F3E5AB] text-[10.5px] font-mono font-bold uppercase">
                       <QrCode className="w-3 h-3" />
                       <span>Scan With Phone Camera</span>
                     </div>
@@ -781,7 +781,7 @@ export function ApkInstallPopup() {
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-mono text-white transition-all cursor-pointer"
                     >
                       {copiedLink ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <Check className="w-3.5 h-3.5 text-[#F3E5AB]" />
                       ) : (
                         <Copy className="w-3.5 h-3.5 text-zinc-300" />
                       )}
@@ -816,9 +816,9 @@ export function ApkInstallPopup() {
                     href="/api/download-apk"
                     download="DesiMuchads-App-v2.4.apk"
                     onClick={handleDirectApkDownload}
-                    className="py-3 px-4 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px]"
+                    className="py-3 px-4 rounded-xl bg-[#D4AF37]/15 hover:bg-[#D4AF37]/25 border border-[#D4AF37]/40 text-[#F3E5AB] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px]"
                   >
-                    <Download className="w-4 h-4 text-emerald-400" />
+                    <Download className="w-4 h-4 text-[#F3E5AB]" />
                     <span>Download APK (85 KB)</span>
                   </a>
                 </div>

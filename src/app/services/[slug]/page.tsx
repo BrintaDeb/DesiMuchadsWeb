@@ -5,26 +5,19 @@ import type { Metadata } from "next";
 import {
   ArrowLeft,
   CheckCircle2,
+  Crown,
   Sparkles,
   ChevronRight,
-  HelpCircle,
-  Search,
   Rocket,
-  Magnet,
   Share2,
   ShoppingBag,
   Zap,
   Code2,
   Package,
-  TrendingUp,
+  Wrench,
 } from "lucide-react";
 import { AGENCY_SERVICES, ServiceItem } from "@/data/servicesData";
 import { MoustacheSVG, FiligreeCorner } from "@/components/common/Icons";
-import { SpotlightCard } from "@/components/common/SpotlightCard";
-import {
-  ServicePackageAddToCartButton,
-  ServiceCartHeaderTrigger,
-} from "@/components/cart/ServicePackageAddToCartButton";
 import { ReadingProgressBar } from "@/components/common/ReadingProgressBar";
 import {
   DetailHeaderStrategyCta,
@@ -48,30 +41,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!service) return { title: "Service Not Found" };
 
   const pageUrl = `https://desimuchads.in/services/${slug}`;
+  const pageTitle = service.title.length <= 30 ? `${service.title} Agency India` : service.title;
+  const description = `${service.title}: ${service.specs.deliverables.slice(0, 2).join(" · ")}.`;
 
   return {
-    title: `${service.title} Agency India`,
-    description: `${service.shortDesc} Scaled across ₹140Cr+ tracked GMV. Unapologetic Indian creative storytelling paired with ruthless mathematical ROI.`,
+    title: pageTitle,
+    description,
     keywords: [
       service.title,
       `${service.title} Agency India`,
-      `${service.title} Delhi NCR Mumbai Bangalore`,
       "Desi Muchads",
-      "Performance Marketing Agency",
-      "High ROAS Agency India",
       ...service.specs.deliverables,
     ],
     alternates: {
       canonical: pageUrl,
     },
     openGraph: {
-      title: `${service.title} Agency India | DESI MUCHADS`,
-      description: service.shortDesc,
+      title: `${pageTitle} | DESI MUCHADS`,
+      description,
       url: pageUrl,
       siteName: "DESI MUCHADS",
       images: [
         {
-          url: "/og-banner.png",
+          url: "https://desimuchads.in/og-banner.png",
           width: 1200,
           height: 630,
           alt: `${service.title} - Desi Muchads`,
@@ -81,9 +73,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${service.title} Agency India | DESI MUCHADS`,
-      description: service.shortDesc,
-      images: ["/og-banner.png"],
+      title: `${pageTitle} | DESI MUCHADS`,
+      description,
+      images: ["https://desimuchads.in/og-banner.png"],
       creator: "@desimuchads",
     },
   };
@@ -93,10 +85,10 @@ export default function ServiceDetailPage({ params }: PageProps) {
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-screen bg-transparent flex items-center justify-center text-zinc-400 font-mono text-sm">
+        <div className="min-h-screen bg-transparent flex items-center justify-center text-zinc-300 font-mono text-sm">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
-            <span>Loading Desi Muchads Service Specification...</span>
+            <span>Loading Service Sheet...</span>
           </div>
         </div>
       }
@@ -114,7 +106,6 @@ async function ServiceDetailContent({ params }: PageProps) {
     notFound();
   }
 
-  // Structured Data: Service Schema
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -126,37 +117,19 @@ async function ServiceDetailContent({ params }: PageProps) {
       url: "https://desimuchads.in",
     },
     areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates"],
-    description: service.fullDesc,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: `${service.title} Deliverables`,
-      itemListElement: service.specs.deliverables.map((deliv: string, idx: number) => ({
+      name: `${service.title} Scope`,
+      itemListElement: service.specs.deliverables.map((deliv: string) => ({
         "@type": "Offer",
-        position: idx + 1,
         itemOffered: {
           "@type": "Service",
           name: deliv,
-          description: `${service.title} specialized agency deliverable: ${deliv}`,
         },
       })),
     },
   };
 
-  // Structured Data: FAQPage Schema
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: service.faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.a,
-      },
-    })),
-  };
-
-  // Structured Data: BreadcrumbList Schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -171,7 +144,7 @@ async function ServiceDetailContent({ params }: PageProps) {
         "@type": "ListItem",
         position: 2,
         name: "Services",
-        item: "https://desimuchads.in/#services",
+        item: "https://desimuchads.in/services",
       },
       {
         "@type": "ListItem",
@@ -185,12 +158,10 @@ async function ServiceDetailContent({ params }: PageProps) {
   const getServiceIcon = (name: ServiceItem["iconName"]) => {
     const iconClass = "w-7 h-7 text-white";
     switch (name) {
-      case "Search":
-        return <Search className={iconClass} />;
+      case "Crown":
+        return <Crown className={iconClass} />;
       case "Rocket":
         return <Rocket className={iconClass} />;
-      case "Magnet":
-        return <Magnet className={iconClass} />;
       case "Share2":
         return <Share2 className={iconClass} />;
       case "ShoppingBag":
@@ -201,30 +172,28 @@ async function ServiceDetailContent({ params }: PageProps) {
         return <Code2 className={iconClass} />;
       case "Package":
         return <Package className={iconClass} />;
-      case "TrendingUp":
-        return <TrendingUp className={iconClass} />;
       default:
         return <Sparkles className={iconClass} />;
     }
   };
 
+  const executionItems = [
+    ...service.specs.deliverables,
+    ...service.framework.map((s) => s.title),
+  ];
+
   return (
     <div className="relative min-h-screen bg-transparent text-white selection:bg-white selection:text-black font-display overflow-x-hidden">
-      {/* Injected Rich Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* Top Floating Glass Navigation Header */}
+      {/* Sticky Header Bar */}
       <header className="sticky top-0 z-50 px-4 sm:px-8 py-4 backdrop-blur-xl bg-black/60 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link
@@ -238,7 +207,7 @@ async function ServiceDetailContent({ params }: PageProps) {
               <span className="font-royal text-sm font-bold tracking-widest text-white uppercase">
                 DESI MUCHADS
               </span>
-              <span className="font-mono text-[9px] text-zinc-400 tracking-wider">
+              <span className="font-mono text-[9px] text-zinc-300 tracking-wider">
                 BACK TO HOME
               </span>
             </div>
@@ -247,42 +216,39 @@ async function ServiceDetailContent({ params }: PageProps) {
           <div className="flex items-center gap-3">
             <Link
               href="/#services"
-              className="text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors hidden sm:inline-flex items-center gap-1"
+              className="text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors hidden sm:inline-flex items-center gap-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>All Capabilities</span>
+              <span>All Services</span>
             </Link>
             <Link
-              href="/#work"
-              className="text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors hidden sm:inline"
+              href="/#request-quote"
+              className="text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors hidden sm:inline"
             >
-              Portfolio Work
+              Request Quote
             </Link>
-            <ServiceCartHeaderTrigger />
             <DetailHeaderStrategyCta label="Free Audit" defaultService={service.title} />
           </div>
         </div>
         <ReadingProgressBar />
       </header>
 
-      {/* Main Content */}
-      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 space-y-24">
-        {/* Breadcrumb Navigation */}
-        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+      {/* Focused Service Sheet: Only Service Name + What We Do */}
+      <main className="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16 space-y-16">
+        <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
           <Link href="/" className="hover:text-white transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
-          <Link href="/#services" className="hover:text-white transition-colors">
-            Capabilities
+          <ChevronRight className="w-3.5 h-3.5 text-zinc-500" />
+          <Link href="/services" className="hover:text-white transition-colors">
+            Services
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-zinc-600" />
+          <ChevronRight className="w-3.5 h-3.5 text-zinc-500" />
           <span className="text-white font-bold">{service.title}</span>
         </div>
 
-        {/* Hero Section */}
-        <div className="relative rounded-2xl sm:rounded-3xl p-5 sm:p-12 md:p-16 bg-[#121215] border border-white/15 border-t-white/30 shadow-2xl overflow-hidden">
-          {/* Filigree decorative corners */}
+        {/* Service Hero Card */}
+        <div className="relative rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 bg-[#121215] border border-white/15 border-t-white/30 shadow-2xl overflow-hidden">
           <div className="absolute top-4 left-4 opacity-30 pointer-events-none">
             <FiligreeCorner className="w-6 h-6 text-white" position="top-left" />
           </div>
@@ -295,185 +261,94 @@ async function ServiceDetailContent({ params }: PageProps) {
               {getServiceIcon(service.iconName)}
             </div>
 
-            <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-none mb-6">
+            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#F3E5AB] font-bold block mb-2">
+              SERVICE SHEET · WHAT WE DO
+            </span>
+
+            <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-none">
               {service.title}
             </h1>
 
-            <p className="text-lg sm:text-2xl text-zinc-300 font-medium leading-relaxed font-sans mb-8">
-              {service.shortDesc}
-            </p>
-
-            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-sans max-w-3xl mb-10">
-              {service.fullDesc}
-            </p>
-
-            {/* Interactive Audit, Strategy Call & Portfolio CTAs */}
             <ServiceHeroAuditActions serviceTitle={service.title} />
           </div>
         </div>
 
-        {/* Section 2: Strategic Edge & Philosophy */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-5 space-y-4">
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase leading-tight">
-              Why Ordinary Agencies Fail &amp; How We Deliver Compounding ROI
+        {/* Strict "What We Do" Action Scope Grid (Zero Verbose Explanations) */}
+        <section className="space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/12 pb-4">
+            <h2 className="font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight">
+              What We Do
             </h2>
-          </div>
-          <div className="lg:col-span-7 rounded-2xl p-8 ios-glass-panel text-zinc-300 leading-relaxed font-sans text-sm sm:text-base space-y-4 shadow-xl">
-            <p>{service.philosophy}</p>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
-              <Sparkles className="w-5 h-5 text-white shrink-0 mt-0.5" />
-              <div className="text-xs text-zinc-300">
-                <strong className="text-white block font-sans text-sm mb-1">
-                  Ideal Client Profile:
-                </strong>
-                {service.specs.bestFor}
-              </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1 font-mono text-[11px] font-bold uppercase text-zinc-300 mr-1">
+                <Wrench className="w-3.5 h-3.5 text-[#F3E5AB]" />
+                <span>TOOLS:</span>
+              </span>
+              {service.specs.tools.map((tool) => (
+                <span
+                  key={tool}
+                  className="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/12 font-mono text-[11px] text-zinc-200"
+                >
+                  {tool}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Section 3: 5-Stage Execution Framework */}
-        <div className="space-y-8">
-          <div>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
-              The 5-Stage Execution Framework
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {service.framework.map((step, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {executionItems.map((item, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl p-6 bg-[#121215] border border-white/10 border-t-white/25 flex flex-col justify-between hover:border-white/30 hover:bg-[#16161b] transition-all"
+                className="rounded-2xl p-5 bg-[#111115] border border-white/12 hover:border-white/30 transition-all flex items-start gap-3"
               >
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/15 flex items-center justify-center font-mono text-xs font-black text-white mb-4">
-                    {step.step}
-                  </div>
-                  <h3 className="font-display font-black text-base text-white uppercase mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed font-sans">
-                    {step.desc}
-                  </p>
+                <span className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded bg-white/10 text-zinc-200 shrink-0 mt-0.5 tabular-nums">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <div className="flex items-start gap-2.5 min-w-0">
+                  <CheckCircle2 className="w-4 h-4 text-[#F3E5AB] shrink-0 mt-0.5" />
+                  <span className="font-sans text-sm font-semibold text-white leading-snug">
+                    {item}
+                  </span>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Section 6: Retainer Packages */}
-        <div className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white uppercase">
-              Service Retainer Packages
-            </h2>
-            <p className="text-zinc-400 text-sm font-sans mt-2">
-              Predictable, flat monthly investment with dedicated engineering and zero hidden markups.
-            </p>
-          </div>
-
-          <div
-            className={`grid grid-cols-1 md:grid-cols-2 ${service.packages.length >= 4
-              ? "xl:grid-cols-4 max-w-7xl gap-5"
-              : "max-w-4xl gap-8"
-              } mx-auto`}
-          >
-            {service.packages.map((pkg, pIdx) => (
-              <SpotlightCard
-                key={pIdx}
-                spotlightColor="rgba(255, 255, 255, 0.08)"
-                borderColor="rgba(255, 255, 255, 0.4)"
-                className="rounded-3xl p-8 bg-[#121215] border border-white/10 hover:border-white/30 flex flex-col justify-between shadow-xl"
-              >
-                <div>
-                  <h3 className="font-display font-black text-2xl text-white uppercase mb-2">
-                    {pkg.name}
-                  </h3>
-                  <div className="flex items-baseline gap-1 mt-4 mb-6 pb-4 border-b border-white/10">
-                    <span className="font-metric font-black text-4xl text-white">
-                      {pkg.price}
-                    </span>
-                    <span className="font-mono text-xs text-zinc-400">/{pkg.period}</span>
-                  </div>
-
-                  <ul className="space-y-2.5 mb-8">
-                    {pkg.highlights.map((h, hIdx) => (
-                      <li key={hIdx} className="flex items-start gap-2.5 text-xs text-zinc-200">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 mt-0.5" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <ServicePackageAddToCartButton
-                  packageId={`${service.slug}-pkg-${pIdx}`}
-                  categoryTitle={service.title}
-                  tierCode={`TIER 0${pIdx + 1}`}
-                  tierName={pkg.name}
-                  priceDisplay={pkg.price}
-                  period={pkg.period}
-                />
-              </SpotlightCard>
-            ))}
-          </div>
-        </div>
-
-        {/* Section 7: FAQs */}
-        <div className="max-w-3xl mx-auto space-y-6">
-          <div className="text-center mb-8">
-            <h2 className="font-display font-black text-2xl sm:text-3xl text-white uppercase">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {service.faqs.map((faq, fIdx) => (
-              <div
-                key={fIdx}
-                className="rounded-2xl p-6 bg-[#121215] border border-white/10 space-y-2"
-              >
-                <div className="flex items-start gap-3">
-                  <HelpCircle className="w-4 h-4 text-white shrink-0 mt-0.5" />
-                  <h3 className="font-display font-bold text-base text-white">
-                    {faq.q}
-                  </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans pl-7">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Banner */}
-        <div className="rounded-3xl p-8 sm:p-12 bg-white text-black text-center max-w-4xl mx-auto space-y-6 shadow-[0_0_50px_rgba(255,255,255,0.15)]">
-          <h2 className="font-display font-black text-3xl sm:text-5xl uppercase leading-tight">
-            Ready to scale {service.title} for your brand?
+        {/* Bottom Direct Action Card */}
+        <div className="rounded-3xl p-8 sm:p-10 bg-white text-black text-center max-w-4xl mx-auto space-y-6 shadow-[0_0_50px_rgba(255,255,255,0.15)]">
+          <h2 className="font-display font-black text-3xl sm:text-4xl uppercase leading-tight">
+            Launch {service.title}
           </h2>
-          <p className="text-zinc-700 text-sm sm:text-base font-sans max-w-xl mx-auto">
-            Book a direct strategy session with our senior growth architects. We audit your current accounts, pinpoint leakage points, and deliver your 90-day scaling roadmap.
-          </p>
           <ServiceBottomAuditActions serviceTitle={service.title} />
-          <div className="pt-1">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
             <Link
-              href="/#services"
+              href="/#request-quote"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all"
+            >
+              Request Custom Quote
+            </Link>
+            <Link
+              href="/services"
               className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-black font-mono text-xs font-bold uppercase tracking-wider transition-all"
             >
-              Explore Other Services
+              All Services
             </Link>
           </div>
         </div>
       </main>
 
-      {/* Footer Credentials */}
-      <footer className="mt-20 border-t border-white/10 py-10 px-4 text-center text-xs font-mono text-zinc-500">
-        <p>UNIT OF DESI MUCHADS DIGITAL LLP</p>
-        <p className="mt-2">© 2025 DESI MUCHADS. ALL RIGHTS RESERVED.</p>
-      </footer>
+      <FooterMinimalBar />
     </div>
+  );
+}
+
+function FooterMinimalBar() {
+  return (
+    <footer className="mt-16 border-t border-white/10 py-10 px-4 text-center text-xs font-mono text-zinc-300">
+      <p>UNIT OF DESI MUCHADS DIGITAL LLP</p>
+      <p className="mt-2">© 2026 DESI MUCHADS. ALL RIGHTS RESERVED.</p>
+    </footer>
   );
 }

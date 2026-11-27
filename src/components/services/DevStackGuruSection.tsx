@@ -23,9 +23,9 @@ const VB_W = 1000;
 const VB_H = 620;
 
 const ORBITS: [OrbitSpec, OrbitSpec, OrbitSpec] = [
-  { rx: 336, ry: 112, tiltDeg: -22, speed: 0.34 },
-  { rx: 344, ry: 116, tiltDeg: 21, speed: -0.28 },
-  { rx: 398, ry: 92, tiltDeg: 3, speed: 0.24 },
+  { rx: 318, ry: 92, tiltDeg: -22, speed: 0.34 },
+  { rx: 356, ry: 134, tiltDeg: 21, speed: -0.28 },
+  { rx: 418, ry: 84, tiltDeg: 2, speed: 0.24 },
 ];
 
 interface DevStackGuruSectionProps {
@@ -41,12 +41,8 @@ export function DevStackGuruSection({ className = "" }: DevStackGuruSectionProps
   const nodeRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const stageSizeRef = useRef<{ w: number; h: number }>({ w: 1000, h: 620 });
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }
-    return false;
-  });
+  // Always start with false on server (SSR-safe). Client will sync via useEffect.
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -108,8 +104,8 @@ export function DevStackGuruSection({ className = "" }: DevStackGuruSectionProps
 
         const scale =
           w < 540
-            ? 0.8 + ((depth + 1) * 0.5) * 0.24
-            : 0.84 + ((depth + 1) * 0.5) * 0.28;
+            ? 0.88 + ((depth + 1) * 0.5) * 0.14
+            : 0.88 + ((depth + 1) * 0.5) * 0.22;
         const opacity = depth >= 0 ? 1 : 0.7 + ((depth + 1) * 0.24);
 
         el.style.transform = `translate3d(${px.toFixed(1)}px, ${py.toFixed(1)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
@@ -260,7 +256,7 @@ export function DevStackGuruSection({ className = "" }: DevStackGuruSectionProps
               minBlockSize: 0,
               willChange: prefersReducedMotion ? "auto" : "transform",
             }}
-            className="touch-hit-expand group absolute w-8 h-8 sm:w-11 sm:h-11 aspect-square bg-transparent flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full"
+            className="group absolute w-7 h-7 sm:w-10 sm:h-10 aspect-square bg-transparent flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full"
           >
             <TechLogoGlyph
               id={node.id}

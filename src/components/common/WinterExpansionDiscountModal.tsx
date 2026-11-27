@@ -40,7 +40,7 @@ function BrandLogoDisplay({
       title="Desi Muchads"
     >
       <img
-        src="/desi-muchads-logo-white-transparent.png"
+        src="/desi-muchads-cropped-logo.png"
         alt="Desi Muchads Logo"
         className="w-36 sm:w-60 h-auto max-w-full object-contain filter drop-shadow-[0_4px_24px_rgba(255,255,255,0.22)]"
       />
@@ -127,7 +127,7 @@ export function WinterExpansionDiscountModal({
         particleCount: 50,
         spread: 60,
         origin: { y: 0.45 },
-        colors: ["#ffffff", "#e8e8e3", "#10b981", "#d4312b"],
+        colors: ["#ffffff", "#e8e8e3", "#D4AF37", "#d4312b"],
       });
     } catch {
       // fallback
@@ -145,7 +145,7 @@ export function WinterExpansionDiscountModal({
         particleCount: 70,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["#ffffff", "#e8e8e3", "#10b981"],
+        colors: ["#ffffff", "#e8e8e3", "#D4AF37"],
       });
       setTimeout(() => setCopied(false), 3000);
     } catch {
@@ -161,8 +161,8 @@ export function WinterExpansionDiscountModal({
 
     const whatsappMessage =
       `Hello Desi Muchads! 👋\n\n` +
-      `I am claiming the Winter Expansion 20% DISCOUNT for my brand using promo code: [${couponCode}].\n\n` +
-      `Please apply this 20% reduction to our Growth Retainer and let's schedule our 15-Minute Strategy Session!`;
+      `I would like to request a custom quote using the priority 20% expansion credit code: [${couponCode}].\n\n` +
+      `Let's discuss scope and schedule a 15-Minute Strategy Session!`;
 
     const url = `https://wa.me/919180252831?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(url, "_blank");
@@ -224,7 +224,7 @@ export function WinterExpansionDiscountModal({
                   id="discountModalTitle"
                   className="font-display font-black text-xl sm:text-2xl md:text-3xl uppercase tracking-tight text-white leading-tight"
                 >
-                  FLAT 20% OFF ALL <span className="font-editorial text-[#e8e8e3]">Growth Retainers</span>
+                  PRIORITY 20% <span className="font-editorial text-[#e8e8e3]">Custom Launch Credit</span>
                 </h3>
                 <p className="text-[10px] sm:text-xs text-zinc-400 font-mono tracking-wide uppercase">
                   National Expansion Milestone · New Delhi · Mumbai · Bengaluru
@@ -255,7 +255,7 @@ export function WinterExpansionDiscountModal({
                     {String(timeLeft.minutes).padStart(2, "0")}m
                   </span>
                   <span className="text-zinc-500">:</span>
-                  <span className="inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-[0.2rem] bg-black border border-white/10 min-w-[34px] sm:min-w-[38px] text-center text-emerald-400 whitespace-nowrap">
+                  <span className="inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-[0.2rem] bg-black border border-white/10 min-w-[34px] sm:min-w-[38px] text-center text-[#F3E5AB] whitespace-nowrap tabular-nums">
                     {String(timeLeft.seconds).padStart(2, "0")}s
                   </span>
                 </div>
@@ -314,9 +314,9 @@ export function WinterExpansionDiscountModal({
               </div>
 
               {/* Trust Footer */}
-              <div className="mt-3.5 sm:mt-5 pt-2.5 sm:pt-3 border-t border-white/10 flex items-center justify-center gap-1.5 text-[9px] sm:text-[10px] font-mono text-zinc-400 text-center">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Applicable across Graphics, SEO, Social Media, Web &amp; Branding plans.</span>
+              <div className="mt-3.5 sm:mt-5 pt-2.5 sm:pt-3 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-mono text-zinc-400 text-center">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#F3E5AB] shrink-0" />
+                <span>Applicable across Meta &amp; Google Ads, Social Media, Website Dev &amp; Branding sprints.</span>
               </div>
             </motion.div>
           </div>

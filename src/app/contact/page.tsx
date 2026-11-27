@@ -20,6 +20,7 @@ import { sound } from "@/lib/sound";
 import { triggerSessionNotification } from "@/lib/pwa";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
+import { BengaluruStudioMap } from "@/components/footer/BengaluruStudioMap";
 import { BrandKundliModal } from "@/components/kundli/BrandKundliModal";
 
 interface DateOption {
@@ -818,16 +819,7 @@ export default function ContactPage() {
               </div>
 
               <div className="lg:col-span-7">
-                <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-[#0c0c0e] h-72 sm:h-80">
-                  <iframe
-                    title="Desi Muchads Headquarters Map - Hosapalaya Bengaluru"
-                    src="https://maps.google.com/maps?q=12.9002701%2C77.6454546&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                    className="w-full h-full border-0 filter contrast-[1.05] opacity-95 map-embed-frame"
-                    loading="lazy"
-                    allowFullScreen
-                    style={{ width: "100%", height: "100%", minHeight: "288px", display: "block" }}
-                  />
-                </div>
+                <BengaluruStudioMap heightClass="h-72 sm:h-80 rounded-2xl border-white/20" />
               </div>
             </div>
           </section>

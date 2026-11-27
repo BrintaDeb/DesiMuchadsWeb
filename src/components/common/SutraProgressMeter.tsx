@@ -26,12 +26,12 @@ const RAIL_SECTIONS: RailSection[] = [
     title: "Selected Works",
     fallbackRoute: "/work",
   },
-  { id: "clients", number: "04", title: "Partners & Process" },
+  { id: "clients", number: "04", title: "Trusted Partners" },
   {
-    id: "pricing",
+    id: "request-quote",
     number: "05",
-    title: "4-Tier Pricing",
-    fallbackRoute: "/pricing",
+    title: "Request Quote",
+    fallbackRoute: "/contact",
   },
   {
     id: "footer",
@@ -204,7 +204,7 @@ export function SutraProgressMeter() {
           <a
             key={sec.id}
             href={`#${sec.id}`}
-            aria-label={sec.title}
+            aria-label={`${sec.number} ${sec.title}`}
             aria-current={isCurrent ? "location" : undefined}
             className={isCurrent ? "is-current" : undefined}
             onClick={(e) => handleJump(e, sec)}

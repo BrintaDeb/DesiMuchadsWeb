@@ -1073,9 +1073,9 @@ export function DemoStorefrontClient({ config }: DemoStorefrontClientProps) {
                     <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold block">
                       COMMERCIAL B2B FLEET OPTIMIZER
                     </span>
-                    <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
+                    <h2 className="font-display font-black text-xl sm:text-2xl text-white uppercase">
                       Fleet TCO &amp; Carbon Neutrality Engine
-                    </h3>
+                    </h2>
                   </div>
                 </div>
 
