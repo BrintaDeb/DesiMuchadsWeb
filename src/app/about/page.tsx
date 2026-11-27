@@ -100,95 +100,82 @@ export default function AboutPage() {
             <span className="text-white font-bold">About Us &amp; Leadership</span>
           </div>
 
-          <div className="max-w-4xl text-left">
-            <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-[0.95]">
-              We Scale Businesses <br />
-              <span className="text-zinc-400">Personally</span> &amp; Seriously.
+          <div className="max-w-3xl text-left">
+            <h1 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight text-white uppercase leading-[0.96]">
+              Personal Scale.{" "}
+              <span className="text-zinc-500">Serious Craft.</span>
             </h1>
 
-            <p className="mt-6 sm:mt-8 text-lg sm:text-2xl text-zinc-300 font-normal leading-relaxed font-sans max-w-3xl">
-              Desi Muchads is an elite growth architecture and high-velocity engineering collective. We reject generic templates and outsourced complacency in favor of deep commercial strategy, hand-crafted code, and relentless ROAS accountability.
+            <p className="mt-5 text-base sm:text-lg text-zinc-400 font-light leading-relaxed font-sans max-w-xl">
+              An independent growth and engineering collective built on senior execution, bespoke code, and measurable ROI.
             </p>
           </div>
 
-          {/* 4 Hero Quantitative Impact Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16">
-            <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Blended ROAS Guarantee</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-[#F3E5AB] tabular-nums">5.8X</div>
-              <span className="text-xs text-zinc-400 font-sans mt-1 block">Engineered across active campaigns</span>
+          {/* 4 Clean Impact Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-10 sm:mt-14">
+            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+              <span className="text-zinc-500 text-[10.5px] font-mono uppercase block mb-1">Blended ROAS</span>
+              <div className="font-display font-bold text-3xl sm:text-4xl text-[#F3E5AB] tabular-nums">5.8X</div>
             </div>
-            <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Verified Works</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-white tabular-nums">50+</div>
-              <span className="text-xs text-zinc-400 font-sans mt-1 block">Live platforms, reels &amp; master art</span>
+            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+              <span className="text-zinc-500 text-[10.5px] font-mono uppercase block mb-1">Works</span>
+              <div className="font-display font-bold text-3xl sm:text-4xl text-white tabular-nums">50+</div>
             </div>
-            <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Human Craftsmanship</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-white tabular-nums">100%</div>
-              <span className="text-xs text-zinc-400 font-sans mt-1 block">Hand-crafted bespoke architecture</span>
+            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+              <span className="text-zinc-500 text-[10.5px] font-mono uppercase block mb-1">Craft</span>
+              <div className="font-display font-bold text-3xl sm:text-4xl text-white tabular-nums">100%</div>
             </div>
-            <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg">
-              <span className="text-zinc-400 text-[11px] font-mono uppercase block mb-1">Average PageSpeed</span>
-              <div className="font-display font-black text-3xl sm:text-4xl text-white tabular-nums">99/100</div>
-              <span className="text-xs text-zinc-400 font-sans mt-1 block">Core Web Vitals sub-0.7s LCP</span>
+            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+              <span className="text-zinc-500 text-[10.5px] font-mono uppercase block mb-1">PageSpeed</span>
+              <div className="font-display font-bold text-3xl sm:text-4xl text-white tabular-nums">99</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. The Core Executive Leadership (Rahul Datta CEO, Brinta Deb CTO, Omkar Dutta CFO) */}
-      <section id="team" className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/10 text-left">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
-          <div className="max-w-2xl">
-            <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white leading-tight">
-              Meet The Minds Behind The Growth.
+      {/* 4. Executive Leadership */}
+      <section id="team" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/[0.08] text-left">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-4">
+          <div className="max-w-xl">
+            <h2 className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight">
+              Leadership
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-zinc-300 font-sans">
-              No interns, no outsourced white-label farms. Direct founder-led accountability and technical mastery across every client engagement.
+            <p className="mt-2 text-sm text-zinc-400 font-light font-sans">
+              Direct founder accountability on every partner account.
             </p>
-          </div>
-
-          <div className="shrink-0 flex items-center gap-2 font-mono text-xs text-zinc-400">
-            <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-            <span>ACTIVE EXECUTIVE ROSTER</span>
           </div>
         </div>
 
-        {/* 3 Executive Leaders 3D Aller Studio Picture Slide Carousel */}
         <FounderSlideCarousel founders={TEAM_ROSTER} />
       </section>
 
-      {/* 5. The Cultural Symbolism of The Moustache (Desi Muchads) */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/10 text-left">
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#121216] via-[#0d0d10] to-[#070709] border border-white/20 relative overflow-hidden shadow-2xl">
-          <div className="max-w-3xl relative z-10 space-y-4">
-            <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight">
+      {/* 5. Philosophy */}
+      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 border-b border-white/[0.08] text-left">
+        <div className="p-7 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.09] relative overflow-hidden">
+          <div className="max-w-2xl relative z-10 space-y-4">
+            <h2 className="font-display font-bold text-2xl sm:text-4xl uppercase tracking-tight text-white leading-tight">
               The Moustache As A Seal Of Honor.
             </h2>
-            <p className="text-zinc-300 font-sans text-sm sm:text-base leading-relaxed">
-              In classical Indian lore, the *Muchh* (Moustache) is not merely facial grooming—it is a sacred emblem of word, dignity, and unyielding pride. When a traditional craftsman gives his word on his moustache, there is no backpedaling, no contractual loophole, and no excuses.
-            </p>
-            <p className="text-zinc-400 font-sans text-sm sm:text-base leading-relaxed">
-              At Desi Muchads, our name is our pledge: <strong>Personal, serious, and relentlessly honorable execution.</strong> If we take your brand into our agency cohort, we treat your capital, your reputation, and your growth as our own.
+            <p className="text-zinc-400 font-sans font-light text-sm sm:text-base leading-relaxed">
+              In Indian tradition, the <em className="not-italic text-zinc-200">Muchh</em> represents kept word and pride in one&apos;s craft. We operate with that same personal accountability across every campaign and line of code.
             </p>
 
-            <div className="pt-4 flex flex-wrap items-center gap-4">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 onClick={() => {
                   sound.playChime();
                   setIsKundliOpen(true);
                 }}
-                className="px-6 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-black tracking-wider uppercase transition-all shadow-xl active:scale-95"
+                className="px-5 py-3 rounded-xl bg-white hover:bg-zinc-200 text-black font-display text-xs font-bold tracking-wider uppercase transition-all active:scale-95"
               >
-                REQUEST BRAND GROWTH AUDIT &gt;
+                Request Audit
               </button>
               <Link
                 href="/work"
-                className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/20 flex items-center gap-1.5"
+                className="px-5 py-3 rounded-xl bg-transparent hover:bg-white/[0.06] text-zinc-200 hover:text-white font-mono text-xs uppercase tracking-wider transition-all border border-white/15 flex items-center gap-1.5"
               >
-                <span>EXPLORE 50 VERIFIED WORKS</span>
+                <span>View Work</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

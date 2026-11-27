@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const rawDesc = `${config.brandTagline}. ${config.hero.title} — Interactive D2C experience by Desi Muchads.`;
   const description =
     rawDesc.length <= 155 ? rawDesc : `${config.brandTagline}. Storefront by Desi Muchads.`.slice(0, 155);
-  const rawImg = config.products[0]?.image || "/og-banner.png";
+  const rawImg = config.hero.heroImage || config.products[0]?.image || "/og-banner.png";
   const storeImage = rawImg.startsWith("http") ? rawImg : `https://desimuchads.in${rawImg}`;
 
   return {
@@ -73,10 +73,10 @@ export default function DemoProductPage({ params }: PageProps) {
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-screen bg-transparent flex items-center justify-center text-zinc-400 font-mono text-sm">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
-            <span>Loading Desi Muchads Demo Storefront...</span>
+        <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400 font-mono text-xs uppercase tracking-widest">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-white/80" />
+            <span>Loading Storefront...</span>
           </div>
         </div>
       }
@@ -94,7 +94,7 @@ async function DemoProductContent({ params }: PageProps) {
     notFound();
   }
 
-  const rawStoreImg = config.products[0]?.image || "/og-banner.png";
+  const rawStoreImg = config.hero.heroImage || config.products[0]?.image || "/og-banner.png";
   const storeSchemaImage = rawStoreImg.startsWith("http")
     ? rawStoreImg
     : `https://desimuchads.in${rawStoreImg}`;

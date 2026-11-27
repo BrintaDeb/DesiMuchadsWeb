@@ -151,7 +151,7 @@ export function ProposalFloatingBar() {
             setManualExpanded(true);
           }}
           aria-label="Expand Quick Connect (Call & WhatsApp)"
-          className="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0a09]/85 hover:bg-[#141416] backdrop-blur-md border border-white/15 hover:border-white/35 text-zinc-300 hover:text-white shadow-[0_8px_24px_rgba(0,0,0,0.75)] opacity-80 hover:opacity-100 transition-all duration-200 cursor-pointer"
+          className="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#09090b]/70 hover:bg-[#141416] backdrop-blur-md border border-white/10 hover:border-white/25 text-zinc-400 hover:text-white opacity-75 hover:opacity-100 transition-all duration-200 cursor-pointer"
         >
           <span className="relative flex h-1.5 w-1.5 shrink-0">
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />

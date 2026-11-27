@@ -12,10 +12,8 @@ import {
   Share2,
   Code2,
   Crown,
-  Sparkles,
 } from "lucide-react";
 import { SectionDivider } from "@/components/common/SectionDivider";
-import { SpotlightCard } from "@/components/common/SpotlightCard";
 import { AGENCY_WHATSAPP_NUMBER } from "@/context/AgencyProposalContext";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
@@ -102,7 +100,7 @@ export function PricingSection({
     <section
       id="request-quote"
       aria-label="Request Custom Quote and Book Strategy Session"
-      className={`relative bg-transparent text-white overflow-hidden scroll-mt-24 ${isHome ? "py-20 sm:py-28 border-t border-white/10" : "py-12 sm:py-16"
+      className={`relative bg-transparent text-white overflow-hidden scroll-mt-24 ${isHome ? "py-14 sm:py-24 lg:py-28 border-t border-white/10" : "py-12 sm:py-16"
         }`}
     >
       {/* Subtle Ambient Glows */}
@@ -113,63 +111,52 @@ export function PricingSection({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-4">
         {/* Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight leading-[1.06]">
-            Request Quote.{" "}
-            <span className="text-zinc-400">Book A Strategy Session.</span>
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h2 className="font-display font-bold text-3xl sm:text-5xl text-white uppercase tracking-tight leading-[1.06]">
+            Custom Scope.{" "}
+            <span className="text-zinc-500">Tailored Execution.</span>
           </h2>
-          <p className="mt-4 text-zinc-300 text-sm sm:text-base font-sans leading-relaxed">
-            Every brand operates at a different velocity. Select the disciplines you want to deploy—Meta &amp; Google Ads, Social Media Management, Website Development, or Branding—and get a bespoke proposal directly from our founding principals.
+          <p className="mt-3 text-zinc-400 text-xs sm:text-sm font-sans font-light">
+            Select your tracks below for a direct custom proposal.
           </p>
         </div>
 
-        {/* Selectable Discipline Scope Cards (Zero Prices / Zero Tiers) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 mb-8">
+        {/* Selectable Minimal Discipline Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-7">
           {QUOTE_SERVICE_TRACKS.map((track) => {
             const Icon = TRACK_ICONS[track.id];
             const isSelected = selectedTracks.includes(track.id);
             return (
-              <SpotlightCard
+              <div
                 key={track.id}
-                spotlightColor={
-                  isSelected
-                    ? "rgba(16, 185, 129, 0.14)"
-                    : "rgba(255, 255, 255, 0.06)"
-                }
-                borderColor={
-                  isSelected
-                    ? "rgba(255, 255, 255, 0.55)"
-                    : "rgba(255, 255, 255, 0.14)"
-                }
-                maxTilt={2}
-                className={`rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 text-left ${isSelected
-                  ? "bg-[#131418] border-2 border-white/70 shadow-[0_12px_36px_rgba(0,0,0,0.65)]"
-                  : "bg-[#0d0d11] border border-white/12 hover:border-white/30"
+                className={`rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 text-left border ${isSelected
+                  ? "bg-white/[0.04] border-white/30"
+                  : "bg-white/[0.015] border-white/[0.07] hover:border-white/15"
                   }`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/15 flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4 text-[#F3E5AB]" />
+                    <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center justify-center shrink-0">
+                      <Icon className="w-4 h-4 text-[#F3E5AB]/85" />
                     </div>
                     <button
                       type="button"
                       onClick={() => toggleTrack(track.id)}
                       aria-pressed={isSelected}
-                      className={`px-3 py-1.5 min-h-[34px] rounded-full font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer ${isSelected
-                        ? "bg-white text-black font-black"
-                        : "bg-white/[0.06] text-zinc-200 border border-white/15 hover:bg-white/15"
+                      className={`px-3 py-1.5 min-h-[34px] rounded-full font-mono text-[10px] uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer touch-manipulation ${isSelected
+                        ? "bg-white text-black font-semibold"
+                        : "bg-transparent text-zinc-400 border border-white/10 hover:border-white/25 hover:text-white"
                         }`}
                     >
                       {isSelected ? (
                         <>
-                          <Check className="w-3 h-3 stroke-[3]" />
-                          <span>Included</span>
+                          <Check className="w-3 h-3 stroke-[2.5]" />
+                          <span>Selected</span>
                         </>
                       ) : (
                         <>
                           <Plus className="w-3 h-3" />
-                          <span>Add Scope</span>
+                          <span>Add</span>
                         </>
                       )}
                     </button>
@@ -180,79 +167,84 @@ export function PricingSection({
                     onClick={() => toggleTrack(track.id)}
                     className="w-full text-left cursor-pointer focus:outline-none"
                   >
-                    <h3 className="font-display font-black text-xl text-white uppercase tracking-tight leading-snug">
+                    <h3 className="font-display font-bold text-lg text-white uppercase tracking-tight leading-snug">
                       {track.title}
                     </h3>
                   </button>
 
-                  <ul className="mt-4 space-y-2 mb-5">
-                    {track.deliverables.map((item, idx) => (
+                  <p className="mt-1 font-mono text-[10.5px] text-zinc-500">
+                    {track.highlightSummary}
+                  </p>
+
+                  <ul className="mt-4 space-y-1.5 mb-5">
+                    {track.deliverables.slice(0, 2).map((item, idx) => (
                       <li
                         key={idx}
-                        className="flex items-start gap-2 text-xs text-zinc-200 font-sans leading-snug"
+                        className="flex items-start gap-2 text-xs text-zinc-300/90 font-sans font-light leading-snug"
                       >
-                        <Check className="w-3.5 h-3.5 text-[#F3E5AB] shrink-0 mt-0.5" />
+                        <Check className="w-3 h-3 text-[#F3E5AB]/70 shrink-0 mt-1" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between">
                   <Link
                     href={`/services/${track.serviceSlug}`}
-                    className="font-mono text-[11px] font-bold text-zinc-300 hover:text-white uppercase tracking-wider inline-flex items-center gap-1 transition-colors"
+                    className="font-mono text-[10.5px] text-zinc-400 hover:text-white uppercase tracking-wider inline-flex items-center gap-1 transition-colors"
                   >
-                    <span>What We Do</span>
+                    <span>Explore</span>
                     <ArrowRight className="w-3 h-3" />
                   </Link>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">
-                    Custom Quote
-                  </span>
                 </div>
-              </SpotlightCard>
+              </div>
             );
           })}
         </div>
 
-        {/* Unified Action Console: Direct Quote & Book Strategy Session */}
-        <div className="rounded-3xl p-5 sm:p-8 bg-[#0b0b0e] border border-white/15 shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            <div className="lg:col-span-6 space-y-3 text-left">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full bg-[#D4AF37]/12 border border-[#D4AF37]/35 font-mono text-[11px] font-bold uppercase tracking-wider text-[#F3E5AB] tabular-nums">
-                  {selectedTrackObjs.length}{" "}
-                  {selectedTrackObjs.length === 1 ? "Service" : "Services"} Selected
+        {/* Clean Action Bar */}
+        <div className="rounded-2xl p-5 sm:p-6 bg-white/[0.015] border border-white/[0.08]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+            <div className="lg:col-span-6 space-y-2.5 text-left">
+              <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400 tabular-nums">
+                <span className="text-[#F3E5AB]">
+                  {selectedTrackObjs.length} selected
                 </span>
-                <span className="font-mono text-[11px] text-zinc-300 uppercase">
-                  Direct Founder Consultation · Zero Lock-In
-                </span>
+                <span>·</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    haptics.light();
+                    sound.playChime();
+                    onOpenKundli();
+                  }}
+                  className="text-zinc-400 hover:text-white underline underline-offset-4 cursor-pointer transition-colors"
+                >
+                  Free Audit
+                </button>
               </div>
-
-              <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
-                Get Your Custom Execution Quote
-              </h3>
 
               <input
                 type="text"
                 aria-label="Your website URL or brief goal (optional)"
                 value={brandNote}
                 onChange={(e) => setBrandNote(e.target.value)}
-                placeholder="Optional: Paste your website / store URL or target goal..."
-                className="w-full px-4 py-3 rounded-xl bg-[#141418] border border-white/15 focus:border-white/50 text-xs sm:text-sm font-mono text-white placeholder-zinc-400 outline-none transition-colors"
+                placeholder="Website URL or target goal (optional)..."
+                className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 focus:border-white/35 text-xs sm:text-sm font-mono text-white placeholder-zinc-500 outline-none transition-colors"
               />
             </div>
 
-            <div className="lg:col-span-6 flex flex-col sm:flex-row lg:flex-wrap items-stretch sm:items-center lg:justify-end gap-3">
+            <div className="lg:col-span-6 flex flex-col sm:flex-row lg:flex-wrap items-stretch sm:items-center lg:justify-end gap-2.5">
               <a
                 href={quoteWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleQuoteDispatch}
-                className="px-6 py-3.5 min-h-[48px] rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(255,255,255,0.22)] active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                className="px-5 py-3 min-h-[44px] rounded-xl bg-white hover:bg-zinc-200 text-black font-display font-bold text-xs uppercase tracking-wider transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>Request Quote on WhatsApp ↗</span>
+                <span>WhatsApp Quote ↗</span>
               </a>
 
               <Link
@@ -261,24 +253,11 @@ export function PricingSection({
                   haptics.selection();
                   sound.playPluck(165);
                 }}
-                className="px-6 py-3.5 min-h-[48px] rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all active:scale-95 flex items-center justify-center gap-2"
+                className="px-5 py-3 min-h-[44px] rounded-xl bg-transparent hover:bg-white/[0.06] border border-white/15 text-zinc-200 hover:text-white font-mono text-xs uppercase tracking-wider transition-all active:scale-95 flex items-center justify-center gap-2"
               >
-                <Calendar className="w-4 h-4 shrink-0 text-[#F3E5AB]" />
-                <span>Book Strategy Session</span>
+                <Calendar className="w-3.5 h-3.5 shrink-0 text-[#F3E5AB]" />
+                <span>Book Session</span>
               </Link>
-
-              <button
-                type="button"
-                onClick={() => {
-                  haptics.light();
-                  sound.playChime();
-                  onOpenKundli();
-                }}
-                className="px-5 py-3.5 min-h-[48px] rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#F3E5AB] shrink-0" />
-                <span>Growth Audit</span>
-              </button>
             </div>
           </div>
         </div>

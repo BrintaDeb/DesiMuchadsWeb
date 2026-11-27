@@ -14,12 +14,10 @@ import { ProposalFloatingBar } from "@/components/proposal/ProposalFloatingBar";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import { PricingSection } from "@/components/pricing/PricingSection";
 import { ProjectPreviewShowcase } from "@/components/casestudies/ProjectPreviewShowcase";
-import { WinterExpansionDiscountModal } from "@/components/common/WinterExpansionDiscountModal";
 import { StardustCursorTrail } from "@/components/common/StardustCursorTrail";
 import { BreydaqsButton } from "@/components/common/BreydaqsButton";
 import { WorkAutoCarousel } from "@/components/work/WorkAutoCarousel";
 import { DevStackGuruSection } from "@/components/services/DevStackGuruSection";
-import { InteractiveServicesShowcase } from "@/components/services/InteractiveServicesShowcase";
 import { ServicesSlideCarousel } from "@/components/services/ServicesSlideCarousel";
 import { Two26ServicesRibbonSection } from "@/components/services/Two26ServicesRibbonSection";
 import { AGENCY_PROJECTS, ProjectItem } from "@/data/projectsData";
@@ -30,7 +28,6 @@ export default function Home() {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [isKundliOpen, setIsKundliOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
-  const [servicesView, setServicesView] = useState<"interactive" | "carousel">("interactive");
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,87 +67,49 @@ export default function Home() {
           {/* Section 1: Monumental Hero with Three.js 3D Centerpiece */}
           <HeroSection onOpenKundli={() => setIsKundliOpen(true)} />
 
-          {/* Section 2: Interactive Services & What We Do */}
-          <section id="services" className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 scroll-mt-24">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-[rgba(232,232,227,0.12)] pb-6">
+          {/* Section 2: Services Showcase */}
+          <section id="services" className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-16 sm:py-22 scroll-mt-24 overflow-hidden">
+            {/* Subtle Ambient Brass-Gold Stage Glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[min(90vw,700px)] h-64 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.07)_0%,transparent_70%)] blur-3xl"
+            />
+
+            <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8 border-b border-[rgba(232,232,227,0.09)] pb-5">
               <div>
-                <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
-                  Services &amp; What We Do
+                <h2 className="font-display font-bold text-3xl sm:text-5xl text-white uppercase tracking-tight">
+                  What We Do
                 </h2>
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <div
-                  role="group"
-                  aria-label="Services showcase mode"
-                  className="inline-flex items-center p-1 rounded-full bg-white/5 border border-white/15 backdrop-blur-md"
-                >
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (servicesView !== "interactive") {
-                        sound.playPluck(165);
-                        setServicesView("interactive");
-                      }
-                    }}
-                    aria-pressed={servicesView === "interactive"}
-                    className={`px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${servicesView === "interactive"
-                      ? "bg-white text-black font-bold shadow-sm"
-                      : "text-zinc-300 hover:text-white"
-                      }`}
-                  >
-                    Interactive Stage
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (servicesView !== "carousel") {
-                        sound.playPluck(165);
-                        setServicesView("carousel");
-                      }
-                    }}
-                    aria-pressed={servicesView === "carousel"}
-                    className={`px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${servicesView === "carousel"
-                      ? "bg-white text-black font-bold shadow-sm"
-                      : "text-zinc-300 hover:text-white"
-                      }`}
-                  >
-                    3D Showcase
-                  </button>
-                </div>
-
                 <BreydaqsButton href="/services" variant="white">
-                  EXPLORE ALL SERVICES
+                  ALL SERVICES
                 </BreydaqsButton>
               </div>
             </div>
 
-            {servicesView === "interactive" ? (
-              <InteractiveServicesShowcase
-                services={AGENCY_SERVICES}
-                onOpenKundli={() => setIsKundliOpen(true)}
-              />
-            ) : (
+            <div className="relative z-10">
               <ServicesSlideCarousel
                 services={AGENCY_SERVICES}
                 onOpenKundli={() => setIsKundliOpen(true)}
               />
-            )}
+            </div>
           </section>
 
           <SectionDivider />
 
           {/* Section 3: Flagship Works & Projects Preview */}
-          <section id="work" className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-24 scroll-mt-24 dm-scroll-reveal">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-[rgba(232,232,227,0.12)] pb-6">
+          <section id="work" className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 scroll-mt-24 dm-scroll-reveal">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-[rgba(232,232,227,0.09)] pb-5">
               <div>
-                <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
-                  PROVEN REVENUE ARCHITECTURES
+                <h2 className="font-display font-bold text-3xl sm:text-5xl text-white uppercase tracking-tight">
+                  Selected Work
                 </h2>
               </div>
 
               <BreydaqsButton href="/work" variant="white">
-                EXPLORE ALL 50 WORKS
+                VIEW ALL WORK
               </BreydaqsButton>
             </div>
 
@@ -166,25 +125,25 @@ export default function Home() {
             </div>
           </section>
 
-          <SectionDivider />
-
-          {/* Section 4: Client Trust Proof Strip */}
-          <ClientsTrustStrip />
-
-          {/* Section 5: Request Custom Quote & Book Strategy Session */}
+          {/* Section 4: Request Custom Quote & Book Strategy Session */}
           <PricingSection variant="home" onOpenKundli={() => setIsKundliOpen(true)} />
 
           <SectionDivider />
 
-          {/* Section 7: Scroll-Drawn White Services Ribbon Showcase */}
+          {/* Section 5: Scroll-Drawn White Services Ribbon Showcase */}
           <Two26ServicesRibbonSection />
 
           <SectionDivider />
 
-          {/* Section 8: Engineering & Growth Tech Stack In Orbit */}
-          <section className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-16 sm:py-20">
+          {/* Section 6: Engineering & Growth Tech Stack In Orbit */}
+          <section className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 sm:py-16 lg:py-20">
             <DevStackGuruSection />
           </section>
+
+          <SectionDivider />
+
+          {/* Section 7: Category Leaders & Trusted Partners (Below Character Art) */}
+          <ClientsTrustStrip />
         </main>
 
         {/* Section 8: Wordmark & Architecture Footer */}
@@ -245,9 +204,6 @@ export default function Home() {
         isOpen={isKundliOpen}
         onClose={() => setIsKundliOpen(false)}
       />
-
-      {/* Winter Scale & National Expansion 20% Discount Modal */}
-      <WinterExpansionDiscountModal onOpenKundli={() => setIsKundliOpen(true)} />
 
       {/* Liquid Platinum Stardust Particle Cursor Trail */}
       <StardustCursorTrail />

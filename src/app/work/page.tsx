@@ -14,6 +14,7 @@ import {
   LayoutGrid,
   ListFilter,
   SlidersHorizontal,
+  Film,
 } from "lucide-react";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/footer/Footer";
@@ -35,6 +36,37 @@ const FILTER_PILLS = [
   { id: "meta-google-ads", label: "Meta & Google Growth (4)" },
 ];
 
+function WorkThumbnailMedia({
+  project,
+  isHovered,
+}: {
+  project: ProjectItem;
+  isHovered: boolean;
+}) {
+  return (
+    <>
+      <img
+        src={project.thumbnail}
+        alt={project.client}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+      {project.heroVideo && isHovered && (
+        <video
+          src={project.heroVideo}
+          poster={project.thumbnail}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover animate-in fade-in duration-300"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+    </>
+  );
+}
+
 export default function WorkPage() {
   const [isKundliOpen, setIsKundliOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -42,6 +74,7 @@ export default function WorkPage() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const [activeModalTab, setActiveModalTab] = useState<"preview" | "theory">("preview");
   const [viewMode, setViewMode] = useState<"carousel" | "grid" | "showcase">("carousel");
+  const [hoveredProjectId, setHoveredProjectId] = useState<number | null>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -109,18 +142,13 @@ export default function WorkPage() {
             <span className="text-white font-bold">Selected Works &amp; Case Studies</span>
           </div>
 
-          <div className="max-w-4xl">
-            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.05] mb-6">
-              Selected Portfolio:{" "}
-              <span className="text-zinc-400 underline decoration-white/20 underline-offset-8">
-                Work That Converts
-              </span>
+          <div className="max-w-3xl">
+            <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase leading-[1.04] mb-3">
+              Selected Work
             </h1>
 
-            <p className="font-sans text-base sm:text-lg md:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-8">
-              Explore our full portfolio of bespoke graphic designs, fine art sketches,
-              high-performance Next.js web applications, viral social media campaigns, and
-              interactive high-velocity e-commerce storefronts.
+            <p className="font-sans text-sm sm:text-base text-zinc-400 font-light leading-relaxed max-w-xl mb-6">
+              Web platforms, commerce engines, social campaigns, and visual identity archives.
             </p>
           </div>
         </section>
@@ -270,26 +298,33 @@ export default function WorkPage() {
                     <div
                       data-cursor="view"
                       onClick={() => handleOpenPreview(proj)}
+                      onMouseEnter={() => proj.heroVideo && setHoveredProjectId(proj.id)}
+                      onMouseLeave={() => hoveredProjectId === proj.id && setHoveredProjectId(null)}
                       className="relative aspect-[16/10] overflow-hidden bg-black/60 cursor-pointer"
                     >
-                      <img
-                        src={proj.thumbnail}
-                        alt={proj.client}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
+                      <WorkThumbnailMedia
+                        project={proj}
+                        isHovered={hoveredProjectId === proj.id}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
                         <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-200">
                           {proj.category}
                         </span>
-                        {isDemoProject(proj) && (
-                          <span className="px-2.5 py-1 rounded-full bg-[#D4AF37]/18 backdrop-blur-md border border-[#D4AF37]/45 text-[10.5px] font-mono font-bold text-[#F3E5AB]">
-                            LIVE DEMO
-                          </span>
-                        )}
+                        <div className="flex items-center gap-1.5">
+                          {proj.heroVideo && (
+                            <span className="px-2 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold text-emerald-300 inline-flex items-center gap-1">
+                              <Film className="w-2.5 h-2.5" />
+                              <span>REEL</span>
+                            </span>
+                          )}
+                          {isDemoProject(proj) && (
+                            <span className="px-2.5 py-1 rounded-full bg-[#D4AF37]/18 backdrop-blur-md border border-[#D4AF37]/45 text-[10.5px] font-mono font-bold text-[#F3E5AB]">
+                              LIVE DEMO
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       {/* Hover Preview Overlay */}
@@ -384,19 +419,25 @@ export default function WorkPage() {
                       <div
                         data-cursor="view"
                         onClick={() => handleOpenPreview(proj)}
+                        onMouseEnter={() => proj.heroVideo && setHoveredProjectId(proj.id)}
+                        onMouseLeave={() => hoveredProjectId === proj.id && setHoveredProjectId(null)}
                         className="lg:col-span-5 relative aspect-[16/10] rounded-2xl overflow-hidden bg-black/60 border border-white/10 cursor-pointer group"
                       >
-                        <img
-                          src={proj.thumbnail}
-                          alt={proj.client}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        <WorkThumbnailMedia
+                          project={proj}
+                          isHovered={hoveredProjectId === proj.id}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                        <div className="absolute top-3 left-3">
+                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
                           <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold uppercase text-zinc-200">
                             {proj.category}
                           </span>
+                          {proj.heroVideo && (
+                            <span className="px-2 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold text-emerald-300 inline-flex items-center gap-1">
+                              <Film className="w-2.5 h-2.5" />
+                              <span>REEL</span>
+                            </span>
+                          )}
                         </div>
 
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -593,6 +634,7 @@ export default function WorkPage() {
             <div className="flex-1 overflow-hidden">
               {activeModalTab === "preview" ? (
                 <ProjectPreviewShowcase
+                  key={activeProject.id}
                   project={activeProject}
                   onClose={() => setActiveProject(null)}
                 />

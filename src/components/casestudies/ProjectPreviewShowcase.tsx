@@ -41,6 +41,7 @@ export function ProjectPreviewShowcase({
   const [zoomLevel, setZoomLevel] = useState<"fit" | "full">("fit");
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [iframeLoading, setIframeLoading] = useState<boolean>(true);
+  const [previewMode, setPreviewMode] = useState<"experience" | "reel">("experience");
 
   // Detect real mobile screen width (< 768px)
   const isRealMobile = React.useSyncExternalStore(
@@ -85,6 +86,73 @@ export function ProjectPreviewShowcase({
 
   // Determine active view mode (if real mobile, force full mobile layout for ergonomics)
   const effectiveDeviceMode = isRealMobile && !isStandalone ? "mobile" : deviceMode;
+  const hasStudioReel = Boolean(project.heroVideo) && assetType !== "video_reel";
+  const showingStudioReel =
+    assetType === "video_reel" || (hasStudioReel && previewMode === "reel");
+  const activeVideoSrc = assetType === "video_reel" ? project.liveUrl : project.heroVideo || "";
+
+  const renderReelPlayer = (isMobileFrame: boolean) => (
+    <div
+      className={`relative w-full h-full flex items-center justify-center bg-black ${isMobileFrame ? "flex-1" : ""
+        }`}
+    >
+      <video
+        ref={videoRef}
+        key={`${activeVideoSrc}-${isMobileFrame ? "m" : "d"}`}
+        src={activeVideoSrc}
+        poster={project.thumbnail}
+        autoPlay
+        loop
+        muted={isMuted}
+        playsInline
+        preload="metadata"
+        className={isMobileFrame ? "w-full h-full object-cover" : "max-w-full max-h-full object-contain"}
+      />
+      <div
+        className={`absolute ${isMobileFrame ? "bottom-3 inset-x-3 p-2.5 rounded-xl border-white/20" : "bottom-4 inset-x-4 p-3 rounded-2xl border-white/15 gap-3 text-xs"
+          } bg-black/80 backdrop-blur-md border flex items-center justify-between font-mono z-20`}
+      >
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleVideoPlayback}
+            className={`${isMobileFrame ? "p-1.5 rounded-lg" : "p-2 rounded-xl"
+              } bg-white text-black hover:bg-zinc-200 transition-all font-bold cursor-pointer`}
+            title={isPlaying ? "Pause Video" : "Play Video"}
+          >
+            {isPlaying ? (
+              <Pause className={isMobileFrame ? "w-3.5 h-3.5" : "w-4 h-4"} />
+            ) : (
+              <Play className={isMobileFrame ? "w-3.5 h-3.5" : "w-4 h-4"} />
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={toggleVideoMute}
+            className={`${isMobileFrame ? "p-1.5 rounded-lg" : "p-2 rounded-xl"
+              } bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer`}
+            title={isMuted ? "Unmute Audio" : "Mute Audio"}
+          >
+            {isMuted ? (
+              <VolumeX className={isMobileFrame ? "w-3.5 h-3.5" : "w-4 h-4"} />
+            ) : (
+              <Volume2 className={isMobileFrame ? "w-3.5 h-3.5" : "w-4 h-4"} />
+            )}
+          </button>
+          {!isMobileFrame && (
+            <span className="text-zinc-300 font-bold ml-1 hidden sm:inline">
+              {isPlaying ? "Playing Reel" : "Paused"}
+            </span>
+          )}
+        </div>
+
+        <div className={`flex items-center gap-2 ${isMobileFrame ? "text-[10.5px] text-[#F3E5AB] font-bold" : "text-zinc-400 text-[11px]"}`}>
+          {!isMobileFrame && <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />}
+          <span>{isMobileFrame ? "9:16 STUDIO REEL" : "HD STUDIO MOTION REEL"}</span>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className={`w-full h-full flex-1 flex flex-col min-h-0 ${className} relative`}>
@@ -99,24 +167,57 @@ export function ProjectPreviewShowcase({
         {/* Left Side: Asset Type Pill */}
         <div className="flex items-center gap-2">
           {assetType === "video_reel" ? (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 text-[#F3E5AB] font-bold text-[11px]">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/10 text-zinc-200 font-medium text-[11px]">
               <Film className="w-3 h-3 text-[#D4AF37]" />
-              <span>4K Motion Reel</span>
+              <span>Motion Reel</span>
             </div>
           ) : assetType === "canva_deck" ? (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-[11px]">
-              <Sparkles className="w-3 h-3 text-amber-400" />
-              <span>Slide Deck Showcase</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/10 text-zinc-200 font-medium text-[11px]">
+              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+              <span>Slide Showcase</span>
             </div>
           ) : assetType === "visual_showcase" ? (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 font-bold text-[11px]">
-              <ImageIcon className="w-3 h-3 text-purple-400" />
-              <span>Master Art &amp; Design</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/10 text-zinc-200 font-medium text-[11px]">
+              <ImageIcon className="w-3 h-3 text-[#D4AF37]" />
+              <span>Master Artwork</span>
+            </div>
+          ) : hasStudioReel ? (
+            <div className="inline-flex items-center p-0.5 rounded-full bg-black/60 border border-white/15 text-[11px]">
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playPluck(150);
+                  setPreviewMode("experience");
+                  setIsPlaying(true);
+                }}
+                className={`px-2.5 py-1 rounded-full transition-colors cursor-pointer inline-flex items-center gap-1.5 ${previewMode === "experience"
+                  ? "bg-white text-black font-bold"
+                  : "text-zinc-400 hover:text-white"
+                  }`}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>Storefront</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playPluck(180);
+                  setPreviewMode("reel");
+                  setIsPlaying(true);
+                }}
+                className={`px-2.5 py-1 rounded-full transition-colors cursor-pointer inline-flex items-center gap-1.5 ${previewMode === "reel"
+                  ? "bg-[#D4AF37] text-black font-bold"
+                  : "text-zinc-400 hover:text-white"
+                  }`}
+              >
+                <Film className="w-3 h-3" />
+                <span>Motion Reel</span>
+              </button>
             </div>
           ) : (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 text-[#F3E5AB] font-bold text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-              <span>Interactive Live Storefront</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/10 text-zinc-200 font-medium text-[11px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>Interactive Storefront</span>
             </div>
           )}
 
@@ -248,15 +349,15 @@ export function ProjectPreviewShowcase({
                 <span className="text-zinc-400 text-[10px] hidden sm:inline">{project.category}</span>
               </div>
 
-              {/* Simulated SSL Live Address Bar */}
-              <div className="hidden md:flex items-center gap-2 px-3 py-0.5 rounded-lg bg-black/60 border border-white/10 text-[11px] font-mono text-zinc-300 max-w-sm truncate">
-                <Lock className="w-3 h-3 text-[#D4AF37] shrink-0" />
+              {/* Minimal Address Bar */}
+              <div className="hidden md:flex items-center gap-2 px-3 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono text-zinc-400 max-w-sm truncate">
+                <Lock className="w-3 h-3 text-zinc-400 shrink-0" />
                 <span className="truncate">
                   {project.liveUrl.startsWith("/")
                     ? `https://desimuchads.in${project.liveUrl}`
                     : project.liveUrl.replace("https://", "")}
                 </span>
-                <span className="ml-auto text-[10px] px-1.5 rounded bg-[#D4AF37]/20 text-[#F3E5AB] font-bold shrink-0">
+                <span className="ml-auto text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-emerald-300 font-semibold shrink-0">
                   LIVE
                 </span>
               </div>
@@ -272,53 +373,10 @@ export function ProjectPreviewShowcase({
             {/* Desktop Viewport Body (Flex-1 fills entire remaining height!) */}
             <div className="relative flex-1 w-full h-full min-h-0 overflow-hidden bg-black flex items-center justify-center">
               {/* 1. VIDEO REEL MODE */}
-              {assetType === "video_reel" && (
-                <div className="relative w-full h-full flex items-center justify-center bg-black">
-                  <video
-                    ref={videoRef}
-                    key={project.liveUrl}
-                    src={project.liveUrl}
-                    poster={project.thumbnail}
-                    autoPlay
-                    loop
-                    muted={isMuted}
-                    playsInline
-                    className="max-w-full max-h-full object-contain"
-                  />
-                  {/* Floating Video Overlay Bar */}
-                  <div className="absolute bottom-4 inset-x-4 p-3 rounded-2xl bg-black/80 backdrop-blur-md border border-white/15 flex items-center justify-between gap-3 text-xs font-mono z-20">
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={toggleVideoPlayback}
-                        className="p-2 rounded-xl bg-white text-black hover:bg-zinc-200 transition-all font-bold cursor-pointer"
-                        title={isPlaying ? "Pause Video" : "Play Video"}
-                      >
-                        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={toggleVideoMute}
-                        className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
-                        title={isMuted ? "Unmute Audio" : "Mute Audio"}
-                      >
-                        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                      </button>
-                      <span className="text-zinc-300 font-bold ml-1 hidden sm:inline">
-                        {isPlaying ? "Playing Reel" : "Paused"}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-zinc-400 text-[11px]">
-                      <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                      <span>4K 60FPS MASTER</span>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {showingStudioReel && renderReelPlayer(false)}
 
               {/* 2. VISUAL SHOWCASE (Artwork / Posters) */}
-              {assetType === "visual_showcase" && (
+              {!showingStudioReel && assetType === "visual_showcase" && (
                 <div className="relative w-full h-full overflow-y-auto overscroll-contain bg-zinc-950 flex flex-col items-center">
                   <div className="w-full flex-1 flex items-center justify-center p-3 sm:p-6">
                     <img
@@ -335,7 +393,7 @@ export function ProjectPreviewShowcase({
               )}
 
               {/* 3. CANVA DECK SHOWCASE */}
-              {assetType === "canva_deck" && (
+              {!showingStudioReel && assetType === "canva_deck" && (
                 <div className="relative w-full h-full flex flex-col items-center justify-between bg-zinc-950 p-4 sm:p-6 overflow-hidden">
                   <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden rounded-xl border border-white/15 bg-black">
                     <img
@@ -372,13 +430,13 @@ export function ProjectPreviewShowcase({
               )}
 
               {/* 4. LIVE INTERACTIVE WEB PLATFORM & DEMO STOREFRONT (Internal Next.js & External Production Apps) */}
-              {(assetType === "internal_app" || assetType === "external_app") && (
+              {!showingStudioReel && (assetType === "internal_app" || assetType === "external_app") && (
                 <div className="relative w-full h-full bg-black">
                   {iframeLoading && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
-                      <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
-                      <span className="font-mono text-xs text-white/70 tracking-wider">
-                        INITIALIZING INTERACTIVE PLATFORM ENGINE...
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#09090b]/95 backdrop-blur-md z-10">
+                      <div className="w-6 h-6 rounded-full border-2 border-white/15 border-t-white animate-spin mb-2.5" />
+                      <span className="font-mono text-[11px] text-zinc-400 tracking-wider uppercase">
+                        Loading Live Storefront...
                       </span>
                     </div>
                   )}
@@ -428,13 +486,13 @@ export function ProjectPreviewShowcase({
                 }`}
             >
               {/* Internal Demo Storefront & External Production Platform in Mobile */}
-              {(assetType === "internal_app" || assetType === "external_app") && (
+              {!showingStudioReel && (assetType === "internal_app" || assetType === "external_app") && (
                 <div className="relative flex-1 w-full h-full bg-black">
                   {iframeLoading && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md z-10">
-                      <div className="w-7 h-7 rounded-full border-2 border-white/20 border-t-white animate-spin mb-2" />
-                      <span className="font-mono text-[10px] text-white/70">
-                        LOADING PLATFORM...
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#09090b]/95 backdrop-blur-md z-10">
+                      <div className="w-6 h-6 rounded-full border-2 border-white/15 border-t-white animate-spin mb-2" />
+                      <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
+                        Loading Storefront...
                       </span>
                     </div>
                   )}
@@ -451,43 +509,10 @@ export function ProjectPreviewShowcase({
               )}
 
               {/* Video Reel in Mobile */}
-              {assetType === "video_reel" && (
-                <div className="relative flex-1 w-full h-full bg-black flex items-center justify-center">
-                  <video
-                    ref={videoRef}
-                    key={`${project.liveUrl}-mobile`}
-                    src={project.liveUrl}
-                    poster={project.thumbnail}
-                    autoPlay
-                    loop
-                    muted={isMuted}
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-3 inset-x-3 p-2.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-between z-20">
-                    <button
-                      type="button"
-                      onClick={toggleVideoPlayback}
-                      className="p-1.5 rounded-lg bg-white text-black font-bold cursor-pointer"
-                    >
-                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={toggleVideoMute}
-                      className="p-1.5 rounded-lg bg-white/10 text-white cursor-pointer"
-                    >
-                      {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-                    </button>
-                    <span className="text-[10.5px] font-mono text-[#F3E5AB] font-bold">
-                      9:16 MOBILE REEL
-                    </span>
-                  </div>
-                </div>
-              )}
+              {showingStudioReel && renderReelPlayer(true)}
 
               {/* Visual Showcase in Mobile */}
-              {assetType === "visual_showcase" && (
+              {!showingStudioReel && assetType === "visual_showcase" && (
                 <div className="relative flex-1 w-full h-full overflow-y-auto overscroll-contain bg-zinc-950 p-2 scrollbar-none flex flex-col items-center justify-center">
                   <img
                     src={project.liveUrl}
@@ -501,7 +526,7 @@ export function ProjectPreviewShowcase({
 
 
               {/* Canva Deck in Mobile */}
-              {assetType === "canva_deck" && (
+              {!showingStudioReel && assetType === "canva_deck" && (
                 <div className="relative flex-1 w-full h-full flex flex-col justify-between p-3 bg-zinc-950">
                   <div className="relative flex-1 w-full rounded-xl overflow-hidden border border-white/10 bg-black">
                     <img

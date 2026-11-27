@@ -83,17 +83,17 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
               aria-hidden="true"
               className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl bg-[radial-gradient(ellipse_at_left,rgba(8,8,7,0.72)_0%,transparent_75%)]"
             />
-            {/* Authentic Brand Emblem Badge */}
-            <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg group select-none transition-all">
-              <div className="w-8 h-4 sm:w-9 sm:h-4.5 flex items-center justify-center">
+            {/* Subtle Brand Label */}
+            <div className="inline-flex items-center gap-2.5 select-none">
+              <div className="w-7 h-3.5 flex items-center justify-center">
                 <img
                   src="/desi-muchads-cropped-logo.png"
                   alt="Desi Muchads Official Logo"
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                  className="w-full h-full object-contain opacity-85"
                 />
               </div>
-              <span className="text-[10px] font-mono tracking-widest text-zinc-300 uppercase font-bold">
-                PERFORMANCE CREATIVE &amp; GROWTH STUDIO
+              <span className="text-[10.5px] font-mono tracking-[0.24em] text-zinc-400 uppercase">
+                GROWTH STUDIO
               </span>
             </div>
 
@@ -111,12 +111,11 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                 {/* Floating Holographic Telemetry Pill on Hover (pseudo-element keeps H1 DOM text clean for SEO) */}
                 <span
                   aria-hidden="true"
-                  data-hover-pill="CONTACT US → SCHEDULE CALL ↗"
-                  className={`before:content-[attr(data-hover-pill)] absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-[0.2rem] bg-[#0c0c0b]/95 border border-[#D4AF37]/60 shadow-[0_0_20px_rgba(212,175,55,0.35)] backdrop-blur-md font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-[#F3E5AB] whitespace-nowrap pointer-events-none transition-all duration-200 flex items-center gap-1.5 ${
-                    isDominateHovered
-                      ? "opacity-100 translate-y-0 scale-100"
-                      : "opacity-0 translate-y-2 scale-95"
-                  }`}
+                  data-hover-pill="CONTACT US →"
+                  className={`before:content-[attr(data-hover-pill)] absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-[0.2rem] bg-[#0c0c0b]/95 border border-[#D4AF37]/45 backdrop-blur-md font-mono text-[9px] sm:text-[10.5px] font-medium uppercase tracking-wider text-[#F3E5AB] whitespace-nowrap pointer-events-none transition-all duration-200 flex items-center gap-1.5 ${isDominateHovered
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-2 scale-95"
+                    }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping order-first" />
                 </span>
@@ -127,61 +126,59 @@ export function HeroSection({ onOpenKundli }: HeroSectionProps) {
                 </span>
 
                 {/* Matte Gold Text with Velvet Luster Glow */}
-                <span className="relative inline-block transition-all duration-300 group-hover:scale-[1.04] bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#C5A059] group-hover:from-[#FFF2B2] group-hover:via-[#F3E5AB] group-hover:to-[#DFB76C] bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(212,175,55,0.3)] group-hover:drop-shadow-[0_0_35px_rgba(212,175,55,0.75)]">
+                <span className="relative inline-block transition-all duration-300 group-hover:scale-[1.04] bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#C5A059] group-hover:from-[#FFF2B2] group-hover:via-[#F3E5AB] group-hover:to-[#DFB76C] bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(212,175,55,0.22)]">
                   dominate.
                 </span>
 
                 {/* Bottom Matte Gold Kinetic Underline */}
                 <span
-                  className={`absolute bottom-1 sm:bottom-2 left-0 w-full h-[2px] sm:h-[3px] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F39] transition-all duration-300 origin-left ${
-                    isDominateHovered ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
-                  }`}
+                  className={`absolute bottom-1 sm:bottom-2 left-0 w-full h-[2px] sm:h-[3px] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F39] transition-all duration-300 origin-left ${isDominateHovered ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
+                    }`}
                 />
               </Link>
             </h1>
 
-            {/* Kinetic Rotating Focus Reel */}
-            <div className="flex items-center gap-2.5 font-mono text-xs sm:text-sm text-zinc-300">
-              <span className="text-zinc-500 uppercase tracking-widest font-bold">
-                FOCUS:
-              </span>
-              <div className="h-6 overflow-hidden relative inline-flex items-center">
-                <span
-                  key={keywordIndex}
-                  className="font-bold tracking-wider bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-white bg-clip-text text-transparent uppercase animate-in slide-in-from-bottom-2 duration-300"
-                >
-                  {ROTATING_KEYWORDS[keywordIndex]}
-                </span>
+            {/* Minimal Rotating Focus & Light Intro */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs text-zinc-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/85 shrink-0" aria-hidden="true" />
+                <div className="h-5 overflow-hidden relative inline-flex items-center">
+                  <span
+                    key={keywordIndex}
+                    className="font-medium tracking-wider text-zinc-300 uppercase animate-in slide-in-from-bottom-2 duration-300"
+                  >
+                    {ROTATING_KEYWORDS[keywordIndex]}
+                  </span>
+                </div>
               </div>
+
+              <p className="text-sm sm:text-base text-zinc-400 font-light leading-relaxed max-w-md font-sans">
+                Performance marketing, Next.js storefronts, and visual identity crafted to scale.
+              </p>
             </div>
 
-            {/* Subhead Paragraph */}
-            <p className="text-xs sm:text-base md:text-lg text-zinc-300 font-normal leading-relaxed max-w-xl font-sans">
-              Desi Muchads engineers ruthless performance marketing architectures, viral digital storytelling, sub-second web platforms, and hyper-growth Quick Commerce campaigns for ambitious global brands.
-            </p>
-
-            {/* Breydaqs Kinetic Double-Slide Action Buttons */}
-            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 w-full">
+            {/* Clean Action Buttons */}
+            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 w-full touch-manipulation">
               <BreydaqsButton
                 onClick={onOpenKundli}
                 variant="white"
-                className="w-full sm:w-auto py-3.5 px-6 sm:px-7 text-xs sm:text-sm min-h-[48px]"
+                className="w-full sm:w-auto py-3.5 px-6 sm:px-7 text-xs sm:text-sm min-h-[48px] touch-manipulation"
               >
-                REQUEST GROWTH AUDIT
+                REQUEST AUDIT
               </BreydaqsButton>
 
               <BreydaqsButton
                 href="#work"
                 variant="dark"
-                className="w-full sm:w-auto py-3.5 px-6 sm:px-7 text-xs sm:text-sm min-h-[48px]"
+                className="w-full sm:w-auto py-3.5 px-6 sm:px-7 text-xs sm:text-sm min-h-[48px] touch-manipulation"
               >
-                SELECTED WORKS
+                SELECTED WORK
               </BreydaqsButton>
             </div>
           </div>
 
           {/* Right Column: 3D Centerpiece on Matte Carbon */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative mt-1 sm:mt-4 lg:mt-0 max-w-full">
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative mt-2 sm:mt-4 lg:mt-0 max-w-full">
             <div className="w-full max-w-xs sm:max-w-lg relative flex flex-col items-center justify-center">
               <ThreeHeroCenterpiece />
             </div>

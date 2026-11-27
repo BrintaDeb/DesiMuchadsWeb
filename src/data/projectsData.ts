@@ -8,6 +8,7 @@ export interface ProjectItem {
   heroStat: string;
   liveUrl: string;
   thumbnail: string;
+  heroVideo?: string;
   fullImage?: string;
   desc: string;
   mushkil: string;
@@ -37,6 +38,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "+65% INQUIRY CVR · HIGH-TICKET BOOKINGS",
     liveUrl: "https://youandme-smoky.vercel.app/",
     thumbnail: "/projects/you-and-me-hero.webp",
+    heroVideo: "/videos/you-and-me-photography.mp4",
     fullImage: "https://brinta-deb-portfolio.onrender.com/assets/media/youandme_full.png",
     desc: "YOU & ME is a premier cinematic destination wedding photography studio capturing timeless love stories across Udaipur, Tuscany, and Goa.",
     mushkil:
@@ -306,6 +308,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "10,000+ PETS ONBOARDED · 78% RETENTION",
     liveUrl: "https://pet-first-web.vercel.app/",
     thumbnail: "/projects/pet-first-hero.png",
+    heroVideo: "/videos/pet-first-wellness.mp4",
     fullImage: "/projects/pet-first-full.webp",
     desc: "Pet-First provides holistic preventive pet wellness, breed-specific customized nutrition plans, and instant video consultations with certified veterinary specialists.",
     mushkil:
@@ -1632,6 +1635,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "MASTER ARTWORK · 300 DPI VECTOR",
     liveUrl: "/demos/ganesha-cyber-mandala",
     thumbnail: "/art/ganesha-cyber-mandala.jpg",
+    heroVideo: "/videos/ganesha-cyber-mandala.mp4",
     desc: "Hand-crafted cyber-spiritual sacred geometry mandala featuring an ornate gold-filigreed elephant deity with liquid platinum accents, sacred geometric rings, and glowing circuitry against obsidian glass.",
     mushkil:
       "Traditional cultural vector iconography frequently looks dated, flat, and disconnected from modern ultra-luxury digital screens and high-resolution display standards.",
@@ -1685,6 +1689,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "RAW INK SKETCH · SUMI-E MASTER",
     liveUrl: "/demos/samurai-ronin-ink-sketch",
     thumbnail: "/art/samurai-ronin-ink-sketch.jpg",
+    heroVideo: "/videos/samurai-ronin-ink-sketch.mp4",
     desc: "High-energy dynamic manga brush ink sketch capturing a wandering ronin in fierce wind, executed with traditional sumi-e splatter textures, expressive monochrome lineart, and a striking crimson katana accent.",
     mushkil:
       "Digital inking often lacks the visceral physical soul, organic bleeding, and dynamic weight of traditional Japanese bamboo-brush ink on handmade washi paper.",
@@ -1738,6 +1743,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "CONCEPT ART · 240+ DETAIL ASSETS",
     liveUrl: "/demos/neotokyo-street-food-hawker",
     thumbnail: "/art/neotokyo-street-food-hawker.jpg",
+    heroVideo: "/videos/neotokyo-street-food-hawker.mp4",
     desc: "Detailed atmospheric isometric anime concept painting of a midnight street-food cart nestled in a rainy neon-lit Neo-Tokyo alleyway, featuring glowing paper lanterns, steam rising from ramen pots, and Ghibli-meets-Akira linework.",
     mushkil:
       "Capturing dense urban isometric perspective while maintaining warm nostalgic emotional warmth and authentic atmospheric illumination across a neon palette.",
@@ -1791,6 +1797,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "MATTE PAINTING · CINEMATIC KEYFRAME",
     liveUrl: "/demos/varanasi-ghats-heritage-matte",
     thumbnail: "/art/varanasi-ghats-heritage-matte.jpg",
+    heroVideo: "/videos/varanasi-ghats-heritage-matte.mp4",
     desc: "Serene cinematic digital concept matte painting of the ancient Varanasi riverfront steps at sunrise with soft golden morning mist, temple spires, floating marigolds, and wooden boats on the sacred river.",
     mushkil:
       "Depicting the vast architectural depth of Varanasi ghats without cluttering the meditative, ethereal dawn spiritual atmosphere.",
@@ -1844,6 +1851,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "+420% ORGANIC TRAFFIC LIFT",
     liveUrl: "/demos/vedaroots-ayurveda",
     thumbnail: "/projects/vedaroots-ayurveda-hero.jpg",
+    heroVideo: "/videos/vedaroots-ayurveda.mp4",
     desc: "VedaRoots is an authentic Ayurvedic wellness brand specializing in single-origin cold-pressed oils, adaptogenic tonics, and classical herb formulations.",
     mushkil:
       "VedaRoots was trapped paying ₹1,200+ per acquisition on generic Meta ads while competitors dominated Google Page 1 for high-intent search queries like 'authentic pure kshirabala oil' and 'cold-pressed sesame oil bulk'. Their technical site had 4.8s TTFB and 0 structured schema markup.",
@@ -1886,6 +1894,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "₹2.4CR PIPELINE · -48% CPA",
     liveUrl: "/demos/urbandrift-ev",
     thumbnail: "/projects/urbandrift-ev-hero.jpg",
+    heroVideo: "/videos/urbandrift-ev.mp4",
     desc: "UrbanDrift manufactures lightweight commercial electric cargo scooters for delivery fleets and urban gig operators.",
     mushkil:
       "UrbanDrift struggled with ultra-high lead costs on generic B2B portals and LinkedIn ads. Competitors bid aggressively on broad EV keywords, causing 80% of budget to leak into consumer tire-kicking inquiries rather than commercial fleet buyers.",
@@ -1927,6 +1936,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "5.8X BLENDED ROAS · ₹1.2CR 90-DAY",
     liveUrl: "/demos/snacknation-makhanas",
     thumbnail: "/projects/snacknation-hero.jpg",
+    heroVideo: "/videos/snacknation-makhanas.mp4",
     desc: "Roasted organic artisanal fox nuts (makhanas) in peri-peri, truffle, and Himalayan pink salt variants.",
     mushkil:
       "Single-pack purchase economics were unsustainable: average order value (AOV) was only ₹299 with a ₹220 customer acquisition cost, leaving zero margin after shipping.",
@@ -1968,6 +1978,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "₹3.2CR+ PIPELINE · ₹180 CPL",
     liveUrl: "/demos/bharat-bio-health",
     thumbnail: "/projects/bharat-biohealth-hero.jpg",
+    heroVideo: "/videos/bharat-bio-health.mp4",
     desc: "National biotechnology provider of automated clinical laboratory equipment and preventive molecular diagnostics.",
     mushkil:
       "High-ticket diagnostic systems costing ₹15L–₹40L each were suffering from prolonged 9-month sales cycles, high lead drop-offs, and cold outbound calling fatigue.",
@@ -2009,6 +2020,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "38 HNI BUYERS · 72% SQL",
     liveUrl: "/demos/sobha-heritage-villas",
     thumbnail: "/projects/sobha-heritage-villas-hero.jpg",
+    heroVideo: "/videos/sobha-heritage-villas.mp4",
     desc: "Ultra-luxury gated enclave of 48 bespoke Portuguese-Goan architectural villas priced from ₹4.5Cr upwards.",
     mushkil:
       "Generic property portal leads were plagued by brokers and unqualified aspirational inquiries. Sales directors were wasting hours fielding calls from buyers without verified liquidity.",
@@ -2050,6 +2062,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "+477% VIRAL ORGANIC REACH",
     liveUrl: "/demos/chaichaska-ctc",
     thumbnail: "/projects/chaichaska-tea-hero.jpg",
+    heroVideo: "/videos/chaichaska-ctc.mp4",
     desc: "Artisanal Assam estate whole leaf tea and spiced tapri-style masala chai blends packaged for modern chai aficionados.",
     mushkil:
       "Brand account had flatlined with under 500 views per post, relying on boring stock photos of tea cups with generic 'Good Morning' captions that generated zero engagement.",
@@ -2091,6 +2104,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     heroStat: "18.4% ENGAGEMENT · 3.8X ROAS",
     liveUrl: "/demos/streethreads-handloom",
     thumbnail: "/projects/streetthreads-handloom-hero.jpg",
+    heroVideo: "/videos/streethreads-handloom.mp4",
     desc: "Fair-trade handloom saree and contemporary ethnic wear cooperative supporting traditional weavers in Varanasi and Maheshwar.",
     mushkil:
       "Fast-fashion copycats were flooding the market with cheap synthetic sarees, drowning out StreeThreads' authentic craftsmanship. Their social posts looked like an outdated catalog.",
@@ -2131,6 +2145,7 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "ecommerce-services",
     heroStat: "+340% RESERVATION & ORDER LIFT",
     liveUrl: "/demos/lionelp-restaurant",
+    heroVideo: "/videos/lionelp-restaurant.mp4",
     thumbnail: "/projects/lionelp-restaurant-hero.jpg",
     desc: "High-end culinary patisserie and fine dining storefront in Mumbai serving artisanal viennoiseries, gourmet breads, and private dining bookings.",
     mushkil:
@@ -2172,7 +2187,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "quick-commerce",
     heroStat: "8.4X FLASH ROAS · 10-MIN FULFILLMENT",
     liveUrl: "/demos/mithaimagic-sweets",
-    thumbnail: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/mithaimagic-sweets-hero.jpg",
+    heroVideo: "/videos/mithaimagic-sweets.mp4",
     desc: "Artisanal dry fruit sweets, Kaju Katli, and festive mithai gift boxes packaged in vacuum-sealed luxury gift tins.",
     mushkil:
       "MithaiMagic missed festival revenue spikes because their stock was constantly out-of-stock in high-demand dark stores across Mumbai and Bangalore, causing catalog rank demotion on Zepto and Blinkit.",
@@ -2213,7 +2229,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "quick-commerce",
     heroStat: "4.2X VELOCITY · 18 MICRO-HUBS",
     liveUrl: "/demos/pureglow-kombucha",
-    thumbnail: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/pureglow-kombucha-hero.jpg",
+    heroVideo: "/videos/pureglow-kombucha.mp4",
     desc: "Naturally fermented probiotic sparkling iced kombucha in ginger lemon, wild berry, and kokum flavors.",
     mushkil:
       "Cold-chain beverages face severe shelf life constraints. Initial inventory sent to quick commerce dark stores was languishing unnoticed on lower catalog pages, risking product expiration.",
@@ -2254,7 +2271,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "<0.6S TTFB · 99 PAGESPEED",
     liveUrl: "/demos/darbar-fine-watches",
-    thumbnail: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/darbar-fine-watches-hero.jpg",
+    heroVideo: "/videos/darbar-fine-watches.mp4",
     desc: "Luxury Indian independent horological studio creating bespoke mechanical timepieces with damascened steel and gold dials.",
     mushkil:
       "Their previous WordPress / WooCommerce site took 6.2 seconds to load high-resolution watch dials on mobile phones. Discerning collectors buying ₹1.8L+ timepieces were abandoning before seeing the movement mechanics.",
@@ -2295,7 +2313,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "4.8% CVR LIFT · 0.5S SPEED",
     liveUrl: "/demos/kisaandirect-agri",
-    thumbnail: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/kisaandirect-agri-hero.jpg",
+    heroVideo: "/videos/kisaandirect-agri.mp4",
     desc: "Direct-from-farm organic staples, heritage grains, and unadulterated cold-pressed oils platform connecting rural cooperatives with urban households.",
     mushkil:
       "A large segment of their target audience accessed the site on low-end budget Android smartphones over unstable rural 3G/4G networks. Complex cart checkouts caused a 76% cart abandonment rate.",
@@ -2336,7 +2355,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "packaging-label",
     heroStat: "+480% SHELF IMPACT · NATIONAL RETAIL",
     liveUrl: "/demos/royal-rajwada-spices",
-    thumbnail: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/royal-rajwada-spices-hero.jpg",
+    heroVideo: "/videos/royal-rajwada-spices.mp4",
     desc: "Single-origin GI-tagged spice blends including Lakadong turmeric, Kashmiri saffron, and Malabar black pepper in luxury gift boxes.",
     mushkil:
       "Despite award-winning spice quality, their previous generic plastic pouch packaging looked cheap on retail supermarket shelves and failed to justify their premium ₹499 price point.",
@@ -2377,7 +2397,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "packaging-label",
     heroStat: "+62% UNBOXING CVR · HIGH-TICKET PRESTIGE",
     liveUrl: "/demos/kamakesh-hair-elixir",
-    thumbnail: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/kamakesh-hair-elixir-hero.jpg",
+    heroVideo: "/videos/kamakesh-hair-elixir.mp4",
     desc: "High-ticket Ayurvedic scalp rejuvenation oil infused with 21 rare Himalayan herbs, priced at ₹2,400 per bottle.",
     mushkil:
       "Consumers hesitated to spend ₹2,400 online because the existing bottle looked like a standard ₹150 chemist hair oil. High unboxing returns were damaging brand equity.",
@@ -2418,7 +2439,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "seo-sem",
     heroStat: "+580% ORGANIC INBOUND PIPELINE",
     liveUrl: "/demos/zenith-seo-growth",
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/zenith-seo-growth-hero.jpg",
+    heroVideo: "/videos/zenith-seo-growth.mp4",
     desc: "Zenith RankMatrix is an enterprise search engine growth system built for B2B tech and high-growth SaaS brands seeking structured Google SERP dominance.",
     mushkil:
       "Enterprise software buyers had stopped clicking traditional low-quality affiliate blogs, instead researching direct vendor benchmarks and ultra-specific commercial queries. Zenith was burning ₹18L/mo on broad Google Ads while losing organic search share to competitors with stronger topical authority.",
@@ -2460,7 +2482,8 @@ export const AGENCY_PROJECTS: ProjectItem[] = [
     serviceId: "web-development",
     heroStat: "38MS GLOBAL EDGE TTFB · 100/100 CWV",
     liveUrl: "/demos/kartflow-headless",
-    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    thumbnail: "/projects/kartflow-headless-hero.jpg",
+    heroVideo: "/videos/kartflow-headless.mp4",
     desc: "KartFlow is a Next.js 16 headless commerce operating system engineered for enterprise D2C retail brands demanding sub-50ms page speeds, instant cart mutations, and 50,000+ flash sale concurrency.",
     mushkil:
       "Fast-growing D2C lifestyle brand was losing over 42% of mobile shoppers due to bloated Shopify Liquid scripts, 4.2-second mobile load times, and frequent checkout gateway crashes during holiday drop sales.",

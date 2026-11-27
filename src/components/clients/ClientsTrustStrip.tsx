@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 import { sound } from "@/lib/sound";
-import { SpotlightCard } from "../common/SpotlightCard";
 import { BreydaqsButton } from "../common/BreydaqsButton";
 
 export function ClientsTrustStrip() {
@@ -70,7 +69,7 @@ export function ClientsTrustStrip() {
   return (
     <section
       id="clients"
-      className="relative py-28 sm:py-36 bg-transparent text-white overflow-hidden select-none font-display border-t border-white/10"
+      className="relative py-16 sm:py-28 lg:py-32 bg-transparent text-white overflow-hidden select-none font-display border-t border-white/10"
     >
       {/* Subtle obsidian vignette backdrop for editorial typography contrast */}
       <div
@@ -79,66 +78,55 @@ export function ClientsTrustStrip() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20 text-left">
-          <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-[-0.035em] text-white uppercase leading-[0.92]">
-            Category Leaders Built to <span className="font-editorial text-[#e8e8e3] font-normal lowercase tracking-normal">→ scale.</span>
+        {/* Minimal Section Header */}
+        <div className="max-w-2xl mb-12 sm:mb-16 text-left">
+          <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-[-0.03em] text-white uppercase leading-[0.96]">
+            Trusted by Category <span className="font-editorial text-[#e8e8e3] font-normal lowercase tracking-normal">→ leaders.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-400 font-normal leading-relaxed font-sans">
-            From emerging national disruptors to established sovereign brands across India.
-          </p>
         </div>
 
-        {/* Velocity-Skewed Kinetic Marquee Ribbon */}
-        <div className="relative w-full max-w-full overflow-hidden contain-paint py-4 my-8 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        {/* Light Velocity Marquee */}
+        <div className="relative w-full max-w-full overflow-hidden contain-paint py-3 my-4 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           <div
             ref={marqueeRef}
-            className="transition-transform will-change-transform flex gap-4 sm:gap-6 animate-marquee motion-reduce:animate-none whitespace-nowrap"
+            className="transition-transform will-change-transform flex gap-6 sm:gap-10 animate-marquee motion-reduce:animate-none whitespace-nowrap"
           >
             {[...clients, ...clients].map((c, idx) => (
               <div
                 key={idx}
                 onMouseEnter={() => sound.playPluck(150 + (idx % 8) * 15)}
-                className="inline-flex items-center gap-3 px-5 py-3 rounded-[0.25rem] bg-[#0f0f0e]/95 border border-[rgba(232,232,227,0.15)] border-t-white/25 hover:border-[#D4AF37]/60 transition-all cursor-pointer group shrink-0 shadow-lg"
+                className="inline-flex items-center gap-2.5 py-2 transition-opacity cursor-pointer group shrink-0 opacity-70 hover:opacity-100"
               >
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] group-hover:scale-125 transition-transform" />
-                  <span className="font-display font-black text-sm tracking-wider text-white uppercase">
-                    {c.name}
-                  </span>
-                </div>
-                <span className="text-zinc-600">•</span>
-                <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
-                  {c.category}
+                <span className="w-1 h-1 rounded-full bg-[#D4AF37]/70" />
+                <span className="font-display font-bold text-sm sm:text-base tracking-wider text-zinc-200 group-hover:text-white uppercase">
+                  {c.name}
                 </span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* 12-Brand Responsive Clean Highlighted Tiles with Liquid Specular Bevels */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 mt-12">
+        {/* Architectural Hairline 6-Column Partner Archive Wall */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 mt-10 border-t border-l border-white/[0.07]">
           {clients.map((c, idx) => (
-            <SpotlightCard
+            <div
               key={idx}
-              maxTilt={7}
               onMouseEnter={() => sound.playPluck(140 + idx * 10)}
-              className="rounded-[0.25rem] p-5 bg-[#0c0c0b]/95 border border-[rgba(232,232,227,0.14)] border-t-white/22 shadow-lg flex flex-col items-center justify-center text-center aspect-[4/3] cursor-pointer hover:border-[#D4AF37]/60 transition-all"
+              className="p-5 sm:p-6 border-r border-b border-white/[0.07] bg-transparent hover:bg-white/[0.025] flex flex-col items-center justify-center text-center aspect-[5/3] cursor-pointer transition-colors group"
             >
-              <span className="font-display font-black text-base sm:text-lg tracking-wider text-white transition-colors uppercase leading-none">
+              <span className="font-display font-bold text-sm tracking-wider text-zinc-200 group-hover:text-white uppercase leading-none transition-colors">
                 {c.name}
               </span>
-              <span className="mt-2.5 text-[11px] font-mono tracking-wider text-zinc-400 uppercase transition-colors">
+              <span className="mt-2 text-[9.5px] font-mono tracking-wider text-zinc-500 uppercase">
                 {c.category}
               </span>
-            </SpotlightCard>
+            </div>
           ))}
         </div>
 
-        {/* Center Bottom Action Button with Magnetic Hover */}
-        <div className="mt-16 text-center">
+        <div className="mt-14 text-center">
           <BreydaqsButton href="/work" variant="white">
-            EXPLORE ALL 50 PARTNER ARCHIVES
+            VIEW ALL WORK
           </BreydaqsButton>
         </div>
       </div>

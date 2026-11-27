@@ -26,13 +26,13 @@ const RAIL_SECTIONS: RailSection[] = [
     title: "Selected Works",
     fallbackRoute: "/work",
   },
-  { id: "clients", number: "04", title: "Trusted Partners" },
   {
     id: "request-quote",
-    number: "05",
+    number: "04",
     title: "Request Quote",
     fallbackRoute: "/contact",
   },
+  { id: "clients", number: "05", title: "Trusted Partners" },
   {
     id: "footer",
     number: "06",

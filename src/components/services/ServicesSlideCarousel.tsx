@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
@@ -14,19 +15,19 @@ import {
   Package,
   Crown,
   Sparkles,
-  CheckCircle2,
+  Play,
+  Pause,
 } from "lucide-react";
 import { ServiceItem } from "@/data/servicesData";
 import { sound } from "@/lib/sound";
 import { haptics } from "@/lib/haptics";
-import { SpotlightCard } from "@/components/common/SpotlightCard";
 
 interface ServicesSlideCarouselProps {
   services: ServiceItem[];
   onOpenKundli: () => void;
 }
 
-const SERVICE_HERO_IMAGES: Record<string, string> = {
+export const SERVICE_HERO_IMAGES: Record<string, string> = {
   "meta-google-ads": "/projects/snacknation-hero.jpg",
   "social-media": "/projects/streetthreads-handloom-hero.jpg",
   "web-development": "/projects/you-and-me-hero.webp",
@@ -36,43 +37,55 @@ const SERVICE_HERO_IMAGES: Record<string, string> = {
   "packaging-label": "/projects/currycraft-hero.png",
 };
 
+const subscribeViewport = (callback: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("resize", callback);
+  return () => window.removeEventListener("resize", callback);
+};
+
 export function ServicesSlideCarousel({
   services,
   onOpenKundli,
 }: ServicesSlideCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(false);
+  const [isHoverPaused, setIsHoverPaused] = useState(false);
+
+  const isMobile = useSyncExternalStore(
+    subscribeViewport,
+    () => (typeof window !== "undefined" ? window.innerWidth < 768 : false),
+    () => false
+  );
+
   const touchStartXRef = useRef<number | null>(null);
   const touchDeltaXRef = useRef<number>(0);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const total = services.length;
   const safeIndex = total > 0 ? Math.min(activeIndex, total - 1) : 0;
 
   const navigateTo = useCallback(
-    (index: number) => {
+    (index: number, withPluck = true) => {
       if (total === 0) return;
       const nextIndex = (index + total) % total;
       setActiveIndex(nextIndex);
-      sound.playPluck(180);
-      haptics.selection();
+      if (withPluck) {
+        sound.playPluck(180);
+        haptics.selection();
+      } else {
+        sound.playTick();
+        haptics.light();
+      }
     },
     [total]
   );
 
   const handlePrev = useCallback(() => {
+    setAutoPlay(false);
     navigateTo(safeIndex - 1);
   }, [safeIndex, navigateTo]);
 
   const handleNext = useCallback(() => {
+    setAutoPlay(false);
     navigateTo(safeIndex + 1);
   }, [safeIndex, navigateTo]);
 
@@ -84,6 +97,20 @@ export function ServicesSlideCarousel({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handlePrev, handleNext]);
+
+  useEffect(() => {
+    if (!autoPlay || isHoverPaused || total <= 1) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, 3600);
+    return () => clearInterval(timer);
+  }, [autoPlay, isHoverPaused, total]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartXRef.current = e.touches[0].clientX;
@@ -107,7 +134,7 @@ export function ServicesSlideCarousel({
   };
 
   const getServiceIcon = (iconName: string) => {
-    const iconStyle = "w-6 h-6 text-white";
+    const iconStyle = "w-4 h-4 text-zinc-200";
     switch (iconName) {
       case "Crown":
         return <Crown className={iconStyle} />;
@@ -131,18 +158,20 @@ export function ServicesSlideCarousel({
   if (total === 0) return null;
 
   const activeService = services[safeIndex] || services[0];
+  const progressPct = total > 1 ? Math.round((safeIndex / (total - 1)) * 100) : 100;
 
   return (
     <div className="w-full max-w-full relative flex flex-col items-center overflow-x-clip">
-      {/* 1. Interactive 3D Sliding Stage (Service Name + What We Do Only) */}
+      {/* 1. Calm 3D Monograph Gallery Stage */}
       <div
-        className="relative w-full h-[460px] sm:h-[520px] md:h-[550px] flex items-center justify-center overflow-hidden sm:overflow-visible select-none touch-pan-y my-6"
+        className="relative w-full h-[410px] sm:h-[470px] md:h-[500px] flex items-center justify-center overflow-hidden sm:overflow-visible select-none touch-pan-y my-2"
+        style={{ perspective: isMobile ? "900px" : "1400px" }}
+        onMouseEnter={() => setIsHoverPaused(true)}
+        onMouseLeave={() => setIsHoverPaused(false)}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-96 rounded-full bg-white/[0.04] blur-[120px] pointer-events-none" />
-
         {services.map((service, i) => {
           let offset = (i - safeIndex) % total;
           if (offset > total / 2) offset -= total;
@@ -151,8 +180,10 @@ export function ServicesSlideCarousel({
           const isCenter = offset === 0;
           const absOffset = Math.abs(offset);
 
-          const xDistance = isMobile ? 210 : 340;
+          const xDistance = isMobile ? 190 : 315;
           const translateX = offset * xDistance;
+          const rotateY = isCenter ? 0 : Math.max(-26, Math.min(26, offset * (isMobile ? -8 : -14)));
+          const translateZ = isCenter ? (isMobile ? 18 : 40) : -absOffset * (isMobile ? 42 : 68);
 
           let scale = 1;
           let opacity = 1;
@@ -165,17 +196,17 @@ export function ServicesSlideCarousel({
             filter = "none";
             zIndex = 30;
           } else if (absOffset === 1) {
-            scale = isMobile ? 0.85 : 0.84;
-            opacity = 0.65;
-            filter = "blur(1.5px)";
+            scale = isMobile ? 0.85 : 0.86;
+            opacity = 0.58;
+            filter = "blur(1.4px)";
             zIndex = 20;
           } else if (absOffset === 2) {
-            scale = isMobile ? 0.72 : 0.7;
-            opacity = 0.3;
+            scale = isMobile ? 0.72 : 0.72;
+            opacity = 0.24;
             filter = "blur(3px)";
             zIndex = 10;
           } else {
-            scale = 0.55;
+            scale = 0.56;
             opacity = 0;
             filter = "blur(6px)";
             zIndex = 1;
@@ -189,193 +220,193 @@ export function ServicesSlideCarousel({
             <div
               key={service.id}
               onClick={() => {
-                if (!isCenter) navigateTo(i);
+                if (!isCenter) {
+                  setAutoPlay(false);
+                  navigateTo(i);
+                }
               }}
               tabIndex={isCenter ? 0 : -1}
               role="group"
               aria-label={`Service: ${service.title}`}
-              className={`absolute top-1/2 left-1/2 block rounded-3xl overflow-hidden cursor-pointer group focus:outline-none transition-all ${isCenter
-                ? "shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)]"
-                : "shadow-xl"
+              className={`absolute top-1/2 left-1/2 block rounded-3xl overflow-hidden cursor-pointer group focus:outline-none ${isCenter ? "shadow-[0_24px_64px_-16px_rgba(0,0,0,0.92)]" : ""
                 }`}
               style={{
-                width: isMobile ? "275px" : "350px",
-                height: isMobile ? "430px" : "500px",
+                width: isMobile ? "260px" : "336px",
+                height: isMobile ? "385px" : "456px",
                 zIndex,
                 opacity,
                 filter,
                 pointerEvents: absOffset > 2 ? "none" : "auto",
-                transform: `translate(-50%, -50%) translateX(${translateX}px) scale(${scale})`,
+                transform: `translate(-50%, -50%) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                 transition:
-                  "transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s cubic-bezier(0.16, 1, 0.3, 1)",
+                  "transform 0.72s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.65s cubic-bezier(0.16, 1, 0.3, 1)",
               }}
             >
               <div
-                className={`relative w-full h-full bg-[#0d0d12] rounded-3xl overflow-hidden transition-colors ${isCenter
-                  ? "border border-white/30 hover:border-white/50"
-                  : "border border-white/10 hover:border-white/20"
+                className={`relative w-full h-full bg-[#0a0a0d] rounded-3xl overflow-hidden transition-colors ${isCenter
+                  ? "border border-white/20 hover:border-white/35"
+                  : "border border-white/[0.06]"
                   }`}
               >
                 <img
                   src={heroImage}
                   alt={service.title}
                   draggable={false}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 opacity-75"
                   loading="lazy"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-black/25 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/50 to-transparent pointer-events-none" />
 
-                <div className="absolute top-4 inset-x-4 z-20 flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                {isCenter && (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent dm-shimmer-sweep"
+                  />
+                )}
+
+                {/* Minimal Top Row */}
+                <div className="absolute top-5 inset-x-5 z-20 flex items-center justify-between">
+                  <span className="font-mono text-[11px] text-zinc-300/90 tabular-nums tracking-widest">
+                    0{i + 1}
+                  </span>
+                  <span className="w-7 h-7 rounded-full bg-black/45 backdrop-blur-md border border-white/10 flex items-center justify-center">
                     {getServiceIcon(service.iconName)}
-                  </div>
-                  <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold tracking-widest text-zinc-200 uppercase shadow-lg">
-                    SERVICE 0{i + 1}
                   </span>
                 </div>
 
-                {/* Strict "Service + What We Do" Card Footer — Zero Prose Explanations */}
-                <div className="absolute bottom-5 inset-x-5 z-20 text-left flex flex-col justify-end space-y-3">
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight leading-tight drop-shadow-md">
-                    {service.title}
-                  </h3>
+                {/* Minimal Editorial Monograph Caption */}
+                <div className="absolute bottom-6 inset-x-6 z-20 text-left space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="font-mono text-[10px] tracking-wider text-[#F3E5AB]/85 uppercase block">
+                      {service.metric}
+                    </span>
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-white uppercase tracking-tight leading-tight">
+                      {service.title}
+                    </h3>
+                  </div>
 
-                  <ul className="space-y-1.5">
-                    {service.specs.deliverables.slice(0, 3).map((deliv, dIdx) => (
-                      <li
-                        key={dIdx}
-                        className="flex items-start gap-2 text-[11px] font-mono text-zinc-200 leading-snug"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#F3E5AB] shrink-0 mt-0.5" />
-                        <span className="line-clamp-1">{deliv}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="font-sans text-xs text-zinc-300/90 font-light leading-relaxed line-clamp-2">
+                    {service.shortDesc}
+                  </p>
 
-                  <div className="pt-2">
+                  <div className="pt-1">
                     <Link
                       href={`/services/${service.slug}`}
                       onClick={(e) => {
                         if (!isCenter) {
                           e.preventDefault();
+                          setAutoPlay(false);
                           navigateTo(i);
                         }
                       }}
-                      className="w-full py-2.5 px-4 min-h-[44px] rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-display font-black tracking-wider uppercase text-center transition-all shadow-md active:scale-95 flex items-center justify-center gap-1.5"
+                      className="inline-flex items-center gap-2 px-4 py-2 min-h-[38px] rounded-full bg-white/[0.1] hover:bg-white text-white hover:text-black border border-white/20 backdrop-blur-md text-[11px] font-mono uppercase tracking-wider transition-all"
                     >
-                      <span>What We Do</span>
+                      <span>Explore</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>
-
-                {isCenter && (
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-4 -bottom-3 h-6 bg-white/25 blur-md opacity-70"
-                  />
-                )}
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* 2. Interactive Navigation Controls & Dot Scrubber */}
-      <div className="flex items-center justify-between w-full max-w-md mt-2 mb-8 px-4">
-        <button
-          type="button"
-          onClick={handlePrev}
-          aria-label="Previous Service"
-          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/15 hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md"
-        >
-          <ChevronLeft className="w-5 h-5 text-white" />
-        </button>
+      {/* 2. Quiet Navigation & Scrubber Rail */}
+      <div className="w-full max-w-md mt-2 mb-6 px-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-3">
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Previous Service"
+            className="w-9 h-9 min-w-[36px] min-h-[36px] rounded-full bg-transparent hover:bg-white/[0.06] border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer touch-manipulation"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
 
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-white tracking-widest">
-              0{safeIndex + 1}
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[11px] text-zinc-400 tabular-nums tracking-widest">
+              0{safeIndex + 1} / 0{total}
             </span>
-            <span className="text-zinc-400 font-mono text-xs">/</span>
-            <span className="font-mono text-xs text-zinc-300 tracking-widest">
-              0{total}
-            </span>
+
+            <button
+              type="button"
+              onClick={() => {
+                sound.playPluck(165);
+                haptics.selection();
+                setAutoPlay((p) => !p);
+              }}
+              aria-pressed={autoPlay}
+              className={`px-2.5 py-1 rounded-full border font-mono text-[10px] uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer touch-manipulation ${autoPlay
+                ? "bg-white/10 border-[#F3E5AB]/45 text-[#F3E5AB]"
+                : "bg-transparent border-white/10 text-zinc-400 hover:text-white"
+                }`}
+            >
+              {autoPlay ? <Pause className="w-2.5 h-2.5" /> : <Play className="w-2.5 h-2.5" />}
+              <span>{autoPlay ? "Pause" : "Auto"}</span>
+            </button>
           </div>
 
-          <div className="flex items-center gap-0.5">
-            {services.map((_, dotIdx) => (
-              <button
-                key={dotIdx}
-                type="button"
-                onClick={() => navigateTo(dotIdx)}
-                aria-label={`Slide to service ${dotIdx + 1}`}
-                style={{ minBlockSize: 0 }}
-                className="w-7 h-7 min-w-[28px] min-h-[28px] flex items-center justify-center rounded-full cursor-pointer group"
-              >
-                <span
-                  aria-hidden="true"
-                  className={`h-1.5 rounded-full transition-all block ${dotIdx === safeIndex
-                    ? "w-6 bg-white"
-                    : "w-1.5 bg-white/30 group-hover:bg-white/60"
-                    }`}
-                />
-              </button>
-            ))}
-          </div>
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Next Service"
+            className="w-9 h-9 min-w-[36px] min-h-[36px] rounded-full bg-transparent hover:bg-white/[0.06] border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer touch-manipulation"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={handleNext}
-          aria-label="Next Service"
-          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-white/15 border border-white/15 hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-md"
-        >
-          <ChevronRight className="w-5 h-5 text-white" />
-        </button>
+        {total > 1 && (
+          <input
+            type="range"
+            aria-label="Scrub 3D service deck"
+            min={0}
+            max={total - 1}
+            step={1}
+            value={safeIndex}
+            onChange={(e) => {
+              const idx = Number(e.target.value);
+              if (idx !== safeIndex) {
+                setAutoPlay(false);
+                navigateTo(idx, false);
+              }
+            }}
+            style={{ "--dm-progress": `${progressPct}%` } as React.CSSProperties}
+            className="dm-studio-range w-full touch-manipulation"
+          />
+        )}
       </div>
 
-      {/* 3. Synchronized Minimal "What We Do" Dossier Panel */}
-      <div className="w-full max-w-3xl px-4 sm:px-6">
-        <SpotlightCard
-          isGlass={true}
-          className="rounded-2xl p-6 sm:p-7 border border-white/15 bg-[#121215]/90 shadow-xl transition-all"
-        >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-left">
-            <div className="space-y-3 min-w-0 flex-1">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
-                  {getServiceIcon(activeService.iconName)}
-                </div>
-                <div>
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#F3E5AB] font-bold block tabular-nums">
-                    0{safeIndex + 1} / 0{total} · WHAT WE DO
-                  </span>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight truncate">
-                    {activeService.title}
-                  </h3>
-                </div>
+      {/* 3. Open Airy Hairline Details Strip */}
+      <div className="w-full max-w-2xl px-4 sm:px-6 pt-5 border-t border-white/[0.07]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeService.slug}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2 }}
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-left"
+          >
+            <div className="space-y-1 min-w-0 flex-1">
+              <div className="flex items-center gap-2 font-mono text-[10.5px] text-zinc-400">
+                <span className="text-[#F3E5AB]">{activeService.metric}</span>
+                <span>·</span>
+                <span className="truncate">{activeService.specs.targetKpi}</span>
               </div>
-
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {activeService.specs.deliverables.map((d, dIdx) => (
-                  <span
-                    key={dIdx}
-                    className="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/12 text-[11px] font-mono text-zinc-200"
-                  >
-                    {d}
-                  </span>
-                ))}
-              </div>
+              <h3 className="font-display font-bold text-lg text-white uppercase tracking-tight truncate">
+                {activeService.title}
+              </h3>
             </div>
 
-            <div className="flex sm:flex-col items-center gap-2.5 shrink-0 w-full sm:w-auto">
+            <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
               <Link
                 href={`/services/${activeService.slug}`}
-                className="flex-1 sm:flex-initial w-full py-2.5 px-4 min-h-[44px] rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-display font-black tracking-wider uppercase text-center transition-all shadow-md active:scale-95 flex items-center justify-center gap-1.5"
+                className="flex-1 sm:flex-initial py-2 px-4 min-h-[38px] rounded-full bg-white hover:bg-zinc-200 text-black text-[11px] font-display font-bold tracking-wider uppercase text-center transition-all flex items-center justify-center gap-1.5"
               >
-                <span>Open Sheet</span>
+                <span>Details</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
@@ -385,13 +416,13 @@ export function ServicesSlideCarousel({
                   onOpenKundli();
                 }}
                 type="button"
-                className="flex-1 sm:flex-initial w-full py-2.5 px-4 min-h-[44px] rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-mono uppercase tracking-wider transition-all text-center cursor-pointer"
+                className="flex-1 sm:flex-initial py-2 px-4 min-h-[38px] rounded-full bg-transparent hover:bg-white/[0.05] border border-white/12 text-zinc-300 hover:text-white text-[11px] font-mono uppercase tracking-wider transition-all text-center cursor-pointer touch-manipulation"
               >
-                Start Audit
+                Audit
               </button>
             </div>
-          </div>
-        </SpotlightCard>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

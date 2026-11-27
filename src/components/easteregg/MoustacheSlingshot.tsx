@@ -1782,12 +1782,15 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
 
       {/* Subtle post-shot recovery / bullseye actions shown only after interactive fire */}
       {(bullseyeHit || blownCount > 0) && (
-        <div className="relative z-20 mt-2 flex flex-wrap items-center justify-center gap-3">
+        <div className="relative z-20 mt-2 flex flex-wrap items-center justify-center gap-3 px-3">
           {bullseyeHit && onOpenKundli && (
             <button
               type="button"
-              onClick={onOpenKundli}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-zinc-200 text-black font-mono text-xs font-bold uppercase tracking-wider shadow-lg transition-all active:scale-95 cursor-pointer"
+              onClick={() => {
+                slingshotSound.unlock();
+                onOpenKundli();
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full bg-white hover:bg-zinc-200 text-black font-mono text-xs font-bold uppercase tracking-wider shadow-lg transition-all active:scale-95 cursor-pointer touch-manipulation"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>Bullseye! Claim Bonus Growth Audit</span>
@@ -1799,7 +1802,7 @@ export function MoustacheSlingshot({ onOpenKundli }: MoustacheSlingshotProps) {
               type="button"
               onClick={handleTidyUp}
               aria-label="Restore scattered page elements"
-              className="dm-ss-tidy-btn dm-ss-sticker-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#141416] hover:bg-[#1e1e22] border border-white/20 text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider cursor-pointer"
+              className="dm-ss-tidy-btn dm-ss-sticker-pill flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-[#141416] hover:bg-[#1e1e22] border border-white/20 text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider cursor-pointer touch-manipulation"
             >
               <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>Tidy up</span>

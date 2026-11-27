@@ -401,7 +401,7 @@ export function ApkInstallPopup() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-0.5 border-l border-white/10 pl-1 shrink-0">
+                <div className="flex items-center gap-1 border-l border-white/10 pl-1.5 shrink-0">
                   <button
                     type="button"
                     onClick={(e) => {
@@ -410,16 +410,16 @@ export function ApkInstallPopup() {
                       haptics.selection();
                       setIsMinimized(true);
                     }}
-                    className="p-1 min-w-[26px] min-h-[26px] flex items-center justify-center rounded text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    className="p-1.5 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer touch-manipulation"
                     title="Minimize"
                     aria-label="Minimize App Widget"
                   >
-                    <span className="text-xs font-bold leading-none block">−</span>
+                    <span className="text-sm font-bold leading-none block">−</span>
                   </button>
                   <button
                     type="button"
                     onClick={handleDismissBanner}
-                    className="p-1 min-w-[26px] min-h-[26px] flex items-center justify-center rounded text-zinc-500 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    className="p-1.5 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer touch-manipulation"
                     title="Dismiss Floating Pill"
                     aria-label="Dismiss App Widget"
                   >
@@ -520,9 +520,10 @@ export function ApkInstallPopup() {
                 aria-selected={activeTab === "android"}
                 onClick={() => {
                   sound.playPluck(150);
+                  haptics.selection();
                   setTabOverride("android");
                 }}
-                className={`py-2 px-2 rounded-xl font-bold transition-all cursor-pointer ${
+                className={`py-2 px-2 min-h-[42px] rounded-xl font-bold transition-all cursor-pointer touch-manipulation ${
                   activeTab === "android"
                     ? "bg-white text-black shadow-md"
                     : "text-zinc-400 hover:text-white"
@@ -536,9 +537,10 @@ export function ApkInstallPopup() {
                 aria-selected={activeTab === "ios"}
                 onClick={() => {
                   sound.playPluck(150);
+                  haptics.selection();
                   setTabOverride("ios");
                 }}
-                className={`py-2 px-2 rounded-xl font-bold transition-all cursor-pointer ${
+                className={`py-2 px-2 min-h-[42px] rounded-xl font-bold transition-all cursor-pointer touch-manipulation ${
                   activeTab === "ios"
                     ? "bg-white text-black shadow-md"
                     : "text-zinc-400 hover:text-white"
@@ -552,9 +554,10 @@ export function ApkInstallPopup() {
                 aria-selected={activeTab === "desktop"}
                 onClick={() => {
                   sound.playPluck(150);
+                  haptics.selection();
                   setTabOverride("desktop");
                 }}
-                className={`py-2 px-2 rounded-xl font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                className={`py-2 px-2 min-h-[42px] rounded-xl font-bold transition-all cursor-pointer flex items-center justify-center gap-1 touch-manipulation ${
                   activeTab === "desktop"
                     ? "bg-white text-black shadow-md"
                     : "text-zinc-400 hover:text-white"

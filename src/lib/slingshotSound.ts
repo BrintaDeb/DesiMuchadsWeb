@@ -39,11 +39,15 @@ class SlingshotSoundEngine {
     window.addEventListener("pointerdown", onGesture, { passive: true, capture: true });
     window.addEventListener("keydown", onGesture, { passive: true, capture: true });
     window.addEventListener("touchstart", onGesture, { passive: true, capture: true });
+    window.addEventListener("click", onGesture, { passive: true, capture: true });
   }
 
   public unlock(): AudioContext | null {
-    if (typeof window === "undefined" || sound.isSoundMuted()) return null;
-    if (!this.ctx) {
+    if (typeof window === "undefined") return null;
+    const sharedCtx = sound.unlock();
+    if (sharedCtx) {
+      this.ctx = sharedCtx;
+    } else if (!this.ctx) {
       const AC =
         window.AudioContext ||
         (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -71,6 +75,10 @@ class SlingshotSoundEngine {
     this.bindUnlockListeners();
     if (typeof window === "undefined" || sound.isSoundMuted()) return null;
     if (requireUnlocked) {
+      if (!this.ctx) {
+        const shared = sound.getAudioContext();
+        if (shared) this.ctx = shared;
+      }
       if (!this.ctx || this.ctx.state !== "running") return null;
       return this.ctx;
     }

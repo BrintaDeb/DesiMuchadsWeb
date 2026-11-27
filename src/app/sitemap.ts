@@ -15,7 +15,7 @@ const SERVICE_HERO_IMAGES: Record<string, string> = {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://desimuchads.in";
-  const lastModified = "2026-11-27T04:20:00.000Z";
+  const lastModified = "2026-11-27T20:10:00.000Z";
 
   const toAbsolute = (path: string) =>
     path.startsWith("http") ? path : `${baseUrl}${path}`;
@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         `${baseUrl}/og-banner.png`,
         `${baseUrl}/art/desi-dev-guru.png`,
         `${baseUrl}/desi-muchads-square-logo.png`,
+        `${baseUrl}/icon-512.png`,
         `${baseUrl}/desi-muchads-cropped-logo@2x.png`,
       ],
     },

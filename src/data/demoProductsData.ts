@@ -116,6 +116,8 @@ export interface DemoProjectConfig {
     subtitle: string;
     primaryCta: string;
     secondaryCta: string;
+    heroImage?: string;
+    videoUrl?: string;
     stats: { label: string; val: string }[];
   };
   interactiveType:
@@ -189,6 +191,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Cold-pressed medicinal oils, wild-harvested Himalayan Shilajit resin, and adaptogenic tonics crafted using authentic 21-day slow decoctions.",
       primaryCta: "Shop Botanical Collection",
       secondaryCta: "Explore Herb Formulation",
+      heroImage: "/projects/vedaroots-ayurveda-hero.jpg",
+      videoUrl: "/videos/vedaroots-ayurveda.mp4",
       stats: [
         { label: "Verified Patrons", val: "38,400+" },
         { label: "Pure Herbs Used", val: "108+" },
@@ -367,6 +371,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Engineered for high-duty delivery operations. Heavy-payload electric 2W and 3W vehicles with 90-second swappable batteries and IoT fleet tracking.",
       primaryCta: "Calculate Fleet Savings",
       secondaryCta: "Book Fleet Pilot (10 EVs)",
+      heroImage: "/projects/urbandrift-ev-hero.jpg",
+      videoUrl: "/videos/urbandrift-ev.mp4",
       stats: [
         { label: "Active Fleet Vehicles", val: "4,850+" },
         { label: "Metric Tons CO2 Cut", val: "12,400 T" },
@@ -517,6 +523,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Documenting discerning couples across Udaipur palaces, Lake Como villas, and Amalfi cliffs with medium-format analog & 4K cinematic film.",
       primaryCta: "Check Wedding Date Availability",
       secondaryCta: "Explore Private Portfolio",
+      heroImage: "/projects/you-and-me-hero.webp",
+      videoUrl: "/videos/you-and-me-photography.mp4",
       stats: [
         { label: "Palace Weddings Covered", val: "240+" },
         { label: "Global Destinations", val: "14 Countries" },
@@ -667,6 +675,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Hand-harvested from Mithila lotus ponds, slow-roasted in pure cold-pressed olive oil, and tossed in natural Himalayan herb seasonings.",
       primaryCta: "Build Your 6-Pack Box",
       secondaryCta: "Explore Flavours",
+      heroImage: "/projects/snacknation-hero.jpg",
+      videoUrl: "/videos/snacknation-makhanas.mp4",
       stats: [
         { label: "Bags Delivered", val: "1,240,000+" },
         { label: "Palm Oil Content", val: "0.0%" },
@@ -824,6 +834,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Engineered for high-volume pathology chains and hospital ICUs. Fully automated 5-part hematology and CLIA immunoassay analyzers with lowest reagent cost per test.",
       primaryCta: "Request Institutional Quote",
       secondaryCta: "Calculate Reagent Cost",
+      heroImage: "/projects/bharat-biohealth-hero.jpg",
+      videoUrl: "/videos/bharat-bio-health.mp4",
       stats: [
         { label: "Installations Nationwide", val: "1,850+" },
         { label: "Daily Diagnostic Tests", val: "420,000+" },
@@ -973,6 +985,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Only 12 bespoke signature residences nestled in pristine Assagao orchards with private basalt plunge pools, double-height verandahs, and 24/7 butler service.",
       primaryCta: "Book Private Helicopter Site Visit",
       secondaryCta: "Download Master Architectural Dossier",
+      heroImage: "/projects/sobha-heritage-villas-hero.jpg",
+      videoUrl: "/videos/sobha-heritage-villas.mp4",
       stats: [
         { label: "Private Residences", val: "Only 12 Estates" },
         { label: "Plot Sizes", val: "Up to 9,500 sq.ft" },
@@ -1122,6 +1136,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Handpicked golden tea fannings infused with green cardamom from Idukki and sun-dried ginger from Wayanad. No dust, no artificial aromas.",
       primaryCta: "Order Fresh Tea Blends",
       secondaryCta: "Choose Your Blend Strength",
+      heroImage: "/projects/chaichaska-tea-hero.jpg",
+      videoUrl: "/videos/chaichaska-ctc.mp4",
       stats: [
         { label: "Cups Brewed Daily", val: "850,000+" },
         { label: "Direct Partner Gardens", val: "8 Assam Estates" },
@@ -1276,6 +1292,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Preserving the sacred art of Banarasi Kadwa weaving, authentic Chanderi zari, and raw Tussar silk directly from the pit looms of generational master weavers.",
       primaryCta: "Explore Bridal Saree Gallery",
       secondaryCta: "Verify Weaver Silk Mark",
+      heroImage: "/projects/streetthreads-handloom-hero.jpg",
+      videoUrl: "/videos/streethreads-handloom.mp4",
       stats: [
         { label: "Master Pit Looms", val: "140 Looms" },
         { label: "Weaving Hours per Saree", val: "320+ Hours" },
@@ -1453,6 +1471,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "French Normandy butter croissants with 27 flaky layers, 36-hour slow-fermented wild sourdough, Valrhona chocolate entremets, and bespoke luxury gifting hampers.",
       primaryCta: "Order Fresh Bakery Hamper",
       secondaryCta: "Reserve Bistro Table",
+      heroImage: "/projects/lionelp-restaurant-hero.jpg",
+      videoUrl: "/videos/lionelp-restaurant.mp4",
       stats: [
         { label: "Croissants Baked Daily", val: "2,400+" },
         { label: "Normandy Butter Used", val: "100% French AOP" },
@@ -1604,6 +1624,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Say goodbye to dry, burnt kibble filled with fillers. Fresh farm chicken, Atlantic salmon oil, and steamed pumpkin customized to your dog's age and weight.",
       primaryCta: "Calculate Dog Calories",
       secondaryCta: "Shop Fresh Food Pouches",
+      heroImage: "/projects/pet-first-hero.png",
+      videoUrl: "/videos/pet-first-wellness.mp4",
       stats: [
         { label: "Healthy Dogs Fed", val: "46,000+" },
         { label: "Fresh Meals Cooked", val: "1,200,000+" },
@@ -1757,6 +1779,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Crafted with 100% Gir cow A2 ghee, Iranian pistachios, and slow-simmered khoya. Stored in climate-controlled dark stores for ultra-fast instant delivery.",
       primaryCta: "Order 10-Min Delivery",
       secondaryCta: "Explore Festive Hampers",
+      heroImage: "/projects/mithaimagic-sweets-hero.jpg",
+      videoUrl: "/videos/mithaimagic-sweets.mp4",
       stats: [
         { label: "Average Delivery Time", val: "11 Mins 40 Sec" },
         { label: "Pure Desi Ghee Used", val: "100% A2 Gir Cow" },
@@ -1784,7 +1808,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Micro-fine besan pearls fried in pure A2 Gir cow ghee, dipped in saffron-cardamom syrup and topped with crushed pistachio flakes.",
         specs: ["100% Pure A2 Desi Ghee", "Melt in Mouth Micro Beads", "Delivered in Tamperproof Box"],
-        image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/mithaimagic-sweets-hero.jpg",
       },
       {
         id: "mm-02",
@@ -1906,6 +1930,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Naturally sparkling raw tonic fermented with first-flush Darjeeling green tea, raw wild fruits, and adaptogens. Chilled to 4°C and delivered in under 15 minutes.",
       primaryCta: "Order Cold-Chain Six-Pack",
       secondaryCta: "Explore Probiotic Strains",
+      heroImage: "/projects/pureglow-kombucha-hero.jpg",
+      videoUrl: "/videos/pureglow-kombucha.mp4",
       stats: [
         { label: "Living Probiotic CFUs", val: "10 Billion/Bottle" },
         { label: "Slow Fermentation Time", val: "21 Days" },
@@ -1937,7 +1963,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Tart wild mountain jamun berries infused with fresh holy basil leaves. Rich in anthocyanins and blood-sugar balancing polyphenols.",
         specs: ["10 Billion Live CFUs", "Zero Added Sugar", "Naturally Carbonated"],
-        image: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/pureglow-kombucha-hero.jpg",
       },
       {
         id: "pg-02",
@@ -2059,6 +2085,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Hand-engraved casebacks with Jodhpur fort motifs, sunburst enamel dials, double-domed sapphire crystals, and 48-hour mechanical power reserve.",
       primaryCta: "Configure Your Timepiece",
       secondaryCta: "Request Private Concierge Viewing",
+      heroImage: "/projects/darbar-fine-watches-hero.jpg",
+      videoUrl: "/videos/darbar-fine-watches.mp4",
       stats: [
         { label: "Annual Production", val: "Only 100 Pieces" },
         { label: "Mechanical Power Reserve", val: "48 Hours" },
@@ -2087,7 +2115,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Swiss automatic movement Calibre DB-01, 28,800 vph beat rate, custom rotor engraved with Mewar sun emblem, double-domed anti-reflective sapphire crystal.",
         specs: ["Swiss DB-01 Automatic Calibre", "Grade 5 Brushed Titanium", "Hand-Stitched Horween Leather"],
-        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/darbar-fine-watches-hero.jpg",
       },
       {
         id: "dw-02",
@@ -2208,6 +2236,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Connecting 12,000+ verified farmer producer organizations (FPOs) across Maharashtra, Punjab, and MP with direct wholesale buyers via transparent digital mandi auctions.",
       primaryCta: "View Live Mandi Prices",
       secondaryCta: "Place Wholesale Escrow Order",
+      heroImage: "/projects/kisaandirect-agri-hero.jpg",
+      videoUrl: "/videos/kisaandirect-agri.mp4",
       stats: [
         { label: "Registered Farmer FPOs", val: "12,400+" },
         { label: "Commodity Tons Traded", val: "480,000 T" },
@@ -2237,7 +2267,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "50mm+ uniform size, cured under shade for maximum storage life. Dispatched directly from Lasalgaon farmer cooperatives in 50kg ventilated mesh bags.",
         specs: ["10 Quintals (1,000kg)", "Moisture Controlled 12%", "Assayed for Size & Purity"],
-        image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/kisaandirect-agri-hero.jpg",
       },
       {
         id: "kd-02",
@@ -2358,6 +2388,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Single-origin heirloom tellicherry peppercorns, Grade-A saffron, and royal garam masala packed in collectible octagonal tins with gold hot-stamped foil to protect volatile terpenes.",
       primaryCta: "Shop Collectible Tin Range",
       secondaryCta: "Explore Plantation Origins",
+      heroImage: "/projects/royal-rajwada-spices-hero.jpg",
+      videoUrl: "/videos/royal-rajwada-spices.mp4",
       stats: [
         { label: "Volatile Terpenes Preserved", val: "99.4%" },
         { label: "Piperine Concentration", val: "7.2% Extra Bold" },
@@ -2411,7 +2443,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Sifted to ensure only berries >4.25mm diameter. Sealed in an octagonal cobalt blue tin with airtight brass-plated double lid.",
         specs: ["4.25mm+ Extra Bold Size", "Double-Lid Airtight Tin", "Harvest Elevation 3,500 ft"],
-        image: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/royal-rajwada-spices-hero.jpg",
       },
       {
         id: "rr-02",
@@ -2532,6 +2564,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Classical Ayush-approved Kshirapak vidhi using wild Bhringraj, Indian gooseberry, and Gunja berries slow-cooked in pure sesame oil. Encased in UV400 amber glass with debossed brass dropper.",
       primaryCta: "Shop Scalp Elixir Ritual",
       secondaryCta: "View 90-Day Clinical Trial",
+      heroImage: "/projects/kamakesh-hair-elixir-hero.jpg",
+      videoUrl: "/videos/kamakesh-hair-elixir.mp4",
       stats: [
         { label: "Active Classical Herbs", val: "21 Rare Botanicals" },
         { label: "Slow Decoction Time", val: "72 Hours on Low Flame" },
@@ -2586,7 +2620,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "The authentic 72-hour cooked Kshirapak hair oil. Scented naturally with vetiver roots and damask rose. Packaged in a heavy-weight amber glass dropper bottle with debossed brass collar.",
         specs: ["21 Fresh Herbs & Goat Milk", "Debossed Brass Precision Dropper", "UV400 Light-Blocking Glass"],
-        image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/kamakesh-hair-elixir-hero.jpg",
       },
       {
         id: "km-02",
@@ -2708,6 +2742,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "We replace vanity keywords with structured topical dominance. High-intent commercial clusters, sub-second Core Web Vitals, and semantic schema architecture that makes your brand the canonical source across Google and modern search engines.",
       primaryCta: "Explore Keyword Cluster Matrix",
       secondaryCta: "View Technical SEO Audit Specs",
+      heroImage: "/projects/zenith-seo-growth-hero.jpg",
+      videoUrl: "/videos/zenith-seo-growth.mp4",
       stats: [
         { label: "Top 3 SERP Ranks", val: "480+" },
         { label: "Search Ad ROAS", val: "8.4x" },
@@ -2743,7 +2779,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Exhaustive technical audit and remediation: Sub-600ms LCP compression, Schema.org Organization Graph, edge cache invalidation, and crawl budget defragmentation.",
         specs: ["Sub-600ms LCP Guarantee", "Complete Schema.org Graph", "Zero Indexing Bottlenecks", "C-Suite Impact Dashboard"],
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/zenith-seo-growth-hero.jpg",
       },
       {
         id: "zenith-02",
@@ -2863,6 +2899,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Engineered for high-volume modern D2C brands that have outgrown monolithic Shopify Liquid themes. Sub-50ms edge rendering, instant optimistic cart mutations, and 100/100 Google Lighthouse Core Web Vitals.",
       primaryCta: "Launch Edge Benchmark Engine",
       secondaryCta: "Inspect Headless Architecture",
+      heroImage: "/projects/kartflow-headless-hero.jpg",
+      videoUrl: "/videos/kartflow-headless.mp4",
       stats: [
         { label: "Global Edge TTFB", val: "38ms" },
         { label: "Mobile Lighthouse Score", val: "100 / 100" },
@@ -2899,7 +2937,7 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         description:
           "Next.js 16 composable frontend architecture integrated with your existing headless Shopify / BigCommerce backend. Sub-50ms TTFB across 300+ global edge POPs.",
         specs: ["Next.js 16 Turbopack Architecture", "100/100 Core Web Vitals", "Multi-Currency Edge Localization", "Zero-Downtime Deployment"],
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+        image: "/projects/kartflow-headless-hero.jpg",
       },
       {
         id: "kart-02",
@@ -3019,6 +3057,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Synthesizing ancient Vedic iconographic proportions with cyberpunk sacred geometry, liquid 24K gold filigree, and volumetric obsidian depth.",
       primaryCta: "Inspect Vector Canvas",
       secondaryCta: "Order Archival Print",
+      heroImage: "/art/ganesha-cyber-mandala.jpg",
+      videoUrl: "/videos/ganesha-cyber-mandala.mp4",
       stats: [
         { label: "Vector Layers", val: "42 Master" },
         { label: "Export Fidelity", val: "300 DPI / 8K" },
@@ -3167,6 +3207,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "Capturing the raw visceral soul of a solitary wandering swordsman battling fierce mountain winds, rendered with expressive bamboo-brush splatter and a striking crimson katana accent.",
       primaryCta: "Inspect Ink Details",
       secondaryCta: "Acquire Limited Print",
+      heroImage: "/art/samurai-ronin-ink-sketch.jpg",
+      videoUrl: "/videos/samurai-ronin-ink-sketch.mp4",
       stats: [
         { label: "Ink Splatters", val: "Hand-Crafted" },
         { label: "Fidelity", val: "8K Ultra-Clean" },
@@ -3290,6 +3332,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "A cozy midnight ramen stall nestled into a rainy cyberpunk alleyway, illuminated by paper lanterns, glowing neon kanji, and warm broth steam in a dense Ghibli-meets-Akira aesthetic.",
       primaryCta: "Explore Isometric Alley",
       secondaryCta: "Acquire Art Print",
+      heroImage: "/art/neotokyo-street-food-hawker.jpg",
+      videoUrl: "/videos/neotokyo-street-food-hawker.mp4",
       stats: [
         { label: "Detail Assets", val: "240+ Hand-Drawn" },
         { label: "Perspective", val: "True 30° Isometric" },
@@ -3413,6 +3457,8 @@ export const DEMO_PROJECTS_DATABASE: Record<string, DemoProjectConfig> = {
         "The sacred riverfront steps at sunrise enveloped in golden morning mist, temple silhouettes, floating diyas, and wooden boats drifting on the holy river in an ethereal meditation on eternity.",
       primaryCta: "Inspect Matte Painting",
       secondaryCta: "Acquire Gallery Canvas",
+      heroImage: "/art/varanasi-ghats-heritage-matte.jpg",
+      videoUrl: "/videos/varanasi-ghats-heritage-matte.mp4",
       stats: [
         { label: "Mist Layers", val: "28 Volumetric" },
         { label: "Fidelity", val: "Cinematic 8K" },

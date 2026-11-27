@@ -18,6 +18,9 @@ User-agent: Googlebot-Image
 Allow: /
 Disallow: /api/
 
+User-agent: Google-Favicon
+Allow: /
+
 User-agent: Googlebot-Video
 Allow: /
 Disallow: /api/
@@ -31,6 +34,9 @@ Allow: /
 Allow: /_next/static/
 Allow: /_next/image
 Disallow: /api/
+
+User-agent: BingPreview
+Allow: /
 
 User-agent: Applebot
 Allow: /

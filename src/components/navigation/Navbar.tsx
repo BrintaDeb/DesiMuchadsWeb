@@ -475,15 +475,15 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                   <div className="flex flex-col text-left">
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-300 font-bold">
-                        Homepage Auto-Slider
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400">
+                        Featured
                       </span>
                     </div>
-                    <span className="font-display font-black text-sm text-white uppercase group-hover/feat:text-zinc-200">
-                      Flagship Revenue Architectures
+                    <span className="font-display font-bold text-sm text-white uppercase group-hover/feat:text-zinc-200">
+                      Selected Work
                     </span>
                   </div>
-                  <span className="text-xs font-mono font-bold text-white group-hover/feat:translate-x-1 transition-transform">
+                  <span className="text-xs font-mono text-white group-hover/feat:translate-x-1 transition-transform">
                     Explore →
                   </span>
                 </Link>
@@ -554,7 +554,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 className="absolute inset-0 -z-10 rounded-[0.25rem] bg-white/[0.08] border border-white/15"
               />
             )}
-            <span>Request Quote</span>
+            <span>Quote</span>
           </Link>
 
           {/* Contact */}
@@ -592,7 +592,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               }}
               title="Back to top"
               aria-label={`Scroll depth ${Math.round(scrollProgress * 100)}%, click to return to top`}
-              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-[0.2rem] bg-white/[0.06] hover:bg-white hover:text-black border border-white/15 text-[10.5px] font-mono font-bold text-[#F3E5AB] transition-all cursor-pointer tabular-nums"
+              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-full bg-white/[0.04] hover:bg-white hover:text-black border border-white/10 text-[10px] font-mono text-zinc-300 transition-all cursor-pointer tabular-nums"
             >
               <span>{String(Math.round(scrollProgress * 100)).padStart(2, "0")}%</span>
               <span aria-hidden="true">↑</span>
@@ -603,11 +603,11 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           <button
             onClick={() => setIsCommandOpen(true)}
             type="button"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[0.2rem] border border-white/15 bg-[#121211] hover:border-white/40 text-xs font-mono text-zinc-300 hover:text-white transition-all ml-1"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-white/10 bg-transparent hover:bg-white/[0.05] hover:border-white/25 text-xs font-mono text-zinc-400 hover:text-white transition-all ml-1"
             title="Open Quick Search & Command Palette (⌘K)"
           >
-            <Search className="w-3.5 h-3.5 text-zinc-400" />
-            <kbd className="px-1 text-[10px] rounded bg-white/10 border border-white/20 text-zinc-300 font-mono">
+            <Search className="w-3.5 h-3.5" />
+            <kbd className="text-[10px] text-zinc-500 font-mono">
               ⌘K
             </kbd>
           </button>
@@ -622,7 +622,7 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
                 window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
               }
             }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[0.2rem] border border-[#D4AF37]/45 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 hover:border-[#F3E5AB] text-[11px] font-mono text-[#F3E5AB] hover:text-white transition-all ml-1 uppercase tracking-wider font-bold cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-white/10 bg-transparent hover:bg-white/[0.05] hover:border-white/25 text-[11px] font-mono text-zinc-400 hover:text-white transition-all uppercase tracking-wider cursor-pointer"
             title="Download / Install Official Desi Muchads Phone & Web App"
           >
             <Download className="w-3.5 h-3.5 text-[#D4AF37]" />
@@ -638,12 +638,12 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             variant="white"
             className="ml-2 py-2 px-4"
           >
-            START A PROJECT
+            START PROJECT
           </BreydaqsButton>
         </nav>
 
         {/* Mobile Header Controls */}
-        <div className="flex items-center gap-1 sm:gap-2 lg:hidden shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
           <SonicToggle />
 
           <button
@@ -651,27 +651,29 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
             onClick={() => {
               sound.playPluck(180);
               haptics.medium();
+              setMobileMenuOpen(false);
               if (typeof window !== "undefined") {
                 window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
               }
             }}
             style={{ minBlockSize: 0 }}
-            className="touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] rounded-[0.2rem] bg-[#D4AF37]/15 border border-[#D4AF37]/45 text-[#F3E5AB] flex items-center justify-center active:scale-95 transition-transform relative cursor-pointer"
+            className="touch-manipulation p-1.5 sm:p-2 w-9 h-9 sm:w-[40px] sm:h-[40px] rounded-full bg-white/[0.03] border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center active:scale-95 transition-all relative cursor-pointer"
             aria-label="Download / Install Mobile App"
             title="Get Mobile App (iOS & Android)"
           >
             <Download className="w-4 h-4 text-[#D4AF37]" />
-            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#D4AF37]" />
           </button>
 
           <button
             onClick={() => {
+              sound.playPluck(195);
               haptics.medium();
+              setMobileMenuOpen(false);
               setIsCommandOpen(true);
             }}
             type="button"
             style={{ minBlockSize: 0 }}
-            className="touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] rounded-[0.2rem] bg-white/5 border border-white/15 text-white flex items-center justify-center active:scale-95 transition-transform"
+            className="touch-manipulation p-1.5 sm:p-2 w-9 h-9 sm:w-[40px] sm:h-[40px] rounded-full bg-white/[0.03] border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center active:scale-95 transition-all cursor-pointer"
             aria-label="Open Command Search (⌘K)"
           >
             <Search className="w-4 h-4" />
@@ -679,11 +681,12 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
           <button
             onClick={() => {
+              sound.playPluck(mobileMenuOpen ? 120 : 170);
               haptics.medium();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
             style={{ minBlockSize: 0 }}
-            className="touch-hit-expand p-1.5 sm:p-2 w-9 h-9 sm:w-[42px] sm:h-[42px] flex items-center justify-center rounded-[0.2rem] bg-white/5 border border-white/15 text-white active:scale-95 transition-transform"
+            className="touch-manipulation p-1.5 sm:p-2 w-9 h-9 sm:w-[40px] sm:h-[40px] flex items-center justify-center rounded-full bg-white/[0.03] border border-white/10 text-white active:scale-95 transition-all cursor-pointer"
             aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
@@ -694,7 +697,10 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
       {/* Mobile Drawer Backdrop */}
       {mobileMenuOpen && (
         <div
-          onClick={() => setMobileMenuOpen(false)}
+          onClick={() => {
+            sound.playPluck(120);
+            setMobileMenuOpen(false);
+          }}
           style={{ top: `${headerHeight}px` }}
           className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden"
           aria-hidden="true"
@@ -710,37 +716,47 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
           }}
           className="fixed inset-x-0 bottom-0 z-50 lg:hidden bg-[#0a0a09] border-t border-[rgba(232,232,227,0.15)] flex flex-col overflow-y-auto overscroll-contain animate-in slide-in-from-top-2 duration-200"
         >
-          <div className="p-5 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))]">
+          <div className="p-4 sm:p-5 space-y-4 max-w-xl mx-auto w-full flex-1 flex flex-col justify-between pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))]">
             <div className="space-y-3">
               {/* Quick Navigation Deck */}
               <div className="grid grid-cols-3 gap-2 font-mono text-xs">
                 <Link
                   href="/contact#session"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5"
+                  onClick={() => {
+                    sound.playPluck(155);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="p-3 min-h-[60px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.98] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5 transition-all touch-manipulation"
                 >
-                  <Calendar className="w-4 h-4 text-zinc-400" />
+                  <Calendar className="w-4 h-4 text-[#F3E5AB]" />
                   <span className="text-[10px] uppercase font-bold text-white">Book Call</span>
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => {
+                    sound.playChime();
+                    haptics.medium();
                     setMobileMenuOpen(false);
                     onOpenKundli();
                   }}
-                  className="p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5"
+                  className="p-3 min-h-[60px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.98] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5 transition-all cursor-pointer touch-manipulation"
                 >
-                  <ShieldCheck className="w-4 h-4 text-zinc-400" />
+                  <ShieldCheck className="w-4 h-4 text-[#F3E5AB]" />
                   <span className="text-[10px] uppercase font-bold text-white">Growth Audit</span>
                 </button>
 
                 <Link
                   href="/about#team"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5"
+                  onClick={() => {
+                    sound.playPluck(165);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="p-3 min-h-[60px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.98] border border-white/10 flex flex-col items-center justify-center text-center gap-1.5 transition-all touch-manipulation"
                 >
-                  <Users className="w-4 h-4 text-zinc-400" />
+                  <Users className="w-4 h-4 text-[#F3E5AB]" />
                   <span className="text-[10px] uppercase font-bold text-white">Our Team</span>
                 </Link>
               </div>
@@ -749,61 +765,89 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               <div className="space-y-1.5 font-mono text-xs pt-2">
                 <Link
                   href="/"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
+                  onClick={() => {
+                    sound.playPluck(140);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.99] border border-white/10 text-white uppercase transition-all touch-manipulation"
                 >
                   <span>Home</span>
                 </Link>
 
                 <Link
                   href="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
+                  onClick={() => {
+                    sound.playPluck(145);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.99] border border-white/10 text-white uppercase transition-all touch-manipulation"
                 >
                   <span>About &amp; Principles</span>
                 </Link>
 
                 <Link
                   href="/services"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
+                  onClick={() => {
+                    sound.playPluck(150);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.99] border border-white/10 text-white uppercase transition-all touch-manipulation"
                 >
                   <span>Services</span>
                 </Link>
 
                 <Link
                   href="/work"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
+                  onClick={() => {
+                    sound.playPluck(155);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.99] border border-white/10 text-white uppercase transition-all touch-manipulation"
                 >
                   <span>Work (All 50+ Case Studies)</span>
-                  <span className="text-[10px] font-mono text-zinc-400">Archive ↗</span>
+                  <span className="text-[10px] font-mono text-zinc-400 shrink-0 ml-2">Archive ↗</span>
                 </Link>
 
                 <Link
                   href="/#work"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#161614] border border-white/20 text-white uppercase"
+                  onClick={() => {
+                    sound.playPluck(165);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#161614] hover:bg-white/10 active:scale-[0.99] border border-white/20 text-white uppercase transition-all touch-manipulation"
                 >
-                  <span className="flex items-center gap-2">
-                    <Sparkles className="w-3.5 h-3.5 text-white" />
-                    <span>Featured Work (Homepage Slider)</span>
+                  <span className="flex items-center gap-2 min-w-0">
+                    <Sparkles className="w-3.5 h-3.5 text-white shrink-0" />
+                    <span className="truncate">Featured Work (Homepage)</span>
                   </span>
-                  <span className="text-[10px] font-mono text-white font-bold">Explore →</span>
+                  <span className="text-[10px] font-mono text-white font-bold shrink-0 ml-2">Explore →</span>
                 </Link>
 
                 <Link
                   href="/#request-quote"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/10 text-white uppercase"
+                  onClick={() => {
+                    sound.playPluck(170);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.99] border border-white/10 text-white uppercase transition-all touch-manipulation"
                 >
                   <span>Request Quote</span>
                 </Link>
 
                 <Link
                   href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-[0.2rem] bg-[#121211] border border-white/20 text-white uppercase font-bold"
+                  onClick={() => {
+                    sound.playPluck(180);
+                    haptics.selection();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between px-3.5 py-3 min-h-[44px] rounded-[0.2rem] bg-[#121211] hover:bg-white/10 active:scale-[0.99] border border-white/20 text-white uppercase font-bold transition-all touch-manipulation"
                 >
                   <span>Contact</span>
                 </Link>
@@ -815,13 +859,14 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
               <button
                 type="button"
                 onClick={() => {
-                  setMobileMenuOpen(false);
                   sound.playPluck(160);
+                  haptics.selection();
+                  setMobileMenuOpen(false);
                   if (typeof window !== "undefined") {
                     window.dispatchEvent(new CustomEvent("dm_open_app_installer"));
                   }
                 }}
-                className="w-full py-2.5 px-3 rounded-[0.2rem] bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer min-h-[44px]"
+                className="w-full py-2.5 px-3 rounded-[0.2rem] bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer min-h-[44px] touch-manipulation"
               >
                 <Download className="w-3.5 h-3.5 text-[#D4AF37]" />
                 <span>Get Mobile App (iOS &amp; Android)</span>
@@ -829,11 +874,12 @@ export function Navbar({ onOpenKundli }: NavbarProps) {
 
               <BreydaqsButton
                 onClick={() => {
+                  sound.playChime();
                   setMobileMenuOpen(false);
                   onOpenKundli();
                 }}
                 variant="white"
-                className="w-full py-3 text-xs"
+                className="w-full py-3.5 min-h-[48px] text-xs touch-manipulation"
               >
                 REQUEST GROWTH AUDIT
               </BreydaqsButton>

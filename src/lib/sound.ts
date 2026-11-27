@@ -18,6 +18,8 @@ class SoundController {
   private listeners: Set<SoundListener> = new Set();
   private playbackListeners: Set<PlaybackListener> = new Set();
   private initialized: boolean = false;
+  private hardwareUnlocked: boolean = false;
+  private gestureListenersBound: boolean = false;
 
   constructor() {
     if (typeof window !== "undefined") {
@@ -27,21 +29,94 @@ class SoundController {
       } else {
         this.isMuted = false; // Enabled by default if not set
       }
+      this.bindGestureUnlock();
     }
   }
 
-  private initAudio() {
-    if (typeof window === "undefined") return;
+  private bindGestureUnlock() {
+    if (this.gestureListenersBound || typeof window === "undefined") return;
+    this.gestureListenersBound = true;
+    const onFirstGesture = () => {
+      this.unlock();
+    };
+    window.addEventListener("touchstart", onFirstGesture, { passive: true, capture: true });
+    window.addEventListener("pointerdown", onFirstGesture, { passive: true, capture: true });
+    window.addEventListener("keydown", onFirstGesture, { passive: true, capture: true });
+    window.addEventListener("click", onFirstGesture, { passive: true, capture: true });
+  }
+
+  private createOrResumeContext(): AudioContext | null {
+    if (typeof window === "undefined") return null;
     if (!this.audioCtx) {
-      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioContextClass) {
-        this.audioCtx = new AudioContextClass();
+        try {
+          this.audioCtx = new AudioContextClass();
+        } catch {
+          return null;
+        }
       }
     }
     if (this.audioCtx && this.audioCtx.state === "suspended") {
       this.audioCtx.resume().catch(() => {});
     }
     this.initialized = true;
+    return this.audioCtx;
+  }
+
+  /**
+   * Synchronously unlocks Web Audio hardware on iOS Safari & Android Chrome
+   * inside user gesture handlers (pointerdown / touchstart / click / keydown).
+   */
+  public unlock(): AudioContext | null {
+    const ctx = this.createOrResumeContext();
+    if (!ctx) return null;
+    if (!this.hardwareUnlocked) {
+      try {
+        const buffer = ctx.createBuffer(1, 1, 22050);
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        const gain = ctx.createGain();
+        gain.gain.value = 0.0001;
+        source.connect(gain);
+        gain.connect(ctx.destination);
+        source.start(0);
+        if (ctx.state === "running") {
+          this.hardwareUnlocked = true;
+        }
+      } catch {}
+    }
+    return ctx;
+  }
+
+  public getAudioContext(): AudioContext | null {
+    return this.createOrResumeContext();
+  }
+
+  private initAudio() {
+    this.unlock();
+  }
+
+  private withRunningContext(schedule: (ctx: AudioContext) => void): void {
+    if (this.isMuted || typeof window === "undefined") return;
+    const ctx = this.unlock();
+    if (!ctx) return;
+    if (ctx.state === "running") {
+      schedule(ctx);
+      return;
+    }
+    if (ctx.state === "suspended") {
+      ctx
+        .resume()
+        .then(() => {
+          if (!this.isMuted && ctx.state === "running") {
+            schedule(ctx);
+          }
+        })
+        .catch(() => {});
+    }
   }
 
   public subscribe(listener: SoundListener): () => void {
@@ -85,36 +160,38 @@ class SoundController {
     return this.isMuted;
   }
 
+  public isAudioReady(): boolean {
+    return !this.isMuted && this.audioCtx?.state === "running";
+  }
+
   /**
    * Procedural Mechanical Pluck (Low-frequency tactile resonant decay)
    */
   public playPluck(frequency: number = 220): void {
     haptics.light();
-    if (this.isMuted || typeof window === "undefined") return;
-    this.initAudio();
-    if (!this.audioCtx) return;
+    this.withRunningContext((ctx) => {
+      try {
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
 
-    try {
-      const now = this.audioCtx.currentTime;
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(frequency, now);
+        osc.frequency.exponentialRampToValueAtTime(Math.max(40, frequency * 0.4), now + 0.12);
 
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(frequency, now);
-      osc.frequency.exponentialRampToValueAtTime(Math.max(40, frequency * 0.4), now + 0.12);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
 
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
 
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.13);
-      this.notifyPlayback("pluck");
-    } catch {
-      // AudioContext unavailable or backgrounded
-    }
+        osc.start(now);
+        osc.stop(now + 0.13);
+        this.notifyPlayback("pluck");
+      } catch {
+        // AudioContext unavailable or backgrounded
+      }
+    });
   }
 
   /**
@@ -122,43 +199,41 @@ class SoundController {
    */
   public playChime(): void {
     haptics.selection();
-    if (this.isMuted || typeof window === "undefined") return;
-    this.initAudio();
-    if (!this.audioCtx) return;
+    this.withRunningContext((ctx) => {
+      try {
+        const now = ctx.currentTime;
 
-    try {
-      const now = this.audioCtx.currentTime;
+        // Note 1: E5 (659.25 Hz)
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.type = "sine";
+        osc1.frequency.setValueAtTime(659.25, now);
 
-      // Note 1: E5 (659.25 Hz)
-      const osc1 = this.audioCtx.createOscillator();
-      const gain1 = this.audioCtx.createGain();
-      osc1.type = "sine";
-      osc1.frequency.setValueAtTime(659.25, now);
+        gain1.gain.setValueAtTime(0.06, now);
+        gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
 
-      gain1.gain.setValueAtTime(0.06, now);
-      gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.46);
 
-      osc1.connect(gain1);
-      gain1.connect(this.audioCtx.destination);
-      osc1.start(now);
-      osc1.stop(now + 0.46);
+        // Note 2: B5 (987.77 Hz) - Slight shimmer delay
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.type = "sine";
+        osc2.frequency.setValueAtTime(987.77, now + 0.05);
 
-      // Note 2: B5 (987.77 Hz) - Slight shimmer delay
-      const osc2 = this.audioCtx.createOscillator();
-      const gain2 = this.audioCtx.createGain();
-      osc2.type = "sine";
-      osc2.frequency.setValueAtTime(987.77, now + 0.05);
+        gain2.gain.setValueAtTime(0.05, now + 0.05);
+        gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
 
-      gain2.gain.setValueAtTime(0.05, now + 0.05);
-      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(now + 0.05);
+        osc2.stop(now + 0.56);
 
-      osc2.connect(gain2);
-      gain2.connect(this.audioCtx.destination);
-      osc2.start(now + 0.05);
-      osc2.stop(now + 0.56);
-
-      this.notifyPlayback("chime");
-    } catch {}
+        this.notifyPlayback("chime");
+      } catch {}
+    });
   }
 
   /**
@@ -166,29 +241,27 @@ class SoundController {
    */
   public playTick(): void {
     haptics.light();
-    if (this.isMuted || typeof window === "undefined") return;
-    this.initAudio();
-    if (!this.audioCtx) return;
+    this.withRunningContext((ctx) => {
+      try {
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
 
-    try {
-      const now = this.audioCtx.currentTime;
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.015);
 
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(800, now);
-      osc.frequency.exponentialRampToValueAtTime(200, now + 0.015);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.015);
 
-      gain.gain.setValueAtTime(0.03, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.015);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
 
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.018);
-      this.notifyPlayback("tick");
-    } catch {}
+        osc.start(now);
+        osc.stop(now + 0.018);
+        this.notifyPlayback("tick");
+      } catch {}
+    });
   }
 
   /**
@@ -196,30 +269,121 @@ class SoundController {
    */
   public playWhoosh(): void {
     haptics.medium();
-    if (this.isMuted || typeof window === "undefined") return;
-    this.initAudio();
-    if (!this.audioCtx) return;
+    this.withRunningContext((ctx) => {
+      try {
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
 
-    try {
-      const now = this.audioCtx.currentTime;
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.exponentialRampToValueAtTime(340, now + 0.15);
 
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(120, now);
-      osc.frequency.exponentialRampToValueAtTime(340, now + 0.15);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
 
-      gain.gain.setValueAtTime(0.04, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
 
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.19);
+        this.notifyPlayback("whoosh");
+      } catch {}
+    });
+  }
 
-      osc.start(now);
-      osc.stop(now + 0.19);
-      this.notifyPlayback("whoosh");
-    } catch {}
+  /**
+   * Soft continuous ambient studio drone for Exhibition Art Studios.
+   */
+  public startAmbientDrone(themeKey = "ganesha"): void {
+    this.stopAmbientDrone();
+    haptics.selection();
+    this.withRunningContext((ctx) => {
+      try {
+        const now = ctx.currentTime;
+        const rootHz =
+          themeKey.includes("samurai")
+            ? 98.0
+            : themeKey.includes("neotokyo")
+              ? 130.81
+              : themeKey.includes("varanasi")
+                ? 110.0
+                : 123.47;
+
+        const master = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(520, now);
+
+        master.gain.setValueAtTime(0.0001, now);
+        master.gain.exponentialRampToValueAtTime(0.045, now + 1.1);
+
+        filter.connect(master);
+        master.connect(ctx.destination);
+
+        const oscA = ctx.createOscillator();
+        const oscB = ctx.createOscillator();
+        const oscC = ctx.createOscillator();
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+
+        oscA.type = "sine";
+        oscA.frequency.setValueAtTime(rootHz, now);
+        oscB.type = "triangle";
+        oscB.frequency.setValueAtTime(rootHz * 1.498, now);
+        oscC.type = "sine";
+        oscC.frequency.setValueAtTime(rootHz * 2.0, now);
+
+        lfo.type = "sine";
+        lfo.frequency.setValueAtTime(0.18, now);
+        lfoGain.gain.setValueAtTime(140, now);
+        lfo.connect(lfoGain);
+        lfoGain.connect(filter.frequency);
+
+        const gA = ctx.createGain();
+        const gB = ctx.createGain();
+        const gC = ctx.createGain();
+        gA.gain.setValueAtTime(0.55, now);
+        gB.gain.setValueAtTime(0.22, now);
+        gC.gain.setValueAtTime(0.18, now);
+
+        oscA.connect(gA);
+        oscB.connect(gB);
+        oscC.connect(gC);
+        gA.connect(filter);
+        gB.connect(filter);
+        gC.connect(filter);
+
+        oscA.start(now);
+        oscB.start(now);
+        oscC.start(now);
+        lfo.start(now);
+
+        activeAmbientCleanup = () => {
+          try {
+            const stopAt = ctx.currentTime + 0.45;
+            master.gain.cancelScheduledValues(ctx.currentTime);
+            master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), ctx.currentTime);
+            master.gain.exponentialRampToValueAtTime(0.0001, stopAt);
+            oscA.stop(stopAt + 0.05);
+            oscB.stop(stopAt + 0.05);
+            oscC.stop(stopAt + 0.05);
+            lfo.stop(stopAt + 0.05);
+          } catch {}
+        };
+        this.notifyPlayback("chime");
+      } catch {}
+    });
+  }
+
+  public stopAmbientDrone(): void {
+    if (activeAmbientCleanup) {
+      activeAmbientCleanup();
+      activeAmbientCleanup = null;
+    }
   }
 }
+
+let activeAmbientCleanup: (() => void) | null = null;
 
 export const sound = new SoundController();

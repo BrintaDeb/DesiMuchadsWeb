@@ -145,12 +145,12 @@ export const metadata: Metadata = {
     : {}),
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon.png", type: "image/png", sizes: "64x64" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon-144x144.png", type: "image/png", sizes: "144x144" },
       { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
       { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
     shortcut: "/favicon.ico",
     apple: [
@@ -187,9 +187,12 @@ export default function RootLayout({
     url: "https://desimuchads.in",
     logo: {
       "@type": "ImageObject",
+      "@id": "https://desimuchads.in/#logo",
       url: "https://desimuchads.in/desi-muchads-square-logo.png",
+      contentUrl: "https://desimuchads.in/desi-muchads-square-logo.png",
       width: 512,
       height: 512,
+      caption: "DESI MUCHADS Official Logo",
     },
     image: "https://desimuchads.in/og-banner.png",
     description:
@@ -426,6 +429,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Desi Muchads" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="Desi Muchads" />
+        <meta name="msapplication-TileImage" content="https://desimuchads.in/favicon-144x144.png" />
+        <meta name="msapplication-TileColor" content="#09090b" />
 
         {/* Capture native PWA beforeinstallprompt early before React hydrates */}
         <script
